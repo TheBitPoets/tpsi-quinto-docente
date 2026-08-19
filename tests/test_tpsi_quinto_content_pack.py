@@ -52,7 +52,7 @@ def parse_html(path: Path) -> StructureParser:
 def test_native_content_pack_v1_is_valid_and_pinned() -> None:
     pack = load(PACK_PATH)
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.11.0"
+    assert pack["version"] == "0.12.0"
     assert pack["status"] == "draft"
     assert pack["extensions"]["platform_contract"]["content_pack_v1_sha"] == ACCEPTED_CONTENT_PACK_V1_SHA
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
@@ -85,6 +85,7 @@ def test_sources_project_exactly_to_course_design_catalog() -> None:
         "08_AUTH_SESSIONI_SICUREZZA.md",
         "09_SSR_NUNJUCKS_CONFRONTO.md",
         "10_VUE3_COMPONENTI_REATTIVITA.md",
+        "11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
     )
     assert normalized[1].ref == "d71da420f1aa2ea39b61356e4f9900c6371e7a42"
     assert normalized[2].ref == "36a909f00c9478983a8d1b950440e2abc28b8a55"
@@ -124,6 +125,7 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
     assert refs["tpsi5-ref-nunjucks"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-vue"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-vite"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-vue-router"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-nist-800-63b"]["role"] == "specification"
     assert refs["tpsi5-ref-owasp-password-storage"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-owasp-session-management"]["role"] == "technical-reference"
@@ -153,7 +155,7 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
 def test_content_items_are_ordered_and_linked_to_real_files() -> None:
     pack = load(PACK_PATH)
     items = pack["content_items"]
-    assert [item["order"] for item in items] == list(range(1, 12))
+    assert [item["order"] for item in items] == list(range(1, 13))
     for item in items:
         assert (ROOT / item["path"]).is_file(), item["path"]
         assert item["source_refs"]
@@ -170,6 +172,7 @@ def test_content_items_are_ordered_and_linked_to_real_files() -> None:
         "tpsi5-content-auth-sessions-security",
         "tpsi5-content-ssr-nunjucks-comparison",
         "tpsi5-content-vue3-components-reactivity",
+        "tpsi5-content-vue-router-navigation",
     } <= ids
 
 
@@ -189,18 +192,27 @@ def test_uda24_is_decomposed_without_changing_its_week_budget() -> None:
     assert "UDA25" in uda24["items"][3]["frame"]["next_step"]
 
 
-def test_uda25_starts_with_real_vue_content_without_changing_week_budget() -> None:
+def test_uda25_has_vue_foundations_and_router_without_changing_week_budget() -> None:
     design = load(DESIGN_PATH)
     uda25 = next(uda for uda in design["years"][0]["udas"] if uda["id"] == "uda-25")
     assert uda25["weeks"] == "5"
-    assert [item["source"] for item in uda25["items"]] == ["content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md"]
+    assert [item["source"] for item in uda25["items"]] == [
+        "content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md",
+        "content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
+    ]
     assert uda25["items"][0]["activity_ids"] == [
         "tpsi5-activity-a-vue-reactivity-microscope-001",
         "tpsi5-activity-b-vue-post-card-001",
         "tpsi5-activity-c-feisbuc-vue-spa-001",
         "tpsi5-activity-d-debug-vue-reactivity-001",
     ]
-    assert "routing" in uda25["items"][0]["frame"]["next_step"].lower()
+    assert uda25["items"][1]["activity_ids"] == [
+        "tpsi5-activity-a-vue-router-microscope-001",
+        "tpsi5-activity-b-navigation-policy-001",
+        "tpsi5-activity-c-feisbuc-vue-router-001",
+        "tpsi5-activity-d-debug-vue-router-001",
+    ]
+    assert "typescript" in uda25["items"][1]["frame"]["next_step"].lower()
 
 
 def test_uda21_activity_contracts_and_assets_remain_valid() -> None:
