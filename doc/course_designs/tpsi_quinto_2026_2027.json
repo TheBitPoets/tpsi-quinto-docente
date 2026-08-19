@@ -12,7 +12,8 @@
         "COVERAGE.md",
         "00_COURSE_ARCHITECTURE.md",
         "01_WEB_PLATFORM_HTML_MODERNO.md",
-        "02_CSS_MODERNO_RESPONSIVE.md"
+        "02_CSS_MODERNO_RESPONSIVE.md",
+        "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md"
       ],
       "indexing_status": "ready"
     },
@@ -146,6 +147,30 @@
                 "preview": "Prepara Bootstrap come astrazione sopra fondamenti CSS reali e poi JavaScript/DOM.",
                 "next_step": "Completare le fondazioni frontend con Bootstrap solo dopo aver consolidato CSS nativo.",
                 "references": "MDN CSS styling basics, Box model, Flexbox, Grid, Responsive design; CSS in Depth 2e come teacher-reference licensed; html_css_summary e Feisbuc pinned."
+              }
+            },
+            {
+              "id": "tpsi5-source-originali:content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md#bootstrap-dal-css-nativo-a-un-framework-frontend",
+              "title": "Bootstrap: dal CSS nativo a un framework frontend",
+              "source": "content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
+              "source_id": "tpsi5-source-originali",
+              "source_label": "TPSI quinto - contenuti originali",
+              "source_provider": "local",
+              "href": "../../content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md#bootstrap-dal-css-nativo-a-un-framework-frontend",
+              "level": 1,
+              "line": 1,
+              "activity_ids": [
+                "tpsi5-activity-e-feisbuc-bootstrap-ui-001"
+              ],
+              "frame": {
+                "status": "draft",
+                "context": "Introduce Bootstrap come API di framework sopra concetti CSS gia acquisiti e completa la terza milestone Feisbuc del blocco frontend foundations.",
+                "prerequisites": "HTML semantico, CSS nativo, Flexbox/Grid, responsive design e Activity A-D.",
+                "objectives": "Usare grid, utility e componenti Bootstrap senza perdere semantica/accessibilita, distinguere comportamento CSS da componenti JS e documentare il mapping framework -> CSS nativo.",
+                "recall": "Riprendere la shell Feisbuc Grid/Flexbox e il metodo di debug del modulo precedente.",
+                "preview": "Prepara JavaScript moderno e DOM mostrando chiaramente il confine fra presentazione statica e componenti interattivi.",
+                "next_step": "Passare a JavaScript moderno, DOM ed eventi in UDA 22.",
+                "references": "Bootstrap 5.3 official docs, MDN responsive design, CSS in Depth 2e teacher-reference; Feisbuc milestone 1 come baseline."
               }
             }
           ]
