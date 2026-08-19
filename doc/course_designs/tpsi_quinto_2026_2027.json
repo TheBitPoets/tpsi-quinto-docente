@@ -1,293 +1,51 @@
 {
   "version": 1,
   "sources": [
-    {
-      "id": "tpsi5-source-originali",
-      "label": "TPSI quinto - contenuti originali",
-      "type": "markdown",
-      "provider": "local",
-      "path": "content/tpsi5",
-      "files": [
-        "README.md",
-        "COVERAGE.md",
-        "00_COURSE_ARCHITECTURE.md",
-        "01_WEB_PLATFORM_HTML_MODERNO.md",
-        "02_CSS_MODERNO_RESPONSIVE.md",
-        "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
-        "04_JAVASCRIPT_DOM_BROWSER_APIS.md",
-        "05_HTTP_ASYNC_FETCH_REST.md",
-        "06_NODE_EXPRESS_BACKEND.md"
-      ],
-      "indexing_status": "ready"
-    },
-    {
-      "id": "tpsi5-source-html-css-legacy",
-      "label": "Legacy HTML/CSS summary",
-      "type": "markdown",
-      "provider": "github",
-      "repository": "TheBitPoets/html_css_summary",
-      "ref": "d71da420f1aa2ea39b61356e4f9900c6371e7a42",
-      "files": ["README.md"],
-      "indexing_status": "ready"
-    },
-    {
-      "id": "tpsi5-source-labs-legacy",
-      "label": "Legacy TPSI labs summary",
-      "type": "markdown",
-      "provider": "github",
-      "repository": "TheBitPoets/labs_summary",
-      "ref": "36a909f00c9478983a8d1b950440e2abc28b8a55",
-      "files": ["README.md"],
-      "indexing_status": "ready"
-    },
-    {
-      "id": "tpsi5-source-feisbuc-legacy",
-      "label": "Legacy Feisbuc project notes",
-      "type": "markdown",
-      "provider": "github",
-      "repository": "TheBitPoets/feisbuc",
-      "ref": "086995ece4260a3408740b94cfe2701ce24f8b57",
-      "files": ["README.md"],
-      "indexing_status": "ready"
-    }
+    {"id":"tpsi5-source-originali","label":"TPSI quinto - contenuti originali","type":"markdown","provider":"local","path":"content/tpsi5","files":["README.md","COVERAGE.md","00_COURSE_ARCHITECTURE.md","01_WEB_PLATFORM_HTML_MODERNO.md","02_CSS_MODERNO_RESPONSIVE.md","03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md","04_JAVASCRIPT_DOM_BROWSER_APIS.md","05_HTTP_ASYNC_FETCH_REST.md","06_NODE_EXPRESS_BACKEND.md","07_SQL_RAW_PERSISTENCE.md"],"indexing_status":"ready"},
+    {"id":"tpsi5-source-html-css-legacy","label":"Legacy HTML/CSS summary","type":"markdown","provider":"github","repository":"TheBitPoets/html_css_summary","ref":"d71da420f1aa2ea39b61356e4f9900c6371e7a42","files":["README.md"],"indexing_status":"ready"},
+    {"id":"tpsi5-source-labs-legacy","label":"Legacy TPSI labs summary","type":"markdown","provider":"github","repository":"TheBitPoets/labs_summary","ref":"36a909f00c9478983a8d1b950440e2abc28b8a55","files":["README.md"],"indexing_status":"ready"},
+    {"id":"tpsi5-source-feisbuc-legacy","label":"Legacy Feisbuc project notes","type":"markdown","provider":"github","repository":"TheBitPoets/feisbuc","ref":"086995ece4260a3408740b94cfe2701ce24f8b57","files":["README.md"],"indexing_status":"ready"}
   ],
-  "years": [
-    {
-      "id": "quinto-anno",
-      "title": "Quinto anno",
-      "audience": {"class_ids": []},
-      "description": "Percorso TPSI Full Stack Web Developer 2026/27. Il calendario e la granularita sono draft finche non vengono verificate le ore reali disponibili e congelate le decisioni su frontend framework, ORM Node e TypeScript.",
-      "weeks": 33,
-      "udas": [
-        {
-          "id": "uda-20",
-          "title": "Avvio, metodo, fonti e architettura full stack",
-          "path": "Fondamenti e metodo",
-          "weeks": "1",
-          "items": [
-            {
-              "id": "tpsi5-source-originali:content/tpsi5/00_COURSE_ARCHITECTURE.md#architettura-didattica-del-corso-full-stack",
-              "title": "Architettura didattica del corso Full Stack",
-              "source": "content/tpsi5/00_COURSE_ARCHITECTURE.md",
-              "source_id": "tpsi5-source-originali",
-              "source_label": "TPSI quinto - contenuti originali",
-              "source_provider": "local",
-              "href": "../../content/tpsi5/00_COURSE_ARCHITECTURE.md#architettura-didattica-del-corso-full-stack",
-              "level": 1,
-              "line": 1,
-              "frame": {
-                "status": "draft",
-                "context": "Rende visibile l'intera catena browser-HTTP-backend-database-realtime e introduce Feisbuc come progetto longitudinale.",
-                "prerequisites": "Uso essenziale del browser, file, editor e programmazione di base.",
-                "objectives": "Descrivere i componenti principali di una applicazione web full stack e il ruolo di HTTP come contratto fra client e server.",
-                "recall": "Riprendere client/server, reti e programmazione studiati negli anni precedenti.",
-                "preview": "Introduce Web Platform, HTML e CSS moderni.",
-                "next_step": "Avviare il blocco Web Platform e Feisbuc.",
-                "references": "Content Pack v1, COVERAGE.md, MDN Web Docs e repository legacy pinned."
-              }
-            }
-          ]
-        },
-        {
-          "id": "uda-21",
-          "title": "Web Platform, HTML, CSS e responsive design",
-          "path": "Frontend foundations",
-          "weeks": "6",
-          "items": [
-            {
-              "id": "tpsi5-source-originali:content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md#web-platform-e-html-moderno",
-              "title": "Web Platform e HTML moderno",
-              "source": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
-              "source_id": "tpsi5-source-originali",
-              "source_label": "TPSI quinto - contenuti originali",
-              "source_provider": "local",
-              "href": "../../content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md#web-platform-e-html-moderno",
-              "level": 1,
-              "line": 1,
-              "activity_ids": [
-                "tpsi5-activity-a-html-anatomy-001",
-                "tpsi5-activity-b-feisbuc-semantic-001"
-              ],
-              "frame": {
-                "status": "draft",
-                "context": "Introduce HTML come struttura e semantica e avvia Feisbuc senza confondere contenuto e presentazione.",
-                "prerequisites": "Browser, editor e concetti intuitivi di pagina web.",
-                "objectives": "Scrivere un documento HTML moderno, usare metadata essenziali ed elementi semantici e leggere MDN/DevTools.",
-                "recall": "Riprendere la catena full stack di UDA 20.",
-                "preview": "Prepara CSS moderno e responsive design.",
-                "next_step": "Passare dalla semantica al layout CSS.",
-                "references": "MDN, WHATWG HTML, html_css_summary e Feisbuc pinned."
-              }
-            },
-            {
-              "id": "tpsi5-source-originali:content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md#css-moderno-layout-e-responsive-design",
-              "title": "CSS moderno, layout e responsive design",
-              "source": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
-              "source_id": "tpsi5-source-originali",
-              "source_label": "TPSI quinto - contenuti originali",
-              "source_provider": "local",
-              "href": "../../content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md#css-moderno-layout-e-responsive-design",
-              "level": 1,
-              "line": 1,
-              "activity_ids": [
-                "tpsi5-activity-c-feisbuc-responsive-layout-001",
-                "tpsi5-activity-d-debug-responsive-css-001"
-              ],
-              "frame": {
-                "status": "draft",
-                "context": "Porta Feisbuc a una shell responsive e introduce il debug CSS basato su modello, non tentativi casuali.",
-                "prerequisites": "HTML moderno e struttura semantica.",
-                "objectives": "Comprendere cascade/box model, scegliere Flexbox/Grid, costruire mobile-first e diagnosticare CSS.",
-                "recall": "Separazione struttura/presentazione.",
-                "preview": "Prepara Bootstrap come astrazione sopra CSS nativo.",
-                "next_step": "Rifattorizzare la shell con Bootstrap mantenendo il mapping CSS.",
-                "references": "MDN CSS, CSS in Depth 2e teacher-reference, legacy HTML/CSS/Feisbuc."
-              }
-            },
-            {
-              "id": "tpsi5-source-originali:content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md#bootstrap-dal-css-nativo-a-un-framework-frontend",
-              "title": "Bootstrap: dal CSS nativo a un framework frontend",
-              "source": "content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
-              "source_id": "tpsi5-source-originali",
-              "source_label": "TPSI quinto - contenuti originali",
-              "source_provider": "local",
-              "href": "../../content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md#bootstrap-dal-css-nativo-a-un-framework-frontend",
-              "level": 1,
-              "line": 1,
-              "activity_ids": ["tpsi5-activity-e-feisbuc-bootstrap-ui-001"],
-              "frame": {
-                "status": "draft",
-                "context": "Introduce Bootstrap come API sopra concetti CSS gia acquisiti.",
-                "prerequisites": "HTML semantico, CSS, Flexbox/Grid e responsive design.",
-                "objectives": "Usare grid, utility e componenti senza perdere semantica/accessibilita e documentare il mapping verso CSS.",
-                "recall": "Shell Feisbuc Grid/Flexbox.",
-                "preview": "Prepara JavaScript/DOM distinguendo presentazione e comportamento.",
-                "next_step": "Passare a JavaScript moderno, DOM ed eventi.",
-                "references": "Bootstrap 5.3, MDN responsive design, CSS in Depth 2e."
-              }
-            }
-          ]
-        },
-        {
-          "id": "uda-22",
-          "title": "JavaScript moderno, DOM e Browser APIs",
-          "path": "Frontend foundations",
-          "weeks": "6",
-          "items": [
-            {
-              "id": "tpsi5-source-originali:content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md#javascript-moderno-dom-e-browser-apis",
-              "title": "JavaScript moderno, DOM e Browser APIs",
-              "source": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
-              "source_id": "tpsi5-source-originali",
-              "source_label": "TPSI quinto - contenuti originali",
-              "source_provider": "local",
-              "href": "../../content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md#javascript-moderno-dom-e-browser-apis",
-              "level": 1,
-              "line": 1,
-              "activity_ids": [
-                "tpsi5-activity-a-js-feed-pipeline-001",
-                "tpsi5-activity-b-js-post-refactor-001",
-                "tpsi5-activity-c-feisbuc-dynamic-feed-001",
-                "tpsi5-activity-d-debug-feisbuc-js-001"
-              ],
-              "frame": {
-                "status": "draft",
-                "context": "Separa ECMAScript dalle Web APIs e porta Feisbuc a un feed dinamico locale prima di coinvolgere la rete.",
-                "prerequisites": "UDA 21 completata e programmazione di base.",
-                "objectives": "Manipolare dati, modellare state/render, creare DOM sicuro, gestire form/event delegation, moduli e Web Storage.",
-                "recall": "Milestone Bootstrap di Feisbuc e separazione struttura/presentazione.",
-                "preview": "Prepara asincronia e comunicazione remota.",
-                "next_step": "UDA 23: HTTP, Promise/async-await, fetch e REST.",
-                "references": "MDN JavaScript/DOM/Events/Web Storage/Modules; ECMAScript; lab3/Feisbuc auditati."
-              }
-            }
-          ]
-        },
-        {
-          "id": "uda-23",
-          "title": "HTTP, asincronia, Fetch e REST",
-          "path": "Web protocols and APIs",
-          "weeks": "4",
-          "items": [
-            {
-              "id": "tpsi5-source-originali:content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md#http-asincronia-fetch-e-rest",
-              "title": "HTTP, asincronia, Fetch e REST",
-              "source": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md",
-              "source_id": "tpsi5-source-originali",
-              "source_label": "TPSI quinto - contenuti originali",
-              "source_provider": "local",
-              "href": "../../content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md#http-asincronia-fetch-e-rest",
-              "level": 1,
-              "line": 1,
-              "activity_ids": [
-                "tpsi5-activity-a-http-microscope-001",
-                "tpsi5-activity-b-async-response-policy-001",
-                "tpsi5-activity-c-feisbuc-rest-client-001",
-                "tpsi5-activity-d-debug-fetch-http-001"
-              ],
-              "frame": {
-                "status": "draft",
-                "context": "Rende HTTP un contratto esplicito prima di Express, introduce Promise/async-await/fetch e porta Feisbuc da localStorage a una API same-origin.",
-                "prerequisites": "UDA 22: JavaScript moderno, moduli, DOM, event delegation, state/render e Web Storage.",
-                "objectives": "Leggere request/response, metodo/status/header/content, distinguere path/query/body, safe/idempotent, usare async/fetch con response.ok, progettare REST e diagnosticare rete/HTTP/CORS con DevTools.",
-                "recall": "Milestone 3: stato client e persistenza locale; ora la frontiera di persistenza diventa remota.",
-                "preview": "Prepara Node.js ed Express mostrando il protocollo che il framework dovra implementare.",
-                "next_step": "UDA 24: aprire la fixture server e studiare Node.js, native http, Express, routing, middleware, persistenza, auth e SSR.",
-                "references": "RFC 9110, WHATWG Fetch, MDN, Node.js HTTP docs; lab5/lab6/lab7 e labs_summary come provenance auditata."
-              }
-            }
-          ]
-        },
-        {
-          "id": "uda-24",
-          "title": "Node.js, Express, persistenza, auth e SSR",
-          "path": "Backend",
-          "weeks": "7",
-          "items": [
-            {
-              "id": "tpsi5-source-originali:content/tpsi5/06_NODE_EXPRESS_BACKEND.md#nodejs-ed-express-5-dal-protocollo-al-backend",
-              "title": "Node.js ed Express 5: dal protocollo al backend",
-              "source": "content/tpsi5/06_NODE_EXPRESS_BACKEND.md",
-              "source_id": "tpsi5-source-originali",
-              "source_label": "TPSI quinto - contenuti originali",
-              "source_provider": "local",
-              "href": "../../content/tpsi5/06_NODE_EXPRESS_BACKEND.md#nodejs-ed-express-5-dal-protocollo-al-backend",
-              "level": 1,
-              "line": 1,
-              "activity_ids": [
-                "tpsi5-activity-a-node-http-express-map-001",
-                "tpsi5-activity-b-post-validation-001",
-                "tpsi5-activity-c-feisbuc-express-api-001",
-                "tpsi5-activity-d-debug-express-pipeline-001"
-              ],
-              "frame": {
-                "status": "draft",
-                "context": "Apre la fixture server di UDA 23, distingue runtime Node e browser, mostra node:http prima di Express e porta Feisbuc a una API Express 5 modulare con memory store sostituibile.",
-                "prerequisites": "UDA 23: HTTP, REST, async/await, fetch e Feisbuc milestone 4 client/server.",
-                "objectives": "Usare Node/npm/ESM/environment, leggere node:http, costruire Express Router/middleware/validation/error pipeline, servire static same-origin e mantenere il contratto Feisbuc separando Router e storage.",
-                "recall": "Request/response, status/header/body, path/query e contratto GET/POST/PATCH gia osservati dal client.",
-                "preview": "Prepara la sostituzione del MemoryPostStore con SQL raw senza cambiare client e contratto HTTP.",
-                "next_step": "Seconda parte UDA 24: SQL raw repository, poi auth sicura e breve confronto SSR/template.",
-                "references": "Node.js docs, Express 5.x docs, RFC 9110; lab5/lab8/lab9/lab10 e labs_summary come provenance auditata."
-              }
-            }
-          ]
-        },
-        {
-          "id": "uda-25",
-          "title": "Frontend framework, SPA e realtime",
-          "path": "Frontend application",
-          "weeks": "5",
-          "items": []
-        },
-        {
-          "id": "uda-26",
-          "title": "FastAPI mirror, testing, deploy e capstone",
-          "path": "Integration and delivery",
-          "weeks": "4",
-          "items": []
-        }
-      ]
-    }
-  ]
+  "years": [{
+    "id":"quinto-anno",
+    "title":"Quinto anno",
+    "audience":{"class_ids":[]},
+    "description":"Percorso TPSI Full Stack Web Developer 2026/27. Il calendario e la granularita sono draft finche non vengono verificate le ore reali disponibili e congelate le decisioni su frontend framework, ORM Node e TypeScript.",
+    "weeks":33,
+    "udas":[
+      {
+        "id":"uda-20","title":"Avvio, metodo, fonti e architettura full stack","path":"Fondamenti e metodo","weeks":"1","items":[{
+          "id":"tpsi5-source-originali:content/tpsi5/00_COURSE_ARCHITECTURE.md#architettura-didattica-del-corso-full-stack","title":"Architettura didattica del corso Full Stack","source":"content/tpsi5/00_COURSE_ARCHITECTURE.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/00_COURSE_ARCHITECTURE.md#architettura-didattica-del-corso-full-stack","level":1,"line":1,
+          "frame":{"status":"draft","context":"Rende visibile browser-HTTP-backend-database-realtime e Feisbuc longitudinale.","prerequisites":"Browser, file, editor e programmazione di base.","objectives":"Descrivere componenti full stack e ruolo di HTTP.","recall":"Client/server e reti degli anni precedenti.","preview":"Web Platform, HTML e CSS.","next_step":"Avviare il blocco Web Platform.","references":"Content Pack v1, COVERAGE, MDN e repo legacy pinned."}
+        }]
+      },
+      {
+        "id":"uda-21","title":"Web Platform, HTML, CSS e responsive design","path":"Frontend foundations","weeks":"6","items":[
+          {"id":"tpsi5-source-originali:content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md#web-platform-e-html-moderno","title":"Web Platform e HTML moderno","source":"content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md#web-platform-e-html-moderno","level":1,"line":1,"activity_ids":["tpsi5-activity-a-html-anatomy-001","tpsi5-activity-b-feisbuc-semantic-001"],"frame":{"status":"draft","context":"HTML come struttura e semantica.","prerequisites":"Browser/editor.","objectives":"Documento moderno, metadata, semantica e DevTools.","recall":"Architettura full stack.","preview":"CSS moderno.","next_step":"Layout CSS.","references":"MDN, WHATWG HTML e legacy pinned."}},
+          {"id":"tpsi5-source-originali:content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md#css-moderno-layout-e-responsive-design","title":"CSS moderno, layout e responsive design","source":"content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md#css-moderno-layout-e-responsive-design","level":1,"line":1,"activity_ids":["tpsi5-activity-c-feisbuc-responsive-layout-001","tpsi5-activity-d-debug-responsive-css-001"],"frame":{"status":"draft","context":"Feisbuc responsive e debug CSS.","prerequisites":"HTML moderno.","objectives":"Cascade, box model, Flexbox/Grid e mobile-first.","recall":"Struttura/presentazione.","preview":"Bootstrap.","next_step":"Rifattorizzare con Bootstrap.","references":"MDN CSS e legacy."}},
+          {"id":"tpsi5-source-originali:content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md#bootstrap-dal-css-nativo-a-un-framework-frontend","title":"Bootstrap: dal CSS nativo a un framework frontend","source":"content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md#bootstrap-dal-css-nativo-a-un-framework-frontend","level":1,"line":1,"activity_ids":["tpsi5-activity-e-feisbuc-bootstrap-ui-001"],"frame":{"status":"draft","context":"Bootstrap come API sopra CSS.","prerequisites":"CSS responsive.","objectives":"Grid, utility e componenti con mapping CSS.","recall":"Shell nativa.","preview":"JavaScript/DOM.","next_step":"Passare a JavaScript moderno.","references":"Bootstrap 5.3 e MDN."}}
+        ]
+      },
+      {
+        "id":"uda-22","title":"JavaScript moderno, DOM e Browser APIs","path":"Frontend foundations","weeks":"6","items":[{
+          "id":"tpsi5-source-originali:content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md#javascript-moderno-dom-e-browser-apis","title":"JavaScript moderno, DOM e Browser APIs","source":"content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md#javascript-moderno-dom-e-browser-apis","level":1,"line":1,"activity_ids":["tpsi5-activity-a-js-feed-pipeline-001","tpsi5-activity-b-js-post-refactor-001","tpsi5-activity-c-feisbuc-dynamic-feed-001","tpsi5-activity-d-debug-feisbuc-js-001"],
+          "frame":{"status":"draft","context":"ECMAScript, DOM/eventi e feed locale.","prerequisites":"UDA21.","objectives":"Dati, state/render, DOM, delegation, modules e Web Storage.","recall":"Feisbuc Bootstrap.","preview":"Asincronia e rete.","next_step":"UDA 23: HTTP, async/await, fetch e REST.","references":"MDN, ECMAScript e lab3/Feisbuc auditati."}
+        }]
+      },
+      {
+        "id":"uda-23","title":"HTTP, asincronia, Fetch e REST","path":"Web protocols and APIs","weeks":"4","items":[{
+          "id":"tpsi5-source-originali:content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md#http-asincronia-fetch-e-rest","title":"HTTP, asincronia, Fetch e REST","source":"content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md#http-asincronia-fetch-e-rest","level":1,"line":1,"activity_ids":["tpsi5-activity-a-http-microscope-001","tpsi5-activity-b-async-response-policy-001","tpsi5-activity-c-feisbuc-rest-client-001","tpsi5-activity-d-debug-fetch-http-001"],
+          "frame":{"status":"draft","context":"HTTP esplicito prima di Express; Feisbuc passa a API.","prerequisites":"UDA22.","objectives":"Request/response, status/header/content, fetch/Response e REST.","recall":"Persistenza locale.","preview":"Node/Express.","next_step":"UDA 24: Node.js, Express e persistenza.","references":"RFC 9110, Fetch, MDN, Node docs e lab5-7."}
+        }]
+      },
+      {
+        "id":"uda-24","title":"Node.js, Express, persistenza, auth e SSR","path":"Backend","weeks":"7","items":[
+          {"id":"tpsi5-source-originali:content/tpsi5/06_NODE_EXPRESS_BACKEND.md#nodejs-ed-express-5-dal-protocollo-al-backend","title":"Node.js ed Express 5: dal protocollo al backend","source":"content/tpsi5/06_NODE_EXPRESS_BACKEND.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/06_NODE_EXPRESS_BACKEND.md#nodejs-ed-express-5-dal-protocollo-al-backend","level":1,"line":1,"activity_ids":["tpsi5-activity-a-node-http-express-map-001","tpsi5-activity-b-post-validation-001","tpsi5-activity-c-feisbuc-express-api-001","tpsi5-activity-d-debug-express-pipeline-001"],"frame":{"status":"draft","context":"Apre la fixture server e porta Feisbuc a Express 5 modulare con store sostituibile.","prerequisites":"UDA23.","objectives":"Node/npm/ESM, node:http, Express Router/middleware/validation/error pipeline e dependency boundary.","recall":"Contratto GET/POST/PATCH.","preview":"SQL raw dietro PostStore.","next_step":"Seconda parte UDA24: SQL raw repository.","references":"Node, Express 5, RFC 9110 e lab5/8/9/10 auditati."}},
+          {"id":"tpsi5-source-originali:content/tpsi5/07_SQL_RAW_PERSISTENCE.md#sql-raw-e-persistenza-dal-memorystore-al-database","title":"SQL raw e persistenza: dal MemoryPostStore al database","source":"content/tpsi5/07_SQL_RAW_PERSISTENCE.md","source_id":"tpsi5-source-originali","source_label":"TPSI quinto - contenuti originali","source_provider":"local","href":"../../content/tpsi5/07_SQL_RAW_PERSISTENCE.md#sql-raw-e-persistenza-dal-memorystore-al-database","level":1,"line":1,"activity_ids":["tpsi5-activity-a-sql-posts-schema-001","tpsi5-activity-b-sql-posts-dml-001","tpsi5-activity-c-feisbuc-sql-repository-001","tpsi5-activity-d-debug-sql-state-001"],"frame":{"status":"draft","context":"Sostituisce MemoryPostStore con SQLite mantenendo Router/client e rende SQL visibile prima dell'ORM.","prerequisites":"Prima parte UDA24: Node/Express e PostStore iniettato.","objectives":"Schema/constraint, DDL/DML, prepared statement, repository SQL, persistenza e debugging WHERE.","recall":"Contratto PostStore e API Feisbuc milestone 5.","preview":"Auth sicura e modello utenti/credential.","next_step":"Terza parte UDA24: utenti, password hashing, session/authn/authz; poi breve SSR.","references":"SQLite docs, Node node:sqlite, TheBitLab SQL runner e lab8 come provenance."}}
+        ]
+      },
+      {"id":"uda-25","title":"Frontend framework, SPA e realtime","path":"Frontend application","weeks":"5","items":[]},
+      {"id":"uda-26","title":"FastAPI mirror, testing, deploy e capstone","path":"Integration and delivery","weeks":"4","items":[]}
+    ]
+  }]
 }
