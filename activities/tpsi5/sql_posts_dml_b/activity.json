@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-b-sql-posts-dml-001",
+  "titolo": "DML sui post: INSERT, UPDATE, DELETE e filtro liked",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "B",
+  "argomenti": ["sql", "sqlite", "insert", "update", "delete", "where", "select", "view", "dml"],
+  "linguaggio": "sql",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-sql-raw-persistence"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/07_SQL_RAW_PERSISTENCE.md", "anchor": "ddl-dml-e-query", "role": "lesson"},
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/07_SQL_RAW_PERSISTENCE.md", "anchor": "la-clausola-where-e-parte-della-sicurezza-logica", "role": "safety-model"}
+  ],
+  "consegna": "Completa la sezione TODO di `main.sql`. Partendo dai seed: inserisci `p3` con testo `Terzo post persistente`; porta `p2` da liked=0/likes=0 a liked=1/likes=1 modificando soltanto quella riga; elimina `draft-remove`; crea la view `liked_posts` che espone id, author, text, likes, liked soltanto per i post liked e li ordina per id. Non modificare p1.",
+  "vincoli": [
+    "ogni UPDATE o DELETE deve avere un WHERE coerente con l'insieme di righe atteso",
+    "non ricreare la tabella posts",
+    "non cambiare i seed iniziali",
+    "liked_posts deve essere una VIEW e non una nuova tabella",
+    "la view deve filtrare liked = 1"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/main.sql", "target_path": "main.sql", "visibility": "student", "description": "Schema e seed con sezione DML da completare"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Stato iniziale/finale richiesto"},
+    {"type": "teacher_only", "path": "solution/main.sql", "visibility": "teacher", "description": "DML di riferimento"}
+  ],
+  "soluzione_attesa": {"tipo": "sql-script", "file": "main.sql", "note": "DML deterministico e view liked_posts."},
+  "correzione": {"compila": false, "test": true, "sandbox": true, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 40, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "test_cases": [
+    {"name": "stato finale", "stdin": "SELECT id, likes, liked FROM posts ORDER BY id;\n", "expected_stdout": "p1|2|1\np2|1|1\np3|0|0\n"},
+    {"name": "view liked", "stdin": "SELECT id, likes FROM liked_posts ORDER BY id;\n", "expected_stdout": "p1|2\np2|1\n"},
+    {"name": "draft eliminato", "stdin": "SELECT COUNT(*) FROM posts WHERE id='draft-remove';\n", "expected_stdout": "0\n"}
+  ],
+  "manual_checks": [],
+  "rubrica": [
+    {"criterio": "INSERT p3", "punti": 2},
+    {"criterio": "UPDATE mirato p2", "punti": 3},
+    {"criterio": "DELETE mirato", "punti": 2},
+    {"criterio": "View liked_posts", "punti": 2},
+    {"criterio": "Leggibilita SQL", "punti": 1}
+  ]
+}
