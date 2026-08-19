@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-b-js-post-refactor-001",
+  "titolo": "Aggiorna un like senza perdere il controllo dello stato",
+  "tipo": "esercizio-classe",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "B",
+  "argomenti": [
+    "javascript",
+    "array-map",
+    "object-spread",
+    "immutability",
+    "state",
+    "boolean",
+    "functions"
+  ],
+  "linguaggio": "javascript",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-22"
+  },
+  "content_ids": [
+    "tpsi5-content-javascript-dom-browser"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "anchor": "spread-copiare-una-struttura-superficiale",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "anchor": "stato-dellapplicazione",
+      "role": "architecture-context"
+    }
+  ],
+  "consegna": "Completa `toggleLike(posts, targetId)`. La funzione deve restituire un nuovo array. Se un post ha `id === targetId`, crea un nuovo object con spread: se `liked` era false diventa true e `likes` aumenta di 1; se era true diventa false e `likes` diminuisce di 1 senza scendere sotto 0. Gli altri post devono restare invariati nel valore. Non modificare direttamente proprieta dell'array ricevuto. Il runner legge `{posts,targetId}` da stdin e stampa il nuovo array JSON.",
+  "vincoli": [
+    "usa Array.map per produrre il nuovo array",
+    "usa object spread per il post modificato",
+    "non assegnare direttamente post.liked o post.likes sugli oggetti di input",
+    "se targetId non esiste restituisci valori equivalenti all'input",
+    "likes non deve diventare negativo",
+    "non aggiungere output di debug"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/main.js",
+      "target_path": "main.js",
+      "visibility": "student",
+      "description": "Runner JSON e funzione toggleLike da completare"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Spiegazione state update e checklist"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/main.js",
+      "visibility": "teacher",
+      "description": "Soluzione di riferimento con map/spread"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Note sul modello state -> render"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "javascript-stdin-stdout",
+    "file": "main.js",
+    "note": "Aggiornamento prevedibile dello stato con map e spread."
+  },
+  "correzione": {
+    "compila": false,
+    "test": true,
+    "sandbox": true,
+    "ai_feedback": false
+  },
+  "test_cases": [
+    {
+      "name": "aggiunge like",
+      "stdin": "{\"posts\":[{\"id\":\"p1\",\"text\":\"Uno\",\"likes\":2,\"liked\":false},{\"id\":\"p2\",\"text\":\"Due\",\"likes\":7,\"liked\":false}],\"targetId\":\"p1\"}\n",
+      "expected_stdout": "[{\"id\":\"p1\",\"text\":\"Uno\",\"likes\":3,\"liked\":true},{\"id\":\"p2\",\"text\":\"Due\",\"likes\":7,\"liked\":false}]\n"
+    },
+    {
+      "name": "rimuove like senza negativo",
+      "stdin": "{\"posts\":[{\"id\":\"p1\",\"likes\":0,\"liked\":true}],\"targetId\":\"p1\"}\n",
+      "expected_stdout": "[{\"id\":\"p1\",\"likes\":0,\"liked\":false}]\n"
+    },
+    {
+      "name": "id non trovato",
+      "stdin": "{\"posts\":[{\"id\":\"p1\",\"likes\":4,\"liked\":false}],\"targetId\":\"missing\"}\n",
+      "expected_stdout": "[{\"id\":\"p1\",\"likes\":4,\"liked\":false}]\n"
+    }
+  ],
+  "metriche": {
+    "tempo_stimato_minuti": 40,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": true
+  },
+  "manual_checks": [
+    {
+      "name": "state update",
+      "criterion": "lo studente sa spiegare perche crea un nuovo array e un nuovo object del post modificato"
+    },
+    {
+      "name": "preparazione DOM",
+      "criterion": "lo studente collega toggleLike alla futura sequenza event -> new state -> render"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Test deterministici superati",
+      "punti": 5
+    },
+    {
+      "criterio": "Uso corretto di map e object spread",
+      "punti": 2
+    },
+    {
+      "criterio": "Gestione edge case like zero/id assente",
+      "punti": 1
+    },
+    {
+      "criterio": "Spiegazione del modello di stato",
+      "punti": 2
+    }
+  ]
+}
