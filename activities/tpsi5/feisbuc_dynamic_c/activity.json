@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-c-feisbuc-dynamic-feed-001",
+  "titolo": "Feisbuc milestone 3: feed dinamico, eventi e localStorage",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "C",
+  "argomenti": [
+    "javascript",
+    "dom",
+    "events",
+    "event-delegation",
+    "forms",
+    "state-render",
+    "localstorage",
+    "json",
+    "es-modules",
+    "accessibility"
+  ],
+  "linguaggio": "javascript",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-22"
+  },
+  "content_ids": [
+    "tpsi5-content-javascript-dom-browser",
+    "tpsi5-content-bootstrap-framework"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "anchor": "feisbuc-milestone-3-feed-dinamico-locale",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "anchor": "event-delegation",
+      "role": "event-model"
+    },
+    {
+      "source_id": "tpsi5-source-feisbuc-legacy",
+      "path": "README.md",
+      "anchor": "scheletro",
+      "role": "legacy-provenance"
+    }
+  ],
+  "project_milestone": "feisbuc-03-dynamic-local-feed",
+  "consegna": "Trasforma la UI Bootstrap dello starter in un feed client-side dinamico. Implementa i moduli `posts.js`, `storage.js` e `app.js`: la form `#composer-form` deve creare post nello stato, `renderPosts()` deve costruire gli `article` con DOM API e `textContent`, il contenitore `#post-list` deve usare un unico listener con event delegation per i pulsanti `data-action=\"like\"`, e ogni modifica deve essere salvata in `localStorage`. All'avvio i post vengono letti dallo storage. Mantieni Bootstrap come presentazione e non usare `fetch`, backend o librerie JavaScript aggiuntive.",
+  "vincoli": [
+    "usa script type=module e separa almeno app/posts/storage",
+    "ascolta submit sulla form e usa preventDefault",
+    "usa FormData o una lettura equivalente semanticamente corretta della form",
+    "non costruire testo utente concatenandolo in innerHTML",
+    "ogni post deve restare un article con data-post-id",
+    "usa un solo listener click sul contenitore #post-list per i like dinamici",
+    "identifica l'azione con data-action e il post con data-post-id",
+    "lo stato JavaScript e la fonte di verita per likes/liked",
+    "salva e carica array/object tramite JSON in localStorage",
+    "gestisci storage vuoto o JSON corrotto senza rendere inutilizzabile la pagina",
+    "non usare fetch, Promise o async/await in questa milestone",
+    "mantieni heading e attributi ARIA dello starter"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/index.html",
+      "target_path": "index.html",
+      "visibility": "student",
+      "description": "UI Bootstrap con composer e contenitore del feed"
+    },
+    {
+      "type": "starter",
+      "path": "starter/custom.css",
+      "target_path": "custom.css",
+      "visibility": "student",
+      "description": "Branding minimo"
+    },
+    {
+      "type": "starter",
+      "path": "starter/app.js",
+      "target_path": "app.js",
+      "visibility": "student",
+      "description": "Orchestrazione DOM/eventi da completare"
+    },
+    {
+      "type": "starter",
+      "path": "starter/posts.js",
+      "target_path": "posts.js",
+      "visibility": "student",
+      "description": "Modello dei post da completare"
+    },
+    {
+      "type": "starter",
+      "path": "starter/storage.js",
+      "target_path": "storage.js",
+      "visibility": "student",
+      "description": "Adapter localStorage da completare"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Architettura, definition of done e checklist"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/index.html",
+      "visibility": "teacher",
+      "description": "Markup di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/custom.css",
+      "visibility": "teacher",
+      "description": "CSS di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/app.js",
+      "visibility": "teacher",
+      "description": "DOM, render e listener di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/posts.js",
+      "visibility": "teacher",
+      "description": "Modello dati di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/storage.js",
+      "visibility": "teacher",
+      "description": "Persistenza locale di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Note, domande e rubrica"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "browser-js-modules",
+    "file": "app.js",
+    "note": "Feed dinamico locale con state/render, event delegation e persistenza Web Storage."
+  },
+  "correzione": {
+    "compila": false,
+    "test": false,
+    "sandbox": false,
+    "ai_feedback": false
+  },
+  "metriche": {
+    "tempo_stimato_minuti": 150,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": true
+  },
+  "manual_checks": [
+    {
+      "name": "state-render",
+      "criterion": "i post sono rappresentati nello stato e il DOM viene prodotto da renderPosts"
+    },
+    {
+      "name": "submit",
+      "criterion": "la form usa submit/preventDefault e crea un post con testo validato"
+    },
+    {
+      "name": "delegation",
+      "criterion": "un solo listener sul contenitore gestisce anche i like dei post creati dopo l'avvio"
+    },
+    {
+      "name": "storage",
+      "criterion": "creazione e like sopravvivono al reload tramite JSON/localStorage"
+    },
+    {
+      "name": "dom-sicuro",
+      "criterion": "il testo del post passa da textContent e non da interpolazione innerHTML"
+    },
+    {
+      "name": "moduli",
+      "criterion": "posts/storage/app hanno responsabilita distinguibili"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Modello di stato e rendering DOM",
+      "punti": 3
+    },
+    {
+      "criterio": "Eventi, form ed event delegation",
+      "punti": 2
+    },
+    {
+      "criterio": "Persistenza localStorage robusta",
+      "punti": 2
+    },
+    {
+      "criterio": "Modularita e leggibilita",
+      "punti": 1
+    },
+    {
+      "criterio": "Semantica, accessibilita e gestione sicura del testo",
+      "punti": 2
+    }
+  ]
+}
