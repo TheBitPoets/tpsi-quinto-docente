@@ -53,7 +53,7 @@ export const seedPosts = [
   {
     id: "seed-1",
     author: "Docente",
-    text: "Feisbuc ora usa Express dietro lo stesso contratto HTTP.",
+    text: "Feisbuc ora usa un backend modulare dietro lo stesso contratto HTTP.",
     likes: 1,
     liked: false,
   },
