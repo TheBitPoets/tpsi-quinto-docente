@@ -2,7 +2,7 @@
   "schema_version": "thebitlab.content-pack.v1",
   "id": "tpsi5-fullstack-web-2026",
   "title": "TPSI quinto anno - Full Stack Web Developer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "status": "draft",
   "language": "it",
   "audience": {
@@ -165,7 +165,8 @@
         "README.md",
         "COVERAGE.md",
         "00_COURSE_ARCHITECTURE.md",
-        "01_WEB_PLATFORM_HTML_MODERNO.md"
+        "01_WEB_PLATFORM_HTML_MODERNO.md",
+        "02_CSS_MODERNO_RESPONSIVE.md"
       ],
       "license_status": "project-license-to-review",
       "indexing_status": "ready"
@@ -283,6 +284,58 @@
           "id": "tpsi5-ref-whatwg-html",
           "role": "specification",
           "locator": "HTML document semantics and structure"
+        }
+      ]
+    },
+    {
+      "id": "tpsi5-content-css-modern-responsive",
+      "kind": "module",
+      "path": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
+      "order": 3,
+      "status": "draft",
+      "curriculum_topics": [
+        "css-syntax",
+        "cascade",
+        "specificity",
+        "inheritance",
+        "box-model",
+        "normal-flow",
+        "flexbox",
+        "grid",
+        "responsive-design",
+        "media-queries",
+        "custom-properties",
+        "css-debugging"
+      ],
+      "activity_ids": [
+        "tpsi5-activity-c-feisbuc-responsive-layout-001",
+        "tpsi5-activity-d-debug-responsive-css-001"
+      ],
+      "source_refs": [
+        {
+          "id": "tpsi5-source-originali",
+          "role": "content-origin",
+          "locator": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md"
+        },
+        {
+          "id": "tpsi5-source-html-css-legacy",
+          "role": "legacy-input",
+          "locator": "README.md#css-sintassi / README.md#il-box-model"
+        },
+        {
+          "id": "tpsi5-source-feisbuc-legacy",
+          "role": "legacy-project-input",
+          "locator": "README.md#divisione-in-colonne"
+        },
+        {
+          "id": "tpsi5-ref-mdn",
+          "role": "technical-reference",
+          "locator": "CSS styling basics; Box model; Flexbox; Grid; Responsive web design"
+        },
+        {
+          "id": "tpsi5-ref-manning-css-depth",
+          "role": "teacher-reference",
+          "locator": "CSS in Depth, Second Edition — conceptual teacher reference only"
         }
       ]
     }
