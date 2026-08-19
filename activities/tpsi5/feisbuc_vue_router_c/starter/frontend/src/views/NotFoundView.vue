@@ -1,0 +1,1 @@
+<template><main class="panel"><h2>Pagina non trovata</h2><p>Il server ha consegnato la SPA, ma il client router non riconosce la location.</p><RouterLink :to="{name:'feed'}">Torna al feed</RouterLink></main></template>
