@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "tpsi5-source-originali",
+      "label": "TPSI quinto - contenuti originali",
+      "type": "markdown",
+      "provider": "local",
+      "path": "content/tpsi5",
+      "files": [
+        "README.md",
+        "COVERAGE.md",
+        "00_COURSE_ARCHITECTURE.md"
+      ],
+      "indexing_status": "ready"
+    },
+    {
+      "id": "tpsi5-source-html-css-legacy",
+      "label": "Legacy HTML/CSS summary",
+      "type": "markdown",
+      "provider": "github",
+      "repository": "TheBitPoets/html_css_summary",
+      "ref": "d71da420f1aa2ea39b61356e4f9900c6371e7a42",
+      "files": [
+        "README.md"
+      ],
+      "indexing_status": "ready"
+    },
+    {
+      "id": "tpsi5-source-labs-legacy",
+      "label": "Legacy TPSI labs summary",
+      "type": "markdown",
+      "provider": "github",
+      "repository": "TheBitPoets/labs_summary",
+      "ref": "36a909f00c9478983a8d1b950440e2abc28b8a55",
+      "files": [
+        "README.md"
+      ],
+      "indexing_status": "ready"
+    },
+    {
+      "id": "tpsi5-source-feisbuc-legacy",
+      "label": "Legacy Feisbuc project notes",
+      "type": "markdown",
+      "provider": "github",
+      "repository": "TheBitPoets/feisbuc",
+      "ref": "086995ece4260a3408740b94cfe2701ce24f8b57",
+      "files": [
+        "README.md"
+      ],
+      "indexing_status": "ready"
+    }
+  ],
+  "years": [
+    {
+      "id": "quinto-anno",
+      "title": "Quinto anno",
+      "audience": {
+        "class_ids": []
+      },
+      "description": "Percorso TPSI Full Stack Web Developer 2026/27. Il calendario e la granularita sono draft finche non vengono verificate le ore reali disponibili e congelate le decisioni su frontend framework, ORM Node e TypeScript.",
+      "weeks": 33,
+      "udas": [
+        {
+          "id": "uda-20",
+          "title": "Avvio, metodo, fonti e architettura full stack",
+          "path": "Fondamenti e metodo",
+          "weeks": "1",
+          "items": [
+            {
+              "id": "tpsi5-source-originali:content/tpsi5/00_COURSE_ARCHITECTURE.md#architettura-didattica-del-corso-full-stack",
+              "title": "Architettura didattica del corso Full Stack",
+              "source": "content/tpsi5/00_COURSE_ARCHITECTURE.md",
+              "source_id": "tpsi5-source-originali",
+              "source_label": "TPSI quinto - contenuti originali",
+              "source_provider": "local",
+              "href": "../../content/tpsi5/00_COURSE_ARCHITECTURE.md#architettura-didattica-del-corso-full-stack",
+              "level": 1,
+              "line": 1,
+              "frame": {
+                "status": "draft",
+                "context": "Rende visibile l'intera catena browser-HTTP-backend-database-realtime e introduce Feisbuc come progetto longitudinale.",
+                "prerequisites": "Uso essenziale del browser, file, editor e programmazione di base.",
+                "objectives": "Descrivere i componenti principali di una applicazione web full stack e il ruolo di HTTP come contratto fra client e server.",
+                "recall": "Riprendere client/server, reti e programmazione studiati negli anni precedenti.",
+                "preview": "Introduce Web Platform, HTML e CSS moderni.",
+                "next_step": "Auditare gli esempi legacy e avviare il primo modulo Web Platform.",
+                "references": "Content Pack v1, COVERAGE.md, MDN Web Docs e repository legacy pinned."
+              }
+            }
+          ]
+        },
+        {
+          "id": "uda-21",
+          "title": "Web Platform, HTML, CSS e responsive design",
+          "path": "Frontend foundations",
+          "weeks": "6",
+          "items": []
+        },
+        {
+          "id": "uda-22",
+          "title": "JavaScript moderno, DOM e Browser APIs",
+          "path": "Frontend foundations",
+          "weeks": "6",
+          "items": []
+        },
+        {
+          "id": "uda-23",
+          "title": "HTTP, asincronia, Fetch e REST",
+          "path": "Web protocols and APIs",
+          "weeks": "4",
+          "items": []
+        },
+        {
+          "id": "uda-24",
+          "title": "Node.js, Express, persistenza, auth e SSR",
+          "path": "Backend",
+          "weeks": "7",
+          "items": []
+        },
+        {
+          "id": "uda-25",
+          "title": "Frontend framework, SPA e realtime",
+          "path": "Frontend application",
+          "weeks": "5",
+          "items": []
+        },
+        {
+          "id": "uda-26",
+          "title": "FastAPI mirror, testing, deploy e capstone",
+          "path": "Integration and delivery",
+          "weeks": "4",
+          "items": []
+        }
+      ]
+    }
+  ]
+}
