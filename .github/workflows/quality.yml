@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JavaScript grading
+      - name: Set up Node.js for deterministic JavaScript and HTTP fixture tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -45,7 +45,11 @@ jobs:
       - name: Install test dependencies
         run: python -m pip install pytest
 
-      - name: Validate Content Pack, Course Design and Activities
+      - name: Validate Content Pack, Course Design, Activities and HTTP fixtures
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
-        run: python -m pytest -q tests/test_tpsi_quinto_content_pack.py tests/test_tpsi_quinto_javascript_dom.py
+        run: >-
+          python -m pytest -q
+          tests/test_tpsi_quinto_content_pack.py
+          tests/test_tpsi_quinto_javascript_dom.py
+          tests/test_tpsi_quinto_http_fetch.py
