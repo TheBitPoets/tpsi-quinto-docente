@@ -20,17 +20,19 @@ Contratto di authoring: `thebitlab.content-pack.v1`.
 
 1. `00_COURSE_ARCHITECTURE.md` — architettura del percorso Full Stack e metodo;
 2. `01_WEB_PLATFORM_HTML_MODERNO.md` — HTML come struttura/semantica, documento moderno, metadata, MDN/DevTools e Feisbuc milestone 0;
-3. `02_CSS_MODERNO_RESPONSIVE.md` — cascade, specificità, box model, Flexbox, Grid, responsive design, custom properties e metodo di debugging; Feisbuc milestone 1.
+3. `02_CSS_MODERNO_RESPONSIVE.md` — cascade, specificità, box model, Flexbox, Grid, responsive design, custom properties e metodo di debugging; Feisbuc milestone 1;
+4. `03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md` — Bootstrap come astrazione sopra CSS nativo, grid/utilities/components, trade-off e Feisbuc milestone 2.
 
 ## Activity disponibili
 
 - A — anatomia documento HTML;
 - B — Feisbuc semantic skeleton;
 - C — Feisbuc responsive shell;
-- D — diagnosi di un layout CSS rotto.
+- D — diagnosi di un layout CSS rotto;
+- E — Feisbuc Bootstrap UI refactor con mapping CSS nativo -> framework.
 
 ## Stato
 
-Versione authoring `0.3.0`, ancora **draft**.
+Versione authoring `0.4.0`, ancora **draft**.
 
-Le fondazioni HTML/CSS coprono ora Activity A-D. Framework frontend, ORM Node e profondità TypeScript restano decisioni da congelare. Il prossimo incremento di UDA 21 completera le fondazioni frontend con Bootstrap **dopo** CSS nativo e dovra produrre almeno una Activity E/F per chiudere il gate di adozione del Content Pack v1.
+Le fondazioni HTML/CSS/Bootstrap coprono ora Activity A-E e soddisfano il consumer gate usato per validare il Content Pack Standard v1. Questo non congela il corso: framework frontend, ORM Node e profondità TypeScript restano decisioni da prendere e il prossimo blocco e UDA 22 — JavaScript moderno, DOM e Browser APIs.

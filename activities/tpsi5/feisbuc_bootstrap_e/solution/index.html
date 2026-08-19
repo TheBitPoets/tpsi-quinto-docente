@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feisbuc — Bootstrap milestone</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="custom.css">
+  </head>
+  <body class="bg-body-tertiary">
+    <header class="border-bottom bg-body">
+      <nav class="navbar navbar-expand-lg" aria-label="Navigazione principale">
+        <div class="container">
+          <h1 class="navbar-brand feisbuc-brand mb-0">Feisbuc</h1>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            aria-controls="mainNav"
+            aria-expanded="false"
+            aria-label="Mostra o nascondi navigazione"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="#profilo">Profilo</a></li>
+              <li class="nav-item"><a class="nav-link" href="#feed">Feed</a></li>
+              <li class="nav-item"><a class="nav-link" href="#tendenze">Tendenze</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container py-4">
+      <div class="row g-4">
+        <section id="profilo" class="col-12 col-lg-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="card-title h4">Profilo</h2>
+              <p class="card-text profile-note">Studente Full Stack</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="feed" class="col-12 col-lg-6">
+          <h2 class="h4 mb-3">Feed</h2>
+
+          <article class="card mb-3">
+            <div class="card-body">
+              <h3 class="card-title h5">Primo post</h3>
+              <p class="card-text">Sto imparando a distinguere il framework dal CSS che usa sotto.</p>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-primary" type="button">Mi piace</button>
+                <button class="btn btn-outline-secondary" type="button">Commenta</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-body">
+              <h3 class="card-title h5">Secondo post</h3>
+              <p class="card-text">Il layout deve restare responsive e semanticamente corretto.</p>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-primary" type="button">Mi piace</button>
+                <button class="btn btn-outline-secondary" type="button">Commenta</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <aside id="tendenze" class="col-12 col-lg-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="card-title h4">Tendenze</h2>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">#html</li>
+                <li class="list-group-item">#css</li>
+                <li class="list-group-item">#bootstrap</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="border-top bg-body py-3">
+      <div class="container">
+        <p class="mb-0">Feisbuc — TPSI quinto</p>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -2,7 +2,7 @@
   "schema_version": "thebitlab.content-pack.v1",
   "id": "tpsi5-fullstack-web-2026",
   "title": "TPSI quinto anno - Full Stack Web Developer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "status": "draft",
   "language": "it",
   "audience": {
@@ -166,7 +166,8 @@
         "COVERAGE.md",
         "00_COURSE_ARCHITECTURE.md",
         "01_WEB_PLATFORM_HTML_MODERNO.md",
-        "02_CSS_MODERNO_RESPONSIVE.md"
+        "02_CSS_MODERNO_RESPONSIVE.md",
+        "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md"
       ],
       "license_status": "project-license-to-review",
       "indexing_status": "ready"
@@ -309,7 +310,8 @@
       ],
       "activity_ids": [
         "tpsi5-activity-c-feisbuc-responsive-layout-001",
-        "tpsi5-activity-d-debug-responsive-css-001"
+        "tpsi5-activity-d-debug-responsive-css-001",
+        "tpsi5-activity-e-feisbuc-bootstrap-ui-001"
       ],
       "source_refs": [
         {
@@ -336,6 +338,47 @@
           "id": "tpsi5-ref-manning-css-depth",
           "role": "teacher-reference",
           "locator": "CSS in Depth, Second Edition — conceptual teacher reference only"
+        }
+      ]
+    },
+    {
+      "id": "tpsi5-content-bootstrap-framework",
+      "kind": "module",
+      "path": "content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
+      "order": 4,
+      "status": "draft",
+      "curriculum_topics": [
+        "css-framework",
+        "bootstrap",
+        "bootstrap-grid",
+        "bootstrap-utilities",
+        "bootstrap-components",
+        "responsive-navbar",
+        "framework-tradeoffs"
+      ],
+      "activity_ids": [
+        "tpsi5-activity-e-feisbuc-bootstrap-ui-001"
+      ],
+      "source_refs": [
+        {
+          "id": "tpsi5-source-originali",
+          "role": "content-origin",
+          "locator": "content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md"
+        },
+        {
+          "id": "tpsi5-ref-bootstrap",
+          "role": "technical-reference",
+          "locator": "Bootstrap 5.3 getting started, grid, utilities, navbar, cards"
+        },
+        {
+          "id": "tpsi5-ref-mdn",
+          "role": "technical-reference",
+          "locator": "Responsive design and native CSS model underlying framework utilities"
+        },
+        {
+          "id": "tpsi5-ref-manning-css-depth",
+          "role": "teacher-reference",
+          "locator": "CSS architecture and maintainability concepts; no licensed text imported"
         }
       ]
     }
