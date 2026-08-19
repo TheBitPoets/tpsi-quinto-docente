@@ -11,7 +11,8 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 - SQL raw prima dell'ORM;
 - trasporto, validation, persistence, auth, authorization e presentation separati;
 - identita derivata server-side da sessione verificata;
-- SSR e client rendering confrontati sopra lo stesso dominio, non trattati come tecnologie in competizione assoluta;
+- SSR e client rendering confrontati sopra lo stesso dominio;
+- Vue viene introdotto **dopo** DOM manuale/API/auth/SSR come astrazione di concetti gia osservati;
 - Node.js + Express backend principale; FastAPI mirror mirato;
 - Feisbuc progetto longitudinale;
 - documentazioni ufficiali e security guidance come reference;
@@ -28,7 +29,8 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 7. `06_NODE_EXPRESS_BACKEND.md` — Node/Express; milestone 5;
 8. `07_SQL_RAW_PERSISTENCE.md` — SQL raw/SQLite; milestone 6;
 9. `08_AUTH_SESSIONI_SICUREZZA.md` — auth/session/authorization; milestone 7;
-10. `09_SSR_NUNJUCKS_CONFRONTO.md` — SSR/Nunjucks/PRG e confronto rendering; milestone 8.
+10. `09_SSR_NUNJUCKS_CONFRONTO.md` — SSR/Nunjucks/PRG; milestone 8;
+11. `10_VUE3_COMPONENTI_REATTIVITA.md` — Vue 3/Vite, reattivita, componenti e prima SPA; milestone 9.
 
 ## Feisbuc oggi
 
@@ -42,38 +44,69 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 6 Express 5 + SqlPostStore + SQLite
 7 users + scrypt + HttpOnly session + ownership
 8 API JSON + SSR Nunjucks sopra stesso auth/store
+9 Vue 3 + Vite SPA shell sopra stessa API/auth/store
 ```
 
-Milestone 8 non sostituisce la API:
+Milestone 9 cambia ancora una volta **solo il presentation layer**:
 
 ```text
-                      +-> /api -> JSON -> browser JS -> DOM
-session + stores -----|
-                      +-> /ssr -> view model -> Nunjucks -> HTML
+browser
+  -> Vue App
+     -> props/emits + reactive state
+     -> api.js
+     -> /api/* JSON
+     -> session + Express + SQLite
 ```
 
-## Activity UDA24 — SSR/template
+Il session token resta nel cookie `HttpOnly`; Vue non legge `document.cookie` e non usa storage per l'autenticazione.
 
-- `tpsi5-activity-a-ssr-view-model-001` — view model puro, autograded JS;
-- `tpsi5-activity-b-nunjucks-autoescape-001` — Nunjucks Environment/autoescape;
-- `tpsi5-activity-c-feisbuc-ssr-001` — milestone 8 overlay, API+SSR coesistono;
-- `tpsi5-activity-d-debug-ssr-boundaries-001` — review di escape/authz/PRG/view context.
+## Decisione frontend
 
-## UDA24 chiusa come percorso didattico
+D1 e congelata:
 
 ```text
-node:http -> Express -> SQL raw -> auth/session -> SSR comparison
+framework core = Vue 3 + Vite
+React          = translation/comparison lab
 ```
 
-Restano volutamente fuori da UDA24:
+La prima verticale pinna nelle reference:
 
-- ORM Node: **TBD** dopo SQL raw;
-- JWT/OAuth/OIDC/MFA: track security successivo quando motivato;
-- framework frontend: UDA25;
-- realtime: UDA25.
+```text
+Vue                  3.5.40
+Vite                 8.2.1
+@vitejs/plugin-vue   6.0.8
+Node                 >=22.18
+```
+
+TypeScript resta `TBD`: direzione preferita, introduzione mirata sui tipi del dominio e sui confini applicativi dopo i fondamenti Vue.
+
+## Activity UDA25 — Vue foundations
+
+- `tpsi5-activity-a-vue-reactivity-microscope-001` — `ref`/`computed` come osservazione guidata;
+- `tpsi5-activity-b-vue-post-card-001` — props down / emits up;
+- `tpsi5-activity-c-feisbuc-vue-spa-001` — milestone 9, SPA a singola vista sopra API/auth esistenti;
+- `tpsi5-activity-d-debug-vue-reactivity-001` — debug reattivita, state derivato, prop mutation, event contract e key.
+
+## Boundary della prima verticale Vue
+
+Non sono ancora introdotti:
+
+```text
+Vue Router
+Pinia
+TypeScript
+WebSocket / Socket.IO
+ORM
+```
+
+Il secondo blocco UDA25 introdurra il routing perche emergera un requisito reale: **URL e navigazione fra viste**. Realtime entrera dopo il routing.
+
+## Grading
+
+Il browser grader TheBitLab non e ancora implementato. Le Activity Vue restano quindi rubric/manuali; la Quality del repository docente installa le dipendenze pinned, compila le reference con Vite e verifica la composizione della SPA con il backend auth esistente. Questa evidence non viene spacciata per autograding della consegna studente.
 
 ## Stato
 
-Versione authoring **`0.10.0`**, ancora `draft` perche il curriculum completo non e congelato.
+Versione authoring **`0.11.0`**, ancora `draft` perche il curriculum completo non e congelato.
 
-Il prossimo incremento e **UDA25 — frontend framework, SPA e realtime**. Prima di scriverlo vanno congelate almeno la scelta del framework frontend e la profondita TypeScript; la scelta ORM puo restare separata finche non serve al percorso.
+Decisioni ancora aperte: profondita TypeScript, ORM Node, ampiezza mirror FastAPI/SQLAlchemy, corso SQL separato e calendario definitivo dopo verifica delle ore reali.
