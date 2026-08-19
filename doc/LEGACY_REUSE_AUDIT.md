@@ -12,9 +12,9 @@ La progressione storica `statico -> JS -> fetch/Express -> SQLite -> login -> te
 
 ## UDA21–23
 
-- `html_css_summary` `d71da420...`: concetti riusati, struttura/semantica/CSS modernizzati;
-- `lab3` `0deae0eb...`: JS selective rewrite; Promise/async spostati a UDA23;
-- `feisbuc` `086995ec...`: progetto longitudinale;
+- `html_css_summary` snapshot `d71da420f1aa2ea39b61356e4f9900c6371e7a42`: concetti riusati, struttura/semantica/CSS modernizzati;
+- `kinderp/lab3` snapshot `0deae0eb606bc9c2849ba271bdf03c128910f1ac`: JavaScript selective rewrite; `Promise/async-await` viene spostato a **UDA 23**, mentre DOM, state/render ed **event delegation** restano in UDA22;
+- `TheBitPoets/feisbuc` snapshot `086995ece4260a3408740b94cfe2701ce24f8b57`: progetto longitudinale; l'output JavaScript locale e la **milestone 3** `feisbuc-03-dynamic-local-feed`;
 - `lab5/6/7`: client/server, form POST, query/path/body ricollocati dopo HTTP esplicito.
 
 ## UDA24 — responsabilita una alla volta
