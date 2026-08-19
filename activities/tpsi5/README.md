@@ -17,10 +17,12 @@ Ogni Activity deve collegare i propri `content_ids` al Content Pack v1 e mantene
 | --- | --- | --- | --- |
 | A | `tpsi5-activity-a-html-anatomy-001` | UDA 21 | completare e osservare lo scheletro di un documento HTML moderno |
 | B | `tpsi5-activity-b-feisbuc-semantic-001` | UDA 21 | Feisbuc milestone 0: trasformare contenitori generici in struttura HTML semantica |
+| C | `tpsi5-activity-c-feisbuc-responsive-layout-001` | UDA 21 | Feisbuc milestone 1: costruire autonomamente una shell responsive con Grid/Flexbox |
+| D | `tpsi5-activity-d-debug-responsive-css-001` | UDA 21 | diagnosticare e correggere overflow, cascade, box model e breakpoint errati |
 
-## Grading HTML nel bootstrap
+## Grading HTML/CSS nel bootstrap
 
-Il grader generico di 2cornot2c pinned dal corso dichiara attualmente `html` come `planned`. Per questo le Activity HTML iniziali hanno:
+Il grader generico di 2cornot2c pinned dal corso dichiara attualmente `html` come `planned`. Per questo le Activity web iniziali hanno:
 
 ```json
 {
@@ -33,11 +35,12 @@ Il grader generico di 2cornot2c pinned dal corso dichiara attualmente `html` com
 
 Sono assegnabili e valutabili tramite checklist/rubrica, ma non devono essere presentate come autograded.
 
-La CI del repository valida schema Activity, asset, collegamenti al Content Pack e struttura delle soluzioni di riferimento. Il supporto browser/HTML automatico verra governato come capability separata della piattaforma.
+La CI del repository valida schema Activity, asset, collegamenti al Content Pack e struttura delle soluzioni di riferimento. Per C/D controlla inoltre proprietà strutturali delle soluzioni CSS e che gli starter di debug contengano davvero i difetti dichiarati. Il supporto HTML/browser automatico resta governato da `TheBitPoets/2cornot2c#729`.
 
-## Prossimi livelli richiesti per il gate Content Pack v1
+## Gate Content Pack v1
 
 - [x] A;
 - [x] B;
-- [ ] C o D;
+- [x] C;
+- [x] D;
 - [ ] E o F.
