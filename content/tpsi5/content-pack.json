@@ -2,7 +2,7 @@
   "schema_version": "thebitlab.content-pack.v1",
   "id": "tpsi5-fullstack-web-2026",
   "title": "TPSI quinto anno - Full Stack Web Developer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
   "language": "it",
   "audience": {
@@ -164,7 +164,8 @@
       "files": [
         "README.md",
         "COVERAGE.md",
-        "00_COURSE_ARCHITECTURE.md"
+        "00_COURSE_ARCHITECTURE.md",
+        "01_WEB_PLATFORM_HTML_MODERNO.md"
       ],
       "license_status": "project-license-to-review",
       "indexing_status": "ready"
@@ -241,6 +242,47 @@
           "id": "tpsi5-source-originali",
           "role": "content-origin",
           "locator": "content/tpsi5/00_COURSE_ARCHITECTURE.md"
+        }
+      ]
+    },
+    {
+      "id": "tpsi5-content-web-platform-html",
+      "kind": "module",
+      "path": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
+      "order": 2,
+      "status": "draft",
+      "curriculum_topics": [
+        "web-platform",
+        "html-syntax",
+        "document-metadata",
+        "semantic-html",
+        "accessibility-basics",
+        "browser-devtools"
+      ],
+      "activity_ids": [
+        "tpsi5-activity-a-html-anatomy-001",
+        "tpsi5-activity-b-feisbuc-semantic-001"
+      ],
+      "source_refs": [
+        {
+          "id": "tpsi5-source-originali",
+          "role": "content-origin",
+          "locator": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md"
+        },
+        {
+          "id": "tpsi5-source-html-css-legacy",
+          "role": "legacy-input",
+          "locator": "README.md#scheletro-html"
+        },
+        {
+          "id": "tpsi5-ref-mdn",
+          "role": "technical-reference",
+          "locator": "Learn Web Development / Structuring content with HTML"
+        },
+        {
+          "id": "tpsi5-ref-whatwg-html",
+          "role": "specification",
+          "locator": "HTML document semantics and structure"
         }
       ]
     }

@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-b-feisbuc-semantic-001",
+  "titolo": "Feisbuc milestone 0: da div generici a HTML semantico",
+  "tipo": "esercizio-classe",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "B",
+  "argomenti": [
+    "html-semantico",
+    "header",
+    "nav",
+    "main",
+    "section",
+    "article",
+    "footer",
+    "accessibilita"
+  ],
+  "linguaggio": "html",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-21"
+  },
+  "content_ids": [
+    "tpsi5-content-web-platform-html"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
+      "anchor": "semantica-scegliere-lelemento-per-cio-che-significa",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
+      "anchor": "esempio-realistico-feisbuc-milestone-0",
+      "role": "project-context"
+    },
+    {
+      "source_id": "tpsi5-source-feisbuc-legacy",
+      "path": "README.md",
+      "anchor": "scheletro",
+      "role": "legacy-provenance"
+    }
+  ],
+  "project_milestone": "feisbuc-00-semantic-skeleton",
+  "consegna": "Lo starter rappresenta una versione semplificata di Feisbuc costruita quasi interamente con `div`. Senza aggiungere CSS o JavaScript, sostituisci i contenitori generici con elementi HTML semantici: `header`, `nav`, `main`, `section`, `article` e `footer`. Mantieni invariati i testi. Il menu deve diventare una vera area di navigazione con `aria-label=\"Navigazione principale\"`. La sezione feed deve avere `id=\"feed\"`, un `h2` identificabile tramite `id=\"feed-title\"` e `aria-labelledby=\"feed-title\"`. Ogni post deve essere un `article` con heading di livello 3. Questa consegna costituisce la milestone 0 del nuovo Feisbuc.",
+  "vincoli": [
+    "non aggiungere CSS",
+    "non aggiungere JavaScript",
+    "non eliminare o riscrivere i testi dello starter",
+    "usa un solo main",
+    "usa un solo h1",
+    "ogni post deve essere un article",
+    "non sostituire automaticamente tutti i div: se un contenitore non ha un significato semantico puo restare div"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/index.html",
+      "target_path": "index.html",
+      "visibility": "student",
+      "description": "Feisbuc legacy-style da trasformare semanticamente"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Checklist della milestone e domande guida"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/index.html",
+      "visibility": "teacher",
+      "description": "Soluzione semantica di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Note docente, alternative accettabili e rubrica"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "documento-html",
+    "file": "index.html",
+    "note": "Primo scheletro semantico di Feisbuc, ancora privo di presentazione e comportamento."
+  },
+  "correzione": {
+    "compila": false,
+    "test": false,
+    "sandbox": false,
+    "ai_feedback": false
+  },
+  "metriche": {
+    "tempo_stimato_minuti": 45,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": false
+  },
+  "manual_checks": [
+    {
+      "name": "struttura pagina",
+      "criterion": "header, nav, main, section e footer sono usati con ruolo coerente"
+    },
+    {
+      "name": "post",
+      "criterion": "ogni post e un article con heading h3"
+    },
+    {
+      "name": "feed",
+      "criterion": "section#feed e collegata al titolo tramite aria-labelledby"
+    },
+    {
+      "name": "gerarchia",
+      "criterion": "un solo h1 e gerarchia h1/h2/h3 coerente"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Scelta corretta degli elementi semantici",
+      "punti": 4
+    },
+    {
+      "criterio": "Gerarchia dei contenuti e heading",
+      "punti": 2
+    },
+    {
+      "criterio": "Navigazione e relazione accessibile della sezione feed",
+      "punti": 2
+    },
+    {
+      "criterio": "Capacita di motivare quando usare div e quando un elemento semantico",
+      "punti": 2
+    }
+  ]
+}

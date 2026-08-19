@@ -4,8 +4,8 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 
 | Area | Core 2026/27 | Progetto Feisbuc | Note |
 | --- | --- | --- | --- |
-| Web Platform e browser | sì | struttura iniziale | documenti, risorse, DevTools |
-| HTML moderno e semantica | sì | markup del social | form, accessibilità di base, immagini/media quando utili |
+| Web Platform e browser | sì | struttura iniziale | **iniziato**: documenti, metadata, DevTools e distinzione sorgente/DOM in `01_WEB_PLATFORM_HTML_MODERNO.md` |
+| HTML moderno e semantica | sì | **milestone 0 disponibile** | Activity A anatomia documento + Activity B Feisbuc semantico; form e immagini verranno approfonditi nello stesso blocco |
 | CSS moderno | sì | layout e design | cascade, box model, Flexbox, Grid, responsive |
 | Bootstrap | sì, dopo CSS nativo | revisione UI | framework CSS, non sostituto dei fondamenti |
 | JavaScript moderno | sì | comportamento client | scope, funzioni, array/object, moduli, errori |
@@ -31,6 +31,13 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 | TypeScript | da decidere | eventuale fase avanzata | breve core o track advanced |
 | Senior track | no, previsto | prosecuzione futura | architecture, perf, cache/queue, observability, CI/CD, scaling |
 
+## Stato Activity rappresentative Content Pack v1
+
+- [x] A — osservazione/modifica controllata: `tpsi5-activity-a-html-anatomy-001`;
+- [x] B — modifica controllata + milestone Feisbuc: `tpsi5-activity-b-feisbuc-semantic-001`;
+- [ ] C/D — implementazione autonoma e debugging;
+- [ ] E/F — mini-progetto/prodotto integrato.
+
 ## Gate prima del freeze del curriculum
 
 1. audit completo di `html_css_summary`, `labs_summary` e `feisbuc`;
@@ -39,4 +46,4 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 4. scelta profondità TypeScript;
 5. definizione del confine col corso SQL separato;
 6. calendario/UDA definitivo dopo verifica delle ore reali disponibili;
-7. almeno una Activity A/B, una C/D e una E/F collegate al pack.
+7. completare almeno una Activity C/D e una E/F oltre alle A/B ora presenti.
