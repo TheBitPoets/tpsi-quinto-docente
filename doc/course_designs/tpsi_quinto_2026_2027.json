@@ -10,7 +10,8 @@
       "files": [
         "README.md",
         "COVERAGE.md",
-        "00_COURSE_ARCHITECTURE.md"
+        "00_COURSE_ARCHITECTURE.md",
+        "01_WEB_PLATFORM_HTML_MODERNO.md"
       ],
       "indexing_status": "ready"
     },
@@ -95,7 +96,33 @@
           "title": "Web Platform, HTML, CSS e responsive design",
           "path": "Frontend foundations",
           "weeks": "6",
-          "items": []
+          "items": [
+            {
+              "id": "tpsi5-source-originali:content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md#web-platform-e-html-moderno",
+              "title": "Web Platform e HTML moderno",
+              "source": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
+              "source_id": "tpsi5-source-originali",
+              "source_label": "TPSI quinto - contenuti originali",
+              "source_provider": "local",
+              "href": "../../content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md#web-platform-e-html-moderno",
+              "level": 1,
+              "line": 1,
+              "activity_ids": [
+                "tpsi5-activity-a-html-anatomy-001",
+                "tpsi5-activity-b-feisbuc-semantic-001"
+              ],
+              "frame": {
+                "status": "draft",
+                "context": "Introduce HTML come linguaggio di struttura e semantica, insegna a leggere MDN e avvia Feisbuc con una milestone semantica senza CSS o JavaScript.",
+                "prerequisites": "Uso del browser, DevTools di base, editor e concetti intuitivi di pagina web.",
+                "objectives": "Scrivere lo scheletro di un documento HTML moderno, distinguere head/header, usare metadata essenziali, scegliere elementi semantici e spiegare quando un div resta appropriato.",
+                "recall": "Riprendere la catena browser-HTTP-backend introdotta in UDA 20 e il concetto di sorgente interpretata da un programma.",
+                "preview": "Prepara CSS moderno, box model, cascade, Flexbox/Grid e responsive design senza confondere struttura e presentazione.",
+                "next_step": "Passare dalla struttura semantica di Feisbuc al layout CSS moderno.",
+                "references": "MDN Structuring content with HTML, WHATWG HTML Living Standard, html_css_summary pinned, Feisbuc pinned."
+              }
+            }
+          ]
         },
         {
           "id": "uda-22",
