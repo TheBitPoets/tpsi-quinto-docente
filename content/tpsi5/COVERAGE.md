@@ -4,17 +4,19 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 
 | Area | Core 2026/27 | Progetto Feisbuc | Note |
 | --- | --- | --- | --- |
-| Web Platform e browser | sì | struttura iniziale | **iniziato**: documenti, metadata, DevTools e distinzione sorgente/DOM in `01_WEB_PLATFORM_HTML_MODERNO.md` |
-| HTML moderno e semantica | sì | **milestone 0 disponibile** | Activity A anatomia documento + Activity B Feisbuc semantico; form e immagini verranno approfonditi nello stesso blocco |
+| Web Platform e browser | sì | struttura iniziale | documenti, metadata, DevTools e distinzione sorgente/DOM in `01_WEB_PLATFORM_HTML_MODERNO.md` |
+| HTML moderno e semantica | sì | **milestone 0 disponibile** | Activity A anatomia documento + Activity B Feisbuc semantico; form/markup vengono ripresi quando servono nei moduli successivi |
 | CSS moderno | sì | **milestone 1 disponibile** | `02_CSS_MODERNO_RESPONSIVE.md`: cascade, specificità, inheritance, box model, normal flow, Flexbox, Grid, custom properties |
 | Responsive design | sì | shell mobile-first | Activity C costruzione autonoma + Activity D debug/diagnosi; media query solo quando il layout fluido non basta |
 | Bootstrap | sì, dopo CSS nativo | **milestone 2 disponibile** | `03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md`: grid/utilities/components come astrazione sopra CSS; Activity E richiede mapping CSS nativo -> Bootstrap |
-| JavaScript moderno | sì | comportamento client | scope, funzioni, array/object, moduli, errori |
-| DOM e Browser APIs | sì | feed dinamico | eventi, delegation, storage, form |
-| Asincronia | sì | caricamento dati | Promise, async/await, fetch |
+| JavaScript moderno | sì | **iniziato** | `04_JAVASCRIPT_DOM_BROWSER_APIS.md`: const/let, tipi utili, array/object, map/filter/find, funzioni/callback, spread/destructuring, scope, errori, ES modules; Activity A/B autograded |
+| DOM e Browser APIs | sì | **milestone 3 disponibile** | state/render, DOM creation, form submit, eventi, bubbling, event delegation, dataset, textContent; Activity C manuale/browser |
+| Web Storage | sì | persistenza locale milestone 3 | localStorage/sessionStorage, JSON, recovery da storage invalido; serve come baseline da sostituire con API in UDA 23 |
+| JavaScript debugging | sì | diagnosi comportamento client | Activity D deriva da bug reali del Feisbuc legacy: event/e, listener dinamici, stato nel DOM, storage e innerHTML |
+| Asincronia | sì, **UDA 23** | caricamento remoto futuro | Promise, async/await e fetch sono intenzionalmente esclusi da UDA 22 per studiarli insieme a HTTP |
 | HTTP | sì, approfondito | contratto client/server | request/response, metodi, status, header, cookie, cache, CORS, HTTPS concettuale |
 | REST/API design | sì | API Feisbuc | resource modelling, error model, validation |
-| Node.js | sì | backend principale | runtime, moduli, npm, env, server HTTP minimo |
+| Node.js | sì | backend principale | runtime, moduli, npm, env, server HTTP minimo; CommonJS viene contestualizzato qui, non nel primo modulo browser |
 | Express | sì | API/SSR | routing, Router, middleware, error handling, static, CORS, auth |
 | SQL | integrazione col corso SQL | persistenza | SQL raw prima dell'ORM |
 | ORM Node | sì, tecnologia TBD | persistenza evoluta | confronto Drizzle / Prisma / Sequelize |
@@ -26,7 +28,7 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 | FastAPI mirror track | sì, mirato | API alternativa | stesso contratto HTTP, non doppio corso |
 | OpenAPI | sì | documentazione API | particolarmente naturale nel mirror FastAPI |
 | SQLAlchemy | sì nel mirror Python | persistenza Python | mapping SQL ↔ ORM |
-| Testing/debugging | sì | test Feisbuc | CSS debugging avviato con Activity D; più avanti unit/API/integration |
+| Testing/debugging | sì | test Feisbuc | CSS + JavaScript debugging; Activity JS A/B usano grading deterministico; più avanti unit/API/integration |
 | Deployment | sì | release finale | env, build, log, HTTPS/reverse proxy concettuali |
 | Capstone | sì | Feisbuc | milestone progressive e prodotto finale |
 | TypeScript | da decidere | eventuale fase avanzata | breve core o track advanced |
@@ -40,14 +42,22 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 - [x] D — debug/diagnosi: `tpsi5-activity-d-debug-responsive-css-001`;
 - [x] E — mini-progetto integrato: `tpsi5-activity-e-feisbuc-bootstrap-ui-001`.
 
-Il gate A-E richiesto per l'adozione reale del **Content Pack Standard v1** e ora rappresentato nel corso. Questo non implica che il curriculum TPSI5 sia congelato: il corso resta in authoring `draft`.
+Il gate A-E richiesto per l'adozione reale del **Content Pack Standard v1** e completato. Lo standard e ora accettato; il curriculum TPSI5 resta correttamente in authoring `draft`.
+
+## Progressione UDA 22
+
+- [x] `tpsi5-activity-a-js-feed-pipeline-001` — JavaScript puro, grading deterministico;
+- [x] `tpsi5-activity-b-js-post-refactor-001` — state update con map/spread, grading deterministico;
+- [x] `tpsi5-activity-c-feisbuc-dynamic-feed-001` — Feisbuc milestone 3, DOM/event delegation/localStorage;
+- [x] `tpsi5-activity-d-debug-feisbuc-js-001` — debug browser basato sui problemi legacy;
+- [ ] eventuale Activity E di estensione locale solo se utile dopo il pilot; non e necessaria per iniziare UDA 23.
 
 ## Gate prima del freeze del curriculum TPSI5
 
-1. audit completo di `html_css_summary`, `labs_summary` e `feisbuc`;
+1. completare l'audit progressivo di `labs_summary` e `feisbuc` mentre i relativi moduli vengono migrati;
 2. scelta framework frontend;
 3. scelta ORM Node;
 4. scelta profondità TypeScript;
 5. definizione del confine col corso SQL separato;
 6. calendario/UDA definitivo dopo verifica delle ore reali disponibili;
-7. proseguire con JavaScript, DOM, HTTP, backend, DB, auth, realtime, testing e deploy.
+7. proseguire con HTTP/async/fetch/REST, backend, DB, auth, realtime, testing e deploy.
