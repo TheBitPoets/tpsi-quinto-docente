@@ -57,6 +57,54 @@ La sequenza storica è preziosa: statico → storage/JS → Express/fetch → fo
 
 Da cambiare: rendere HTTP esplicito prima di Express/fetch; trasformare i lab in Activity A–F; rivedere dipendenze Node/DB; introdurre password hashing, session/authn/authz e sicurezza; usare Nunjucks come confronto SSR anziché architettura finale; correggere la descrizione di Socket.IO, che non va presentato semplicemente come wrapper WebSocket.
 
+### Decisione UDA 22
+
+La progressione `lab2`/`lab3`/`lab4` viene riutilizzata come **ordine concettuale**, non come importazione dei repository esterni:
+
+```text
+JavaScript language
+  -> DOM/events
+  -> Web Storage
+  -> mini-app/browser
+```
+
+La parte async del vecchio `lab3` viene separata:
+
+- callback come concetto di funzione/evento: **UDA 22**;
+- Promise, `async`/`await` e `fetch`: **UDA 23**, insieme a HTTP e REST.
+
+Questo evita di presentare asincronia e rete come sintassi isolate.
+
+## `kinderp/lab3`
+
+Snapshot auditato: `0deae0eb606bc9c2849ba271bdf03c128910f1ac`.
+
+**Decisione: TEACHER-REFERENCE + SELECTIVE REWRITE.**
+
+Il repository contiene un buon inventario di concetti JavaScript (variabili/tipi, controllo di flusso, array/loop, funzioni, async/errori, moduli), ma non viene promosso a sorgente canonica senza revisione.
+
+| Area legacy | Decisione | Motivo / destinazione |
+| --- | --- | --- |
+| `let` / `const` / `var` | **reuse concept / rewrite example** | `const` come default e `let` per riassegnazione; l'assegnazione successiva a una `const` diventa esperimento controllato, non codice canonico |
+| primitive / object / array | **reuse concepts / new Feisbuc data** | esempi generici sostituiti da post, likes, tag e stato della UI |
+| array mutation (`push`, `splice`...) | **reuse + contextualize** | mantenere la distinzione fra operazioni mutanti e trasformazioni che producono nuove collezioni |
+| `map` / `filter` / `find` / `some` / `every` | **add/expand** | diventano parte del core UDA 22 e alimentano Activity A/B |
+| funzioni / callback / arrow | **reuse concept / rewrite examples** | conservare funzioni come valori e callback; riscrivere esempi eliminando rumore/dead code e collegandoli a array/events |
+| error handling | **reuse selectively** | `try/catch` usato per recovery motivato (es. JSON storage), non per nascondere errori |
+| callback async / Promise / async-await | **defer to UDA 23** | studiarli insieme a HTTP/fetch per dare un motivo concreto all'asincronia |
+| CommonJS | **defer to Node/backend** | e un modello dell'ecosistema Node, non il primo module system del browser |
+| ES module Node + filesystem | **replace for UDA 22** | l'esempio legacy e Node-specifico e contiene riferimenti incompleti; il browser parte da `type=module`, `import`/`export` e moduli locali |
+| advanced internals/classes/metaprogramming | **defer/advanced** | entrano solo se richiesti dal core o nel futuro track advanced/senior |
+
+### Output UDA 22
+
+- `content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md`;
+- Activity A `tpsi5-activity-a-js-feed-pipeline-001` — JavaScript puro autograded;
+- Activity B `tpsi5-activity-b-js-post-refactor-001` — state update autograded;
+- Activity C `tpsi5-activity-c-feisbuc-dynamic-feed-001` — DOM/event delegation/localStorage;
+- Activity D `tpsi5-activity-d-debug-feisbuc-js-001` — diagnosi browser;
+- Feisbuc milestone `feisbuc-03-dynamic-local-feed`.
+
 ## `TheBitPoets/feisbuc`
 
 Pinned: `086995ece4260a3408740b94cfe2701ce24f8b57`.
@@ -80,6 +128,38 @@ Flexbox → navigazione e azioni del post
 
 Il layout di base è mobile-first e la versione ampia usa colonne Grid flessibili. Il vecchio uso di float rimane utile come evidenza storica da confrontare, non come soluzione canonica del nuovo corso.
 
+**Milestone 2** rifattorizza la UI con Bootstrap soltanto dopo avere costruito il layout nativo. `MAPPING.md` obbliga a collegare ogni astrazione del framework ai concetti CSS sottostanti.
+
+### Audit JavaScript legacy applicato in UDA 22
+
+`add_post.js` e `like_button_pressed.js` contengono intuizioni didattiche preziose ma anche debiti da rendere espliciti:
+
+| Pattern legacy | Decisione |
+| --- | --- |
+| `DOMContentLoaded` + listener | **reuse concept**, poi confrontare con `type=module` e caricamento differito |
+| `event.preventDefault()` con parametro `e` | **turn into debug case** nell'Activity D |
+| creazione DOM con `createElement`/`appendChild` | **reuse concept / modernize** con semantica, `textContent`, `append`, funzioni di render |
+| `counter` globale + id `like_button_N` | **replace** con identita del dato (`post.id`) e `data-post-id`/`data-action` |
+| listener individuali sui like iniziali | **retire as final solution**; resta utile come step del problema |
+| event delegation sul `.feed` | **preserve and deepen**: bubbling, `target/currentTarget`, `closest`, contenitore stabile |
+| like rappresentato modificando stile/disabled del button | **replace** con `state -> render`; likes/liked sono dati |
+| nessuna persistenza strutturata | **add** adapter `localStorage` + JSON + recovery |
+| testo utente inserito nel DOM | **harden**: `textContent` come default; XSS verra approfondito nel modulo security |
+
+La milestone 3 conserva quindi l'idea migliore del legacy — **event delegation** — ma cambia il modello architetturale:
+
+```text
+legacy
+DOM = stato
+button id = identita
+
+nuovo
+post object = stato
+post.id = identita
+DOM = render dello stato
+data-action = azione UI
+```
+
 ## Principio di migrazione
 
-Nessun repository legacy viene copiato integralmente nel nuovo corso. Ogni frammento deve ricevere una decisione esplicita `reuse`, `rewrite`, `replace` o `retire`, conservando provenance e snapshot originario.
+Nessun repository legacy viene copiato integralmente nel nuovo corso. Ogni frammento deve ricevere una decisione esplicita `reuse`, `rewrite`, `replace`, `defer` o `retire`, conservando provenance e snapshot originario.
