@@ -1,0 +1,41 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-d-debug-vue-router-001",
+  "titolo":"Debug Vue Router: loop, deep link e boundary client/server",
+  "tipo":"debug-didattico",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"D",
+  "argomenti":["vue-router","debugging","redirect-loop","history-base","route-meta","deep-link","express-5","client-server-boundary"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-vue-router-navigation"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md","anchor":"26-debug-in-quattro-livelli","role":"lesson"}],
+  "consegna":"Analizza i tre snippet rotti (`router.js`, `App.vue`, `server-fallback.js`). Prima compila `DIAGNOSI.md` con sintomo, livello, causa ed evidence; poi confronta/fissa base history, meta field, redirect loop, navigazione interna, catch-all client e wildcard Express 5.",
+  "vincoli":["diagnosi prima del fix","distinguere HTTP server da route client","non risolvere un loop rendendo pubblica la route feed","non sostituire authorization backend con guard","createWebHistory usa la base Vite","Express 5 wildcard nominato","navigazione interna usa RouterLink/router"],
+  "assets":[
+    {"type":"starter","path":"starter/router.js","target_path":"router.js","visibility":"student","description":"Router con bug concettuali"},
+    {"type":"starter","path":"starter/App.vue","target_path":"App.vue","visibility":"student","description":"Navigazione interna con reload"},
+    {"type":"starter","path":"starter/server-fallback.js","target_path":"server-fallback.js","visibility":"student","description":"Fallback Express incompatibile"},
+    {"type":"starter","path":"starter/DIAGNOSI.md","target_path":"DIAGNOSI.md","visibility":"student","description":"Evidence sheet"},
+    {"type":"teacher_only","path":"solution/router.js","visibility":"teacher","description":"Router corretto"},
+    {"type":"teacher_only","path":"solution/App.vue","visibility":"teacher","description":"Navigazione corretta"},
+    {"type":"teacher_only","path":"solution/server-fallback.js","visibility":"teacher","description":"Fallback corretto"},
+    {"type":"teacher_only","path":"solution/DIAGNOSI.md","visibility":"teacher","description":"Diagnosi reference"}
+  ],
+  "soluzione_attesa":{"tipo":"debug-vue-router-boundaries","file":"DIAGNOSI.md","note":"Diagnosi causale prima delle correzioni."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":75,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"history-base","criterion":"riconosce createWebHistory senza BASE_URL"},
+    {"name":"guard-loop","criterion":"riconosce redirect login->login e meta typo"},
+    {"name":"internal-nav","criterion":"riconosce window.location come reload e base errata"},
+    {"name":"fallback","criterion":"riconosce wildcard Express 5 non nominato e server/client 404"}
+  ],
+  "rubrica":[
+    {"criterio":"Diagnosi per livello","punti":3},
+    {"criterio":"History/base e deep link","punti":2},
+    {"criterio":"Guard/meta/loop","punti":2},
+    {"criterio":"Navigazione interna","punti":1},
+    {"criterio":"Fallback Express 5 e 404","punti":2}
+  ]
+}

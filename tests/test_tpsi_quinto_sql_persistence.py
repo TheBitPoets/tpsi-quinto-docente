@@ -68,7 +68,7 @@ def assert_activity(root,difficulty,activity_id,automatic):
 def test_sql_content_pack_item_course_design_and_activity_contracts():
     pack=load(PACK_PATH); design=load(DESIGN_PATH)
     item=next(x for x in pack["content_items"] if x["id"]=="tpsi5-content-sql-raw-persistence")
-    assert pack["version"]=="0.11.0"
+    assert pack["version"]=="0.12.0"
     assert item["path"]=="content/tpsi5/07_SQL_RAW_PERSISTENCE.md" and item["order"]==8
     assert item["activity_ids"]==[
         "tpsi5-activity-a-sql-posts-schema-001","tpsi5-activity-b-sql-posts-dml-001",

@@ -123,6 +123,32 @@ jobs:
         working-directory: _vue-reference
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
+      - name: Install Vue Router microscope
+        working-directory: activities/tpsi5/vue_router_microscope_a/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build Vue Router microscope
+        working-directory: activities/tpsi5/vue_router_microscope_a/starter
+        run: npm run build
+
+      - name: Compose Feisbuc milestone 9 with Vue Router overlay
+        run: python tests/compose_vue_router_frontend.py
+
+      - name: Install routed Vue frontend
+        working-directory: _vue-router-frontend
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build routed Vue frontend
+        working-directory: _vue-router-frontend
+        run: npm run build
+
+      - name: Compose routed Vue frontend with auth backend
+        run: python tests/compose_vue_router_reference.py
+
+      - name: Install Express for routed Vue backend reference
+        working-directory: _vue-router-reference
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -136,3 +162,4 @@ jobs:
           tests/test_tpsi_quinto_auth_security.py
           tests/test_tpsi_quinto_ssr_nunjucks.py
           tests/test_tpsi_quinto_vue_spa.py
+          tests/test_tpsi_quinto_vue_router.py
