@@ -13,7 +13,8 @@
         "00_COURSE_ARCHITECTURE.md",
         "01_WEB_PLATFORM_HTML_MODERNO.md",
         "02_CSS_MODERNO_RESPONSIVE.md",
-        "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md"
+        "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
+        "04_JAVASCRIPT_DOM_BROWSER_APIS.md"
       ],
       "indexing_status": "ready"
     },
@@ -180,7 +181,35 @@
           "title": "JavaScript moderno, DOM e Browser APIs",
           "path": "Frontend foundations",
           "weeks": "6",
-          "items": []
+          "items": [
+            {
+              "id": "tpsi5-source-originali:content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md#javascript-moderno-dom-e-browser-apis",
+              "title": "JavaScript moderno, DOM e Browser APIs",
+              "source": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+              "source_id": "tpsi5-source-originali",
+              "source_label": "TPSI quinto - contenuti originali",
+              "source_provider": "local",
+              "href": "../../content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md#javascript-moderno-dom-e-browser-apis",
+              "level": 1,
+              "line": 1,
+              "activity_ids": [
+                "tpsi5-activity-a-js-feed-pipeline-001",
+                "tpsi5-activity-b-js-post-refactor-001",
+                "tpsi5-activity-c-feisbuc-dynamic-feed-001",
+                "tpsi5-activity-d-debug-feisbuc-js-001"
+              ],
+              "frame": {
+                "status": "draft",
+                "context": "Separa ECMAScript dalle Web APIs, introduce DOM/eventi/storage/modules e porta Feisbuc da UI statica a feed dinamico locale prima di coinvolgere la rete.",
+                "prerequisites": "UDA 21 completata: HTML semantico, CSS responsive, Bootstrap e uso essenziale di DevTools; programmazione di base dagli anni precedenti.",
+                "objectives": "Manipolare dati con JavaScript moderno, modellare state/render, creare DOM in modo sicuro, gestire form/eventi con delegation, usare ES modules e Web Storage e diagnosticare errori con DevTools.",
+                "recall": "Riprendere la milestone Bootstrap di Feisbuc e la distinzione struttura/presentazione: JavaScript aggiunge comportamento senza sostituire semantica e CSS.",
+                "preview": "Prepara asincronia e comunicazione remota mantenendo chiara la differenza fra logica client e protocollo HTTP.",
+                "next_step": "UDA 23: HTTP in profondita, Promise/async-await, fetch e REST; la persistenza locale di Feisbuc verra progressivamente sostituita da una API.",
+                "references": "MDN JavaScript Guide/DOM/Events/Web Storage/Modules; ECMAScript specification; labs_summary/lab3 e Feisbuc legacy come provenance auditata; Pluralsight JavaScript come teacher-reference licensed."
+              }
+            }
+          ]
         },
         {
           "id": "uda-23",
