@@ -1,0 +1,11 @@
+<h1>Feed</h1>
+<p data-debug-secret="{{ secret }}">{{ currentUser.displayName }}</p>
+{% for post in posts %}
+<article>
+  <h2>{{ post.author }}</h2>
+  <div>{{ post.text | safe }}</div>
+  {% if post.authorId == currentUser.id %}
+    <a href="/ssr/posts/{{ post.id }}/delete">Elimina</a>
+  {% endif %}
+</article>
+{% endfor %}

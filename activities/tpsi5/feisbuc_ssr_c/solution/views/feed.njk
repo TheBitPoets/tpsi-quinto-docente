@@ -1,0 +1,30 @@
+{% extends "base.njk" %}
+{% block title %}Feed SSR{% endblock %}
+{% block content %}
+<h1>Feed SSR</h1>
+<p>Autenticato come <strong>{{ currentUser.displayName }}</strong>.</p>
+
+<form method="post" action="/ssr/posts">
+  <label for="post-text">Nuovo post</label>
+  <textarea id="post-text" name="text" maxlength="280" required></textarea>
+  <button type="submit">Pubblica</button>
+</form>
+
+<section aria-labelledby="feed-title">
+  <h2 id="feed-title">Post</h2>
+  {% for post in posts %}
+  <article data-post-id="{{ post.id }}">
+    <h3>{{ post.author }}</h3>
+    <p>{{ post.text }}</p>
+    <p>{{ post.likes }} like · {{ post.likedLabel }}</p>
+    {% if post.canDelete %}
+    <form method="post" action="/ssr/posts/{{ post.id }}/delete">
+      <button type="submit">Elimina</button>
+    </form>
+    {% endif %}
+  </article>
+  {% else %}
+  <p>Nessun post.</p>
+  {% endfor %}
+</section>
+{% endblock %}

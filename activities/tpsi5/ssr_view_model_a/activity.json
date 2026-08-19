@@ -1,0 +1,29 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-a-ssr-view-model-001",
+  "titolo":"View model SSR: prepara i post per la vista",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"A",
+  "argomenti":["ssr","view-model","presentation","authorization-ui","javascript","pure-function"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-24"},
+  "content_ids":["tpsi5-content-ssr-nunjucks-comparison"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md","anchor":"6-view-model-preparare-dati-per-la-vista","role":"lesson"}],
+  "consegna":"Completa `buildFeedViewModel(input)`. Ricevi `{user,posts}` e produci un oggetto presentazionale. Ogni post deve conservare id/authorId/author/text/likes/liked e aggiungere `canDelete` (true solo se user.id === post.authorId) e `likedLabel` (`Non mi piace piu` se liked, altrimenti `Mi piace`). Non generare HTML e non trattare canDelete come authorization server-side.",
+  "vincoli":["funzione pura","non mutare input","nessun DOM","nessun HTML","canDelete e solo UI hint","output deterministico","stdout solo JSON"],
+  "assets":[
+    {"type":"starter","path":"starter/main.js","target_path":"main.js","visibility":"student","description":"View-model builder da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Contratto e matrice attesa"},
+    {"type":"teacher_only","path":"solution/main.js","visibility":"teacher","description":"Soluzione di riferimento"}
+  ],
+  "soluzione_attesa":{"tipo":"javascript-deterministico","file":"main.js","note":"View model puro, non template rendering."},
+  "correzione":{"compila":false,"test":true,"sandbox":true,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":30,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "test_cases":[
+    {"name":"owner","stdin":"{\"user\":{\"id\":\"u1\",\"displayName\":\"Alice\"},\"posts\":[{\"id\":\"p1\",\"authorId\":\"u1\",\"author\":\"Alice\",\"text\":\"ciao\",\"likes\":2,\"liked\":false}]}\n","expected_stdout":"{\"user\":{\"id\":\"u1\",\"displayName\":\"Alice\"},\"posts\":[{\"id\":\"p1\",\"authorId\":\"u1\",\"author\":\"Alice\",\"text\":\"ciao\",\"likes\":2,\"liked\":false,\"canDelete\":true,\"likedLabel\":\"Mi piace\"}]}"},
+    {"name":"non-owner-liked","stdin":"{\"user\":{\"id\":\"u2\",\"displayName\":\"Bob\"},\"posts\":[{\"id\":\"p1\",\"authorId\":\"u1\",\"author\":\"Alice\",\"text\":\"x\",\"likes\":3,\"liked\":true}]}\n","expected_stdout":"{\"user\":{\"id\":\"u2\",\"displayName\":\"Bob\"},\"posts\":[{\"id\":\"p1\",\"authorId\":\"u1\",\"author\":\"Alice\",\"text\":\"x\",\"likes\":3,\"liked\":true,\"canDelete\":false,\"likedLabel\":\"Non mi piace piu\"}]}"},
+    {"name":"anonymous","stdin":"{\"user\":null,\"posts\":[{\"id\":\"p1\",\"authorId\":\"u1\",\"author\":\"Alice\",\"text\":\"x\",\"likes\":0,\"liked\":false}]}\n","expected_stdout":"{\"user\":null,\"posts\":[{\"id\":\"p1\",\"authorId\":\"u1\",\"author\":\"Alice\",\"text\":\"x\",\"likes\":0,\"liked\":false,\"canDelete\":false,\"likedLabel\":\"Mi piace\"}]}"}
+  ],
+  "rubrica":[{"criterio":"View model corretto","punti":3},{"criterio":"canDelete owner-only","punti":2},{"criterio":"likedLabel","punti":2},{"criterio":"immutabilita/input","punti":2},{"criterio":"chiarezza boundary UI/authz","punti":1}]
+}

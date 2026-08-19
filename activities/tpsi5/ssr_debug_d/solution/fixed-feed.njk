@@ -1,0 +1,11 @@
+{% for post in posts %}
+<article>
+  <h2>{{ post.author }}</h2>
+  <p>{{ post.text }}</p>
+  {% if post.canDelete %}
+  <form method="post" action="/ssr/posts/{{ post.id }}/delete">
+    <button type="submit">Elimina</button>
+  </form>
+  {% endif %}
+</article>
+{% endfor %}

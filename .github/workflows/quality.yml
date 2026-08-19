@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JS, SQL, auth and backend E2E tests
+      - name: Set up Node.js for deterministic JS, SQL, auth, SSR and backend E2E tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -65,6 +65,17 @@ jobs:
         working-directory: activities/tpsi5/feisbuc_auth_c/solution
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
+      - name: Install Nunjucks mini-render reference
+        working-directory: activities/tpsi5/nunjucks_autoescape_b/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Compose Feisbuc SSR reference from milestone 7
+        run: python tests/compose_ssr_reference.py
+
+      - name: Install Express and Nunjucks for composed SSR reference
+        working-directory: _ssr-reference
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -76,3 +87,4 @@ jobs:
           tests/test_tpsi_quinto_node_express.py
           tests/test_tpsi_quinto_sql_persistence.py
           tests/test_tpsi_quinto_auth_security.py
+          tests/test_tpsi_quinto_ssr_nunjucks.py
