@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-c-feisbuc-express-api-001",
+  "titolo": "Feisbuc milestone 5: API Express 5 modulare",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "C",
+  "argomenti": ["nodejs", "express-5", "router", "middleware", "validation", "error-handling", "request-id", "environment", "static-files", "rest-api", "memory-store"],
+  "linguaggio": "nodejs",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-node-express-backend", "tpsi5-content-http-async-fetch-rest"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/06_NODE_EXPRESS_BACKEND.md", "anchor": "feisbuc-milestone-5-stessa-api-nuovo-backend", "role": "lesson"},
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md", "anchor": "feisbuc-milestone-4-dallo-storage-alla-api", "role": "previous-contract"},
+    {"source_id": "tpsi5-source-labs-legacy", "path": "README.md", "anchor": "lab5", "role": "legacy-provenance"}
+  ],
+  "project_milestone": "feisbuc-05-express-api",
+  "consegna": "Sostituisci il server `node:http` monolitico della milestone 4 con una applicazione Express 5 modulare senza cambiare il contratto del client. Completa `createApp`, `postsRouter`, validation, `MemoryPostStore` e middleware. La API deve supportare `GET /api/posts`, filtro opzionale `?liked=true|false`, `POST /api/posts` con JSON e `201 + Location`, `PATCH /api/posts/:id` per il like, `404` JSON, `415` per representation non JSON dove richiesta e un error model comune con `requestId`. Servi anche il client da `public/` con `express.static`. Lo storage resta volutamente in memoria.",
+  "vincoli": [
+    "usa ES modules e Express 5.2.1 pinned",
+    "separa almeno app/server/router/validation/store/middleware",
+    "express.json deve essere montato prima delle route che leggono req.body",
+    "usa express.Router per la risorsa posts",
+    "non usare GET per creare/modificare/cancellare stato",
+    "validation non deve dipendere da req/res",
+    "il router dipende da un postStore passato dall'esterno",
+    "il 404 middleware viene dopo static e API router",
+    "l'error middleware ha quattro parametri e produce JSON coerente",
+    "non aggiungere database, ORM, auth o template engine",
+    "non aggiungere cors middleware: client e API sono same-origin in questa milestone",
+    "non modificare il client per compensare errori del backend"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/package.json", "target_path": "package.json", "visibility": "student", "description": "Package Express pinned"},
+    {"type": "starter", "path": "starter/src/app.js", "target_path": "src/app.js", "visibility": "student", "description": "Composizione Express da completare"},
+    {"type": "starter", "path": "starter/src/server.js", "target_path": "src/server.js", "visibility": "student", "description": "Startup server"},
+    {"type": "starter", "path": "starter/src/config.js", "target_path": "src/config.js", "visibility": "student", "description": "Configurazione environment"},
+    {"type": "starter", "path": "starter/src/posts.router.js", "target_path": "src/posts.router.js", "visibility": "student", "description": "Router posts da completare"},
+    {"type": "starter", "path": "starter/src/post-store.js", "target_path": "src/post-store.js", "visibility": "student", "description": "Memory store da completare"},
+    {"type": "starter", "path": "starter/src/validation.js", "target_path": "src/validation.js", "visibility": "student", "description": "Validation da completare/riusare da Activity B"},
+    {"type": "starter", "path": "starter/src/http-errors.js", "target_path": "src/http-errors.js", "visibility": "student", "description": "Errore applicativo HTTP"},
+    {"type": "starter", "path": "starter/src/middleware.js", "target_path": "src/middleware.js", "visibility": "student", "description": "Request ID, logger, 404, error handler"},
+    {"type": "example", "path": "starter/public/index.html", "target_path": "public/index.html", "visibility": "student", "description": "Client Feisbuc milestone 4 invariato"},
+    {"type": "example", "path": "starter/public/custom.css", "target_path": "public/custom.css", "visibility": "student", "description": "CSS client"},
+    {"type": "example", "path": "starter/public/app.js", "target_path": "public/app.js", "visibility": "student", "description": "UI client completa"},
+    {"type": "example", "path": "starter/public/api.js", "target_path": "public/api.js", "visibility": "student", "description": "HTTP adapter client completo"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Architettura, DoD e smoke request"},
+    {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Rubrica e domande docente"}
+  ],
+  "soluzione_attesa": {"tipo": "express-multi-file", "file": "src/server.js", "note": "Express app modulare, memory store e client same-origin."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 180, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "manual_checks": [
+    {"name": "contract", "criterion": "GET/POST/PATCH mantengono il contratto UDA23"},
+    {"name": "middleware-order", "criterion": "JSON parser/router/static/404/error handler sono ordinati correttamente"},
+    {"name": "router", "criterion": "la risorsa posts usa express.Router"},
+    {"name": "validation", "criterion": "input invalido viene rifiutato al confine senza logica DOM/client"},
+    {"name": "store-boundary", "criterion": "router dipende da MemoryPostStore astratto dal transport"},
+    {"name": "error-model", "criterion": "error response coerenti includono code/message/requestId"}
+  ],
+  "rubrica": [
+    {"criterio": "Contratto REST e status HTTP", "punti": 2},
+    {"criterio": "Router e middleware", "punti": 2},
+    {"criterio": "Validation e error model", "punti": 2},
+    {"criterio": "Memory store e separazione responsabilita", "punti": 2},
+    {"criterio": "Config, logging/request ID e static client", "punti": 2}
+  ]
+}
