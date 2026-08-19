@@ -1,0 +1,12 @@
+:root {
+  --feisbuc-brand: #243b53;
+}
+
+.feisbuc-brand {
+  color: var(--feisbuc-brand);
+  letter-spacing: 0.04em;
+}
+
+.profile-note {
+  max-width: 24ch;
+}
