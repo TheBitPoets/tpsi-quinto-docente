@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-a-auth-credential-policy-001",
+  "titolo": "Policy credenziali: email normalizzata e password moderna",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "A",
+  "argomenti": ["authentication", "password-policy", "email-normalization", "nist", "input-validation", "javascript"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-auth-sessions-security"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md", "anchor": "3-password-policy-moderna", "role": "lesson"}
+  ],
+  "consegna": "Completa `validateCredentials(input)`. L'input deve essere un oggetto con `email` e `password`. Normalizza l'email con trim + lowercase e verifica un formato email didattico essenziale. La password deve avere da 15 a 128 code point inclusi. Non imporre maiuscole, numeri o simboli. Il programma legge JSON da stdin e stampa un solo JSON deterministico.",
+  "vincoli": ["usa const/let e funzioni pure","conta la password con Array.from(password).length","email normalizzata con trim e lowercase","non introdurre regole di composizione","errors nell'ordine: body-invalid, email-invalid, password-too-short, password-too-long","nessun log extra oltre al JSON finale"],
+  "assets": [
+    {"type":"starter","path":"starter/main.js","target_path":"main.js","visibility":"student","description":"Funzione policy da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Contratto input/output"},
+    {"type":"teacher_only","path":"solution/main.js","visibility":"teacher","description":"Soluzione docente"}
+  ],
+  "soluzione_attesa": {"tipo":"javascript-deterministico","file":"main.js","note":"Policy pura; nessun hashing in questa Activity."},
+  "correzione": {"compila":false,"test":true,"sandbox":true,"ai_feedback":false},
+  "metriche": {"tempo_stimato_minuti":35,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "test_cases": [
+    {"name":"valid-passphrase","stdin":"{\"email\":\"  STUDENTE@Example.Test \",\"password\":\"una passphrase lunga 2026\"}\n","expected_stdout":"{\"ok\":true,\"email\":\"studente@example.test\",\"errors\":[]}"},
+    {"name":"short-no-composition","stdin":"{\"email\":\"a@b.test\",\"password\":\"Aa1!breve\"}\n","expected_stdout":"{\"ok\":false,\"email\":\"a@b.test\",\"errors\":[\"password-too-short\"]}"},
+    {"name":"invalid-email","stdin":"{\"email\":\"not-an-email\",\"password\":\"questa password supera quindici\"}\n","expected_stdout":"{\"ok\":false,\"email\":\"not-an-email\",\"errors\":[\"email-invalid\"]}"},
+    {"name":"body-invalid","stdin":"[]\n","expected_stdout":"{\"ok\":false,\"email\":\"\",\"errors\":[\"body-invalid\"]}"},
+    {"name":"too-long","stdin":"{\"email\":\"a@b.test\",\"password\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}\n","expected_stdout":"{\"ok\":false,\"email\":\"a@b.test\",\"errors\":[\"password-too-long\"]}"}
+  ],
+  "rubrica": [
+    {"criterio":"Normalizzazione email","punti":2},{"criterio":"Lunghezza password 15-128","punti":3},{"criterio":"Nessuna composition rule arbitraria","punti":2},{"criterio":"Output/errori deterministici","punti":2},{"criterio":"Codice leggibile","punti":1}
+  ]
+}

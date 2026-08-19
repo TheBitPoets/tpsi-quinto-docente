@@ -1,0 +1,2 @@
+:root { --feisbuc-brand: #243b53; }
+.navbar-brand { color: var(--feisbuc-brand); letter-spacing: .04em; }

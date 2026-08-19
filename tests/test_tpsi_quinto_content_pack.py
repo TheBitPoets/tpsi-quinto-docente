@@ -52,7 +52,7 @@ def parse_html(path: Path) -> StructureParser:
 def test_native_content_pack_v1_is_valid_and_pinned() -> None:
     pack = load(PACK_PATH)
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.8.0"
+    assert pack["version"] == "0.9.0"
     assert pack["status"] == "draft"
     assert pack["extensions"]["platform_contract"]["content_pack_v1_sha"] == ACCEPTED_CONTENT_PACK_V1_SHA
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
@@ -82,6 +82,7 @@ def test_sources_project_exactly_to_course_design_catalog() -> None:
         "05_HTTP_ASYNC_FETCH_REST.md",
         "06_NODE_EXPRESS_BACKEND.md",
         "07_SQL_RAW_PERSISTENCE.md",
+        "08_AUTH_SESSIONI_SICUREZZA.md",
     )
     assert normalized[1].ref == "d71da420f1aa2ea39b61356e4f9900c6371e7a42"
     assert normalized[2].ref == "36a909f00c9478983a8d1b950440e2abc28b8a55"
@@ -118,6 +119,11 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
     assert refs["tpsi5-ref-node"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-express"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-sqlite"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-nist-800-63b"]["role"] == "specification"
+    assert refs["tpsi5-ref-owasp-password-storage"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-owasp-session-management"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-owasp-csrf"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-mdn-cookies"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-manning-css-depth"]["access"] == "licensed"
     assert refs["tpsi5-ref-pluralsight-javascript"]["access"] == "licensed"
 
@@ -132,14 +138,16 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
         assert refs[ref_id]["role"] == "teacher-reference"
 
     source_providers = {source["provider"] for source in pack["sources"]}
-    for provider in ("manning", "pluralsight", "mdn", "whatwg", "nodejs", "expressjs", "sqlite"):
+    for provider in (
+        "manning", "pluralsight", "mdn", "whatwg", "nodejs", "expressjs", "sqlite", "nist", "owasp"
+    ):
         assert provider not in source_providers
 
 
 def test_content_items_are_ordered_and_linked_to_real_files() -> None:
     pack = load(PACK_PATH)
     items = pack["content_items"]
-    assert [item["order"] for item in items] == list(range(1, 9))
+    assert [item["order"] for item in items] == list(range(1, 10))
     for item in items:
         assert (ROOT / item["path"]).is_file(), item["path"]
         assert item["source_refs"]
@@ -153,6 +161,7 @@ def test_content_items_are_ordered_and_linked_to_real_files() -> None:
         "tpsi5-content-http-async-fetch-rest",
         "tpsi5-content-node-express-backend",
         "tpsi5-content-sql-raw-persistence",
+        "tpsi5-content-auth-sessions-security",
     } <= ids
 
 
@@ -163,9 +172,11 @@ def test_uda24_is_decomposed_without_changing_its_week_budget() -> None:
     assert [item["source"] for item in uda24["items"]] == [
         "content/tpsi5/06_NODE_EXPRESS_BACKEND.md",
         "content/tpsi5/07_SQL_RAW_PERSISTENCE.md",
+        "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md",
     ]
     assert "SQL raw" in uda24["items"][0]["frame"]["next_step"]
     assert "auth" in uda24["items"][1]["frame"]["next_step"].lower()
+    assert "SSR" in uda24["items"][2]["frame"]["next_step"]
 
 
 def test_uda21_activity_contracts_and_assets_remain_valid() -> None:

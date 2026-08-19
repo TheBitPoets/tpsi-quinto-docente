@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-b-auth-post-authorization-001",
+  "titolo": "Autorizzazione server-side: chi puo agire sul post?",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "B",
+  "argomenti": ["authorization", "authentication", "ownership", "idor", "server-side-access-control", "javascript"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-auth-sessions-security"],
+  "source_refs": [{"source_id":"tpsi5-source-originali","path":"content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md","anchor":"13-autorizzazione-il-server-decide","role":"lesson"}],
+  "consegna": "Completa `authorizePostAction(input)`. L'input contiene `user`, `post` e `action`. Un utente non autenticato non puo fare nulla. Un autenticato puo `read`, `like` e `create`. `edit` e `delete` sono consentite solo se `post.authorId === user.id`. Le decisioni devono essere server-side e deterministiche. Stampa `{allowed, reason}`.",
+  "vincoli": ["non leggere campi come currentUserId scelti fuori da user.id","edit/delete richiedono ownership","nessun accesso DOM","reason stabile: authentication-required, allowed, ownership-required, action-unknown","nessun log extra"],
+  "assets": [
+    {"type":"starter","path":"starter/main.js","target_path":"main.js","visibility":"student","description":"Authorization function da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Matrice access control"},
+    {"type":"teacher_only","path":"solution/main.js","visibility":"teacher","description":"Soluzione docente"}
+  ],
+  "soluzione_attesa": {"tipo":"javascript-deterministico","file":"main.js","note":"Funzione pura di authorization per ownership."},
+  "correzione": {"compila":false,"test":true,"sandbox":true,"ai_feedback":false},
+  "metriche": {"tempo_stimato_minuti":35,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "test_cases": [
+    {"name":"anonymous-read","stdin":"{\"user\":null,\"post\":{\"id\":\"p1\",\"authorId\":\"u1\"},\"action\":\"read\"}\n","expected_stdout":"{\"allowed\":false,\"reason\":\"authentication-required\"}"},
+    {"name":"authenticated-like","stdin":"{\"user\":{\"id\":\"u2\"},\"post\":{\"id\":\"p1\",\"authorId\":\"u1\"},\"action\":\"like\"}\n","expected_stdout":"{\"allowed\":true,\"reason\":\"allowed\"}"},
+    {"name":"owner-delete","stdin":"{\"user\":{\"id\":\"u1\"},\"post\":{\"id\":\"p1\",\"authorId\":\"u1\"},\"action\":\"delete\"}\n","expected_stdout":"{\"allowed\":true,\"reason\":\"allowed\"}"},
+    {"name":"non-owner-delete","stdin":"{\"user\":{\"id\":\"u2\"},\"post\":{\"id\":\"p1\",\"authorId\":\"u1\"},\"action\":\"delete\"}\n","expected_stdout":"{\"allowed\":false,\"reason\":\"ownership-required\"}"},
+    {"name":"unknown","stdin":"{\"user\":{\"id\":\"u1\"},\"post\":{\"id\":\"p1\",\"authorId\":\"u1\"},\"action\":\"ban\"}\n","expected_stdout":"{\"allowed\":false,\"reason\":\"action-unknown\"}"}
+  ],
+  "rubrica": [
+    {"criterio":"Autenticazione richiesta","punti":2},{"criterio":"Read/like/create per autenticati","punti":2},{"criterio":"Ownership edit/delete","punti":3},{"criterio":"Default deny azioni sconosciute","punti":2},{"criterio":"Funzione pura/leggibile","punti":1}
+  ]
+}

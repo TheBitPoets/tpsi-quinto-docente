@@ -11,11 +11,12 @@ Il consumer e pinned alla revisione **Accettata** del contratto in `TheBitPoets/
 - partire dalla Web Platform prima dei framework;
 - rendere HTTP esplicito prima di `fetch`/Express;
 - usare SQL raw prima dell'ORM;
-- separare trasporto HTTP, validation e persistenza;
+- separare trasporto HTTP, validation, persistenza, autenticazione e autorizzazione;
+- derivare l'identita dal contesto verificato server-side, mai da un campo scelto dal client;
 - usare Node.js + Express come backend principale dopo avere studiato il protocollo;
 - mantenere Python/FastAPI come mirror track mirato;
 - usare Feisbuc come progetto longitudinale;
-- usare documentazioni ufficiali come reference professionali;
+- usare documentazioni ufficiali e security guidance autorevoli come reference professionali;
 - mantenere Activity A–F e separazione studente/docente/grading.
 
 ## Contenuti disponibili
@@ -27,7 +28,8 @@ Il consumer e pinned alla revisione **Accettata** del contratto in `TheBitPoets/
 5. `04_JAVASCRIPT_DOM_BROWSER_APIS.md` — JavaScript/DOM/storage; milestone 3;
 6. `05_HTTP_ASYNC_FETCH_REST.md` — HTTP/async/fetch/REST; milestone 4;
 7. `06_NODE_EXPRESS_BACKEND.md` — Node + Express 5 + backend modulare; milestone 5;
-8. `07_SQL_RAW_PERSISTENCE.md` — modello relazionale, DDL/DML, constraint, prepared statement, `node:sqlite` e repository persistente; milestone 6.
+8. `07_SQL_RAW_PERSISTENCE.md` — modello relazionale, DDL/DML, constraint, prepared statement, `node:sqlite` e repository persistente; milestone 6;
+9. `08_AUTH_SESSIONI_SICUREZZA.md` — password policy/hash, sessioni server-side, cookie, CSRF defense e authorization; milestone 7.
 
 ## Feisbuc oggi
 
@@ -39,27 +41,23 @@ Il consumer e pinned alla revisione **Accettata** del contratto in `TheBitPoets/
 4  HTTP REST client + node:http fixture
 5  Express 5 + MemoryPostStore
 6  Express 5 + SqlPostStore + SQLite file
+7  users + scrypt + session cookie + verified author + ownership
 ```
 
-Il contratto client rimane:
+La milestone 7 non sposta il token nel client JavaScript. Il boundary diventa:
 
 ```text
-GET   /api/posts
-POST  /api/posts
-PATCH /api/posts/:id
+browser
+  -> HttpOnly session cookie
+  -> loadAuth
+  -> req.auth.user
+  -> protected Router
+  -> authorization
+  -> SqlAuthStore + SqlPostStore
+  -> SQLite
 ```
 
-La milestone 6 dimostra invece questa sostituzione:
-
-```text
-Router -> MemoryPostStore
-             ↓
-         SqlPostStore
-             ↓
-          SQLite
-```
-
-Il Router non conosce `DatabaseSync`; il client non conosce SQLite.
+Il client usa `GET /api/auth/me` per conoscere l'utente pubblico, mentre il session token resta una credential gestita dal browser.
 
 ## Activity UDA 24 — Node/Express
 
@@ -75,31 +73,38 @@ Il Router non conosce `DatabaseSync`; il client non conosce SQLite.
 - `tpsi5-activity-c-feisbuc-sql-repository-001` — milestone 6 con `node:sqlite` e restart persistence;
 - `tpsi5-activity-d-debug-sql-state-001` — debugging constraint/WHERE, **autograded SQL + diagnosi**.
 
-## Boundary SQL / ORM
+## Activity UDA 24 — auth/session/security
 
-L'ORM resta **TBD e fuori da questo incremento**.
+- `tpsi5-activity-a-auth-credential-policy-001` — policy email/password, **autograded JS**;
+- `tpsi5-activity-b-auth-post-authorization-001` — authorization/ownership, **autograded JS**;
+- `tpsi5-activity-c-feisbuc-auth-session-001` — milestone 7: scrypt, sessioni, cookie, authn/authz e ownership;
+- `tpsi5-activity-d-debug-auth-security-001` — security review di un backend che funziona ma viola il trust model.
 
-Prima lo studente deve saper spiegare:
+## Boundary auth
+
+Il core corrente usa sessioni server-side opache perche il requisito e un browser same-origin con backend Express. Restano fuori da questa milestone:
 
 ```text
-schema
-constraint
-SELECT
-INSERT
-UPDATE/DELETE + WHERE
-prepared statement
-transaction
-repository
+JWT
+OAuth/OIDC
+MFA/passkey
+password reset
+email verification
+SSO
 ```
 
-Solo dopo confrontiamo che cosa un ORM astrae e a quale costo.
+Sono concetti importanti, ma non servono per capire i primitive e i trust boundary della sessione applicativa di Feisbuc.
+
+## Boundary SQL / ORM
+
+L'ORM resta **TBD**. Prima lo studente deve sapere leggere SQL raw e capire prepared statement, constraint, repository e schema relazionale; solo dopo confronteremo che cosa l'ORM astrae.
 
 ## Boundary col futuro corso SQL
 
-Nell'organizzazione non esiste ancora un repository SQL dedicato. Per ora questo blocco vive in TPSI5 come consumer reale del Content Pack; la struttura e stata resa autonoma per poter essere estratta in seguito senza rompere il percorso Full Stack.
+Nell'organizzazione non esiste ancora un repository SQL dedicato. Il blocco SQL vive per ora in TPSI5 come consumer reale del Content Pack ed e strutturato per essere estratto in seguito senza rompere il percorso Full Stack.
 
 ## Stato
 
-Versione authoring **`0.8.0`**, ancora `draft`.
+Versione authoring **`0.9.0`**, ancora `draft`.
 
-Il prossimo incremento di UDA24 e **auth sicura**: modello utenti/credential, password hashing, session/authn/authz. SSR/template resta successivo e compatto.
+Il prossimo incremento di UDA24 e il **breve confronto SSR/template** mantenendo lo stesso modello auth. Framework frontend, ORM Node e profondita TypeScript restano decisioni aperte.

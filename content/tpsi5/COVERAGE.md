@@ -11,31 +11,35 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso mentre i moduli
 | Bootstrap | sì, dopo CSS nativo | **milestone 2 disponibile** | framework come astrazione sopra CSS, mapping obbligatorio |
 | JavaScript moderno | sì | comportamento client | `04_JAVASCRIPT_DOM_BROWSER_APIS.md`; array/object, map/filter/find, functions, ES modules; A/B autograded |
 | DOM e Browser APIs | sì | **milestone 3 disponibile** | state/render, form, eventi, event delegation, dataset, textContent |
-| Web Storage | sì, come passaggio | milestone 3 locale | `localStorage`/JSON come persistenza temporanea, poi sostituita dalla API in milestone 4 |
+| Web Storage | sì, come passaggio | milestone 3 locale | `localStorage`/JSON solo per dati applicativi non sensibili; sostituito dalla API in milestone 4 |
 | JavaScript debugging | sì | diagnosi comportamento client | Activity D UDA 22 usa bug reali del Feisbuc legacy |
 | Asincronia | sì | **milestone 4 disponibile** | `05_HTTP_ASYNC_FETCH_REST.md`: Promise, `async`/`await`, error handling e separazione network/HTTP |
 | HTTP | sì, approfondito | contratto client/server | request/response, URL/path/query, metodi, safe/idempotent, status, headers, Content-Type, curl e Network panel |
 | Fetch | sì | client Feisbuc remoto | `response.ok`, parsing condizionale, error taxonomy |
-| REST/API design | sì | **milestone 4/5/6** | contratto `GET/POST/PATCH /api/posts` mantenuto mentre cambiano framework e storage |
-| CORS / same-origin | sì, fondamenti | same-origin | niente `cors()` automatico: policy cross-origin solo quando esiste un vero secondo origin |
-| Node.js | sì | **milestone 5/6** | runtime, process/env, npm/package.json, ESM, `node:http` e `node:sqlite` |
-| Express | sì | **milestone 5 disponibile** | Express 5.2.1 pinned: Router, middleware, static, body parsing, validation, error pipeline, request ID/logging |
-| Backend architecture | sì | store sostituibile | `app/server/router/validation/store/middleware`; Router dipende dal contratto store |
-| Modello relazionale / SQLite | sì | **milestone 6 disponibile** | `07_SQL_RAW_PERSISTENCE.md`: schema, PK, constraint, DDL/DML, indici e mapping boolean 0/1 |
-| SQL raw | sì, integrato e futuro corso dedicato | **milestone 6 disponibile** | A/B/D autograded dal runner SQL TheBitLab; `SqlPostStore` usa prepared statements |
-| Prepared statements / SQL injection prevention | sì | repository SQL | input esterno bindato, nessuna concatenazione in query |
-| Transazioni | sì, fondamenti | estensione repository | introdotte quando esiste un invariante multi-statement; non usate come rituale |
-| ORM Node | sì, tecnologia TBD | persistenza evoluta | confronto Drizzle / Prisma / Sequelize **dopo** SQL raw |
-| Auth e sicurezza web | sì | fase successiva UDA 24 | password hashing, session/authn/authz, cookie, secret; password in chiaro legacy = anti-pattern |
-| Template/SSR | sì, compatto | fase successiva UDA 24 | Nunjucks/equivalente come confronto SSR vs API/SPA |
+| REST/API design | sì | **milestone 4–7** | contratto posts evolve senza perdere semantica HTTP; auth aggiunge register/login/me/logout |
+| CORS / same-origin | sì, fondamenti | same-origin | niente `cors()` automatico; policy cross-origin soltanto con requisito reale |
+| Node.js | sì | **milestone 5–7** | runtime, process/env, npm/package.json, ESM, `node:http`, `node:sqlite`, `node:crypto` |
+| Express | sì | **milestone 5–7** | Express 5.2.1 pinned: Router, middleware, static, body parsing, auth pipeline, request ID/logging |
+| Backend architecture | sì | boundary sostituibili | `app/server/router/validation/store/middleware`; auth/session e persistence restano separati |
+| Modello relazionale / SQLite | sì | **milestone 6/7** | posts, users e sessions; FK/constraint/indici e prepared statements |
+| SQL raw | sì, integrato e futuro corso dedicato | **milestone 6/7** | A/B/D autograded dal runner SQL; repository SQL prima dell'ORM |
+| Prepared statements / SQL injection prevention | sì | repository SQL/auth | email, user/session/post id e contenuti vengono bindati |
+| Transazioni | sì, fondamenti | repository | introdotte quando servono invarianti multi-statement |
+| Password policy / hashing | sì | **milestone 7 disponibile** | 15–128, niente composition rule; `scrypt` + salt casuale; niente password plaintext |
+| Session management | sì | **milestone 7 disponibile** | token opaco, hash token nel DB, TTL, logout/revoca, cookie `HttpOnly`/`SameSite`/`Secure` in production |
+| Authentication | sì | **milestone 7 disponibile** | register/login/me/logout; errore login generico e identità derivata server-side |
+| Authorization | sì | **milestone 7 disponibile** | ownership server-side; DELETE proprio 204, altrui 403, anonimo 401 |
+| CSRF / same-origin defense | sì, fondamenti | milestone 7 | `SameSite=Strict` + controllo Origin/Sec-Fetch-Site per unsafe methods; defense in depth |
+| ORM Node | sì, tecnologia TBD | persistenza evoluta | confronto Drizzle / Prisma / Sequelize **dopo** SQL raw e auth |
+| Template/SSR | sì, compatto | **prossimo incremento UDA 24** | confronto SSR vs API/client render; auth model resta invariato |
 | Framework frontend | sì, tecnologia TBD | SPA Feisbuc | candidato Vue 3; scelta non congelata |
 | SPA e routing | sì | client completo | componenti, stato, form, REST |
 | WebSocket/realtime | sì | live feed/chat/notifiche | WebSocket concettuale + Socket.IO applicativo |
 | FastAPI mirror track | sì, mirato | API alternativa | stesso contratto HTTP, non doppio corso |
 | OpenAPI | sì | documentazione API | naturale nel mirror FastAPI |
 | SQLAlchemy | sì nel mirror Python | persistenza Python | mapping SQL ↔ ORM |
-| Testing/debugging | sì | test Feisbuc | CSS/JS/HTTP/Express/SQL debugging; SQL e JS puri autograded; API reference E2E |
-| Deployment | sì | release finale | env, build, log, HTTPS/reverse proxy concettuali |
+| Testing/debugging | sì | test Feisbuc | CSS/JS/HTTP/Express/SQL/auth debugging; JS/SQL puri autograded; auth/session reference E2E |
+| Deployment | sì | release finale | env, build, log, HTTPS/reverse proxy concettuali; cookie Secure/proxy ripresi qui |
 | Capstone | sì | Feisbuc | milestone progressive e prodotto finale |
 | TypeScript | da decidere | eventuale fase avanzata | breve core o track advanced |
 | Senior track | no, previsto | prosecuzione futura | architecture, perf, cache/queue, observability, CI/CD, scaling |
@@ -50,17 +54,26 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso mentre i moduli
 4 HTTP REST API client + node:http fixture
 5 Express 5 modular API + MemoryPostStore
 6 Express 5 + SqlPostStore + SQLite file
+7 users + scrypt + server-side session + verified author + ownership
 ```
 
-Il salto 5 → 6 e volutamente locale alla persistenza:
+Il salto 6 → 7 cambia il **trust model**, non soltanto lo schema:
 
 ```text
-client -> api.js -> Router -> MemoryPostStore
-                         |
-                         `-> SqlPostStore -> SQLite
+prima
+client -> API -> Router -> SqlPostStore
+                  author convenzionale
+
+ora
+browser -> HttpOnly cookie
+        -> loadAuth -> req.auth.user
+        -> protected Router
+        -> authorization
+        -> SqlAuthStore + SqlPostStore
+        -> SQLite
 ```
 
-Client, HTTP contract, validation ed error model non devono cambiare.
+Il client non sceglie `authorId` e non legge il session token.
 
 ## Activity UDA 22
 
@@ -90,10 +103,17 @@ Client, HTTP contract, validation ed error model non devono cambiare.
 - [x] `tpsi5-activity-c-feisbuc-sql-repository-001` — milestone 6, `node:sqlite` + persistence restart-safe;
 - [x] `tpsi5-activity-d-debug-sql-state-001` — constraint + UPDATE/DELETE debugging, **grading SQL + diagnosi**.
 
+## Activity UDA 24 — auth/session/security
+
+- [x] `tpsi5-activity-a-auth-credential-policy-001` — email/password policy, **grading JS**;
+- [x] `tpsi5-activity-b-auth-post-authorization-001` — ownership/default deny, **grading JS**;
+- [x] `tpsi5-activity-c-feisbuc-auth-session-001` — milestone 7, scrypt + session server-side + cookie + authn/authz;
+- [x] `tpsi5-activity-d-debug-auth-security-001` — security review di password/session/identity/IDOR.
+
 ## Gate prima del freeze del curriculum TPSI5
 
-1. completare UDA 24 con auth sicura e confronto SSR;
-2. definire/creare il corso SQL separato riusando questo blocco come primo consumer;
+1. completare UDA 24 con il breve confronto SSR/template;
+2. definire/creare il corso SQL separato riusando il blocco SQL come primo consumer;
 3. scelta framework frontend;
 4. scelta ORM Node;
 5. scelta profondità TypeScript;
