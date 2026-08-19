@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-d-debug-fetch-http-001",
+  "titolo": "Debug fetch: separa network error, HTTP error e parsing",
+  "tipo": "debug-didattico",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "D",
+  "argomenti": ["fetch", "http-status", "response-ok", "content-type", "json", "204", "devtools", "debugging"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-23"},
+  "content_ids": ["tpsi5-content-http-async-fetch-rest"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md", "anchor": "errori-frequenti", "role": "lesson"},
+    {"source_id": "tpsi5-ref-lab5-legacy", "path": "client.js", "anchor": "fetch-chain", "role": "legacy-provenance"},
+    {"source_id": "tpsi5-ref-lab7-legacy", "path": "client.js", "anchor": "fetch-requests", "role": "legacy-provenance"}
+  ],
+  "consegna": "Avvia la fixture e riproduci i tre bug dello starter: GET di una risorsa mancante, POST con representation errata e risposta 204. Prima compila `DIAGNOSI.md` usando Network/Console. Poi correggi `client.js` creando una policy coerente per leggere il payload, controllare `response.ok`, serializzare JSON correttamente e distinguere un esito HTTP negativo da un errore di rete/runtime.",
+  "vincoli": [
+    "compila DIAGNOSI.md prima del fix",
+    "non modificare server.mjs",
+    "usa DevTools Network per ogni caso",
+    "404 deve essere trattato come HTTP error e non come success",
+    "POST deve usare Content-Type application/json e JSON.stringify",
+    "204 non deve essere parsato come JSON",
+    "non etichettare automaticamente ogni catch come network error",
+    "non introdurre Axios o librerie esterne"
+  ],
+  "assets": [
+    {"type": "fixture", "path": "starter/server.mjs", "target_path": "server.mjs", "visibility": "student", "description": "Server same-origin per riprodurre i casi"},
+    {"type": "starter", "path": "starter/index.html", "target_path": "index.html", "visibility": "student", "description": "UI minima del debug lab"},
+    {"type": "starter", "path": "starter/client.js", "target_path": "client.js", "visibility": "student", "description": "Client volutamente errato"},
+    {"type": "starter", "path": "starter/DIAGNOSI.md", "target_path": "DIAGNOSI.md", "visibility": "student", "description": "Worksheet sintomo-causa-fix"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Metodo di lavoro e definition of done"},
+    {"type": "teacher_only", "path": "solution/client.js", "visibility": "teacher", "description": "Client corretto di riferimento"},
+    {"type": "teacher_only", "path": "solution/DIAGNOSI.md", "visibility": "teacher", "description": "Diagnosi di riferimento"}
+  ],
+  "soluzione_attesa": {"tipo": "debug-browser-http", "file": "client.js", "note": "Policy Response robusta e diagnosi basata su Network panel."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 70, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "manual_checks": [
+    {"name": "diagnosi", "criterion": "sintomo, status/request, causa e verifica sono compilati prima del fix"},
+    {"name": "404", "criterion": "response.ok governa l'esito HTTP"},
+    {"name": "post json", "criterion": "header e body JSON sono coerenti"},
+    {"name": "204", "criterion": "nessun parsing JSON su null-body success"},
+    {"name": "error taxonomy", "criterion": "HTTP e network/runtime sono distinti"}
+  ],
+  "rubrica": [
+    {"criterio": "Qualita della diagnosi", "punti": 3},
+    {"criterio": "Gestione status/response.ok", "punti": 2},
+    {"criterio": "Serialization e Content-Type", "punti": 2},
+    {"criterio": "Gestione 204/body", "punti": 1},
+    {"criterio": "Verifica con DevTools e chiarezza codice", "punti": 2}
+  ]
+}
