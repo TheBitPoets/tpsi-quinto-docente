@@ -1,0 +1,71 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-c-feisbuc-vue-spa-001",
+  "titolo":"Feisbuc milestone 9: Vue SPA sopra la API esistente",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"C",
+  "argomenti":["vue-3","vite","spa","sfc","composition-api","ref","computed","props","emits","fetch","authentication","authorization"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-vue3-components-reactivity","tpsi5-content-auth-sessions-security"],
+  "source_refs":[
+    {"source_id":"tpsi5-source-originali","path":"content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md","anchor":"11-feisbuc-milestone-9-vue-spa-shell","role":"lesson"},
+    {"source_id":"tpsi5-source-originali","path":"content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md","anchor":"autenticazione-sessioni-e-autorizzazione-identita-affidabile-nel-backend","role":"previous-architecture"}
+  ],
+  "project_milestone":"feisbuc-09-vue-spa",
+  "consegna":"Parti dalla milestone 7 auth/session e aggiungi il frontend Vue fornito come progetto separato. Completa `App.vue` per gestire bootstrap auth, caricamento post, login/register/logout, create, like e delete usando `api.js`. Mantieni PostCard come child presentazionale con props/emits. La build deve produrre asset con base `/vue/`, poi serviti dallo stesso Express: API, cookie HttpOnly, authorization e SQLite non cambiano.",
+  "vincoli":[
+    "Vue 3.5.40, Vite 8.2.1, @vitejs/plugin-vue 6.0.8, Node >=22.18",
+    "base build /vue/ e API relative /api/*",
+    "nessun Vue Router, Pinia o TypeScript in questa milestone",
+    "nessun localStorage/sessionStorage/document.cookie per auth",
+    "nessun authorId scelto dal client",
+    "PostCard non chiama fetch e non muta props",
+    "computed per postCount/likedCount invece di state duplicato",
+    "representation server restituita da POST/PATCH aggiorna lo state",
+    "delete UI e solo UX; authorization resta nel backend",
+    "backend milestone 7 non viene riscritto o duplicato"
+  ],
+  "assets":[
+    {"type":"starter","path":"starter/frontend/package.json","target_path":"frontend/package.json","visibility":"student","description":"Toolchain Vue/Vite pinned"},
+    {"type":"starter","path":"starter/frontend/index.html","target_path":"frontend/index.html","visibility":"student","description":"SPA entry"},
+    {"type":"starter","path":"starter/frontend/vite.config.js","target_path":"frontend/vite.config.js","visibility":"student","description":"Vite base/proxy"},
+    {"type":"starter","path":"starter/frontend/src/main.js","target_path":"frontend/src/main.js","visibility":"student","description":"Vue mount"},
+    {"type":"starter","path":"starter/frontend/src/App.vue","target_path":"frontend/src/App.vue","visibility":"student","description":"Integration state da completare"},
+    {"type":"example","path":"starter/frontend/src/api.js","target_path":"frontend/src/api.js","visibility":"student","description":"HTTP adapter gia noto"},
+    {"type":"example","path":"starter/frontend/src/components/AuthPanel.vue","target_path":"frontend/src/components/AuthPanel.vue","visibility":"student","description":"Auth form component"},
+    {"type":"example","path":"starter/frontend/src/components/PostComposer.vue","target_path":"frontend/src/components/PostComposer.vue","visibility":"student","description":"Composer component"},
+    {"type":"example","path":"starter/frontend/src/components/PostCard.vue","target_path":"frontend/src/components/PostCard.vue","visibility":"student","description":"PostCard baseline da Activity B"},
+    {"type":"example","path":"starter/frontend/src/style.css","target_path":"frontend/src/style.css","visibility":"student","description":"CSS SPA"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Workflow dev/build e definition of done"},
+    {"type":"teacher_only","path":"solution/frontend/package.json","visibility":"teacher","description":"Package reference"},
+    {"type":"teacher_only","path":"solution/frontend/index.html","visibility":"teacher","description":"Entry reference"},
+    {"type":"teacher_only","path":"solution/frontend/vite.config.js","visibility":"teacher","description":"Vite reference"},
+    {"type":"teacher_only","path":"solution/frontend/src/main.js","visibility":"teacher","description":"Mount reference"},
+    {"type":"teacher_only","path":"solution/frontend/src/App.vue","visibility":"teacher","description":"SPA orchestration reference"},
+    {"type":"teacher_only","path":"solution/frontend/src/api.js","visibility":"teacher","description":"API adapter reference"},
+    {"type":"teacher_only","path":"solution/frontend/src/components/AuthPanel.vue","visibility":"teacher","description":"Auth component reference"},
+    {"type":"teacher_only","path":"solution/frontend/src/components/PostComposer.vue","visibility":"teacher","description":"Composer reference"},
+    {"type":"teacher_only","path":"solution/frontend/src/components/PostCard.vue","visibility":"teacher","description":"PostCard reference"},
+    {"type":"teacher_only","path":"solution/frontend/src/style.css","visibility":"teacher","description":"CSS reference"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Integration review"}
+  ],
+  "soluzione_attesa":{"tipo":"vue-spa-overlay","file":"frontend/src/App.vue","note":"Presentation adapter Vue sopra API/auth/SQLite invariati."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":210,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"build","criterion":"npm run build produce dist con base /vue/"},
+    {"name":"auth","criterion":"401 bootstrap -> login/register; session token non entra nel JS"},
+    {"name":"feed","criterion":"GET/POST/PATCH/DELETE mantengono il contratto API"},
+    {"name":"components","criterion":"props/emits e App owner dello state"},
+    {"name":"architecture","criterion":"nessuna modifica necessaria a auth/session/SQLite"}
+  ],
+  "rubrica":[
+    {"criterio":"Reattivita e computed", "punti":2},
+    {"criterio":"Componenti props/emits", "punti":2},
+    {"criterio":"Integrazione API/auth", "punti":3},
+    {"criterio":"State update e authorization boundary", "punti":2},
+    {"criterio":"Build/qualita", "punti":1}
+  ]
+}
