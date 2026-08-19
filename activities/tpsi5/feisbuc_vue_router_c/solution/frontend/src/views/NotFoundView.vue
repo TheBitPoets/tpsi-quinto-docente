@@ -1,0 +1,1 @@
+<template><main class="panel"><h2>Pagina non trovata</h2><p>La SPA e stata caricata, ma nessuna route applicativa corrisponde a questa URL.</p><RouterLink :to="{ name: 'feed' }">Torna al feed</RouterLink></main></template>
