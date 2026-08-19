@@ -30,5 +30,6 @@ export function loadConfig(env = process.env) {
     cookieSecure,
     cookieName: production ? "__Host-feisbuc.sid" : "feisbuc.sid",
     sessionTtlMs,
+    trustProxy: parseBoolean(env.TRUST_PROXY, false),
   };
 }
