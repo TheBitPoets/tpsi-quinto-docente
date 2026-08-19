@@ -4,6 +4,8 @@ Questo package contiene i contenuti originali del corso **TPSI quinto anno — F
 
 Contratto di authoring: `thebitlab.content-pack.v1`.
 
+Il consumer e pinned alla revisione **Accettata** del contratto in `TheBitPoets/2cornot2c`: `5472eef86568a4e7ce59ad34ba937220df27efd7`.
+
 ## Principi
 
 - partire dalla Web Platform prima dei framework;
@@ -33,6 +35,6 @@ Contratto di authoring: `thebitlab.content-pack.v1`.
 
 ## Stato
 
-Versione authoring `0.4.0`, ancora **draft**.
+Versione authoring `0.4.1`, ancora **draft**.
 
 Le fondazioni HTML/CSS/Bootstrap coprono ora Activity A-E e soddisfano il consumer gate usato per validare il Content Pack Standard v1. Questo non congela il corso: framework frontend, ORM Node e profondità TypeScript restano decisioni da prendere e il prossimo blocco e UDA 22 — JavaScript moderno, DOM e Browser APIs.
