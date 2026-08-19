@@ -25,11 +25,11 @@ jobs:
       - name: Checkout TPSI quinto content pack
         uses: actions/checkout@v4
 
-      - name: Checkout pinned TheBitLab platform contracts
+      - name: Checkout pinned accepted TheBitLab Content Pack v1 contracts
         uses: actions/checkout@v4
         with:
           repository: TheBitPoets/2cornot2c
-          ref: 39936004d3dc777b4e56d089dac0e61a138a1913
+          ref: 5472eef86568a4e7ce59ad34ba937220df27efd7
           path: _thebitlab-platform
 
       - name: Set up Python
