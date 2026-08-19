@@ -152,7 +152,7 @@ def test_router_guard_session_and_deep_link_boundaries_are_explicit() -> None:
 
     assert 'app.get("/vue/{*splat}"' in fallback
     assert 'app.use("/vue", express.static(vueRoot))' in fallback
-    assert backend_app.index('app.use("/api/posts"') < backend_app.index("installVueSpa") < backend_app.index("app.use(notFound)")
+    assert backend_app.index('app.use("/api/posts"') < backend_app.index("installVueSpa(app") < backend_app.index("app.use(notFound)")
 
 
 def test_router_debug_starter_contains_real_defects_and_reference_fixes_them() -> None:
@@ -164,9 +164,10 @@ def test_router_debug_starter_contains_real_defects_and_reference_fixes_them() -
     fixed_server = (D_ROOT / "solution/server-fallback.js").read_text(encoding="utf-8")
     diagnosis = (D_ROOT / "solution/DIAGNOSI.md").read_text(encoding="utf-8").lower()
 
+    compact_broken = broken_router.replace(" ", "")
     assert "createWebHistory()" in broken_router
-    assert "requireAuth:true" in broken_router.replace(" ", "")
-    assert 'return {name:"login"}' in broken_router.replace(" ", "")
+    assert "requireAuth:true" in compact_broken
+    assert 'return{name:"login"}' in compact_broken
     assert "pathMatch" not in broken_router
     assert "window.location.assign" in broken_app
     assert 'app.get("/vue/*"' in broken_server
