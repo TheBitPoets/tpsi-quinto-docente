@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-a-sql-posts-schema-001",
+  "titolo": "Schema persistente dei post: tipi, default e constraint",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "A",
+  "argomenti": ["sql", "sqlite", "ddl", "create-table", "primary-key", "not-null", "check", "default", "index", "constraints"],
+  "linguaggio": "sql",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-sql-raw-persistence"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/07_SQL_RAW_PERSISTENCE.md", "anchor": "dal-post-javascript-alla-relazione", "role": "lesson"}
+  ],
+  "consegna": "Completa `main.sql`. Crea la tabella `posts` con id TEXT primary key, author/text obbligatori e non vuoti, text lungo al massimo 280 caratteri, likes intero non negativo, liked rappresentato da 0/1 e created_at con default. Usa una tabella STRICT, crea l'indice `idx_posts_liked_created` e inserisci esattamente i due seed indicati nello starter. Il grader aggiungera query e tentativi di insert invalidi sul tuo schema.",
+  "vincoli": [
+    "non rimuovere i seed p1 e p2",
+    "usa constraint SQL e non trigger per gli invarianti richiesti",
+    "liked accetta soltanto 0 oppure 1",
+    "likes non puo essere negativo",
+    "text dopo trim deve avere lunghezza 1-280",
+    "crea l'indice idx_posts_liked_created su liked e created_at"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/main.sql", "target_path": "main.sql", "visibility": "student", "description": "Schema SQL da completare"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Contratto dello schema e comandi di verifica"},
+    {"type": "teacher_only", "path": "solution/main.sql", "visibility": "teacher", "description": "Schema di riferimento"}
+  ],
+  "soluzione_attesa": {"tipo": "sql-script", "file": "main.sql", "note": "DDL idempotente per la singola esecuzione del grader, constraint e seed deterministici."},
+  "correzione": {"compila": false, "test": true, "sandbox": true, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 45, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "test_cases": [
+    {"name": "seed canonici", "stdin": "SELECT id, author, text, likes, liked FROM posts ORDER BY id;\n", "expected_stdout": "p1|Docente|Primo post persistente|2|1\np2|Studente|Secondo post persistente|0|0\n"},
+    {"name": "constraint rifiutano stati invalidi", "stdin": "INSERT OR IGNORE INTO posts(id,author,text,likes,liked) VALUES('bad-empty','A','   ',0,0); INSERT OR IGNORE INTO posts(id,author,text,likes,liked) VALUES('bad-liked','A','ok',0,2); INSERT OR IGNORE INTO posts(id,author,text,likes,liked) VALUES('bad-likes','A','ok',-1,0); SELECT COUNT(*) FROM posts WHERE id LIKE 'bad-%';\n", "expected_stdout": "0\n"},
+    {"name": "indice disponibile", "stdin": "SELECT name FROM sqlite_master WHERE type='index' AND name='idx_posts_liked_created';\n", "expected_stdout": "idx_posts_liked_created\n"}
+  ],
+  "manual_checks": [],
+  "rubrica": [
+    {"criterio": "Schema e chiave primaria", "punti": 2},
+    {"criterio": "Constraint author/text", "punti": 2},
+    {"criterio": "Constraint likes/liked", "punti": 2},
+    {"criterio": "Default e created_at", "punti": 2},
+    {"criterio": "Indice e seed", "punti": 2}
+  ]
+}
