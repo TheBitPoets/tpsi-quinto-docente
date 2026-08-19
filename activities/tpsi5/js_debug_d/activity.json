@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-d-debug-feisbuc-js-001",
+  "titolo": "Diagnostica Feisbuc: eventi, stato e storage che si rompono",
+  "tipo": "debug-didattico",
+  "student_support_mode": "feedback-tecnico",
+  "difficolta": "D",
+  "argomenti": [
+    "javascript-debugging",
+    "dom",
+    "events",
+    "event-object",
+    "event-delegation",
+    "state",
+    "localstorage",
+    "json",
+    "devtools"
+  ],
+  "linguaggio": "javascript",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-22"
+  },
+  "content_ids": [
+    "tpsi5-content-javascript-dom-browser"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "anchor": "debug-javascript-metodo-prima-della-modifica",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "anchor": "un-bug-concreto-del-feisbuc-legacy",
+      "role": "legacy-bug-context"
+    },
+    {
+      "source_id": "tpsi5-source-feisbuc-legacy",
+      "path": "README.md",
+      "anchor": "scheletro",
+      "role": "legacy-provenance"
+    }
+  ],
+  "consegna": "Lo starter e una versione volutamente fragile del feed Feisbuc ispirata al codice legacy. Prima di modificare il codice compila `DIAGNOSI.md` con almeno cinque problemi distinti indicando sintomo, causa tecnica, evidenza DevTools e fix proposto. Poi correggi `app.js`: la form deve usare correttamente l'oggetto Event; i post nuovi devono ricevere like senza registrare listener individuali; l'identita deve appartenere al post tramite `data-post-id`; likes/liked devono vivere nello stato JavaScript e non soltanto nel testo del DOM; lo storage deve usare JSON e recuperare da dati corrotti. Non usare `fetch` o backend.",
+  "vincoli": [
+    "scrivi la diagnosi prima del fix",
+    "documenta almeno cinque cause concrete",
+    "non modificare index.html salvo correzioni motivate di attributi accessibili",
+    "ascolta submit sulla form",
+    "non usare una variabile globale `event` al posto del parametro del listener",
+    "non registrare un listener like separato su ogni pulsante",
+    "usa event delegation sul contenitore stabile del feed",
+    "usa data-post-id e data-action invece di id incrementali per i controlli",
+    "mantieni likes/liked nello stato JavaScript",
+    "usa JSON.stringify/JSON.parse per localStorage",
+    "gestisci JSON storage corrotto",
+    "non usare innerHTML con testo inserito dall'utente",
+    "non usare fetch, Promise o async/await"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/index.html",
+      "target_path": "index.html",
+      "visibility": "student",
+      "description": "Markup stabile per il debug"
+    },
+    {
+      "type": "starter",
+      "path": "starter/app.js",
+      "target_path": "app.js",
+      "visibility": "student",
+      "description": "JavaScript intenzionalmente difettoso"
+    },
+    {
+      "type": "starter",
+      "path": "starter/DIAGNOSI.md",
+      "target_path": "DIAGNOSI.md",
+      "visibility": "student",
+      "description": "Template obbligatorio per ipotesi/evidenze/fix"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Procedura di debugging e definition of done"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/app.js",
+      "visibility": "teacher",
+      "description": "Implementazione corretta di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/DIAGNOSI.md",
+      "visibility": "teacher",
+      "description": "Diagnosi di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Mappa bug e rubrica"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "debug-browser-javascript",
+    "file": "app.js",
+    "note": "Diagnosi motivata e feed corretto con state/render, delegation e storage JSON."
+  },
+  "correzione": {
+    "compila": false,
+    "test": false,
+    "sandbox": false,
+    "ai_feedback": false
+  },
+  "metriche": {
+    "tempo_stimato_minuti": 100,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": true
+  },
+  "manual_checks": [
+    {
+      "name": "diagnosi",
+      "criterion": "almeno cinque problemi sono collegati a evidenze osservabili e non a tentativi casuali"
+    },
+    {
+      "name": "event object",
+      "criterion": "submit usa il parametro Event corretto e preventDefault"
+    },
+    {
+      "name": "delegation",
+      "criterion": "un solo listener sul feed gestisce anche post creati dinamicamente"
+    },
+    {
+      "name": "state",
+      "criterion": "likes e liked vengono aggiornati nei dati e poi renderizzati"
+    },
+    {
+      "name": "storage",
+      "criterion": "localStorage usa JSON e recovery da valore non valido"
+    },
+    {
+      "name": "dom",
+      "criterion": "testo utente viene assegnato con textContent"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Qualita della diagnosi e uso DevTools",
+      "punti": 4
+    },
+    {
+      "criterio": "Correzione eventi/event delegation",
+      "punti": 2
+    },
+    {
+      "criterio": "Correzione state/render",
+      "punti": 2
+    },
+    {
+      "criterio": "Persistenza e recovery storage",
+      "punti": 1
+    },
+    {
+      "criterio": "Spiegazione causa-effetto",
+      "punti": 1
+    }
+  ]
+}

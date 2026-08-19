@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feisbuc — JavaScript debug</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 48rem; padding: 0 1rem; }
+      form, article { border: 1px solid #bbb; border-radius: .5rem; padding: 1rem; margin-bottom: 1rem; }
+      textarea { width: 100%; box-sizing: border-box; }
+      button { margin-top: .5rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Feisbuc Debug</h1>
+
+    <form id="composer-form">
+      <label for="post-text">Nuovo post</label>
+      <textarea id="post-text" name="text" required></textarea>
+      <button type="submit">Pubblica</button>
+    </form>
+
+    <p id="status" aria-live="polite"></p>
+    <section id="feed" aria-label="Feed dei post"></section>
+
+    <script src="app.js"></script>
+  </body>
+</html>

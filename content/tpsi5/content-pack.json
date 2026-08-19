@@ -2,7 +2,7 @@
   "schema_version": "thebitlab.content-pack.v1",
   "id": "tpsi5-fullstack-web-2026",
   "title": "TPSI quinto anno - Full Stack Web Developer",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "status": "draft",
   "language": "it",
   "audience": {
@@ -27,6 +27,16 @@
       "role": "technical-reference",
       "title": "MDN Web Docs",
       "uri": "https://developer.mozilla.org/en-US/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-ecmascript",
+      "kind": "standard",
+      "provider": "tc39",
+      "role": "specification",
+      "title": "ECMAScript Language Specification",
+      "uri": "https://tc39.es/ecma262/",
       "access": "public",
       "license_status": "external-public-reference"
     },
@@ -150,6 +160,17 @@
       "uri": "https://app.pluralsight.com/paths/skills/javascript-2022",
       "access": "licensed",
       "license_status": "licensed-reference-only"
+    },
+    {
+      "id": "tpsi5-ref-lab3-legacy",
+      "kind": "repository",
+      "provider": "github",
+      "role": "teacher-reference",
+      "title": "Legacy TPSI JavaScript lab3",
+      "uri": "https://github.com/kinderp/lab3",
+      "access": "project",
+      "license_status": "project-license-to-review",
+      "notes": "Auditato allo snapshot 0deae0eb606bc9c2849ba271bdf03c128910f1ac; esempi riusati solo come provenance/ispirazione e riscritti nel nuovo corso."
     }
   ],
   "sources": [
@@ -167,7 +188,8 @@
         "00_COURSE_ARCHITECTURE.md",
         "01_WEB_PLATFORM_HTML_MODERNO.md",
         "02_CSS_MODERNO_RESPONSIVE.md",
-        "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md"
+        "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
+        "04_JAVASCRIPT_DOM_BROWSER_APIS.md"
       ],
       "license_status": "project-license-to-review",
       "indexing_status": "ready"
@@ -337,7 +359,7 @@
         {
           "id": "tpsi5-ref-manning-css-depth",
           "role": "teacher-reference",
-          "locator": "CSS in Depth, Second Edition — conceptual teacher reference only"
+          "locator": "CSS in Depth, Second Edition - conceptual teacher reference only"
         }
       ]
     },
@@ -379,6 +401,72 @@
           "id": "tpsi5-ref-manning-css-depth",
           "role": "teacher-reference",
           "locator": "CSS architecture and maintainability concepts; no licensed text imported"
+        }
+      ]
+    },
+    {
+      "id": "tpsi5-content-javascript-dom-browser",
+      "kind": "module",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "order": 5,
+      "status": "draft",
+      "curriculum_topics": [
+        "javascript-language",
+        "const-let",
+        "arrays-objects",
+        "array-methods",
+        "functions-callbacks",
+        "es-modules",
+        "dom",
+        "dom-manipulation",
+        "events",
+        "event-delegation",
+        "forms",
+        "state-render",
+        "web-storage",
+        "javascript-debugging"
+      ],
+      "activity_ids": [
+        "tpsi5-activity-a-js-feed-pipeline-001",
+        "tpsi5-activity-b-js-post-refactor-001",
+        "tpsi5-activity-c-feisbuc-dynamic-feed-001",
+        "tpsi5-activity-d-debug-feisbuc-js-001"
+      ],
+      "source_refs": [
+        {
+          "id": "tpsi5-source-originali",
+          "role": "content-origin",
+          "locator": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md"
+        },
+        {
+          "id": "tpsi5-source-labs-legacy",
+          "role": "legacy-progression",
+          "locator": "README.md#lab2 / README.md#lab3 / README.md#lab4"
+        },
+        {
+          "id": "tpsi5-source-feisbuc-legacy",
+          "role": "legacy-project-input",
+          "locator": "add_post.js and like_button_pressed.js audited at pinned snapshot"
+        },
+        {
+          "id": "tpsi5-ref-lab3-legacy",
+          "role": "teacher-reference",
+          "locator": "snapshot 0deae0eb606bc9c2849ba271bdf03c128910f1ac"
+        },
+        {
+          "id": "tpsi5-ref-mdn",
+          "role": "technical-reference",
+          "locator": "JavaScript Guide; DOM scripting; Events; Web Storage; Modules"
+        },
+        {
+          "id": "tpsi5-ref-ecmascript",
+          "role": "specification",
+          "locator": "ECMAScript language, lexical declarations and modules"
+        },
+        {
+          "id": "tpsi5-ref-pluralsight-javascript",
+          "role": "teacher-reference",
+          "locator": "Professional JavaScript learning path; teacher design reference only"
         }
       ]
     }
