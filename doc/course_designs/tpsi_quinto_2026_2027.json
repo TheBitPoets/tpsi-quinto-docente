@@ -14,7 +14,8 @@
         "01_WEB_PLATFORM_HTML_MODERNO.md",
         "02_CSS_MODERNO_RESPONSIVE.md",
         "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
-        "04_JAVASCRIPT_DOM_BROWSER_APIS.md"
+        "04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+        "05_HTTP_ASYNC_FETCH_REST.md"
       ],
       "indexing_status": "ready"
     },
@@ -25,9 +26,7 @@
       "provider": "github",
       "repository": "TheBitPoets/html_css_summary",
       "ref": "d71da420f1aa2ea39b61356e4f9900c6371e7a42",
-      "files": [
-        "README.md"
-      ],
+      "files": ["README.md"],
       "indexing_status": "ready"
     },
     {
@@ -37,9 +36,7 @@
       "provider": "github",
       "repository": "TheBitPoets/labs_summary",
       "ref": "36a909f00c9478983a8d1b950440e2abc28b8a55",
-      "files": [
-        "README.md"
-      ],
+      "files": ["README.md"],
       "indexing_status": "ready"
     },
     {
@@ -49,9 +46,7 @@
       "provider": "github",
       "repository": "TheBitPoets/feisbuc",
       "ref": "086995ece4260a3408740b94cfe2701ce24f8b57",
-      "files": [
-        "README.md"
-      ],
+      "files": ["README.md"],
       "indexing_status": "ready"
     }
   ],
@@ -59,9 +54,7 @@
     {
       "id": "quinto-anno",
       "title": "Quinto anno",
-      "audience": {
-        "class_ids": []
-      },
+      "audience": {"class_ids": []},
       "description": "Percorso TPSI Full Stack Web Developer 2026/27. Il calendario e la granularita sono draft finche non vengono verificate le ore reali disponibili e congelate le decisioni su frontend framework, ORM Node e TypeScript.",
       "weeks": 33,
       "udas": [
@@ -88,7 +81,7 @@
                 "objectives": "Descrivere i componenti principali di una applicazione web full stack e il ruolo di HTTP come contratto fra client e server.",
                 "recall": "Riprendere client/server, reti e programmazione studiati negli anni precedenti.",
                 "preview": "Introduce Web Platform, HTML e CSS moderni.",
-                "next_step": "Auditare gli esempi legacy e avviare il primo modulo Web Platform.",
+                "next_step": "Avviare il blocco Web Platform e Feisbuc.",
                 "references": "Content Pack v1, COVERAGE.md, MDN Web Docs e repository legacy pinned."
               }
             }
@@ -116,13 +109,13 @@
               ],
               "frame": {
                 "status": "draft",
-                "context": "Introduce HTML come linguaggio di struttura e semantica, insegna a leggere MDN e avvia Feisbuc con una milestone semantica senza CSS o JavaScript.",
-                "prerequisites": "Uso del browser, DevTools di base, editor e concetti intuitivi di pagina web.",
-                "objectives": "Scrivere lo scheletro di un documento HTML moderno, distinguere head/header, usare metadata essenziali, scegliere elementi semantici e spiegare quando un div resta appropriato.",
-                "recall": "Riprendere la catena browser-HTTP-backend introdotta in UDA 20 e il concetto di sorgente interpretata da un programma.",
-                "preview": "Prepara CSS moderno, box model, cascade, Flexbox/Grid e responsive design senza confondere struttura e presentazione.",
-                "next_step": "Passare dalla struttura semantica di Feisbuc al layout CSS moderno.",
-                "references": "MDN Structuring content with HTML, WHATWG HTML Living Standard, html_css_summary pinned, Feisbuc pinned."
+                "context": "Introduce HTML come struttura e semantica e avvia Feisbuc senza confondere contenuto e presentazione.",
+                "prerequisites": "Browser, editor e concetti intuitivi di pagina web.",
+                "objectives": "Scrivere un documento HTML moderno, usare metadata essenziali ed elementi semantici e leggere MDN/DevTools.",
+                "recall": "Riprendere la catena full stack di UDA 20.",
+                "preview": "Prepara CSS moderno e responsive design.",
+                "next_step": "Passare dalla semantica al layout CSS.",
+                "references": "MDN, WHATWG HTML, html_css_summary e Feisbuc pinned."
               }
             },
             {
@@ -141,13 +134,13 @@
               ],
               "frame": {
                 "status": "draft",
-                "context": "Porta Feisbuc dalla sola semantica HTML a una shell responsive e introduce un metodo di debug CSS basato su cascade, box model e DevTools.",
-                "prerequisites": "HTML moderno, struttura semantica e Activity A/B del primo modulo.",
-                "objectives": "Comprendere cascade/specificita e box model, scegliere Flexbox/Grid, costruire un layout mobile-first, usare media query/custom properties e diagnosticare overflow e conflitti CSS.",
-                "recall": "Riprendere la separazione struttura/presentazione e la milestone Feisbuc semantica.",
-                "preview": "Prepara Bootstrap come astrazione sopra fondamenti CSS reali e poi JavaScript/DOM.",
-                "next_step": "Completare le fondazioni frontend con Bootstrap solo dopo aver consolidato CSS nativo.",
-                "references": "MDN CSS styling basics, Box model, Flexbox, Grid, Responsive design; CSS in Depth 2e come teacher-reference licensed; html_css_summary e Feisbuc pinned."
+                "context": "Porta Feisbuc a una shell responsive e introduce il debug CSS basato su modello, non tentativi casuali.",
+                "prerequisites": "HTML moderno e struttura semantica.",
+                "objectives": "Comprendere cascade/box model, scegliere Flexbox/Grid, costruire mobile-first e diagnosticare CSS.",
+                "recall": "Separazione struttura/presentazione.",
+                "preview": "Prepara Bootstrap come astrazione sopra CSS nativo.",
+                "next_step": "Rifattorizzare la shell con Bootstrap mantenendo il mapping CSS.",
+                "references": "MDN CSS, CSS in Depth 2e teacher-reference, legacy HTML/CSS/Feisbuc."
               }
             },
             {
@@ -160,18 +153,16 @@
               "href": "../../content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md#bootstrap-dal-css-nativo-a-un-framework-frontend",
               "level": 1,
               "line": 1,
-              "activity_ids": [
-                "tpsi5-activity-e-feisbuc-bootstrap-ui-001"
-              ],
+              "activity_ids": ["tpsi5-activity-e-feisbuc-bootstrap-ui-001"],
               "frame": {
                 "status": "draft",
-                "context": "Introduce Bootstrap come API di framework sopra concetti CSS gia acquisiti e completa la terza milestone Feisbuc del blocco frontend foundations.",
-                "prerequisites": "HTML semantico, CSS nativo, Flexbox/Grid, responsive design e Activity A-D.",
-                "objectives": "Usare grid, utility e componenti Bootstrap senza perdere semantica/accessibilita, distinguere comportamento CSS da componenti JS e documentare il mapping framework -> CSS nativo.",
-                "recall": "Riprendere la shell Feisbuc Grid/Flexbox e il metodo di debug del modulo precedente.",
-                "preview": "Prepara JavaScript moderno e DOM mostrando chiaramente il confine fra presentazione statica e componenti interattivi.",
-                "next_step": "Passare a JavaScript moderno, DOM ed eventi in UDA 22.",
-                "references": "Bootstrap 5.3 official docs, MDN responsive design, CSS in Depth 2e teacher-reference; Feisbuc milestone 1 come baseline."
+                "context": "Introduce Bootstrap come API sopra concetti CSS gia acquisiti.",
+                "prerequisites": "HTML semantico, CSS, Flexbox/Grid e responsive design.",
+                "objectives": "Usare grid, utility e componenti senza perdere semantica/accessibilita e documentare il mapping verso CSS.",
+                "recall": "Shell Feisbuc Grid/Flexbox.",
+                "preview": "Prepara JavaScript/DOM distinguendo presentazione e comportamento.",
+                "next_step": "Passare a JavaScript moderno, DOM ed eventi.",
+                "references": "Bootstrap 5.3, MDN responsive design, CSS in Depth 2e."
               }
             }
           ]
@@ -200,13 +191,13 @@
               ],
               "frame": {
                 "status": "draft",
-                "context": "Separa ECMAScript dalle Web APIs, introduce DOM/eventi/storage/modules e porta Feisbuc da UI statica a feed dinamico locale prima di coinvolgere la rete.",
-                "prerequisites": "UDA 21 completata: HTML semantico, CSS responsive, Bootstrap e uso essenziale di DevTools; programmazione di base dagli anni precedenti.",
-                "objectives": "Manipolare dati con JavaScript moderno, modellare state/render, creare DOM in modo sicuro, gestire form/eventi con delegation, usare ES modules e Web Storage e diagnosticare errori con DevTools.",
-                "recall": "Riprendere la milestone Bootstrap di Feisbuc e la distinzione struttura/presentazione: JavaScript aggiunge comportamento senza sostituire semantica e CSS.",
-                "preview": "Prepara asincronia e comunicazione remota mantenendo chiara la differenza fra logica client e protocollo HTTP.",
-                "next_step": "UDA 23: HTTP in profondita, Promise/async-await, fetch e REST; la persistenza locale di Feisbuc verra progressivamente sostituita da una API.",
-                "references": "MDN JavaScript Guide/DOM/Events/Web Storage/Modules; ECMAScript specification; labs_summary/lab3 e Feisbuc legacy come provenance auditata; Pluralsight JavaScript come teacher-reference licensed."
+                "context": "Separa ECMAScript dalle Web APIs e porta Feisbuc a un feed dinamico locale prima di coinvolgere la rete.",
+                "prerequisites": "UDA 21 completata e programmazione di base.",
+                "objectives": "Manipolare dati, modellare state/render, creare DOM sicuro, gestire form/event delegation, moduli e Web Storage.",
+                "recall": "Milestone Bootstrap di Feisbuc e separazione struttura/presentazione.",
+                "preview": "Prepara asincronia e comunicazione remota.",
+                "next_step": "UDA 23: HTTP, Promise/async-await, fetch e REST.",
+                "references": "MDN JavaScript/DOM/Events/Web Storage/Modules; ECMAScript; lab3/Feisbuc auditati."
               }
             }
           ]
@@ -216,7 +207,35 @@
           "title": "HTTP, asincronia, Fetch e REST",
           "path": "Web protocols and APIs",
           "weeks": "4",
-          "items": []
+          "items": [
+            {
+              "id": "tpsi5-source-originali:content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md#http-asincronia-fetch-e-rest",
+              "title": "HTTP, asincronia, Fetch e REST",
+              "source": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md",
+              "source_id": "tpsi5-source-originali",
+              "source_label": "TPSI quinto - contenuti originali",
+              "source_provider": "local",
+              "href": "../../content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md#http-asincronia-fetch-e-rest",
+              "level": 1,
+              "line": 1,
+              "activity_ids": [
+                "tpsi5-activity-a-http-microscope-001",
+                "tpsi5-activity-b-async-response-policy-001",
+                "tpsi5-activity-c-feisbuc-rest-client-001",
+                "tpsi5-activity-d-debug-fetch-http-001"
+              ],
+              "frame": {
+                "status": "draft",
+                "context": "Rende HTTP un contratto esplicito prima di Express, introduce Promise/async-await/fetch e porta Feisbuc da localStorage a una API same-origin.",
+                "prerequisites": "UDA 22: JavaScript moderno, moduli, DOM, event delegation, state/render e Web Storage.",
+                "objectives": "Leggere request/response, metodo/status/header/content, distinguere path/query/body, safe/idempotent, usare async/fetch con response.ok, progettare REST e diagnosticare rete/HTTP/CORS con DevTools.",
+                "recall": "Milestone 3: stato client e persistenza locale; ora la frontiera di persistenza diventa remota.",
+                "preview": "Prepara Node.js ed Express mostrando il protocollo che il framework dovra implementare.",
+                "next_step": "UDA 24: aprire la fixture server e studiare Node.js, native http, Express, routing, middleware, persistenza, auth e SSR.",
+                "references": "RFC 9110, WHATWG Fetch, MDN, Node.js HTTP docs; lab5/lab6/lab7 e labs_summary come provenance auditata."
+              }
+            }
+          ]
         },
         {
           "id": "uda-24",
