@@ -1,0 +1,39 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-b-navigation-policy-001",
+  "titolo":"Navigation policy: route protetta senza redirect loop",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"B",
+  "argomenti":["vue-router","navigation-guard","authentication","route-meta","state-machine","default-policy"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-vue-router-navigation"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md","anchor":"18-una-policy-di-navigazione-pura","role":"lesson"}],
+  "consegna":"Completa `decideNavigation(input)`. L'input contiene `routeName`, `requiresAuth`, `authStatus` (`unknown|anonymous|authenticated`) e `fullPath`. Se una decisione auth serve ma lo stato e unknown, restituisci `resolve-auth`. Una route protetta anonima redirige a `login` preservando `fullPath`; una login route con utente autenticato redirige a `feed`; negli altri casi consenti. Stampa JSON deterministico.",
+  "vincoli":["funzione pura","nessun import Vue/Vue Router","nessun DOM/fetch","nessun redirect loop sulla login route","fullPath preservato solo nel redirect verso login","nessun log extra"],
+  "assets":[
+    {"type":"starter","path":"starter/main.js","target_path":"main.js","visibility":"student","description":"Navigation state machine da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Matrice decisionale"},
+    {"type":"teacher_only","path":"solution/main.js","visibility":"teacher","description":"Policy reference"}
+  ],
+  "soluzione_attesa":{"tipo":"javascript-deterministico","file":"main.js","note":"Policy pura riusabile dalla navigation guard."},
+  "correzione":{"compila":false,"test":true,"sandbox":true,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":40,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "test_cases":[
+    {"name":"public-unknown","stdin":"{\"routeName\":\"about\",\"requiresAuth\":false,\"authStatus\":\"unknown\",\"fullPath\":\"/about\"}\n","expected_stdout":"{\"action\":\"allow\"}"},
+    {"name":"protected-unknown","stdin":"{\"routeName\":\"feed\",\"requiresAuth\":true,\"authStatus\":\"unknown\",\"fullPath\":\"/feed\"}\n","expected_stdout":"{\"action\":\"resolve-auth\"}"},
+    {"name":"login-unknown","stdin":"{\"routeName\":\"login\",\"requiresAuth\":false,\"authStatus\":\"unknown\",\"fullPath\":\"/login\"}\n","expected_stdout":"{\"action\":\"resolve-auth\"}"},
+    {"name":"protected-anonymous","stdin":"{\"routeName\":\"feed\",\"requiresAuth\":true,\"authStatus\":\"anonymous\",\"fullPath\":\"/feed?liked=true\"}\n","expected_stdout":"{\"action\":\"redirect\",\"name\":\"login\",\"redirect\":\"/feed?liked=true\"}"},
+    {"name":"login-authenticated","stdin":"{\"routeName\":\"login\",\"requiresAuth\":false,\"authStatus\":\"authenticated\",\"fullPath\":\"/login\"}\n","expected_stdout":"{\"action\":\"redirect\",\"name\":\"feed\"}"},
+    {"name":"protected-authenticated","stdin":"{\"routeName\":\"feed\",\"requiresAuth\":true,\"authStatus\":\"authenticated\",\"fullPath\":\"/feed\"}\n","expected_stdout":"{\"action\":\"allow\"}"},
+    {"name":"login-anonymous","stdin":"{\"routeName\":\"login\",\"requiresAuth\":false,\"authStatus\":\"anonymous\",\"fullPath\":\"/login\"}\n","expected_stdout":"{\"action\":\"allow\"}"}
+  ],
+  "rubrica":[
+    {"criterio":"Stato unknown gestito esplicitamente","punti":2},
+    {"criterio":"Redirect anonimo protetto con fullPath","punti":3},
+    {"criterio":"Login authenticated senza loop","punti":2},
+    {"criterio":"Allow corretti","punti":2},
+    {"criterio":"Funzione pura/leggibile","punti":1}
+  ]
+}
