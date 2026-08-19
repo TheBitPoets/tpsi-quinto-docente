@@ -8,7 +8,7 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 | HTML moderno e semantica | sì | **milestone 0 disponibile** | Activity A anatomia documento + Activity B Feisbuc semantico; form e immagini verranno approfonditi nello stesso blocco |
 | CSS moderno | sì | **milestone 1 disponibile** | `02_CSS_MODERNO_RESPONSIVE.md`: cascade, specificità, inheritance, box model, normal flow, Flexbox, Grid, custom properties |
 | Responsive design | sì | shell mobile-first | Activity C costruzione autonoma + Activity D debug/diagnosi; media query solo quando il layout fluido non basta |
-| Bootstrap | sì, dopo CSS nativo | revisione UI | framework CSS, non sostituto dei fondamenti; non ancora iniziato |
+| Bootstrap | sì, dopo CSS nativo | **milestone 2 disponibile** | `03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md`: grid/utilities/components come astrazione sopra CSS; Activity E richiede mapping CSS nativo -> Bootstrap |
 | JavaScript moderno | sì | comportamento client | scope, funzioni, array/object, moduli, errori |
 | DOM e Browser APIs | sì | feed dinamico | eventi, delegation, storage, form |
 | Asincronia | sì | caricamento dati | Promise, async/await, fetch |
@@ -38,9 +38,11 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 - [x] B — modifica controllata + milestone Feisbuc: `tpsi5-activity-b-feisbuc-semantic-001`;
 - [x] C — implementazione autonoma: `tpsi5-activity-c-feisbuc-responsive-layout-001`;
 - [x] D — debug/diagnosi: `tpsi5-activity-d-debug-responsive-css-001`;
-- [ ] E/F — mini-progetto/prodotto integrato.
+- [x] E — mini-progetto integrato: `tpsi5-activity-e-feisbuc-bootstrap-ui-001`.
 
-## Gate prima del freeze del curriculum
+Il gate A-E richiesto per l'adozione reale del **Content Pack Standard v1** e ora rappresentato nel corso. Questo non implica che il curriculum TPSI5 sia congelato: il corso resta in authoring `draft`.
+
+## Gate prima del freeze del curriculum TPSI5
 
 1. audit completo di `html_css_summary`, `labs_summary` e `feisbuc`;
 2. scelta framework frontend;
@@ -48,4 +50,4 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 4. scelta profondità TypeScript;
 5. definizione del confine col corso SQL separato;
 6. calendario/UDA definitivo dopo verifica delle ore reali disponibili;
-7. completare almeno una Activity E/F; A-D sono ora rappresentate nel corso.
+7. proseguire con JavaScript, DOM, HTTP, backend, DB, auth, realtime, testing e deploy.
