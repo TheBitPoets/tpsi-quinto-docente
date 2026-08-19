@@ -68,7 +68,7 @@ def assert_activity(root,difficulty,activity_id,automatic):
 def test_uda23_content_item_remains_stable_after_later_backend_increments():
     pack=load(PACK_PATH); design=load(DESIGN_PATH)
     item=next(x for x in pack["content_items"] if x["id"]=="tpsi5-content-http-async-fetch-rest")
-    assert pack["version"]=="0.9.0"
+    assert pack["version"]=="0.10.0"
     assert item["path"]=="content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md" and item["order"]==6
     assert item["activity_ids"]==[
         "tpsi5-activity-a-http-microscope-001","tpsi5-activity-b-async-response-policy-001",
@@ -80,7 +80,8 @@ def test_uda23_content_item_remains_stable_after_later_backend_increments():
     assert [x["source"] for x in uda24["items"]]==[
         "content/tpsi5/06_NODE_EXPRESS_BACKEND.md",
         "content/tpsi5/07_SQL_RAW_PERSISTENCE.md",
-        "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md"]
+        "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md",
+        "content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md"]
     assert_activity(A_ROOT,"A","tpsi5-activity-a-http-microscope-001",False)
     b=assert_activity(B_ROOT,"B","tpsi5-activity-b-async-response-policy-001",True)
     c=assert_activity(C_ROOT,"C","tpsi5-activity-c-feisbuc-rest-client-001",False)
