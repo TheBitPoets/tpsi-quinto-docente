@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JavaScript, SQL persistence and backend E2E tests
+      - name: Set up Node.js for deterministic JS, SQL, auth and backend E2E tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -61,6 +61,10 @@ jobs:
         working-directory: activities/tpsi5/feisbuc_sql_c/solution
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
+      - name: Install Express for Feisbuc auth reference solution
+        working-directory: activities/tpsi5/feisbuc_auth_c/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -71,3 +75,4 @@ jobs:
           tests/test_tpsi_quinto_http_fetch.py
           tests/test_tpsi_quinto_node_express.py
           tests/test_tpsi_quinto_sql_persistence.py
+          tests/test_tpsi_quinto_auth_security.py
