@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-e-feisbuc-bootstrap-ui-001",
+  "titolo": "Feisbuc milestone 2: rifattorizza la UI con Bootstrap",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "E",
+  "argomenti": [
+    "bootstrap",
+    "css-framework",
+    "responsive-grid",
+    "utilities",
+    "navbar",
+    "card",
+    "accessibilita",
+    "refactoring"
+  ],
+  "linguaggio": "html",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-21"
+  },
+  "content_ids": [
+    "tpsi5-content-css-modern-responsive",
+    "tpsi5-content-bootstrap-framework"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
+      "anchor": "feisbuc-milestone-2",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
+      "anchor": "feisbuc-milestone-1-layout-responsive",
+      "role": "baseline"
+    },
+    {
+      "source_id": "tpsi5-source-feisbuc-legacy",
+      "path": "README.md",
+      "anchor": "scheletro",
+      "role": "legacy-provenance"
+    }
+  ],
+  "project_milestone": "feisbuc-02-bootstrap-ui",
+  "consegna": "Parti dallo starter Feisbuc con struttura semantica e CSS nativo. Rifattorizza la UI usando Bootstrap 5.3: container e grid responsive per il macro-layout, navbar collassabile, card per i post, button per le azioni e utility per spaziatura/flex. Mantieni gli elementi semantici (`header`, `nav`, `main`, `section`, `article`, `aside`, `footer`) e gli attributi accessibili. Il layout deve essere a una colonna sui viewport stretti e 3/6/3 da `lg`. Riduci `custom.css` al solo branding/prodotto: non deve più implementare Grid/Flexbox/media query del macro-layout. Completa `MAPPING.md` con almeno sei mapping fra la soluzione CSS nativa precedente e l'astrazione Bootstrap scelta, spiegando il concetto CSS sottostante.",
+  "vincoli": [
+    "usa Bootstrap 5.3.x e documenta la versione usata",
+    "usa container, row e colonne responsive per il macro-layout",
+    "usa una navbar responsive con collapse e bootstrap.bundle",
+    "mantieni article per ogni post anche quando usi card",
+    "usa almeno una utility Flexbox e una utility di spacing",
+    "non usare style inline",
+    "non usare !important",
+    "custom.css non deve implementare display grid, display flex o media query del macro-layout",
+    "mantieni un solo h1 e la gerarchia h1/h2/h3",
+    "compila almeno sei righe sostanziali in MAPPING.md",
+    "il risultato deve restare leggibile anche se Bootstrap viene sostituito in futuro"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/index.html",
+      "target_path": "index.html",
+      "visibility": "student",
+      "description": "Feisbuc responsive costruito con CSS nativo da rifattorizzare"
+    },
+    {
+      "type": "starter",
+      "path": "starter/custom.css",
+      "target_path": "custom.css",
+      "visibility": "student",
+      "description": "CSS nativo di partenza da ridurre al branding"
+    },
+    {
+      "type": "starter",
+      "path": "starter/MAPPING.md",
+      "target_path": "MAPPING.md",
+      "visibility": "student",
+      "description": "Tabella obbligatoria CSS nativo -> Bootstrap"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Guida, definition of done e checklist"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/index.html",
+      "visibility": "teacher",
+      "description": "Soluzione Bootstrap di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/custom.css",
+      "visibility": "teacher",
+      "description": "CSS custom minimo di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/MAPPING.md",
+      "visibility": "teacher",
+      "description": "Mapping di riferimento framework -> CSS"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Note didattiche, alternative e rubrica"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "mini-progetto-html-css-framework",
+    "file": "index.html",
+    "note": "Feisbuc milestone 2 con Bootstrap per layout/componenti e CSS custom ridotto al prodotto."
+  },
+  "correzione": {
+    "compila": false,
+    "test": false,
+    "sandbox": false,
+    "ai_feedback": false
+  },
+  "metriche": {
+    "tempo_stimato_minuti": 120,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": false
+  },
+  "manual_checks": [
+    {
+      "name": "grid responsive",
+      "criterion": "il macro-layout usa container/row/col e passa da una colonna a 3/6/3 da lg"
+    },
+    {
+      "name": "navbar",
+      "criterion": "navbar e collapse sono collegati correttamente e il bundle Bootstrap e incluso"
+    },
+    {
+      "name": "semantica",
+      "criterion": "header/nav/main/section/article/aside/footer e heading restano coerenti"
+    },
+    {
+      "name": "custom css",
+      "criterion": "custom.css contiene solo branding/prodotto e non reimplementa il framework"
+    },
+    {
+      "name": "mapping",
+      "criterion": "MAPPING.md contiene almeno sei mapping corretti con il concetto CSS sottostante"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Uso ragionato di grid, utility e componenti Bootstrap",
+      "punti": 3
+    },
+    {
+      "criterio": "Responsive design e navbar funzionante",
+      "punti": 2
+    },
+    {
+      "criterio": "Semantica e accessibilita preservate",
+      "punti": 2
+    },
+    {
+      "criterio": "Qualita del mapping CSS nativo -> Bootstrap",
+      "punti": 2
+    },
+    {
+      "criterio": "CSS personalizzato minimo e manutenibile",
+      "punti": 1
+    }
+  ]
+}
