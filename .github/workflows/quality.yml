@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JS, SQL, auth, SSR and backend E2E tests
+      - name: Set up Node.js for deterministic JS, SQL, auth, SSR, Vue and backend E2E tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -76,6 +76,53 @@ jobs:
         working-directory: _ssr-reference
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
+      - name: Install Vue reactivity microscope
+        working-directory: activities/tpsi5/vue_reactivity_a/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build Vue reactivity microscope
+        working-directory: activities/tpsi5/vue_reactivity_a/starter
+        run: npm run build
+
+      - name: Install Vue PostCard reference
+        working-directory: activities/tpsi5/vue_post_card_b/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build Vue PostCard reference
+        working-directory: activities/tpsi5/vue_post_card_b/solution
+        run: npm run build
+
+      - name: Install Feisbuc Vue SPA reference
+        working-directory: activities/tpsi5/feisbuc_vue_c/solution/frontend
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build Feisbuc Vue SPA reference
+        working-directory: activities/tpsi5/feisbuc_vue_c/solution/frontend
+        run: npm run build
+
+      - name: Install Vue debug starter
+        working-directory: activities/tpsi5/vue_debug_d/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build Vue debug starter
+        working-directory: activities/tpsi5/vue_debug_d/starter
+        run: npm run build
+
+      - name: Install Vue debug reference solution
+        working-directory: activities/tpsi5/vue_debug_d/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build Vue debug reference solution
+        working-directory: activities/tpsi5/vue_debug_d/solution
+        run: npm run build
+
+      - name: Compose Feisbuc Vue reference from milestone 7 and Vite dist
+        run: python tests/compose_vue_reference.py
+
+      - name: Install Express for composed Vue reference
+        working-directory: _vue-reference
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -88,3 +135,4 @@ jobs:
           tests/test_tpsi_quinto_sql_persistence.py
           tests/test_tpsi_quinto_auth_security.py
           tests/test_tpsi_quinto_ssr_nunjucks.py
+          tests/test_tpsi_quinto_vue_spa.py

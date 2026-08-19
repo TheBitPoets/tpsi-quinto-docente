@@ -1,0 +1,45 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-b-vue-post-card-001",
+  "titolo":"Vue PostCard: props in ingresso, emits in uscita",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"B",
+  "argomenti":["vue-3","sfc","component","props","emits","one-way-data-flow"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-vue3-components-reactivity"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md","anchor":"8-props-ed-emits","role":"lesson"}],
+  "consegna":"Completa `PostCard.vue`: il componente riceve `post` e `canDelete`, emette `toggle-like` con l'id del post ed emette `delete` solo dal bottone visibile quando `canDelete` e true. Non mutare la prop e non chiamare fetch dal componente. Il parent fornito aggiorna lo state per rendere osservabile il contratto.",
+  "vincoli":["props read-only","nessun fetch/axios nel child","emit toggle-like con post.id","emit delete con post.id","delete button protetto da v-if=canDelete","toolchain pinned Vue 3.5.40/Vite 8.2.1/plugin-vue 6.0.8"],
+  "assets":[
+    {"type":"starter","path":"starter/package.json","target_path":"package.json","visibility":"student","description":"Toolchain"},
+    {"type":"starter","path":"starter/index.html","target_path":"index.html","visibility":"student","description":"Entry HTML"},
+    {"type":"starter","path":"starter/vite.config.js","target_path":"vite.config.js","visibility":"student","description":"Vite config"},
+    {"type":"starter","path":"starter/src/main.js","target_path":"src/main.js","visibility":"student","description":"Mount"},
+    {"type":"starter","path":"starter/src/App.vue","target_path":"src/App.vue","visibility":"student","description":"Parent state e handler"},
+    {"type":"starter","path":"starter/src/components/PostCard.vue","target_path":"src/components/PostCard.vue","visibility":"student","description":"Componente da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Contratto"},
+    {"type":"teacher_only","path":"solution/package.json","visibility":"teacher","description":"Package reference"},
+    {"type":"teacher_only","path":"solution/index.html","visibility":"teacher","description":"Entry reference"},
+    {"type":"teacher_only","path":"solution/vite.config.js","visibility":"teacher","description":"Vite config reference"},
+    {"type":"teacher_only","path":"solution/src/main.js","visibility":"teacher","description":"Mount reference"},
+    {"type":"teacher_only","path":"solution/src/App.vue","visibility":"teacher","description":"Parent reference"},
+    {"type":"teacher_only","path":"solution/src/components/PostCard.vue","visibility":"teacher","description":"PostCard reference"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Review"}
+  ],
+  "soluzione_attesa":{"tipo":"vue-sfc-component","file":"src/components/PostCard.vue","note":"One-way data flow: props down, emits up."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":60,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"props","criterion":"post/canDelete dichiarate e non mutate"},
+    {"name":"emits","criterion":"toggle-like/delete emessi con id"},
+    {"name":"boundary","criterion":"nessuna chiamata HTTP nel child"}
+  ],
+  "rubrica":[
+    {"criterio":"Props e rendering", "punti":3},
+    {"criterio":"Emits e payload", "punti":3},
+    {"criterio":"One-way data flow", "punti":2},
+    {"criterio":"Accessibilita/qualita", "punti":2}
+  ]
+}

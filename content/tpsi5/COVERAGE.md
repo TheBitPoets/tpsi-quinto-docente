@@ -11,10 +11,12 @@ Stato: **draft**.
 | Node/Express | sì | milestone 5 | Express 5.2.1, Router/middleware/validation/error model |
 | SQL raw/SQLite | sì | milestone 6 | `node:sqlite`, constraint, prepared statement, persistence |
 | Auth/session/authz | sì | milestone 7 | scrypt, HttpOnly cookie, session server-side, ownership |
-| SSR/template | sì, compatto | **milestone 8 disponibile** | Nunjucks 3.2.4, view model, autoescape, PRG, coexistence API/SSR |
+| SSR/template | sì, compatto | milestone 8 | Nunjucks, view model, autoescape, PRG, coexistence API/SSR |
+| Vue 3 + Vite | **sì, D1 deciso** | **milestone 9 disponibile** | SFC, Composition API, ref/computed, props/emits, API/auth invariati |
+| SPA routing | sì | prossimo blocco UDA25 | Vue Router solo quando serve URL/navigation |
+| TypeScript | TBD | UDA25/advanced | introduzione mirata preferita, profondita da congelare |
+| Global state/Pinia | solo se motivato | non ancora | props/emits prima; store solo con requisito condiviso reale |
 | ORM Node | TBD | futuro | confronto solo dopo SQL raw |
-| Framework frontend | TBD | UDA25 | candidato Vue 3; decisione da congelare |
-| TypeScript | TBD | UDA25/advanced | profondita da congelare |
 | WebSocket/realtime | sì | UDA25 | WebSocket concettuale + Socket.IO applicato |
 | FastAPI mirror/OpenAPI/SQLAlchemy | sì, mirato | UDA26 | stesso contratto HTTP come mirror |
 | Testing/deploy/capstone | sì | UDA26 | release finale e osservabilita base |
@@ -31,38 +33,59 @@ Stato: **draft**.
 6 Express 5 + SqlPostStore + SQLite file
 7 users + scrypt + server-side session + ownership
 8 Nunjucks SSR + stessa API/auth/session/store
+9 Vue 3 + Vite SPA shell + stessa API/auth/session/store
 ```
 
-### Milestone 8 — due presentation adapter
+### Milestone 9 — framework frontend senza riscrivere il backend
 
 ```text
-                         +-> JSON -> JS -> DOM
-SqlPostStore + session --|
-                         +-> view model -> Nunjucks -> HTML
+Vue App
+  ├── AuthPanel
+  ├── PostComposer
+  └── PostCard * N
+       ↓
+      api.js
+       ↓
+     /api/*
+       ↓
+loadAuth + Router + stores + SQLite
 ```
 
-La Quality reference deve verificare:
+Invariant:
 
-- anonimo `/ssr` -> 401;
-- utente autenticato `/ssr` -> `text/html`;
-- POST form -> 303 -> GET;
-- body utente con `<script>` viene escapato;
-- non-owner non vede delete e riceve 403 se forza la route;
-- owner delete -> 303 e rimozione;
-- `/api/posts` continua a essere JSON e vede le stesse righe.
+- cookie sessione ancora `HttpOnly`;
+- nessun token in `localStorage`/`sessionStorage`/`document.cookie`;
+- autore del post ancora derivato da `req.auth.user`;
+- delete ancora autorizzata server-side;
+- Vue non introduce una seconda persistence strategy.
 
-## Activity UDA24 — SSR
+La Quality reference deve verificare almeno:
 
-- [x] `tpsi5-activity-a-ssr-view-model-001` — grading JS;
-- [x] `tpsi5-activity-b-nunjucks-autoescape-001` — template lab + reference CI;
-- [x] `tpsi5-activity-c-feisbuc-ssr-001` — milestone 8 overlay;
-- [x] `tpsi5-activity-d-debug-ssr-boundaries-001` — escaping/authz/PRG review.
+- build Vite delle reference A/B/C/D;
+- base `/vue/` nella build milestone 9;
+- SPA statica servita dallo stesso Express della milestone 7;
+- `/api/auth/me` e `/api/posts` mantengono il contratto;
+- register/session/API restano utilizzabili con la SPA presente;
+- `PostCard` non contiene `fetch` e comunica tramite emits;
+- nessun Router/Pinia/TypeScript introdotto prematuramente.
+
+## Activity UDA25 — Vue foundations
+
+- [x] `tpsi5-activity-a-vue-reactivity-microscope-001` — `ref`/`computed`, osservazione + reference build;
+- [x] `tpsi5-activity-b-vue-post-card-001` — props/emits, reference build;
+- [x] `tpsi5-activity-c-feisbuc-vue-spa-001` — milestone 9, reference build + composed E2E;
+- [x] `tpsi5-activity-d-debug-vue-reactivity-001` — debugging reattivita/component boundary, starter+solution build.
+
+## Boundary di grading Vue
+
+Il runtime browser completo resta non disponibile nel grader TheBitLab. Le build e gli E2E della solution sono evidence del **repository docente**, non test automatici della consegna studente.
 
 ## Gate prima del freeze del curriculum TPSI5
 
 1. definire/creare il corso SQL separato riusando il blocco SQL;
-2. congelare framework frontend;
+2. **framework frontend: completato — Vue 3 + Vite**;
 3. decidere profondita TypeScript;
 4. decidere ORM Node quando serve realmente;
 5. verificare ore reali e calendario definitivo;
-6. completare UDA25–26: framework frontend/realtime, FastAPI mirror, testing e deploy.
+6. completare UDA25: Vue Router, realtime e translation lab React;
+7. completare UDA26: FastAPI mirror, testing, deploy e capstone.

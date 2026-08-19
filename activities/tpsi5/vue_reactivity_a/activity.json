@@ -1,0 +1,39 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-a-vue-reactivity-microscope-001",
+  "titolo":"Vue reactivity microscope: ref e computed",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"A",
+  "argomenti":["vue-3","vite","reactivity","ref","computed","sfc","composition-api"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-vue3-components-reactivity"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md","anchor":"4-ref-e-reattivita","role":"lesson"}],
+  "consegna":"Esegui la piccola app Vue/Vite fornita. Osserva `ref`, `.value` nello script, unwrapping nel template e `computed`. Compila `OBSERVATIONS.md` spiegando cosa cambia quando premi i pulsanti e perche `doubled` non viene mantenuto come secondo state manuale.",
+  "vincoli":["Node >=22.18","Vue 3.5.40","Vite 8.2.1","@vitejs/plugin-vue 6.0.8","non introdurre watch","non sostituire computed con state duplicato"],
+  "assets":[
+    {"type":"starter","path":"starter/package.json","target_path":"package.json","visibility":"student","description":"Toolchain Vue/Vite pinned"},
+    {"type":"starter","path":"starter/index.html","target_path":"index.html","visibility":"student","description":"Entry HTML"},
+    {"type":"starter","path":"starter/vite.config.js","target_path":"vite.config.js","visibility":"student","description":"Config Vite Vue"},
+    {"type":"starter","path":"starter/src/main.js","target_path":"src/main.js","visibility":"student","description":"Mount Vue app"},
+    {"type":"starter","path":"starter/src/App.vue","target_path":"src/App.vue","visibility":"student","description":"Microscope ref/computed"},
+    {"type":"starter","path":"student/OBSERVATIONS.md","target_path":"OBSERVATIONS.md","visibility":"student","description":"Scheda osservazioni"},
+    {"type":"teacher_only","path":"solution/OBSERVATIONS.md","visibility":"teacher","description":"Osservazioni attese"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Conduzione e domande"}
+  ],
+  "soluzione_attesa":{"tipo":"vue-observation","file":"OBSERVATIONS.md","note":"Lo starter e intenzionalmente eseguibile; il prodotto e la spiegazione osservativa."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":45,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"ref-value","criterion":"spiega .value nello script e unwrapping nel template"},
+    {"name":"computed","criterion":"spiega perche doubled e derivato e non duplicato"},
+    {"name":"state-render","criterion":"collega il comportamento a state -> render manuale"}
+  ],
+  "rubrica":[
+    {"criterio":"Osservazione ref/.value", "punti":3},
+    {"criterio":"Comprensione computed", "punti":3},
+    {"criterio":"Collegamento al DOM manuale", "punti":2},
+    {"criterio":"Lessico e precisione", "punti":2}
+  ]
+}
