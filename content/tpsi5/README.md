@@ -9,38 +9,60 @@ Il consumer e pinned alla revisione **Accettata** del contratto in `TheBitPoets/
 ## Principi
 
 - partire dalla Web Platform prima dei framework;
-- rendere HTTP un argomento esplicito e non un dettaglio nascosto di `fetch`/Express;
-- usare SQL raw prima dell'ORM e mantenere visibile il mapping SQL ↔ ORM;
-- usare Node.js + Express come backend principale;
-- mantenere Python/FastAPI come mirror track mirato, non come duplicazione integrale;
+- rendere HTTP esplicito prima di `fetch`/Express;
+- usare SQL raw prima dell'ORM;
+- usare Node.js + Express come backend principale, ma soltanto dopo avere studiato il protocollo;
+- mantenere Python/FastAPI come mirror track mirato;
 - usare Feisbuc come progetto longitudinale;
-- usare MDN e le documentazioni ufficiali per insegnare a leggere la documentazione professionale;
-- usare Manning/Pluralsight come riferimenti docente licensed, senza copiarne o ingerirne automaticamente i contenuti;
-- mantenere Activity e laboratori nella tassonomia TheBitLab A–F.
+- usare MDN, specifiche e documentazioni ufficiali come reference professionali;
+- usare Manning/Pluralsight come teacher-reference licensed senza ingestione;
+- mantenere Activity A–F e separazione studente/docente/grading.
 
 ## Contenuti disponibili
 
-1. `00_COURSE_ARCHITECTURE.md` — architettura del percorso Full Stack e metodo;
-2. `01_WEB_PLATFORM_HTML_MODERNO.md` — HTML come struttura/semantica, documento moderno, metadata, MDN/DevTools e Feisbuc milestone 0;
-3. `02_CSS_MODERNO_RESPONSIVE.md` — cascade, specificità, box model, Flexbox, Grid, responsive design, custom properties e metodo di debugging; Feisbuc milestone 1;
-4. `03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md` — Bootstrap come astrazione sopra CSS nativo, grid/utilities/components, trade-off e Feisbuc milestone 2;
-5. `04_JAVASCRIPT_DOM_BROWSER_APIS.md` — JavaScript moderno, array/object/functions, ES modules, DOM, form/eventi, event delegation, state/render, Web Storage e debugging; Feisbuc milestone 3.
+1. `00_COURSE_ARCHITECTURE.md` — architettura del percorso e metodo;
+2. `01_WEB_PLATFORM_HTML_MODERNO.md` — HTML moderno; Feisbuc milestone 0;
+3. `02_CSS_MODERNO_RESPONSIVE.md` — CSS/Flexbox/Grid/responsive; milestone 1;
+4. `03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md` — Bootstrap come astrazione sopra CSS; milestone 2;
+5. `04_JAVASCRIPT_DOM_BROWSER_APIS.md` — JavaScript, DOM, eventi, modules, Web Storage; milestone 3;
+6. `05_HTTP_ASYNC_FETCH_REST.md` — HTTP semantics, Promise/async-await, Fetch/Response, REST, same-origin/CORS e network debugging; milestone 4.
 
-## Activity disponibili
+## Feisbuc oggi
 
-UDA 21 porta dalla struttura HTML alla UI responsive/Bootstrap con Activity A-E. UDA 22 aggiunge:
+```text
+milestone 0  semantic HTML
+milestone 1  responsive native CSS
+milestone 2  Bootstrap UI
+milestone 3  dynamic local JS + localStorage
+milestone 4  HTTP REST API client
+```
 
-- `tpsi5-activity-a-js-feed-pipeline-001` — pipeline `filter/map`, **autograded JavaScript**;
-- `tpsi5-activity-b-js-post-refactor-001` — state update `map/spread`, **autograded JavaScript**;
-- `tpsi5-activity-c-feisbuc-dynamic-feed-001` — Feisbuc milestone 3 con DOM/event delegation/localStorage;
-- `tpsi5-activity-d-debug-feisbuc-js-001` — debug browser basato su bug e pattern del Feisbuc legacy.
+La milestone 4 rende visibile la sostituzione:
 
-## Confine UDA 22 / UDA 23
+```text
+localStorage
+     ↓
+api.js -> fetch -> HTTP -> server fixture
+```
 
-UDA 22 studia il comportamento client senza rete. `Promise`, `async`/`await` e `fetch` sono intenzionalmente rinviati a UDA 23, dove vengono introdotti insieme a HTTP e REST. La milestone 3 usa quindi `localStorage` come persistenza locale temporanea: il passaggio successivo renderà visibile la sostituzione `storage locale -> API HTTP`.
+Il server UDA 23 usa `node:http` ed e deliberatamente trattato come fixture/black box. Node runtime, native HTTP server ed Express diventano oggetto di studio in UDA 24.
+
+## Activity UDA 22
+
+- `tpsi5-activity-a-js-feed-pipeline-001` — **autograded JavaScript**;
+- `tpsi5-activity-b-js-post-refactor-001` — **autograded JavaScript**;
+- `tpsi5-activity-c-feisbuc-dynamic-feed-001` — browser/manuale;
+- `tpsi5-activity-d-debug-feisbuc-js-001` — browser/manuale.
+
+## Activity UDA 23
+
+- `tpsi5-activity-a-http-microscope-001` — request/response con `curl -i` + Network panel;
+- `tpsi5-activity-b-async-response-policy-001` — status/ok/Content-Type + Promise/await, **autograded JavaScript**;
+- `tpsi5-activity-c-feisbuc-rest-client-001` — Feisbuc milestone 4, GET/POST/PATCH via HTTP;
+- `tpsi5-activity-d-debug-fetch-http-001` — debug 404 vs network, serialization/Content-Type e 204.
 
 ## Stato
 
-Versione authoring `0.5.0`, ancora **draft**.
+Versione authoring **`0.6.0`**, ancora `draft`.
 
-Il Content Pack Standard v1 resta congelato; il corso no. Framework frontend, ORM Node e profondità TypeScript rimangono decisioni da prendere. Il prossimo blocco previsto è UDA 23 — **HTTP, asincronia, Fetch e REST**.
+Il Content Pack Standard v1 resta congelato; il curriculum continua a evolvere. Framework frontend, ORM Node e profondita TypeScript sono ancora decisioni aperte. Il prossimo blocco e UDA 24: **Node.js, Express, persistenza, auth e SSR**.

@@ -1,165 +1,246 @@
-# Audit iniziale delle risorse legacy
+# Audit delle risorse legacy TPSI quinto
 
-Stato: draft. Gli SHA indicati sono snapshot di partenza, non branch mobili.
+Stato: **draft progressivo**. Gli SHA sono snapshot di provenance, non branch mobili. Nessun repository legacy viene copiato integralmente nel corso: ogni elemento riceve una decisione `reuse`, `rewrite`, `replace`, `defer` o `retire`.
 
 ## `TheBitPoets/html_css_summary`
 
 Pinned: `d71da420f1aa2ea39b61356e4f9900c6371e7a42`.
 
-**Decisione iniziale: REUSE + MAJOR UPDATE.**
+Decisione: **REUSE CONCEPTS + MAJOR REWRITE**.
 
-Da conservare: progressione molto semplice, esempi piccoli, box model, block/inline, collegamenti playground.
-
-Da aggiornare: scheletro HTML moderno (`DOCTYPE`, `lang`, charset, viewport), semantica, form, accessibilità, cascade/specificità, Flexbox, Grid, media query, custom properties e responsive design. Gli esempi vanno revisionati: per esempio la sezione dedicata a `<ul>` contiene attualmente un esempio con `<ol>`. JSFiddle resta materiale legacy utile, ma i nuovi micro-esempi dovrebbero privilegiare MDN Playground quando possibile.
-
-### Decisioni per frammento — primo modulo HTML
-
-| Frammento legacy | Decisione | Destinazione / motivazione |
+| Frammento | Decisione | Nuova destinazione |
 | --- | --- | --- |
-| `Scheletro html` | **rewrite** | sostituito da `01_WEB_PLATFORM_HTML_MODERNO.md`: doctype moderno, `lang`, UTF-8, viewport, `title`, distinzione `head/header` |
-| `Tag p` | **reuse concept / new example** | il concetto resta, ma viene spiegato come semantica del testo e non come effetto grafico |
-| `Tag ol` | **reuse concept / new example** | mantenere liste ordinate con esempi originali |
-| `Tag ul` | **rewrite** | correggere l'esempio legacy che usa `ol`; nuovo esempio originale nel corso |
-| `Tag a` | **reuse concept / update** | mantenere il collegamento ipertestuale e aggiungere contesto semantico/accessibilità quando serve |
-| `CSS sintassi` | **migrated/rewrite** | ora coperto da `02_CSS_MODERNO_RESPONSIVE.md` con terminologia selettore/proprietà/valore e workflow MDN |
-| `Box Model` | **migrated/major update** | ora integrato con `box-sizing: border-box`, DevTools e debugging reale |
-| `Block/Inline` | **rewrite** | ricollocato nel normal flow e nei concetti di display, senza usarlo come modello centrale del layout moderno |
-| Padding/Margin/Border | **reuse concepts / new examples** | conservati dentro il box model con esempi originali e Activity nuove |
-| JSFiddle links | **keep as legacy evidence** | non diventano dipendenza obbligatoria; MDN Playground/browser locale sono preferiti nei nuovi micro-lab |
+| scheletro HTML | rewrite | documento moderno con doctype/lang/charset/viewport |
+| p/ol/a | reuse concept | esempi originali e semantici |
+| ul | rewrite | corregge il vecchio esempio con `ol` |
+| CSS syntax | migrated/rewrite | `02_CSS_MODERNO_RESPONSIVE.md` |
+| box model | major update | `border-box`, DevTools e debugging |
+| block/inline | rewrite | normal flow, non modello di layout |
+| margin/padding/border | reuse | box model moderno |
+| JSFiddle | legacy evidence | MDN Playground/browser locale preferiti per i nuovi micro-lab |
 
-### Output del primo incremento
+Output: HTML/CSS UDA 21 + Feisbuc milestone 0/1.
 
-- `content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md`;
-- Activity A `tpsi5-activity-a-html-anatomy-001`;
-- Activity B `tpsi5-activity-b-feisbuc-semantic-001`;
-- Feisbuc milestone `feisbuc-00-semantic-skeleton`.
-
-### Output del secondo incremento CSS
-
-- `content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md`;
-- cascade, specificità, inheritance e box model riscritti con approccio moderno;
-- Flexbox e Grid aggiunti come strumenti principali di layout;
-- responsive design e media query introdotti con strategia mobile-first;
-- custom properties introdotte come fondamento di manutenzione;
-- Activity C `tpsi5-activity-c-feisbuc-responsive-layout-001`;
-- Activity D `tpsi5-activity-d-debug-responsive-css-001`;
-- Feisbuc milestone `feisbuc-01-responsive-shell`.
-
-Il nuovo testo non copia la spiegazione legacy: conserva i concetti utili, riscrive esempi e struttura e collega esplicitamente MDN come riferimento professionale. *CSS in Depth, Second Edition* resta teacher-reference licensed e non viene riprodotto.
+---
 
 ## `TheBitPoets/labs_summary`
 
 Pinned: `36a909f00c9478983a8d1b950440e2abc28b8a55`.
 
-**Decisione iniziale: REUSE PROGRESSION + REBUILD ACTIVITIES.**
+Decisione: **REUSE PROGRESSION + REBUILD ACTIVITIES**.
 
-La sequenza storica è preziosa: statico → storage/JS → Express/fetch → form/POST → parametri HTTP → SQLite → register/login/CRUD → template → Socket.IO.
-
-Da cambiare: rendere HTTP esplicito prima di Express/fetch; trasformare i lab in Activity A–F; rivedere dipendenze Node/DB; introdurre password hashing, session/authn/authz e sicurezza; usare Nunjucks come confronto SSR anziché architettura finale; correggere la descrizione di Socket.IO, che non va presentato semplicemente come wrapper WebSocket.
-
-### Decisione UDA 22
-
-La progressione `lab2`/`lab3`/`lab4` viene riutilizzata come **ordine concettuale**, non come importazione dei repository esterni:
+La progressione storica rimane utile:
 
 ```text
-JavaScript language
-  -> DOM/events
-  -> Web Storage
-  -> mini-app/browser
+statico
+ -> storage/JS
+ -> fetch/Express
+ -> form POST
+ -> query/path/body
+ -> SQLite
+ -> login/register
+ -> template
+ -> realtime
 ```
 
-La parte async del vecchio `lab3` viene separata:
+Il nuovo corso cambia però l'ordine esplicativo:
 
-- callback come concetto di funzione/evento: **UDA 22**;
-- Promise, `async`/`await` e `fetch`: **UDA 23**, insieme a HTTP e REST.
+```text
+Web Platform
+ -> JavaScript/DOM
+ -> HTTP
+ -> fetch/REST
+ -> Node
+ -> Express
+ -> SQL/DB
+ -> auth/SSR
+ -> framework frontend/realtime
+```
 
-Questo evita di presentare asincronia e rete come sintassi isolate.
+Motivo: non vogliamo che `fetch`, `req.query` o `cors()` appaiano prima del modello che stanno implementando.
+
+---
 
 ## `kinderp/lab3`
 
-Snapshot auditato: `0deae0eb606bc9c2849ba271bdf03c128910f1ac`.
+Snapshot: `0deae0eb606bc9c2849ba271bdf03c128910f1ac`.
 
-**Decisione: TEACHER-REFERENCE + SELECTIVE REWRITE.**
+Decisione: **TEACHER-REFERENCE + SELECTIVE REWRITE**.
 
-Il repository contiene un buon inventario di concetti JavaScript (variabili/tipi, controllo di flusso, array/loop, funzioni, async/errori, moduli), ma non viene promosso a sorgente canonica senza revisione.
+| Area legacy | Decisione |
+| --- | --- |
+| `let`/`const`/`var` | rewrite examples, `const` default e `let` per riassegnazione |
+| primitive/object/array | reuse concepts con dati Feisbuc |
+| array mutation | contextualize rispetto a trasformazioni prevedibili |
+| `map/filter/find` | expand nel core |
+| functions/callback/arrow | reuse concept, esempi riscritti |
+| error handling | selective reuse |
+| Promise/async-await | **defer da UDA 22 a UDA 23** |
+| CommonJS | defer a Node/backend |
+| ES module Node/filesystem | replace per browser ES modules |
+| advanced internals/classes | advanced/senior |
 
-| Area legacy | Decisione | Motivo / destinazione |
-| --- | --- | --- |
-| `let` / `const` / `var` | **reuse concept / rewrite example** | `const` come default e `let` per riassegnazione; l'assegnazione successiva a una `const` diventa esperimento controllato, non codice canonico |
-| primitive / object / array | **reuse concepts / new Feisbuc data** | esempi generici sostituiti da post, likes, tag e stato della UI |
-| array mutation (`push`, `splice`...) | **reuse + contextualize** | mantenere la distinzione fra operazioni mutanti e trasformazioni che producono nuove collezioni |
-| `map` / `filter` / `find` / `some` / `every` | **add/expand** | diventano parte del core UDA 22 e alimentano Activity A/B |
-| funzioni / callback / arrow | **reuse concept / rewrite examples** | conservare funzioni come valori e callback; riscrivere esempi eliminando rumore/dead code e collegandoli a array/events |
-| error handling | **reuse selectively** | `try/catch` usato per recovery motivato (es. JSON storage), non per nascondere errori |
-| callback async / Promise / async-await | **defer to UDA 23** | studiarli insieme a HTTP/fetch per dare un motivo concreto all'asincronia |
-| CommonJS | **defer to Node/backend** | e un modello dell'ecosistema Node, non il primo module system del browser |
-| ES module Node + filesystem | **replace for UDA 22** | l'esempio legacy e Node-specifico e contiene riferimenti incompleti; il browser parte da `type=module`, `import`/`export` e moduli locali |
-| advanced internals/classes/metaprogramming | **defer/advanced** | entrano solo se richiesti dal core o nel futuro track advanced/senior |
+L'esempio ES module Node legacy non viene reso canonico: e Node-specifico e contiene riferimenti incompleti. UDA 22 parte da `type=module`, `import`/`export` nel browser.
 
-### Output UDA 22
+Output UDA 22:
 
-- `content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md`;
-- Activity A `tpsi5-activity-a-js-feed-pipeline-001` — JavaScript puro autograded;
-- Activity B `tpsi5-activity-b-js-post-refactor-001` — state update autograded;
-- Activity C `tpsi5-activity-c-feisbuc-dynamic-feed-001` — DOM/event delegation/localStorage;
-- Activity D `tpsi5-activity-d-debug-feisbuc-js-001` — diagnosi browser;
-- Feisbuc milestone `feisbuc-03-dynamic-local-feed`.
+- `04_JAVASCRIPT_DOM_BROWSER_APIS.md`;
+- A/B JavaScript puro autograded;
+- C Feisbuc DOM/event delegation/localStorage;
+- D debug browser;
+- milestone `feisbuc-03-dynamic-local-feed`.
+
+---
 
 ## `TheBitPoets/feisbuc`
 
 Pinned: `086995ece4260a3408740b94cfe2701ce24f8b57`.
 
-**Decisione iniziale: KEEP AS LONGITUDINAL CAPSTONE.**
+Decisione: **KEEP AS LONGITUDINAL CAPSTONE**.
 
-Il progetto ha valore perché cresce insieme al corso. Il README e gli esempi sono sorgente didattica; i file HTML/CSS/JS sono invece asset/progetto e non vengono ingeriti come Markdown dalla Course Board.
-
-Da modernizzare: layout basati su float → Flexbox/Grid; semantica/accessibilità; gestione degli asset esterni; separazione progressiva dei moduli JS; REST/backend/DB/auth; framework frontend; realtime; test e deploy.
-
-### Decisioni applicate
-
-**Milestone 0** non copia il vecchio `home.html`: ricostruisce uno scheletro Feisbuc minimale e richiede allo studente di passare da contenitori generici a `header`, `nav`, `main`, `section`, `article` e `footer`.
-
-**Milestone 1** sostituisce il modello legacy a colonne basato su `float` con:
+### Evoluzione applicata
 
 ```text
-Grid    → macro-layout profilo/feed/tendenze
-Flexbox → navigazione e azioni del post
+milestone 0  semantica HTML
+milestone 1  Grid/Flexbox responsive
+milestone 2  Bootstrap con mapping verso CSS nativo
+milestone 3  JavaScript state/render + event delegation + localStorage
+milestone 4  HTTP REST API client
 ```
 
-Il layout di base è mobile-first e la versione ampia usa colonne Grid flessibili. Il vecchio uso di float rimane utile come evidenza storica da confrontare, non come soluzione canonica del nuovo corso.
+### JavaScript legacy
 
-**Milestone 2** rifattorizza la UI con Bootstrap soltanto dopo avere costruito il layout nativo. `MAPPING.md` obbliga a collegare ogni astrazione del framework ai concetti CSS sottostanti.
-
-### Audit JavaScript legacy applicato in UDA 22
-
-`add_post.js` e `like_button_pressed.js` contengono intuizioni didattiche preziose ma anche debiti da rendere espliciti:
-
-| Pattern legacy | Decisione |
+| Pattern | Decisione |
 | --- | --- |
-| `DOMContentLoaded` + listener | **reuse concept**, poi confrontare con `type=module` e caricamento differito |
-| `event.preventDefault()` con parametro `e` | **turn into debug case** nell'Activity D |
-| creazione DOM con `createElement`/`appendChild` | **reuse concept / modernize** con semantica, `textContent`, `append`, funzioni di render |
-| `counter` globale + id `like_button_N` | **replace** con identita del dato (`post.id`) e `data-post-id`/`data-action` |
-| listener individuali sui like iniziali | **retire as final solution**; resta utile come step del problema |
-| event delegation sul `.feed` | **preserve and deepen**: bubbling, `target/currentTarget`, `closest`, contenitore stabile |
-| like rappresentato modificando stile/disabled del button | **replace** con `state -> render`; likes/liked sono dati |
-| nessuna persistenza strutturata | **add** adapter `localStorage` + JSON + recovery |
-| testo utente inserito nel DOM | **harden**: `textContent` come default; XSS verra approfondito nel modulo security |
+| `DOMContentLoaded` + listener | reuse concept, poi confronto con module scripts |
+| `event.preventDefault()` con parametro `e` | debug case reale |
+| `createElement`/`appendChild` | reuse/modernize con semantica e `textContent` |
+| counter globale e `like_button_N` | replace con `post.id` + `data-*` |
+| listener individuali sui like iniziali | retire come soluzione finale |
+| event delegation sul feed | **preserve and deepen** |
+| like conservato nello stile/disabled del button | replace con state -> render |
+| nessuna persistenza strutturata | localStorage/JSON in milestone 3 |
+| testo utente nel DOM | harden con `textContent` |
 
-La milestone 3 conserva quindi l'idea migliore del legacy — **event delegation** — ma cambia il modello architetturale:
+Modello nuovo:
 
 ```text
-legacy
-DOM = stato
-button id = identita
-
-nuovo
 post object = stato
 post.id = identita
 DOM = render dello stato
 data-action = azione UI
 ```
 
-## Principio di migrazione
+---
 
-Nessun repository legacy viene copiato integralmente nel nuovo corso. Ogni frammento deve ricevere una decisione esplicita `reuse`, `rewrite`, `replace`, `defer` o `retire`, conservando provenance e snapshot originario.
+# Audit UDA 23 — lab5/lab6/lab7
+
+## `kinderp/lab5`
+
+Snapshot: `b518922bf346ffe6402d67806acf4c5bc78916b9`.
+
+Decisione: **PRESERVE FIRST CLIENT/SERVER INTUITION, REORDER CONCEPTS**.
+
+Punti utili:
+
+- primo `fetch()` semplice;
+- JSON restituito dal server;
+- separazione visiva client/server.
+
+Debiti trasformati in materiale didattico:
+
+- Express viene introdotto immediatamente, prima di rendere esplicito HTTP;
+- CORS viene configurato come libreria prima di spiegare origin/policy;
+- il client fa `response.json()` e `catch()` ma non controlla `response.ok`.
+
+Nel nuovo corso:
+
+```text
+HTTP request/response
+ -> status/header/content
+ -> Promise/async-await
+ -> fetch/Response.ok
+ -> REST
+ -> solo dopo Express/CORS middleware
+```
+
+Quindi lab5 resta provenance, non baseline di codice.
+
+## `kinderp/lab6`
+
+Snapshot: `79f4d056958b083b70f75b178ef08f00b3f902a8`.
+
+Decisione: **REUSE AS ARCHITECTURAL CONTRAST**.
+
+Valore principale: mostra che il browser sa fare una request `POST` anche con una normale `<form>` senza JavaScript.
+
+Nel nuovo corso il confronto diventa:
+
+```text
+HTML form navigation/submission
+vs
+fetch API request + client-side state update
+```
+
+Il parsing Express (`express.json`, `express.urlencoded`) viene spostato a UDA 24, dove sara finalmente possibile spiegare che cosa astrae.
+
+## `kinderp/lab7`
+
+Snapshot: `b4ee8a661d0127d5dc92254e5b3bc0a24b6075e5`.
+
+Decisione: **PRESERVE QUERY/PATH/BODY IDEA, MOVE EXPRESS MAPPING LATER**.
+
+Il lab storico mostra bene tre modi di trasportare dati:
+
+```text
+query string
+path segment
+request body
+```
+
+Nel nuovo corso questi vengono prima descritti come parti della request HTTP:
+
+```text
+GET /users?id=123
+GET /users/123
+POST /users + content
+```
+
+Solo in UDA 24 verranno mappati a:
+
+```text
+req.query
+req.params
+req.body
+```
+
+Il POST legacy `application/x-www-form-urlencoded` resta utile per confrontare representation diverse; Feisbuc milestone 4 sceglie invece JSON e rende esplicito `Content-Type` + `JSON.stringify`.
+
+---
+
+# Output UDA 23
+
+- `content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md`;
+- `tpsi5-activity-a-http-microscope-001` — protocollo osservato con curl/DevTools;
+- `tpsi5-activity-b-async-response-policy-001` — status/ok/Content-Type, autograded JS;
+- `tpsi5-activity-c-feisbuc-rest-client-001` — GET/POST/PATCH, milestone 4;
+- `tpsi5-activity-d-debug-fetch-http-001` — diagnosi di 404, media type, serialization e 204;
+- Feisbuc `feisbuc-04-rest-api-client`.
+
+## Server fixture UDA 23
+
+La fixture usa `node:http`, memoria e same-origin **ma non e ancora un laboratorio Node/Express**.
+
+Serve a rendere osservabile il contratto:
+
+```text
+browser -> HTTP -> server fixture
+```
+
+senza introdurre routing/middleware/persistenza prima del momento didattico corretto. UDA 24 aprira il black box e sostituira progressivamente la fixture con il backend strutturato.
+
+---
+
+# Principio di migrazione
+
+Il valore dei vecchi repo e storico e didattico: mostrano l'evoluzione reale del percorso. Il nuovo corso conserva le idee buone, rende espliciti i debiti e riscrive codice/consegne secondo gli standard correnti, mantenendo sempre snapshot e provenance.

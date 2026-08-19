@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fetch debug lab</title>
+  </head>
+  <body>
+    <h1>Fetch debug lab</h1>
+    <p>Apri DevTools → Network prima di premere i pulsanti.</p>
+    <button type="button" data-case="missing">GET missing</button>
+    <button type="button" data-case="create">POST broken</button>
+    <button type="button" data-case="empty">204 no content</button>
+    <pre id="output" aria-live="polite"></pre>
+    <script type="module" src="client.js"></script>
+  </body>
+</html>

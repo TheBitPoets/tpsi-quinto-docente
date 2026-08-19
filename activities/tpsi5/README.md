@@ -1,6 +1,6 @@
 # Activity TPSI5
 
-Le Activity del corso usano lo schema TheBitLab Activity 1.0 e la tassonomia ufficiale A–F:
+Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F:
 
 - A: esegui/osserva;
 - B: modifica controllata;
@@ -9,61 +9,53 @@ Le Activity del corso usano lo schema TheBitLab Activity 1.0 e la tassonomia uff
 - E: mini-progetto;
 - F: prodotto integrato.
 
-Ogni Activity deve collegare i propri `content_ids` al Content Pack v1 e mantenere separati asset studente, grading e docente.
-
 ## Activity disponibili
 
 | Livello | ID | UDA | Scopo | Grading |
 | --- | --- | --- | --- | --- |
-| A | `tpsi5-activity-a-html-anatomy-001` | UDA 21 | completare e osservare lo scheletro di un documento HTML moderno | manuale |
-| B | `tpsi5-activity-b-feisbuc-semantic-001` | UDA 21 | Feisbuc milestone 0: trasformare contenitori generici in struttura HTML semantica | manuale |
-| C | `tpsi5-activity-c-feisbuc-responsive-layout-001` | UDA 21 | Feisbuc milestone 1: costruire autonomamente una shell responsive con Grid/Flexbox | manuale |
-| D | `tpsi5-activity-d-debug-responsive-css-001` | UDA 21 | diagnosticare overflow, cascade, box model e breakpoint errati | manuale |
-| E | `tpsi5-activity-e-feisbuc-bootstrap-ui-001` | UDA 21 | Feisbuc milestone 2: rifattorizzare la UI con Bootstrap e mapping verso CSS nativo | manuale |
-| A | `tpsi5-activity-a-js-feed-pipeline-001` | UDA 22 | trasformare dati del feed con filter/map e output JSON deterministico | **automatico JS** |
-| B | `tpsi5-activity-b-js-post-refactor-001` | UDA 22 | aggiornare lo stato dei like con map/spread | **automatico JS** |
-| C | `tpsi5-activity-c-feisbuc-dynamic-feed-001` | UDA 22 | Feisbuc milestone 3: DOM, form, event delegation, ES modules e localStorage | browser/manuale |
-| D | `tpsi5-activity-d-debug-feisbuc-js-001` | UDA 22 | diagnosticare bug reali di eventi, stato, delegation e storage | browser/manuale |
+| A | `tpsi5-activity-a-html-anatomy-001` | 21 | anatomia HTML | manuale |
+| B | `tpsi5-activity-b-feisbuc-semantic-001` | 21 | milestone 0 semantica | manuale |
+| C | `tpsi5-activity-c-feisbuc-responsive-layout-001` | 21 | milestone 1 responsive | manuale |
+| D | `tpsi5-activity-d-debug-responsive-css-001` | 21 | debug CSS | manuale |
+| E | `tpsi5-activity-e-feisbuc-bootstrap-ui-001` | 21 | milestone 2 Bootstrap | manuale |
+| A | `tpsi5-activity-a-js-feed-pipeline-001` | 22 | pipeline dati feed | **automatico JS** |
+| B | `tpsi5-activity-b-js-post-refactor-001` | 22 | state update map/spread | **automatico JS** |
+| C | `tpsi5-activity-c-feisbuc-dynamic-feed-001` | 22 | milestone 3 DOM/storage | browser/manuale |
+| D | `tpsi5-activity-d-debug-feisbuc-js-001` | 22 | debug eventi/stato/storage | browser/manuale |
+| A | `tpsi5-activity-a-http-microscope-001` | 23 | osservare HTTP con curl/Network | manuale |
+| B | `tpsi5-activity-b-async-response-policy-001` | 23 | Promise/await + Response policy | **automatico JS** |
+| C | `tpsi5-activity-c-feisbuc-rest-client-001` | 23 | milestone 4 REST client | browser/manuale + smoke CI reference |
+| D | `tpsi5-activity-d-debug-fetch-http-001` | 23 | debug fetch/HTTP | browser/manuale |
 
 ## Boundary di grading
 
-Nel contratto 2cornot2c pinned dal corso:
+Nel contratto piattaforma pinned:
 
 ```text
 javascript / nodejs  -> implemented
-html                 -> planned
+html/browser          -> non ancora implementato come runtime completo
 ```
-
-Di conseguenza distinguiamo esplicitamente due casi.
 
 ### JavaScript puro
 
-Le Activity A/B di UDA 22 possono essere corrette deterministicamente dal runner Node.js:
+A/B UDA 22 e B UDA 23 possono usare il runner deterministico Node.js:
 
 ```text
-stdin JSON
-   -> main.js
-   -> stdout JSON
-   -> confronto expected_stdout
+stdin -> JavaScript -> stdout -> expected_stdout
 ```
 
-Hanno quindi `correzione.test=true` e `sandbox=true`.
+Queste Activity dichiarano `test=true` e `sandbox=true`.
 
-### Browser/DOM
+### Protocollo osservato
 
-Le Activity HTML/CSS e le Activity JavaScript che dipendono da `document`, eventi browser, `localStorage` o rendering restano valutate tramite checklist/rubrica:
+Activity A UDA 23 e manuale perche il risultato e una lettura ragionata di request/response con `curl` e DevTools. La CI verifica comunque che la fixture HTTP restituisca realmente gli status/headers dichiarati.
 
-```json
-{
-  "compila": false,
-  "test": false,
-  "sandbox": false,
-  "ai_feedback": false
-}
-```
+### Browser/DOM/fetch
 
-La CI del repository valida comunque schema, asset e proprietà strutturali delle soluzioni/starter. Il vero runtime/grader HTML/browser resta governato da `TheBitPoets/2cornot2c#729`; non viene simulato con falsi test verdi.
+Le Activity che devono osservare DOM, event loop del browser, rendering, Web Storage o Fetch dentro una pagina restano a rubrica finche `2cornot2c#729` non fornisce il browser grader.
 
-## Content Pack v1
+Questo non impedisce alla CI del **corso** di smoke-testare le soluzioni di riferimento a livello HTTP: server fixture e adapter `api.js` vengono eseguiti davvero con Node 22 per verificare GET/POST/PATCH e gestione errori.
 
-Il gate A-E usato per accettare `thebitlab.content-pack.v1` è completato e il corso è pinned alla revisione Accettata del contratto. Le Activity successive continuano a usare lo stesso standard senza trasformare il curriculum TPSI5 in una specifica congelata.
+## Regola
+
+Non trasformiamo uno smoke test della soluzione docente in un finto autograding studente. Il tipo di evidenza deve corrispondere al comportamento che vogliamo misurare.

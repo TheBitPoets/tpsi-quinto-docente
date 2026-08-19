@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-c-feisbuc-rest-client-001",
+  "titolo": "Feisbuc milestone 4: dal localStorage alla API HTTP",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "C",
+  "argomenti": ["http", "fetch", "promise", "async-await", "rest", "json", "content-type", "status-code", "dom", "api-client"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-23"},
+  "content_ids": ["tpsi5-content-http-async-fetch-rest", "tpsi5-content-javascript-dom-browser"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md", "anchor": "feisbuc-milestone-4-da-localstorage-a-api", "role": "lesson"},
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md", "anchor": "feisbuc-milestone-3-feed-dinamico-locale", "role": "baseline"}
+  ],
+  "project_milestone": "feisbuc-04-rest-api-client",
+  "consegna": "Parti dalla stessa architettura DOM/state della milestone 3, ma elimina la persistenza `localStorage`. La fixture `server.mjs` espone e serve same-origin `GET /api/posts`, `POST /api/posts` e `PATCH /api/posts/:id`. Completa `api.js` con un helper `requestJson` robusto e completa `app.js` affinche carichi il feed, crei post e aggiorni like con `async/await`. Ogni risposta HTTP deve essere interpretata tramite status/`response.ok` e Content-Type; gli errori devono diventare feedback visibile nella UI. Non modificare il server e non usare Express.",
+  "vincoli": [
+    "non modificare server.mjs",
+    "non usare localStorage o sessionStorage",
+    "usa un modulo api.js separato dal DOM",
+    "controlla response.ok prima di considerare riuscita la richiesta",
+    "leggi Content-Type prima di scegliere json/text",
+    "POST usa Content-Type application/json e JSON.stringify",
+    "PATCH invia liked boolean",
+    "app.js usa async/await e try/catch/finally dove appropriato",
+    "mantieni event delegation per i like",
+    "mantieni textContent per il testo utente",
+    "mostra loading/error/success senza usare alert()",
+    "non usare Express, Axios o altre librerie HTTP"
+  ],
+  "assets": [
+    {"type": "fixture", "path": "starter/server.mjs", "target_path": "server.mjs", "visibility": "student", "description": "Server Node HTTP same-origin, black-box per questa UDA"},
+    {"type": "starter", "path": "starter/index.html", "target_path": "index.html", "visibility": "student", "description": "UI Feisbuc milestone 4"},
+    {"type": "starter", "path": "starter/custom.css", "target_path": "custom.css", "visibility": "student", "description": "CSS/Bootstrap supplementare"},
+    {"type": "starter", "path": "starter/api.js", "target_path": "api.js", "visibility": "student", "description": "API adapter da completare"},
+    {"type": "starter", "path": "starter/app.js", "target_path": "app.js", "visibility": "student", "description": "DOM orchestration da completare"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Contratto API e checklist"},
+    {"type": "teacher_only", "path": "solution/api.js", "visibility": "teacher", "description": "API client di riferimento"},
+    {"type": "teacher_only", "path": "solution/app.js", "visibility": "teacher", "description": "App client di riferimento"},
+    {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Domande guida e rubrica"}
+  ],
+  "soluzione_attesa": {"tipo": "browser-http-client", "file": "app.js", "note": "Feisbuc usa REST API same-origin e non Web Storage per lo stato persistente."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 150, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "manual_checks": [
+    {"name": "api boundary", "criterion": "api.js contiene networking; app.js contiene DOM/state"},
+    {"name": "response policy", "criterion": "status/ok e Content-Type vengono interpretati esplicitamente"},
+    {"name": "post", "criterion": "POST crea una risorsa e usa representation restituita"},
+    {"name": "patch", "criterion": "like usa PATCH su /api/posts/:id"},
+    {"name": "ui states", "criterion": "loading/error/success sono rappresentati nella UI"},
+    {"name": "no storage", "criterion": "non rimane persistenza localStorage/sessionStorage"}
+  ],
+  "rubrica": [
+    {"criterio": "Client HTTP e response policy", "punti": 3},
+    {"criterio": "Async/await e gestione errori", "punti": 2},
+    {"criterio": "REST GET/POST/PATCH", "punti": 2},
+    {"criterio": "Separazione api/DOM e stato", "punti": 1},
+    {"criterio": "UX loading/error e accessibilita", "punti": 2}
+  ]
+}

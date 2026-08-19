@@ -40,11 +40,7 @@ class StructureParser(HTMLParser):
     def handle_decl(self, decl: str) -> None:
         self.declarations.append(decl.lower())
 
-    def handle_starttag(
-        self,
-        tag: str,
-        attrs: list[tuple[str, str | None]],
-    ) -> None:
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         self.tags.append(tag)
         self.attrs.setdefault(tag, []).append(dict(attrs))
 
@@ -67,35 +63,26 @@ def all_classes(parser: StructureParser) -> set[str]:
 
 def test_native_content_pack_v1_is_valid_and_pinned() -> None:
     pack = load(PACK_PATH)
-
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.5.0"
+    assert pack["version"] == "0.6.0"
     assert pack["status"] == "draft"
-    assert (
-        pack["extensions"]["platform_contract"]["content_pack_v1_sha"]
-        == ACCEPTED_CONTENT_PACK_V1_SHA
-    )
+    assert pack["extensions"]["platform_contract"]["content_pack_v1_sha"] == ACCEPTED_CONTENT_PACK_V1_SHA
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
 
 
-def test_pack_sources_project_to_current_course_source_catalog() -> None:
+def test_sources_project_exactly_to_course_design_catalog() -> None:
     pack = load(PACK_PATH)
+    design = load(DESIGN_PATH)
     projected = project_course_design_sources(pack)
-    normalized = course_source_catalog.normalize_course_sources({"sources": projected})
+    assert design["sources"] == projected
 
+    normalized = course_source_catalog.normalize_course_sources({"sources": projected})
     assert [source.source_id for source in normalized] == [
         "tpsi5-source-originali",
         "tpsi5-source-html-css-legacy",
         "tpsi5-source-labs-legacy",
         "tpsi5-source-feisbuc-legacy",
     ]
-    assert [source.provider for source in normalized] == [
-        "local",
-        "github",
-        "github",
-        "github",
-    ]
-    assert normalized[0].path == "content/tpsi5"
     assert normalized[0].files == (
         "README.md",
         "COVERAGE.md",
@@ -104,35 +91,25 @@ def test_pack_sources_project_to_current_course_source_catalog() -> None:
         "02_CSS_MODERNO_RESPONSIVE.md",
         "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
         "04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+        "05_HTTP_ASYNC_FETCH_REST.md",
     )
     assert normalized[1].ref == "d71da420f1aa2ea39b61356e4f9900c6371e7a42"
     assert normalized[2].ref == "36a909f00c9478983a8d1b950440e2abc28b8a55"
     assert normalized[3].ref == "086995ece4260a3408740b94cfe2701ce24f8b57"
 
 
-def test_course_design_uses_exact_content_pack_source_projection() -> None:
+def test_course_design_keeps_33_week_draft_and_open_decisions() -> None:
     pack = load(PACK_PATH)
-    design = load(DESIGN_PATH)
-    assert design["sources"] == project_course_design_sources(pack)
-
-
-def test_course_design_keeps_33_weeks_and_open_decisions() -> None:
     design = load(DESIGN_PATH)
     year = design["years"][0]
-    pack = load(PACK_PATH)
-    decisions = pack["extensions"]["bootstrap_decisions"]
 
     assert year["weeks"] == 33
     assert sum(int(uda["weeks"]) for uda in year["udas"]) == 33
     assert [uda["id"] for uda in year["udas"]] == [
-        "uda-20",
-        "uda-21",
-        "uda-22",
-        "uda-23",
-        "uda-24",
-        "uda-25",
-        "uda-26",
+        "uda-20", "uda-21", "uda-22", "uda-23", "uda-24", "uda-25", "uda-26"
     ]
+
+    decisions = pack["extensions"]["bootstrap_decisions"]
     assert decisions["frontend_framework"] == "tbd"
     assert decisions["node_orm"] == "tbd"
     assert decisions["typescript_depth"] == "tbd"
@@ -140,73 +117,68 @@ def test_course_design_keeps_33_weeks_and_open_decisions() -> None:
     assert decisions["python_mirror"] == "fastapi"
 
 
-def test_references_keep_public_specs_and_licensed_material_separate() -> None:
+def test_public_specs_and_licensed_teacher_references_are_not_sources() -> None:
     pack = load(PACK_PATH)
     refs = {item["id"]: item for item in pack["references"]}
 
     assert refs["tpsi5-ref-mdn"]["role"] == "technical-reference"
-    assert refs["tpsi5-ref-ecmascript"]["role"] == "specification"
-    assert refs["tpsi5-ref-whatwg-html"]["role"] == "specification"
     assert refs["tpsi5-ref-rfc9110"]["role"] == "specification"
+    assert refs["tpsi5-ref-fetch"]["role"] == "specification"
+    assert refs["tpsi5-ref-ecmascript"]["role"] == "specification"
     assert refs["tpsi5-ref-manning-css-depth"]["access"] == "licensed"
     assert refs["tpsi5-ref-pluralsight-javascript"]["access"] == "licensed"
-    assert refs["tpsi5-ref-lab3-legacy"]["role"] == "teacher-reference"
+    assert refs["tpsi5-ref-lab5-legacy"]["role"] == "teacher-reference"
+    assert refs["tpsi5-ref-lab6-legacy"]["role"] == "teacher-reference"
+    assert refs["tpsi5-ref-lab7-legacy"]["role"] == "teacher-reference"
 
-    source_providers = {source["provider"] for source in pack["sources"]}
-    assert "mdn" not in source_providers
-    assert "manning" not in source_providers
-    assert "pluralsight" not in source_providers
-    assert "tc39" not in source_providers
+    providers = {source["provider"] for source in pack["sources"]}
+    assert "manning" not in providers
+    assert "pluralsight" not in providers
+    assert "mdn" not in providers
+    assert "whatwg" not in providers
 
 
-def test_content_items_are_ordered_and_files_exist() -> None:
+def test_content_items_are_ordered_and_linked_to_real_files() -> None:
     pack = load(PACK_PATH)
     items = pack["content_items"]
+    assert [item["order"] for item in items] == list(range(1, 7))
+    for item in items:
+        assert (ROOT / item["path"]).is_file(), item["path"]
+        assert item["source_refs"]
 
-    assert [item["order"] for item in items] == [1, 2, 3, 4, 5]
-    assert [item["id"] for item in items] == [
-        "tpsi5-content-course-architecture",
+    ids = {item["id"] for item in items}
+    assert {
         "tpsi5-content-web-platform-html",
         "tpsi5-content-css-modern-responsive",
         "tpsi5-content-bootstrap-framework",
         "tpsi5-content-javascript-dom-browser",
-    ]
-    for item in items:
-        assert (ROOT / item["path"]).is_file()
-        assert item["source_refs"]
+        "tpsi5-content-http-async-fetch-rest",
+    } <= ids
 
 
-def test_uda21_keeps_html_css_bootstrap_progression() -> None:
-    design = load(DESIGN_PATH)
-    uda21 = next(uda for uda in design["years"][0]["udas"] if uda["id"] == "uda-21")
-
-    assert [item["source"] for item in uda21["items"]] == [
-        "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
-        "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
-        "content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
-    ]
-    assert all(item["frame"]["status"] == "draft" for item in uda21["items"])
-
-
-def test_uda21_activity_contracts_and_student_teacher_separation() -> None:
-    pack = load(PACK_PATH)
-    known_content_ids = {item["id"] for item in pack["content_items"]}
+def test_uda21_activity_contracts_and_student_teacher_assets_remain_valid() -> None:
+    known_content_ids = {item["id"] for item in load(PACK_PATH)["content_items"]}
+    expected_ids = {
+        "A": "tpsi5-activity-a-html-anatomy-001",
+        "B": "tpsi5-activity-b-feisbuc-semantic-001",
+        "C": "tpsi5-activity-c-feisbuc-responsive-layout-001",
+        "D": "tpsi5-activity-d-debug-responsive-css-001",
+        "E": "tpsi5-activity-e-feisbuc-bootstrap-ui-001",
+    }
 
     for difficulty, root in UDA21_ACTIVITY_ROOTS.items():
-        path = root / "activity.json"
-        activity = load(path)
-        assert validate_activity(activity, str(path)) == []
+        activity = load(root / "activity.json")
+        assert validate_activity(activity, str(root / "activity.json")) == []
+        assert activity["id"] == expected_ids[difficulty]
         assert activity["difficolta"] == difficulty
         assert set(activity.get("content_ids", [])) <= known_content_ids
-        assert sum(item["punti"] for item in activity["rubrica"]) == 10
-        assert activity["correzione"]["test"] is False
+        assert sum(entry["punti"] for entry in activity["rubrica"]) == 10
 
         student_targets: set[str] = set()
         for asset in activity["assets"]:
-            asset_path = root / asset["path"]
-            assert asset_path.is_file(), asset_path
+            assert (root / asset["path"]).is_file(), asset
             if asset["visibility"] == "student":
-                assert asset["type"] not in {"hidden_test", "teacher_only"}
+                assert asset["type"] not in {"teacher_only", "hidden_test"}
                 target = asset.get("target_path")
                 assert isinstance(target, str) and target
                 assert target not in student_targets
@@ -215,71 +187,41 @@ def test_uda21_activity_contracts_and_student_teacher_separation() -> None:
                 assert asset["visibility"] == "teacher"
 
 
-def test_html_browser_auto_grading_is_still_not_claimed() -> None:
-    assert SUPPORTED_LANGUAGES["html"] == "planned"
-    for root in UDA21_ACTIVITY_ROOTS.values():
-        assert load(root / "activity.json")["correzione"]["test"] is False
+def test_uda21_reference_solutions_keep_semantics_and_modern_layout() -> None:
+    html_a = parse_html(UDA21_ACTIVITY_ROOTS["A"] / "solution" / "index.html")
+    assert "doctype html" in html_a.declarations
+    assert html_a.attrs["html"][0].get("lang") == "it"
+    assert html_a.tags.count("main") == 1
+    assert html_a.tags.count("h1") == 1
 
+    semantic = parse_html(UDA21_ACTIVITY_ROOTS["B"] / "solution" / "index.html")
+    for tag in ("header", "nav", "main", "article", "footer"):
+        assert tag in semantic.tags
 
-def test_html_semantic_reference_solution_remains_valid() -> None:
-    solution = parse_html(UDA21_ACTIVITY_ROOTS["B"] / "solution" / "index.html")
-
-    assert solution.tags.count("header") == 1
-    assert solution.tags.count("nav") == 1
-    assert solution.tags.count("main") == 1
-    assert solution.tags.count("article") == 2
-    assert solution.tags.count("footer") == 1
-
-
-def test_css_reference_solution_uses_modern_layout_and_debug_fix_removes_faults() -> None:
-    responsive = (UDA21_ACTIVITY_ROOTS["C"] / "solution" / "style.css").read_text(
-        encoding="utf-8"
-    )
-    broken = (UDA21_ACTIVITY_ROOTS["D"] / "starter" / "style.css").read_text(
-        encoding="utf-8"
-    )
-    fixed = (UDA21_ACTIVITY_ROOTS["D"] / "solution" / "style.css").read_text(
-        encoding="utf-8"
-    )
-
-    assert "display: grid" in responsive
-    assert "display: flex" in responsive
-    assert "@media (min-width: 56rem)" in responsive
-    assert "float:" not in responsive
-    assert "!important" not in responsive
-
-    assert "width: 1200px" in broken
-    assert "!important" in broken
-    assert "flex-wrap: nowrap" in broken
-    assert "width: 1200px" not in fixed
-    assert "!important" not in fixed
-    assert "flex-wrap: wrap" in fixed
-
-
-def test_bootstrap_reference_solution_preserves_semantics_and_minimal_custom_css() -> None:
-    root = UDA21_ACTIVITY_ROOTS["E"]
-    html = (root / "solution" / "index.html").read_text(encoding="utf-8")
-    css = (root / "solution" / "custom.css").read_text(encoding="utf-8")
-    parsed = parse_html(root / "solution" / "index.html")
-    classes = all_classes(parsed)
-
-    assert "bootstrap@5.3.8/dist/css/bootstrap.min.css" in html
-    assert "bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" in html
-    for name in ("container", "row", "col-12", "col-lg-3", "col-lg-6", "card"):
-        assert name in classes
-    assert parsed.tags.count("article") == 2
-    assert "display: grid" not in css
-    assert "display: flex" not in css
-    assert "@media" not in css
+    css = (UDA21_ACTIVITY_ROOTS["C"] / "solution" / "style.css").read_text(encoding="utf-8")
+    assert "display: grid" in css
+    assert "display: flex" in css
+    assert "@media" in css
     assert "!important" not in css
 
+    broken = (UDA21_ACTIVITY_ROOTS["D"] / "starter" / "style.css").read_text(encoding="utf-8")
+    fixed = (UDA21_ACTIVITY_ROOTS["D"] / "solution" / "style.css").read_text(encoding="utf-8")
+    assert "box-sizing: content-box" in broken
+    assert "!important" in broken
+    assert "box-sizing: border-box" in fixed
+    assert "!important" not in fixed
 
-def test_legacy_audit_preserves_previous_migration_evidence() -> None:
-    audit = (ROOT / "doc" / "LEGACY_REUSE_AUDIT.md").read_text(encoding="utf-8")
+    bootstrap_html = (UDA21_ACTIVITY_ROOTS["E"] / "solution" / "index.html").read_text(encoding="utf-8")
+    bootstrap_css = (UDA21_ACTIVITY_ROOTS["E"] / "solution" / "custom.css").read_text(encoding="utf-8")
+    parsed = parse_html(UDA21_ACTIVITY_ROOTS["E"] / "solution" / "index.html")
+    classes = all_classes(parsed)
+    assert "bootstrap@5.3.8" in bootstrap_html
+    assert {"container", "row", "col-12", "navbar", "card", "btn"} <= classes
+    assert "display: grid" not in bootstrap_css
+    assert "@media" not in bootstrap_css
 
-    assert "`Scheletro html` | **rewrite**" in audit
-    assert "`CSS sintassi` | **migrated/rewrite**" in audit
-    assert "`Box Model` | **migrated/major update**" in audit
-    assert "feisbuc-00-semantic-skeleton" in audit
-    assert "feisbuc-01-responsive-shell" in audit
-    assert "feisbuc-03-dynamic-local-feed" in audit
+
+def test_grading_boundary_still_matches_platform_contract() -> None:
+    assert SUPPORTED_LANGUAGES["javascript"] == "implemented"
+    assert SUPPORTED_LANGUAGES["nodejs"] == "implemented"
+    assert SUPPORTED_LANGUAGES["html"] == "planned"

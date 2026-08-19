@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-a-http-microscope-001",
+  "titolo": "HTTP al microscopio: request, response, status e representation",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "A",
+  "argomenti": ["http", "request", "response", "headers", "status-code", "content-type", "curl", "devtools"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-23"},
+  "content_ids": ["tpsi5-content-http-async-fetch-rest"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md", "anchor": "http-prima-dei-framework", "role": "lesson"}
+  ],
+  "consegna": "Avvia la fixture `server.mjs` e usa `curl -i` e DevTools Network per osservare almeno: GET /api/posts, GET /api/posts/missing, POST /api/posts con JSON valido, POST con Content-Type errato e un metodo non ammesso. Per ogni caso annota metodo, target, request headers/body, status, response headers/body e spiega quale informazione appartiene al protocollo e quale alla representation.",
+  "vincoli": [
+    "non modificare server.mjs",
+    "usa almeno una richiesta curl con -i",
+    "osserva almeno una richiesta anche in DevTools Network",
+    "non limitarti al body JSON: registra status e Content-Type",
+    "distingui errore 4xx da errore di connessione"
+  ],
+  "assets": [
+    {"type": "fixture", "path": "starter/server.mjs", "target_path": "server.mjs", "visibility": "student", "description": "Server HTTP didattico senza Express"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Comandi, tabella di osservazione e definition of done"},
+    {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Risultati attesi e domande guida"}
+  ],
+  "soluzione_attesa": {"tipo": "osservazione-protocollo", "file": "README.md", "note": "Worksheet compilato durante laboratorio e discussione orale."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 50, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": false},
+  "manual_checks": [
+    {"name": "request anatomy", "criterion": "riconosce metodo, target, header e content"},
+    {"name": "response anatomy", "criterion": "riconosce status, header e content"},
+    {"name": "status semantics", "criterion": "distingue 200/201/400/404/405/415"},
+    {"name": "representation", "criterion": "spiega il ruolo di Content-Type e JSON"},
+    {"name": "tools", "criterion": "usa curl -i e DevTools Network"}
+  ],
+  "rubrica": [
+    {"criterio": "Anatomia request/response", "punti": 3},
+    {"criterio": "Interpretazione status code", "punti": 2},
+    {"criterio": "Header e representation", "punti": 2},
+    {"criterio": "Uso di curl/DevTools", "punti": 2},
+    {"criterio": "Spiegazione protocollo vs JSON", "punti": 1}
+  ]
+}

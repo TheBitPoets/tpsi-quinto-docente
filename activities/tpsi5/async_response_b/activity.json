@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-b-async-response-policy-001",
+  "titolo": "Interpreta una Response: status, ok e Content-Type",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "B",
+  "argomenti": ["promise", "async-await", "http-status", "response-ok", "content-type", "json"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-23"},
+  "content_ids": ["tpsi5-content-http-async-fetch-rest"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md", "anchor": "fetch-errore-di-rete-errore-http", "role": "lesson"}
+  ],
+  "consegna": "Completa `analyzeResponse(meta)`. L'input descrive i metadata essenziali di una Response HTTP: `status` e `contentType`. La funzione deve essere `async`, attraversare almeno un confine Promise/await e restituire JSON deterministico con `ok` (status 200-299), `statusClass` (`2xx`, `4xx`, ...), `isJson` e `outcome` (`accept` oppure `http-error`). L'obiettivo e separare la semantica della Response dal successivo parsing del body.",
+  "vincoli": [
+    "non usare fetch in questa Activity",
+    "usa async/await o Promise in modo reale",
+    "ok e vero soltanto per status 200-299",
+    "riconosci application/json anche con charset",
+    "non dedurre successo dalla presenza di JSON",
+    "stdout deve contenere solo il JSON richiesto"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/main.js", "target_path": "main.js", "visibility": "student", "description": "Starter Node/JavaScript"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Contratto input/output e richiami teorici"},
+    {"type": "teacher_only", "path": "solution/main.js", "visibility": "teacher", "description": "Soluzione di riferimento"}
+  ],
+  "soluzione_attesa": {"tipo": "javascript-deterministico", "file": "main.js", "note": "Policy di interpretazione Response separata dal networking."},
+  "correzione": {"compila": false, "test": true, "sandbox": true, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 35, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "test_cases": [
+    {"name": "200 json", "stdin": "{\"status\":200,\"contentType\":\"application/json; charset=utf-8\"}\n", "expected_stdout": "{\"ok\":true,\"statusClass\":\"2xx\",\"isJson\":true,\"outcome\":\"accept\"}\n"},
+    {"name": "404 json", "stdin": "{\"status\":404,\"contentType\":\"application/json\"}\n", "expected_stdout": "{\"ok\":false,\"statusClass\":\"4xx\",\"isJson\":true,\"outcome\":\"http-error\"}\n"},
+    {"name": "500 text", "stdin": "{\"status\":500,\"contentType\":\"text/plain\"}\n", "expected_stdout": "{\"ok\":false,\"statusClass\":\"5xx\",\"isJson\":false,\"outcome\":\"http-error\"}\n"},
+    {"name": "204", "stdin": "{\"status\":204,\"contentType\":\"\"}\n", "expected_stdout": "{\"ok\":true,\"statusClass\":\"2xx\",\"isJson\":false,\"outcome\":\"accept\"}\n"}
+  ],
+  "rubrica": [
+    {"criterio": "Status e response.ok", "punti": 3},
+    {"criterio": "Classificazione status", "punti": 2},
+    {"criterio": "Content-Type/JSON", "punti": 2},
+    {"criterio": "Uso corretto async/Promise", "punti": 2},
+    {"criterio": "Output deterministico e leggibilita", "punti": 1}
+  ]
+}
