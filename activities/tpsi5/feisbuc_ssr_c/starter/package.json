@@ -1,0 +1,1 @@
+{"name":"feisbuc-08-ssr-starter","private":true,"type":"module","engines":{"node":">=22.13"},"dependencies":{"express":"5.2.1","nunjucks":"3.2.4"}}

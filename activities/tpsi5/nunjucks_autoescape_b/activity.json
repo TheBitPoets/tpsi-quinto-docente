@@ -1,0 +1,29 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-b-nunjucks-autoescape-001",
+  "titolo":"Nunjucks: renderizza testo utente senza trasformarlo in HTML",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"B",
+  "argomenti":["nunjucks","template","autoescape","xss-basics","conditional-rendering","ssr"],
+  "linguaggio":"nodejs",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-24"},
+  "content_ids":["tpsi5-content-ssr-nunjucks-comparison"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md","anchor":"8-autoescape-e-contenuto-utente","role":"lesson"}],
+  "consegna":"Completa il mini renderer Nunjucks. Configura un Environment con FileSystemLoader, `autoescape:true` e `throwOnUndefined:true`; renderizza `post.njk` con un post contenente testo utente e una flag `canDelete`. Il testo deve essere escapato e il form elimina deve comparire soltanto quando canDelete e true. Non usare `|safe` sul testo del post.",
+  "vincoli":["nunjucks 3.2.4 pinned","Environment esplicito","autoescape true","throwOnUndefined true","nessun |safe su post.text","template separato dal renderer","canDelete e UI hint, non authorization"],
+  "assets":[
+    {"type":"starter","path":"starter/package.json","target_path":"package.json","visibility":"student","description":"Dipendenza Nunjucks pinned"},
+    {"type":"starter","path":"starter/render.mjs","target_path":"render.mjs","visibility":"student","description":"Renderer da completare"},
+    {"type":"starter","path":"starter/templates/post.njk","target_path":"templates/post.njk","visibility":"student","description":"Template da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Istruzioni"},
+    {"type":"teacher_only","path":"solution/package.json","visibility":"teacher","description":"Package reference"},
+    {"type":"teacher_only","path":"solution/render.mjs","visibility":"teacher","description":"Renderer reference"},
+    {"type":"teacher_only","path":"solution/templates/post.njk","visibility":"teacher","description":"Template reference"}
+  ],
+  "soluzione_attesa":{"tipo":"node-template-render","file":"render.mjs","note":"Reference CI verifica escape e conditional rendering."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":45,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[{"name":"environment","criterion":"Environment/FileSystemLoader espliciti"},{"name":"escape","criterion":"script-like user text viene escapato"},{"name":"conditional","criterion":"delete form solo con canDelete"}],
+  "rubrica":[{"criterio":"Environment corretto","punti":2},{"criterio":"Autoescape","punti":3},{"criterio":"Template separato","punti":2},{"criterio":"Conditional rendering","punti":2},{"criterio":"Boundary authz spiegato","punti":1}]
+}

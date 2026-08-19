@@ -1,0 +1,29 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-d-debug-ssr-boundaries-001",
+  "titolo":"Debug SSR: template sicuro, authorization e PRG",
+  "tipo":"debug-didattico",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"D",
+  "argomenti":["ssr","nunjucks","autoescape","safe-filter","authorization","prg","http-safe-methods","trust-boundary"],
+  "linguaggio":"nodejs",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-24"},
+  "content_ids":["tpsi5-content-ssr-nunjucks-comparison"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md","anchor":"18-errori-frequenti-e-security-review","role":"lesson"},{"source_id":"tpsi5-source-labs-legacy","path":"README.md","anchor":"lab10","role":"legacy-progression"}],
+  "consegna":"Esegui una diagnosi prima di correggere. Lo starter contiene: `|safe` su testo utente, delete resa disponibile solo tramite controllo visivo ma route senza ownership, mutazione via GET, POST create che restituisce 200 HTML invece di PRG, template context con un campo secret inutile. Compila `DIAGNOSI.md` con sintomo/rischio/trust boundary/fix/evidence. Poi confronta i fixed patterns docente.",
+  "vincoli":["diagnosi prima del fix","almeno cinque finding","distinguere escaping e validation","distinguere UI visibility e authorization","GET resta safe","mutazioni form -> POST","successo POST -> 303","nessun |safe su user content","view model minimo"],
+  "assets":[
+    {"type":"starter","path":"starter/ssr.router.js","target_path":"ssr.router.js","visibility":"student","description":"Router volutamente errato"},
+    {"type":"starter","path":"starter/feed.njk","target_path":"feed.njk","visibility":"student","description":"Template volutamente errato"},
+    {"type":"starter","path":"starter/DIAGNOSI.md","target_path":"DIAGNOSI.md","visibility":"student","description":"Template diagnosi"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Metodo di review"},
+    {"type":"teacher_only","path":"solution/DIAGNOSI.md","visibility":"teacher","description":"Diagnosi reference"},
+    {"type":"teacher_only","path":"solution/fixed-router.js","visibility":"teacher","description":"Pattern router corretti"},
+    {"type":"teacher_only","path":"solution/fixed-feed.njk","visibility":"teacher","description":"Pattern template corretto"}
+  ],
+  "soluzione_attesa":{"tipo":"diagnosi-ssr","file":"DIAGNOSI.md","note":"La review deve spiegare cause e trust boundary, non soltanto modificare il codice."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":80,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":false},
+  "manual_checks":[{"name":"escape","criterion":"rimuove safe da testo utente"},{"name":"authz","criterion":"ownership verificata server-side"},{"name":"http","criterion":"GET non muta e POST usa 303"},{"name":"context","criterion":"view model non espone secret"}],
+  "rubrica":[{"criterio":"Finding completi","punti":3},{"criterio":"Trust boundary","punti":2},{"criterio":"Fix HTTP/PRG","punti":2},{"criterio":"Escape/authz","punti":2},{"criterio":"Evidence","punti":1}]
+}
