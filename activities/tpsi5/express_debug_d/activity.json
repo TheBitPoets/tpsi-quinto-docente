@@ -30,7 +30,9 @@
     {"type": "starter", "path": "starter/public/index.html", "target_path": "public/index.html", "visibility": "student", "description": "Static file che inizialmente viene intercettato dal 404"},
     {"type": "starter", "path": "starter/DIAGNOSI.md", "target_path": "DIAGNOSI.md", "visibility": "student", "description": "Template diagnosi"},
     {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Sintomi e request di riproduzione"},
+    {"type": "teacher_only", "path": "solution/package.json", "visibility": "teacher", "description": "Package solution pinned"},
     {"type": "teacher_only", "path": "solution/server.js", "visibility": "teacher", "description": "Server corretto"},
+    {"type": "teacher_only", "path": "solution/public/index.html", "visibility": "teacher", "description": "Static file corretto"},
     {"type": "teacher_only", "path": "solution/DIAGNOSI.md", "visibility": "teacher", "description": "Diagnosi di riferimento"},
     {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Criteri e domande"}
   ],
