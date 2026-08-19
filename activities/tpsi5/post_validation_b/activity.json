@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-b-post-validation-001",
+  "titolo": "Valida il confine: normalizza un nuovo post",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "B",
+  "argomenti": ["javascript", "validation", "pure-function", "boundary", "json", "backend"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-node-express-backend"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/06_NODE_EXPRESS_BACKEND.md", "anchor": "validation-non-fidarti-del-confine-esterno", "role": "lesson"}
+  ],
+  "consegna": "Completa `validateNewPost(input)`. Il programma legge un JSON da stdin e stampa su stdout un solo JSON. La validation deve accettare soltanto un object non-array con campo `text` stringa, fare trim, rifiutare testo vuoto e testo oltre 280 caratteri e restituire una struttura deterministica `{ok:true,value:{text}}` oppure `{ok:false,error:<code>}`. Non usare Express: la business rule deve restare una funzione pura riutilizzabile dalla route o da test futuri.",
+  "vincoli": [
+    "non importare Express o API HTTP",
+    "non mutare l'input ricevuto",
+    "array, null e primitive sono body invalidi",
+    "trimma il testo prima di validare la lunghezza",
+    "usa gli error code richiesti senza testo libero",
+    "stdout deve contenere soltanto il JSON finale"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/main.js", "target_path": "main.js", "visibility": "student", "description": "Starter validator"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Contratto input/output"},
+    {"type": "teacher_only", "path": "solution/main.js", "visibility": "teacher", "description": "Soluzione validator"}
+  ],
+  "soluzione_attesa": {"tipo": "javascript-deterministico", "file": "main.js", "note": "Validation pura separata dal transport layer."},
+  "correzione": {"compila": false, "test": true, "sandbox": true, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 40, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "test_cases": [
+    {"name": "post valido e trim", "stdin": "{\"text\":\"  Ciao Feisbuc  \"}\n", "expected_stdout": "{\"ok\":true,\"value\":{\"text\":\"Ciao Feisbuc\"}}\n"},
+    {"name": "text mancante", "stdin": "{}\n", "expected_stdout": "{\"ok\":false,\"error\":\"text-required\"}\n"},
+    {"name": "solo spazi", "stdin": "{\"text\":\"   \"}\n", "expected_stdout": "{\"ok\":false,\"error\":\"text-required\"}\n"},
+    {"name": "body array", "stdin": "[]\n", "expected_stdout": "{\"ok\":false,\"error\":\"body-invalid\"}\n"},
+    {"name": "text non stringa", "stdin": "{\"text\":42}\n", "expected_stdout": "{\"ok\":false,\"error\":\"text-required\"}\n"},
+    {"name": "troppo lungo", "stdin": "{\"text\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}\n", "expected_stdout": "{\"ok\":false,\"error\":\"text-too-long\"}\n"}
+  ],
+  "rubrica": [
+    {"criterio": "Riconoscimento body valido", "punti": 2},
+    {"criterio": "Trim e text-required", "punti": 2},
+    {"criterio": "Limite 280", "punti": 2},
+    {"criterio": "Output deterministico", "punti": 2},
+    {"criterio": "Funzione pura e leggibile", "punti": 2}
+  ]
+}
