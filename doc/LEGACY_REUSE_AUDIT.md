@@ -43,7 +43,7 @@ statico
  -> realtime
 ```
 
-Il nuovo corso cambia però l'ordine esplicativo:
+Il nuovo corso cambia l'ordine esplicativo:
 
 ```text
 Web Platform
@@ -57,7 +57,7 @@ Web Platform
  -> framework frontend/realtime
 ```
 
-Motivo: non vogliamo che `fetch`, `req.query` o `cors()` appaiano prima del modello che stanno implementando.
+Motivo: `fetch`, `req.query`, `sqlite3` o `cors()` non devono apparire prima del modello che stanno implementando.
 
 ---
 
@@ -75,20 +75,12 @@ Decisione: **TEACHER-REFERENCE + SELECTIVE REWRITE**.
 | `map/filter/find` | expand nel core |
 | functions/callback/arrow | reuse concept, esempi riscritti |
 | error handling | selective reuse |
-| Promise/async-await | **defer da UDA 22 a UDA 23** |
-| CommonJS | defer a Node/backend |
+| Promise/async-await | defer da UDA 22 a UDA 23 |
+| CommonJS | defer a Node/backend e contestualizzare come legacy/ecosistema |
 | ES module Node/filesystem | replace per browser ES modules |
 | advanced internals/classes | advanced/senior |
 
-L'esempio ES module Node legacy non viene reso canonico: e Node-specifico e contiene riferimenti incompleti. UDA 22 parte da `type=module`, `import`/`export` nel browser.
-
-Output UDA 22:
-
-- `04_JAVASCRIPT_DOM_BROWSER_APIS.md`;
-- A/B JavaScript puro autograded;
-- C Feisbuc DOM/event delegation/localStorage;
-- D debug browser;
-- milestone `feisbuc-03-dynamic-local-feed`.
+Output UDA 22: JavaScript/DOM/Web Storage, A/B autograded, milestone 3 e debug browser.
 
 ---
 
@@ -105,7 +97,8 @@ milestone 0  semantica HTML
 milestone 1  Grid/Flexbox responsive
 milestone 2  Bootstrap con mapping verso CSS nativo
 milestone 3  JavaScript state/render + event delegation + localStorage
-milestone 4  HTTP REST API client
+milestone 4  HTTP REST API client + node:http fixture
+milestone 5  Express 5 modular API + MemoryPostStore
 ```
 
 ### JavaScript legacy
@@ -117,18 +110,19 @@ milestone 4  HTTP REST API client
 | `createElement`/`appendChild` | reuse/modernize con semantica e `textContent` |
 | counter globale e `like_button_N` | replace con `post.id` + `data-*` |
 | listener individuali sui like iniziali | retire come soluzione finale |
-| event delegation sul feed | **preserve and deepen** |
+| event delegation sul feed | preserve and deepen |
 | like conservato nello stile/disabled del button | replace con state -> render |
-| nessuna persistenza strutturata | localStorage/JSON in milestone 3 |
+| nessuna persistenza strutturata | localStorage/JSON in milestone 3, API da milestone 4 |
 | testo utente nel DOM | harden con `textContent` |
 
-Modello nuovo:
+Modello corrente:
 
 ```text
 post object = stato
 post.id = identita
 DOM = render dello stato
 data-action = azione UI
+HTTP contract = confine client/backend
 ```
 
 ---
@@ -149,9 +143,9 @@ Punti utili:
 
 Debiti trasformati in materiale didattico:
 
-- Express viene introdotto immediatamente, prima di rendere esplicito HTTP;
-- CORS viene configurato come libreria prima di spiegare origin/policy;
-- il client fa `response.json()` e `catch()` ma non controlla `response.ok`.
+- Express introdotto prima di rendere esplicito HTTP;
+- CORS configurato prima di spiegare origin/policy;
+- `fetch().catch()` usato senza una policy esplicita su `response.ok`.
 
 Nel nuovo corso:
 
@@ -161,10 +155,10 @@ HTTP request/response
  -> Promise/async-await
  -> fetch/Response.ok
  -> REST
- -> solo dopo Express/CORS middleware
+ -> Node/Express
 ```
 
-Quindi lab5 resta provenance, non baseline di codice.
+Lab5 resta provenance e diventa anche confronto Express 4 -> Express 5, non baseline di codice.
 
 ## `kinderp/lab6`
 
@@ -172,17 +166,7 @@ Snapshot: `79f4d056958b083b70f75b178ef08f00b3f902a8`.
 
 Decisione: **REUSE AS ARCHITECTURAL CONTRAST**.
 
-Valore principale: mostra che il browser sa fare una request `POST` anche con una normale `<form>` senza JavaScript.
-
-Nel nuovo corso il confronto diventa:
-
-```text
-HTML form navigation/submission
-vs
-fetch API request + client-side state update
-```
-
-Il parsing Express (`express.json`, `express.urlencoded`) viene spostato a UDA 24, dove sara finalmente possibile spiegare che cosa astrae.
+Valore principale: il browser sa fare una POST con normale `<form>` senza JavaScript. Il parsing Express (`express.json`, `express.urlencoded`) viene spostato dove il framework e oggetto di studio.
 
 ## `kinderp/lab7`
 
@@ -190,54 +174,154 @@ Snapshot: `b4ee8a661d0127d5dc92254e5b3bc0a24b6075e5`.
 
 Decisione: **PRESERVE QUERY/PATH/BODY IDEA, MOVE EXPRESS MAPPING LATER**.
 
-Il lab storico mostra bene tre modi di trasportare dati:
-
 ```text
-query string
-path segment
-request body
+GET /users?id=123       -> query
+GET /users/123          -> path
+POST /users + content   -> body
 ```
 
-Nel nuovo corso questi vengono prima descritti come parti della request HTTP:
+UDA 23 li studia come parti della request; UDA 24 li mappa a `req.query`, `req.params`, `req.body`.
 
-```text
-GET /users?id=123
-GET /users/123
-POST /users + content
-```
+Output UDA 23:
 
-Solo in UDA 24 verranno mappati a:
-
-```text
-req.query
-req.params
-req.body
-```
-
-Il POST legacy `application/x-www-form-urlencoded` resta utile per confrontare representation diverse; Feisbuc milestone 4 sceglie invece JSON e rende esplicito `Content-Type` + `JSON.stringify`.
+- `05_HTTP_ASYNC_FETCH_REST.md`;
+- Activity A–D HTTP/async/fetch;
+- Feisbuc `feisbuc-04-rest-api-client`.
 
 ---
 
-# Output UDA 23
+# Audit UDA 24 — Node/Express e futuri DB/auth/SSR
 
-- `content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md`;
-- `tpsi5-activity-a-http-microscope-001` — protocollo osservato con curl/DevTools;
-- `tpsi5-activity-b-async-response-policy-001` — status/ok/Content-Type, autograded JS;
-- `tpsi5-activity-c-feisbuc-rest-client-001` — GET/POST/PATCH, milestone 4;
-- `tpsi5-activity-d-debug-fetch-http-001` — diagnosi di 404, media type, serialization e 204;
-- Feisbuc `feisbuc-04-rest-api-client`.
+## Principio della prima parte UDA 24
 
-## Server fixture UDA 23
-
-La fixture usa `node:http`, memoria e same-origin **ma non e ancora un laboratorio Node/Express**.
-
-Serve a rendere osservabile il contratto:
+Il server black-box di UDA 23 viene aperto in due passaggi:
 
 ```text
-browser -> HTTP -> server fixture
+node:http esplicito
+      ↓
+quali responsabilita stiamo ripetendo?
+      ↓
+Express 5 Router + middleware + validation + error pipeline
 ```
 
-senza introdurre routing/middleware/persistenza prima del momento didattico corretto. UDA 24 aprira il black box e sostituira progressivamente la fixture con il backend strutturato.
+La prima API Express usa **solo memoria**. SQL, auth e template vengono intenzionalmente separati per rendere attribuibili gli errori e per poter sostituire una dipendenza alla volta.
+
+## `kinderp/lab5` come baseline Express storica
+
+Lo stesso snapshot UDA 23 diventa qui teacher-reference per confrontare:
+
+```text
+legacy
+CommonJS + Express 4.18.2 + cors() globale
+
+nuovo
+ES modules + Express 5.x pinned + same-origin iniziale + CORS soltanto con policy motivata
+```
+
+Decisione: **COMPARE, DO NOT COPY**.
+
+Valore: primo server Express piccolo. Debito: framework e CORS appaiono come setup necessario invece che come scelte con motivazione.
+
+## `kinderp/lab8`
+
+Snapshot: `be9a3988aec8a99b1a0f6776ad8cbeba33d82353`.
+
+Decisione: **PRESERVE SQL-RELATIONSHIP INTUITION; RETIRE MUTATING GET AND TIGHT COUPLING**.
+
+Il lab e utile perché porta finalmente SQLite nel backend e prova a ragionare su relazioni 1:1, 1:N e N:N.
+
+Debiti da non trasferire:
+
+| Pattern legacy | Decisione | Nuovo modello |
+| --- | --- | --- |
+| Express e SQLite introdotti nello stesso salto | defer/split | prima Express con memory store, poi SQL repository |
+| `GET /N2N` crea tabelle e inserisce righe | **retire** | GET resta safe; schema/migrazioni sono operazioni separate |
+| route che esegue direttamente DDL/SQL | replace | Router -> repository SQL |
+| database file come dettaglio sparso | replace | config/repository boundary |
+
+La futura Activity SQL non copiera quindi le route del lab8: riusera soltanto il problema relazionale e le query come teacher-reference.
+
+## `kinderp/lab9`
+
+Snapshot: `97ee815691e0c985e5216e6f9ed264fd809509ee`.
+
+Decisione: **PRESERVE CRUD/AUTH PROGRESSION; RETIRE CREDENTIAL AND PORTABILITY ANTI-PATTERNS**.
+
+Punti utili:
+
+- CRUD su una risorsa utenti;
+- path parameter per l'id;
+- register/login come motivazione reale per persistenza e auth;
+- query parametrizzate in varie operazioni.
+
+Debiti espliciti:
+
+| Pattern legacy | Decisione | Nuovo modello |
+| --- | --- | --- |
+| path SQLite assoluto `C:\\Users\\...` | **retire** | path/config relativo o environment, portabile |
+| password ricevuta e inserita direttamente | **retire/harden** | password hashing prima della persistenza |
+| password stampata/loggata nel client | **retire** | credenziali mai nei log |
+| API, validation, SQL e response nello stesso file | replace | Router/service/repository boundaries minime |
+| error response eterogenee | replace | error model stabile con code/message/requestId |
+
+La futura fase auth usera il lab9 per mostrare perché "funziona" non significa "e sicuro".
+
+## `kinderp/lab10`
+
+Snapshot: `7319c0696c8a6f76237e1ef21b4c3c2b535c4958`.
+
+Decisione: **DEFER TO SSR COMPARISON; SEPARATE FROM API AND DATABASE FOUNDATIONS**.
+
+Valore:
+
+- introduce Nunjucks e rendering server-side;
+- mostra dati SQL trasformati in HTML dinamico;
+- offre un contrasto reale con API JSON + client rendering.
+
+Debiti/limiti per il nuovo ordine:
+
+- Express, SQLite, query complesse e template engine entrano insieme;
+- le route chiamate `/api/...` restituiscono HTML, confondendo il contratto API con il rendering;
+- SQL e presentation logic convivono nello stesso server file.
+
+Nuovo uso didattico:
+
+```text
+prima
+REST JSON + client render
+
+poi
+SSR route + template
+
+confronto
+chi produce HTML?
+dove vive lo stato UI?
+quale navigation model?
+```
+
+Nunjucks rimane quindi un modulo compatto di confronto SSR, non la destinazione obbligatoria del progetto.
+
+---
+
+# Output primo blocco UDA 24
+
+- `content/tpsi5/06_NODE_EXPRESS_BACKEND.md`;
+- `tpsi5-activity-a-node-http-express-map-001` — mapping native HTTP -> Express;
+- `tpsi5-activity-b-post-validation-001` — validation pura autograded;
+- `tpsi5-activity-c-feisbuc-express-api-001` — milestone 5 Express modulare + memory store;
+- `tpsi5-activity-d-debug-express-pipeline-001` — middleware order, params, safe methods, 404/error pipeline;
+- Feisbuc `feisbuc-05-express-api`.
+
+## Prossime migrazioni UDA 24
+
+```text
+MemoryPostStore
+  -> SQL raw repository
+  -> auth sicura con password hashing/sessione
+  -> breve confronto SSR/template
+```
+
+Ogni passaggio deve preservare il più possibile client, contratto HTTP, validation e error model, cambiando una responsabilita alla volta.
 
 ---
 

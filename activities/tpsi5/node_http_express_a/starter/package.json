@@ -1,0 +1,15 @@
+{
+  "name": "tpsi5-node-http-express-map",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "native": "node native-server.js",
+    "express": "node express-server.js"
+  },
+  "dependencies": {
+    "express": "5.2.1"
+  }
+}

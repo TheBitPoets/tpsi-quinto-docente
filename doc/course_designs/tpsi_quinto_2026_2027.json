@@ -15,7 +15,8 @@
         "02_CSS_MODERNO_RESPONSIVE.md",
         "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
         "04_JAVASCRIPT_DOM_BROWSER_APIS.md",
-        "05_HTTP_ASYNC_FETCH_REST.md"
+        "05_HTTP_ASYNC_FETCH_REST.md",
+        "06_NODE_EXPRESS_BACKEND.md"
       ],
       "indexing_status": "ready"
     },
@@ -242,7 +243,35 @@
           "title": "Node.js, Express, persistenza, auth e SSR",
           "path": "Backend",
           "weeks": "7",
-          "items": []
+          "items": [
+            {
+              "id": "tpsi5-source-originali:content/tpsi5/06_NODE_EXPRESS_BACKEND.md#nodejs-ed-express-5-dal-protocollo-al-backend",
+              "title": "Node.js ed Express 5: dal protocollo al backend",
+              "source": "content/tpsi5/06_NODE_EXPRESS_BACKEND.md",
+              "source_id": "tpsi5-source-originali",
+              "source_label": "TPSI quinto - contenuti originali",
+              "source_provider": "local",
+              "href": "../../content/tpsi5/06_NODE_EXPRESS_BACKEND.md#nodejs-ed-express-5-dal-protocollo-al-backend",
+              "level": 1,
+              "line": 1,
+              "activity_ids": [
+                "tpsi5-activity-a-node-http-express-map-001",
+                "tpsi5-activity-b-post-validation-001",
+                "tpsi5-activity-c-feisbuc-express-api-001",
+                "tpsi5-activity-d-debug-express-pipeline-001"
+              ],
+              "frame": {
+                "status": "draft",
+                "context": "Apre la fixture server di UDA 23, distingue runtime Node e browser, mostra node:http prima di Express e porta Feisbuc a una API Express 5 modulare con memory store sostituibile.",
+                "prerequisites": "UDA 23: HTTP, REST, async/await, fetch e Feisbuc milestone 4 client/server.",
+                "objectives": "Usare Node/npm/ESM/environment, leggere node:http, costruire Express Router/middleware/validation/error pipeline, servire static same-origin e mantenere il contratto Feisbuc separando Router e storage.",
+                "recall": "Request/response, status/header/body, path/query e contratto GET/POST/PATCH gia osservati dal client.",
+                "preview": "Prepara la sostituzione del MemoryPostStore con SQL raw senza cambiare client e contratto HTTP.",
+                "next_step": "Seconda parte UDA 24: SQL raw repository, poi auth sicura e breve confronto SSR/template.",
+                "references": "Node.js docs, Express 5.x docs, RFC 9110; lab5/lab8/lab9/lab10 e labs_summary come provenance auditata."
+              }
+            }
+          ]
         },
         {
           "id": "uda-25",

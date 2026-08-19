@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-a-node-http-express-map-001",
+  "titolo": "Dal server nativo a Express: stessa API, meno plumbing",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "A",
+  "argomenti": ["nodejs", "npm", "package-json", "es-modules", "node-http", "express-5", "routing", "middleware", "http"],
+  "linguaggio": "nodejs",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-node-express-backend", "tpsi5-content-http-async-fetch-rest"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/06_NODE_EXPRESS_BACKEND.md", "anchor": "apriamo-la-fixture-nodehttp", "role": "lesson"},
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/06_NODE_EXPRESS_BACKEND.md", "anchor": "perche-express", "role": "comparison"}
+  ],
+  "consegna": "Installa le dipendenze, avvia a turno `native-server.js` e `express-server.js`, invia le stesse request a `/api/health` e `/api/echo` e completa `MAPPING.md`. Per ogni responsabilita indica dove viene gestita nel server `node:http` e dove in Express: method/path matching, parsing JSON, status, headers, 404 ed error handling. Non modificare il contratto HTTP: osserva come cambia il plumbing, non la semantica.",
+  "vincoli": [
+    "usa Node 22 o compatibile con il baseline del corso",
+    "non cambiare path, metodi o shape JSON dei due server",
+    "confronta almeno una GET, una POST JSON valida e una route inesistente",
+    "usa curl -i o un client equivalente che mostri status e headers",
+    "MAPPING.md deve distinguere chiaramente protocollo HTTP e API del framework"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/package.json", "target_path": "package.json", "visibility": "student", "description": "Progetto ESM con Express 5.2.1 pinned"},
+    {"type": "example", "path": "starter/native-server.js", "target_path": "native-server.js", "visibility": "student", "description": "Server node:http completo"},
+    {"type": "example", "path": "starter/express-server.js", "target_path": "express-server.js", "visibility": "student", "description": "Server Express equivalente"},
+    {"type": "starter", "path": "starter/MAPPING.md", "target_path": "MAPPING.md", "visibility": "student", "description": "Tabella di confronto da completare"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Istruzioni e request da provare"},
+    {"type": "teacher_only", "path": "solution/MAPPING.md", "visibility": "teacher", "description": "Mappa di riferimento"},
+    {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Domande guida e criteri"}
+  ],
+  "soluzione_attesa": {"tipo": "comparison-report", "file": "MAPPING.md", "note": "Mappa node:http -> Express senza cambiare il contratto HTTP."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 55, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "manual_checks": [
+    {"name": "same-contract", "criterion": "lo studente dimostra che i due server espongono lo stesso contratto osservato"},
+    {"name": "mapping", "criterion": "MAPPING.md collega almeno sei responsabilita node:http -> Express"},
+    {"name": "protocol-vs-framework", "criterion": "status/header/metodi vengono riconosciuti come HTTP e non come invenzioni di Express"}
+  ],
+  "rubrica": [
+    {"criterio": "Esecuzione e osservazione delle request", "punti": 3},
+    {"criterio": "Mapping node:http -> Express", "punti": 4},
+    {"criterio": "Distinzione protocollo/framework", "punti": 2},
+    {"criterio": "Uso corretto di DevTools/curl e linguaggio tecnico", "punti": 1}
+  ]
+}
