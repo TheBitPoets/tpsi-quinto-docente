@@ -102,7 +102,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, automatic: bo
 def test_node_express_content_item_remains_first_uda24_backend_step() -> None:
     pack = load(PACK_PATH); design = load(DESIGN_PATH)
     item = next(item for item in pack["content_items"] if item["id"] == "tpsi5-content-node-express-backend")
-    assert pack["version"] == "0.9.0"
+    assert pack["version"] == "0.10.0"
     assert item["path"] == "content/tpsi5/06_NODE_EXPRESS_BACKEND.md"
     assert item["order"] == 7
     assert item["activity_ids"] == [
@@ -115,6 +115,7 @@ def test_node_express_content_item_remains_first_uda24_backend_step() -> None:
         "content/tpsi5/06_NODE_EXPRESS_BACKEND.md",
         "content/tpsi5/07_SQL_RAW_PERSISTENCE.md",
         "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md",
+        "content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md",
     ]
     assert uda24["items"][0]["activity_ids"] == item["activity_ids"]
     assert_activity(A_ROOT,"A","tpsi5-activity-a-node-http-express-map-001",False)
