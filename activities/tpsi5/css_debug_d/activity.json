@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-d-debug-responsive-css-001",
+  "titolo": "Diagnostica il layout Feisbuc che si rompe su mobile",
+  "tipo": "debug-didattico",
+  "student_support_mode": "feedback-tecnico",
+  "difficolta": "D",
+  "argomenti": [
+    "css-debugging",
+    "cascade",
+    "specificity",
+    "box-model",
+    "grid",
+    "flexbox",
+    "responsive-design",
+    "overflow"
+  ],
+  "linguaggio": "html",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-21"
+  },
+  "content_ids": [
+    "tpsi5-content-css-modern-responsive"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
+      "anchor": "debug-css-osserva-prima-di-cambiare",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
+      "anchor": "errori-frequenti",
+      "role": "diagnostic-context"
+    }
+  ],
+  "consegna": "La pagina Feisbuc dello starter sembra accettabile a una larghezza desktop specifica ma produce overflow e layout incoerente riducendo il viewport. Non correggere subito a tentativi. Compila prima `DIAGNOSI.md` indicando almeno cinque cause concrete, con selettore/proprieta coinvolti ed effetto osservato. Poi correggi esclusivamente `style.css` mantenendo l'HTML invariato: il risultato deve essere mobile-first, senza overflow orizzontale, con Grid a tre colonne solo da 56rem, navigazione Flexbox con wrapping, `border-box`, feed restringibile e nessun `!important`. Non e consentito risolvere nascondendo l'overflow.",
+  "vincoli": [
+    "documenta almeno cinque cause prima delle correzioni",
+    "non modificare index.html",
+    "non usare overflow-x hidden",
+    "rimuovi la dipendenza da larghezze fisse del layout principale",
+    "rimuovi !important dal fix finale",
+    "usa una base mobile a una colonna",
+    "usa tre colonne soltanto da 56rem in su",
+    "la navigazione deve poter andare a capo"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/index.html",
+      "target_path": "index.html",
+      "visibility": "student",
+      "description": "HTML corretto da non modificare"
+    },
+    {
+      "type": "starter",
+      "path": "starter/style.css",
+      "target_path": "style.css",
+      "visibility": "student",
+      "description": "CSS intenzionalmente difettoso"
+    },
+    {
+      "type": "starter",
+      "path": "starter/DIAGNOSI.md",
+      "target_path": "DIAGNOSI.md",
+      "visibility": "student",
+      "description": "Template obbligatorio per ipotesi, evidenze e correzioni"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Procedura di debug e definition of done"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/index.html",
+      "visibility": "teacher",
+      "description": "HTML invariato di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/style.css",
+      "visibility": "teacher",
+      "description": "CSS corretto di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/DIAGNOSI.md",
+      "visibility": "teacher",
+      "description": "Diagnosi attesa delle cause introdotte"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Mappa bug, domande e rubrica"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "debug-html-css",
+    "file": "style.css",
+    "note": "Diagnosi tracciata prima del fix e layout responsive corretto senza occultare i sintomi."
+  },
+  "correzione": {
+    "compila": false,
+    "test": false,
+    "sandbox": false,
+    "ai_feedback": false
+  },
+  "metriche": {
+    "tempo_stimato_minuti": 75,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": false
+  },
+  "manual_checks": [
+    {
+      "name": "diagnosi prima del fix",
+      "criterion": "DIAGNOSI.md identifica almeno cinque cause specifiche con evidenze osservabili"
+    },
+    {
+      "name": "overflow",
+      "criterion": "il fix elimina la causa dell'overflow e non usa overflow-x hidden"
+    },
+    {
+      "name": "cascade",
+      "criterion": "il fix rimuove !important e rende prevedibile il padding del feed"
+    },
+    {
+      "name": "responsive",
+      "criterion": "base a una colonna e tre colonne soltanto da 56rem"
+    },
+    {
+      "name": "spiegazione",
+      "criterion": "lo studente sa mostrare in DevTools almeno una regola sovrascritta e il box model"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Qualita della diagnosi e uso di evidenze DevTools",
+      "punti": 4
+    },
+    {
+      "criterio": "Correzione di overflow, box model e layout responsive",
+      "punti": 3
+    },
+    {
+      "criterio": "Correzione di cascade/specificita senza !important",
+      "punti": 2
+    },
+    {
+      "criterio": "Spiegazione del nesso causa-effetto",
+      "punti": 1
+    }
+  ]
+}

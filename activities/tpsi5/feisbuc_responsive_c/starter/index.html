@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feisbuc — milestone responsive</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <h1>Feisbuc</h1>
+        <nav aria-label="Navigazione principale">
+          <ul class="nav-list">
+            <li><a href="#feed">Feed</a></li>
+            <li><a href="#profilo">Profilo</a></li>
+            <li><a href="#tendenze">Tendenze</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="profile" id="profilo" aria-labelledby="profile-title">
+        <h2 id="profile-title">Profilo</h2>
+        <p>Antonio, studente full stack.</p>
+      </section>
+
+      <section class="feed" id="feed" aria-labelledby="feed-title">
+        <h2 id="feed-title">Feed</h2>
+        <article class="post">
+          <h3>Primo post</h3>
+          <p>Sto trasformando Feisbuc in una applicazione responsive.</p>
+          <div class="post-actions" aria-label="Azioni post">
+            <button type="button">Mi piace</button>
+            <button type="button">Commenta</button>
+          </div>
+        </article>
+        <article class="post">
+          <h3>Secondo post</h3>
+          <p>Grid per il macro-layout, Flexbox per i gruppi interni.</p>
+          <div class="post-actions" aria-label="Azioni post">
+            <button type="button">Mi piace</button>
+            <button type="button">Commenta</button>
+          </div>
+        </article>
+      </section>
+
+      <aside class="trends" id="tendenze" aria-labelledby="trends-title">
+        <h2 id="trends-title">Tendenze</h2>
+        <ul>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#fullstack</li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <p>Feisbuc — progetto didattico TPSI5</p>
+    </footer>
+  </body>
+</html>

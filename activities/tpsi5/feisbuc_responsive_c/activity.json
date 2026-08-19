@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-c-feisbuc-responsive-layout-001",
+  "titolo": "Feisbuc milestone 1: costruisci la shell responsive",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "C",
+  "argomenti": [
+    "css",
+    "box-model",
+    "flexbox",
+    "grid",
+    "responsive-design",
+    "media-query",
+    "custom-properties"
+  ],
+  "linguaggio": "html",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-21"
+  },
+  "content_ids": [
+    "tpsi5-content-web-platform-html",
+    "tpsi5-content-css-modern-responsive"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
+      "anchor": "feisbuc-milestone-1-shell-responsive",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
+      "anchor": "flexbox-o-grid",
+      "role": "technical-context"
+    },
+    {
+      "source_id": "tpsi5-source-feisbuc-legacy",
+      "path": "README.md",
+      "anchor": "divisione-in-colonne",
+      "role": "legacy-provenance"
+    }
+  ],
+  "project_milestone": "feisbuc-01-responsive-shell",
+  "consegna": "Partendo dallo starter semantico di Feisbuc, completa `style.css` costruendo un layout mobile-first. Su viewport stretti le regioni profilo, feed e tendenze devono essere in una sola colonna. Da 56rem in su usa CSS Grid per ottenere tre colonne flessibili, con il feed al centro capace di restringersi senza overflow. Usa Flexbox per la navigazione e le azioni dei post. Imposta globalmente `box-sizing: border-box`, definisci almeno quattro custom properties in `:root`, usa `gap`, rendi le immagini responsive e limita la larghezza complessiva della pagina senza fissarla a un singolo monitor. Non usare float, `!important` o larghezze rigide del layout principale.",
+  "vincoli": [
+    "mobile-first: la regola base della page-shell deve essere a una colonna",
+    "da 56rem in su la page-shell deve usare tre colonne Grid",
+    "il feed centrale deve poter restringersi senza overflow orizzontale",
+    "la navigazione deve usare Flexbox e consentire wrapping",
+    "usa almeno quattro custom properties definite in :root",
+    "usa box-sizing border-box globalmente",
+    "non usare float per il layout",
+    "non usare !important",
+    "non nascondere l'overflow orizzontale per mascherare errori",
+    "non modificare la semantica fondamentale dell'HTML starter"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/index.html",
+      "target_path": "index.html",
+      "visibility": "student",
+      "description": "Scheletro semantico Feisbuc milestone 0"
+    },
+    {
+      "type": "starter",
+      "path": "starter/style.css",
+      "target_path": "style.css",
+      "visibility": "student",
+      "description": "Foglio CSS con base tipografica e TODO di layout"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Contratto responsive, checklist e procedura DevTools"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/index.html",
+      "visibility": "teacher",
+      "description": "HTML di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/style.css",
+      "visibility": "teacher",
+      "description": "Soluzione CSS responsive di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Note docente, alternative accettabili e rubrica"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "pagina-html-css-responsive",
+    "file": "index.html",
+    "note": "Feisbuc milestone 1: shell responsive mobile-first con Grid macro e Flexbox locale."
+  },
+  "correzione": {
+    "compila": false,
+    "test": false,
+    "sandbox": false,
+    "ai_feedback": false
+  },
+  "metriche": {
+    "tempo_stimato_minuti": 90,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": false
+  },
+  "manual_checks": [
+    {
+      "name": "mobile",
+      "criterion": "a viewport stretto il layout resta leggibile in una colonna e non produce overflow orizzontale"
+    },
+    {
+      "name": "desktop",
+      "criterion": "da 56rem la page-shell usa tre colonne Grid flessibili"
+    },
+    {
+      "name": "scelta layout",
+      "criterion": "Grid e usato per il macro-layout e Flexbox per navigazione/azioni"
+    },
+    {
+      "name": "cascade e manutenzione",
+      "criterion": "assenza di float e !important; selettori semplici e custom properties riusabili"
+    },
+    {
+      "name": "devtools",
+      "criterion": "lo studente sa mostrare box model e grid/flex overlay nel browser"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Layout mobile-first e comportamento responsive",
+      "punti": 3
+    },
+    {
+      "criterio": "Uso appropriato di Grid e Flexbox",
+      "punti": 3
+    },
+    {
+      "criterio": "Box model, dimensioni e assenza di overflow",
+      "punti": 2
+    },
+    {
+      "criterio": "Custom properties, chiarezza e manutenibilita CSS",
+      "punti": 2
+    }
+  ]
+}
