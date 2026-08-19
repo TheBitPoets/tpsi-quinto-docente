@@ -25,7 +25,8 @@ Il consumer e pinned alla revisione **Accettata** del contratto in `TheBitPoets/
 3. `02_CSS_MODERNO_RESPONSIVE.md` — CSS/Flexbox/Grid/responsive; milestone 1;
 4. `03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md` — Bootstrap come astrazione sopra CSS; milestone 2;
 5. `04_JAVASCRIPT_DOM_BROWSER_APIS.md` — JavaScript, DOM, eventi, modules, Web Storage; milestone 3;
-6. `05_HTTP_ASYNC_FETCH_REST.md` — HTTP semantics, Promise/async-await, Fetch/Response, REST, same-origin/CORS e network debugging; milestone 4.
+6. `05_HTTP_ASYNC_FETCH_REST.md` — HTTP, Promise/async-await, Fetch/Response, REST e debugging; milestone 4;
+7. `06_NODE_EXPRESS_BACKEND.md` — Node runtime/npm/ESM, `node:http`, Express 5, middleware, Router, validation, error model e backend modulare; milestone 5.
 
 ## Feisbuc oggi
 
@@ -34,35 +35,62 @@ milestone 0  semantic HTML
 milestone 1  responsive native CSS
 milestone 2  Bootstrap UI
 milestone 3  dynamic local JS + localStorage
-milestone 4  HTTP REST API client
+milestone 4  HTTP REST API client + node:http fixture
+milestone 5  Express 5 modular API + MemoryPostStore
 ```
 
-La milestone 4 rende visibile la sostituzione:
+Il passaggio UDA 23 -> UDA 24 mantiene invariato il contratto:
 
 ```text
-localStorage
-     ↓
-api.js -> fetch -> HTTP -> server fixture
+GET   /api/posts
+POST  /api/posts
+PATCH /api/posts/:id
 ```
 
-Il server UDA 23 usa `node:http` ed e deliberatamente trattato come fixture/black box. Node runtime, native HTTP server ed Express diventano oggetto di studio in UDA 24.
+ma sostituisce:
+
+```text
+node:http fixture monolitica
+```
+
+con:
+
+```text
+Express app
+  -> middleware
+  -> Router
+  -> validation
+  -> MemoryPostStore
+  -> error pipeline
+```
+
+Questo prepara una sostituzione ancora piu importante: `MemoryPostStore -> SQL raw repository`, senza cambiare il client.
 
 ## Activity UDA 22
 
-- `tpsi5-activity-a-js-feed-pipeline-001` — **autograded JavaScript**;
-- `tpsi5-activity-b-js-post-refactor-001` — **autograded JavaScript**;
+- `tpsi5-activity-a-js-feed-pipeline-001` — autograded JavaScript;
+- `tpsi5-activity-b-js-post-refactor-001` — autograded JavaScript;
 - `tpsi5-activity-c-feisbuc-dynamic-feed-001` — browser/manuale;
 - `tpsi5-activity-d-debug-feisbuc-js-001` — browser/manuale.
 
 ## Activity UDA 23
 
 - `tpsi5-activity-a-http-microscope-001` — request/response con `curl -i` + Network panel;
-- `tpsi5-activity-b-async-response-policy-001` — status/ok/Content-Type + Promise/await, **autograded JavaScript**;
+- `tpsi5-activity-b-async-response-policy-001` — status/ok/Content-Type + Promise/await, autograded JavaScript;
 - `tpsi5-activity-c-feisbuc-rest-client-001` — Feisbuc milestone 4, GET/POST/PATCH via HTTP;
-- `tpsi5-activity-d-debug-fetch-http-001` — debug 404 vs network, serialization/Content-Type e 204.
+- `tpsi5-activity-d-debug-fetch-http-001` — debug rete/HTTP/representation.
+
+## Activity UDA 24 — primo blocco
+
+- `tpsi5-activity-a-node-http-express-map-001` — confronto `node:http`/Express con lo stesso contratto;
+- `tpsi5-activity-b-post-validation-001` — validation pura, autograded JavaScript;
+- `tpsi5-activity-c-feisbuc-express-api-001` — Feisbuc milestone 5, backend Express modulare;
+- `tpsi5-activity-d-debug-express-pipeline-001` — middleware order, params/query, safe methods e error pipeline.
+
+SQL, autenticazione e SSR appartengono ancora a UDA 24 ma verranno sviluppati come incrementi separati per mantenere leggibili responsabilita e cause degli errori.
 
 ## Stato
 
-Versione authoring **`0.6.0`**, ancora `draft`.
+Versione authoring **`0.7.0`**, ancora `draft`.
 
-Il Content Pack Standard v1 resta congelato; il curriculum continua a evolvere. Framework frontend, ORM Node e profondita TypeScript sono ancora decisioni aperte. Il prossimo blocco e UDA 24: **Node.js, Express, persistenza, auth e SSR**.
+Il Content Pack Standard v1 resta congelato; il curriculum continua a evolvere. Framework frontend, ORM Node e profondita TypeScript sono ancora decisioni aperte. Il prossimo incremento e **SQL raw repository**, seguito da auth sicura e breve confronto SSR/template.
