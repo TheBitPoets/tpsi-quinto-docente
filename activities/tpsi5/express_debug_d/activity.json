@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-d-debug-express-pipeline-001",
+  "titolo": "Debug Express: ordine middleware, params e error pipeline",
+  "tipo": "debug-didattico",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "D",
+  "argomenti": ["express-5", "middleware-order", "express-json", "router", "params-query", "404", "error-handler", "http-methods", "static-files", "debugging"],
+  "linguaggio": "nodejs",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-node-express-backend", "tpsi5-content-http-async-fetch-rest"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/06_NODE_EXPRESS_BACKEND.md", "anchor": "errori-frequenti", "role": "lesson"},
+    {"source_id": "tpsi5-source-labs-legacy", "path": "README.md", "anchor": "lab5", "role": "legacy-provenance"}
+  ],
+  "consegna": "Avvia lo starter e riproduci i sintomi descritti in README. Prima di modificare il codice compila `DIAGNOSI.md` con sintomo -> osservazione HTTP/console -> causa -> fix previsto. Correggi poi la pipeline Express in modo che: il body JSON sia disponibile nelle POST, `/api/posts/:id` legga `req.params.id`, nessuna GET modifichi lo stato, i file statici siano serviti prima del 404 e gli errori async arrivino a un error middleware JSON con firma a quattro argomenti. Non riscrivere tutto: modifica soltanto le responsabilita necessarie.",
+  "vincoli": [
+    "diagnosi prima del fix",
+    "usa Network/curl per distinguere hang, 404, 500 HTML e 500 JSON",
+    "non aggiungere try/catch in ogni route per nascondere l'error pipeline",
+    "non aggiungere cors middleware",
+    "non cambiare Express 5.2.1",
+    "il 404 finale deve essere JSON",
+    "l'error handler deve avere quattro parametri",
+    "GET deve restare safe nel codice corretto"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/package.json", "target_path": "package.json", "visibility": "student", "description": "Package Express pinned"},
+    {"type": "starter", "path": "starter/server.js", "target_path": "server.js", "visibility": "student", "description": "Server Express deliberatamente rotto"},
+    {"type": "starter", "path": "starter/public/index.html", "target_path": "public/index.html", "visibility": "student", "description": "Static file che inizialmente viene intercettato dal 404"},
+    {"type": "starter", "path": "starter/DIAGNOSI.md", "target_path": "DIAGNOSI.md", "visibility": "student", "description": "Template diagnosi"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Sintomi e request di riproduzione"},
+    {"type": "teacher_only", "path": "solution/server.js", "visibility": "teacher", "description": "Server corretto"},
+    {"type": "teacher_only", "path": "solution/DIAGNOSI.md", "visibility": "teacher", "description": "Diagnosi di riferimento"},
+    {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Criteri e domande"}
+  ],
+  "soluzione_attesa": {"tipo": "express-debug", "file": "server.js", "note": "Correzione minima della pipeline con diagnosi esplicita."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 100, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "manual_checks": [
+    {"name": "diagnosis", "criterion": "almeno cinque cause vengono individuate prima dei fix"},
+    {"name": "middleware-order", "criterion": "parser/static/router/404/error handler hanno ordine coerente"},
+    {"name": "params", "criterion": "path parameter letto da req.params"},
+    {"name": "safe-get", "criterion": "nessuna GET crea o modifica post"},
+    {"name": "error-json", "criterion": "async error arriva al middleware JSON a quattro argomenti"}
+  ],
+  "rubrica": [
+    {"criterio": "Diagnosi causa-effetto", "punti": 4},
+    {"criterio": "Ordine middleware", "punti": 2},
+    {"criterio": "Params/query e metodi HTTP", "punti": 2},
+    {"criterio": "404/error pipeline JSON", "punti": 2}
+  ]
+}
