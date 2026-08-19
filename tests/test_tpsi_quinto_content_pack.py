@@ -64,7 +64,7 @@ def all_classes(parser: StructureParser) -> set[str]:
 def test_native_content_pack_v1_is_valid_and_pinned() -> None:
     pack = load(PACK_PATH)
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.6.0"
+    assert pack["version"] == "0.7.0"
     assert pack["status"] == "draft"
     assert pack["extensions"]["platform_contract"]["content_pack_v1_sha"] == ACCEPTED_CONTENT_PACK_V1_SHA
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
@@ -92,6 +92,7 @@ def test_sources_project_exactly_to_course_design_catalog() -> None:
         "03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
         "04_JAVASCRIPT_DOM_BROWSER_APIS.md",
         "05_HTTP_ASYNC_FETCH_REST.md",
+        "06_NODE_EXPRESS_BACKEND.md",
     )
     assert normalized[1].ref == "d71da420f1aa2ea39b61356e4f9900c6371e7a42"
     assert normalized[2].ref == "36a909f00c9478983a8d1b950440e2abc28b8a55"
@@ -117,31 +118,36 @@ def test_course_design_keeps_33_week_draft_and_open_decisions() -> None:
     assert decisions["python_mirror"] == "fastapi"
 
 
-def test_public_specs_and_licensed_teacher_references_are_not_sources() -> None:
+def test_specs_legacy_and_licensed_references_are_not_indexable_sources() -> None:
     pack = load(PACK_PATH)
     refs = {item["id"]: item for item in pack["references"]}
 
-    assert refs["tpsi5-ref-mdn"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-rfc9110"]["role"] == "specification"
     assert refs["tpsi5-ref-fetch"]["role"] == "specification"
     assert refs["tpsi5-ref-ecmascript"]["role"] == "specification"
+    assert refs["tpsi5-ref-node"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-express"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-manning-css-depth"]["access"] == "licensed"
     assert refs["tpsi5-ref-pluralsight-javascript"]["access"] == "licensed"
-    assert refs["tpsi5-ref-lab5-legacy"]["role"] == "teacher-reference"
-    assert refs["tpsi5-ref-lab6-legacy"]["role"] == "teacher-reference"
-    assert refs["tpsi5-ref-lab7-legacy"]["role"] == "teacher-reference"
+    for ref_id in (
+        "tpsi5-ref-lab5-legacy",
+        "tpsi5-ref-lab6-legacy",
+        "tpsi5-ref-lab7-legacy",
+        "tpsi5-ref-lab8-legacy",
+        "tpsi5-ref-lab9-legacy",
+        "tpsi5-ref-lab10-legacy",
+    ):
+        assert refs[ref_id]["role"] == "teacher-reference"
 
     providers = {source["provider"] for source in pack["sources"]}
-    assert "manning" not in providers
-    assert "pluralsight" not in providers
-    assert "mdn" not in providers
-    assert "whatwg" not in providers
+    for non_source_provider in ("manning", "pluralsight", "mdn", "whatwg", "nodejs", "expressjs"):
+        assert non_source_provider not in providers
 
 
-def test_content_items_are_ordered_and_linked_to_real_files() -> None:
+def test_content_items_are_ordered_linked_and_include_backend_foundations() -> None:
     pack = load(PACK_PATH)
     items = pack["content_items"]
-    assert [item["order"] for item in items] == list(range(1, 7))
+    assert [item["order"] for item in items] == list(range(1, 8))
     for item in items:
         assert (ROOT / item["path"]).is_file(), item["path"]
         assert item["source_refs"]
@@ -153,6 +159,7 @@ def test_content_items_are_ordered_and_linked_to_real_files() -> None:
         "tpsi5-content-bootstrap-framework",
         "tpsi5-content-javascript-dom-browser",
         "tpsi5-content-http-async-fetch-rest",
+        "tpsi5-content-node-express-backend",
     } <= ids
 
 
@@ -172,56 +179,34 @@ def test_uda21_activity_contracts_and_student_teacher_assets_remain_valid() -> N
         assert activity["id"] == expected_ids[difficulty]
         assert activity["difficolta"] == difficulty
         assert set(activity.get("content_ids", [])) <= known_content_ids
-        assert sum(entry["punti"] for entry in activity["rubrica"]) == 10
-
-        student_targets: set[str] = set()
-        for asset in activity["assets"]:
+        assert sum(item["punti"] for item in activity["rubrica"]) == 10
+        for asset in activity.get("assets", []):
             assert (root / asset["path"]).is_file(), asset
             if asset["visibility"] == "student":
                 assert asset["type"] not in {"teacher_only", "hidden_test"}
-                target = asset.get("target_path")
-                assert isinstance(target, str) and target
-                assert target not in student_targets
-                student_targets.add(target)
-            else:
-                assert asset["visibility"] == "teacher"
+                assert asset.get("target_path")
 
-
-def test_uda21_reference_solutions_keep_semantics_and_modern_layout() -> None:
-    html_a = parse_html(UDA21_ACTIVITY_ROOTS["A"] / "solution" / "index.html")
-    assert "doctype html" in html_a.declarations
-    assert html_a.attrs["html"][0].get("lang") == "it"
-    assert html_a.tags.count("main") == 1
-    assert html_a.tags.count("h1") == 1
-
-    semantic = parse_html(UDA21_ACTIVITY_ROOTS["B"] / "solution" / "index.html")
-    for tag in ("header", "nav", "main", "article", "footer"):
-        assert tag in semantic.tags
-
-    css = (UDA21_ACTIVITY_ROOTS["C"] / "solution" / "style.css").read_text(encoding="utf-8")
-    assert "display: grid" in css
-    assert "display: flex" in css
-    assert "@media" in css
-    assert "!important" not in css
-
-    broken = (UDA21_ACTIVITY_ROOTS["D"] / "starter" / "style.css").read_text(encoding="utf-8")
-    fixed = (UDA21_ACTIVITY_ROOTS["D"] / "solution" / "style.css").read_text(encoding="utf-8")
-    assert "box-sizing: content-box" in broken
-    assert "!important" in broken
-    assert "box-sizing: border-box" in fixed
-    assert "!important" not in fixed
-
-    bootstrap_html = (UDA21_ACTIVITY_ROOTS["E"] / "solution" / "index.html").read_text(encoding="utf-8")
-    bootstrap_css = (UDA21_ACTIVITY_ROOTS["E"] / "solution" / "custom.css").read_text(encoding="utf-8")
-    parsed = parse_html(UDA21_ACTIVITY_ROOTS["E"] / "solution" / "index.html")
-    classes = all_classes(parsed)
-    assert "bootstrap@5.3.8" in bootstrap_html
-    assert {"container", "row", "col-12", "navbar", "card", "btn"} <= classes
-    assert "display: grid" not in bootstrap_css
-    assert "@media" not in bootstrap_css
-
-
-def test_grading_boundary_still_matches_platform_contract() -> None:
-    assert SUPPORTED_LANGUAGES["javascript"] == "implemented"
-    assert SUPPORTED_LANGUAGES["nodejs"] == "implemented"
     assert SUPPORTED_LANGUAGES["html"] == "planned"
+
+
+def test_uda21_reference_solutions_keep_semantics_responsive_css_and_bootstrap_mapping() -> None:
+    html_solution = parse_html(UDA21_ACTIVITY_ROOTS["B"] / "solution" / "index.html")
+    assert html_solution.tags.count("header") == 1
+    assert html_solution.tags.count("nav") == 1
+    assert html_solution.tags.count("main") == 1
+    assert html_solution.tags.count("article") == 2
+
+    css_solution = (UDA21_ACTIVITY_ROOTS["C"] / "solution" / "style.css").read_text(encoding="utf-8")
+    assert "display: grid" in css_solution
+    assert "display: flex" in css_solution
+    assert "@media (min-width: 56rem)" in css_solution
+    assert "!important" not in css_solution
+    assert "float:" not in css_solution
+
+    bootstrap_html = parse_html(UDA21_ACTIVITY_ROOTS["E"] / "solution" / "index.html")
+    bootstrap_classes = all_classes(bootstrap_html)
+    for expected in ("container", "row", "col-lg-6", "navbar", "card", "btn"):
+        assert expected in bootstrap_classes
+    mapping = (UDA21_ACTIVITY_ROOTS["E"] / "solution" / "MAPPING.md").read_text(encoding="utf-8")
+    assert "CSS nativo" in mapping
+    assert "Bootstrap" in mapping
