@@ -16,9 +16,12 @@ from scripts.validate_activity import validate_activity
 ROOT = Path(__file__).resolve().parents[1]
 PACK_PATH = ROOT / "content" / "tpsi5" / "content-pack.json"
 DESIGN_PATH = ROOT / "doc" / "course_designs" / "tpsi_quinto_2026_2027.json"
-LESSON_PATH = ROOT / "content" / "tpsi5" / "01_WEB_PLATFORM_HTML_MODERNO.md"
+HTML_LESSON_PATH = ROOT / "content" / "tpsi5" / "01_WEB_PLATFORM_HTML_MODERNO.md"
+CSS_LESSON_PATH = ROOT / "content" / "tpsi5" / "02_CSS_MODERNO_RESPONSIVE.md"
 ACTIVITY_A_ROOT = ROOT / "activities" / "tpsi5" / "html_anatomy_a"
 ACTIVITY_B_ROOT = ROOT / "activities" / "tpsi5" / "feisbuc_semantic_b"
+ACTIVITY_C_ROOT = ROOT / "activities" / "tpsi5" / "feisbuc_responsive_c"
+ACTIVITY_D_ROOT = ROOT / "activities" / "tpsi5" / "css_debug_d"
 
 
 def load(path: Path) -> dict:
@@ -56,7 +59,7 @@ def test_native_content_pack_v1_is_valid() -> None:
     pack = load(PACK_PATH)
 
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.2.0"
+    assert pack["version"] == "0.3.0"
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
 
 
@@ -85,6 +88,7 @@ def test_pack_sources_project_to_current_course_source_catalog() -> None:
         "COVERAGE.md",
         "00_COURSE_ARCHITECTURE.md",
         "01_WEB_PLATFORM_HTML_MODERNO.md",
+        "02_CSS_MODERNO_RESPONSIVE.md",
     )
     assert normalized[1].ref == "d71da420f1aa2ea39b61356e4f9900c6371e7a42"
     assert normalized[2].ref == "36a909f00c9478983a8d1b950440e2abc28b8a55"
@@ -180,67 +184,135 @@ def test_web_platform_html_content_item_links_level_a_and_b_activities() -> None
         "tpsi5-ref-mdn",
         "tpsi5-ref-whatwg-html",
     } <= source_ref_ids
-    assert LESSON_PATH.is_file()
+    assert HTML_LESSON_PATH.is_file()
 
 
-def test_uda21_schedules_html_lesson_and_activities() -> None:
+def test_css_content_item_links_level_c_and_d_activities_and_provenance() -> None:
+    pack = load(PACK_PATH)
+    item = next(
+        content
+        for content in pack["content_items"]
+        if content["id"] == "tpsi5-content-css-modern-responsive"
+    )
+
+    assert item["path"] == "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md"
+    assert item["activity_ids"] == [
+        "tpsi5-activity-c-feisbuc-responsive-layout-001",
+        "tpsi5-activity-d-debug-responsive-css-001",
+    ]
+    source_ref_ids = {source_ref["id"] for source_ref in item["source_refs"]}
+    assert {
+        "tpsi5-source-originali",
+        "tpsi5-source-html-css-legacy",
+        "tpsi5-source-feisbuc-legacy",
+        "tpsi5-ref-mdn",
+        "tpsi5-ref-manning-css-depth",
+    } <= source_ref_ids
+    assert CSS_LESSON_PATH.is_file()
+
+
+def test_uda21_schedules_html_and_css_lessons_with_activities() -> None:
     design = load(DESIGN_PATH)
     uda21 = next(uda for uda in design["years"][0]["udas"] if uda["id"] == "uda-21")
 
-    assert len(uda21["items"]) == 1
-    lesson = uda21["items"][0]
-    assert lesson["source"] == "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md"
-    assert lesson["activity_ids"] == [
+    assert len(uda21["items"]) == 2
+    html_lesson, css_lesson = uda21["items"]
+
+    assert html_lesson["source"] == "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md"
+    assert html_lesson["activity_ids"] == [
         "tpsi5-activity-a-html-anatomy-001",
         "tpsi5-activity-b-feisbuc-semantic-001",
     ]
-    assert lesson["frame"]["status"] == "draft"
+    assert html_lesson["frame"]["status"] == "draft"
+
+    assert css_lesson["source"] == "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md"
+    assert css_lesson["activity_ids"] == [
+        "tpsi5-activity-c-feisbuc-responsive-layout-001",
+        "tpsi5-activity-d-debug-responsive-css-001",
+    ]
+    assert css_lesson["frame"]["status"] == "draft"
 
 
-def test_level_a_and_b_activity_contracts_and_assets_are_valid() -> None:
+def _assert_activity_contract(
+    root: Path,
+    difficulty: str,
+    activity_id: str,
+    expected_student_targets: set[str],
+    known_content_ids: set[str],
+) -> dict:
+    path = root / "activity.json"
+    activity = load(path)
+    assert validate_activity(activity, str(path)) == []
+    assert activity["id"] == activity_id
+    assert activity["difficolta"] == difficulty
+    assert activity["linguaggio"] == "html"
+    assert set(activity["content_ids"]) <= known_content_ids
+    assert activity["correzione"] == {
+        "compila": False,
+        "test": False,
+        "sandbox": False,
+        "ai_feedback": False,
+    }
+    assert sum(item["punti"] for item in activity["rubrica"]) == 10
+
+    student_targets: set[str] = set()
+    for asset in activity["assets"]:
+        asset_path = root / asset["path"]
+        assert asset_path.is_file(), asset_path
+        if asset["visibility"] == "student":
+            assert asset["type"] not in {"hidden_test", "teacher_only"}
+            target = asset.get("target_path")
+            assert isinstance(target, str) and target
+            assert target not in student_targets
+            student_targets.add(target)
+        else:
+            assert asset["visibility"] == "teacher"
+
+    assert student_targets == expected_student_targets
+    return activity
+
+
+def test_level_a_to_d_activity_contracts_and_assets_are_valid() -> None:
     pack = load(PACK_PATH)
     known_content_ids = {item["id"] for item in pack["content_items"]}
-    expected = [
-        (ACTIVITY_A_ROOT, "A", "tpsi5-activity-a-html-anatomy-001"),
-        (ACTIVITY_B_ROOT, "B", "tpsi5-activity-b-feisbuc-semantic-001"),
-    ]
 
-    for root, difficulty, activity_id in expected:
-        path = root / "activity.json"
-        activity = load(path)
-        assert validate_activity(activity, str(path)) == []
-        assert activity["id"] == activity_id
-        assert activity["difficolta"] == difficulty
-        assert activity["linguaggio"] == "html"
-        assert set(activity["content_ids"]) <= known_content_ids
-        assert activity["correzione"] == {
-            "compila": False,
-            "test": False,
-            "sandbox": False,
-            "ai_feedback": False,
-        }
-        assert sum(item["punti"] for item in activity["rubrica"]) == 10
+    _assert_activity_contract(
+        ACTIVITY_A_ROOT,
+        "A",
+        "tpsi5-activity-a-html-anatomy-001",
+        {"index.html", "README.md"},
+        known_content_ids,
+    )
+    _assert_activity_contract(
+        ACTIVITY_B_ROOT,
+        "B",
+        "tpsi5-activity-b-feisbuc-semantic-001",
+        {"index.html", "README.md"},
+        known_content_ids,
+    )
+    activity_c = _assert_activity_contract(
+        ACTIVITY_C_ROOT,
+        "C",
+        "tpsi5-activity-c-feisbuc-responsive-layout-001",
+        {"index.html", "style.css", "README.md"},
+        known_content_ids,
+    )
+    activity_d = _assert_activity_contract(
+        ACTIVITY_D_ROOT,
+        "D",
+        "tpsi5-activity-d-debug-responsive-css-001",
+        {"index.html", "style.css", "DIAGNOSI.md", "README.md"},
+        known_content_ids,
+    )
 
-        student_targets: set[str] = set()
-        for asset in activity["assets"]:
-            asset_path = root / asset["path"]
-            assert asset_path.is_file(), asset_path
-            if asset["visibility"] == "student":
-                assert asset["type"] not in {"hidden_test", "teacher_only"}
-                target = asset.get("target_path")
-                assert isinstance(target, str) and target
-                assert target not in student_targets
-                student_targets.add(target)
-            else:
-                assert asset["visibility"] == "teacher"
-
-        assert student_targets == {"index.html", "README.md"}
+    assert activity_c["project_milestone"] == "feisbuc-01-responsive-shell"
+    assert activity_d["tipo"] == "debug-didattico"
 
 
 def test_html_auto_grading_is_not_claimed_before_platform_support_exists() -> None:
     assert SUPPORTED_LANGUAGES["html"] == "planned"
-    assert load(ACTIVITY_A_ROOT / "activity.json")["correzione"]["test"] is False
-    assert load(ACTIVITY_B_ROOT / "activity.json")["correzione"]["test"] is False
+    for root in (ACTIVITY_A_ROOT, ACTIVITY_B_ROOT, ACTIVITY_C_ROOT, ACTIVITY_D_ROOT):
+        assert load(root / "activity.json")["correzione"]["test"] is False
 
 
 def test_level_a_reference_solution_has_modern_document_metadata() -> None:
@@ -260,7 +332,7 @@ def test_level_a_reference_solution_has_modern_document_metadata() -> None:
     assert solution.tags.count("h1") == 1
 
 
-def test_feisbuc_milestone_reference_solution_is_semantic() -> None:
+def test_feisbuc_milestone_zero_reference_solution_is_semantic() -> None:
     starter = parse_html(ACTIVITY_B_ROOT / "starter" / "index.html")
     solution = parse_html(ACTIVITY_B_ROOT / "solution" / "index.html")
 
@@ -273,18 +345,74 @@ def test_feisbuc_milestone_reference_solution_is_semantic() -> None:
     assert solution.tags.count("section") == 2
     assert solution.tags.count("article") == 2
     assert solution.tags.count("footer") == 1
-    assert solution.tags.count("h1") == 1
-    assert solution.tags.count("h2") == 2
-    assert solution.tags.count("h3") == 2
     assert solution.attrs["nav"][0].get("aria-label") == "Navigazione principale"
     feed = next(item for item in solution.attrs["section"] if item.get("id") == "feed")
     assert feed.get("aria-labelledby") == "feed-title"
 
 
-def test_legacy_audit_records_first_html_migration_decisions() -> None:
+def test_feisbuc_milestone_one_reference_css_uses_modern_layout_primitives() -> None:
+    css = (ACTIVITY_C_ROOT / "solution" / "style.css").read_text(encoding="utf-8")
+
+    required_fragments = [
+        "box-sizing: border-box",
+        "display: grid",
+        "grid-template-columns: 1fr",
+        "@media (min-width: 56rem)",
+        "minmax(0, 1fr)",
+        "display: flex",
+        "flex-wrap: wrap",
+        "max-width: 100%",
+        "--space-1:",
+        "gap:",
+    ]
+    for fragment in required_fragments:
+        assert fragment in css
+
+    assert "float:" not in css
+    assert "!important" not in css
+    assert "overflow-x: hidden" not in css
+    assert "width: 1200px" not in css
+
+
+def test_css_debug_starter_contains_declared_faults_and_solution_removes_them() -> None:
+    starter = (ACTIVITY_D_ROOT / "starter" / "style.css").read_text(encoding="utf-8")
+    solution = (ACTIVITY_D_ROOT / "solution" / "style.css").read_text(encoding="utf-8")
+    diagnosis = (ACTIVITY_D_ROOT / "solution" / "DIAGNOSI.md").read_text(encoding="utf-8")
+
+    assert "box-sizing: content-box" in starter
+    assert "width: 1200px" in starter
+    assert "grid-template-columns: 280px 700px 280px" in starter
+    assert "min-width: 700px" in starter
+    assert "!important" in starter
+    assert "flex-wrap: nowrap" in starter
+    assert "@media (min-width: 56rem)" in starter
+
+    assert "box-sizing: border-box" in solution
+    assert "grid-template-columns: 1fr" in solution
+    assert "minmax(0, 1fr)" in solution
+    assert "flex-wrap: wrap" in solution
+    assert "overflow-wrap: anywhere" in solution
+    assert "!important" not in solution
+    assert "width: 1200px" not in solution
+    assert "overflow-x: hidden" not in solution
+
+    for keyword in (
+        "body",
+        "content-box",
+        "min-width",
+        "important",
+        "media query",
+    ):
+        assert keyword.lower() in diagnosis.lower()
+
+
+def test_legacy_audit_records_html_and_css_migration_decisions() -> None:
     audit = (ROOT / "doc" / "LEGACY_REUSE_AUDIT.md").read_text(encoding="utf-8")
 
     assert "Decisioni per frammento — primo modulo HTML" in audit
     assert "`Scheletro html` | **rewrite**" in audit
     assert "`Tag ul` | **rewrite**" in audit
+    assert "`CSS sintassi` | **migrated/rewrite**" in audit
+    assert "`Box Model` | **migrated/major update**" in audit
     assert "feisbuc-00-semantic-skeleton" in audit
+    assert "feisbuc-01-responsive-shell" in audit

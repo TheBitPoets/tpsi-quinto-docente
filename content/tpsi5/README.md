@@ -19,10 +19,18 @@ Contratto di authoring: `thebitlab.content-pack.v1`.
 ## Contenuti disponibili
 
 1. `00_COURSE_ARCHITECTURE.md` — architettura del percorso Full Stack e metodo;
-2. `01_WEB_PLATFORM_HTML_MODERNO.md` — HTML come struttura/semantica, documento moderno, metadata, MDN/DevTools e Feisbuc milestone 0.
+2. `01_WEB_PLATFORM_HTML_MODERNO.md` — HTML come struttura/semantica, documento moderno, metadata, MDN/DevTools e Feisbuc milestone 0;
+3. `02_CSS_MODERNO_RESPONSIVE.md` — cascade, specificità, box model, Flexbox, Grid, responsive design, custom properties e metodo di debugging; Feisbuc milestone 1.
+
+## Activity disponibili
+
+- A — anatomia documento HTML;
+- B — Feisbuc semantic skeleton;
+- C — Feisbuc responsive shell;
+- D — diagnosi di un layout CSS rotto.
 
 ## Stato
 
-Versione authoring `0.2.0`, ancora **draft**.
+Versione authoring `0.3.0`, ancora **draft**.
 
-Il primo modulo Web Platform/HTML e disponibile con Activity A e B. Framework frontend, ORM Node e profondità TypeScript restano decisioni da congelare. I prossimi contenuti di UDA 21 riguarderanno CSS moderno, cascade/box model, Flexbox/Grid e responsive design prima di introdurre Bootstrap.
+Le fondazioni HTML/CSS coprono ora Activity A-D. Framework frontend, ORM Node e profondità TypeScript restano decisioni da congelare. Il prossimo incremento di UDA 21 completera le fondazioni frontend con Bootstrap **dopo** CSS nativo e dovra produrre almeno una Activity E/F per chiudere il gate di adozione del Content Pack v1.

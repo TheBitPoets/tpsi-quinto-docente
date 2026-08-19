@@ -21,11 +21,11 @@ Da aggiornare: scheletro HTML moderno (`DOCTYPE`, `lang`, charset, viewport), se
 | `Tag ol` | **reuse concept / new example** | mantenere liste ordinate con esempi originali |
 | `Tag ul` | **rewrite** | correggere l'esempio legacy che usa `ol`; nuovo esempio originale nel corso |
 | `Tag a` | **reuse concept / update** | mantenere il collegamento ipertestuale e aggiungere contesto semantico/accessibilità quando serve |
-| `CSS sintassi` | **defer** | migra al prossimo modulo CSS, non va mescolato con la prima lezione HTML |
-| `Box Model` | **defer + major update** | prossimo modulo CSS, con riferimento MDN/CSS in Depth |
-| `Block/Inline` | **rewrite later** | spiegare nel contesto di layout e normal flow, evitando di farne il modello centrale del CSS moderno |
-| Padding/Margin/Border | **reuse concepts later** | prossimo modulo CSS, con lab visuali nuovi |
-| JSFiddle links | **keep as legacy evidence** | non diventano dipendenza obbligatoria; MDN Playground/browser locale saranno preferiti nei nuovi micro-lab |
+| `CSS sintassi` | **migrated/rewrite** | ora coperto da `02_CSS_MODERNO_RESPONSIVE.md` con terminologia selettore/proprietà/valore e workflow MDN |
+| `Box Model` | **migrated/major update** | ora integrato con `box-sizing: border-box`, DevTools e debugging reale |
+| `Block/Inline` | **rewrite** | ricollocato nel normal flow e nei concetti di display, senza usarlo come modello centrale del layout moderno |
+| Padding/Margin/Border | **reuse concepts / new examples** | conservati dentro il box model con esempi originali e Activity nuove |
+| JSFiddle links | **keep as legacy evidence** | non diventano dipendenza obbligatoria; MDN Playground/browser locale sono preferiti nei nuovi micro-lab |
 
 ### Output del primo incremento
 
@@ -34,7 +34,18 @@ Da aggiornare: scheletro HTML moderno (`DOCTYPE`, `lang`, charset, viewport), se
 - Activity B `tpsi5-activity-b-feisbuc-semantic-001`;
 - Feisbuc milestone `feisbuc-00-semantic-skeleton`.
 
-Il nuovo testo non copia la spiegazione legacy: conserva i concetti utili, riscrive esempi e struttura e collega esplicitamente MDN/WHATWG come riferimenti professionali.
+### Output del secondo incremento CSS
+
+- `content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md`;
+- cascade, specificità, inheritance e box model riscritti con approccio moderno;
+- Flexbox e Grid aggiunti come strumenti principali di layout;
+- responsive design e media query introdotti con strategia mobile-first;
+- custom properties introdotte come fondamento di manutenzione;
+- Activity C `tpsi5-activity-c-feisbuc-responsive-layout-001`;
+- Activity D `tpsi5-activity-d-debug-responsive-css-001`;
+- Feisbuc milestone `feisbuc-01-responsive-shell`.
+
+Il nuovo testo non copia la spiegazione legacy: conserva i concetti utili, riscrive esempi e struttura e collega esplicitamente MDN come riferimento professionale. *CSS in Depth, Second Edition* resta teacher-reference licensed e non viene riprodotto.
 
 ## `TheBitPoets/labs_summary`
 
@@ -56,9 +67,18 @@ Il progetto ha valore perché cresce insieme al corso. Il README e gli esempi so
 
 Da modernizzare: layout basati su float → Flexbox/Grid; semantica/accessibilità; gestione degli asset esterni; separazione progressiva dei moduli JS; REST/backend/DB/auth; framework frontend; realtime; test e deploy.
 
-### Prima decisione applicata
+### Decisioni applicate
 
-La prima milestone non copia il vecchio `home.html`: ricostruisce uno scheletro Feisbuc minimale e richiede allo studente di passare da contenitori generici a `header`, `nav`, `main`, `section`, `article` e `footer`. Il progetto legacy rimane provenance e ispirazione incrementale, non starter canonico del nuovo corso.
+**Milestone 0** non copia il vecchio `home.html`: ricostruisce uno scheletro Feisbuc minimale e richiede allo studente di passare da contenitori generici a `header`, `nav`, `main`, `section`, `article` e `footer`.
+
+**Milestone 1** sostituisce il modello legacy a colonne basato su `float` con:
+
+```text
+Grid    → macro-layout profilo/feed/tendenze
+Flexbox → navigazione e azioni del post
+```
+
+Il layout di base è mobile-first e la versione ampia usa colonne Grid flessibili. Il vecchio uso di float rimane utile come evidenza storica da confrontare, non come soluzione canonica del nuovo corso.
 
 ## Principio di migrazione
 

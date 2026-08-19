@@ -1,0 +1,43 @@
+:root {
+  /* TODO: definisci almeno quattro custom properties significative */
+}
+
+/* TODO: imposta border-box in modo coerente */
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* TODO: Flexbox + wrapping + gap */
+}
+
+.page-shell {
+  /* TODO: contenitore centrato, Grid mobile-first a una colonna */
+}
+
+.profile,
+.feed,
+.trends,
+.post {
+  /* TODO: usa variabili, padding, border e background coerenti */
+}
+
+.post + .post {
+  margin-top: 1rem;
+}
+
+.post-actions {
+  /* TODO: Flexbox */
+}
+
+img {
+  /* TODO: comportamento responsive */
+}
+
+/* TODO: da 56rem in su passa a tre colonne Grid flessibili */

@@ -11,7 +11,8 @@
         "README.md",
         "COVERAGE.md",
         "00_COURSE_ARCHITECTURE.md",
-        "01_WEB_PLATFORM_HTML_MODERNO.md"
+        "01_WEB_PLATFORM_HTML_MODERNO.md",
+        "02_CSS_MODERNO_RESPONSIVE.md"
       ],
       "indexing_status": "ready"
     },
@@ -120,6 +121,31 @@
                 "preview": "Prepara CSS moderno, box model, cascade, Flexbox/Grid e responsive design senza confondere struttura e presentazione.",
                 "next_step": "Passare dalla struttura semantica di Feisbuc al layout CSS moderno.",
                 "references": "MDN Structuring content with HTML, WHATWG HTML Living Standard, html_css_summary pinned, Feisbuc pinned."
+              }
+            },
+            {
+              "id": "tpsi5-source-originali:content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md#css-moderno-layout-e-responsive-design",
+              "title": "CSS moderno, layout e responsive design",
+              "source": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
+              "source_id": "tpsi5-source-originali",
+              "source_label": "TPSI quinto - contenuti originali",
+              "source_provider": "local",
+              "href": "../../content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md#css-moderno-layout-e-responsive-design",
+              "level": 1,
+              "line": 1,
+              "activity_ids": [
+                "tpsi5-activity-c-feisbuc-responsive-layout-001",
+                "tpsi5-activity-d-debug-responsive-css-001"
+              ],
+              "frame": {
+                "status": "draft",
+                "context": "Porta Feisbuc dalla sola semantica HTML a una shell responsive e introduce un metodo di debug CSS basato su cascade, box model e DevTools.",
+                "prerequisites": "HTML moderno, struttura semantica e Activity A/B del primo modulo.",
+                "objectives": "Comprendere cascade/specificita e box model, scegliere Flexbox/Grid, costruire un layout mobile-first, usare media query/custom properties e diagnosticare overflow e conflitti CSS.",
+                "recall": "Riprendere la separazione struttura/presentazione e la milestone Feisbuc semantica.",
+                "preview": "Prepara Bootstrap come astrazione sopra fondamenti CSS reali e poi JavaScript/DOM.",
+                "next_step": "Completare le fondazioni frontend con Bootstrap solo dopo aver consolidato CSS nativo.",
+                "references": "MDN CSS styling basics, Box model, Flexbox, Grid, Responsive design; CSS in Depth 2e come teacher-reference licensed; html_css_summary e Feisbuc pinned."
               }
             }
           ]

@@ -6,8 +6,9 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 | --- | --- | --- | --- |
 | Web Platform e browser | sì | struttura iniziale | **iniziato**: documenti, metadata, DevTools e distinzione sorgente/DOM in `01_WEB_PLATFORM_HTML_MODERNO.md` |
 | HTML moderno e semantica | sì | **milestone 0 disponibile** | Activity A anatomia documento + Activity B Feisbuc semantico; form e immagini verranno approfonditi nello stesso blocco |
-| CSS moderno | sì | layout e design | cascade, box model, Flexbox, Grid, responsive |
-| Bootstrap | sì, dopo CSS nativo | revisione UI | framework CSS, non sostituto dei fondamenti |
+| CSS moderno | sì | **milestone 1 disponibile** | `02_CSS_MODERNO_RESPONSIVE.md`: cascade, specificità, inheritance, box model, normal flow, Flexbox, Grid, custom properties |
+| Responsive design | sì | shell mobile-first | Activity C costruzione autonoma + Activity D debug/diagnosi; media query solo quando il layout fluido non basta |
+| Bootstrap | sì, dopo CSS nativo | revisione UI | framework CSS, non sostituto dei fondamenti; non ancora iniziato |
 | JavaScript moderno | sì | comportamento client | scope, funzioni, array/object, moduli, errori |
 | DOM e Browser APIs | sì | feed dinamico | eventi, delegation, storage, form |
 | Asincronia | sì | caricamento dati | Promise, async/await, fetch |
@@ -25,7 +26,7 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 | FastAPI mirror track | sì, mirato | API alternativa | stesso contratto HTTP, non doppio corso |
 | OpenAPI | sì | documentazione API | particolarmente naturale nel mirror FastAPI |
 | SQLAlchemy | sì nel mirror Python | persistenza Python | mapping SQL ↔ ORM |
-| Testing/debugging | sì | test Feisbuc | unit/API/integration, DevTools e diagnosi |
+| Testing/debugging | sì | test Feisbuc | CSS debugging avviato con Activity D; più avanti unit/API/integration |
 | Deployment | sì | release finale | env, build, log, HTTPS/reverse proxy concettuali |
 | Capstone | sì | Feisbuc | milestone progressive e prodotto finale |
 | TypeScript | da decidere | eventuale fase avanzata | breve core o track advanced |
@@ -35,7 +36,8 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 
 - [x] A — osservazione/modifica controllata: `tpsi5-activity-a-html-anatomy-001`;
 - [x] B — modifica controllata + milestone Feisbuc: `tpsi5-activity-b-feisbuc-semantic-001`;
-- [ ] C/D — implementazione autonoma e debugging;
+- [x] C — implementazione autonoma: `tpsi5-activity-c-feisbuc-responsive-layout-001`;
+- [x] D — debug/diagnosi: `tpsi5-activity-d-debug-responsive-css-001`;
 - [ ] E/F — mini-progetto/prodotto integrato.
 
 ## Gate prima del freeze del curriculum
@@ -46,4 +48,4 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso prima della dec
 4. scelta profondità TypeScript;
 5. definizione del confine col corso SQL separato;
 6. calendario/UDA definitivo dopo verifica delle ore reali disponibili;
-7. completare almeno una Activity C/D e una E/F oltre alle A/B ora presenti.
+7. completare almeno una Activity E/F; A-D sono ora rappresentate nel corso.
