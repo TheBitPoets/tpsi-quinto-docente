@@ -16,22 +16,25 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso mentre i moduli
 | Asincronia | sì | **milestone 4 disponibile** | `05_HTTP_ASYNC_FETCH_REST.md`: Promise, `async`/`await`, error handling e separazione network/HTTP |
 | HTTP | sì, approfondito | contratto client/server | request/response, URL/path/query, metodi, safe/idempotent, status, headers, Content-Type, curl e Network panel |
 | Fetch | sì | client Feisbuc remoto | `response.ok`, parsing condizionale, error taxonomy |
-| REST/API design | sì | **milestone 4/5** | contratto `GET/POST/PATCH /api/posts` mantenuto mentre cambia il backend |
+| REST/API design | sì | **milestone 4/5/6** | contratto `GET/POST/PATCH /api/posts` mantenuto mentre cambiano framework e storage |
 | CORS / same-origin | sì, fondamenti | same-origin | niente `cors()` automatico: policy cross-origin solo quando esiste un vero secondo origin |
-| Node.js | sì | **milestone 5 disponibile** | `06_NODE_EXPRESS_BACKEND.md`: runtime, process/env, npm/package.json, ESM, event loop concettuale, `node:http` |
+| Node.js | sì | **milestone 5/6** | runtime, process/env, npm/package.json, ESM, `node:http` e `node:sqlite` |
 | Express | sì | **milestone 5 disponibile** | Express 5.2.1 pinned: Router, middleware, static, body parsing, validation, error pipeline, request ID/logging |
-| Backend architecture | sì | memory store sostituibile | `app/server/router/validation/store/middleware`; Router dipende dallo store, non dalla memoria concreta |
-| SQL | integrazione col corso SQL | **prossimo incremento UDA 24** | SQL raw repository prima dell'ORM; sostituirà `MemoryPostStore` mantenendo il contratto HTTP |
-| ORM Node | sì, tecnologia TBD | persistenza evoluta | confronto Drizzle / Prisma / Sequelize dopo SQL raw |
-| Auth e sicurezza web | sì | fase successiva UDA 24 | password hashing, session/authn/authz, cookie, secret; password in chiaro dei legacy è anti-pattern esplicito |
-| Template/SSR | sì, compatto | fase successiva UDA 24 | Nunjucks/equivalente come confronto SSR vs API/SPA, non architettura finale obbligatoria |
+| Backend architecture | sì | store sostituibile | `app/server/router/validation/store/middleware`; Router dipende dal contratto store |
+| Modello relazionale / SQLite | sì | **milestone 6 disponibile** | `07_SQL_RAW_PERSISTENCE.md`: schema, PK, constraint, DDL/DML, indici e mapping boolean 0/1 |
+| SQL raw | sì, integrato e futuro corso dedicato | **milestone 6 disponibile** | A/B/D autograded dal runner SQL TheBitLab; `SqlPostStore` usa prepared statements |
+| Prepared statements / SQL injection prevention | sì | repository SQL | input esterno bindato, nessuna concatenazione in query |
+| Transazioni | sì, fondamenti | estensione repository | introdotte quando esiste un invariante multi-statement; non usate come rituale |
+| ORM Node | sì, tecnologia TBD | persistenza evoluta | confronto Drizzle / Prisma / Sequelize **dopo** SQL raw |
+| Auth e sicurezza web | sì | fase successiva UDA 24 | password hashing, session/authn/authz, cookie, secret; password in chiaro legacy = anti-pattern |
+| Template/SSR | sì, compatto | fase successiva UDA 24 | Nunjucks/equivalente come confronto SSR vs API/SPA |
 | Framework frontend | sì, tecnologia TBD | SPA Feisbuc | candidato Vue 3; scelta non congelata |
 | SPA e routing | sì | client completo | componenti, stato, form, REST |
 | WebSocket/realtime | sì | live feed/chat/notifiche | WebSocket concettuale + Socket.IO applicativo |
 | FastAPI mirror track | sì, mirato | API alternativa | stesso contratto HTTP, non doppio corso |
 | OpenAPI | sì | documentazione API | naturale nel mirror FastAPI |
 | SQLAlchemy | sì nel mirror Python | persistenza Python | mapping SQL ↔ ORM |
-| Testing/debugging | sì | test Feisbuc | CSS/JS/HTTP/Express debugging; JS puro autograded; API reference E2E in CI |
+| Testing/debugging | sì | test Feisbuc | CSS/JS/HTTP/Express/SQL debugging; SQL e JS puri autograded; API reference E2E |
 | Deployment | sì | release finale | env, build, log, HTTPS/reverse proxy concettuali |
 | Capstone | sì | Feisbuc | milestone progressive e prodotto finale |
 | TypeScript | da decidere | eventuale fase avanzata | breve core o track advanced |
@@ -46,28 +49,18 @@ Stato: **draft**. Questa matrice descrive il perimetro del corso mentre i moduli
 3 JavaScript DOM + localStorage
 4 HTTP REST API client + node:http fixture
 5 Express 5 modular API + MemoryPostStore
+6 Express 5 + SqlPostStore + SQLite file
 ```
 
-La milestone 5 mantiene intenzionalmente il contratto di milestone 4:
+Il salto 5 → 6 e volutamente locale alla persistenza:
 
 ```text
-client
-  -> api.js
-  -> GET/POST/PATCH /api/posts
-  -> Express Router
-  -> validation
-  -> MemoryPostStore
+client -> api.js -> Router -> MemoryPostStore
+                         |
+                         `-> SqlPostStore -> SQLite
 ```
 
-La prossima sostituzione desiderata è quindi locale al backend:
-
-```text
-MemoryPostStore
-      ↓
-SQL raw repository
-```
-
-senza riscrivere client, route semantics o error model.
+Client, HTTP contract, validation ed error model non devono cambiare.
 
 ## Activity UDA 22
 
@@ -78,22 +71,29 @@ senza riscrivere client, route semantics o error model.
 
 ## Activity UDA 23
 
-- [x] `tpsi5-activity-a-http-microscope-001` — `curl -i` + DevTools, request/response/status/header/content;
-- [x] `tpsi5-activity-b-async-response-policy-001` — Promise/async + semantica `Response`, grading deterministico JS;
+- [x] `tpsi5-activity-a-http-microscope-001` — `curl -i` + DevTools;
+- [x] `tpsi5-activity-b-async-response-policy-001` — Promise/async + `Response`, grading JS;
 - [x] `tpsi5-activity-c-feisbuc-rest-client-001` — milestone 4, GET/POST/PATCH via `fetch`;
-- [x] `tpsi5-activity-d-debug-fetch-http-001` — 404 vs network error, JSON/Content-Type, 204 e parsing.
+- [x] `tpsi5-activity-d-debug-fetch-http-001` — debug 404/media type/204.
 
-## Activity UDA 24 — primo blocco Node/Express
+## Activity UDA 24 — Node/Express
 
 - [x] `tpsi5-activity-a-node-http-express-map-001` — confronto stessa API `node:http`/Express;
-- [x] `tpsi5-activity-b-post-validation-001` — validation pura, grading deterministico JS;
-- [x] `tpsi5-activity-c-feisbuc-express-api-001` — milestone 5, Express Router/middleware/memory store;
-- [x] `tpsi5-activity-d-debug-express-pipeline-001` — ordine middleware, params, safe methods, 404/error pipeline.
+- [x] `tpsi5-activity-b-post-validation-001` — validation pura, grading JS;
+- [x] `tpsi5-activity-c-feisbuc-express-api-001` — milestone 5, Express + MemoryPostStore;
+- [x] `tpsi5-activity-d-debug-express-pipeline-001` — debug middleware/params/errors.
+
+## Activity UDA 24 — SQL raw/persistence
+
+- [x] `tpsi5-activity-a-sql-posts-schema-001` — schema/constraint, **grading SQL**;
+- [x] `tpsi5-activity-b-sql-posts-dml-001` — DML/view/WHERE, **grading SQL**;
+- [x] `tpsi5-activity-c-feisbuc-sql-repository-001` — milestone 6, `node:sqlite` + persistence restart-safe;
+- [x] `tpsi5-activity-d-debug-sql-state-001` — constraint + UPDATE/DELETE debugging, **grading SQL + diagnosi**.
 
 ## Gate prima del freeze del curriculum TPSI5
 
-1. completare UDA 24 con SQL raw, auth sicura e confronto SSR;
-2. definire operativamente il confine col corso SQL separato;
+1. completare UDA 24 con auth sicura e confronto SSR;
+2. definire/creare il corso SQL separato riusando questo blocco come primo consumer;
 3. scelta framework frontend;
 4. scelta ORM Node;
 5. scelta profondità TypeScript;

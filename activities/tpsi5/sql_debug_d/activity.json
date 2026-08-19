@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-d-debug-sql-state-001",
+  "titolo": "Debug SQL: constraint, UPDATE senza WHERE e DELETE troppo ampio",
+  "tipo": "debug-didattico",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "D",
+  "argomenti": ["sql", "sqlite", "debugging", "check-constraint", "update", "delete", "where", "data-integrity"],
+  "linguaggio": "sql",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-sql-raw-persistence"],
+  "source_refs": [
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/07_SQL_RAW_PERSISTENCE.md", "anchor": "la-clausola-where-e-parte-della-sicurezza-logica", "role": "lesson"},
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/07_SQL_RAW_PERSISTENCE.md", "anchor": "errori-frequenti", "role": "debug-model"}
+  ],
+  "consegna": "Lo starter rappresenta una migrazione/DML difettosa. Prima compila `DIAGNOSI.md`: per ciascuno dei tre bug indica sintomo, causa e fix minimo. Poi correggi soltanto la sezione marcata BROKEN in `main.sql`. Stato finale richiesto: p1 invariato (2/1), p2 deve diventare 1/1, p3 deve restare 0/0 e `remove-me` deve essere eliminato. Lo script non deve violare alcun constraint.",
+  "vincoli": [
+    "non modificare schema o seed p1/p2/p3",
+    "correggi la riga remove-me rendendola valida prima della cancellazione",
+    "l'UPDATE deve modificare soltanto p2",
+    "il DELETE deve eliminare soltanto remove-me",
+    "non disabilitare o rimuovere i CHECK",
+    "diagnosi prima del fix"
+  ],
+  "assets": [
+    {"type": "starter", "path": "starter/main.sql", "target_path": "main.sql", "visibility": "student", "description": "SQL deliberatamente rotto"},
+    {"type": "starter", "path": "starter/DIAGNOSI.md", "target_path": "DIAGNOSI.md", "visibility": "student", "description": "Template diagnosi"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Sintomi e stato finale"},
+    {"type": "teacher_only", "path": "solution/main.sql", "visibility": "teacher", "description": "SQL corretto"},
+    {"type": "teacher_only", "path": "solution/DIAGNOSI.md", "visibility": "teacher", "description": "Diagnosi di riferimento"}
+  ],
+  "soluzione_attesa": {"tipo": "sql-debug", "file": "main.sql", "note": "Fix minimi con WHERE precisi e constraint preservati."},
+  "correzione": {"compila": false, "test": true, "sandbox": true, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 50, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "test_cases": [
+    {"name": "stato finale esatto", "stdin": "SELECT id, likes, liked FROM posts ORDER BY id;\n", "expected_stdout": "p1|2|1\np2|1|1\np3|0|0\n"},
+    {"name": "solo remove-me eliminato", "stdin": "SELECT COUNT(*) FROM posts WHERE id='remove-me'; SELECT COUNT(*) FROM posts;\n", "expected_stdout": "0\n3\n"}
+  ],
+  "manual_checks": [
+    {"name": "diagnosis", "criterion": "DIAGNOSI.md distingue constraint violation, UPDATE senza WHERE e DELETE con predicato troppo ampio"}
+  ],
+  "rubrica": [
+    {"criterio": "Diagnosi dei tre difetti", "punti": 4},
+    {"criterio": "Constraint preservati", "punti": 2},
+    {"criterio": "UPDATE mirato", "punti": 2},
+    {"criterio": "DELETE mirato", "punti": 2}
+  ]
+}

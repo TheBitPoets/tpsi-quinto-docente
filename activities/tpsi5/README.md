@@ -30,6 +30,10 @@ Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F:
 | B | `tpsi5-activity-b-post-validation-001` | 24 | validation pura del body | automatico JS |
 | C | `tpsi5-activity-c-feisbuc-express-api-001` | 24 | milestone 5 Express API modulare | manuale + reference E2E CI |
 | D | `tpsi5-activity-d-debug-express-pipeline-001` | 24 | debug middleware/order/params/errors | manuale + reference E2E CI |
+| A | `tpsi5-activity-a-sql-posts-schema-001` | 24 | schema e constraint `posts` | **automatico SQL** |
+| B | `tpsi5-activity-b-sql-posts-dml-001` | 24 | INSERT/UPDATE/DELETE/view | **automatico SQL** |
+| C | `tpsi5-activity-c-feisbuc-sql-repository-001` | 24 | milestone 6 `SqlPostStore` persistente | manuale + reference E2E CI |
+| D | `tpsi5-activity-d-debug-sql-state-001` | 24 | debug constraint/WHERE | **automatico SQL + diagnosi** |
 
 ## Boundary di grading
 
@@ -37,36 +41,58 @@ Nel contratto piattaforma pinned:
 
 ```text
 javascript / nodejs  -> runner deterministico disponibile
+sql                  -> runner SQLite deterministico disponibile
 html/browser          -> runtime completo non ancora disponibile
 ```
 
 ### JavaScript puro
 
-A/B UDA 22, B UDA 23 e B UDA 24 possono usare il runner deterministico Node.js:
+A/B UDA 22, B UDA 23 e B Node/Express possono usare:
 
 ```text
 stdin -> JavaScript -> stdout -> expected_stdout
 ```
 
-Queste Activity dichiarano `test=true` e `sandbox=true`.
+### SQL puro
 
-### Protocollo, browser e backend multi-file
+A/B/D del blocco SQL usano direttamente il runner SQL TheBitLab:
+
+```text
+main.sql
+  + SQL di test
+  -> SQLite :memory:
+  -> righe serializzate
+  -> expected_stdout
+```
+
+Questo significa che constraint, DML e stato finale sono verificati senza introdurre Node nel test del linguaggio SQL.
+
+Activity D conserva anche una parte manuale: la CI puo verificare lo stato corretto, ma la rubrica valuta se lo studente ha spiegato **perche** constraint/WHERE erano sbagliati.
+
+### Browser e backend multi-file
 
 Una Activity puo richiedere evidence che il runner singolo-file non misura:
 
 ```text
-curl/Network reasoning
-DOM + browser APIs
+DOM/browser
 server process
 routing/middleware
-static files
-piu file e dipendenze npm
+file DB persistente
+restart del processo
+piu file/dipendenze
 ```
 
-In questi casi l'Activity resta a rubrica/manuale finche il runtime TheBitLab appropriato non e disponibile.
+In questi casi l'Activity resta a rubrica/manuale. La CI del repository docente esegue le **soluzioni di riferimento**, non finge che siano test automatici della consegna studente.
 
-La CI del **repository docente** puo comunque eseguire le soluzioni di riferimento: per UDA 23 avvia le fixture HTTP; per UDA 24 installa Express pinned e smoke-testa i server A/C/D. Questo verifica che noi non pubblichiamo una soluzione rotta, ma non viene presentato come autograding della consegna studente.
+Per milestone 6 la CI deve dimostrare anche:
+
+```text
+POST su DB file
+ -> stop server
+ -> restart stesso DB_PATH
+ -> GET ritrova il post
+```
 
 ## Regola
 
-Il tipo di evidenza deve corrispondere al comportamento che vogliamo misurare. Non trasformiamo uno smoke test docente in un finto test studente e non usiamo il runner Node per fingere di avere un browser.
+Il tipo di evidenza deve corrispondere al comportamento osservato: linguaggio puro → runner deterministico; browser/processi/persistenza → runtime/E2E appropriato.
