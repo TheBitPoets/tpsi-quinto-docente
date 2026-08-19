@@ -26,6 +26,10 @@ Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 | B | `tpsi5-activity-b-vue-post-card-001` | props down / emits up | manuale + reference Vite build |
 | C | `tpsi5-activity-c-feisbuc-vue-spa-001` | milestone 9 Vue SPA | manuale + build + composed backend smoke |
 | D | `tpsi5-activity-d-debug-vue-reactivity-001` | reactivity/component debugging | manuale + starter/solution build |
+| A | `tpsi5-activity-a-vue-router-microscope-001` | URL/history/RouterView/deep link | manuale + Vite build |
+| B | `tpsi5-activity-b-navigation-policy-001` | navigation state machine | **automatico JS** |
+| C | `tpsi5-activity-c-feisbuc-vue-router-001` | milestone 10 Vue Router | manuale + composed build/deep-link E2E |
+| D | `tpsi5-activity-d-debug-vue-router-001` | history/guard/fallback debug | manuale + structural checks |
 
 ## Boundary di grading
 
@@ -33,22 +37,25 @@ Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 linguaggio puro                 -> runner deterministico JS/SQL
 single template/render          -> reference CI con dependency pinned
 Vue/SFC/browser multi-file      -> reference build + smoke/E2E docente
+HTTP deep-link fallback         -> reference server E2E
 backend/persistence/security    -> reference E2E
 security/architecture reasoning -> rubrica + evidence
 ```
 
-Il browser grader TheBitLab non e ancora implementato. Per le Activity Vue `correzione.test=false` rimane quindi intenzionale.
+Il browser grader TheBitLab non e ancora implementato. Per le Activity Vue/router `correzione.test=false` rimane quindi intenzionale quando il comportamento da osservare richiede browser DOM/history/eventi. La Activity B di routing e invece autograded perche la navigation policy e una funzione JavaScript pura.
 
 La Quality del repository docente puo e deve:
 
 - installare versioni pinned;
 - eseguire `vite build` su starter/reference appropriati;
-- controllare staticamente boundary come props/emits e assenza di token handling;
+- controllare staticamente route/meta/guard e boundary auth;
+- comporre milestone 9 + routing overlay;
 - comporre `dist/` con il backend auth gia verificato;
-- fare smoke HTTP sul sistema reference.
+- fare smoke HTTP su `/vue/` e sul deep link `/vue/feed`;
+- verificare che `/api/*` mantenga 401/403 e il contratto precedente.
 
 Queste verifiche dimostrano la qualita della **reference solution**, non trasformano automaticamente l'Activity browser in autograding studente.
 
 ## Regola
 
-Il tipo di evidence deve corrispondere al comportamento osservato. In particolare, il successo di `vite build` non dimostra da solo che una UI reattiva funzioni nel browser: reattivita, eventi e DOM richiederanno il browser runner futuro (#729).
+Il tipo di evidence deve corrispondere al comportamento osservato. `vite build` e un deep-link HTTP 200 non dimostrano da soli che RouterLink, back/forward, navigation guard e rendering funzionino nel browser: questi comportamenti richiederanno il browser runner futuro (#729).
