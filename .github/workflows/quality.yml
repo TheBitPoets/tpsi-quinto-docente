@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JavaScript and backend E2E tests
+      - name: Set up Node.js for deterministic JavaScript, SQL persistence and backend E2E tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -49,12 +49,16 @@ jobs:
         working-directory: activities/tpsi5/node_http_express_a/starter
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
-      - name: Install Express for Feisbuc reference solution
+      - name: Install Express for Feisbuc memory-store reference
         working-directory: activities/tpsi5/feisbuc_express_c/solution
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
       - name: Install Express for debug reference solution
         working-directory: activities/tpsi5/express_debug_d/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Install Express for Feisbuc SQL reference solution
+        working-directory: activities/tpsi5/feisbuc_sql_c/solution
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
@@ -66,3 +70,4 @@ jobs:
           tests/test_tpsi_quinto_javascript_dom.py
           tests/test_tpsi_quinto_http_fetch.py
           tests/test_tpsi_quinto_node_express.py
+          tests/test_tpsi_quinto_sql_persistence.py
