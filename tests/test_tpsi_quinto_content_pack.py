@@ -24,6 +24,7 @@ ACTIVITY_B_ROOT = ROOT / "activities" / "tpsi5" / "feisbuc_semantic_b"
 ACTIVITY_C_ROOT = ROOT / "activities" / "tpsi5" / "feisbuc_responsive_c"
 ACTIVITY_D_ROOT = ROOT / "activities" / "tpsi5" / "css_debug_d"
 ACTIVITY_E_ROOT = ROOT / "activities" / "tpsi5" / "feisbuc_bootstrap_e"
+ACCEPTED_CONTENT_PACK_V1_SHA = "5472eef86568a4e7ce59ad34ba937220df27efd7"
 
 
 def load(path: Path) -> dict:
@@ -71,8 +72,12 @@ def test_native_content_pack_v1_is_valid() -> None:
     pack = load(PACK_PATH)
 
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.4.0"
+    assert pack["version"] == "0.4.1"
     assert pack["status"] == "draft"
+    assert (
+        pack["extensions"]["platform_contract"]["content_pack_v1_sha"]
+        == ACCEPTED_CONTENT_PACK_V1_SHA
+    )
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
 
 
