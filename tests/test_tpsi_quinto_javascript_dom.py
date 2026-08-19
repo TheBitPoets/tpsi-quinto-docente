@@ -285,14 +285,16 @@ def test_debug_activity_contains_real_faults_and_reference_removes_them() -> Non
 
     assert 'addEventListener("submit", (event)' in fixed
     assert 'feed.addEventListener("click"' in fixed
-    assert "data-post-id" not in fixed  # dataset API produces the attribute at runtime
     assert "dataset.postId" in fixed
     assert "dataset.action" in fixed
+    assert "[data-post-id]" in fixed
+    assert "[data-action='like']" in fixed
     assert "JSON.stringify(posts)" in fixed
     assert "JSON.parse(raw)" in fixed
     assert ".textContent = post.text" in fixed
     assert "querySelectorAll" not in fixed
     assert "let counter" not in fixed
+    assert "like_button_" not in fixed
     assert "innerHTML" not in fixed
     assert "fetch(" not in fixed
 
