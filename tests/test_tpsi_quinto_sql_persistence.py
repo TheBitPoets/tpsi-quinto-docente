@@ -68,7 +68,7 @@ def assert_activity(root,difficulty,activity_id,automatic):
 def test_sql_content_pack_item_course_design_and_activity_contracts():
     pack=load(PACK_PATH); design=load(DESIGN_PATH)
     item=next(x for x in pack["content_items"] if x["id"]=="tpsi5-content-sql-raw-persistence")
-    assert pack["version"]=="0.9.0"
+    assert pack["version"]=="0.10.0"
     assert item["path"]=="content/tpsi5/07_SQL_RAW_PERSISTENCE.md" and item["order"]==8
     assert item["activity_ids"]==[
         "tpsi5-activity-a-sql-posts-schema-001","tpsi5-activity-b-sql-posts-dml-001",
@@ -76,9 +76,10 @@ def test_sql_content_pack_item_course_design_and_activity_contracts():
     assert {"tpsi5-ref-lab8-legacy","tpsi5-ref-node","tpsi5-ref-sqlite"} <= {r["id"] for r in item["source_refs"]}
     assert LESSON_PATH.is_file()
     uda24=next(u for u in design["years"][0]["udas"] if u["id"]=="uda-24")
-    assert len(uda24["items"])==3
+    assert len(uda24["items"])==4
     assert uda24["items"][1]["source"]=="content/tpsi5/07_SQL_RAW_PERSISTENCE.md"
     assert uda24["items"][2]["source"]=="content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md"
+    assert uda24["items"][3]["source"]=="content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md"
     assert_activity(A_ROOT,"A","tpsi5-activity-a-sql-posts-schema-001",True)
     assert_activity(B_ROOT,"B","tpsi5-activity-b-sql-posts-dml-001",True)
     c=assert_activity(C_ROOT,"C","tpsi5-activity-c-feisbuc-sql-repository-001",False)
