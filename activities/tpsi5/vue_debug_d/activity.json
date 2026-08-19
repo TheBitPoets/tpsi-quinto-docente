@@ -1,0 +1,47 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-d-debug-vue-reactivity-001",
+  "titolo":"Debug Vue: reattivita, props, key ed eventi",
+  "tipo":"debug-didattico",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"D",
+  "argomenti":["vue-3","debugging","reactivity","reactive-destructuring","computed","props","emits","v-for-key"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-vue3-components-reactivity"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md","anchor":"15-errori-frequenti","role":"lesson"}],
+  "consegna":"Lo starter compila ma mostra comportamenti incoerenti. Prima compila `DIAGNOSI.md`, poi correggi: destructuring di primitive da `reactive`, count derivato duplicato come ref, mutazione diretta di prop, key basata sull'indice e nome evento child/parent incoerente. Non risolvere introducendo Pinia, watch o reload forzati.",
+  "vincoli":["starter e solution devono entrambi compilare","diagnosi prima del fix","computed per stato derivato","props non mutate","key stabile post.id","nome emit/listener coerente","nessun watch/Pinia"],
+  "assets":[
+    {"type":"starter","path":"starter/package.json","target_path":"package.json","visibility":"student","description":"Toolchain"},
+    {"type":"starter","path":"starter/index.html","target_path":"index.html","visibility":"student","description":"Entry"},
+    {"type":"starter","path":"starter/vite.config.js","target_path":"vite.config.js","visibility":"student","description":"Vite config"},
+    {"type":"starter","path":"starter/src/main.js","target_path":"src/main.js","visibility":"student","description":"Mount"},
+    {"type":"starter","path":"starter/src/App.vue","target_path":"src/App.vue","visibility":"student","description":"App con bug reattivita/key/evento"},
+    {"type":"starter","path":"starter/src/components/PostCard.vue","target_path":"src/components/PostCard.vue","visibility":"student","description":"Child con prop mutation/event bug"},
+    {"type":"starter","path":"student/DIAGNOSI.md","target_path":"DIAGNOSI.md","visibility":"student","description":"Scheda diagnosi"},
+    {"type":"teacher_only","path":"solution/package.json","visibility":"teacher","description":"Package fixed"},
+    {"type":"teacher_only","path":"solution/index.html","visibility":"teacher","description":"Entry fixed"},
+    {"type":"teacher_only","path":"solution/vite.config.js","visibility":"teacher","description":"Vite fixed"},
+    {"type":"teacher_only","path":"solution/src/main.js","visibility":"teacher","description":"Mount fixed"},
+    {"type":"teacher_only","path":"solution/src/App.vue","visibility":"teacher","description":"App fixed"},
+    {"type":"teacher_only","path":"solution/src/components/PostCard.vue","visibility":"teacher","description":"Child fixed"},
+    {"type":"teacher_only","path":"solution/DIAGNOSI.md","visibility":"teacher","description":"Diagnosi attesa"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Review"}
+  ],
+  "soluzione_attesa":{"tipo":"vue-debug","file":"src/App.vue","note":"Fix reattivita e one-way data flow senza cambiare stack."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":80,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"reactive-destructure","criterion":"riconosce la perdita di reattivita della primitive destructured"},
+    {"name":"derived-state","criterion":"sostituisce count duplicato con computed"},
+    {"name":"one-way-flow","criterion":"rimuove prop mutation e usa emit coerente"},
+    {"name":"stable-key","criterion":"usa post.id e non indice"}
+  ],
+  "rubrica":[
+    {"criterio":"Diagnosi causa-effetto", "punti":4},
+    {"criterio":"Fix reattivita/computed", "punti":2},
+    {"criterio":"Props/emits", "punti":2},
+    {"criterio":"Key e qualita", "punti":2}
+  ]
+}
