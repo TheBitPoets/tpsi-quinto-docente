@@ -139,7 +139,7 @@ def test_auth_content_pack_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
     item = next(x for x in pack["content_items"] if x["id"] == "tpsi5-content-auth-sessions-security")
-    assert pack["version"] == "0.9.0"
+    assert pack["version"] == "0.10.0"
     assert item["path"] == "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md"
     assert item["order"] == 9
     assert item["activity_ids"] == [
@@ -164,11 +164,12 @@ def test_auth_content_pack_design_and_activity_contracts() -> None:
 
     uda24 = next(u for u in design["years"][0]["udas"] if u["id"] == "uda-24")
     assert uda24["weeks"] == "7"
-    assert len(uda24["items"]) == 3
+    assert len(uda24["items"]) == 4
     auth_item = uda24["items"][2]
     assert auth_item["source"] == "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md"
     assert auth_item["activity_ids"] == item["activity_ids"]
     assert "SSR" in auth_item["frame"]["next_step"]
+    assert uda24["items"][3]["source"] == "content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md"
 
     a = assert_activity(A_ROOT, "A", "tpsi5-activity-a-auth-credential-policy-001", True)
     b = assert_activity(B_ROOT, "B", "tpsi5-activity-b-auth-post-authorization-001", True)
