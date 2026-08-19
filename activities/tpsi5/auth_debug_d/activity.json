@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-d-debug-auth-security-001",
+  "titolo": "Security review auth: funziona, ma di chi ti stai fidando?",
+  "tipo": "debug-didattico",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "D",
+  "argomenti": ["authentication", "authorization", "password-storage", "session-fixation", "cookie-security", "user-enumeration", "idor", "security-review"],
+  "linguaggio": "nodejs",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-24"},
+  "content_ids": ["tpsi5-content-auth-sessions-security"],
+  "source_refs": [
+    {"source_id":"tpsi5-source-originali","path":"content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md","anchor":"29-errori-frequenti","role":"lesson"},
+    {"source_id":"tpsi5-ref-lab9-legacy","path":"index.js","anchor":"","role":"legacy-security-provenance"}
+  ],
+  "consegna": "Esegui una security review di `insecure.js` **prima** di proporre fix. Completa `SECURITY_REVIEW.md` collegando asset/trust boundary -> vulnerabilita -> attacco -> fix -> evidence. Devi trovare almeno: password plaintext, user enumeration, session ID prevedibile, cookie debole, leak di secret nella response, authorId fidato dal body, authorization basata su userId/authorId dichiarati dal client e assenza di revoca/expiry server-side. Poi confronta i tuoi fix con `fixed-patterns.js` senza trasformare la review in una riscrittura completa del server.",
+  "vincoli": [
+    "diagnosi prima del fix",
+    "almeno otto finding distinti",
+    "ogni finding deve indicare un attacco osservabile o plausibile",
+    "distingui autenticazione e autorizzazione",
+    "non proporre localStorage per token auth",
+    "non proporre JWT come fix automatico",
+    "cookie Secure deve essere motivato insieme a HTTPS",
+    "SameSite va descritto come defense in depth, non soluzione CSRF unica"
+  ],
+  "assets": [
+    {"type":"starter","path":"starter/insecure.js","target_path":"insecure.js","visibility":"student","description":"Backend volutamente vulnerabile"},
+    {"type":"starter","path":"starter/SECURITY_REVIEW.md","target_path":"SECURITY_REVIEW.md","visibility":"student","description":"Template review"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Metodo di review"},
+    {"type":"teacher_only","path":"solution/SECURITY_REVIEW.md","visibility":"teacher","description":"Review di riferimento"},
+    {"type":"teacher_only","path":"solution/fixed-patterns.js","visibility":"teacher","description":"Pattern di fix minimali"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Domande e valutazione"}
+  ],
+  "soluzione_attesa": {"tipo":"security-review","file":"SECURITY_REVIEW.md","note":"Review causa/attacco/fix/evidence; non solo patch codice."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 100, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": false},
+  "manual_checks": [
+    {"name":"password","criterion":"plaintext -> password KDF con salt"},
+    {"name":"enumeration","criterion":"login usa errore pubblico generico"},
+    {"name":"session","criterion":"token random/opaco, hash DB, revoca/expiry"},
+    {"name":"cookie","criterion":"HttpOnly/Secure/SameSite/Path motivati"},
+    {"name":"identity","criterion":"author identity deriva dal server session context"},
+    {"name":"authorization","criterion":"ownership viene verificata server-side"}
+  ],
+  "rubrica": [
+    {"criterio":"Completezza finding", "punti":3},
+    {"criterio":"Causa e attacco", "punti":2},
+    {"criterio":"Fix coerenti", "punti":2},
+    {"criterio":"Evidence verificabile", "punti":2},
+    {"criterio":"Trust-boundary reasoning", "punti":1}
+  ]
+}
