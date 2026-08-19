@@ -1,0 +1,44 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-a-vue-router-microscope-001",
+  "titolo":"Vue Router microscope: URL, history e RouterView",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"A",
+  "argomenti":["vue-router","client-side-routing","router-link","router-view","history-api","deep-link","404"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-vue-router-navigation"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md","anchor":"3-route-record","role":"lesson"}],
+  "consegna":"Esegui la mini SPA, naviga con RouterLink, usa back/forward, osserva `route.fullPath`, prova un URL inesistente e infine apri direttamente un deep link. Compila `OBSERVATIONS.md` distinguendo comportamento del router e comportamento del server dev. Non modificare il codice prima di avere raccolto le evidenze.",
+  "vincoli":["Vue 3.5.40 e Vue Router 5.2.0","Vite 8.2.1","usa RouterLink per la navigazione interna","createWebHistory(import.meta.env.BASE_URL)","catch-all client-side presente","nessun Pinia/TypeScript"],
+  "assets":[
+    {"type":"starter","path":"starter/package.json","target_path":"package.json","visibility":"student","description":"Toolchain pinned"},
+    {"type":"starter","path":"starter/index.html","target_path":"index.html","visibility":"student","description":"Vite entry"},
+    {"type":"starter","path":"starter/vite.config.js","target_path":"vite.config.js","visibility":"student","description":"Vite config"},
+    {"type":"starter","path":"starter/src/main.js","target_path":"src/main.js","visibility":"student","description":"Vue + router mount"},
+    {"type":"starter","path":"starter/src/router.js","target_path":"src/router.js","visibility":"student","description":"Route records"},
+    {"type":"starter","path":"starter/src/App.vue","target_path":"src/App.vue","visibility":"student","description":"Layout con RouterLink/RouterView"},
+    {"type":"starter","path":"starter/src/views/HomeView.vue","target_path":"src/views/HomeView.vue","visibility":"student","description":"Home view"},
+    {"type":"starter","path":"starter/src/views/FeedView.vue","target_path":"src/views/FeedView.vue","visibility":"student","description":"Feed view"},
+    {"type":"starter","path":"starter/src/views/NotFoundView.vue","target_path":"src/views/NotFoundView.vue","visibility":"student","description":"Client 404"},
+    {"type":"starter","path":"student/OBSERVATIONS.md","target_path":"OBSERVATIONS.md","visibility":"student","description":"Evidence notebook"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Expected observations"}
+  ],
+  "soluzione_attesa":{"tipo":"osservazione-vue-router","file":"OBSERVATIONS.md","note":"Evidence su URL/history/matching/deep link."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":55,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"url","criterion":"spiega come cambia fullPath con RouterLink"},
+    {"name":"history","criterion":"documenta back/forward senza reload completo"},
+    {"name":"not-found","criterion":"distingue catch-all client da server fallback"},
+    {"name":"deep-link","criterion":"descrive cosa deve fare il server in produzione"}
+  ],
+  "rubrica":[
+    {"criterio":"URL e route match","punti":3},
+    {"criterio":"History/back-forward","punti":2},
+    {"criterio":"RouterLink/RouterView","punti":2},
+    {"criterio":"404 e deep link","punti":2},
+    {"criterio":"Evidence leggibile","punti":1}
+  ]
+}
