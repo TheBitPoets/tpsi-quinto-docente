@@ -45,11 +45,17 @@ jobs:
       - name: Install Python test dependencies
         run: python -m pip install pytest
 
-      - name: Install pinned Express dependencies for reference E2E
-        run: |
-          npm --prefix activities/tpsi5/node_http_express_a/starter install --ignore-scripts --no-audit --no-fund --package-lock=false
-          npm --prefix activities/tpsi5/feisbuc_express_c/solution install --ignore-scripts --no-audit --no-fund --package-lock=false
-          npm --prefix activities/tpsi5/express_debug_d/solution install --ignore-scripts --no-audit --no-fund --package-lock=false
+      - name: Install Express for native-vs-framework reference
+        working-directory: activities/tpsi5/node_http_express_a/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Install Express for Feisbuc reference solution
+        working-directory: activities/tpsi5/feisbuc_express_c/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Install Express for debug reference solution
+        working-directory: activities/tpsi5/express_debug_d/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
