@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import closing
 import hashlib
 import http.cookiejar
 import json
@@ -330,12 +331,11 @@ def test_auth_reference_e2e_cookie_db_ownership_logout_and_restart() -> None:
             status, _, _ = call(alice, f"{server.base}/api/posts/{post_id}", method="DELETE")
             assert status == 204
 
-            # crea un nuovo post per verificare persistenza dopo restart
             _, _, persistent_post = call(alice, f"{server.base}/api/posts", method="POST", payload={"text":"resta dopo restart"})
             persistent_id = persistent_post["id"]
 
         assert db_path.is_file()
-        with sqlite3.connect(db_path) as db:
+        with closing(sqlite3.connect(db_path)) as db:
             email, password_hash = db.execute(
                 "SELECT email, password_hash FROM users WHERE id = ?", (alice_id,)
             ).fetchone()
@@ -348,7 +348,6 @@ def test_auth_reference_e2e_cookie_db_ownership_logout_and_restart() -> None:
             assert alice_token not in session_hashes
             assert hashlib.sha256(alice_token.encode()).hexdigest() in session_hashes
 
-        # cookie host-only non dipende dalla porta: la sessione server-side deve sopravvivere al restart
         with RunningAuthServer(db_path=db_path) as restarted:
             status, _, me = call(alice, f"{restarted.base}/api/auth/me")
             assert status == 200 and me["user"]["id"] == alice_id
@@ -361,7 +360,6 @@ def test_auth_reference_e2e_cookie_db_ownership_logout_and_restart() -> None:
             code, _, payload = error_call(alice, f"{restarted.base}/api/auth/me")
             assert code == 401 and payload["error"]["code"] == "authentication-required"
 
-            # login riparte con una sessione nuova e un errore pubblico generico nei fallimenti
             code1, _, wrong_user = error_call(
                 alice, f"{restarted.base}/api/auth/login", method="POST",
                 payload={"email":"missing@example.test","password":PASSWORD},
