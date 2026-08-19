@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-a-js-feed-pipeline-001",
+  "titolo": "Pipeline JavaScript: dai post al riepilogo del feed",
+  "tipo": "esercizio-classe",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "A",
+  "argomenti": [
+    "javascript",
+    "const-let",
+    "array",
+    "object",
+    "destructuring",
+    "filter",
+    "map",
+    "template-literal",
+    "json"
+  ],
+  "linguaggio": "javascript",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-22"
+  },
+  "content_ids": [
+    "tpsi5-content-javascript-dom-browser"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md",
+      "anchor": "array-una-collezione-ordinata",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-labs-legacy",
+      "path": "README.md",
+      "anchor": "lab3",
+      "role": "legacy-provenance"
+    }
+  ],
+  "consegna": "Completa la funzione `prepareFeed(posts)` nello starter. L'input e un array JSON di post con `id`, `author`, `text`, `likes` e `published`. Mantieni soltanto i post con `published === true` e trasformali in nuovi oggetti `{id, label, popular}`. `label` deve essere `${author}: ${text.trim()}`; `popular` vale `true` quando `likes >= 5`. Non modificare il codice di lettura stdin/output JSON. Conserva l'ordine originale dei post pubblicati.",
+  "vincoli": [
+    "usa const come default e let soltanto se serve riassegnare",
+    "usa filter e map nella pipeline",
+    "non modificare l'array di input",
+    "non ordinare i post",
+    "non stampare log aggiuntivi su stdout",
+    "l'output deve essere JSON valido e deterministico"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/main.js",
+      "target_path": "main.js",
+      "visibility": "student",
+      "description": "Runner stdin/stdout e funzione prepareFeed da completare"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Contratto input/output, esempi e checklist"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/main.js",
+      "visibility": "teacher",
+      "description": "Soluzione di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Misconception e discussione del grader"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "javascript-stdin-stdout",
+    "file": "main.js",
+    "note": "Pipeline pura filter -> map; DOM non coinvolto."
+  },
+  "correzione": {
+    "compila": false,
+    "test": true,
+    "sandbox": true,
+    "ai_feedback": false
+  },
+  "test_cases": [
+    {
+      "name": "filtra e trasforma mantenendo ordine",
+      "stdin": "[{\"id\":1,\"author\":\"Ada\",\"text\":\"  DOM  \",\"likes\":7,\"published\":true},{\"id\":2,\"author\":\"Linus\",\"text\":\"Bozza\",\"likes\":20,\"published\":false},{\"id\":3,\"author\":\"Grace\",\"text\":\"JavaScript\",\"likes\":2,\"published\":true}]\n",
+      "expected_stdout": "[{\"id\":1,\"label\":\"Ada: DOM\",\"popular\":true},{\"id\":3,\"label\":\"Grace: JavaScript\",\"popular\":false}]\n"
+    },
+    {
+      "name": "array vuoto",
+      "stdin": "[]\n",
+      "expected_stdout": "[]\n"
+    },
+    {
+      "name": "nessun post pubblicato",
+      "stdin": "[{\"id\":8,\"author\":\"Kim\",\"text\":\"draft\",\"likes\":5,\"published\":false}]\n",
+      "expected_stdout": "[]\n"
+    }
+  ],
+  "metriche": {
+    "tempo_stimato_minuti": 35,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": true
+  },
+  "manual_checks": [
+    {
+      "name": "spiegazione",
+      "criterion": "lo studente sa spiegare che filter seleziona e map trasforma"
+    },
+    {
+      "name": "immutabilita intenzionale",
+      "criterion": "lo studente distingue nuova collezione da mutazione dell'input"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Test deterministici superati",
+      "punti": 5
+    },
+    {
+      "criterio": "Uso corretto di filter/map e dati",
+      "punti": 2
+    },
+    {
+      "criterio": "Leggibilita e scelta const/let",
+      "punti": 1
+    },
+    {
+      "criterio": "Spiegazione del flusso input -> output",
+      "punti": 2
+    }
+  ]
+}
