@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-a-html-anatomy-001",
+  "titolo": "Anatomia di un documento HTML moderno",
+  "tipo": "studio-guidato",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "A",
+  "argomenti": [
+    "html",
+    "doctype",
+    "metadata",
+    "semantica",
+    "devtools"
+  ],
+  "linguaggio": "html",
+  "contesto": {
+    "percorso": "quinto-anno",
+    "uda": "uda-21"
+  },
+  "content_ids": [
+    "tpsi5-content-web-platform-html"
+  ],
+  "source_refs": [
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
+      "anchor": "lo-scheletro-moderno-di-una-pagina",
+      "role": "lesson"
+    },
+    {
+      "source_id": "tpsi5-source-originali",
+      "path": "content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md",
+      "anchor": "imparare-a-leggere-mdn",
+      "role": "method"
+    }
+  ],
+  "consegna": "Apri lo starter `index.html` nel browser e con DevTools. Completa il documento aggiungendo `<!doctype html>`, `lang=\"it\"`, `meta charset=\"utf-8\"` e il meta viewport. Non cambiare il contenuto visibile. Ricarica la pagina dopo ogni modifica e annota nella checklist cosa cambia nel sorgente e cosa osservi nel DOM. Infine sostituisci il contenitore generico dell'intestazione con l'elemento semantico `header`.",
+  "vincoli": [
+    "mantieni il titolo visibile e il paragrafo forniti nello starter",
+    "non aggiungere CSS o JavaScript",
+    "usa esattamente un h1",
+    "imposta la lingua principale su italiano",
+    "non copiare l'intero esempio MDN: usa la documentazione per verificare le singole scelte"
+  ],
+  "assets": [
+    {
+      "type": "starter",
+      "path": "starter/index.html",
+      "target_path": "index.html",
+      "visibility": "student",
+      "description": "Documento HTML minimale da completare"
+    },
+    {
+      "type": "example",
+      "path": "student/README.md",
+      "target_path": "README.md",
+      "visibility": "student",
+      "description": "Procedura guidata e checklist di osservazione"
+    },
+    {
+      "type": "teacher_only",
+      "path": "solution/index.html",
+      "visibility": "teacher",
+      "description": "Soluzione di riferimento"
+    },
+    {
+      "type": "teacher_only",
+      "path": "teacher/NOTES.md",
+      "visibility": "teacher",
+      "description": "Note docente e rubrica osservativa"
+    }
+  ],
+  "soluzione_attesa": {
+    "tipo": "documento-html",
+    "file": "index.html",
+    "note": "Documento HTML moderno minimale con metadata essenziali e header semantico."
+  },
+  "correzione": {
+    "compila": false,
+    "test": false,
+    "sandbox": false,
+    "ai_feedback": false
+  },
+  "metriche": {
+    "tempo_stimato_minuti": 30,
+    "traccia_tempo_dichiarato": true,
+    "traccia_sessioni_thebitlab": true,
+    "traccia_eventi_didattici": true,
+    "traccia_errori_compilazione": false
+  },
+  "manual_checks": [
+    {
+      "name": "documento moderno",
+      "criterion": "doctype, lang, charset, viewport e title sono presenti e coerenti"
+    },
+    {
+      "name": "semantica minima",
+      "criterion": "l'intestazione visibile usa header e contiene un solo h1"
+    },
+    {
+      "name": "osservazione DevTools",
+      "criterion": "lo studente sa distinguere file sorgente e DOM mostrato dal browser"
+    }
+  ],
+  "rubrica": [
+    {
+      "criterio": "Scheletro e metadata corretti",
+      "punti": 4
+    },
+    {
+      "criterio": "Uso dell'elemento header e gerarchia h1",
+      "punti": 2
+    },
+    {
+      "criterio": "Uso consapevole di DevTools",
+      "punti": 2
+    },
+    {
+      "criterio": "Spiegazione del ruolo di HTML e dei metadata",
+      "punti": 2
+    }
+  ]
+}
