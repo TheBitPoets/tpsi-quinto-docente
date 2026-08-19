@@ -1,0 +1,278 @@
+{
+  "schema_version": "thebitlab.content-pack.v1",
+  "id": "tpsi5-fullstack-web-2026",
+  "title": "TPSI quinto anno - Full Stack Web Developer",
+  "version": "0.1.0",
+  "status": "draft",
+  "language": "it",
+  "audience": {
+    "school_level": "secondaria-secondo-grado",
+    "school_type": "istituto-tecnico-tecnologico",
+    "course": "informatica-e-telecomunicazioni-articolazione-informatica",
+    "subject": "TPSI",
+    "year": 5,
+    "school_year": "2026-2027"
+  },
+  "ownership": {
+    "content_origin": "original-course-material",
+    "redistribution_status": "private-course-repository",
+    "editorial_copying_allowed": false,
+    "notes": "Contenuti originali TheBitPoets; fonti esterne e materiale licensed sono registrati come provenance/reference e non copiati automaticamente."
+  },
+  "references": [
+    {
+      "id": "tpsi5-ref-mdn",
+      "kind": "documentation",
+      "provider": "mdn",
+      "role": "technical-reference",
+      "title": "MDN Web Docs",
+      "uri": "https://developer.mozilla.org/en-US/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-whatwg-html",
+      "kind": "standard",
+      "provider": "whatwg",
+      "role": "specification",
+      "title": "HTML Living Standard",
+      "uri": "https://html.spec.whatwg.org/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-rfc9110",
+      "kind": "standard",
+      "provider": "rfc-editor",
+      "role": "specification",
+      "title": "RFC 9110 - HTTP Semantics",
+      "uri": "https://www.rfc-editor.org/rfc/rfc9110",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-node",
+      "kind": "documentation",
+      "provider": "nodejs",
+      "role": "technical-reference",
+      "title": "Node.js Documentation",
+      "uri": "https://nodejs.org/api/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-express",
+      "kind": "documentation",
+      "provider": "expressjs",
+      "role": "technical-reference",
+      "title": "Express Documentation",
+      "uri": "https://expressjs.com/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-bootstrap",
+      "kind": "documentation",
+      "provider": "bootstrap",
+      "role": "technical-reference",
+      "title": "Bootstrap Documentation",
+      "uri": "https://getbootstrap.com/docs/5.3/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-vue",
+      "kind": "documentation",
+      "provider": "vuejs",
+      "role": "technical-reference",
+      "title": "Vue Documentation - candidate frontend framework",
+      "uri": "https://vuejs.org/guide/",
+      "access": "public",
+      "license_status": "external-public-reference",
+      "notes": "Candidate only; framework choice not frozen in bootstrap."
+    },
+    {
+      "id": "tpsi5-ref-websocket",
+      "kind": "standard",
+      "provider": "whatwg",
+      "role": "specification",
+      "title": "WebSockets Standard",
+      "uri": "https://websockets.spec.whatwg.org/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-socketio",
+      "kind": "documentation",
+      "provider": "socketio",
+      "role": "technical-reference",
+      "title": "Socket.IO Documentation",
+      "uri": "https://socket.io/docs/v4/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-fastapi",
+      "kind": "documentation",
+      "provider": "fastapi",
+      "role": "technical-reference",
+      "title": "FastAPI Documentation",
+      "uri": "https://fastapi.tiangolo.com/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-sqlalchemy",
+      "kind": "documentation",
+      "provider": "sqlalchemy",
+      "role": "technical-reference",
+      "title": "SQLAlchemy 2.0 Documentation",
+      "uri": "https://docs.sqlalchemy.org/en/20/",
+      "access": "public",
+      "license_status": "external-public-reference"
+    },
+    {
+      "id": "tpsi5-ref-manning-css-depth",
+      "kind": "book",
+      "provider": "manning",
+      "role": "teacher-reference",
+      "title": "CSS in Depth, Second Edition",
+      "uri": "https://www.manning.com/books/css-in-depth-second-edition",
+      "access": "licensed",
+      "license_status": "licensed-reference-only"
+    },
+    {
+      "id": "tpsi5-ref-pluralsight-javascript",
+      "kind": "learning-path",
+      "provider": "pluralsight",
+      "role": "teacher-reference",
+      "title": "JavaScript learning path",
+      "uri": "https://app.pluralsight.com/paths/skills/javascript-2022",
+      "access": "licensed",
+      "license_status": "licensed-reference-only"
+    }
+  ],
+  "sources": [
+    {
+      "id": "tpsi5-source-originali",
+      "kind": "source-package",
+      "label": "TPSI quinto - contenuti originali",
+      "type": "markdown",
+      "provider": "local",
+      "role": "approved-course-content",
+      "path": "content/tpsi5",
+      "files": [
+        "README.md",
+        "COVERAGE.md",
+        "00_COURSE_ARCHITECTURE.md"
+      ],
+      "license_status": "project-license-to-review",
+      "indexing_status": "ready"
+    },
+    {
+      "id": "tpsi5-source-html-css-legacy",
+      "kind": "source-package",
+      "label": "Legacy HTML/CSS summary",
+      "type": "markdown",
+      "provider": "github",
+      "role": "legacy-course-content",
+      "repository": "TheBitPoets/html_css_summary",
+      "ref": "d71da420f1aa2ea39b61356e4f9900c6371e7a42",
+      "files": [
+        "README.md"
+      ],
+      "license_status": "project-license-to-review",
+      "indexing_status": "ready"
+    },
+    {
+      "id": "tpsi5-source-labs-legacy",
+      "kind": "source-package",
+      "label": "Legacy TPSI labs summary",
+      "type": "markdown",
+      "provider": "github",
+      "role": "legacy-course-content",
+      "repository": "TheBitPoets/labs_summary",
+      "ref": "36a909f00c9478983a8d1b950440e2abc28b8a55",
+      "files": [
+        "README.md"
+      ],
+      "license_status": "project-license-to-review",
+      "indexing_status": "ready"
+    },
+    {
+      "id": "tpsi5-source-feisbuc-legacy",
+      "kind": "source-package",
+      "label": "Legacy Feisbuc project notes",
+      "type": "markdown",
+      "provider": "github",
+      "role": "legacy-project-content",
+      "repository": "TheBitPoets/feisbuc",
+      "ref": "086995ece4260a3408740b94cfe2701ce24f8b57",
+      "files": [
+        "README.md"
+      ],
+      "license_status": "project-license-to-review",
+      "indexing_status": "ready"
+    }
+  ],
+  "coverage": {
+    "path": "content/tpsi5/COVERAGE.md",
+    "status": "draft"
+  },
+  "content_items": [
+    {
+      "id": "tpsi5-content-course-architecture",
+      "kind": "module",
+      "path": "content/tpsi5/00_COURSE_ARCHITECTURE.md",
+      "order": 1,
+      "status": "draft",
+      "curriculum_topics": [
+        "full-stack-web-development",
+        "web-platform",
+        "http",
+        "frontend",
+        "backend",
+        "persistence",
+        "realtime"
+      ],
+      "activity_ids": [],
+      "source_refs": [
+        {
+          "id": "tpsi5-source-originali",
+          "role": "content-origin",
+          "locator": "content/tpsi5/00_COURSE_ARCHITECTURE.md"
+        }
+      ]
+    }
+  ],
+  "course_designs": [
+    {
+      "id": "tpsi5-course-2026-2027",
+      "path": "doc/course_designs/tpsi_quinto_2026_2027.json",
+      "status": "draft"
+    }
+  ],
+  "activity_roots": [
+    "activities/tpsi5"
+  ],
+  "policies": {
+    "provenance_required": true,
+    "teacher_review_required_before_publish": true,
+    "student_teacher_asset_separation_required": true,
+    "ai_is_not_primary_source": true,
+    "restricted_source_copying_forbidden": true
+  },
+  "extensions": {
+    "bootstrap_decisions": {
+      "frontend_framework": "tbd",
+      "node_orm": "tbd",
+      "typescript_depth": "tbd",
+      "python_mirror": "fastapi",
+      "main_backend": "node-express"
+    },
+    "platform_contract": {
+      "repository": "TheBitPoets/2cornot2c",
+      "content_pack_v1_sha": "39936004d3dc777b4e56d089dac0e61a138a1913"
+    }
+  }
+}
