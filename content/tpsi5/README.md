@@ -16,6 +16,13 @@ Contratto di authoring: `thebitlab.content-pack.v1`.
 - usare Manning/Pluralsight come riferimenti docente licensed, senza copiarne o ingerirne automaticamente i contenuti;
 - mantenere Activity e laboratori nella tassonomia TheBitLab A–F.
 
+## Contenuti disponibili
+
+1. `00_COURSE_ARCHITECTURE.md` — architettura del percorso Full Stack e metodo;
+2. `01_WEB_PLATFORM_HTML_MODERNO.md` — HTML come struttura/semantica, documento moderno, metadata, MDN/DevTools e Feisbuc milestone 0.
+
 ## Stato
 
-Bootstrap. Framework frontend, ORM Node e profondità TypeScript sono decisioni ancora da congelare.
+Versione authoring `0.2.0`, ancora **draft**.
+
+Il primo modulo Web Platform/HTML e disponibile con Activity A e B. Framework frontend, ORM Node e profondità TypeScript restano decisioni da congelare. I prossimi contenuti di UDA 21 riguarderanno CSS moderno, cascade/box model, Flexbox/Grid e responsive design prima di introdurre Bootstrap.
