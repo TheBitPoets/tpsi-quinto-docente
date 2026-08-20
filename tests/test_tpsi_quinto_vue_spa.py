@@ -67,10 +67,10 @@ def package_versions(path: Path) -> None:
 def test_vue_content_pack_decision_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.12.0"
+    assert pack["version"] == "0.13.0"
     decisions = pack["extensions"]["bootstrap_decisions"]
     assert decisions["frontend_framework"] == "vue3-vite"
-    assert decisions["typescript_depth"] == "tbd"
+    assert decisions["typescript_depth"] == "targeted-boundary-typing"
     assert decisions["node_orm"] == "tbd"
 
     item = next(x for x in pack["content_items"] if x["id"] == "tpsi5-content-vue3-components-reactivity")
@@ -88,11 +88,12 @@ def test_vue_content_pack_decision_course_design_and_activity_contracts() -> Non
 
     uda25 = next(u for u in design["years"][0]["udas"] if u["id"] == "uda-25")
     assert uda25["weeks"] == "5"
-    assert len(uda25["items"]) == 2
+    assert len(uda25["items"]) == 3
     assert uda25["items"][0]["source"] == item["path"]
     assert uda25["items"][0]["activity_ids"] == item["activity_ids"]
     assert "routing" in uda25["items"][0]["frame"]["next_step"].lower()
     assert uda25["items"][1]["source"] == "content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md"
+    assert uda25["items"][2]["source"] == "content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md"
 
     assert_activity(A_ROOT, "A", "tpsi5-activity-a-vue-reactivity-microscope-001")
     assert_activity(B_ROOT, "B", "tpsi5-activity-b-vue-post-card-001")

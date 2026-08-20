@@ -1,0 +1,1 @@
+{"name":"tpsi5-typescript-debug-solution","private":true,"version":"0.0.0","type":"module","engines":{"node":">=22.18"},"scripts":{"type-check":"vue-tsc --noEmit"},"dependencies":{"vue":"3.5.40","vue-router":"5.2.0"},"devDependencies":{"typescript":"6.0.3","vue-tsc":"3.3.8"}}

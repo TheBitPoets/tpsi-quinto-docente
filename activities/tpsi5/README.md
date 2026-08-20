@@ -30,32 +30,36 @@ Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 | B | `tpsi5-activity-b-navigation-policy-001` | navigation state machine | **automatico JS** |
 | C | `tpsi5-activity-c-feisbuc-vue-router-001` | milestone 10 Vue Router | manuale + composed build/deep-link E2E |
 | D | `tpsi5-activity-d-debug-vue-router-001` | history/guard/fallback debug | manuale + structural checks |
+| A | `tpsi5-activity-a-typescript-contract-microscope-001` | inference/union/unknown/nullability | manuale + `tsc --noEmit` reference |
+| B | `tpsi5-activity-b-typescript-navigation-policy-001` | discriminated navigation union | manuale + `tsc --noEmit` reference |
+| C | `tpsi5-activity-c-feisbuc-typescript-boundaries-001` | milestone 11 TS boundary overlay | manuale + `vue-tsc` + build + composed E2E |
+| D | `tpsi5-activity-d-debug-typescript-boundaries-001` | static type debugging | starter type-check **deve fallire**, solution verde |
 
 ## Boundary di grading
 
 ```text
-linguaggio puro                 -> runner deterministico JS/SQL
-single template/render          -> reference CI con dependency pinned
-Vue/SFC/browser multi-file      -> reference build + smoke/E2E docente
-HTTP deep-link fallback         -> reference server E2E
-backend/persistence/security    -> reference E2E
-security/architecture reasoning -> rubrica + evidence
+linguaggio puro JS/SQL           -> runner deterministico TheBitLab
+TypeScript puro/SFC              -> reference tsc/vue-tsc in repository CI
+single template/render           -> reference CI con dependency pinned
+Vue/SFC/browser multi-file       -> reference build + smoke/E2E docente
+HTTP deep-link fallback          -> reference server E2E
+backend/persistence/security     -> reference E2E
+security/architecture reasoning  -> rubrica + evidence
 ```
 
-Il browser grader TheBitLab non e ancora implementato. Per le Activity Vue/router `correzione.test=false` rimane quindi intenzionale quando il comportamento da osservare richiede browser DOM/history/eventi. La Activity B di routing e invece autograded perche la navigation policy e una funzione JavaScript pura.
+Il browser grader TheBitLab non e ancora implementato e il runner accettato non dichiara TypeScript. Per le Activity TS `correzione.test=false` e intenzionale: `tsc`/`vue-tsc` in Quality sono evidence della reference, non una capacita di grading della piattaforma.
 
 La Quality del repository docente puo e deve:
 
 - installare versioni pinned;
-- eseguire `vite build` su starter/reference appropriati;
-- controllare staticamente route/meta/guard e boundary auth;
-- comporre milestone 9 + routing overlay;
+- eseguire `tsc --noEmit` / `vue-tsc --noEmit` sulle reference TypeScript;
+- verificare che lo starter D fallisca realmente per gli errori dichiarati;
+- eseguire `vite build` sulla milestone 11;
+- comporre milestone 10 + TypeScript overlay;
 - comporre `dist/` con il backend auth gia verificato;
-- fare smoke HTTP su `/vue/` e sul deep link `/vue/feed`;
+- fare smoke HTTP su `/vue/` e `/vue/feed`;
 - verificare che `/api/*` mantenga 401/403 e il contratto precedente.
-
-Queste verifiche dimostrano la qualita della **reference solution**, non trasformano automaticamente l'Activity browser in autograding studente.
 
 ## Regola
 
-Il tipo di evidence deve corrispondere al comportamento osservato. `vite build` e un deep-link HTTP 200 non dimostrano da soli che RouterLink, back/forward, navigation guard e rendering funzionino nel browser: questi comportamenti richiederanno il browser runner futuro (#729).
+Il tipo di evidence deve corrispondere al comportamento osservato. Un type-check verde dimostra coerenza statica, non correttezza del JSON remoto, sicurezza del backend o comportamento browser. Runtime validation, 401/403 e browser runner restano livelli distinti.
