@@ -84,14 +84,12 @@ async function request(path: string, options: RequestOptions = {}): Promise<unkn
     }),
   };
   const response = await fetch(path, init);
-
-  let payload: unknown = null;
-  if (response.status !== 204) {
-    const contentType = response.headers.get("content-type") ?? "";
-    payload = contentType.includes("application/json")
+  const contentType = response.headers.get("content-type") ?? "";
+  const payload: unknown = response.status === 204
+    ? null
+    : contentType.includes("application/json")
       ? await response.json() as unknown
       : await response.text();
-  }
 
   if (!response.ok) throw parseError(payload, response.status);
   return payload;
