@@ -55,11 +55,11 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, *, automatic:
 def test_vue_router_pack_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.12.0"
+    assert pack["version"] == "0.13.0"
     assert pack["extensions"]["bootstrap_decisions"] == {
         "frontend_framework": "vue3-vite",
         "node_orm": "tbd",
-        "typescript_depth": "tbd",
+        "typescript_depth": "targeted-boundary-typing",
         "python_mirror": "fastapi",
         "main_backend": "node-express",
     }
@@ -84,8 +84,10 @@ def test_vue_router_pack_design_and_activity_contracts() -> None:
     assert [entry["source"] for entry in uda25["items"]] == [
         "content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md",
         "content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
+        "content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md",
     ]
     assert uda25["items"][1]["activity_ids"] == item["activity_ids"]
+    assert "typescript" in uda25["items"][1]["frame"]["next_step"].lower()
 
     assert_activity(A_ROOT, "A", "tpsi5-activity-a-vue-router-microscope-001", automatic=False)
     b = assert_activity(B_ROOT, "B", "tpsi5-activity-b-navigation-policy-001", automatic=True)
