@@ -68,9 +68,12 @@ async function deletePost(id: string): Promise<void> {
 // TODO milestone 12:
 // - importa createRealtimeClient/applyRealtimeEvent;
 // - registra il lifecycle una sola volta e fai cleanup in onUnmounted;
-// - AVVIA il realtime prima del primo snapshot REST;
+// - AVVIA connect e primo snapshot insieme;
 // - mentre GET /api/posts e in volo, accoda gli eventi ricevuti;
 // - applica gli eventi accodati allo snapshot prima di sostituire posts;
+// - quando arriva il PRIMO onConnect, esegui comunque un nuovo resync:
+//   socket.connect() e asincrono e il primo GET potrebbe essere terminato prima
+//   dell'handshake, lasciando altrimenti una finestra di perdita;
 // - al reconnect ripeti lo stesso resync snapshot + coda eventi;
 // - non accettare payload socket come Post senza runtime validation.
 
