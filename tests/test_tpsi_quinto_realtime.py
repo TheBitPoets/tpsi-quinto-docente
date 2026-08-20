@@ -119,6 +119,11 @@ def test_realtime_toolchain_build_and_event_boundaries_are_explicit() -> None:
         assert event_name in events
         assert event_name in realtime_server
     assert "posts.some" in events
+    assert "parseRealtimeEvent" in events
+    assert "Invalid realtime post payload" in events
+    assert "Invalid realtime delete payload" in events
+    assert '(payload: unknown)' in adapter
+    assert "parseRealtimeEvent(type, payload)" in adapter
     assert 'socket.on("post:create"' not in realtime_server
     assert "readCookie(socket.request.headers.cookie" in realtime_server
     assert "hashSessionToken" in realtime_server
@@ -130,8 +135,13 @@ def test_realtime_toolchain_build_and_event_boundaries_are_explicit() -> None:
     assert "createServer(app)" in server and "attachRealtime" in server
 
     assert "onUnmounted(() => realtime.stop())" in feed
-    assert "onReconnect()" in feed and "void loadPosts()" in feed
+    assert "queuedEvents" in feed
+    assert "applyOrQueue" in feed
+    assert "resyncPosts" in feed
+    assert "resyncRequested" in feed
+    assert "onReconnect()" in feed and "void resyncPosts()" in feed
     assert "applyRealtimeEvent" in feed
+    assert "Apriamo il realtime prima dello snapshot" in feed
     assert "localStorage" not in adapter and "document.cookie" not in adapter
 
 
