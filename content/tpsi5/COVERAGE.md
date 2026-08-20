@@ -53,11 +53,18 @@ browser A ── POST/PATCH/DELETE ──► REST API
                                       ├─ browser A
                                       └─ browser B
 
-reconnect
+connect/reconnect
    ↓
-GET /api/posts
+listener realtime attivo
    ↓
-snapshot autorevole
+GET /api/posts ───────┐
+   │                  │ eventi concorrenti
+   │                  ▼
+   │               coda eventi
+   ▼                  │
+snapshot autorevole ◄─┘
+   ↓
+state convergente
 ```
 
 Invariant:
@@ -68,8 +75,10 @@ Invariant:
 - nessun `authorId` o `userId` inviato dal socket client viene trusted;
 - sessione rivalidata prima del broadcast e socket invalido disconnesso;
 - eventi core: `post:created`, `post:updated`, `post:deleted`;
+- ogni payload Socket.IO esterno entra nel frontend come `unknown` e diventa `Post`/`RealtimeEvent` solo dopo runtime validation;
 - `post:created` e idempotente nel reducer client;
 - listener Socket.IO hanno lifecycle start/stop simmetrico;
+- il realtime e attivo mentre lo snapshot REST e in volo; gli eventi concorrenti vengono accodati e riapplicati allo snapshot per evitare la race snapshot→connect;
 - reconnect non viene confuso con delivery completa: `GET /api/posts` ricostruisce lo snapshot;
 - TypeScript strict resta attivo;
 - nessun Pinia/ORM introdotto nella milestone 12.
@@ -83,6 +92,8 @@ La Quality reference deve verificare almeno:
 - due sessioni autentiche ricevono create/update/delete;
 - un evento client inventato `post:create` non modifica il dominio;
 - autore dei post continua a derivare da `req.auth.user`;
+- adapter client conserva i payload remoti come `unknown` fino al parser runtime;
+- FeedView implementa resync con listener attivo + coda eventi, non snapshot seguito da connect;
 - dopo disconnessione, lo snapshot REST recupera una mutazione avvenuta offline;
 - HTTP/SQL/auth/SSR/Vue/Router/TypeScript gates precedenti restano attivi.
 
