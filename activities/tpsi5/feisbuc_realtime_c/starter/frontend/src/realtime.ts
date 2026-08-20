@@ -1,5 +1,17 @@
-import { io } from "socket.io-client";
-import type { RealtimeEvent } from "./realtime-events";
+import { io, type Socket } from "socket.io-client";
+import {
+  parseRealtimeEvent,
+  type RealtimeEvent,
+} from "./realtime-events";
+
+interface ServerToClientEvents {
+  "realtime:ready": (payload: unknown) => void;
+  "post:created": (payload: unknown) => void;
+  "post:updated": (payload: unknown) => void;
+  "post:deleted": (payload: unknown) => void;
+}
+
+interface ClientToServerEvents {}
 
 export interface RealtimeHandlers {
   onEvent(event: RealtimeEvent): void;
@@ -10,15 +22,17 @@ export interface RealtimeHandlers {
 }
 
 export function createRealtimeClient() {
-  const socket = io({ autoConnect: false });
+  const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({ autoConnect: false });
 
   return {
     start(handlers: RealtimeHandlers): void {
       // TODO:
       // - registra listener post:created/post:updated/post:deleted;
+      // - ogni payload remoto entra come unknown e passa da parseRealtimeEvent;
       // - distingui primo connect da reconnect;
       // - propaga disconnect/connect_error;
       // - poi socket.connect().
+      void parseRealtimeEvent;
       void handlers;
       socket.connect();
     },
