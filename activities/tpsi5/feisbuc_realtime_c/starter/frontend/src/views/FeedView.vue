@@ -67,10 +67,12 @@ async function deletePost(id: string): Promise<void> {
 
 // TODO milestone 12:
 // - importa createRealtimeClient/applyRealtimeEvent;
-// - registra il lifecycle una sola volta;
-// - applica gli eventi al feed;
-// - al reconnect richiama loadPosts();
-// - rimuovi i listener in onUnmounted.
+// - registra il lifecycle una sola volta e fai cleanup in onUnmounted;
+// - AVVIA il realtime prima del primo snapshot REST;
+// - mentre GET /api/posts e in volo, accoda gli eventi ricevuti;
+// - applica gli eventi accodati allo snapshot prima di sostituire posts;
+// - al reconnect ripeti lo stesso resync snapshot + coda eventi;
+// - non accettare payload socket come Post senza runtime validation.
 
 onMounted(loadPosts);
 </script>
