@@ -65,9 +65,9 @@ def test_typescript_content_pack_decision_and_course_design() -> None:
 
     refs = {entry["id"]: entry for entry in pack["references"]}
     assert refs["tpsi5-ref-typescript"]["role"] == "technical-reference"
-    assert refs["tpsi5-ref-vue-language-tools"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-vue-typescript"]["role"] == "technical-reference"
     assert "6.0.3" in refs["tpsi5-ref-typescript"]["notes"]
-    assert "3.3.8" in refs["tpsi5-ref-vue-language-tools"]["notes"]
+    assert "3.3.8" in refs["tpsi5-ref-vue-typescript"]["notes"]
 
     item = next(x for x in pack["content_items"] if x["id"] == "tpsi5-content-typescript-boundary-typing")
     assert item["path"] == "content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md"
