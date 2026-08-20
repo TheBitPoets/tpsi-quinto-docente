@@ -75,12 +75,15 @@ function parseError(value: unknown, status: number): ApiError {
 }
 
 async function request(path: string, options: RequestOptions = {}): Promise<unknown> {
-  const response = await fetch(path, {
+  const init: RequestInit = {
     method: options.method ?? "GET",
     credentials: "same-origin",
-    headers: options.body === undefined ? {} : { "Content-Type": "application/json" },
-    body: options.body === undefined ? undefined : JSON.stringify(options.body),
-  });
+    ...(options.body === undefined ? {} : {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(options.body),
+    }),
+  };
+  const response = await fetch(path, init);
 
   let payload: unknown = null;
   if (response.status !== 204) {
