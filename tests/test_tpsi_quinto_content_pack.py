@@ -52,7 +52,7 @@ def parse_html(path: Path) -> StructureParser:
 def test_native_content_pack_v1_is_valid_and_pinned() -> None:
     pack = load(PACK_PATH)
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.12.0"
+    assert pack["version"] == "0.13.0"
     assert pack["status"] == "draft"
     assert pack["extensions"]["platform_contract"]["content_pack_v1_sha"] == ACCEPTED_CONTENT_PACK_V1_SHA
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
@@ -86,6 +86,7 @@ def test_sources_project_exactly_to_course_design_catalog() -> None:
         "09_SSR_NUNJUCKS_CONFRONTO.md",
         "10_VUE3_COMPONENTI_REATTIVITA.md",
         "11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
+        "12_TYPESCRIPT_CONTRATTI_FRONTEND.md",
     )
     assert normalized[1].ref == "d71da420f1aa2ea39b61356e4f9900c6371e7a42"
     assert normalized[2].ref == "36a909f00c9478983a8d1b950440e2abc28b8a55"
@@ -107,7 +108,7 @@ def test_course_design_keeps_33_week_draft_and_open_decisions() -> None:
     assert decisions == {
         "frontend_framework": "vue3-vite",
         "node_orm": "tbd",
-        "typescript_depth": "tbd",
+        "typescript_depth": "targeted-boundary-typing",
         "python_mirror": "fastapi",
         "main_backend": "node-express",
     }
@@ -126,6 +127,8 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
     assert refs["tpsi5-ref-vue"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-vite"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-vue-router"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-typescript"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-vue-typescript"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-nist-800-63b"]["role"] == "specification"
     assert refs["tpsi5-ref-owasp-password-storage"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-owasp-session-management"]["role"] == "technical-reference"
@@ -147,7 +150,7 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
     source_providers = {source["provider"] for source in pack["sources"]}
     for provider in (
         "manning", "pluralsight", "mdn", "whatwg", "nodejs", "expressjs",
-        "sqlite", "nist", "owasp", "mozilla", "vuejs", "vite",
+        "sqlite", "nist", "owasp", "mozilla", "vuejs", "vite", "microsoft",
     ):
         assert provider not in source_providers
 
@@ -155,7 +158,7 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
 def test_content_items_are_ordered_and_linked_to_real_files() -> None:
     pack = load(PACK_PATH)
     items = pack["content_items"]
-    assert [item["order"] for item in items] == list(range(1, 13))
+    assert [item["order"] for item in items] == list(range(1, 14))
     for item in items:
         assert (ROOT / item["path"]).is_file(), item["path"]
         assert item["source_refs"]
@@ -173,6 +176,7 @@ def test_content_items_are_ordered_and_linked_to_real_files() -> None:
         "tpsi5-content-ssr-nunjucks-comparison",
         "tpsi5-content-vue3-components-reactivity",
         "tpsi5-content-vue-router-navigation",
+        "tpsi5-content-typescript-boundary-typing",
     } <= ids
 
 
@@ -192,13 +196,14 @@ def test_uda24_is_decomposed_without_changing_its_week_budget() -> None:
     assert "UDA25" in uda24["items"][3]["frame"]["next_step"]
 
 
-def test_uda25_has_vue_foundations_and_router_without_changing_week_budget() -> None:
+def test_uda25_has_vue_router_and_typescript_without_changing_week_budget() -> None:
     design = load(DESIGN_PATH)
     uda25 = next(uda for uda in design["years"][0]["udas"] if uda["id"] == "uda-25")
     assert uda25["weeks"] == "5"
     assert [item["source"] for item in uda25["items"]] == [
         "content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md",
         "content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
+        "content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md",
     ]
     assert uda25["items"][0]["activity_ids"] == [
         "tpsi5-activity-a-vue-reactivity-microscope-001",
@@ -212,7 +217,13 @@ def test_uda25_has_vue_foundations_and_router_without_changing_week_budget() -> 
         "tpsi5-activity-c-feisbuc-vue-router-001",
         "tpsi5-activity-d-debug-vue-router-001",
     ]
-    assert "typescript" in uda25["items"][1]["frame"]["next_step"].lower()
+    assert uda25["items"][2]["activity_ids"] == [
+        "tpsi5-activity-a-typescript-contract-microscope-001",
+        "tpsi5-activity-b-typescript-navigation-policy-001",
+        "tpsi5-activity-c-feisbuc-typescript-boundaries-001",
+        "tpsi5-activity-d-debug-typescript-boundaries-001",
+    ]
+    assert "realtime" in uda25["items"][2]["frame"]["next_step"].lower()
 
 
 def test_uda21_activity_contracts_and_assets_remain_valid() -> None:
@@ -240,6 +251,7 @@ def test_uda21_activity_contracts_and_assets_remain_valid() -> None:
 
     assert SUPPORTED_LANGUAGES["html"] == "planned"
     assert SUPPORTED_LANGUAGES["sql"] == "implemented"
+    assert "typescript" not in SUPPORTED_LANGUAGES
 
 
 def test_uda21_reference_solutions_keep_semantics_css_and_bootstrap_mapping() -> None:
