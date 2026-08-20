@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-a-react-translation-microscope-001",
+  "titolo": "React translation microscope: state e derived value",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "A",
+  "argomenti": ["react", "vite", "jsx", "use-state", "derived-state", "framework-transfer"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-25"},
+  "content_ids": ["tpsi5-content-react-translation-comparison"],
+  "source_refs": [{"source_id": "tpsi5-source-originali", "path": "content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md", "anchor": "1-mappa-vue---react", "role": "lesson"}],
+  "consegna": "Esegui il counter React/Vite fornito e confrontalo con `comparison/Counter.vue`. Compila `MAPPING.md` collegando `ref` a `useState`, `computed` a un valore derivato, event binding e rendering dichiarativo. Spiega perche `doubled` non deve essere un secondo state e perche un calcolo banale non richiede automaticamente `useMemo`.",
+  "vincoli": ["Node >=22.18", "React 19.2.8", "react-dom 19.2.8", "Vite 8.2.1", "@vitejs/plugin-react 6.0.5", "non introdurre useMemo nel counter", "non duplicare doubled in useState", "nessuna API/fetch"],
+  "assets": [
+    {"type": "starter", "path": "starter/package.json", "target_path": "package.json", "visibility": "student", "description": "Toolchain React/Vite pinned"},
+    {"type": "starter", "path": "starter/index.html", "target_path": "index.html", "visibility": "student", "description": "Entry HTML"},
+    {"type": "starter", "path": "starter/vite.config.js", "target_path": "vite.config.js", "visibility": "student", "description": "Config Vite React"},
+    {"type": "starter", "path": "starter/src/main.jsx", "target_path": "src/main.jsx", "visibility": "student", "description": "Mount React"},
+    {"type": "starter", "path": "starter/src/App.jsx", "target_path": "src/App.jsx", "visibility": "student", "description": "Counter React"},
+    {"type": "example", "path": "starter/comparison/Counter.vue", "target_path": "comparison/Counter.vue", "visibility": "student", "description": "Sorgente Vue equivalente"},
+    {"type": "starter", "path": "student/MAPPING.md", "target_path": "MAPPING.md", "visibility": "student", "description": "Mappa concettuale da completare"},
+    {"type": "teacher_only", "path": "solution/MAPPING.md", "visibility": "teacher", "description": "Mappa attesa"},
+    {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Conduzione del confronto"}
+  ],
+  "soluzione_attesa": {"tipo": "react-observation", "file": "MAPPING.md", "note": "Lo starter e eseguibile; il prodotto valutato e la traduzione concettuale."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 35, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "manual_checks": [
+    {"name": "state-map", "criterion": "collega ref/useState allo stesso problema di state"},
+    {"name": "derived-value", "criterion": "spiega computed vs espressione derivata senza state duplicato/useMemo automatico"},
+    {"name": "state-render", "criterion": "riconosce evento -> state -> render in entrambi"}
+  ],
+  "rubrica": [
+    {"criterio": "Mapping state/update", "punti": 3},
+    {"criterio": "Valore derivato e boundary useMemo", "punti": 3},
+    {"criterio": "State -> render trasferibile", "punti": 2},
+    {"criterio": "Lessico e precisione", "punti": 2}
+  ]
+}
