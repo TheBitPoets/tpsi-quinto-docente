@@ -45,7 +45,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, automatic: bo
 def test_realtime_content_pack_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.14.0"
+    assert pack["version"] == "0.15.0"
     decisions = pack["extensions"]["bootstrap_decisions"]
     assert decisions["frontend_framework"] == "vue3-vite"
     assert decisions["typescript_depth"] == "targeted-boundary-typing"
@@ -74,8 +74,13 @@ def test_realtime_content_pack_course_design_and_activity_contracts() -> None:
         "content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
         "content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md",
         "content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md",
+        "content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md",
     ]
     assert uda25["items"][3]["activity_ids"] == item["activity_ids"]
+    assert uda25["items"][4]["activity_ids"] == [
+        "tpsi5-activity-a-react-translation-microscope-001",
+        "tpsi5-activity-b-react-post-card-translation-001",
+    ]
 
     assert_activity(A_ROOT, "A", "tpsi5-activity-a-websocket-realtime-microscope-001", False)
     b = assert_activity(B_ROOT, "B", "tpsi5-activity-b-realtime-event-reducer-001", True)
@@ -118,6 +123,7 @@ def test_realtime_toolchain_build_and_event_boundaries_are_explicit() -> None:
     for event_name in ("post:created", "post:updated", "post:deleted"):
         assert event_name in events
         assert event_name in realtime_server
+
     assert "posts.some" in events
     assert "parseRealtimeEvent" in events
     assert "Invalid realtime post payload" in events
