@@ -1,0 +1,27 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-b-typescript-navigation-policy-001",
+  "titolo":"Navigation policy tipizzata con discriminated union",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"B",
+  "argomenti":["typescript","discriminated-union","literal-types","navigation-policy","exhaustiveness","vue-router"],
+  "linguaggio":"typescript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-typescript-boundary-typing","tpsi5-content-vue-router-navigation"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md","anchor":"16-navigation-policy-tipizzata","role":"lesson"}],
+  "consegna":"Completa `decideNavigation(input)` mantenendo la stessa semantica della milestone 10, ma modellando `AuthStatus`, `RouteName`, `NavigationInput` e `NavigationDecision`. Le decisioni devono formare una discriminated union: allow, resolve-auth oppure redirect con route name obbligatorio.",
+  "vincoli":["TypeScript 6.0.3","strict=true","nessun any","RouteName union chiusa","AuthStatus union chiusa","redirect richiede name","allow/resolve-auth non espongono name","nessun import Vue: la policy resta funzione pura"],
+  "assets":[
+    {"type":"starter","path":"starter/package.json","target_path":"package.json","visibility":"student","description":"Toolchain TypeScript"},
+    {"type":"starter","path":"starter/tsconfig.json","target_path":"tsconfig.json","visibility":"student","description":"Strict config"},
+    {"type":"starter","path":"starter/main.ts","target_path":"main.ts","visibility":"student","description":"Policy da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Matrice decisionale"},
+    {"type":"teacher_only","path":"solution/main.ts","visibility":"teacher","description":"Reference tipizzata"}
+  ],
+  "soluzione_attesa":{"tipo":"typescript-pure-policy","file":"main.ts","note":"Stessa semantica JS, contratto statico piu forte."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":50,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[{"name":"type-check","criterion":"reference e consegna completata passano tsc --noEmit"},{"name":"union","criterion":"NavigationDecision non permette combinazioni incoerenti"},{"name":"purity","criterion":"nessuna dipendenza da Vue/router runtime"}],
+  "rubrica":[{"criterio":"AuthStatus/RouteName literal union","punti":2},{"criterio":"NavigationInput","punti":2},{"criterio":"Discriminated union decision","punti":3},{"criterio":"Semantica policy invariata","punti":2},{"criterio":"Leggibilita e assenza any","punti":1}]
+}
