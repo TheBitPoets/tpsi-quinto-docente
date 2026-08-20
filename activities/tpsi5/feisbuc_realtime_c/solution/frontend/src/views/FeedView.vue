@@ -6,7 +6,10 @@ import PostComposer from "../components/PostComposer.vue";
 import PostCard from "../components/PostCard.vue";
 import { useSession } from "../session";
 import type { Post } from "../domain";
-import { applyRealtimeEvent } from "../realtime-events";
+import {
+  applyRealtimeEvent,
+  type RealtimeEvent,
+} from "../realtime-events";
 import { createRealtimeClient } from "../realtime";
 
 const route = useRoute();
@@ -20,6 +23,10 @@ const postCount = computed(() => posts.value.length);
 const likedCount = computed(() => posts.value.filter((post) => post.liked).length);
 const realtime = createRealtimeClient();
 
+const queuedEvents: RealtimeEvent[] = [];
+let resyncing = false;
+let resyncRequested = false;
+
 async function handleError(cause: unknown): Promise<void> {
   if (cause instanceof ApiError && cause.status === 401) {
     session.markAnonymous();
@@ -29,15 +36,38 @@ async function handleError(cause: unknown): Promise<void> {
   error.value = cause instanceof Error ? cause.message : "Errore inatteso";
 }
 
-async function loadPosts(): Promise<void> {
+function applyOrQueue(event: RealtimeEvent): void {
+  if (resyncing) {
+    queuedEvents.push(event);
+    return;
+  }
+  posts.value = applyRealtimeEvent(posts.value, event);
+}
+
+async function resyncPosts(): Promise<void> {
+  if (resyncing) {
+    resyncRequested = true;
+    return;
+  }
+
+  resyncing = true;
+  resyncRequested = false;
   loading.value = true;
   error.value = "";
   try {
-    posts.value = await api.listPosts();
+    const snapshot = await api.listPosts();
+    let next = snapshot;
+    for (const event of queuedEvents) {
+      next = applyRealtimeEvent(next, event);
+    }
+    posts.value = next;
   } catch (cause: unknown) {
     await handleError(cause);
   } finally {
+    queuedEvents.splice(0);
+    resyncing = false;
     loading.value = false;
+    if (resyncRequested) void resyncPosts();
   }
 }
 
@@ -82,20 +112,22 @@ async function deletePost(id: string): Promise<void> {
   }
 }
 
-onMounted(async () => {
-  await loadPosts();
-  if (session.status.value !== "authenticated") return;
+onMounted(() => {
+  if (session.status.value !== "authenticated") {
+    void resyncPosts();
+    return;
+  }
 
   realtime.start({
     onEvent(event) {
-      posts.value = applyRealtimeEvent(posts.value, event);
+      applyOrQueue(event);
     },
     onConnect() {
       realtimeStatus.value = "online";
     },
     onReconnect() {
       realtimeStatus.value = "online";
-      void loadPosts();
+      void resyncPosts();
     },
     onDisconnect() {
       realtimeStatus.value = "offline";
@@ -105,6 +137,11 @@ onMounted(async () => {
       error.value = `Realtime: ${message}`;
     },
   });
+
+  // Apriamo il realtime prima dello snapshot. Gli eventi ricevuti mentre
+  // GET /api/posts e in volo vengono accodati e applicati allo snapshot:
+  // cosi non esiste una finestra snapshot -> connect in cui perdere update.
+  void resyncPosts();
 });
 
 onUnmounted(() => realtime.stop());
