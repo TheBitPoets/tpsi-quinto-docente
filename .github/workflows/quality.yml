@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JS, SQL, auth, SSR, Vue and backend E2E tests
+      - name: Set up Node.js for deterministic JS, SQL, auth, SSR, Vue, TypeScript and backend E2E tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -149,6 +149,52 @@ jobs:
         working-directory: _vue-router-reference
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
+      - name: Install TypeScript contract microscope
+        working-directory: activities/tpsi5/typescript_contract_microscope_a/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Type-check TypeScript contract microscope
+        working-directory: activities/tpsi5/typescript_contract_microscope_a/starter
+        run: npm run type-check
+
+      - name: Install typed navigation policy
+        working-directory: activities/tpsi5/typescript_navigation_policy_b/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Type-check typed navigation policy
+        working-directory: activities/tpsi5/typescript_navigation_policy_b/starter
+        run: npm run type-check
+
+      - name: Install TypeScript debug starter
+        working-directory: activities/tpsi5/typescript_debug_d/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Install TypeScript debug reference solution
+        working-directory: activities/tpsi5/typescript_debug_d/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Compose milestone 10 with TypeScript overlay
+        run: python tests/compose_typescript_frontend.py
+
+      - name: Install typed Feisbuc frontend
+        working-directory: _typescript-frontend
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Type-check typed Feisbuc frontend
+        working-directory: _typescript-frontend
+        run: npm run type-check
+
+      - name: Build typed Feisbuc frontend
+        working-directory: _typescript-frontend
+        run: npm run build
+
+      - name: Compose typed frontend with auth backend
+        run: python tests/compose_typescript_reference.py
+
+      - name: Install Express for typed backend reference
+        working-directory: _typescript-reference
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -163,3 +209,4 @@ jobs:
           tests/test_tpsi_quinto_ssr_nunjucks.py
           tests/test_tpsi_quinto_vue_spa.py
           tests/test_tpsi_quinto_vue_router.py
+          tests/test_tpsi_quinto_typescript.py
