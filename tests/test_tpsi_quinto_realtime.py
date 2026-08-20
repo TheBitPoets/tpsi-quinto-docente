@@ -139,9 +139,10 @@ def test_realtime_toolchain_build_and_event_boundaries_are_explicit() -> None:
     assert "applyOrQueue" in feed
     assert "resyncPosts" in feed
     assert "resyncRequested" in feed
-    assert "onReconnect()" in feed and "void resyncPosts()" in feed
+    assert "onConnect()" in feed and "onReconnect()" in feed
+    assert feed.count("void resyncPosts()") >= 3
     assert "applyRealtimeEvent" in feed
-    assert "Apriamo il realtime prima dello snapshot" in feed
+    assert "snapshot successivo all'handshake effettivo" in feed
     assert "localStorage" not in adapter and "document.cookie" not in adapter
 
 
