@@ -12,10 +12,11 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 - trasporto, validation, persistence, auth, authorization e presentation separati;
 - identita derivata server-side da sessione verificata;
 - SSR e client rendering confrontati sopra lo stesso dominio;
-- Vue viene introdotto dopo DOM manuale/API/auth/SSR come astrazione di concetti gia osservati;
+- Vue viene introdotto dopo DOM manuale/API/auth/SSR;
 - Vue Router entra solo quando l'URL deve rappresentare piu viste;
-- TypeScript entra dopo Vue/Router per rendere verificabili boundary reali, non come secondo corso di sintassi;
-- JSON di rete resta non fidato: `unknown` + runtime narrowing prima dei tipi di dominio;
+- TypeScript rende verificabili boundary reali, non sostituisce runtime validation;
+- realtime aggiunge un **event path**, ma REST resta il **command path**;
+- reconnect non viene confuso con recovery: Feisbuc rilegge uno snapshot REST;
 - Node.js + Express backend principale; FastAPI mirror mirato;
 - Feisbuc progetto longitudinale;
 - documentazioni ufficiali e security guidance come reference;
@@ -35,7 +36,8 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 10. `09_SSR_NUNJUCKS_CONFRONTO.md` — SSR/Nunjucks/PRG; milestone 8;
 11. `10_VUE3_COMPONENTI_REATTIVITA.md` — Vue 3/Vite; milestone 9;
 12. `11_VUE_ROUTER_NAVIGAZIONE_SPA.md` — Vue Router; milestone 10;
-13. `12_TYPESCRIPT_CONTRATTI_FRONTEND.md` — TypeScript mirato ai boundary; milestone 11.
+13. `12_TYPESCRIPT_CONTRATTI_FRONTEND.md` — TypeScript mirato; milestone 11;
+14. `13_WEBSOCKET_SOCKETIO_REALTIME.md` — WebSocket/Socket.IO, delivery e recovery; milestone 12.
 
 ## Feisbuc oggi
 
@@ -52,24 +54,22 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 9 Vue 3 + Vite SPA shell sopra stessa API/auth/store
 10 Vue Router + URL/history + protected routes + deep-link fallback
 11 TypeScript strict sui boundary frontend + stesso backend/API
+12 REST commands + Socket.IO realtime + reconnect/resync
 ```
 
-Milestone 11 non introduce un nuovo backend:
+Milestone 12 mantiene due flussi distinti:
 
 ```text
-response.json()
-    ↓
- unknown
-    ↓ parser/narrowing
- User / Post
-    ↓
-session / router / props-emits
-    ↓
-Vue SPA
-    ↓
-/api/*
-    ↓
-Express auth + SQLite invariati
+COMMAND
+browser -> REST -> auth/validation -> SQLite -> HTTP response
+                                ↓
+                              event
+                                ↓
+EVENT
+server -> Socket.IO -> client A / client B
+
+RECOVERY
+reconnect -> GET /api/posts -> snapshot autorevole
 ```
 
 ## Decisioni frontend
@@ -80,6 +80,7 @@ D1 e D3 sono congelate:
 framework core      = Vue 3 + Vite
 router core         = Vue Router
 TypeScript depth    = targeted-boundary-typing
+realtime core       = WebSocket concettuale + Socket.IO applicato
 React               = translation/comparison lab
 ```
 
@@ -92,37 +93,37 @@ Vite                 8.2.1
 @vitejs/plugin-vue   6.0.8
 TypeScript           6.0.3
 vue-tsc              3.3.8
+Socket.IO            4.8.3
+socket.io-client     4.8.3
 Node                 >=22.18
 ```
 
-TypeScript 7 non viene adottato automaticamente: il corso privilegia una toolchain Vue/vue-tsc riproducibile e la rivalutera quando la compatibilita sara stabile.
+## Activity UDA25 — realtime
 
-## Activity UDA25 — TypeScript
-
-- `tpsi5-activity-a-typescript-contract-microscope-001` — inferenza, union, `unknown`, narrowing e nullability;
-- `tpsi5-activity-b-typescript-navigation-policy-001` — navigation decision come discriminated union;
-- `tpsi5-activity-c-feisbuc-typescript-boundaries-001` — milestone 11, overlay TypeScript della milestone 10;
-- `tpsi5-activity-d-debug-typescript-boundaries-001` — starter volutamente rosso con errori statici reali.
+- `tpsi5-activity-a-websocket-realtime-microscope-001` — polling, WebSocket, Socket.IO e recovery;
+- `tpsi5-activity-b-realtime-event-reducer-001` — reducer idempotente, autograded JS;
+- `tpsi5-activity-c-feisbuc-socketio-realtime-001` — milestone 12 multiutente;
+- `tpsi5-activity-d-debug-realtime-boundaries-001` — security, lifecycle, delivery e architecture debug.
 
 ## Boundary UDA25
 
-Non sono ancora introdotti:
+Non sono introdotti automaticamente:
 
 ```text
 Pinia
-WebSocket / Socket.IO
 ORM
 backend Express in TypeScript
+Socket.IO command handlers per create/update/delete
 ```
 
-Il piccolo stato condiviso della sessione resta un composable/module. Pinia entra solo se il realtime crea un problema di stato condiviso reale.
+Il feed resta posseduto da `FeedView`; Pinia entra solo se piu feature/route richiederanno una cache condivisa con ownership non piu locale.
 
 ## Grading
 
-Il browser grader TheBitLab non e ancora implementato e lo snapshot accettato del runner non dichiara TypeScript come linguaggio supportato. Le Activity TS restano quindi rubric/manuali (`correzione.test=false`). La Quality docente usa `tsc`/`vue-tsc`, build Vite e smoke E2E del sistema composto come evidence della reference solution; non viene spacciata per autograding TypeScript della piattaforma.
+Il browser grader TheBitLab non e ancora implementato e lo snapshot accettato del runner non dichiara TypeScript. Le Activity browser/TypeScript/realtime rimangono manuali quando richiedono DOM o connessioni. La Quality docente usa `tsc`/`vue-tsc`, build Vite, server live e un probe Socket.IO a due utenti come evidence della reference solution. Activity B realtime resta invece automaticamente verificabile come JavaScript puro.
 
 ## Stato
 
-Versione authoring **`0.13.0`**, ancora `draft` perche il curriculum completo non e congelato.
+Versione authoring **`0.14.0`**, ancora `draft` perche il curriculum completo non e congelato.
 
 Decisioni ancora aperte: ORM Node, ampiezza mirror FastAPI/SQLAlchemy, corso SQL separato e calendario definitivo dopo verifica delle ore reali.
