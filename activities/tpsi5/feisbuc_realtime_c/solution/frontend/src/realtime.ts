@@ -1,12 +1,14 @@
 import { io, type Socket } from "socket.io-client";
-import type { Post } from "./domain";
-import type { RealtimeEvent } from "./realtime-events";
+import {
+  parseRealtimeEvent,
+  type RealtimeEvent,
+} from "./realtime-events";
 
 interface ServerToClientEvents {
-  "realtime:ready": (payload: { userId: string }) => void;
-  "post:created": (post: Post) => void;
-  "post:updated": (post: Post) => void;
-  "post:deleted": (payload: { postId: string }) => void;
+  "realtime:ready": (payload: unknown) => void;
+  "post:created": (payload: unknown) => void;
+  "post:updated": (payload: unknown) => void;
+  "post:deleted": (payload: unknown) => void;
 }
 
 interface ClientToServerEvents {}
@@ -26,9 +28,17 @@ export function createRealtimeClient() {
   let handlers: RealtimeHandlers | null = null;
   let connectedOnce = false;
 
-  const onCreated = (post: Post) => handlers?.onEvent({ type: "post:created", post });
-  const onUpdated = (post: Post) => handlers?.onEvent({ type: "post:updated", post });
-  const onDeleted = (payload: { postId: string }) => handlers?.onEvent({ type: "post:deleted", postId: payload.postId });
+  const dispatch = (type: RealtimeEvent["type"], payload: unknown) => {
+    if (!handlers) return;
+    try {
+      handlers.onEvent(parseRealtimeEvent(type, payload));
+    } catch (cause: unknown) {
+      handlers.onError(cause instanceof Error ? cause.message : "Invalid realtime payload");
+    }
+  };
+  const onCreated = (payload: unknown) => dispatch("post:created", payload);
+  const onUpdated = (payload: unknown) => dispatch("post:updated", payload);
+  const onDeleted = (payload: unknown) => dispatch("post:deleted", payload);
   const onConnect = () => {
     if (!handlers) return;
     if (connectedOnce) handlers.onReconnect();
