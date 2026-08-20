@@ -33,13 +33,31 @@ Stato: `TBD`.
 
 ## D3 — TypeScript
 
-Direzione preferita: **introduzione mirata dopo i fondamenti Vue**, sui tipi di dominio e sui confini applicativi (`Post`, `User`, props, payload API e response HTTP), evitando di duplicare ogni esercizio JavaScript in TypeScript.
+Decisione: **targeted boundary typing nel core UDA25**.
 
-Alternative ancora da congelare: introduzione breve nel core; track advanced separato; combinazione dei due.
+Stato: `DECIDED`.
 
-Criterio principale: non sacrificare HTTP/SQL/testing/realtime per inseguire tooling o type-level programming non necessario al quinto anno.
+TypeScript viene introdotto dopo Vue e Vue Router, quando esistono gia contratti reali da rendere staticamente verificabili. Il core copre:
 
-Stato: `TBD`.
+- inferenza e annotazioni solo quando aggiungono informazione;
+- union e discriminated union;
+- `unknown`, narrowing e nullability;
+- tipi di dominio (`User`, `Post`, credenziali e stato auth);
+- boundary HTTP: JSON esterno come `unknown` prima della runtime validation;
+- props/emits Vue type-based;
+- session state, navigation policy e `RouteMeta`;
+- `strict`, `noUncheckedIndexedAccess` ed `exactOptionalPropertyTypes`.
+
+Restano fuori dal core:
+
+- conditional/mapped types avanzati e type gymnastics;
+- decorators/metaprogrammazione;
+- migrazione completa del backend Express a TypeScript;
+- duplicazione sistematica di ogni esercizio JavaScript in TypeScript.
+
+Baseline reference 2026/27: TypeScript 6.0.3 + `vue-tsc` 3.3.8. TypeScript 7 viene rivalutato solo quando l'integrazione Vue/vue-tsc usata dal corso e stabile e riproducibile.
+
+Regola didattica: TypeScript descrive un contratto statico, ma **non rende affidabile un JSON di rete senza runtime validation**.
 
 ## D4 — Mirror Python
 
