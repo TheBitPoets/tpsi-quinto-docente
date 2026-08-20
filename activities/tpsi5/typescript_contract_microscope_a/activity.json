@@ -1,0 +1,31 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-a-typescript-contract-microscope-001",
+  "titolo":"Microscopio TypeScript: inference, union, unknown e nullability",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"A",
+  "argomenti":["typescript","type-inference","union-types","unknown","narrowing","strict-null-checks","static-analysis"],
+  "linguaggio":"typescript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-typescript-boundary-typing"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md","anchor":"1-typescript-non-sostituisce-javascript","role":"lesson"}],
+  "consegna":"Installa le dipendenze, esegui `npm run type-check`, poi studia `src/microscope.ts`. Per ogni blocco con `@ts-expect-error`, spiega quale contratto statico viene violato. Infine modifica uno dei tipi e osserva come cambia l'errore del compilatore senza eseguire il programma.",
+  "vincoli":["TypeScript 6.0.3","strict=true","non rimuovere strict per far passare il progetto","non sostituire unknown con any","distinguere errore statico da errore runtime","nessun framework richiesto"],
+  "assets":[
+    {"type":"starter","path":"starter/package.json","target_path":"package.json","visibility":"student","description":"Toolchain TypeScript pinned"},
+    {"type":"starter","path":"starter/tsconfig.json","target_path":"tsconfig.json","visibility":"student","description":"Strict baseline"},
+    {"type":"example","path":"starter/src/microscope.ts","target_path":"src/microscope.ts","visibility":"student","description":"Esempi osservabili con expect-error"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Scheda di osservazione"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Chiavi di lettura"}
+  ],
+  "soluzione_attesa":{"tipo":"osservazione-typecheck","file":"src/microscope.ts","note":"Lo studente interpreta errori statici intenzionali senza rimuovere i controlli."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":45,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"type-check","criterion":"npm run type-check termina con successo grazie agli errori intenzionali marcati"},
+    {"name":"explanation","criterion":"lo studente distingue inference, union, unknown e nullability"},
+    {"name":"boundary","criterion":"lo studente sa spiegare perche un type error non equivale a runtime validation"}
+  ],
+  "rubrica":[{"criterio":"Inference e annotazioni","punti":2},{"criterio":"Union e stati possibili","punti":2},{"criterio":"unknown e narrowing","punti":3},{"criterio":"Nullability","punti":2},{"criterio":"Spiegazione statico/runtime","punti":1}]
+}
