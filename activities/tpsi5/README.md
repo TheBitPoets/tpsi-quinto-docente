@@ -33,33 +33,34 @@ Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 | A | `tpsi5-activity-a-typescript-contract-microscope-001` | inference/union/unknown/nullability | manuale + `tsc --noEmit` reference |
 | B | `tpsi5-activity-b-typescript-navigation-policy-001` | discriminated navigation union | manuale + `tsc --noEmit` reference |
 | C | `tpsi5-activity-c-feisbuc-typescript-boundaries-001` | milestone 11 TS boundary overlay | manuale + `vue-tsc` + build + composed E2E |
-| D | `tpsi5-activity-d-debug-typescript-boundaries-001` | static type debugging | starter type-check **deve fallire**, solution verde |
+| D | `tpsi5-activity-d-debug-typescript-boundaries-001` | static type debugging | starter type-check rosso, solution verde |
+| A | `tpsi5-activity-a-websocket-realtime-microscope-001` | polling/WebSocket/Socket.IO/recovery | manuale |
+| B | `tpsi5-activity-b-realtime-event-reducer-001` | event reducer idempotente | **automatico JS** |
+| C | `tpsi5-activity-c-feisbuc-socketio-realtime-001` | milestone 12 realtime multiutente | manuale + type-check/build + two-client E2E |
+| D | `tpsi5-activity-d-debug-realtime-boundaries-001` | trust/lifecycle/delivery debug | manuale + structural checks |
 
 ## Boundary di grading
 
 ```text
 linguaggio puro JS/SQL           -> runner deterministico TheBitLab
 TypeScript puro/SFC              -> reference tsc/vue-tsc in repository CI
-single template/render           -> reference CI con dependency pinned
-Vue/SFC/browser multi-file       -> reference build + smoke/E2E docente
-HTTP deep-link fallback          -> reference server E2E
+Vue/browser                      -> reference build + smoke/E2E docente
+Socket.IO transport/domain       -> reference two-client E2E docente
+browser DOM/offline interaction  -> browser grader futuro
 backend/persistence/security     -> reference E2E
 security/architecture reasoning  -> rubrica + evidence
 ```
 
-Il browser grader TheBitLab non e ancora implementato e il runner accettato non dichiara TypeScript. Per le Activity TS `correzione.test=false` e intenzionale: `tsc`/`vue-tsc` in Quality sono evidence della reference, non una capacita di grading della piattaforma.
+Il browser grader TheBitLab non e ancora implementato e il runner accettato non dichiara TypeScript. Le Activity TS/realtime restano `correzione.test=false` quando richiedono runtime non disponibili nella piattaforma. Activity B realtime e invece autograded perche il reducer e JavaScript puro.
 
-La Quality del repository docente puo e deve:
+La Quality docente puo:
 
-- installare versioni pinned;
-- eseguire `tsc --noEmit` / `vue-tsc --noEmit` sulle reference TypeScript;
-- verificare che lo starter D fallisca realmente per gli errori dichiarati;
-- eseguire `vite build` sulla milestone 11;
-- comporre milestone 10 + TypeScript overlay;
-- comporre `dist/` con il backend auth gia verificato;
-- fare smoke HTTP su `/vue/` e `/vue/feed`;
-- verificare che `/api/*` mantenga 401/403 e il contratto precedente.
+- eseguire `tsc`/`vue-tsc` e Vite build;
+- comporre milestone 11 + realtime overlay;
+- avviare Express + Socket.IO sullo stesso server;
+- verificare socket anonimo rifiutato;
+- aprire due socket autenticati e osservare create/update/delete;
+- verificare che un command socket inventato non muti il dominio;
+- simulare offline e verificare lo snapshot REST di recovery.
 
-## Regola
-
-Il tipo di evidence deve corrispondere al comportamento osservato. Un type-check verde dimostra coerenza statica, non correttezza del JSON remoto, sicurezza del backend o comportamento browser. Runtime validation, 401/403 e browser runner restano livelli distinti.
+Queste evidence dimostrano la reference solution; non sostituiscono il futuro browser grader per DOM, DevTools/offline mode o UI dello studente.
