@@ -1,0 +1,31 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-b-realtime-event-reducer-001",
+  "titolo":"Realtime reducer: eventi idempotenti sul feed",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"B",
+  "argomenti":["realtime","event-contract","reducer","idempotency","state","socket.io"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-websocket-socketio-realtime"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md","anchor":"5-reducer-realtime-evento---nuovo-state","role":"lesson"}],
+  "consegna":"Completa `applyRealtimeEvent(posts,event)`. `post:created` inserisce il post in testa solo se l'id non esiste; `post:updated` sostituisce il post con lo stesso id; `post:deleted` elimina l'id indicato. La funzione deve essere pura, non mutare l'array ricevuto e stampare JSON deterministico.",
+  "vincoli":["funzione pura","nessun DOM/fetch/socket","nessuna mutazione dell'array input","post:created idempotente per id","ordine degli altri post preservato","nessun log extra"],
+  "assets":[
+    {"type":"starter","path":"starter/main.js","target_path":"main.js","visibility":"student","description":"Reducer da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Contratto eventi"},
+    {"type":"teacher_only","path":"solution/main.js","visibility":"teacher","description":"Reducer reference"}
+  ],
+  "soluzione_attesa":{"tipo":"javascript-deterministico","file":"main.js","note":"Reducer puro riusabile dal client realtime."},
+  "correzione":{"compila":false,"test":true,"sandbox":true,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":45,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "test_cases":[
+    {"name":"created-new","stdin":"{\"posts\":[{\"id\":\"p1\",\"text\":\"uno\"}],\"event\":{\"type\":\"post:created\",\"post\":{\"id\":\"p2\",\"text\":\"due\"}}}\n","expected_stdout":"[{\"id\":\"p2\",\"text\":\"due\"},{\"id\":\"p1\",\"text\":\"uno\"}]"},
+    {"name":"created-duplicate","stdin":"{\"posts\":[{\"id\":\"p1\",\"text\":\"uno\"}],\"event\":{\"type\":\"post:created\",\"post\":{\"id\":\"p1\",\"text\":\"uno\"}}}\n","expected_stdout":"[{\"id\":\"p1\",\"text\":\"uno\"}]"},
+    {"name":"updated","stdin":"{\"posts\":[{\"id\":\"p1\",\"text\":\"uno\",\"likes\":0},{\"id\":\"p2\",\"text\":\"due\",\"likes\":0}],\"event\":{\"type\":\"post:updated\",\"post\":{\"id\":\"p2\",\"text\":\"due\",\"likes\":1}}}\n","expected_stdout":"[{\"id\":\"p1\",\"text\":\"uno\",\"likes\":0},{\"id\":\"p2\",\"text\":\"due\",\"likes\":1}]"},
+    {"name":"deleted","stdin":"{\"posts\":[{\"id\":\"p1\"},{\"id\":\"p2\"}],\"event\":{\"type\":\"post:deleted\",\"postId\":\"p1\"}}\n","expected_stdout":"[{\"id\":\"p2\"}]"},
+    {"name":"delete-missing","stdin":"{\"posts\":[{\"id\":\"p1\"}],\"event\":{\"type\":\"post:deleted\",\"postId\":\"missing\"}}\n","expected_stdout":"[{\"id\":\"p1\"}]"}
+  ],
+  "rubrica":[{"criterio":"Created idempotente","punti":3},{"criterio":"Updated per id","punti":2},{"criterio":"Deleted per id","punti":2},{"criterio":"Immutabilita input","punti":2},{"criterio":"Leggibilita","punti":1}]
+}
