@@ -156,7 +156,7 @@ def test_ssr_content_pack_design_and_activity_contracts_close_uda24() -> None:
     design = load(DESIGN_PATH)
     item = next(x for x in pack["content_items"] if x["id"] == "tpsi5-content-ssr-nunjucks-comparison")
 
-    assert pack["version"] == "0.12.0"
+    assert pack["version"] == "0.13.0"
     assert item["order"] == 10
     assert item["path"] == "content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md"
     assert item["activity_ids"] == [
