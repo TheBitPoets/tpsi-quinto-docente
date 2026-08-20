@@ -124,6 +124,9 @@ onMounted(() => {
     },
     onConnect() {
       realtimeStatus.value = "online";
+      // La connect e asincrona: questo secondo snapshot chiude anche la
+      // finestra fra il primo GET e l'effettivo completamento dell'handshake.
+      void resyncPosts();
     },
     onReconnect() {
       realtimeStatus.value = "online";
@@ -138,9 +141,9 @@ onMounted(() => {
     },
   });
 
-  // Apriamo il realtime prima dello snapshot. Gli eventi ricevuti mentre
-  // GET /api/posts e in volo vengono accodati e applicati allo snapshot:
-  // cosi non esiste una finestra snapshot -> connect in cui perdere update.
+  // Avviamo connect e snapshot insieme. Gli eventi ricevuti mentre
+  // GET /api/posts e in volo vengono accodati. Il resync di onConnect
+  // garantisce inoltre uno snapshot successivo all'handshake effettivo.
   void resyncPosts();
 });
 
