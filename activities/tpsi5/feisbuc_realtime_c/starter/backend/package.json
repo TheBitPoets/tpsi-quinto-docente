@@ -1,0 +1,8 @@
+{
+  "name":"feisbuc-realtime-backend-starter",
+  "private":true,
+  "type":"module",
+  "engines":{"node":">=22.18"},
+  "scripts":{"start":"node src/server.js"},
+  "dependencies":{"express":"5.2.1","socket.io":"4.8.3"}
+}

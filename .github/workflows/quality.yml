@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JS, SQL, auth, SSR, Vue, TypeScript and backend E2E tests
+      - name: Set up Node.js for deterministic JS, SQL, auth, SSR, Vue, TypeScript, realtime and backend E2E tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -195,6 +195,32 @@ jobs:
         working-directory: _typescript-reference
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
+      - name: Compose milestone 11 with realtime frontend overlay
+        run: python tests/compose_realtime_frontend.py
+
+      - name: Install realtime Feisbuc frontend
+        working-directory: _realtime-frontend
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Type-check realtime Feisbuc frontend
+        working-directory: _realtime-frontend
+        run: npm run type-check
+
+      - name: Build realtime Feisbuc frontend
+        working-directory: _realtime-frontend
+        run: npm run build
+
+      - name: Compose realtime frontend with auth backend
+        run: python tests/compose_realtime_reference.py
+
+      - name: Install Express and Socket.IO for realtime backend reference
+        working-directory: _realtime-reference
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Install Socket.IO two-client probe
+        working-directory: tests/realtime_probe
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -210,3 +236,4 @@ jobs:
           tests/test_tpsi_quinto_vue_spa.py
           tests/test_tpsi_quinto_vue_router.py
           tests/test_tpsi_quinto_typescript.py
+          tests/test_tpsi_quinto_realtime.py

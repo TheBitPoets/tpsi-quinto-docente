@@ -1,0 +1,25 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-a-websocket-realtime-microscope-001",
+  "titolo":"Microscopio realtime: polling, WebSocket e Socket.IO",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"A",
+  "argomenti":["polling","websocket","socket.io","push","handshake","reconnect","delivery"],
+  "linguaggio":"javascript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-websocket-socketio-realtime"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md","anchor":"2-polling-push-e-connessione-persistente","role":"lesson"}],
+  "consegna":"Leggi ed esegui la traccia guidata, poi completa `OSSERVAZIONI.md`: distingui request HTTP, handshake, connessione persistente, server push, reconnect e recovery. Devi spiegare anche perche Socket.IO non e sinonimo di WebSocket e perche un reconnect non garantisce che nessun evento sia stato perso.",
+  "vincoli":["nessuna mutazione Feisbuc","nessuna API nuova","distinguere protocollo da libreria","distinguere reconnect da recovery","usare terminologia HTTP/WebSocket/Socket.IO corretta"],
+  "assets":[
+    {"type":"starter","path":"starter/trace.js","target_path":"trace.js","visibility":"student","description":"Traccia osservativa commentata"},
+    {"type":"example","path":"student/OSSERVAZIONI.md","target_path":"OSSERVAZIONI.md","visibility":"student","description":"Scheda da completare"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Punti attesi e misconception"}
+  ],
+  "soluzione_attesa":{"tipo":"osservazione-guidata","note":"Timeline corretta e distinzione WebSocket/Socket.IO/recovery."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":45,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":false},
+  "manual_checks":[{"name":"timeline","criterion":"riconosce request/handshake/push/reconnect"},{"name":"boundary","criterion":"Socket.IO non viene descritto come semplice alias WebSocket"},{"name":"recovery","criterion":"spiega che gli eventi persi richiedono resync/recovery"}],
+  "rubrica":[{"criterio":"Timeline polling/request-response","punti":2},{"criterio":"WebSocket handshake e bidirezionalita","punti":3},{"criterio":"Socket.IO fallback/reconnect/event model","punti":3},{"criterio":"Disconnessione e recovery","punti":2}]
+}

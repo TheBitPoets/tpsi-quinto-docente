@@ -102,7 +102,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, automatic: bo
 def test_node_express_content_item_remains_first_uda24_backend_step() -> None:
     pack = load(PACK_PATH); design = load(DESIGN_PATH)
     item = next(item for item in pack["content_items"] if item["id"] == "tpsi5-content-node-express-backend")
-    assert pack["version"] == "0.13.0"
+    assert pack["version"] == "0.14.0"
     assert item["path"] == "content/tpsi5/06_NODE_EXPRESS_BACKEND.md"
     assert item["order"] == 7
     assert item["activity_ids"] == [

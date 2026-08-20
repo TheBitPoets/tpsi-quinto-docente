@@ -1,0 +1,28 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-d-debug-realtime-boundaries-001",
+  "titolo":"Debug realtime: trust, listener lifecycle e recovery",
+  "tipo":"debug-didattico",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"D",
+  "argomenti":["socket.io","security","listener-lifecycle","reconnect","recovery","idempotency","architecture"],
+  "linguaggio":"typescript",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
+  "content_ids":["tpsi5-content-websocket-socketio-realtime","tpsi5-content-auth-sessions-security","tpsi5-content-typescript-boundary-typing"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md","anchor":"15-errori-frequenti","role":"lesson"}],
+  "consegna":"Prima di modificare il codice, compila `DIAGNOSI.md`. Classifica almeno cinque difetti come security, lifecycle, delivery/recovery oppure architecture. Lo starter contiene un command path Socket.IO parallelo alla REST API, identity spoofing, handshake non autenticato, listener duplicabili, reducer non idempotente e reconnect senza resync. Proponi quindi la correzione mantenendo REST come command path.",
+  "vincoli":["diagnosi prima del fix","nessun userId/authorId trusted dal payload socket","nessuna mutazione post comandata via socket","listener rimovibili","created idempotente","reconnect richiede snapshot REST","non risolvere con Pinia","non disattivare auth/authorization esistenti"],
+  "assets":[
+    {"type":"starter","path":"starter/server.js","target_path":"server.js","visibility":"student","description":"Server realtime volutamente insicuro"},
+    {"type":"starter","path":"starter/client.ts","target_path":"client.ts","visibility":"student","description":"Client con lifecycle/recovery difettosi"},
+    {"type":"starter","path":"student/DIAGNOSI.md","target_path":"DIAGNOSI.md","visibility":"student","description":"Scheda di diagnosi obbligatoria"},
+    {"type":"teacher_only","path":"solution/server.js","visibility":"teacher","description":"Boundary server corretto"},
+    {"type":"teacher_only","path":"solution/client.ts","visibility":"teacher","description":"Lifecycle/recovery corretto"},
+    {"type":"teacher_only","path":"solution/DIAGNOSI.md","visibility":"teacher","description":"Diagnosi causale reference"}
+  ],
+  "soluzione_attesa":{"tipo":"security-and-delivery-debug","note":"REST commands, authenticated socket, cleanup listener, idempotenza e resync."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":80,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[{"name":"diagnosis-first","criterion":"almeno cinque cause classificate prima del fix"},{"name":"trust","criterion":"identita server-side, nessun authorId trusted"},{"name":"lifecycle","criterion":"listener registrati/rimossi simmetricamente"},{"name":"recovery","criterion":"reconnect -> REST snapshot"}],
+  "rubrica":[{"criterio":"Diagnosi security/trust","punti":3},{"criterio":"Diagnosi lifecycle","punti":2},{"criterio":"Delivery/recovery e idempotenza","punti":3},{"criterio":"Architecture REST/event path","punti":2}]
+}
