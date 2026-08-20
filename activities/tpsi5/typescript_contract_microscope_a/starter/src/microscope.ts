@@ -1,3 +1,5 @@
+export {};
+
 type AuthStatus = "unknown" | "anonymous" | "authenticated";
 
 interface User {
