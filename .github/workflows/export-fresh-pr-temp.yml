@@ -1,0 +1,27 @@
+name: Export UDA26 fresh PR temp
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    if: github.head_ref == 'agent/uda26-export-fresh'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uda26-fresh-source-pr
+          if-no-files-found: error
+          retention-days: 1
+          path: |
+            .github/workflows/quality.yml
+            activities/tpsi5
+            content/tpsi5
+            doc/OPEN_DECISIONS.md
+            doc/course_designs/tpsi_quinto_2026_2027.json
+            tests
