@@ -1,0 +1,26 @@
+name: Export source temp
+
+on:
+  push:
+    branches:
+      - agent/uda26-runtime-deploy-capstone-exporttmp
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-snapshot
+          if-no-files-found: error
+          retention-days: 1
+          path: |
+            .github/workflows/quality.yml
+            content/tpsi5
+            doc/course_designs/tpsi_quinto_2026_2027.json
+            activities/tpsi5
+            tests
