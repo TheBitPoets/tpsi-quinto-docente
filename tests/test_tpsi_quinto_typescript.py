@@ -60,7 +60,7 @@ def test_typescript_content_pack_decision_and_course_design() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
 
-    assert pack["version"] == "0.16.0"
+    assert pack["version"] == "0.17.0"
     assert pack["extensions"]["bootstrap_decisions"]["typescript_depth"] == "targeted-boundary-typing"
 
     refs = {entry["id"]: entry for entry in pack["references"]}
