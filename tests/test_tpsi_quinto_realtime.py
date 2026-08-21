@@ -45,7 +45,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, automatic: bo
 def test_realtime_content_pack_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.18.0"
+    assert pack["version"] == "0.19.0"
     decisions = pack["extensions"]["bootstrap_decisions"]
     assert decisions["frontend_framework"] == "vue3-vite"
     assert decisions["typescript_depth"] == "targeted-boundary-typing"

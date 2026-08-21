@@ -42,7 +42,8 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 15. `14_REACT_TRANSLATION_COMPARISON.md` — translation lab Vue -> React, non-core;
 16. `15_FASTAPI_OPENAPI_MIRROR.md` — mirror 01 HTTP/OpenAPI/TestClient;
 17. `16_SQLALCHEMY_PERSISTENCE_MIRROR.md` — mirror 02 SQLAlchemy/SQLite/restart;
-18. `17_TESTING_INTEGRATION_BOUNDARIES.md` — mirror 03 pytest, fixture/isolation e integration boundaries. milestone 12.
+18. `17_TESTING_INTEGRATION_BOUNDARIES.md` — mirror 03 pytest, fixture/isolation e integration boundaries;
+19. `18_RUNTIME_DEPLOY_HEALTH_CAPSTONE.md` — mirror 04 runtime config, health/readiness, live Uvicorn ed evidence capstone. milestone 12.
 
 ## Feisbuc oggi
 
@@ -87,7 +88,7 @@ mirror 02  SQLAlchemy 2.0 + SQLite + restart persistence
     ↓
 mirror 03  pytest + fixture/tmp_path + repository/HTTP integration + isolation
     ↓
-quarto slice  config/deploy + health/readiness + capstone/evidence bundle
+mirror 04  config/prestart + health/readiness + live Uvicorn + capstone/evidence
 ```
 
 Il mirror non sostituisce il backend principale Node/Express: serve a trasferire concetti e rendere visibili i contratti fra framework diversi.
@@ -146,6 +147,6 @@ Il browser grader TheBitLab non e ancora implementato e lo snapshot accettato de
 
 ## Stato
 
-Versione authoring **`0.18.0`**, ancora `draft` perche il curriculum completo non e congelato.
+Versione authoring **`0.19.0`**, ancora `draft` perche il curriculum completo non e congelato.
 
-Decisioni ancora aperte: ORM Node, corso SQL separato, calendario definitivo e dettagli del quarto slice UDA26 (config/deploy/capstone).
+Decisioni ancora aperte: ORM Node, corso SQL separato e calendario definitivo. UDA26 e chiusa nei quattro slice previsti.

@@ -50,6 +50,12 @@ Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 | B | `tpsi5-activity-b-pytest-fixture-boundary-001` | fixture/tmp_path/isolation | manuale + pytest reference |
 | C | `tpsi5-activity-c-feisbuc-testing-boundaries-001` | mirror 03 testing harness | manuale + integration/restart CI |
 | D | `tpsi5-activity-d-debug-testing-boundaries-001` | shared-state/over-mocking debug | manuale |
+| A | `tpsi5-activity-a-runtime-deploy-microscope-001` | runtime/config/health map | manuale |
+| B | `tpsi5-activity-b-runtime-config-contract-001` | config policy/fail-fast | **automatico Python** |
+| C | `tpsi5-activity-c-health-readiness-001` | health/readiness | manuale + reference CI |
+| D | `tpsi5-activity-d-debug-runtime-deploy-001` | runtime boundary debug | manuale |
+| E | `tpsi5-activity-e-evidence-bundle-001` | evidence mini-project | manuale + reference CI |
+| F | `tpsi5-activity-f-feisbuc-runtime-capstone-001` | mirror 04 runtime capstone | manuale + live-process/evidence CI |
 
 ## Boundary di grading
 
@@ -65,7 +71,7 @@ backend/persistence/security     -> reference E2E
 security/architecture reasoning  -> rubrica + evidence
 ```
 
-Il browser grader TheBitLab non e ancora implementato e il runner accettato non dichiara TypeScript. Le Activity TS/realtime restano `correzione.test=false` quando richiedono runtime non disponibili nella piattaforma. Activity B realtime e invece autograded perche il reducer e JavaScript puro. In UDA26 la policy FastAPI B resta automatico Python; fixture pytest, FastAPI multi-file e SQLAlchemy restano evidence di repository CI e rubrica manuale.
+Il browser grader TheBitLab non e ancora implementato e il runner accettato non dichiara TypeScript. Le Activity TS/realtime restano `correzione.test=false` quando richiedono runtime non disponibili nella piattaforma. Activity B realtime e invece autograded perche il reducer e JavaScript puro. In UDA26 le policy Python pure (FastAPI B e runtime-config B) restano automatiche; fixture pytest, FastAPI/SQLAlchemy multi-file, health/readiness, live process ed evidence restano reference CI e rubrica manuale.
 
 La Quality docente puo:
 
@@ -82,4 +88,4 @@ Queste evidence dimostrano la reference solution; non sostituiscono il futuro br
 
 ## Quality UDA26
 
-La CI pinna `pytest 9.1.1` e valida separatamente fixture repository, mirror 02 persistence e mirror 03 testing harness prima della regression suite completa. I test d'integrazione usano SQLite reale sotto directory temporanee e non mockano il boundary che dichiarano di verificare.
+La CI pinna `pytest 9.1.1` e valida fixture repository, mirror 02 persistence, mirror 03 testing harness e mirror 04 runtime capstone. Il closeout aggiunge health/readiness, processo Uvicorn reale ed evidence bundle deterministico prima della regression suite completa.
