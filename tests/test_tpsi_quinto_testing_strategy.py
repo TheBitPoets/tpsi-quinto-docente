@@ -49,7 +49,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str) -> dict:
 def test_testing_slice_is_registered_without_changing_week_budget() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.19.0"
+    assert pack["version"] == "1.0.0"
     refs = {item["id"]: item for item in pack["references"]}
     assert refs["tpsi5-ref-pytest"]["role"] == "technical-reference"
     assert PYTEST_VERSION in refs["tpsi5-ref-pytest"]["notes"]

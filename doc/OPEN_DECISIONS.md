@@ -1,4 +1,8 @@
-# Decisioni da congelare prima del curriculum freeze
+# Decisioni congelate — curriculum TPSI quinto 2026/27
+
+Freeze editoriale: **21 agosto 2026**.
+
+Tutte le decisioni D1–D5 sono chiuse per la release Content Pack 1.0.0. Una modifica futura del perimetro richiede issue esplicita, motivazione didattica e version bump.
 
 ## D1 — Framework frontend principale
 
@@ -10,26 +14,26 @@ Motivazione didattica:
 
 - continuita forte con HTML, CSS e JavaScript gia studiati;
 - Single File Components leggibili come evoluzione di struttura, comportamento e stile;
-- Composition API adatta a rendere espliciti `state -> render`, props, emits, computed e lifecycle dopo il DOM manuale;
+- Composition API rende espliciti `state -> render`, props, emits, computed e lifecycle dopo il DOM manuale;
 - carico cognitivo compatibile con le 5 settimane di UDA25;
-- tooling ufficiale coerente con Vite;
-- permette di introdurre TypeScript in modo progressivo senza renderlo prerequisito del primo componente.
+- tooling ufficiale coerente con Vite.
 
-Motivazione professionale:
-
-- ecosistema e documentazione maturi;
-- competenze trasferibili a React: componenti, props, stato, rendering dichiarativo, routing, form e data fetching;
-- React resta un **translation/comparison lab** finale, non un secondo framework core.
-
-Boundary: il corso insegna i concetti SPA attraverso Vue; non deve trasformarsi in un corso di sintassi Vue. Ogni astrazione importante va ricondotta al modello Web Platform gia studiato.
+Boundary: React resta un **translation/comparison lab**, non un secondo framework core. Le astrazioni Vue vanno ricondotte alla Web Platform gia studiata.
 
 ## D2 — ORM Node
 
-Candidati iniziali: Drizzle, Prisma, Sequelize.
+Decisione: **nessun ORM Node nel core 2026/27**.
 
-Criteri: visibilita del mapping SQL, maturita, TypeScript requirement, migrazioni, SQLite/PostgreSQL, chiarezza didattica.
+Stato: `DECIDED`.
 
-Stato: `TBD`.
+Motivazione:
+
+- UDA24 rende visibile SQL raw con `node:sqlite`, constraint, prepared statement, repository e persistenza reale prima di qualunque astrazione;
+- il budget di 33 settimane e gia completo senza comprimere auth, frontend, realtime o deploy;
+- il concetto ORM viene comunque osservato nel mirror Python con SQLAlchemy 2.0.51, dove il mapping SQL/ORM e esplicito;
+- introdurre Drizzle/Prisma/Sequelize ora aggiungerebbe superficie sintattica senza un nuovo obiettivo curricolare necessario.
+
+Boundary: un ORM Node puo diventare estensione futura/senior o revisione di una release successiva, ma non va aggiunto silenziosamente al core 2026/27.
 
 ## D3 — TypeScript
 
@@ -37,66 +41,33 @@ Decisione: **targeted boundary typing nel core UDA25**.
 
 Stato: `DECIDED`.
 
-TypeScript viene introdotto dopo Vue e Vue Router, quando esistono gia contratti reali da rendere staticamente verificabili. Il core copre:
+Il core copre inferenza e annotazioni utili, union/discriminated union, `unknown`, narrowing, nullability, tipi di dominio, boundary HTTP `JSON -> unknown -> runtime validation`, props/emits Vue, session/navigation policy e modalita strict.
 
-- inferenza e annotazioni solo quando aggiungono informazione;
-- union e discriminated union;
-- `unknown`, narrowing e nullability;
-- tipi di dominio (`User`, `Post`, credenziali e stato auth);
-- boundary HTTP: JSON esterno come `unknown` prima della runtime validation;
-- props/emits Vue type-based;
-- session state, navigation policy e `RouteMeta`;
-- `strict`, `noUncheckedIndexedAccess` ed `exactOptionalPropertyTypes`.
+Restano fuori type gymnastics, decorators/metaprogrammazione, migrazione completa del backend Express a TypeScript e duplicazione sistematica degli esercizi JavaScript.
 
-Restano fuori dal core:
-
-- conditional/mapped types avanzati e type gymnastics;
-- decorators/metaprogrammazione;
-- migrazione completa del backend Express a TypeScript;
-- duplicazione sistematica di ogni esercizio JavaScript in TypeScript.
-
-Baseline reference 2026/27: TypeScript 6.0.3 + `vue-tsc` 3.3.8. TypeScript 7 viene rivalutato solo quando l'integrazione Vue/vue-tsc usata dal corso e stabile e riproducibile.
-
-Regola didattica: TypeScript descrive un contratto statico, ma **non rende affidabile un JSON di rete senza runtime validation**.
+Baseline 2026/27: TypeScript 6.0.3 + `vue-tsc` 3.3.8. Regola didattica: TypeScript descrive un contratto statico ma non rende affidabile un JSON di rete senza runtime validation.
 
 ## D4 — Mirror Python
 
-Decisione: **FastAPI mirror track mirato in UDA26, con SQLAlchemy in un secondo slice separato**.
+Decisione: **FastAPI mirror track mirato in UDA26**, con SQLAlchemy in un secondo slice e testing/runtime in slice separati.
 
 Stato: `DECIDED`.
 
-Obiettivo: mostrare la portabilita del contratto HTTP e dei boundary applicativi senza duplicare integralmente il backend Feisbuc Express.
+Sequenza congelata:
 
-Sequenza didattica congelata:
+1. FastAPI + Pydantic + OpenAPI + TestClient + MemoryPostStore;
+2. SQLAlchemy 2.0.51 + SQLite sotto lo stesso contratto;
+3. pytest fixture/isolation/integration boundaries;
+4. environment config, prestart, health/readiness, live Uvicorn ed evidence capstone.
 
-1. **FastAPI + Pydantic + OpenAPI + TestClient + MemoryPostStore**;
-2. **SQLAlchemy 2.x** sotto lo stesso contratto e la stessa suite HTTP;
-3. testing/deploy/capstone, riusando quanto emerso nei due adapter.
-
-Il primo slice confronta esplicitamente:
-
-- route Express ↔ path operation FastAPI;
-- validation JavaScript/runtime parser ↔ validation Pydantic;
-- input model ↔ output model;
-- status/header HTTP espliciti;
-- `response_model` come representation boundary;
-- OpenAPI/JSON Schema generati;
-- `TestClient` come evidence del contratto;
-- differenze osservabili dei default framework, incluso il `422` FastAPI per request validation.
-
-Boundary deliberato:
-
-- il prodotto principale resta `Vue -> Express -> SQLite -> session/auth -> Socket.IO`;
-- il mirror Python non introduce una seconda SPA;
-- auth/session/realtime non vengono duplicati nel primo mirror;
-- SQLAlchemy non entra nello stesso incremento di FastAPI/OpenAPI;
-- l'autore fixture del primo mirror non viene presentato come autenticazione;
-- una differenza di framework non viene nascosta automaticamente: prima si decide se il contratto richiede compatibilita esatta.
-
-Baseline riproducibile del primo slice: FastAPI `0.141.1`, Pydantic `2.13.4`, Uvicorn `0.52.1`, HTTPX `0.28.1`; SQLAlchemy `2.0.51` e riservato al secondo slice.
+Boundary: il prodotto principale resta `Vue -> Express -> SQLite -> session/auth -> Socket.IO`; il mirror Python non duplica SPA, auth/session o realtime.
 
 ## D5 — Corso SQL separato
 
-TPSI5 deve consumare il corso SQL senza duplicarlo. Nel backend restano comunque query SQL raw prima dell'ORM, cosi lo studente vede la relazione tra SQL e astrazione applicativa.
+Decisione: **integrazione futura non bloccante**.
 
-Da decidere: prerequisiti e milestone condivise fra i due Course Design.
+Stato: `DECIDED`.
+
+TPSI5 2026/27 e autosufficiente per il sottoinsieme SQL necessario a UDA24: schema/constraint, DDL/DML, `WHERE`, prepared statement, transazioni concettuali e repository SQLite. Il futuro Content Pack SQL separato potra fornire prerequisiti piu profondi, esercitazioni aggiuntive e milestone condivise, ma non e requisito per pubblicare o svolgere questa release.
+
+Boundary: il corso SQL non deve essere duplicato dentro TPSI5; una futura integrazione dovra mantenere visibile il mapping fra query SQL e astrazioni applicative.

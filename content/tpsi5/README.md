@@ -97,7 +97,7 @@ Baseline testing: `pytest 9.1.1`; niente coverage plugin, xdist, Testcontainers 
 
 ## Decisioni frontend
 
-D1 e D3 sono congelate:
+Le decisioni D1–D5 sono congelate per la release 2026/27:
 
 ```text
 framework core      = Vue 3 + Vite
@@ -105,6 +105,8 @@ router core         = Vue Router
 TypeScript depth    = targeted-boundary-typing
 realtime core       = WebSocket concettuale + Socket.IO applicato
 React               = translation/comparison lab
+ORM Node             = fuori dal core 2026/27
+corso SQL separato   = integrazione futura non bloccante
 ```
 
 Baseline reference UDA25:
@@ -147,6 +149,6 @@ Il browser grader TheBitLab non e ancora implementato e lo snapshot accettato de
 
 ## Stato
 
-Versione authoring **`0.19.0`**, ancora `draft` perche il curriculum completo non e congelato.
+Release authoring **`1.0.0`**, stato editoriale **`approved`**. Curriculum 2026/27 congelato su 33 settimane con UDA20–UDA26 complete.
 
-Decisioni ancora aperte: ORM Node, corso SQL separato e calendario definitivo. UDA26 e chiusa nei quattro slice previsti.
+D2 congela l'ORM Node fuori dal core; D5 rende il futuro corso SQL un'integrazione non bloccante. Dettagli e policy post-freeze: `doc/CURRICULUM_FREEZE_2026_2027.md`.

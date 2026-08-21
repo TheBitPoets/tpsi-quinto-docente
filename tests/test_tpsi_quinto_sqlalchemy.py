@@ -55,7 +55,7 @@ def test_sqlalchemy_content_pack_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
 
-    assert pack["version"] == "0.19.0"
+    assert pack["version"] == "1.0.0"
     refs = {item["id"]: item for item in pack["references"]}
     sqlalchemy_ref = refs["tpsi5-ref-sqlalchemy"]
     assert sqlalchemy_ref["role"] == "technical-reference"

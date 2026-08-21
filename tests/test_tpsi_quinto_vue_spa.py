@@ -67,11 +67,12 @@ def package_versions(path: Path) -> None:
 def test_vue_content_pack_decision_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.19.0"
+    assert pack["version"] == "1.0.0"
     decisions = pack["extensions"]["bootstrap_decisions"]
     assert decisions["frontend_framework"] == "vue3-vite"
     assert decisions["typescript_depth"] == "targeted-boundary-typing"
-    assert decisions["node_orm"] == "tbd"
+    assert decisions["node_orm"] == "none-core-2026-27"
+    assert decisions["sql_course_integration"] == "optional-nonblocking"
 
     item = next(x for x in pack["content_items"] if x["id"] == "tpsi5-content-vue3-components-reactivity")
     assert item["path"] == "content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md"

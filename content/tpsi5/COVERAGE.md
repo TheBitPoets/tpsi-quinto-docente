@@ -1,6 +1,6 @@
-# TPSI quinto 2026/27 — matrice di copertura iniziale
+# TPSI quinto 2026/27 — matrice di copertura congelata
 
-Stato: **draft**.
+Stato: **approved / curriculum freeze 1.0.0**.
 
 | Area | Core 2026/27 | Progetto Feisbuc | Note |
 | --- | --- | --- | --- |
@@ -18,7 +18,7 @@ Stato: **draft**.
 | WebSocket/realtime | **sì** | **milestone 12** | WebSocket concettuale + Socket.IO 4.8.3, REST commands, session handshake e resync |
 | React translation/comparison | **sì, breve non-core** | nessuna milestone nuova | Vue -> React: state, derived values, props/callback, JSX, controlled input; React non diventa secondo frontend core |
 | Global state/Pinia | solo se motivato | non introdotto | FeedView ha ancora ownership naturale del feed; sessione resta composable singleton |
-| ORM Node | TBD | futuro | confronto solo dopo SQL raw |
+| ORM Node | **no, fuori dal core 2026/27** | estensione futura | D2: SQL raw resta visibile nel backend Node; ORM osservato nel mirror SQLAlchemy |
 | FastAPI mirror/OpenAPI | **sì, D4 deciso** | mirror 01 | FastAPI/Pydantic/OpenAPI/TestClient + MemoryPostStore; stesso dominio HTTP, non secondo backend completo |
 | SQLAlchemy mirror | **sì** | **mirror 02** | SQLAlchemy 2.0.51 + SQLite sotto lo stesso contratto FastAPI; repository/Session boundary e restart persistence |
 | Testing strategy | **sì** | **mirror 03** | pytest 9.1.1, fixture/tmp_path, repository + HTTP integration, restart/isolation e mock boundary |
@@ -324,3 +324,17 @@ Per UDA26 il runner **Python e implementato**: Activity B FastAPI e Activity B r
 10. **SQLAlchemy persistence mirror: secondo slice UDA26 implementato**;
 11. **testing strategy/integration boundaries: terzo slice UDA26 implementato**;
 12. **runtime deploy/capstone: quarto slice UDA26 completato; UDA26 chiusa**.
+
+
+## Curriculum freeze 1.0.0
+
+- 33 settimane e UDA20–UDA26 congelate;
+- content item 00–18 approvati;
+- Feisbuc milestone 0–12 complete;
+- mirror Python 01–04 completo;
+- D1–D5 chiuse;
+- ORM Node non appartiene al core 2026/27;
+- il futuro corso SQL e integrazione non bloccante;
+- #729 e #731 restano capability TheBitLab non bloccanti.
+
+Ogni modifica curricolare post-freeze segue la policy in `doc/CURRICULUM_FREEZE_2026_2027.md`.
