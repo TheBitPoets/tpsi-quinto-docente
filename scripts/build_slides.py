@@ -166,7 +166,7 @@ def write_manifest(output_root: Path, formats: list[str]) -> None:
         "course": "tpsi-quinto-2026-2027",
         "content_pack": "1.0.0",
         "marp_cli": MARP_CLI_VERSION,
-        "commit": os.environ.get("GITHUB_SHA"),
+        "commit": os.environ.get("SOURCE_SHA") or os.environ.get("GITHUB_SHA"),
         "formats": formats,
         "source_decks": sources,
         "artifacts": artifacts,
