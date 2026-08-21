@@ -19,10 +19,11 @@ Stato: **draft**.
 | React translation/comparison | **sì, breve non-core** | nessuna milestone nuova | Vue -> React: state, derived values, props/callback, JSX, controlled input; React non diventa secondo frontend core |
 | Global state/Pinia | solo se motivato | non introdotto | FeedView ha ancora ownership naturale del feed; sessione resta composable singleton |
 | ORM Node | TBD | futuro | confronto solo dopo SQL raw |
-| FastAPI mirror/OpenAPI/SQLAlchemy | sì, mirato | UDA26 | stesso contratto HTTP come mirror |
+| FastAPI mirror/OpenAPI | **sì, D4 deciso** | mirror 01 | FastAPI/Pydantic/OpenAPI/TestClient + MemoryPostStore; stesso dominio HTTP, non secondo backend completo |
+| SQLAlchemy mirror | sì, secondo slice UDA26 | mirror 02 futuro | SQLAlchemy 2.x sotto la stessa suite HTTP, dopo FastAPI/OpenAPI |
 | Testing/deploy/capstone | sì | UDA26 | release finale e osservabilita base |
 
-## Progressione Feisbuc
+## Progressione Feisbuc principale
 
 ```text
 0 semantic HTML
@@ -41,6 +42,51 @@ Stato: **draft**.
 ```
 
 Il translation lab React **non aggiunge una milestone 13**: confronta un problema UI già risolto e mantiene Feisbuc sul frontend Vue core.
+
+## Track mirror Python UDA26
+
+Il mirror e una progressione separata dal prodotto principale:
+
+```text
+Feisbuc HTTP contract gia noto
+        ↓
+mirror 01
+FastAPI + Pydantic + OpenAPI + TestClient
+        ↓
+MemoryPostStore
+        ↓
+mirror 02 futuro
+stessa suite HTTP + SQLAlchemy 2.x + SQLite
+        ↓
+testing/deploy/capstone
+```
+
+Invariant mirror 01:
+
+- il contratto HTTP viene confrontato con Express, non reinventato da zero;
+- route core: `GET /api/posts`, `POST /api/posts`, `PATCH /api/posts/{id}`;
+- `PostCreate` e `Post` sono modelli distinti;
+- `authorId` non appartiene al command affidabile;
+- POST usa `201` e `Location`;
+- `response_model` definisce la representation pubblica;
+- id inesistente produce `404`;
+- validation Pydantic `422` viene resa visibile come differenza di compatibility, non nascosta automaticamente;
+- OpenAPI espone path/schema verificabili;
+- `TestClient` verifica il contratto senza server TCP;
+- MemoryPostStore non importa FastAPI;
+- nessun SQLAlchemy, auth/session, Socket.IO o secondo frontend in mirror 01.
+
+Baseline primo slice UDA26:
+
+```text
+FastAPI   0.141.1
+Pydantic  2.13.4
+Uvicorn   0.52.1
+HTTPX     0.28.1
+Python    3.11 / 3.12 CI
+```
+
+SQLAlchemy `2.0.51` resta riservato al secondo slice.
 
 ### Milestone 12 — comandi REST, eventi Socket.IO
 
@@ -141,9 +187,18 @@ Boundary:
 - `computed` viene tradotto prima come valore derivato; `useMemo` non viene introdotto automaticamente;
 - la Quality costruisce le reference React/Vite ma non dichiara browser autograding.
 
-## Boundary di grading UDA25
+## Activity UDA26 — FastAPI/OpenAPI mirror
+
+- [x] `tpsi5-activity-a-fastapi-openapi-microscope-001` — route/OpenAPI/schema/422, manuale;
+- [x] `tpsi5-activity-b-fastapi-post-validation-001` — policy Python pura, **automatico Python**;
+- [x] `tpsi5-activity-c-feisbuc-fastapi-mirror-001` — mirror 01 con MemoryPostStore e TestClient;
+- [x] `tpsi5-activity-d-debug-fastapi-boundaries-001` — status/trust/schema/404/output boundary.
+
+## Boundary di grading
 
 Il browser grader TheBitLab non e ancora implementato e il runner deterministico TheBitLab non dichiara ancora TypeScript. Le Activity Vue/TypeScript/realtime/React che richiedono browser o connessioni restano quindi `correzione.test=false`. La Quality docente puo eseguire `tsc`/`vue-tsc`, build Vue/React, backend live e probe Socket.IO a due client; questa evidence non viene spacciata per autograding browser dello studente.
+
+Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `correzione.test=true` per la policy Python pura. Le Activity A/C/D richiedono framework multi-file, OpenAPI/TestClient o ragionamento di debugging e restano manual/rubric-based; la repository Quality valida le reference FastAPI senza dichiarare un grader FastAPI-specifico.
 
 ## Gate prima del freeze del curriculum TPSI5
 
@@ -155,4 +210,5 @@ Il browser grader TheBitLab non e ancora implementato e il runner deterministico
 6. decidere ORM Node quando serve realmente;
 7. verificare ore reali e calendario definitivo;
 8. **translation/comparison lab React: completato — breve, non-core, nessuna seconda SPA**;
-9. completare UDA26: FastAPI mirror, testing, deploy e capstone.
+9. **FastAPI/OpenAPI mirror: primo slice UDA26 implementato**;
+10. completare UDA26: SQLAlchemy mirror, testing, deploy e capstone.

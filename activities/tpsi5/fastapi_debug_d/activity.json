@@ -1,0 +1,29 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-d-debug-fastapi-boundaries-001",
+  "titolo":"Debug FastAPI: status, trust, schema e output boundary",
+  "tipo":"debug-didattico",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"D",
+  "argomenti":["fastapi","debugging","pydantic","response-model","http-status","trust-boundary","openapi"],
+  "linguaggio":"python",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-26"},
+  "content_ids":["tpsi5-content-fastapi-openapi-mirror"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md","anchor":"16-errori-frequenti","role":"lesson"}],
+  "consegna":"Analizza `broken_app.py` e compila `DIAGNOSI.md`. Individua almeno: POST che usa 200 invece di 201, body `dict` senza schema esplicito, `authorId` trusted dal client, campo interno esposto e id mancante che produce errore non governato. Confronta con la reference corretta e spiega come ogni fix modifica il contratto osservabile/OpenAPI.",
+  "vincoli":["nessun SQLAlchemy","diagnosi per causa non per riga","distinguere security/trust da schema/documentation","distinguere 404 da 500","non usare response_model come sostituto dell'authorization"],
+  "assets":[
+    {"type":"starter","path":"starter/requirements.txt","target_path":"requirements.txt","visibility":"student","description":"Toolchain"},
+    {"type":"starter","path":"starter/broken_app.py","target_path":"broken_app.py","visibility":"student","description":"Backend volutamente difettoso"},
+    {"type":"example","path":"student/DIAGNOSI.md","target_path":"DIAGNOSI.md","visibility":"student","description":"Scheda diagnosi"},
+    {"type":"teacher_only","path":"solution/requirements.txt","visibility":"teacher","description":"Toolchain reference"},
+    {"type":"teacher_only","path":"solution/fixed_app.py","visibility":"teacher","description":"Reference corretta"},
+    {"type":"teacher_only","path":"solution/DIAGNOSI.md","visibility":"teacher","description":"Diagnosi attesa"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Review docente"}
+  ],
+  "soluzione_attesa":{"tipo":"diagnosi-fastapi","file":"DIAGNOSI.md","note":"Correzione ragionata dei boundary HTTP/trust/schema."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":60,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[{"name":"status","criterion":"200 create -> 201 + Location"},{"name":"schema","criterion":"dict -> Pydantic input/output models"},{"name":"trust","criterion":"client authorId non affidabile"},{"name":"error","criterion":"KeyError/500 -> 404 governato"},{"name":"output","criterion":"internalSecret non appartiene alla representation pubblica"}],
+  "rubrica":[{"criterio":"Status/header","punti":2},{"criterio":"Input/OpenAPI schema","punti":2},{"criterio":"Trust boundary","punti":2},{"criterio":"404/error taxonomy","punti":2},{"criterio":"Output boundary","punti":2}]
+}
