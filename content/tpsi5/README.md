@@ -18,6 +18,7 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 - realtime aggiunge un **event path**, ma REST resta il **command path**;
 - reconnect non viene confuso con recovery: Feisbuc rilegge uno snapshot REST;
 - Node.js + Express backend principale; FastAPI mirror mirato;
+- test progettati per boundary osservabili, isolamento e diagnosi, non per percentuali decorative;
 - Feisbuc progetto longitudinale;
 - documentazioni ufficiali e security guidance come reference;
 - Activity A–F con asset student/teacher separati.
@@ -37,7 +38,11 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 11. `10_VUE3_COMPONENTI_REATTIVITA.md` — Vue 3/Vite; milestone 9;
 12. `11_VUE_ROUTER_NAVIGAZIONE_SPA.md` — Vue Router; milestone 10;
 13. `12_TYPESCRIPT_CONTRATTI_FRONTEND.md` — TypeScript mirato; milestone 11;
-14. `13_WEBSOCKET_SOCKETIO_REALTIME.md` — WebSocket/Socket.IO, delivery e recovery; milestone 12.
+14. `13_WEBSOCKET_SOCKETIO_REALTIME.md` — WebSocket/Socket.IO, delivery e recovery; milestone 12;
+15. `14_REACT_TRANSLATION_COMPARISON.md` — translation lab Vue -> React, non-core;
+16. `15_FASTAPI_OPENAPI_MIRROR.md` — mirror 01 HTTP/OpenAPI/TestClient;
+17. `16_SQLALCHEMY_PERSISTENCE_MIRROR.md` — mirror 02 SQLAlchemy/SQLite/restart;
+18. `17_TESTING_INTEGRATION_BOUNDARIES.md` — mirror 03 pytest, fixture/isolation e integration boundaries. milestone 12.
 
 ## Feisbuc oggi
 
@@ -71,6 +76,23 @@ server -> Socket.IO -> client A / client B
 RECOVERY
 reconnect -> GET /api/posts -> snapshot autorevole
 ```
+
+
+## Track mirror Python UDA26
+
+```text
+mirror 01  FastAPI + Pydantic + OpenAPI + TestClient
+    ↓
+mirror 02  SQLAlchemy 2.0 + SQLite + restart persistence
+    ↓
+mirror 03  pytest + fixture/tmp_path + repository/HTTP integration + isolation
+    ↓
+quarto slice  config/deploy + health/readiness + capstone/evidence bundle
+```
+
+Il mirror non sostituisce il backend principale Node/Express: serve a trasferire concetti e rendere visibili i contratti fra framework diversi.
+
+Baseline testing: `pytest 9.1.1`; niente coverage plugin, xdist, Testcontainers o browser automation in questo slice.
 
 ## Decisioni frontend
 
@@ -124,6 +146,6 @@ Il browser grader TheBitLab non e ancora implementato e lo snapshot accettato de
 
 ## Stato
 
-Versione authoring **`0.14.0`**, ancora `draft` perche il curriculum completo non e congelato.
+Versione authoring **`0.18.0`**, ancora `draft` perche il curriculum completo non e congelato.
 
-Decisioni ancora aperte: ORM Node, ampiezza mirror FastAPI/SQLAlchemy, corso SQL separato e calendario definitivo dopo verifica delle ore reali.
+Decisioni ancora aperte: ORM Node, corso SQL separato, calendario definitivo e dettagli del quarto slice UDA26 (config/deploy/capstone).

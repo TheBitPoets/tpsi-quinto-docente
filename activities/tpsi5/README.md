@@ -2,7 +2,7 @@
 
 Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 
-## Estratto UDA24–25
+## Estratto UDA24–26
 
 | Livello | ID | Scopo | Grading |
 | --- | --- | --- | --- |
@@ -38,6 +38,18 @@ Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 | B | `tpsi5-activity-b-realtime-event-reducer-001` | event reducer idempotente | **automatico JS** |
 | C | `tpsi5-activity-c-feisbuc-socketio-realtime-001` | milestone 12 realtime multiutente | manuale + type-check/build + two-client E2E |
 | D | `tpsi5-activity-d-debug-realtime-boundaries-001` | trust/lifecycle/delivery debug | manuale + structural checks |
+| A | `tpsi5-activity-a-fastapi-openapi-microscope-001` | FastAPI/OpenAPI microscope | manuale + TestClient reference |
+| B | `tpsi5-activity-b-fastapi-post-validation-001` | validation policy pura | **automatico Python** |
+| C | `tpsi5-activity-c-feisbuc-fastapi-mirror-001` | mirror 01 FastAPI | manuale + reference CI |
+| D | `tpsi5-activity-d-debug-fastapi-boundaries-001` | FastAPI boundary debug | manuale |
+| A | `tpsi5-activity-a-sqlalchemy-mapping-microscope-001` | ORM mapping/Session | manuale + reference CI |
+| B | `tpsi5-activity-b-sqlalchemy-repository-001` | repository ORM | manuale + pytest reference |
+| C | `tpsi5-activity-c-feisbuc-fastapi-sqlalchemy-001` | mirror 02 persistence | manuale + restart CI |
+| D | `tpsi5-activity-d-debug-sqlalchemy-transactions-001` | transaction/session debug | manuale |
+| A | `tpsi5-activity-a-testing-boundary-microscope-001` | test-level reasoning | manuale |
+| B | `tpsi5-activity-b-pytest-fixture-boundary-001` | fixture/tmp_path/isolation | manuale + pytest reference |
+| C | `tpsi5-activity-c-feisbuc-testing-boundaries-001` | mirror 03 testing harness | manuale + integration/restart CI |
+| D | `tpsi5-activity-d-debug-testing-boundaries-001` | shared-state/over-mocking debug | manuale |
 
 ## Boundary di grading
 
@@ -47,11 +59,13 @@ TypeScript puro/SFC              -> reference tsc/vue-tsc in repository CI
 Vue/browser                      -> reference build + smoke/E2E docente
 Socket.IO transport/domain       -> reference two-client E2E docente
 browser DOM/offline interaction  -> browser grader futuro
+Python puro                    -> runner deterministico TheBitLab
+pytest/framework/database       -> reference CI docente
 backend/persistence/security     -> reference E2E
 security/architecture reasoning  -> rubrica + evidence
 ```
 
-Il browser grader TheBitLab non e ancora implementato e il runner accettato non dichiara TypeScript. Le Activity TS/realtime restano `correzione.test=false` quando richiedono runtime non disponibili nella piattaforma. Activity B realtime e invece autograded perche il reducer e JavaScript puro.
+Il browser grader TheBitLab non e ancora implementato e il runner accettato non dichiara TypeScript. Le Activity TS/realtime restano `correzione.test=false` quando richiedono runtime non disponibili nella piattaforma. Activity B realtime e invece autograded perche il reducer e JavaScript puro. In UDA26 la policy FastAPI B resta automatico Python; fixture pytest, FastAPI multi-file e SQLAlchemy restano evidence di repository CI e rubrica manuale.
 
 La Quality docente puo:
 
@@ -64,3 +78,8 @@ La Quality docente puo:
 - simulare offline e verificare lo snapshot REST di recovery.
 
 Queste evidence dimostrano la reference solution; non sostituiscono il futuro browser grader per DOM, DevTools/offline mode o UI dello studente.
+
+
+## Quality UDA26
+
+La CI pinna `pytest 9.1.1` e valida separatamente fixture repository, mirror 02 persistence e mirror 03 testing harness prima della regression suite completa. I test d'integrazione usano SQLite reale sotto directory temporanee e non mockano il boundary che dichiarano di verificare.

@@ -61,7 +61,7 @@ def test_react_translation_pack_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
 
-    assert pack["version"] == "0.17.0"
+    assert pack["version"] == "0.18.0"
     assert pack["extensions"]["bootstrap_decisions"]["frontend_framework"] == "vue3-vite"
 
     refs = {entry["id"]: entry for entry in pack["references"]}
