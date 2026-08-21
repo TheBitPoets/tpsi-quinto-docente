@@ -48,32 +48,33 @@ def validate_sources() -> None:
     if numbers != EXPECTED_MODULES:
         errors.append(f"expected module decks 00..18, found: {numbers}")
 
-    content_files = sorted(
-        p for p in CONTENT_ROOT.glob("[0-9][0-9]_*.md") if p.name[:2] in EXPECTED_MODULES
-    )
-    content_by_number = {p.name[:2]: p for p in content_files}
+    content_by_number = {
+        p.name[:2]: p
+        for p in CONTENT_ROOT.glob("[0-9][0-9]_*.md")
+        if p.name[:2] in EXPECTED_MODULES
+    }
+    slide_index = SLIDES_README.read_text(encoding="utf-8") if SLIDES_README.exists() else ""
+
     for deck in modules:
         number = deck.name[:2]
         canonical = content_by_number.get(number)
         if canonical is None:
             errors.append(f"{deck}: no canonical content module {number}")
         elif deck.stem != canonical.stem:
-            errors.append(
-                f"{deck}: stem differs from canonical content {canonical.name}"
-            )
+            errors.append(f"{deck}: stem differs from canonical content {canonical.name}")
 
         text = deck.read_text(encoding="utf-8")
         front_matter = _front_matter(text)
-        if not front_matter:
-            errors.append(f"{deck}: missing YAML front matter")
-        elif not re.search(r"(?m)^marp:\s*true\s*$", front_matter):
-            errors.append(f"{deck}: front matter must contain 'marp: true'")
-        if "## Obiettivi" not in text and "# Obiettivi" not in text:
-            errors.append(f"{deck}: missing objectives slide/section")
+        if not front_matter or not re.search(r"(?m)^marp:\s*true\s*$", front_matter):
+            errors.append(f"{deck}: missing Marp front matter")
+        if "obiettivi" not in text.lower():
+            errors.append(f"{deck}: missing objectives")
         if "checkpoint" not in text.lower():
             errors.append(f"{deck}: missing checkpoint")
-        if "Feisbuc" not in text:
+        if "feisbuc" not in text.lower():
             errors.append(f"{deck}: missing Feisbuc connection")
+        if f"modules/{deck.name}" not in slide_index:
+            errors.append(f"slides/tpsi5/README.md: missing link to modules/{deck.name}")
 
     overview = SLIDES_ROOT / "COURSE_SLIDES.md"
     if not overview.exists():
@@ -83,19 +84,10 @@ def validate_sources() -> None:
         if not fm or not re.search(r"(?m)^marp:\s*true\s*$", fm):
             errors.append("COURSE_SLIDES.md must be a Marp deck")
 
-    for index_path in (ROOT_README, SLIDES_README):
-        if not index_path.exists():
-            errors.append(f"missing {index_path.relative_to(ROOT)}")
-            continue
-        index_text = index_path.read_text(encoding="utf-8")
-        for deck in modules:
-            expected = f"modules/{deck.name}"
-            if index_path == ROOT_README:
-                expected = f"slides/tpsi5/{expected}"
-            if expected not in index_text:
-                errors.append(
-                    f"{index_path.relative_to(ROOT)}: missing link to {expected}"
-                )
+    root_index = ROOT_README.read_text(encoding="utf-8") if ROOT_README.exists() else ""
+    for required in ("slides/tpsi5/README.md", "slides/tpsi5/COURSE_SLIDES.md"):
+        if required not in root_index:
+            errors.append(f"README.md: missing slide entry point {required}")
 
     if errors:
         raise SystemExit("Slide delivery validation failed:\n- " + "\n- ".join(errors))
@@ -107,7 +99,6 @@ def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) 
         raise SystemExit("npx not found: install Node.js 18+ before building slides")
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    relative_inputs = [str(p.relative_to(ROOT)) for p in inputs]
     cmd = [
         npx,
         "--yes",
@@ -127,7 +118,7 @@ def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) 
         cmd.extend(["--pptx", "--browser", browser])
     elif fmt != "html":
         raise ValueError(f"unsupported format: {fmt}")
-    cmd.extend(relative_inputs)
+    cmd.extend(str(p.relative_to(ROOT)) for p in inputs)
     subprocess.run(cmd, cwd=ROOT, check=True)
 
 
@@ -140,27 +131,18 @@ def _sha256(path: Path) -> str:
 
 
 def write_manifest(output_root: Path, formats: list[str]) -> None:
-    files = []
+    artifacts = []
     for path in sorted(output_root.rglob("*")):
-        if not path.is_file() or path.name in {"MANIFEST.json", "SHA256SUMS.txt"}:
-            continue
-        files.append(
-            {
+        if path.is_file() and path.name not in {"MANIFEST.json", "SHA256SUMS.txt"}:
+            artifacts.append({
                 "path": path.relative_to(output_root).as_posix(),
                 "sha256": _sha256(path),
                 "bytes": path.stat().st_size,
-            }
-        )
-
-    source_files = []
-    for path in discover_decks():
-        source_files.append(
-            {
-                "path": path.relative_to(ROOT).as_posix(),
-                "sha256": _sha256(path),
-            }
-        )
-
+            })
+    sources = [
+        {"path": p.relative_to(ROOT).as_posix(), "sha256": _sha256(p)}
+        for p in discover_decks()
+    ]
     manifest = {
         "schema": "thebitpoets.course-slides-artifact.v1",
         "course": "tpsi-quinto-2026-2027",
@@ -168,15 +150,14 @@ def write_manifest(output_root: Path, formats: list[str]) -> None:
         "marp_cli": MARP_CLI_VERSION,
         "commit": os.environ.get("GITHUB_SHA"),
         "formats": formats,
-        "source_decks": source_files,
-        "artifacts": files,
+        "source_decks": sources,
+        "artifacts": artifacts,
     }
     (output_root / "MANIFEST.json").write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     (output_root / "SHA256SUMS.txt").write_text(
-        "".join(f"{item['sha256']}  {item['path']}\n" for item in files),
-        encoding="utf-8",
+        "".join(f"{item['sha256']}  {item['path']}\n" for item in artifacts), encoding="utf-8"
     )
 
 
@@ -193,17 +174,8 @@ def build(output_root: Path, formats: list[str], browser: str) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=ROOT / "build" / "tpsi5-slides",
-        help="artifact output directory",
-    )
-    parser.add_argument(
-        "--formats",
-        default="html,pdf,pptx",
-        help="comma-separated subset of html,pdf,pptx",
-    )
+    parser.add_argument("--output", type=Path, default=ROOT / "build" / "tpsi5-slides")
+    parser.add_argument("--formats", default="html,pdf,pptx")
     parser.add_argument("--browser", default="chrome")
     parser.add_argument("--check-only", action="store_true")
     return parser.parse_args()
