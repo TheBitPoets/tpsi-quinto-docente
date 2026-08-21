@@ -55,7 +55,7 @@ def test_sqlalchemy_content_pack_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
 
-    assert pack["version"] == "0.18.0"
+    assert pack["version"] == "0.19.0"
     refs = {item["id"]: item for item in pack["references"]}
     sqlalchemy_ref = refs["tpsi5-ref-sqlalchemy"]
     assert sqlalchemy_ref["role"] == "technical-reference"
@@ -78,13 +78,14 @@ def test_sqlalchemy_content_pack_course_design_and_activity_contracts() -> None:
 
     uda26 = next(u for u in design["years"][0]["udas"] if u["id"] == "uda-26")
     assert uda26["weeks"] == "4"
-    assert len(uda26["items"]) == 3
+    assert len(uda26["items"]) == 4
     assert uda26["items"][0]["source"] == "content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md"
     assert "SQLAlchemy" in uda26["items"][0]["frame"]["next_step"]
     assert uda26["items"][1]["source"] == item["path"]
     assert uda26["items"][1]["activity_ids"] == item["activity_ids"]
     assert "testing" in uda26["items"][1]["frame"]["next_step"].lower()
     assert uda26["items"][2]["source"] == "content/tpsi5/17_TESTING_INTEGRATION_BOUNDARIES.md"
+    assert uda26["items"][3]["source"] == "content/tpsi5/18_RUNTIME_DEPLOY_HEALTH_CAPSTONE.md"
 
     a = assert_activity(A_ROOT, "A", "tpsi5-activity-a-sqlalchemy-mapping-microscope-001")
     b = assert_activity(B_ROOT, "B", "tpsi5-activity-b-sqlalchemy-repository-001")

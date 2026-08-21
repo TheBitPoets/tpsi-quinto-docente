@@ -22,7 +22,7 @@ Stato: **draft**.
 | FastAPI mirror/OpenAPI | **sì, D4 deciso** | mirror 01 | FastAPI/Pydantic/OpenAPI/TestClient + MemoryPostStore; stesso dominio HTTP, non secondo backend completo |
 | SQLAlchemy mirror | **sì** | **mirror 02** | SQLAlchemy 2.0.51 + SQLite sotto lo stesso contratto FastAPI; repository/Session boundary e restart persistence |
 | Testing strategy | **sì** | **mirror 03** | pytest 9.1.1, fixture/tmp_path, repository + HTTP integration, restart/isolation e mock boundary |
-| Deploy/capstone | sì | UDA26 | quarto slice ancora da chiudere: config, deploy, health/readiness ed evidence bundle |
+| Deploy/capstone | **sì, completato** | **mirror 04** | env config/fail-fast, prestart, health/readiness, live Uvicorn probe, runbook ed evidence SHA-256 |
 
 ## Progressione Feisbuc principale
 
@@ -64,7 +64,8 @@ restart persistence + repository/transaction evidence
 mirror 03
 pytest fixture + isolation + repository/HTTP contract boundaries
         ↓
-deploy/capstone
+mirror 04
+runtime config + prestart + liveness/readiness + live Uvicorn + evidence
 ```
 
 Invariant mirror 01:
@@ -266,11 +267,48 @@ Python        3.11 / 3.12 CI
 - [x] `tpsi5-activity-c-feisbuc-testing-boundaries-001` — mirror 03 feature-neutral con HTTP/OpenAPI/repository/isolation/restart suite;
 - [x] `tpsi5-activity-d-debug-testing-boundaries-001` — shared state, order dependency, over-mocking, internal assert e teardown.
 
+
+Invariant mirror 04:
+
+- nessuna nuova feature di prodotto: `GET/POST/PATCH /api/posts` resta invariato;
+- `FEISBUC_ENV`, `FEISBUC_DATABASE_URL` e `FEISBUC_BUILD_SHA` sono app config; host/port/workers/reload restano process-server config;
+- production senza database URL fallisce subito;
+- `python -m app.prepare` possiede schema+seed e `create_app()` non prepara implicitamente il DB;
+- `/health` e liveness e non interroga SQLite;
+- `/ready` attraversa la dipendenza reale `posts` e risponde `503` generico finche non e pronta;
+- FastAPI lifespan dispone l'Engine;
+- la CI avvia un processo Uvicorn reale con deadline e cleanup;
+- l'evidence bundle contiene `manifest.json`, `openapi.json`, `SHA256SUMS.txt` senza timestamp/PID/porta/path/secret;
+- runbook production-like usa un processo Uvicorn senza `--reload`;
+- nessun auth/session/realtime Python, Alembic, PostgreSQL, async ORM, Docker Compose, Kubernetes, reverse proxy o TLS entra nel closeout.
+
+Baseline quarto slice UDA26:
+
+```text
+pytest        9.1.1
+FastAPI       0.141.1
+Pydantic      2.13.4
+Uvicorn       0.52.1
+HTTPX         0.28.1
+SQLAlchemy    2.0.51
+SQLite        file temporaneo / runtime URL
+Python        3.11 / 3.12 CI
+```
+
+## Activity UDA26 — Runtime deploy e capstone
+
+- [x] `tpsi5-activity-a-runtime-deploy-microscope-001` — config/prestart/liveness/readiness map;
+- [x] `tpsi5-activity-b-runtime-config-contract-001` — config policy pura, **automatico Python**;
+- [x] `tpsi5-activity-c-health-readiness-001` — probe red/green con SQLite reale;
+- [x] `tpsi5-activity-d-debug-runtime-deploy-001` — fallback/leakage/fake readiness/lifecycle debug;
+- [x] `tpsi5-activity-e-evidence-bundle-001` — manifest/OpenAPI/SHA-256 deterministici;
+- [x] `tpsi5-activity-f-feisbuc-runtime-capstone-001` — mirror 04 integrato con live Uvicorn probe.
+
 ## Boundary di grading
 
 Il browser grader TheBitLab non e ancora implementato e il runner deterministico TheBitLab non dichiara ancora TypeScript. Le Activity Vue/TypeScript/realtime/React che richiedono browser o connessioni restano quindi `correzione.test=false`. La Quality docente puo eseguire `tsc`/`vue-tsc`, build Vue/React, backend live e probe Socket.IO a due client; questa evidence non viene spacciata per autograding browser dello studente.
 
-Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `correzione.test=true` per la policy Python pura. Le Activity FastAPI A/C/D, SQLAlchemy A/B/C/D e testing A/B/C/D richiedono framework multi-file, database, fixture lifecycle o ragionamento architetturale e restano manual/rubric-based nella piattaforma; la repository Quality valida pytest fixture, reference SQLAlchemy, HTTP integration, isolation e restart test senza dichiarare un browser/ORM grader specifico.
+Per UDA26 il runner **Python e implementato**: Activity B FastAPI e Activity B runtime-config usano `correzione.test=true` per policy Python pure. Le Activity framework/database/process/evidence restano manual/rubric-based nella piattaforma; la repository Quality valida SQLAlchemy, HTTP/restart, health/readiness, processo Uvicorn reale ed evidence senza dichiarare un grader deployment specifico.
 
 ## Gate prima del freeze del curriculum TPSI5
 
@@ -285,4 +323,4 @@ Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `co
 9. **FastAPI/OpenAPI mirror: primo slice UDA26 implementato**;
 10. **SQLAlchemy persistence mirror: secondo slice UDA26 implementato**;
 11. **testing strategy/integration boundaries: terzo slice UDA26 implementato**;
-12. completare UDA26: configurazione/deploy e capstone.
+12. **runtime deploy/capstone: quarto slice UDA26 completato; UDA26 chiusa**.

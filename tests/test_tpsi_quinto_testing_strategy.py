@@ -49,7 +49,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str) -> dict:
 def test_testing_slice_is_registered_without_changing_week_budget() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.18.0"
+    assert pack["version"] == "0.19.0"
     refs = {item["id"]: item for item in pack["references"]}
     assert refs["tpsi5-ref-pytest"]["role"] == "technical-reference"
     assert PYTEST_VERSION in refs["tpsi5-ref-pytest"]["notes"]
@@ -71,6 +71,7 @@ def test_testing_slice_is_registered_without_changing_week_budget() -> None:
         "content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md",
         "content/tpsi5/16_SQLALCHEMY_PERSISTENCE_MIRROR.md",
         "content/tpsi5/17_TESTING_INTEGRATION_BOUNDARIES.md",
+        "content/tpsi5/18_RUNTIME_DEPLOY_HEALTH_CAPSTONE.md",
     ]
     assert uda26["items"][2]["activity_ids"] == item["activity_ids"]
     assert "deploy" in uda26["items"][2]["frame"]["next_step"].lower()
