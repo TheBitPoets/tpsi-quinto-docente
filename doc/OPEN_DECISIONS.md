@@ -61,9 +61,39 @@ Regola didattica: TypeScript descrive un contratto statico, ma **non rende affid
 
 ## D4 — Mirror Python
 
-Direzione iniziale: FastAPI + SQLAlchemy, con un sottoinsieme significativo della stessa REST API Express per mostrare la portabilita del contratto HTTP.
+Decisione: **FastAPI mirror track mirato in UDA26, con SQLAlchemy in un secondo slice separato**.
 
-Da decidere: ampiezza esatta e collocazione temporale.
+Stato: `DECIDED`.
+
+Obiettivo: mostrare la portabilita del contratto HTTP e dei boundary applicativi senza duplicare integralmente il backend Feisbuc Express.
+
+Sequenza didattica congelata:
+
+1. **FastAPI + Pydantic + OpenAPI + TestClient + MemoryPostStore**;
+2. **SQLAlchemy 2.x** sotto lo stesso contratto e la stessa suite HTTP;
+3. testing/deploy/capstone, riusando quanto emerso nei due adapter.
+
+Il primo slice confronta esplicitamente:
+
+- route Express ↔ path operation FastAPI;
+- validation JavaScript/runtime parser ↔ validation Pydantic;
+- input model ↔ output model;
+- status/header HTTP espliciti;
+- `response_model` come representation boundary;
+- OpenAPI/JSON Schema generati;
+- `TestClient` come evidence del contratto;
+- differenze osservabili dei default framework, incluso il `422` FastAPI per request validation.
+
+Boundary deliberato:
+
+- il prodotto principale resta `Vue -> Express -> SQLite -> session/auth -> Socket.IO`;
+- il mirror Python non introduce una seconda SPA;
+- auth/session/realtime non vengono duplicati nel primo mirror;
+- SQLAlchemy non entra nello stesso incremento di FastAPI/OpenAPI;
+- l'autore fixture del primo mirror non viene presentato come autenticazione;
+- una differenza di framework non viene nascosta automaticamente: prima si decide se il contratto richiede compatibilita esatta.
+
+Baseline riproducibile del primo slice: FastAPI `0.141.1`, Pydantic `2.13.4`, Uvicorn `0.52.1`, HTTPX `0.28.1`; SQLAlchemy `2.0.51` e riservato al secondo slice.
 
 ## D5 — Corso SQL separato
 
