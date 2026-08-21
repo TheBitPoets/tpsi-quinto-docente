@@ -55,7 +55,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, *, automatic:
 def test_vue_router_pack_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.14.0"
+    assert pack["version"] == "0.15.0"
     assert pack["extensions"]["bootstrap_decisions"] == {
         "frontend_framework": "vue3-vite",
         "node_orm": "tbd",
@@ -86,6 +86,7 @@ def test_vue_router_pack_design_and_activity_contracts() -> None:
         "content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
         "content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md",
         "content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md",
+        "content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md",
     ]
     assert uda25["items"][1]["activity_ids"] == item["activity_ids"]
     assert "typescript" in uda25["items"][1]["frame"]["next_step"].lower()

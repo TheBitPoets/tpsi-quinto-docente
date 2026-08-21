@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "id": "tpsi5-activity-b-react-post-card-translation-001",
+  "titolo": "React PostCard: props in ingresso, callback in uscita",
+  "tipo": "laboratorio",
+  "student_support_mode": "teoria-dispense",
+  "difficolta": "B",
+  "argomenti": ["react", "jsx", "component", "props", "callback-props", "one-way-data-flow", "immutable-state"],
+  "linguaggio": "javascript",
+  "contesto": {"percorso": "quinto-anno", "uda": "uda-25"},
+  "content_ids": ["tpsi5-content-react-translation-comparison"],
+  "source_refs": [{"source_id": "tpsi5-source-originali", "path": "content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md", "anchor": "5-props-down-output-up", "role": "lesson"}],
+  "consegna": "Completa `PostCard.jsx` traducendo la PostCard Vue gia studiata. Il child riceve `post`, `canDelete`, `onToggleLike` e `onDelete`; invoca le callback con `post.id`, non muta la prop e non chiama API. Il parent fornito mantiene ownership di `posts`, aggiorna con nuovi array/oggetti e usa `key={post.id}`.",
+  "vincoli": ["props read-only", "nessun fetch/axios nel child", "onToggleLike(post.id)", "onDelete(post.id)", "delete renderizzato solo con canDelete", "parent state ownership", "update immutabile", "key={post.id}", "React 19.2.8/react-dom 19.2.8", "Vite 8.2.1/plugin-react 6.0.5", "nessun React Router/Redux/Next.js"],
+  "assets": [
+    {"type": "starter", "path": "starter/package.json", "target_path": "package.json", "visibility": "student", "description": "Toolchain React/Vite pinned"},
+    {"type": "starter", "path": "starter/index.html", "target_path": "index.html", "visibility": "student", "description": "Entry HTML"},
+    {"type": "starter", "path": "starter/vite.config.js", "target_path": "vite.config.js", "visibility": "student", "description": "Vite config"},
+    {"type": "starter", "path": "starter/src/main.jsx", "target_path": "src/main.jsx", "visibility": "student", "description": "Mount React"},
+    {"type": "starter", "path": "starter/src/App.jsx", "target_path": "src/App.jsx", "visibility": "student", "description": "Parent con state e handler"},
+    {"type": "starter", "path": "starter/src/components/PostCard.jsx", "target_path": "src/components/PostCard.jsx", "visibility": "student", "description": "Componente da completare"},
+    {"type": "example", "path": "student/README.md", "target_path": "README.md", "visibility": "student", "description": "Contratto Vue -> React"},
+    {"type": "teacher_only", "path": "solution/package.json", "visibility": "teacher", "description": "Package reference"},
+    {"type": "teacher_only", "path": "solution/index.html", "visibility": "teacher", "description": "Entry reference"},
+    {"type": "teacher_only", "path": "solution/vite.config.js", "visibility": "teacher", "description": "Config reference"},
+    {"type": "teacher_only", "path": "solution/src/main.jsx", "visibility": "teacher", "description": "Mount reference"},
+    {"type": "teacher_only", "path": "solution/src/App.jsx", "visibility": "teacher", "description": "Parent reference"},
+    {"type": "teacher_only", "path": "solution/src/components/PostCard.jsx", "visibility": "teacher", "description": "PostCard reference"},
+    {"type": "teacher_only", "path": "teacher/NOTES.md", "visibility": "teacher", "description": "Review docente"}
+  ],
+  "soluzione_attesa": {"tipo": "react-component-translation", "file": "src/components/PostCard.jsx", "note": "Stesso one-way data flow della PostCard Vue: props down, callback up."},
+  "correzione": {"compila": false, "test": false, "sandbox": false, "ai_feedback": false},
+  "metriche": {"tempo_stimato_minuti": 55, "traccia_tempo_dichiarato": true, "traccia_sessioni_thebitlab": true, "traccia_eventi_didattici": true, "traccia_errori_compilazione": true},
+  "manual_checks": [
+    {"name": "props", "criterion": "post/canDelete ricevuti e non mutati"},
+    {"name": "callbacks", "criterion": "onToggleLike/onDelete invocati con post.id"},
+    {"name": "ownership", "criterion": "state e aggiornamenti restano nel parent"},
+    {"name": "boundary", "criterion": "nessuna chiamata HTTP o global store nel child"}
+  ],
+  "rubrica": [
+    {"criterio": "Props e rendering", "punti": 2},
+    {"criterio": "Callback e payload", "punti": 3},
+    {"criterio": "Ownership/update immutabile", "punti": 3},
+    {"criterio": "Boundary e qualita", "punti": 2}
+  ]
+}

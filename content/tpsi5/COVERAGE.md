@@ -16,6 +16,7 @@ Stato: **draft**.
 | Vue Router / SPA routing | **sì** | milestone 10 | URL/history, named routes, guard, client 404, Express deep-link fallback |
 | TypeScript | **sì, D3 deciso** | milestone 11 | targeted boundary typing: dominio, API `unknown`, props/emits, session e route meta |
 | WebSocket/realtime | **sì** | **milestone 12** | WebSocket concettuale + Socket.IO 4.8.3, REST commands, session handshake e resync |
+| React translation/comparison | **sì, breve non-core** | nessuna milestone nuova | Vue -> React: state, derived values, props/callback, JSX, controlled input; React non diventa secondo frontend core |
 | Global state/Pinia | solo se motivato | non introdotto | FeedView ha ancora ownership naturale del feed; sessione resta composable singleton |
 | ORM Node | TBD | futuro | confronto solo dopo SQL raw |
 | FastAPI mirror/OpenAPI/SQLAlchemy | sì, mirato | UDA26 | stesso contratto HTTP come mirror |
@@ -38,6 +39,8 @@ Stato: **draft**.
 11 TypeScript strict sui boundary frontend + stesso backend/API
 12 REST commands + Socket.IO realtime + reconnect/resync
 ```
+
+Il translation lab React **non aggiunge una milestone 13**: confronta un problema UI già risolto e mantiene Feisbuc sul frontend Vue core.
 
 ### Milestone 12 — comandi REST, eventi Socket.IO
 
@@ -85,7 +88,7 @@ Invariant:
 
 La Quality reference deve verificare almeno:
 
-- Activity B passa il runner JavaScript TheBitLab;
+- Activity B realtime passa il runner JavaScript TheBitLab;
 - frontend milestone 11 + overlay realtime passa `vue-tsc` e Vite build;
 - backend composto usa Express e Socket.IO sullo stesso HTTP server;
 - socket anonimo viene rifiutato;
@@ -125,9 +128,22 @@ La Quality reference deve verificare almeno:
 - [x] `tpsi5-activity-c-feisbuc-socketio-realtime-001` — milestone 12;
 - [x] `tpsi5-activity-d-debug-realtime-boundaries-001` — trust/lifecycle/delivery/architecture.
 
+## Activity UDA25 — React translation/comparison
+
+- [x] `tpsi5-activity-a-react-translation-microscope-001` — `ref/computed` -> `useState`/derived value, manuale;
+- [x] `tpsi5-activity-b-react-post-card-translation-001` — props/emits -> props/callback e immutable parent state, manuale.
+
+Boundary:
+
+- React resta un translation lab, non un secondo stack applicativo;
+- nessuna nuova milestone Feisbuc;
+- nessun React Router, Redux, Next.js, Server Components o React Compiler nel core;
+- `computed` viene tradotto prima come valore derivato; `useMemo` non viene introdotto automaticamente;
+- la Quality costruisce le reference React/Vite ma non dichiara browser autograding.
+
 ## Boundary di grading UDA25
 
-Il browser grader TheBitLab non e ancora implementato e il runner deterministico TheBitLab non dichiara ancora TypeScript. Le Activity Vue/TypeScript/realtime che richiedono browser o connessioni restano quindi `correzione.test=false`. La Quality docente puo eseguire `tsc`/`vue-tsc`, build, backend live e probe Socket.IO a due client; questa evidence non viene spacciata per autograding browser dello studente.
+Il browser grader TheBitLab non e ancora implementato e il runner deterministico TheBitLab non dichiara ancora TypeScript. Le Activity Vue/TypeScript/realtime/React che richiedono browser o connessioni restano quindi `correzione.test=false`. La Quality docente puo eseguire `tsc`/`vue-tsc`, build Vue/React, backend live e probe Socket.IO a due client; questa evidence non viene spacciata per autograding browser dello studente.
 
 ## Gate prima del freeze del curriculum TPSI5
 
@@ -138,5 +154,5 @@ Il browser grader TheBitLab non e ancora implementato e il runner deterministico
 5. **realtime: completato — WebSocket concettuale + Socket.IO applicato**;
 6. decidere ORM Node quando serve realmente;
 7. verificare ore reali e calendario definitivo;
-8. completare il breve translation/comparison lab React;
+8. **translation/comparison lab React: completato — breve, non-core, nessuna seconda SPA**;
 9. completare UDA26: FastAPI mirror, testing, deploy e capstone.

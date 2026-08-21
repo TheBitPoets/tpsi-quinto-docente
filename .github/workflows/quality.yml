@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Set up Node.js for deterministic JS, SQL, auth, SSR, Vue, TypeScript, realtime and backend E2E tests
+      - name: Set up Node.js for deterministic JS, SQL, auth, SSR, Vue, TypeScript, realtime, React and backend E2E tests
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -221,6 +221,22 @@ jobs:
         working-directory: tests/realtime_probe
         run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
 
+      - name: Install React translation microscope
+        working-directory: activities/tpsi5/react_translation_microscope_a/starter
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build React translation microscope
+        working-directory: activities/tpsi5/react_translation_microscope_a/starter
+        run: npm run build
+
+      - name: Install React PostCard reference
+        working-directory: activities/tpsi5/react_post_card_b/solution
+        run: npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+
+      - name: Build React PostCard reference
+        working-directory: activities/tpsi5/react_post_card_b/solution
+        run: npm run build
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -237,3 +253,4 @@ jobs:
           tests/test_tpsi_quinto_vue_router.py
           tests/test_tpsi_quinto_typescript.py
           tests/test_tpsi_quinto_realtime.py
+          tests/test_tpsi_quinto_react_translation.py
