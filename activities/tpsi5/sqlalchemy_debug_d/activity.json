@@ -1,0 +1,35 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-d-debug-sqlalchemy-transactions-001",
+  "titolo":"Debug SQLAlchemy: Session lifetime, commit e persistence boundary",
+  "tipo":"debug-didattico",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"D",
+  "argomenti":["sqlalchemy","debugging","session","transaction","commit","rollback","engine","repository-pattern","orm-boundary"],
+  "linguaggio":"python",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-26"},
+  "content_ids":["tpsi5-content-sqlalchemy-persistence-mirror"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/16_SQLALCHEMY_PERSISTENCE_MIRROR.md","anchor":"22-errori-frequenti","role":"lesson"}],
+  "consegna":"Analizza `broken_repository.py` e compila `DIAGNOSI.md`. Classifica almeno questi difetti: Engine creato nel lifetime sbagliato, Session globale riusata, legacy `session.query`, `flush()` trattato come commit, output ottenuto con `row.__dict__` e gestione di errore senza rollback. Per ogni caso indica sintomo, causa, boundary violato, fix e test di regressione. Confronta poi la reference corretta.",
+  "vincoli":["SQLAlchemy 2.0.51","diagnosi per responsabilita","distinguere flush da commit","distinguere Engine da Session","nessun FastAPI necessario per spiegare il repository","non usare rollback come sostituto del commit","non accettare row.__dict__ come representation pubblica"],
+  "assets":[
+    {"type":"starter","path":"starter/requirements.txt","target_path":"requirements.txt","visibility":"student","description":"Toolchain"},
+    {"type":"starter","path":"starter/broken_repository.py","target_path":"broken_repository.py","visibility":"student","description":"Repository volutamente difettoso"},
+    {"type":"example","path":"student/DIAGNOSI.md","target_path":"DIAGNOSI.md","visibility":"student","description":"Scheda diagnosi"},
+    {"type":"teacher_only","path":"solution/requirements.txt","visibility":"teacher","description":"Toolchain reference"},
+    {"type":"teacher_only","path":"solution/fixed_repository.py","visibility":"teacher","description":"Reference corretta"},
+    {"type":"teacher_only","path":"solution/DIAGNOSI.md","visibility":"teacher","description":"Diagnosi attesa"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Review docente"}
+  ],
+  "soluzione_attesa":{"tipo":"diagnosi-sqlalchemy","file":"DIAGNOSI.md","note":"Correzione ragionata di lifetime, transaction e representation boundary."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":70,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"engine","criterion":"Engine appartiene al composition root, non a ogni operazione"},
+    {"name":"session","criterion":"Session globale sostituita da SessionFactory/lifetime corto"},
+    {"name":"transaction","criterion":"flush non viene confuso con commit; rollback dopo failure"},
+    {"name":"api2","criterion":"Query legacy sostituita da select/scalars"},
+    {"name":"output","criterion":"row.__dict__ non diventa representation pubblica"}
+  ],
+  "rubrica":[{"criterio":"Engine/Session lifetime","punti":2},{"criterio":"Flush/commit","punti":2},{"criterio":"Rollback/error recovery","punti":2},{"criterio":"SQLAlchemy 2.0 API","punti":2},{"criterio":"Output boundary","punti":2}]
+}
