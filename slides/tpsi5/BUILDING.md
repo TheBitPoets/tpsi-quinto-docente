@@ -41,8 +41,16 @@ Per una build rapida senza browser:
 python scripts/build_slides.py --formats html
 ```
 
+### Strategia di rendering
+
+- HTML e PDF usano fino a 4 conversioni Marp in parallelo.
+- PPTX e intenzionalmente seriale (`parallel=1`): il rendering PowerPoint usa Chrome/Puppeteer in modo piu pesante e il seriale evita timeout intermittenti osservati con quattro worker concorrenti.
+- I file derivati temporanei vengono rimossi dai sorgenti e raccolti soltanto sotto `build/tpsi5-slides/`.
+
 ## CI
 
 `.github/workflows/slides.yml` esegue controllo + build HTML/PDF/PPTX e pubblica un artifact GitHub Actions chiamato `tpsi5-slides-<commit-sha>` con retention di 30 giorni.
+
+Il bundle contiene 20 deck per formato (overview + 19 moduli), `MANIFEST.json` con provenance/hash dei sorgenti e degli output e `SHA256SUMS.txt`.
 
 Gli artifact sono una derivazione del delivery layer. Il curriculum resta quello del Content Pack `1.0.0 / approved`.
