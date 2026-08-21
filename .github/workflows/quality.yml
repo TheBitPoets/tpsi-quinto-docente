@@ -42,8 +42,14 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install Python test dependencies
-        run: python -m pip install pytest
+      - name: Install Python and FastAPI test dependencies
+        run: >-
+          python -m pip install
+          pytest
+          fastapi==0.141.1
+          pydantic==2.13.4
+          uvicorn==0.52.1
+          httpx==0.28.1
 
       - name: Install Express for native-vs-framework reference
         working-directory: activities/tpsi5/node_http_express_a/starter
@@ -237,6 +243,10 @@ jobs:
         working-directory: activities/tpsi5/react_post_card_b/solution
         run: npm run build
 
+      - name: Validate FastAPI mirror reference with TestClient
+        working-directory: activities/tpsi5/feisbuc_fastapi_mirror_c/solution
+        run: python -m pytest -q tests
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -254,3 +264,4 @@ jobs:
           tests/test_tpsi_quinto_typescript.py
           tests/test_tpsi_quinto_realtime.py
           tests/test_tpsi_quinto_react_translation.py
+          tests/test_tpsi_quinto_fastapi.py
