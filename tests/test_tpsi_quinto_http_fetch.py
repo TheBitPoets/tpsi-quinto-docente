@@ -68,7 +68,7 @@ def assert_activity(root,difficulty,activity_id,automatic):
 def test_uda23_content_item_remains_stable_after_later_backend_increments():
     pack=load(PACK_PATH); design=load(DESIGN_PATH)
     item=next(x for x in pack["content_items"] if x["id"]=="tpsi5-content-http-async-fetch-rest")
-    assert pack["version"]=="0.15.0"
+    assert pack["version"]=="0.16.0"
     assert item["path"]=="content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md" and item["order"]==6
     assert item["activity_ids"]==[
         "tpsi5-activity-a-http-microscope-001","tpsi5-activity-b-async-response-policy-001",

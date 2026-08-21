@@ -139,7 +139,7 @@ def test_auth_content_pack_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
     item = next(x for x in pack["content_items"] if x["id"] == "tpsi5-content-auth-sessions-security")
-    assert pack["version"] == "0.15.0"
+    assert pack["version"] == "0.16.0"
     assert item["path"] == "content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md"
     assert item["order"] == 9
     assert item["activity_ids"] == [
