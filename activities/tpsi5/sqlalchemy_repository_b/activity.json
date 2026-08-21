@@ -1,0 +1,35 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-b-sqlalchemy-repository-001",
+  "titolo":"SQLAlchemy PostStore: repository senza FastAPI",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"B",
+  "argomenti":["sqlalchemy","repository-pattern","sessionmaker","select","commit","mapping","transaction","sqlite"],
+  "linguaggio":"python",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-26"},
+  "content_ids":["tpsi5-content-sqlalchemy-persistence-mirror"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/16_SQLALCHEMY_PERSISTENCE_MIRROR.md","anchor":"12-repository-teniamo-fastapi-fuori-dalla-persistenza","role":"lesson"}],
+  "consegna":"Completa `SqlAlchemyPostStore.list()`, `create()` e `set_liked()` nello starter. Il repository riceve una SessionFactory, usa `select`/`Session.get`, fa commit sulle mutazioni e restituisce dict della representation pubblica tramite `to_public_post`. Non importare FastAPI e non restituire `row.__dict__`. Esegui i test repository reference come guida al contratto.",
+  "vincoli":["SQLAlchemy 2.0.51","DeclarativeBase/Mapped/mapped_column","select API 2.0","SessionFactory iniettata","Session lifetime per metodo","commit esplicito su create/update","nessun FastAPI","nessuna session.query legacy","nessun row.__dict__","set_liked idempotente"],
+  "assets":[
+    {"type":"starter","path":"starter/requirements.txt","target_path":"requirements.txt","visibility":"student","description":"SQLAlchemy pinned"},
+    {"type":"starter","path":"starter/repository.py","target_path":"repository.py","visibility":"student","description":"Repository con TODO controllati"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Contratto e checklist"},
+    {"type":"teacher_only","path":"solution/requirements.txt","visibility":"teacher","description":"Dipendenze reference"},
+    {"type":"teacher_only","path":"solution/repository.py","visibility":"teacher","description":"Reference repository"},
+    {"type":"teacher_only","path":"solution/tests/test_repository.py","visibility":"teacher","description":"Repository regression suite"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Review dei boundary"}
+  ],
+  "soluzione_attesa":{"tipo":"sqlalchemy-repository","note":"Repository ORM indipendente dal framework web con transaction boundary esplicito."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":80,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"boundary","criterion":"repository non importa FastAPI"},
+    {"name":"read","criterion":"list usa select/scalars e mapping pubblico"},
+    {"name":"create","criterion":"create usa add + commit"},
+    {"name":"update","criterion":"set_liked usa get, transizione idempotente e commit"},
+    {"name":"lifetime","criterion":"ogni metodo chiude la propria Session"}
+  ],
+  "rubrica":[{"criterio":"Repository boundary","punti":2},{"criterio":"SELECT/list","punti":2},{"criterio":"Create/commit","punti":2},{"criterio":"Like transition","punti":2},{"criterio":"Session lifetime/API 2.0","punti":2}]
+}
