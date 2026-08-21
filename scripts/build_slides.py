@@ -108,6 +108,7 @@ def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) 
     for path in generated:
         path.unlink(missing_ok=True)
 
+    parallelism = "1" if fmt == "pptx" else "4"
     cmd = [
         npx,
         "--yes",
@@ -115,7 +116,7 @@ def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) 
         "--html",
         "--allow-local-files",
         "--parallel",
-        "4",
+        parallelism,
     ]
     if fmt == "pdf":
         cmd.extend(["--pdf", "--pdf-outlines", "--browser", browser])
