@@ -108,6 +108,8 @@ def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) 
     for path in generated:
         path.unlink(missing_ok=True)
 
+    # PPTX rendering is browser/image heavy. Keep it sequential and give each
+    # browser operation enough time on shared CI runners. HTML/PDF stay parallel.
     parallelism = "1" if fmt == "pptx" else "4"
     cmd = [
         npx,
@@ -121,7 +123,13 @@ def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) 
     if fmt == "pdf":
         cmd.extend(["--pdf", "--pdf-outlines", "--browser", browser])
     elif fmt == "pptx":
-        cmd.extend(["--pptx", "--browser", browser])
+        cmd.extend([
+            "--pptx",
+            "--browser",
+            browser,
+            "--browser-timeout",
+            "300",
+        ])
     elif fmt != "html":
         raise ValueError(f"unsupported format: {fmt}")
     cmd.extend(str(p.relative_to(ROOT)) for p in decks)
