@@ -1,0 +1,33 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-a-sqlalchemy-mapping-microscope-001",
+  "titolo":"SQLAlchemy microscope: mapping, Session e SQL generato",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"A",
+  "argomenti":["sqlalchemy","orm","declarativebase","mapped-column","engine","session","select","transaction","sqlite"],
+  "linguaggio":"python",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-26"},
+  "content_ids":["tpsi5-content-sqlalchemy-persistence-mirror"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/16_SQLALCHEMY_PERSISTENCE_MIRROR.md","anchor":"5-declarativebase-il-catalogo-dei-mapping","role":"lesson"}],
+  "consegna":"Esegui lo starter con `echo=True`, osserva il DDL/INSERT/SELECT emesso da SQLAlchemy e compila `OBSERVATIONS.md`. Collega `DeclarativeBase`, `Mapped`, `mapped_column`, Engine, Session, add/commit e select alle operazioni SQL gia studiate in UDA24. Spiega anche perche la Session SQLAlchemy non e la sessione login dell'utente.",
+  "vincoli":["Python 3.11+","SQLAlchemy 2.0.51","API SQLAlchemy 2.0","nessuna session.query legacy","nessun FastAPI nel microscope","non nascondere echo SQL"],
+  "assets":[
+    {"type":"starter","path":"starter/requirements.txt","target_path":"requirements.txt","visibility":"student","description":"SQLAlchemy pinned"},
+    {"type":"starter","path":"starter/app.py","target_path":"app.py","visibility":"student","description":"Microscope eseguibile"},
+    {"type":"example","path":"student/OBSERVATIONS.md","target_path":"OBSERVATIONS.md","visibility":"student","description":"Scheda osservazione"},
+    {"type":"teacher_only","path":"solution/OBSERVATIONS.md","visibility":"teacher","description":"Osservazioni attese"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Conduzione docente"}
+  ],
+  "soluzione_attesa":{"tipo":"sqlalchemy-observation","file":"OBSERVATIONS.md","note":"Lo starter e eseguibile; il prodotto e la spiegazione del mapping e della transaction osservata."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":55,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"mapping","criterion":"collega classe/tabella e attributo/colonna"},
+    {"name":"session","criterion":"spiega Session come unit of work e non login session"},
+    {"name":"sql","criterion":"riconosce CREATE TABLE, INSERT e SELECT nell'echo"},
+    {"name":"transaction","criterion":"distingue add da commit"},
+    {"name":"api2","criterion":"usa select/scalars e non Query legacy"}
+  ],
+  "rubrica":[{"criterio":"Mapping","punti":2},{"criterio":"Engine/Session","punti":2},{"criterio":"SQL osservato","punti":2},{"criterio":"Transaction","punti":2},{"criterio":"Confronto con SQL raw","punti":2}]
+}
