@@ -18,4 +18,4 @@ Il broken backend usa `payload["authorId"]`: identity spoofing. `authorId` non a
 
 ## 5. Campo interno
 
-Restituire il dict interno pubblica `internalSecret`. `response_model=Post` definisce la representation pubblica e filtra il campo. Questo non sostituisce l'authorization: protegge la shape, non decide chi puo leggere.
+Restituire il dict interno pubblica `internalSecret`. `response_model=Post` definisce lo schema della representation pubblica e filtra il campo. Questo non sostituisce l'authorization: protegge la shape, non decide chi puo leggere.
