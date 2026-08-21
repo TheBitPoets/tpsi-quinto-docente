@@ -178,9 +178,25 @@ Prima descrivi il concetto, poi proponi una sintassi React possibile.
 
 ---
 
+# Collegamento a Feisbuc
+
+Non riscriviamo l'intera applicazione Feisbuc in React.
+
+Prendiamo **un solo boundary già noto**, per esempio `PostCard`, e manteniamo invariati:
+
+- DTO del post;
+- responsabilità del componente;
+- azione delete verso il parent;
+- contratto HTTP/backend;
+- comportamento osservabile.
+
+Se cambia il framework ma non il contratto, possiamo confrontare davvero le architetture.
+
+---
+
 # Mini-lab
 
-Prendi un `PostCard` Vue e riscrivilo in React mantenendo:
+Prendi un `PostCard` Vue di Feisbuc e riscrivilo in React mantenendo:
 
 - stessi dati in input;
 - stessa azione delete;
