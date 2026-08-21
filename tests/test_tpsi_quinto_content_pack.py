@@ -52,7 +52,7 @@ def parse_html(path: Path) -> StructureParser:
 def test_native_content_pack_v1_is_valid_and_pinned() -> None:
     pack = load(PACK_PATH)
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.16.0"
+    assert pack["version"] == "0.17.0"
     assert pack["status"] == "draft"
     assert pack["extensions"]["platform_contract"]["content_pack_v1_sha"] == ACCEPTED_CONTENT_PACK_V1_SHA
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
@@ -90,6 +90,7 @@ def test_sources_project_exactly_to_course_design_catalog() -> None:
         "13_WEBSOCKET_SOCKETIO_REALTIME.md",
         "14_REACT_TRANSLATION_COMPARISON.md",
         "15_FASTAPI_OPENAPI_MIRROR.md",
+        "16_SQLALCHEMY_PERSISTENCE_MIRROR.md",
     )
     assert normalized[1].ref == "d71da420f1aa2ea39b61356e4f9900c6371e7a42"
     assert normalized[2].ref == "36a909f00c9478983a8d1b950440e2abc28b8a55"
@@ -135,6 +136,8 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
     assert refs["tpsi5-ref-vue-typescript"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-websocket"]["role"] == "specification"
     assert refs["tpsi5-ref-socketio"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-fastapi"]["role"] == "technical-reference"
+    assert refs["tpsi5-ref-sqlalchemy"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-nist-800-63b"]["role"] == "specification"
     assert refs["tpsi5-ref-owasp-password-storage"]["role"] == "technical-reference"
     assert refs["tpsi5-ref-owasp-session-management"]["role"] == "technical-reference"
@@ -157,7 +160,7 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
     for provider in (
         "manning", "pluralsight", "mdn", "whatwg", "nodejs", "expressjs",
         "sqlite", "nist", "owasp", "mozilla", "vuejs", "vite", "microsoft",
-        "socketio", "react",
+        "socketio", "react", "fastapi", "sqlalchemy",
     ):
         assert provider not in source_providers
 
@@ -165,7 +168,7 @@ def test_external_specs_docs_and_licensed_material_are_references_not_sources() 
 def test_content_items_are_ordered_and_linked_to_real_files() -> None:
     pack = load(PACK_PATH)
     items = pack["content_items"]
-    assert [item["order"] for item in items] == list(range(1, 17))
+    assert [item["order"] for item in items] == list(range(1, 18))
     for item in items:
         assert (ROOT / item["path"]).is_file(), item["path"]
         assert item["source_refs"]
@@ -187,6 +190,7 @@ def test_content_items_are_ordered_and_linked_to_real_files() -> None:
         "tpsi5-content-websocket-socketio-realtime",
         "tpsi5-content-react-translation-comparison",
         "tpsi5-content-fastapi-openapi-mirror",
+        "tpsi5-content-sqlalchemy-persistence-mirror",
     } <= ids
 
 
