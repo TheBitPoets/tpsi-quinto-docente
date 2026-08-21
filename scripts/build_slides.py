@@ -64,8 +64,8 @@ def validate_sources() -> None:
             errors.append(f"{deck}: stem differs from canonical content {canonical.name}")
 
         text = deck.read_text(encoding="utf-8")
-        front_matter = _front_matter(text)
-        if not front_matter or not re.search(r"(?m)^marp:\s*true\s*$", front_matter):
+        fm = _front_matter(text)
+        if not fm or not re.search(r"(?m)^marp:\s*true\s*$", fm):
             errors.append(f"{deck}: missing Marp front matter")
         if "obiettivi" not in text.lower():
             errors.append(f"{deck}: missing objectives")
@@ -93,22 +93,27 @@ def validate_sources() -> None:
         raise SystemExit("Slide delivery validation failed:\n- " + "\n- ".join(errors))
 
 
+def _generated_path(source: Path, fmt: str) -> Path:
+    return source.with_suffix(f".{fmt}")
+
+
 def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) -> None:
     npx = shutil.which("npx")
     if not npx:
         raise SystemExit("npx not found: install Node.js 18+ before building slides")
 
+    decks = list(inputs)
     output_dir.mkdir(parents=True, exist_ok=True)
+    generated = [_generated_path(source, fmt) for source in decks]
+    for path in generated:
+        path.unlink(missing_ok=True)
+
     cmd = [
         npx,
         "--yes",
         MARP_PACKAGE,
         "--html",
         "--allow-local-files",
-        "--input-dir",
-        str(SLIDES_ROOT.relative_to(ROOT)),
-        "--output",
-        str(output_dir.relative_to(ROOT)),
         "--parallel",
         "4",
     ]
@@ -118,8 +123,20 @@ def _run_marp(inputs: Iterable[Path], output_dir: Path, fmt: str, browser: str) 
         cmd.extend(["--pptx", "--browser", browser])
     elif fmt != "html":
         raise ValueError(f"unsupported format: {fmt}")
-    cmd.extend(str(p.relative_to(ROOT)) for p in inputs)
-    subprocess.run(cmd, cwd=ROOT, check=True)
+    cmd.extend(str(p.relative_to(ROOT)) for p in decks)
+
+    try:
+        subprocess.run(cmd, cwd=ROOT, check=True)
+        for source, built in zip(decks, generated):
+            if not built.exists():
+                raise SystemExit(f"Marp did not produce expected artifact: {built}")
+            relative = source.relative_to(SLIDES_ROOT).with_suffix(f".{fmt}")
+            destination = output_dir / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(built), str(destination))
+    finally:
+        for path in generated:
+            path.unlink(missing_ok=True)
 
 
 def _sha256(path: Path) -> str:
