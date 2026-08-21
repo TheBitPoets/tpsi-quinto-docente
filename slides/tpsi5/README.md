@@ -24,15 +24,15 @@ Quando una slide viene corretta o chiarita durante l'anno, registrare la modific
 | 03 | UDA-21 | [Bootstrap: da CSS a framework](modules/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md) | [overview](COURSE_SLIDES.md#slides-03) | [lesson](../../content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md) | completo |
 | 04 | UDA-22 | [JavaScript, DOM e Browser APIs](modules/04_JAVASCRIPT_DOM_BROWSER_APIS.md) | [overview](COURSE_SLIDES.md#slides-04) | [lesson](../../content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md) | completo |
 | 05 | UDA-23 | [HTTP, async, Fetch e REST](modules/05_HTTP_ASYNC_FETCH_REST.md) | [overview](COURSE_SLIDES.md#slides-05) | [lesson](../../content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md) | completo |
-| 06 | UDA-24 | — | [overview](COURSE_SLIDES.md#slides-06) | [Node.js ed Express 5](../../content/tpsi5/06_NODE_EXPRESS_BACKEND.md) | prossimo batch |
-| 07 | UDA-24 | — | [overview](COURSE_SLIDES.md#slides-07) | [SQL raw e persistenza](../../content/tpsi5/07_SQL_RAW_PERSISTENCE.md) | prossimo batch |
-| 08 | UDA-24 | — | [overview](COURSE_SLIDES.md#slides-08) | [Auth, sessioni e sicurezza](../../content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md) | prossimo batch |
-| 09 | UDA-24 | — | [overview](COURSE_SLIDES.md#slides-09) | [SSR e Nunjucks](../../content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md) | prossimo batch |
-| 10 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-10) | [Vue 3](../../content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md) | pianificato |
-| 11 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-11) | [Vue Router](../../content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md) | pianificato |
-| 12 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-12) | [TypeScript mirato](../../content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md) | pianificato |
-| 13 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-13) | [Socket.IO realtime](../../content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md) | pianificato |
-| 14 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-14) | [React translation lab](../../content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md) | pianificato |
+| 06 | UDA-24 | [Node.js ed Express 5](modules/06_NODE_EXPRESS_BACKEND.md) | [overview](COURSE_SLIDES.md#slides-06) | [lesson](../../content/tpsi5/06_NODE_EXPRESS_BACKEND.md) | completo |
+| 07 | UDA-24 | [SQL raw e persistenza](modules/07_SQL_RAW_PERSISTENCE.md) | [overview](COURSE_SLIDES.md#slides-07) | [lesson](../../content/tpsi5/07_SQL_RAW_PERSISTENCE.md) | completo |
+| 08 | UDA-24 | [Auth, sessioni e sicurezza](modules/08_AUTH_SESSIONI_SICUREZZA.md) | [overview](COURSE_SLIDES.md#slides-08) | [lesson](../../content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md) | completo |
+| 09 | UDA-24 | [SSR e Nunjucks](modules/09_SSR_NUNJUCKS_CONFRONTO.md) | [overview](COURSE_SLIDES.md#slides-09) | [lesson](../../content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md) | completo |
+| 10 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-10) | [Vue 3](../../content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md) | prossimo batch |
+| 11 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-11) | [Vue Router](../../content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md) | prossimo batch |
+| 12 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-12) | [TypeScript mirato](../../content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md) | prossimo batch |
+| 13 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-13) | [Socket.IO realtime](../../content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md) | prossimo batch |
+| 14 | UDA-25 | — | [overview](COURSE_SLIDES.md#slides-14) | [React translation lab](../../content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md) | prossimo batch |
 | 15 | UDA-26 | — | [overview](COURSE_SLIDES.md#slides-15) | [FastAPI/OpenAPI mirror](../../content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md) | pianificato |
 | 16 | UDA-26 | — | [overview](COURSE_SLIDES.md#slides-16) | [SQLAlchemy persistence](../../content/tpsi5/16_SQLALCHEMY_PERSISTENCE_MIRROR.md) | pianificato |
 | 17 | UDA-26 | — | [overview](COURSE_SLIDES.md#slides-17) | [Testing boundaries](../../content/tpsi5/17_TESTING_INTEGRATION_BOUNDARIES.md) | pianificato |
@@ -40,9 +40,9 @@ Quando una slide viene corretta o chiarita durante l'anno, registrare la modific
 
 ## Batch di produzione
 
-- **Batch A — 00–05:** foundations + HTTP — completato in questo delivery slice.
-- **Batch B — 06–09:** backend, SQL, auth, SSR.
-- **Batch C — 10–14:** Vue, routing, TypeScript, realtime, React comparison.
-- **Batch D — 15–18:** FastAPI mirror, SQLAlchemy, testing, runtime/deploy.
+- **Batch A — 00–05:** foundations + HTTP — completato.
+- **Batch B — 06–09:** backend, SQL, auth, SSR — completato.
+- **Batch C — 10–14:** Vue, routing, TypeScript, realtime, React comparison — in lavorazione.
+- **Batch D — 15–18:** FastAPI mirror, SQLAlchemy, testing, runtime/deploy — pianificato.
 
 Questo batching serve a facilitare review e correzioni durante l'anno: ogni deck resta indipendente e può evolvere senza rigenerare un monolite.
