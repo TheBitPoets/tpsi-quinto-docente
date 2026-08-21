@@ -20,7 +20,7 @@ Stato: **draft**.
 | Global state/Pinia | solo se motivato | non introdotto | FeedView ha ancora ownership naturale del feed; sessione resta composable singleton |
 | ORM Node | TBD | futuro | confronto solo dopo SQL raw |
 | FastAPI mirror/OpenAPI | **sì, D4 deciso** | mirror 01 | FastAPI/Pydantic/OpenAPI/TestClient + MemoryPostStore; stesso dominio HTTP, non secondo backend completo |
-| SQLAlchemy mirror | sì, secondo slice UDA26 | mirror 02 futuro | SQLAlchemy 2.x sotto la stessa suite HTTP, dopo FastAPI/OpenAPI |
+| SQLAlchemy mirror | **sì** | **mirror 02** | SQLAlchemy 2.0.51 + SQLite sotto lo stesso contratto FastAPI; repository/Session boundary e restart persistence |
 | Testing/deploy/capstone | sì | UDA26 | release finale e osservabilita base |
 
 ## Progressione Feisbuc principale
@@ -55,8 +55,10 @@ FastAPI + Pydantic + OpenAPI + TestClient
         ↓
 MemoryPostStore
         ↓
-mirror 02 futuro
-stessa suite HTTP + SQLAlchemy 2.x + SQLite
+mirror 02
+stessa suite HTTP + SQLAlchemy 2.0.51 + SQLite file
+        ↓
+restart persistence + repository/transaction evidence
         ↓
 testing/deploy/capstone
 ```
@@ -86,7 +88,32 @@ HTTPX     0.28.1
 Python    3.11 / 3.12 CI
 ```
 
-SQLAlchemy `2.0.51` resta riservato al secondo slice.
+Invariant mirror 02:
+
+- SQLAlchemy `2.0.51` e pinned e usa la API moderna `DeclarativeBase` / `Mapped` / `mapped_column` / `select`;
+- `PostCreate`/`PostLikePatch`/`Post` restano boundary Pydantic separati dalla entity ORM `PostRow`;
+- Engine e SessionFactory nascono nel composition root; le route non costruiscono il database;
+- `SqlAlchemyPostStore` non importa FastAPI e usa Session a lifetime corto;
+- create/update fanno commit esplicito;
+- `session.query(...)` non e baseline del corso;
+- `row.__dict__` non diventa representation pubblica;
+- seed `seed-1` e idempotente;
+- il database SQLite e configurabile e nei test usa un file temporaneo;
+- una seconda app sullo stesso file recupera il post creato dalla prima dopo `engine.dispose()`;
+- `GET`, `POST 201 + Location`, `PATCH`, `404`, `422` e OpenAPI restano compatibili col mirror 01;
+- nessun auth/session Python, Socket.IO, Alembic, async ORM o deploy viene introdotto in questo slice.
+
+Baseline secondo slice UDA26:
+
+```text
+FastAPI      0.141.1
+Pydantic     2.13.4
+Uvicorn      0.52.1
+HTTPX        0.28.1
+SQLAlchemy   2.0.51
+SQLite       file temporaneo/reference
+Python       3.11 / 3.12 CI
+```
 
 ### Milestone 12 — comandi REST, eventi Socket.IO
 
@@ -194,11 +221,18 @@ Boundary:
 - [x] `tpsi5-activity-c-feisbuc-fastapi-mirror-001` — mirror 01 con MemoryPostStore e TestClient;
 - [x] `tpsi5-activity-d-debug-fastapi-boundaries-001` — status/trust/schema/404/output boundary.
 
+## Activity UDA26 — SQLAlchemy persistence mirror
+
+- [x] `tpsi5-activity-a-sqlalchemy-mapping-microscope-001` — mapping/Engine/Session/SQL echo, manuale;
+- [x] `tpsi5-activity-b-sqlalchemy-repository-001` — repository ORM isolato da FastAPI, manuale con reference CI;
+- [x] `tpsi5-activity-c-feisbuc-fastapi-sqlalchemy-001` — mirror 02 con SQLite file + restart persistence;
+- [x] `tpsi5-activity-d-debug-sqlalchemy-transactions-001` — Engine/Session lifetime, flush/commit/rollback, Query legacy e output boundary.
+
 ## Boundary di grading
 
 Il browser grader TheBitLab non e ancora implementato e il runner deterministico TheBitLab non dichiara ancora TypeScript. Le Activity Vue/TypeScript/realtime/React che richiedono browser o connessioni restano quindi `correzione.test=false`. La Quality docente puo eseguire `tsc`/`vue-tsc`, build Vue/React, backend live e probe Socket.IO a due client; questa evidence non viene spacciata per autograding browser dello studente.
 
-Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `correzione.test=true` per la policy Python pura. Le Activity A/C/D richiedono framework multi-file, OpenAPI/TestClient o ragionamento di debugging e restano manual/rubric-based; la repository Quality valida le reference FastAPI senza dichiarare un grader FastAPI-specifico.
+Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `correzione.test=true` per la policy Python pura. Le Activity FastAPI A/C/D e le nuove Activity SQLAlchemy A/B/C/D richiedono framework multi-file, database o ragionamento di debugging e restano manual/rubric-based nella piattaforma; la repository Quality valida le reference SQLAlchemy e il restart test senza dichiarare un grader ORM-specifico.
 
 ## Gate prima del freeze del curriculum TPSI5
 
@@ -211,4 +245,5 @@ Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `co
 7. verificare ore reali e calendario definitivo;
 8. **translation/comparison lab React: completato — breve, non-core, nessuna seconda SPA**;
 9. **FastAPI/OpenAPI mirror: primo slice UDA26 implementato**;
-10. completare UDA26: SQLAlchemy mirror, testing, deploy e capstone.
+10. **SQLAlchemy persistence mirror: secondo slice UDA26 implementato**;
+11. completare UDA26: testing strategy, deploy e capstone.

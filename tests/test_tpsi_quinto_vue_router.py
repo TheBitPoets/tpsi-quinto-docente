@@ -55,7 +55,7 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, *, automatic:
 def test_vue_router_pack_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
-    assert pack["version"] == "0.16.0"
+    assert pack["version"] == "0.17.0"
     assert pack["extensions"]["bootstrap_decisions"] == {
         "frontend_framework": "vue3-vite",
         "node_orm": "tbd",
