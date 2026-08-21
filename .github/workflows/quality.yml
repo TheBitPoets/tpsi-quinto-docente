@@ -45,7 +45,7 @@ jobs:
       - name: Install Python, FastAPI and SQLAlchemy test dependencies
         run: >-
           python -m pip install
-          pytest
+          pytest==9.1.1
           fastapi==0.141.1
           pydantic==2.13.4
           uvicorn==0.52.1
@@ -256,6 +256,15 @@ jobs:
         working-directory: activities/tpsi5/feisbuc_fastapi_sqlalchemy_c/solution
         run: python -m pytest -q tests
 
+
+      - name: Validate pytest fixture boundary reference
+        working-directory: activities/tpsi5/pytest_fixture_boundary_b/solution
+        run: python -m pytest -q tests
+
+      - name: Validate Feisbuc testing boundaries reference
+        working-directory: activities/tpsi5/feisbuc_testing_boundaries_c/solution
+        run: python -m pytest -q tests
+
       - name: Validate Content Pack, Course Design, Activities and reference runtimes
         env:
           PYTHONPATH: ${{ github.workspace }}/_thebitlab-platform
@@ -275,3 +284,4 @@ jobs:
           tests/test_tpsi_quinto_react_translation.py
           tests/test_tpsi_quinto_fastapi.py
           tests/test_tpsi_quinto_sqlalchemy.py
+          tests/test_tpsi_quinto_testing_strategy.py

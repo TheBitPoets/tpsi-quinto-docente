@@ -74,7 +74,7 @@ def test_fastapi_content_pack_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
 
-    assert pack["version"] == "0.17.0"
+    assert pack["version"] == "0.18.0"
     assert pack["extensions"]["bootstrap_decisions"]["python_mirror"] == "fastapi"
 
     refs = {item["id"]: item for item in pack["references"]}
@@ -98,11 +98,12 @@ def test_fastapi_content_pack_course_design_and_activity_contracts() -> None:
 
     uda26 = next(u for u in design["years"][0]["udas"] if u["id"] == "uda-26")
     assert uda26["weeks"] == "4"
-    assert len(uda26["items"]) == 2
+    assert len(uda26["items"]) == 3
     assert uda26["items"][0]["source"] == item["path"]
     assert uda26["items"][0]["activity_ids"] == item["activity_ids"]
     assert "SQLAlchemy" in uda26["items"][0]["frame"]["next_step"]
     assert uda26["items"][1]["source"] == "content/tpsi5/16_SQLALCHEMY_PERSISTENCE_MIRROR.md"
+    assert uda26["items"][2]["source"] == "content/tpsi5/17_TESTING_INTEGRATION_BOUNDARIES.md"
 
     a = assert_activity(A_ROOT, "A", "tpsi5-activity-a-fastapi-openapi-microscope-001", False)
     b = assert_activity(B_ROOT, "B", "tpsi5-activity-b-fastapi-post-validation-001", True)

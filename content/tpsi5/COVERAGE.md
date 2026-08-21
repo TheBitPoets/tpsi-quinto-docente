@@ -21,7 +21,8 @@ Stato: **draft**.
 | ORM Node | TBD | futuro | confronto solo dopo SQL raw |
 | FastAPI mirror/OpenAPI | **sì, D4 deciso** | mirror 01 | FastAPI/Pydantic/OpenAPI/TestClient + MemoryPostStore; stesso dominio HTTP, non secondo backend completo |
 | SQLAlchemy mirror | **sì** | **mirror 02** | SQLAlchemy 2.0.51 + SQLite sotto lo stesso contratto FastAPI; repository/Session boundary e restart persistence |
-| Testing/deploy/capstone | sì | UDA26 | release finale e osservabilita base |
+| Testing strategy | **sì** | **mirror 03** | pytest 9.1.1, fixture/tmp_path, repository + HTTP integration, restart/isolation e mock boundary |
+| Deploy/capstone | sì | UDA26 | quarto slice ancora da chiudere: config, deploy, health/readiness ed evidence bundle |
 
 ## Progressione Feisbuc principale
 
@@ -60,7 +61,10 @@ stessa suite HTTP + SQLAlchemy 2.0.51 + SQLite file
         ↓
 restart persistence + repository/transaction evidence
         ↓
-testing/deploy/capstone
+mirror 03
+pytest fixture + isolation + repository/HTTP contract boundaries
+        ↓
+deploy/capstone
 ```
 
 Invariant mirror 01:
@@ -214,6 +218,32 @@ Boundary:
 - `computed` viene tradotto prima come valore derivato; `useMemo` non viene introdotto automaticamente;
 - la Quality costruisce le reference React/Vite ma non dichiara browser autograding.
 
+
+Invariant mirror 03:
+
+- nessuna nuova route o feature di prodotto; il nuovo artefatto e il test harness;
+- pytest `9.1.1` e pinned nella reference;
+- fixture function-scoped e `tmp_path` isolano database/app per test;
+- repository integration usa SQLAlchemy + SQLite reali, non mock;
+- HTTP integration attraversa FastAPI + Pydantic + repository + SQLite tramite TestClient;
+- restart persistence resta un test separato con due app/Engine;
+- OpenAPI e verificato con smoke assert su path/schema significativi, non snapshot byte-per-byte;
+- test indipendenti dall'ordine e niente `shared-test.db`;
+- mock ammessi solo per boundary esterni/costosi/non deterministici, non per l'integrazione sotto test;
+- CI mantiene gate reference separati prima della regression suite completa.
+
+Baseline terzo slice UDA26:
+
+```text
+pytest        9.1.1
+FastAPI       0.141.1
+Pydantic      2.13.4
+HTTPX         0.28.1
+SQLAlchemy    2.0.51
+SQLite        file temporanei via tmp_path
+Python        3.11 / 3.12 CI
+```
+
 ## Activity UDA26 — FastAPI/OpenAPI mirror
 
 - [x] `tpsi5-activity-a-fastapi-openapi-microscope-001` — route/OpenAPI/schema/422, manuale;
@@ -228,11 +258,19 @@ Boundary:
 - [x] `tpsi5-activity-c-feisbuc-fastapi-sqlalchemy-001` — mirror 02 con SQLite file + restart persistence;
 - [x] `tpsi5-activity-d-debug-sqlalchemy-transactions-001` — Engine/Session lifetime, flush/commit/rollback, Query legacy e output boundary.
 
+
+## Activity UDA26 — Testing strategy e integration boundaries
+
+- [x] `tpsi5-activity-a-testing-boundary-microscope-001` — scegliere il livello minimo che osserva la proprieta, manuale;
+- [x] `tpsi5-activity-b-pytest-fixture-boundary-001` — fixture function-scoped, `tmp_path`, teardown e parametrizzazione, manuale con reference CI;
+- [x] `tpsi5-activity-c-feisbuc-testing-boundaries-001` — mirror 03 feature-neutral con HTTP/OpenAPI/repository/isolation/restart suite;
+- [x] `tpsi5-activity-d-debug-testing-boundaries-001` — shared state, order dependency, over-mocking, internal assert e teardown.
+
 ## Boundary di grading
 
 Il browser grader TheBitLab non e ancora implementato e il runner deterministico TheBitLab non dichiara ancora TypeScript. Le Activity Vue/TypeScript/realtime/React che richiedono browser o connessioni restano quindi `correzione.test=false`. La Quality docente puo eseguire `tsc`/`vue-tsc`, build Vue/React, backend live e probe Socket.IO a due client; questa evidence non viene spacciata per autograding browser dello studente.
 
-Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `correzione.test=true` per la policy Python pura. Le Activity FastAPI A/C/D e le nuove Activity SQLAlchemy A/B/C/D richiedono framework multi-file, database o ragionamento di debugging e restano manual/rubric-based nella piattaforma; la repository Quality valida le reference SQLAlchemy e il restart test senza dichiarare un grader ORM-specifico.
+Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `correzione.test=true` per la policy Python pura. Le Activity FastAPI A/C/D, SQLAlchemy A/B/C/D e testing A/B/C/D richiedono framework multi-file, database, fixture lifecycle o ragionamento architetturale e restano manual/rubric-based nella piattaforma; la repository Quality valida pytest fixture, reference SQLAlchemy, HTTP integration, isolation e restart test senza dichiarare un browser/ORM grader specifico.
 
 ## Gate prima del freeze del curriculum TPSI5
 
@@ -246,4 +284,5 @@ Per UDA26 il runner **Python e implementato**: Activity B FastAPI usa quindi `co
 8. **translation/comparison lab React: completato — breve, non-core, nessuna seconda SPA**;
 9. **FastAPI/OpenAPI mirror: primo slice UDA26 implementato**;
 10. **SQLAlchemy persistence mirror: secondo slice UDA26 implementato**;
-11. completare UDA26: testing strategy, deploy e capstone.
+11. **testing strategy/integration boundaries: terzo slice UDA26 implementato**;
+12. completare UDA26: configurazione/deploy e capstone.
