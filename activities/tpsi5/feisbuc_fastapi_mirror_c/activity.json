@@ -1,0 +1,42 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-c-feisbuc-fastapi-mirror-001",
+  "titolo":"Feisbuc mirror 01: FastAPI, Pydantic, OpenAPI e TestClient",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"C",
+  "argomenti":["fastapi","pydantic","openapi","testclient","rest","response-model","memory-store","contract-mirror"],
+  "linguaggio":"python",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-26"},
+  "content_ids":["tpsi5-content-fastapi-openapi-mirror","tpsi5-content-http-async-fetch-rest","tpsi5-content-node-express-backend"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md","anchor":"19-laboratorio-mirror-fastapi","role":"lesson"}],
+  "project_milestone":"feisbuc-mirror-01-fastapi-openapi",
+  "consegna":"Completa il mirror Python di `GET /api/posts`, `POST /api/posts` e `PATCH /api/posts/{id}`. Usa modelli Pydantic distinti per command/output, `response_model`, `201` + `Location`, `404`, un MemoryPostStore iniettato nel composition root e TestClient. Il mirror deve mantenere la shape pubblica Post e le success semantics principali, documentando il `422` FastAPI come differenza di validation. Non replicare session/auth, SQLite o Socket.IO in questo slice.",
+  "vincoli":["FastAPI 0.141.1","Pydantic 2.13.4","Uvicorn 0.52.1","HTTPX 0.28.1","GET/POST/PATCH /api/posts","POST 201 + Location","response_model pubblico","command model senza authorId/userId","MemoryPostStore separato dal framework","TestClient","nessun SQLAlchemy","nessuna auth/session fake","nessun Socket.IO","nessun frontend Python"],
+  "assets":[
+    {"type":"starter","path":"starter/requirements.txt","target_path":"requirements.txt","visibility":"student","description":"Dipendenze pinned"},
+    {"type":"starter","path":"starter/app/__init__.py","target_path":"app/__init__.py","visibility":"student","description":"Package"},
+    {"type":"starter","path":"starter/app/models.py","target_path":"app/models.py","visibility":"student","description":"Pydantic models da completare"},
+    {"type":"starter","path":"starter/app/store.py","target_path":"app/store.py","visibility":"student","description":"Memory store boundary"},
+    {"type":"starter","path":"starter/app/main.py","target_path":"app/main.py","visibility":"student","description":"Path operations da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Contratto e workflow"},
+    {"type":"teacher_only","path":"solution/requirements.txt","visibility":"teacher","description":"Reference dependencies"},
+    {"type":"teacher_only","path":"solution/app/__init__.py","visibility":"teacher","description":"Reference package"},
+    {"type":"teacher_only","path":"solution/app/models.py","visibility":"teacher","description":"Reference models"},
+    {"type":"teacher_only","path":"solution/app/store.py","visibility":"teacher","description":"Reference store"},
+    {"type":"teacher_only","path":"solution/app/main.py","visibility":"teacher","description":"Reference FastAPI app"},
+    {"type":"teacher_only","path":"solution/tests/test_contract.py","visibility":"teacher","description":"TestClient contract suite"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Review e boundary mirror"}
+  ],
+  "soluzione_attesa":{"tipo":"fastapi-contract-mirror","note":"Mirror in-memory delle path posts con Pydantic/OpenAPI/TestClient, senza duplicazione del backend completo."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":150,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"contract","criterion":"GET/POST/PATCH, 201/Location, 404 e Post shape verificati con TestClient"},
+    {"name":"models","criterion":"input/output separati e authorId assente dal command"},
+    {"name":"openapi","criterion":"/openapi.json espone paths e schemas attesi"},
+    {"name":"boundary","criterion":"store non importa FastAPI e non compaiono SQLAlchemy/auth/realtime"},
+    {"name":"compatibility","criterion":"422 viene riconosciuto come differenza consapevole del mirror"}
+  ],
+  "rubrica":[{"criterio":"HTTP success contract","punti":3},{"criterio":"Pydantic input/output boundary","punti":2},{"criterio":"Store separation","punti":2},{"criterio":"OpenAPI/TestClient evidence","punti":2},{"criterio":"Compatibility reasoning","punti":1}]
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-b-fastapi-post-validation-001",
+  "titolo":"Post policy Python: dominio prima del framework",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"B",
+  "argomenti":["python","validation","domain-policy","http-boundary","fastapi-mirror"],
+  "linguaggio":"python",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-26"},
+  "content_ids":["tpsi5-content-fastapi-openapi-mirror"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md","anchor":"13-store-boundary-non-leghiamo-fastapi-alla-persistenza","role":"lesson"}],
+  "consegna":"Completa `normalize_post_text(value)`. Accetta solo stringhe, applica `strip()`, rifiuta testo vuoto e testo oltre 280 caratteri. Il programma legge JSON da stdin e stampa un solo JSON deterministico. La policy deve restare Python puro: FastAPI/Pydantic arriveranno nell'adapter HTTP.",
+  "vincoli":["Python standard library only","nessun FastAPI/Pydantic","funzione deterministica","nessun log extra","trim prima del controllo required/max 280"],
+  "assets":[
+    {"type":"starter","path":"starter/main.py","target_path":"main.py","visibility":"student","description":"Policy da completare"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Contratto stdin/stdout"},
+    {"type":"teacher_only","path":"solution/main.py","visibility":"teacher","description":"Reference autograded"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Boundary framework/dominio"}
+  ],
+  "soluzione_attesa":{"tipo":"python-deterministico","file":"main.py","note":"Policy riusabile indipendentemente dal web framework."},
+  "correzione":{"compila":false,"test":true,"sandbox":true,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":40,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "test_cases":[
+    {"name":"trim-valid","stdin":"{\"text\":\"  ciao FastAPI  \"}\n","expected_stdout":"{\"ok\":true,\"text\":\"ciao FastAPI\"}"},
+    {"name":"blank","stdin":"{\"text\":\"   \"}\n","expected_stdout":"{\"ok\":false,\"error\":\"post-text-required\"}"},
+    {"name":"wrong-type","stdin":"{\"text\":42}\n","expected_stdout":"{\"ok\":false,\"error\":\"post-text-required\"}"},
+    {"name":"max-valid","stdin":"{\"text\":\"aaaaaaaaaa\"}\n","expected_stdout":"{\"ok\":true,\"text\":\"aaaaaaaaaa\"}"},
+    {"name":"too-long","stdin":"{\"text\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}\n","expected_stdout":"{\"ok\":false,\"error\":\"post-text-too-long\"}"}
+  ],
+  "rubrica":[{"criterio":"Type/required","punti":3},{"criterio":"Trim/order policy","punti":2},{"criterio":"Max length","punti":2},{"criterio":"Output deterministico","punti":2},{"criterio":"Boundary puro","punti":1}]
+}

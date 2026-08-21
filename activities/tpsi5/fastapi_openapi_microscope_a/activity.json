@@ -1,0 +1,32 @@
+{
+  "schema_version":"1.0",
+  "id":"tpsi5-activity-a-fastapi-openapi-microscope-001",
+  "titolo":"FastAPI/OpenAPI microscope: route, schema e 422",
+  "tipo":"laboratorio",
+  "student_support_mode":"teoria-dispense",
+  "difficolta":"A",
+  "argomenti":["fastapi","openapi","pydantic","json-schema","swagger-ui","testclient","http"],
+  "linguaggio":"python",
+  "contesto":{"percorso":"quinto-anno","uda":"uda-26"},
+  "content_ids":["tpsi5-content-fastapi-openapi-mirror"],
+  "source_refs":[{"source_id":"tpsi5-source-originali","path":"content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md","anchor":"10-openapi-il-contratto-diventa-una-risorsa-interrogabile","role":"lesson"}],
+  "consegna":"Esegui la piccola app FastAPI fornita, apri `/docs` e `/openapi.json`, prova GET/POST validi e una POST con testo vuoto. Compila `OBSERVATIONS.md` collegando path operation, modello Pydantic, JSON Schema, status 201 e validation 422 ai concetti HTTP gia studiati.",
+  "vincoli":["Python 3.11+","FastAPI 0.141.1","Pydantic 2.13.4","Uvicorn 0.52.1","HTTPX 0.28.1","non introdurre SQLAlchemy","non cambiare route per far coincidere l'osservazione"],
+  "assets":[
+    {"type":"starter","path":"starter/requirements.txt","target_path":"requirements.txt","visibility":"student","description":"Dipendenze pinned"},
+    {"type":"starter","path":"starter/app.py","target_path":"app.py","visibility":"student","description":"Microscope FastAPI eseguibile"},
+    {"type":"example","path":"student/OBSERVATIONS.md","target_path":"OBSERVATIONS.md","visibility":"student","description":"Scheda di osservazione"},
+    {"type":"teacher_only","path":"solution/OBSERVATIONS.md","visibility":"teacher","description":"Osservazioni attese"},
+    {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Conduzione docente"}
+  ],
+  "soluzione_attesa":{"tipo":"fastapi-observation","file":"OBSERVATIONS.md","note":"Lo starter e eseguibile; il prodotto e la spiegazione del contratto osservato."},
+  "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
+  "metriche":{"tempo_stimato_minuti":50,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
+  "manual_checks":[
+    {"name":"openapi","criterion":"individua paths e schemas in /openapi.json"},
+    {"name":"validation","criterion":"spiega perche il body invalido non entra nella funzione e produce 422"},
+    {"name":"http","criterion":"collega 201 e Location al contratto HTTP"},
+    {"name":"comparison","criterion":"mappa decoratore FastAPI e route Express senza confondere framework e protocollo"}
+  ],
+  "rubrica":[{"criterio":"OpenAPI/JSON Schema","punti":3},{"criterio":"Validation 422","punti":2},{"criterio":"HTTP/status/header","punti":3},{"criterio":"Confronto Express/FastAPI","punti":2}]
+}
