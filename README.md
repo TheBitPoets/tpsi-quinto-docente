@@ -10,6 +10,14 @@ Il corso accompagna una classe quinta dalla lettura consapevole della Web Platfo
 
 L'obiettivo non è “fare tante tecnologie”, ma far vedere agli studenti **dove passano i confini**: browser/server, protocollo/framework, memoria/database, utente/sessione, JSON/tipo, stato locale/realtime, app funzionante/app verificabile.
 
+### Ingressi rapidi
+
+- **Docente:** [`teacher/README.md`](teacher/README.md) — conduzione della lezione, demo, debugging, gestione delle modifiche in-year.
+- **Studente:** [`student/README.md`](student/README.md) — workflow leggi/esegui/modifica/test/debug/consegna, setup e troubleshooting.
+- **Slide:** [`slides/tpsi5/README.md`](slides/tpsi5/README.md) — indice delle presentazioni.
+- **Activity/lab:** [`activities/tpsi5/`](activities/tpsi5/) — esercitazioni, debug, milestone e reference solution.
+- **Modifiche durante l'anno:** [`doc/DELIVERY_CHANGELOG.md`](doc/DELIVERY_CHANGELOG.md).
+
 ### A chi serve questo repository
 
 - **Docente**: indice del percorso, lezioni, attività, reference solution, Quality gate e slide Markdown da usare in classe.
@@ -26,12 +34,12 @@ L'obiettivo non è “fare tante tecnologie”, ma far vedere agli studenti **do
 - Activity A–F e reference solution collegate ai content item;
 - Quality cross-platform su Ubuntu Python 3.11/3.12 e Windows Python 3.11.
 
-Il freeze editoriale è documentato in [`doc/CURRICULUM_FREEZE_2026_2027.md`](doc/CURRICULUM_FREEZE_2026_2027.md).
+Il freeze editoriale è documentato in [`doc/CURRICULUM_FREEZE_2026_2027.md`](doc/CURRICULUM_FREEZE_2026_2027.md). Il materiale di delivery può essere corretto e migliorato durante l'anno senza cambiare silenziosamente il curriculum: ogni revisione classroom-facing va registrata nel [`Delivery Change Log`](doc/DELIVERY_CHANGELOG.md).
 
 ## Come usare i materiali in classe
 
 1. Parti dall'indice qui sotto e apri il modulo della settimana.
-2. Usa le [slide Markdown del corso](slides/tpsi5/COURSE_SLIDES.md) come scaletta di lezione.
+2. Usa le [slide Markdown del corso](slides/tpsi5/COURSE_SLIDES.md) o i deck modulari come narrazione della lezione.
 3. Apri le Activity corrispondenti in [`activities/tpsi5/`](activities/tpsi5/) per esercitazione, debug o milestone Feisbuc.
 4. Usa la Quality come prova che reference solution e contratti restano riproducibili.
 
@@ -97,7 +105,10 @@ FastAPI mirror / SQLAlchemy / pytest / deploy capstone
 - [`doc/course_designs/tpsi_quinto_2026_2027.json`](doc/course_designs/tpsi_quinto_2026_2027.json) — Course Design di 33 settimane;
 - [`doc/OPEN_DECISIONS.md`](doc/OPEN_DECISIONS.md) — decisioni D1–D5 congelate;
 - [`doc/CURRICULUM_FREEZE_2026_2027.md`](doc/CURRICULUM_FREEZE_2026_2027.md) — baseline, confini e policy post-freeze;
+- [`doc/DELIVERY_CHANGELOG.md`](doc/DELIVERY_CHANGELOG.md) — correzioni e revisioni classroom-facing durante l'anno;
 - [`doc/LEGACY_REUSE_AUDIT.md`](doc/LEGACY_REUSE_AUDIT.md) — provenance e audit dei materiali legacy;
+- [`teacher/`](teacher/) — guida docente;
+- [`student/`](student/) — guida operativa studenti;
 - [`slides/tpsi5/`](slides/tpsi5/) — slide Markdown per la conduzione delle lezioni;
 - [`activities/tpsi5/`](activities/tpsi5/) — Activity e reference solution;
 - [`.github/workflows/quality.yml`](.github/workflows/quality.yml) — Quality del consumer reale.
@@ -110,4 +121,4 @@ Il futuro corso SQL separato potrà approfondire e riusare milestone condivise, 
 
 Le capability di piattaforma #729 (browser/HTML grader) e #731 (TypeScript Activity runner) restano follow-up indipendenti e non bloccano il curriculum freeze.
 
-Umbrella di progetto: `TheBitPoets/2cornot2c#728`. Standard cross-course accettato: `TheBitPoets/2cornot2c#723`.
+Umbrella di progetto: `TheBitPoets/2cornot2c#728`. Standard authoring cross-course accettato: `TheBitPoets/2cornot2c#723`. Delivery standard cross-course in rollout: `TheBitPoets/2cornot2c#737`.
