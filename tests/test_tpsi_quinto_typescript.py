@@ -60,7 +60,7 @@ def test_typescript_content_pack_decision_and_course_design() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
 
-    assert pack["version"] == "0.14.0"
+    assert pack["version"] == "0.15.0"
     assert pack["extensions"]["bootstrap_decisions"]["typescript_depth"] == "targeted-boundary-typing"
 
     refs = {entry["id"]: entry for entry in pack["references"]}
@@ -87,6 +87,7 @@ def test_typescript_content_pack_decision_and_course_design() -> None:
         "content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md",
         "content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md",
         "content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md",
+        "content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md",
     ]
     assert uda25["items"][2]["activity_ids"] == item["activity_ids"]
     assert "realtime" in uda25["items"][2]["frame"]["next_step"].lower()
