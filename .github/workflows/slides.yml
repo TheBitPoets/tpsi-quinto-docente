@@ -27,6 +27,9 @@ on:
 permissions:
   contents: read
 
+env:
+  SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
 jobs:
   build-slides:
     runs-on: ubuntu-latest
@@ -60,7 +63,7 @@ jobs:
       - name: Upload slide bundle
         uses: actions/upload-artifact@v4
         with:
-          name: tpsi5-slides-${{ github.sha }}
+          name: tpsi5-slides-${{ env.SOURCE_SHA }}
           path: build/tpsi5-slides
           if-no-files-found: error
           retention-days: 30
