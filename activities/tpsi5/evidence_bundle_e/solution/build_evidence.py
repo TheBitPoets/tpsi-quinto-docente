@@ -7,7 +7,7 @@ def canonical(obj): return (json.dumps(obj,ensure_ascii=False,sort_keys=True,sep
 def build(output: Path, build_sha: str):
     output.mkdir(parents=True,exist_ok=True)
     openapi=canonical({"openapi":"3.1.0","info":{"title":"Feisbuc capstone","version":"0.4.0"},"paths":{"/health":{},"/ready":{},"/api/posts":{}}})
-    manifest=canonical({"schema":"thebitlab.capstone-evidence.v1","milestone":"feisbuc-mirror-04-runtime-capstone","contentPack":"0.19.0","buildSha":build_sha,"contracts":["runtime-config","health-liveness","database-readiness","posts-http-contract","restart-persistence","live-uvicorn-process"],"files":["manifest.json","openapi.json","SHA256SUMS.txt"]})
+    manifest=canonical({"schema":"thebitlab.capstone-evidence.v1","milestone":"feisbuc-mirror-04-runtime-capstone","contentPack":"1.0.0","buildSha":build_sha,"contracts":["runtime-config","health-liveness","database-readiness","posts-http-contract","restart-persistence","live-uvicorn-process"],"files":["manifest.json","openapi.json","SHA256SUMS.txt"]})
     (output/"manifest.json").write_bytes(manifest); (output/"openapi.json").write_bytes(openapi)
     lines=[]
     for name in ("manifest.json","openapi.json"):

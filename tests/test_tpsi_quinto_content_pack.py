@@ -52,8 +52,12 @@ def parse_html(path: Path) -> StructureParser:
 def test_native_content_pack_v1_is_valid_and_pinned() -> None:
     pack = load(PACK_PATH)
     assert pack["schema_version"] == "thebitlab.content-pack.v1"
-    assert pack["version"] == "0.19.0"
-    assert pack["status"] == "draft"
+    assert pack["version"] == "1.0.0"
+    assert pack["status"] == "approved"
+    assert pack["coverage"]["status"] == "approved"
+    assert all(item["status"] == "approved" for item in pack["content_items"])
+    assert all(item["status"] == "approved" for item in pack["course_designs"])
+    assert (ROOT / "doc" / "CURRICULUM_FREEZE_2026_2027.md").is_file()
     assert pack["extensions"]["platform_contract"]["content_pack_v1_sha"] == ACCEPTED_CONTENT_PACK_V1_SHA
     assert validate_content_pack(pack, str(PACK_PATH), root=ROOT) == []
 
@@ -99,7 +103,7 @@ def test_sources_project_exactly_to_course_design_catalog() -> None:
     assert normalized[3].ref == "086995ece4260a3408740b94cfe2701ce24f8b57"
 
 
-def test_course_design_keeps_33_week_draft_and_open_decisions() -> None:
+def test_course_design_keeps_33_week_frozen_curriculum_and_decisions() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
     year = design["years"][0]
@@ -113,10 +117,11 @@ def test_course_design_keeps_33_week_draft_and_open_decisions() -> None:
     decisions = pack["extensions"]["bootstrap_decisions"]
     assert decisions == {
         "frontend_framework": "vue3-vite",
-        "node_orm": "tbd",
+        "node_orm": "none-core-2026-27",
         "typescript_depth": "targeted-boundary-typing",
         "python_mirror": "fastapi",
         "main_backend": "node-express",
+        "sql_course_integration": "optional-nonblocking",
     }
 
 

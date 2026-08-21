@@ -74,7 +74,7 @@ def test_fastapi_content_pack_course_design_and_activity_contracts() -> None:
     pack = load(PACK_PATH)
     design = load(DESIGN_PATH)
 
-    assert pack["version"] == "0.19.0"
+    assert pack["version"] == "1.0.0"
     assert pack["extensions"]["bootstrap_decisions"]["python_mirror"] == "fastapi"
 
     refs = {item["id"]: item for item in pack["references"]}

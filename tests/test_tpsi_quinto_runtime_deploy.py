@@ -17,7 +17,7 @@ def load(path): return json.loads(path.read_text(encoding='utf-8'))
 
 def test_closeout_registered_and_week_budget_unchanged():
     pack=load(PACK); design=load(DESIGN)
-    assert pack['version']=='0.19.0'
+    assert pack['version']=='1.0.0'
     item=next(x for x in pack['content_items'] if x['id']=='tpsi5-content-runtime-deploy-capstone')
     assert item['order']==19 and item['path']==str(LESSON.relative_to(ROOT)).replace('\\','/')
     assert item['activity_ids']==[
