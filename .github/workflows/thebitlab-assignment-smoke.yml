@@ -31,16 +31,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Upload Activity JSON snapshot for deterministic migration/review
-        if: runner.os == 'Linux'
-        uses: actions/upload-artifact@v4
-        with:
-          name: tpsi5-activity-json-snapshot
-          path: activities/tpsi5/*/activity.json
-          if-no-files-found: error
-          retention-days: 1
-
-      - name: Check every TPSI5 Activity can build an assignment plan
+      - name: Check TPSI5 assignment plans and explicit platform fallbacks
         run: python tests/thebitlab_assignment_smoke.py --plans-only
 
       - name: Build the first student scaffold and verify visibility
