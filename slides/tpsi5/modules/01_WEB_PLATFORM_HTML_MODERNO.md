@@ -206,13 +206,33 @@ Non serve ancora “farlo bello”.
 
 # Handoff al laboratorio
 
-Durante l'Activity:
+Prima Activity concreta:
 
-1. osserva un documento;
-2. identifica semantica debole;
-3. rifattorizza senza cambiare il significato funzionale;
-4. verifica con DevTools;
-5. spiega perché la nuova struttura è migliore.
+**A — Anatomia di un documento HTML moderno**  
+`tpsi5-activity-a-html-anatomy-001`
+
+Percorso studente nel repository:
+
+`activities/tpsi5/html_anatomy_a/student/README.md`
+
+Starter:
+
+`activities/tpsi5/html_anatomy_a/starter/index.html`
+
+Durante il lab: osserva → modifica → ricarica → confronta sorgente e DOM → spiega.
+
+---
+
+# Grading di questa Activity
+
+In questa release il browser/HTML grader generico **non è ancora disponibile**.
+
+Quindi:
+
+- lavoro locale con browser + editor + DevTools;
+- checklist e rubrica docente;
+- TheBitLab può registrare/assegnare l'Activity;
+- non presentiamo test automatici HTML inesistenti.
 
 ---
 
