@@ -87,14 +87,16 @@ Per il percorso concreto **Activity TPSI5 → validazione → assegnazione/scaff
 
 ## Prima della prima classe
 
-Eseguire almeno una volta il rehearsal completo con dati demo:
+Eseguire il [rehearsal TPSI5 prima della prima classe](PILOT_REHEARSAL_TPSI5.md) con soli account e dati demo. Il playbook collega il percorso didattico del primo laboratorio ai gate operativi del pilot e distingue esplicitamente tre esiti: **GO tecnico demo**, **GO pilot** e **NO-GO**.
+
+Il percorso didattico minimo è:
 
 ```text
 README → teacher guide → modulo 00 → modulo 01
 → prima Activity → starter → grading/rubrica
 ```
 
-Se TheBitLab viene usato nel pilot, aggiungere validazione Activity, dry-run dell'assegnazione e prova del canale studente secondo `THEBITLAB_HANDOFF.md`.
+Se TheBitLab viene usato nel pilot, il rehearsal aggiunge validazione Activity, capability/dry-run dell'adapter, scaffold demo e i gate sul deployment reale: data root autorevole, account demo, auth/authz, pairing/TUI, Docker, tentativo definitivo e registro docente, backup/restore, revoca/shutdown e governance. La sola CI del repository non è sufficiente per dichiarare **GO pilot**.
 
 ## Durante l'anno
 
