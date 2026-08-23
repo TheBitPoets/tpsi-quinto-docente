@@ -62,6 +62,25 @@ def load_adapter():
     return module
 
 
+def load_platform_validator(platform_root: Path):
+    platform_root = platform_root.resolve()
+    platform_string = str(platform_root)
+    if platform_string not in sys.path:
+        sys.path.insert(0, platform_string)
+
+    validator_path = platform_root / "scripts" / "validate_activity.py"
+    if not validator_path.is_file():
+        raise FileNotFoundError("validator-missing")
+
+    spec = importlib.util.spec_from_file_location("thebitlab_validate_activity_preflight", validator_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("validator-load-failed")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def add_check(checks: list[Check], identifier: str, status: str, detail: str) -> None:
     checks.append(Check(identifier, status, detail))
 
@@ -109,15 +128,20 @@ def verify_docker(checks: list[Check], *, skip: bool) -> None:
 
 
 def validate_activity(checks: list[Check], platform_root: Path) -> None:
-    validator = platform_root / "scripts" / "validate_activity.py"
-    if not validator.is_file():
-        add_check(checks, "activity.schema", "FAIL", "Pinned validator missing")
+    try:
+        validator = load_platform_validator(platform_root)
+        data, load_errors = validator.load_json(FIRST_ACTIVITY)
+        errors = list(load_errors)
+        if data is not None:
+            errors.extend(validator.validate_activity(data, "html_anatomy_a/activity.json"))
+    except Exception as error:
+        add_check(checks, "activity.schema", "FAIL", type(error).__name__)
         return
-    completed = run_command([sys.executable, str(validator), str(FIRST_ACTIVITY)], cwd=platform_root)
-    if completed.returncode == 0:
-        add_check(checks, "activity.schema", "PASS", FIRST_ACTIVITY_ID)
+
+    if errors:
+        add_check(checks, "activity.schema", "FAIL", f"{len(errors)} validation error(s)")
     else:
-        add_check(checks, "activity.schema", "FAIL", f"validator exit code {completed.returncode}")
+        add_check(checks, "activity.schema", "PASS", FIRST_ACTIVITY_ID)
 
 
 def check_adapter_and_scaffold(checks: list[Check], platform_root: Path) -> None:
