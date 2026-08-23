@@ -12,9 +12,11 @@ Questa guida raccoglie ciò che serve per **insegnare** il corso senza modificar
 3. Usa le slide come narrazione della lezione, non come sostituto della dispensa.
 4. Esegui la demo prevista o un esempio minimo equivalente.
 5. Inserisci almeno un checkpoint orale/rapido prima del laboratorio.
-6. Avvia le Activity collegate in `activities/tpsi5/`.
+6. Avvia le Activity collegate dall'[indice Activity](../activities/tpsi5/README.md).
 7. Usa reference solution e Quality per verificare contratti e comportamento.
 8. Registra eventuali chiarimenti/correzioni emersi in aula nel delivery changelog.
+
+Il **modulo 00** è orientamento e non ha una Activity dedicata. Il primo handoff operativo è il modulo 01 → [`html_anatomy_a`](../activities/tpsi5/html_anatomy_a/student/README.md).
 
 ## Struttura consigliata di una lezione
 
@@ -70,6 +72,8 @@ Le reference solution sono in `activities/tpsi5/` nelle directory previste dai s
 
 Il curriculum resta compatibile con il pilot TheBitLab pinned definito dal Content Pack. Dove il runner/grader non esiste ancora, usare il fallback manuale/rubric-based documentato dal modulo/Activity; non presentarlo agli studenti come grading automatico.
 
+Per il percorso concreto **Activity TPSI5 → validazione → assegnazione/scaffold → canale studente**, usare la guida [TPSI5 → TheBitLab — handoff operativo docente](THEBITLAB_HANDOFF.md). La guida resta pinnata alla revisione TheBitLab dichiarata dal Content Pack e distingue esplicitamente runner automatici da checklist, reference CI ed evidence manuale.
+
 ## Checklist prima di una lezione
 
 - slide del modulo aperte;
@@ -78,7 +82,19 @@ Il curriculum resta compatibile con il pilot TheBitLab pinned definito dal Conte
 - Activity/starter verificati;
 - eventuali credenziali/tool esterni pronti;
 - output atteso chiaro;
+- tipo di grading realmente disponibile verificato;
 - piano B se TheBitLab o rete non sono disponibili.
+
+## Prima della prima classe
+
+Eseguire almeno una volta il rehearsal completo con dati demo:
+
+```text
+README → teacher guide → modulo 00 → modulo 01
+→ prima Activity → starter → grading/rubrica
+```
+
+Se TheBitLab viene usato nel pilot, aggiungere validazione Activity, dry-run dell'assegnazione e prova del canale studente secondo `THEBITLAB_HANDOFF.md`.
 
 ## Durante l'anno
 
