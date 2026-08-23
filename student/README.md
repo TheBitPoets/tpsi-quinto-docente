@@ -2,7 +2,7 @@
 
 Corso: **Full Stack Web Developer 2026/27**.
 
-Questa guida spiega **come lavorare** durante il corso. I contenuti teorici sono nei moduli `content/tpsi5/`; gli esercizi e i progetti sono in `activities/tpsi5/` e, quando previsto, in TheBitLab.
+Questa guida spiega **come lavorare** durante il corso. I contenuti teorici sono nei moduli `content/tpsi5/`; gli esercizi e i progetti sono in `activities/tpsi5/` e, quando previsto, vengono consegnati anche tramite TheBitLab.
 
 ## Il ciclo di lavoro
 
@@ -22,9 +22,23 @@ Per ogni modulo:
 2. controlla prerequisiti e obiettivi;
 3. segui le slide durante la spiegazione;
 4. prova gli esempi in locale;
-5. apri l'Activity indicata;
+5. apri l'Activity indicata dal modulo o dall'[indice Activity](../activities/tpsi5/README.md);
 6. esegui test/check disponibili;
 7. conserva l'evidenza richiesta.
+
+Il **modulo 00** è orientamento e non ha una Activity dedicata. Il primo laboratorio operativo è nel modulo 01.
+
+## Primo laboratorio: percorso esatto
+
+Per iniziare senza cercare file nel repository:
+
+1. leggi [Web Platform e HTML moderno](../content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md);
+2. apri [Activity A — Anatomia di un documento HTML moderno](../activities/tpsi5/html_anatomy_a/student/README.md);
+3. lavora sullo [starter `index.html`](../activities/tpsi5/html_anatomy_a/starter/index.html);
+4. apri il file nel browser e usa DevTools come indicato dalla procedura;
+5. completa la checklist dell'Activity.
+
+Questa prima Activity è intenzionalmente manuale/rubric-based: non esiste ancora un grader browser/HTML generico da presentare come automatico.
 
 ## Strumenti base
 
@@ -115,7 +129,11 @@ Prima di chiedere “non funziona”, raccogli almeno:
 
 ## TheBitLab
 
+Non devi lanciare direttamente un `activity.json`. Quando una Activity viene distribuita tramite TheBitLab, il docente prepara l'assegnazione/scaffold e tu lavori attraverso il canale studente previsto dal pilot (CLI/TUI autenticata) oppure nel repository di consegna indicato.
+
 Alcune attività hanno runner automatici, altre restano rubric/manuali. Se l'Activity non ha un grader automatico, segui la procedura di evidenza/consegna indicata dal docente: non significa che l'attività sia meno importante.
+
+Il corso non simula capability che la piattaforma non possiede ancora: HTML/DOM/DevTools e altre interazioni browser possono richiedere checklist, rubrica o evidence manuale.
 
 ## Feisbuc
 

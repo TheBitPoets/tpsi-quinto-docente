@@ -2,7 +2,50 @@
 
 Le Activity usano TheBitLab Activity 1.0 e la tassonomia A–F.
 
-## Estratto UDA24–26
+## Come usare questo indice
+
+- Lo studente parte sempre dalla **lesson** del modulo e poi apre la guida `student/README.md` della Activity indicata.
+- Il docente usa `activity.json` come contratto e `teacher/` / `solution/` come materiale riservato di supporto.
+- Una Activity con `correzione.test=false` non va presentata come autograded.
+- Per distribuire le Activity tramite il pilot, vedere [`../../teacher/THEBITLAB_HANDOFF.md`](../../teacher/THEBITLAB_HANDOFF.md).
+
+### Primo laboratorio del corso
+
+Modulo 01 → [`html_anatomy_a/student/README.md`](html_anatomy_a/student/README.md) → [`starter/index.html`](html_anatomy_a/starter/index.html).
+
+## UDA21 — Web Platform, HTML, CSS e Bootstrap
+
+| Modulo | Livello | Activity | Percorso |
+| --- | --- | --- | --- |
+| 01 HTML | A | `tpsi5-activity-a-html-anatomy-001` — anatomia documento HTML | [`html_anatomy_a/`](html_anatomy_a/) |
+| 01 HTML | B | `tpsi5-activity-b-feisbuc-semantic-001` — refactoring semantico Feisbuc | [`feisbuc_semantic_b/`](feisbuc_semantic_b/) |
+| 02 CSS | C | `tpsi5-activity-c-feisbuc-responsive-layout-001` — shell responsive | [`feisbuc_responsive_c/`](feisbuc_responsive_c/) |
+| 02 CSS | D | `tpsi5-activity-d-debug-responsive-css-001` — debug responsive | [`css_debug_d/`](css_debug_d/) |
+| 03 Bootstrap | E | `tpsi5-activity-e-feisbuc-bootstrap-ui-001` — milestone Bootstrap | [`feisbuc_bootstrap_e/`](feisbuc_bootstrap_e/) |
+
+Le micro-attività A/B del modulo CSS e A–D del modulo Bootstrap possono essere svolte come esercizi guidati anche quando non hanno un bundle Activity separato: la lesson resta la fonte canonica.
+
+## UDA22 — JavaScript, DOM e Browser APIs
+
+| Livello | Scopo | Percorso |
+| --- | --- | --- |
+| A | pipeline JavaScript osservabile/deterministica | [`js_feed_pipeline_a/`](js_feed_pipeline_a/) |
+| B | refactoring con funzioni, destructuring, spread e array methods | [`js_post_refactor_b/`](js_post_refactor_b/) |
+| C | Feisbuc milestone 3: state/render/DOM/storage | [`feisbuc_dynamic_c/`](feisbuc_dynamic_c/) |
+| D | debug del client JavaScript e dei boundary DOM/eventi | [`js_debug_d/`](js_debug_d/) |
+
+Le Activity pure JavaScript possono usare il runner deterministico quando `activity.json` lo dichiara; le osservazioni DOM/browser restano separate dal runner puro.
+
+## UDA23 — HTTP, async, Fetch e REST
+
+| Livello | Scopo | Percorso |
+| --- | --- | --- |
+| A | microscopio request/response HTTP | [`http_microscope_a/`](http_microscope_a/) |
+| B | asincronia e gestione della risposta | [`async_response_b/`](async_response_b/) |
+| C | Feisbuc client REST | [`feisbuc_rest_c/`](feisbuc_rest_c/) |
+| D | debug Fetch/HTTP | [`fetch_debug_d/`](fetch_debug_d/) |
+
+## UDA24–26 — backend, persistence, frontend framework, realtime e mirror Python
 
 | Livello | ID | Scopo | Grading |
 | --- | --- | --- | --- |
@@ -65,8 +108,8 @@ TypeScript puro/SFC              -> reference tsc/vue-tsc in repository CI
 Vue/browser                      -> reference build + smoke/E2E docente
 Socket.IO transport/domain       -> reference two-client E2E docente
 browser DOM/offline interaction  -> browser grader futuro
-Python puro                    -> runner deterministico TheBitLab
-pytest/framework/database       -> reference CI docente
+Python puro                      -> runner deterministico TheBitLab
+pytest/framework/database        -> reference CI docente
 backend/persistence/security     -> reference E2E
 security/architecture reasoning  -> rubrica + evidence
 ```
@@ -84,7 +127,6 @@ La Quality docente puo:
 - simulare offline e verificare lo snapshot REST di recovery.
 
 Queste evidence dimostrano la reference solution; non sostituiscono il futuro browser grader per DOM, DevTools/offline mode o UI dello studente.
-
 
 ## Quality UDA26
 

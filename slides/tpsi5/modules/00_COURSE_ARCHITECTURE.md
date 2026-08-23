@@ -125,6 +125,21 @@ La domanda ricorrente sarà: **cosa abbiamo spostato o aggiunto?**
 
 ---
 
+# Stack core già deciso
+
+Per il 2026/27 le decisioni non sono aperte:
+
+- Vue 3 + Vite è il frontend core;
+- React è solo translation/comparison lab;
+- SQL raw viene prima dell'ORM;
+- TypeScript è mirato ai boundary;
+- FastAPI è un mirror mirato del contratto;
+- il corso SQL separato non è un prerequisito bloccante.
+
+Questa lezione presenta la mappa: non ridefinisce il curriculum.
+
+---
+
 # Esempio: pubblicare un post
 
 Versione iniziale:
@@ -184,7 +199,7 @@ Confronta la risposta con un compagno e giustificala.
 
 # Come useremo il laboratorio
 
-Ogni modulo contiene almeno una combinazione di:
+Dal modulo 01 in avanti useremo combinazioni di:
 
 - Activity di osservazione;
 - modifica guidata;
@@ -192,7 +207,9 @@ Ogni modulo contiene almeno una combinazione di:
 - debug;
 - milestone Feisbuc.
 
-Non basta ottenere l'output: dovrai saper spiegare **perché** è corretto.
+**Il modulo 00 è solo orientamento e non ha una Activity dedicata.**
+
+Il primo laboratorio sarà: **Anatomia di un documento HTML moderno**.
 
 ---
 
