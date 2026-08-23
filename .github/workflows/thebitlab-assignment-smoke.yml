@@ -36,3 +36,6 @@ jobs:
 
       - name: Build the first student scaffold and verify visibility
         run: python tests/thebitlab_assignment_smoke.py --first-scaffold
+
+      - name: Run sanitized candidate-host preflight contract in CI mode
+        run: python scripts/tpsi5_pilot_preflight.py --platform _thebitlab-platform --skip-docker
