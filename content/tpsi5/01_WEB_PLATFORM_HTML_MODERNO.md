@@ -1,6 +1,6 @@
 # Web Platform e HTML moderno
 
-Stato: **draft didattico**. Questa lezione inaugura UDA 21 e sostituisce la parte introduttiva di `html_css_summary` con una versione moderna, semantica e orientata alla documentazione professionale.
+Stato: **Content Pack 1.0.0 / approved**. Questa lezione inaugura UDA 21 e sostituisce la parte introduttiva di `html_css_summary` con una versione moderna, semantica e orientata alla documentazione professionale.
 
 ## Obiettivi
 
@@ -304,11 +304,11 @@ Provenienza legacy: `TheBitPoets/html_css_summary` @ `d71da420f1aa2ea39b61356e4f
 
 ### A — osserva e modifica
 
-Apri lo starter dell'Activity `tpsi5-activity-a-html-anatomy-001`, aggiungi i metadati mancanti e osserva il DOM con DevTools.
+Apri [Activity A — Anatomia di un documento HTML moderno](../../activities/tpsi5/html_anatomy_a/student/README.md) (`tpsi5-activity-a-html-anatomy-001`), lavora sullo [starter `index.html`](../../activities/tpsi5/html_anatomy_a/starter/index.html), aggiungi i metadati mancanti e osserva il DOM con DevTools.
 
 ### B — modifica controllata
 
-Nell'Activity `tpsi5-activity-b-feisbuc-semantic-001`, trasforma uno scheletro Feisbuc composto quasi soltanto da `div` in una struttura semantica.
+Nell'[Activity B — Feisbuc semantico](../../activities/tpsi5/feisbuc_semantic_b/student/README.md) (`tpsi5-activity-b-feisbuc-semantic-001`), trasforma uno scheletro Feisbuc composto quasi soltanto da `div` in una struttura semantica.
 
 ### C — scrittura autonoma
 
@@ -329,6 +329,8 @@ Feisbuc crescera fino a diventare l'applicazione full stack del corso.
 ## Laboratorio
 
 Le prime due Activity sono pensate per lavorare in locale con browser + editor e per essere registrabili da TheBitLab. Il grader HTML/browser generico di 2cornot2c e ancora pianificato: in questa fase la valutazione e guidata da checklist e rubrica docente, senza simulare test automatici inesistenti.
+
+Per l'indice navigabile delle Activity del corso vedere [`../../activities/tpsi5/README.md`](../../activities/tpsi5/README.md).
 
 ## Verifica rapida
 
@@ -375,5 +377,5 @@ HTTP       -> comunicazione client/server
 
 ## Activity correlate
 
-- `tpsi5-activity-a-html-anatomy-001`
-- `tpsi5-activity-b-feisbuc-semantic-001`
+- [A — `tpsi5-activity-a-html-anatomy-001`](../../activities/tpsi5/html_anatomy_a/student/README.md)
+- [B — `tpsi5-activity-b-feisbuc-semantic-001`](../../activities/tpsi5/feisbuc_semantic_b/student/README.md)
