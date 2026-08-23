@@ -1,1 +1,4 @@
 /build/tpsi5-slides/
+/_thebitlab-platform/
+__pycache__/
+*.py[cod]
