@@ -1,0 +1,38 @@
+name: TheBitLab assignment smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  assignment-smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout TPSI quinto content pack
+        uses: actions/checkout@v4
+
+      - name: Checkout pinned accepted TheBitLab
+        uses: actions/checkout@v4
+        with:
+          repository: TheBitPoets/2cornot2c
+          ref: 5472eef86568a4e7ce59ad34ba937220df27efd7
+          path: _thebitlab-platform
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check every TPSI5 Activity can build an assignment plan
+        run: python tests/thebitlab_assignment_smoke.py --plans-only
+
+      - name: Build the first student scaffold and verify visibility
+        run: python tests/thebitlab_assignment_smoke.py --first-scaffold
