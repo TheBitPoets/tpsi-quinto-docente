@@ -54,38 +54,33 @@ eseguire dalla root di `2cornot2c`:
 python scripts/validate_activity.py ../tpsi-quinto-docente/activities/tpsi5/html_anatomy_a/activity.json
 ```
 
+Il comando usa `/` anche su Windows: Python lo accetta normalmente. Se la disposizione delle cartelle è diversa, sostituire i path con quelli reali senza usare placeholder fra `<` e `>`.
+
 Output atteso:
 
 ```text
 Activity validation passed.
 ```
 
-Adattare il path se i due repository non sono fratelli sul filesystem.
-
 ## 3. Preparare uno scaffold repository studente
 
 Il pin TheBitLab espone `scripts/assign_activity.py`, che accetta un path Activity esterno.
 
+Negli esempi seguenti `../student-repo` rappresenta un repository studente demo. Sostituirlo con il path reale.
+
 Prima fare sempre un dry-run:
 
 ```bash
-python scripts/assign_activity.py \
-  --activity ../tpsi-quinto-docente/activities/tpsi5/html_anatomy_a/activity.json \
-  --target <repository-studente> \
-  --thebitlab-ref 5472eef86568a4e7ce59ad34ba937220df27efd7 \
-  --dry-run
+python scripts/assign_activity.py --activity ../tpsi-quinto-docente/activities/tpsi5/html_anatomy_a/activity.json --target ../student-repo --thebitlab-ref 5472eef86568a4e7ce59ad34ba937220df27efd7 --dry-run
 ```
 
 Se il piano è corretto, ripetere senza `--dry-run`:
 
 ```bash
-python scripts/assign_activity.py \
-  --activity ../tpsi-quinto-docente/activities/tpsi5/html_anatomy_a/activity.json \
-  --target <repository-studente> \
-  --thebitlab-ref 5472eef86568a4e7ce59ad34ba937220df27efd7
+python scripts/assign_activity.py --activity ../tpsi-quinto-docente/activities/tpsi5/html_anatomy_a/activity.json --target ../student-repo --thebitlab-ref 5472eef86568a4e7ce59ad34ba937220df27efd7
 ```
 
-Per più repository si può ripetere `--target` oppure usare `--targets-file` secondo la CLI del pin.
+Le forme a riga singola sono copiabili in Bash, PowerShell e terminali equivalenti. Per più repository si può ripetere `--target` oppure usare `--targets-file` secondo la CLI del pin.
 
 ### Regola fail-safe
 
