@@ -83,6 +83,39 @@ tpsi5-first-class-YYYYMMDD-NN/
 
 Non salvare o condividere cookie, bearer, token dashboard, proof di pairing, codici OAuth, state/nonce, client secret, private key, HAR o dump del database.
 
+## Preflight automatico consigliato
+
+I gate locali non sensibili possono essere verificati in un unico passaggio con `scripts/tpsi5_pilot_preflight.py`. Il comando controlla worktree/SHA, pin TheBitLab, Python, Docker, schema della prima Activity, adapter, piano di assegnazione e scaffold temporaneo con controllo anti-leakage.
+
+Dalla root di TPSI5, con `2cornot2c` in una directory sorella:
+
+```bash
+python scripts/tpsi5_pilot_preflight.py \
+  --platform ../2cornot2c \
+  --expected-tpsi5-sha <SHA-candidato> \
+  --report <directory-evidenze>/01-preflight.json
+```
+
+Su PowerShell il comando equivalente è:
+
+```powershell
+python scripts/tpsi5_pilot_preflight.py `
+  --platform ..\2cornot2c `
+  --expected-tpsi5-sha <SHA-candidato> `
+  --report <directory-evidenze>\01-preflight.json
+```
+
+Regole:
+
+- sul **candidate host non usare `--skip-docker`**;
+- `--skip-docker` esiste solo per la regressione CI Linux/Windows e registra il gate Docker come `BLOCKED`;
+- il report non contiene path assoluti, variabili d'ambiente, token o identità studente;
+- il massimo esito prodotto dal preflight è **GO tecnico demo**; `go_pilot_possible_from_this_report` resta sempre `false`;
+- l'esito `Quality`/`Slides` dello SHA candidato va comunque verificato separatamente: il preflight registra lo SHA locale ma non interroga GitHub;
+- auth/TUI, policy sandbox Docker e immagine immutabile, coerenza tentativo definitivo/registro, backup/restore, revoca e governance restano gate del deployment reale.
+
+Un exit code diverso da zero sul candidate host è un **NO-GO del preflight** finché il finding non è risolto. Un preflight verde non autorizza dati reali.
+
 ## Gate 1 — release e repository
 
 Dai due checkout puliti verificare:
@@ -99,7 +132,7 @@ PASS se:
 - Quality e Slides dello stesso SHA sono verdi;
 - 2cornot2c è esattamente sul pin `5472eef...`.
 
-Un checkout diverso dal pin non può essere usato per dichiarare superata questa prova.
+Un checkout diverso dal pin non può essere usato per dichiarare superata questa prova. Il preflight automatico può sostituire i comandi locali di questo gate, ma non la verifica dello stato CI remoto.
 
 ## Gate 2 — Activity e capability di delivery
 
@@ -166,6 +199,8 @@ index.html     # starter
 Deve essere assente qualunque soluzione o nota docente.
 
 Aprire `GUIDA.md`, poi `index.html` nel browser e verificare che le istruzioni siano comprensibili senza consultare directory riservate.
+
+Il preflight automatico esegue Gate 2–4 su directory temporanee per verificare contratto e packaging senza lasciare una consegna demo persistente. La prova didattica del Gate 5 resta intenzionalmente manuale.
 
 ## Gate 5 — prova didattica del primo laboratorio
 
