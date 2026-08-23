@@ -34,10 +34,13 @@ Il corso risponderà progressivamente a queste domande costruendo e ricostruendo
 4. costruire il backend principale con Node.js + Express;
 5. usare SQL direttamente prima dell'ORM;
 6. introdurre autenticazione e sicurezza;
-7. passare a un frontend componentizzato con il framework che verrà scelto;
-8. introdurre realtime con WebSocket/Socket.IO;
-9. riscrivere una parte mirata del backend con FastAPI per dimostrare che il contratto HTTP separa client e server;
-10. testare e distribuire il prodotto finale.
+7. confrontare il rendering server-side prima della SPA;
+8. passare a un frontend componentizzato con **Vue 3 + Vite**;
+9. introdurre routing e TypeScript mirato ai boundary;
+10. introdurre realtime con WebSocket/Socket.IO;
+11. usare React in un laboratorio di traduzione/comparazione, non come secondo framework core;
+12. riscrivere una parte mirata del backend con FastAPI/SQLAlchemy per rendere visibili gli stessi contratti da un altro stack;
+13. testare e distribuire il prodotto finale raccogliendo evidence verificabili.
 
 ## Ambienti di laboratorio
 
@@ -60,14 +63,18 @@ La tassonomia ufficiale resta quella TheBitLab:
 - E — mini-progetto;
 - F — prodotto integrato.
 
-## Decisioni ancora aperte
+## Decisioni congelate per il 2026/27
 
-Sono deliberatamente lasciate aperte nel bootstrap:
+Il Content Pack **1.0.0 / approved** ha già chiuso le decisioni architetturali del core:
 
-- framework frontend principale;
-- ORM Node;
-- profondità TypeScript nel core;
-- ampiezza esatta del mirror FastAPI;
-- confine temporale col corso SQL separato.
+- **D1:** Vue 3 + Vite è il framework frontend principale; React resta un translation/comparison lab;
+- **D2:** nessun ORM Node nel core: prima SQL raw + SQLite + repository;
+- **D3:** TypeScript è usato in modo mirato ai boundary frontend, non come riscrittura totale dello stack;
+- **D4:** il mirror FastAPI è mirato e serve a confrontare contratti e confini, non a duplicare Feisbuc;
+- **D5:** il futuro corso SQL può integrarsi con TPSI5, ma non è un prerequisito bloccante.
 
-Queste decisioni saranno congelate prima della release del curriculum, non nascoste in scelte tecniche accidentali.
+Queste scelte sono parte del curriculum congelato e non vengono ridefinite durante la delivery ordinaria.
+
+## Orientamento e primo laboratorio
+
+Questo modulo 00 è una **lezione di orientamento** e non ha una Activity separata nel Content Pack. Il primo laboratorio operativo arriva nel modulo 01, **Web Platform e HTML moderno**, con l'Activity [Anatomia di un documento HTML moderno](../../activities/tpsi5/html_anatomy_a/student/README.md).
