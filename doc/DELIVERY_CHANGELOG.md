@@ -8,6 +8,9 @@ Questo changelog registra modifiche al materiale di delivery durante l'anno scol
 | Data | Modulo/materiale | Tipo | Modifica | Motivo | Materiale già distribuito superato? |
 |---|---|---|---|---|---|
 | 2026-08-21 | delivery layer | `setup` | Aggiunte guide docente/studente e policy di manutenzione in-year. | Preparare il corso all'uso reale in aula mantenendo il curriculum 1.0.0 congelato. | no |
+| 2026-08-23 | modulo 00 + slide 00 | `errata` / `clarification` | Rimossi i riferimenti bootstrap a decisioni ancora aperte; esplicitate D1–D5 già congelate e il fatto che il modulo 00 non ha Activity dedicata. | Il dry-run docente/studente mostrava una contraddizione tra lesson iniziale e Content Pack 1.0.0 / freeze. | no |
+| 2026-08-23 | modulo 01 + slide 01 + indice Activity | `clarification` | Allineato lo stato della lesson a `Content Pack 1.0.0 / approved`; aggiunti link diretti alle prime Activity, allo starter e un indice navigabile UDA21–23. | Rendere il primo handoff al laboratorio raggiungibile senza ricerca manuale nel repository. | no |
+| 2026-08-23 | guide docente/studente + `teacher/THEBITLAB_HANDOFF.md` | `setup` | Documentato il percorso TPSI5 → validazione Activity → assegnazione/scaffold → canale studente sul pin TheBitLab; chiariti i boundary di grading manuale/automatico. | Chiudere l'ultimo miglio operativo emerso dal delivery dry-run senza simulare capability non disponibili. | no |
 
 ## Tipi
 
