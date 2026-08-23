@@ -5,6 +5,7 @@ import copy
 import importlib
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 from contextlib import contextmanager
@@ -55,10 +56,34 @@ def capability_for(activity_path: Path) -> Capability:
     return Capability(True)
 
 
+def verify_platform_revision(platform_root: Path) -> None:
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(platform_root), "rev-parse", "HEAD"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError as error:
+        raise ValueError(f"Impossibile verificare il pin TheBitLab: {error}") from error
+
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or "git rev-parse fallito"
+        raise ValueError(f"Checkout TheBitLab non verificabile: {detail}")
+
+    actual = completed.stdout.strip().lower()
+    if actual != THEBITLAB_REF:
+        raise ValueError(
+            "Revisione TheBitLab diversa dal pin accettato: "
+            f"attesa {THEBITLAB_REF}, trovata {actual or '<vuota>'}."
+        )
+
+
 def load_platform(platform_root: Path):
     platform_root = platform_root.resolve()
     if not (platform_root / "scripts" / "assign_activity.py").is_file():
         raise ValueError(f"Checkout TheBitLab non valido: {platform_root}")
+    verify_platform_revision(platform_root)
     platform_string = str(platform_root)
     if platform_string not in sys.path:
         sys.path.insert(0, platform_string)
