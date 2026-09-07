@@ -7,7 +7,8 @@
     <marker id="serviceRequest" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0l12 6-12 6z" fill="#38bdf8"/></marker>
     <marker id="serviceResponse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0l12 6-12 6z" fill="#34d399"/></marker>
     <marker id="serviceInternal" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0l12 6-12 6z" fill="#0d9488"/></marker>
-    <marker id="serviceData" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0l12 6-12 6z" fill="#4f46e5"/></marker>
+    <marker id="serviceInternalSmall" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0l18 9-18 9z" fill="#0d9488"/></marker>
+    <marker id="serviceData" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0l18 9-18 9z" fill="#4f46e5"/></marker>
   </defs>
 
   <rect width="1920" height="1080" fill="#08192c"/>
@@ -90,8 +91,8 @@
   </g>
 
   <path d="M1200 445h110" fill="none" stroke="#0d9488" stroke-width="9" marker-end="url(#serviceInternal)"/>
-  <path d="M1560 582v35" fill="none" stroke="#0d9488" stroke-width="8" marker-end="url(#serviceInternal)"/>
-  <path d="M1560 736v28" fill="none" stroke="#4f46e5" stroke-width="8" marker-end="url(#serviceData)"/>
+  <path d="M1560 588v30" fill="none" stroke="#0d9488" stroke-width="5" marker-end="url(#serviceInternalSmall)"/>
+  <path d="M1560 741v14" fill="none" stroke="#4f46e5" stroke-width="5" marker-end="url(#serviceData)"/>
 
   <g font-family="Inter,Arial,sans-serif" font-weight="800">
     <rect x="270" y="970" width="1380" height="58" rx="29" fill="#e2e8f0" opacity=".12"/>
