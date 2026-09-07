@@ -126,7 +126,11 @@ La semplificazione **HTTP = pull** e **WebSocket = push** è utile come primo mo
 
 Nel progetto Feisbuc useremo HTTP per i comandi e il recupero dei dati, e WebSocket/Socket.IO per distribuire gli aggiornamenti in tempo reale.
 
-## Dal servizio all'interfaccia
+## Dal servizio alla Web API
+
+Prima di parlare di REST, dobbiamo mettere in relazione alcuni termini che incontreremo spesso: **servizio**, **interfaccia pubblica**, **API**, **web service** e **Web API**. Nei prossimi paragrafi li introdurremo uno alla volta, seguendo il percorso compiuto da un client per utilizzare una funzionalità offerta da un server.
+
+### Dal servizio all'interfaccia
 
 Un server viene realizzato per offrire uno o più **servizi** ai client.
 
@@ -142,6 +146,8 @@ Un client non deve conoscere il codice interno con cui il server realizza queste
 Il server ha quindi bisogno di un punto d'ingresso ben definito: una **interfaccia pubblica** attraverso la quale i client possono utilizzare i servizi offerti.
 
 “Pubblica” non significa necessariamente “accessibile a tutti”: l'interfaccia può richiedere autenticazione e autorizzazione. Significa che quella è la parte del server esposta ai client, mentre l'implementazione interna rimane nascosta.
+
+Nel nostro contesto, l'interfaccia pubblica attraverso cui un programma utilizza i servizi del server è chiamata **API**. Vediamo quindi che cosa significa questo termine.
 
 ### Che cos'è un'API?
 
@@ -168,6 +174,8 @@ Allo stesso modo, il client comunica con l'API senza conoscere direttamente il c
 
 > L'API descrive **come entrare** nel sistema. Il servizio descrive **che cosa il sistema sa fare**.
 
+Questa definizione di API è generale e non implica necessariamente l'uso del Web. Quando invece il servizio viene eseguito su un server ed è accessibile attraverso la rete con le tecnologie del Web, parliamo di **web service**.
+
 ### Che cos'è un web service?
 
 Un **web service** è un servizio software accessibile attraverso una rete utilizzando tecnologie e protocolli del Web.
@@ -185,7 +193,7 @@ App mobile ────┼──► Web API ──► servizio sul server
 Altro server ──┘
 ```
 
-I client possono essere diversi, ma utilizzano tutti la stessa interfaccia esposta dal server. In questo corso i web service saranno esposti principalmente tramite una **Web API basata su HTTP**.
+I client possono essere diversi, ma utilizzano tutti la stessa interfaccia esposta dal server. Per descrivere con precisione questa interfaccia dobbiamo ora distinguere il termine generale **API** dal caso particolare **Web API**.
 
 ### API e Web API
 
@@ -215,6 +223,8 @@ servizi del backend
         ▼
 database
 ```
+
+Nel nostro corso i web service saranno esposti principalmente tramite una **Web API basata su HTTP**. Ora che tutti i termini sono stati introdotti, l'immagine seguente riassume il loro rapporto. Subito dopo vedremo come organizzare questa Web API secondo lo stile REST.
 
 ![Dal client al web service attraverso l'interfaccia pubblica del server](../../assets/tpsi5/00-web-service-interface.svg)
 
