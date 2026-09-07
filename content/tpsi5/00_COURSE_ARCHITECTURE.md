@@ -143,8 +143,6 @@ Il server ha quindi bisogno di un punto d'ingresso ben definito: una **interfacc
 
 “Pubblica” non significa necessariamente “accessibile a tutti”: l'interfaccia può richiedere autenticazione e autorizzazione. Significa che quella è la parte del server esposta ai client, mentre l'implementazione interna rimane nascosta.
 
-![Dal client al web service attraverso l'interfaccia pubblica del server](../../assets/tpsi5/00-web-service-interface.svg)
-
 ### Che cos'è un'API?
 
 API significa **Application Programming Interface**, cioè **interfaccia di programmazione di un'applicazione**.
@@ -217,6 +215,8 @@ servizi del backend
         ▼
 database
 ```
+
+![Dal client al web service attraverso l'interfaccia pubblica del server](../../assets/tpsi5/00-web-service-interface.svg)
 
 ## Che cos'è una REST API?
 
