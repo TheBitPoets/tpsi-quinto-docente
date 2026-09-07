@@ -102,6 +102,7 @@ FastAPI mirror / SQLAlchemy / pytest / deploy capstone
 - [`content/tpsi5/content-pack.json`](content/tpsi5/content-pack.json) — manifest Content Pack **1.0.0 approved**;
 - [`content/tpsi5/COVERAGE.md`](content/tpsi5/COVERAGE.md) — matrice di copertura congelata;
 - [`content/tpsi5/00_COURSE_ARCHITECTURE.md`](content/tpsi5/00_COURSE_ARCHITECTURE.md) — architettura didattica;
+- [`content/tpsi5/STYLE_GUIDE.md`](content/tpsi5/STYLE_GUIDE.md) — standard HTML/Markdown, callout, icone e pannelli espandibili delle dispense;
 - [`doc/course_designs/tpsi_quinto_2026_2027.json`](doc/course_designs/tpsi_quinto_2026_2027.json) — Course Design di 33 settimane;
 - [`doc/OPEN_DECISIONS.md`](doc/OPEN_DECISIONS.md) — decisioni D1–D5 congelate;
 - [`doc/CURRICULUM_FREEZE_2026_2027.md`](doc/CURRICULUM_FREEZE_2026_2027.md) — baseline, confini e policy post-freeze;

@@ -4,6 +4,12 @@ Questo package contiene i contenuti originali del corso **TPSI quinto anno — F
 
 Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accettata `5472eef86568a4e7ce59ad34ba937220df27efd7` di `TheBitPoets/2cornot2c`.
 
+## Standard editoriale
+
+Tutte le dispense del corso seguono lo [standard di formattazione HTML/Markdown](STYLE_GUIDE.md), derivato dal corso `2cornot2c`: titoli Markdown, paragrafi HTML giustificati, immagini centrate, callout con icone semantiche e pannelli `details/summary` per orientamento, checkpoint e laboratori.
+
+Lo standard è obbligatorio per i nuovi contenuti e viene applicato progressivamente alle lezioni esistenti durante la loro revisione.
+
 ## Principi
 
 - Web Platform prima dei framework;
