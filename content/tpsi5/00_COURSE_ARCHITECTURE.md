@@ -10,21 +10,9 @@ Al termine lo studente dovrà saper:
 - spiegare perché client e server hanno bisogno di un protocollo condiviso;
 - distinguere il modello request/response di HTTP dal canale persistente e bidirezionale di WebSocket;
 - riconoscere servizi, API, risorse e metodi HTTP in una semplice applicazione web;
-- descrivere, a livello introduttivo, il percorso completo di una richiesta:
+- descrivere, a livello introduttivo, il percorso completo di una richiesta.
 
-```text
-browser
-  ↓
-HTML + CSS + JavaScript
-  ↓
-HTTP / WebSocket
-  ↓
-REST API / backend
-  ↓
-database
-  ↓
-autenticazione / realtime / deploy
-```
+![Dal browser al servizio completo: la mappa del percorso full stack](../../assets/tpsi5/00-course-path.svg)
 
 ## Problema iniziale
 

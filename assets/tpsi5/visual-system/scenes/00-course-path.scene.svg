@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../00-course-path.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Dal browser al servizio completo</title>
+  <desc id="desc">Il percorso del corso attraversa browser, frontend HTML CSS JavaScript, protocolli HTTP e WebSocket, REST API e backend, database, autenticazione, realtime e deploy.</desc>
+  <defs id="visual-kit-components"/>
+  <defs>
+    <linearGradient id="pathBackground" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient>
+    <linearGradient id="capabilitiesHead" x1="0" x2="1"><stop stop-color="#d97706"/><stop offset=".55" stop-color="#e11d48"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="15" stdDeviation="18" flood-color="#020617" flood-opacity=".34"/></filter>
+    <marker id="pathArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0l12 6-12 6z" fill="#94a3b8"/></marker>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#pathBackground)"/>
+  <circle cx="70" cy="100" r="280" fill="#0ea5e9" opacity=".07"/><circle cx="1850" cy="1040" r="370" fill="#8b5cf6" opacity=".07"/>
+  <text x="960" y="72" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="46" font-weight="800">DAL BROWSER AL SERVIZIO COMPLETO</text>
+  <text x="960" y="116" text-anchor="middle" fill="#b8c8dc" font-family="Inter,Arial,sans-serif" font-size="23">La mappa del percorso full stack che costruiremo durante l'anno</text>
+
+  <g fill="none" stroke="#94a3b8" stroke-width="8" marker-end="url(#pathArrow)">
+    <path d="M304 560h49"/><path d="M618 560h49"/><path d="M932 560h49"/><path d="M1246 560h49"/><path d="M1560 560h49"/>
+  </g>
+
+  <g filter="url(#cardShadow)" font-family="Inter,Arial,sans-serif">
+    <g transform="translate(50 215)">
+      <rect width="250" height="700" rx="30" fill="#f8fafc"/>
+      <path d="M30 0h190a30 30 0 0 1 30 30v95H0V30A30 30 0 0 1 30 0z" fill="#2563eb"/>
+      <circle cx="34" cy="35" r="18" fill="#dbeafe"/><text x="34" y="42" text-anchor="middle" fill="#1d4ed8" font-size="20" font-weight="800">1</text>
+      <text x="125" y="89" text-anchor="middle" fill="white" font-size="28" font-weight="800">BROWSER</text>
+      <use href="#tpsi-browser" x="25" y="190" width="200" height="128"/>
+      <text x="125" y="375" text-anchor="middle" fill="#102a43" font-size="20" font-weight="800">IL CLIENT SOFTWARE</text>
+      <text x="125" y="420" text-anchor="middle" fill="#52677f" font-size="17">mostra l'interfaccia</text>
+      <text x="125" y="449" text-anchor="middle" fill="#52677f" font-size="17">e avvia le richieste</text>
+      <rect x="30" y="535" width="190" height="84" rx="20" fill="#dbeafe"/>
+      <text x="125" y="569" text-anchor="middle" fill="#1e3a8a" font-size="16" font-weight="800">Firefox · Chrome</text>
+      <text x="125" y="595" text-anchor="middle" fill="#1e3a8a" font-size="16" font-weight="800">Safari · Edge</text>
+    </g>
+
+    <g transform="translate(364 215)">
+      <rect width="250" height="700" rx="30" fill="#f8fafc"/>
+      <path d="M30 0h190a30 30 0 0 1 30 30v95H0V30A30 30 0 0 1 30 0z" fill="#0ea5e9"/>
+      <circle cx="34" cy="35" r="18" fill="#e0f2fe"/><text x="34" y="42" text-anchor="middle" fill="#0369a1" font-size="20" font-weight="800">2</text>
+      <text x="125" y="89" text-anchor="middle" fill="white" font-size="27" font-weight="800">FRONTEND</text>
+      <use href="#tpsi-badge-html" x="22" y="182" width="64" height="64"/><use href="#tpsi-badge-css" x="93" y="182" width="64" height="64"/><use href="#tpsi-badge-js" x="164" y="182" width="64" height="64"/>
+      <text x="125" y="313" text-anchor="middle" fill="#102a43" font-size="20" font-weight="800">CODICE NEL BROWSER</text>
+      <text x="125" y="360" text-anchor="middle" fill="#52677f" font-size="17">HTML struttura</text>
+      <text x="125" y="390" text-anchor="middle" fill="#52677f" font-size="17">CSS presentazione</text>
+      <text x="125" y="420" text-anchor="middle" fill="#52677f" font-size="17">JavaScript comportamento</text>
+      <rect x="30" y="535" width="190" height="84" rx="20" fill="#e0f2fe"/>
+      <text x="125" y="570" text-anchor="middle" fill="#075985" font-size="16" font-weight="800">UI · DOM · EVENTI</text>
+      <text x="125" y="596" text-anchor="middle" fill="#075985" font-size="16" font-weight="800">STATO · RENDER</text>
+    </g>
+
+    <g transform="translate(678 215)">
+      <rect width="250" height="700" rx="30" fill="#f8fafc"/>
+      <path d="M30 0h190a30 30 0 0 1 30 30v95H0V30A30 30 0 0 1 30 0z" fill="#8b5cf6"/>
+      <circle cx="34" cy="35" r="18" fill="#ede9fe"/><text x="34" y="42" text-anchor="middle" fill="#6d28d9" font-size="20" font-weight="800">3</text>
+      <text x="125" y="89" text-anchor="middle" fill="white" font-size="26" font-weight="800">PROTOCOLLI</text>
+      <use href="#tpsi-network" x="60" y="160" width="130" height="130"/>
+      <rect x="30" y="330" width="190" height="68" rx="19" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3"/>
+      <text x="125" y="373" text-anchor="middle" fill="#0369a1" font-size="21" font-weight="800">HTTP</text>
+      <rect x="30" y="422" width="190" height="68" rx="19" fill="#ede9fe" stroke="#8b5cf6" stroke-width="3"/>
+      <text x="125" y="465" text-anchor="middle" fill="#6d28d9" font-size="21" font-weight="800">WEBSOCKET</text>
+      <text x="125" y="553" text-anchor="middle" fill="#52677f" font-size="16">request/response</text>
+      <text x="125" y="582" text-anchor="middle" fill="#52677f" font-size="16">canale realtime</text>
+    </g>
+
+    <g transform="translate(992 215)">
+      <rect width="250" height="700" rx="30" fill="#f8fafc"/>
+      <path d="M30 0h190a30 30 0 0 1 30 30v95H0V30A30 30 0 0 1 30 0z" fill="#059669"/>
+      <circle cx="34" cy="35" r="18" fill="#d1fae5"/><text x="34" y="42" text-anchor="middle" fill="#047857" font-size="20" font-weight="800">4</text>
+      <text x="125" y="76" text-anchor="middle" fill="white" font-size="23" font-weight="800">REST API</text>
+      <text x="125" y="105" text-anchor="middle" fill="#d1fae5" font-size="18" font-weight="700">BACKEND</text>
+      <use href="#tpsi-api" x="45" y="160" width="160" height="108"/>
+      <use href="#tpsi-server" x="53" y="296" width="144" height="108"/>
+      <text x="125" y="459" text-anchor="middle" fill="#102a43" font-size="19" font-weight="800">SERVIZI E REGOLE</text>
+      <text x="125" y="503" text-anchor="middle" fill="#52677f" font-size="16">route · validazione</text>
+      <text x="125" y="532" text-anchor="middle" fill="#52677f" font-size="16">logica · sicurezza</text>
+      <rect x="30" y="570" width="190" height="54" rx="20" fill="#d1fae5"/>
+      <text x="125" y="604" text-anchor="middle" fill="#065f46" font-size="16" font-weight="800">Node.js · Express</text>
+    </g>
+
+    <g transform="translate(1306 215)">
+      <rect width="250" height="700" rx="30" fill="#f8fafc"/>
+      <path d="M30 0h190a30 30 0 0 1 30 30v95H0V30A30 30 0 0 1 30 0z" fill="#4f46e5"/>
+      <circle cx="34" cy="35" r="18" fill="#e0e7ff"/><text x="34" y="42" text-anchor="middle" fill="#4338ca" font-size="20" font-weight="800">5</text>
+      <text x="125" y="89" text-anchor="middle" fill="white" font-size="27" font-weight="800">DATABASE</text>
+      <use href="#tpsi-database" x="26" y="190" width="198" height="142"/>
+      <text x="125" y="397" text-anchor="middle" fill="#102a43" font-size="20" font-weight="800">DATI PERSISTENTI</text>
+      <text x="125" y="444" text-anchor="middle" fill="#52677f" font-size="17">il backend legge</text>
+      <text x="125" y="473" text-anchor="middle" fill="#52677f" font-size="17">e modifica i dati</text>
+      <rect x="30" y="535" width="190" height="84" rx="20" fill="#e0e7ff"/>
+      <text x="125" y="570" text-anchor="middle" fill="#3730a3" font-size="17" font-weight="800">SQL</text>
+      <text x="125" y="597" text-anchor="middle" fill="#3730a3" font-size="16" font-weight="800">SQLite</text>
+    </g>
+
+    <g transform="translate(1620 215)">
+      <rect width="250" height="700" rx="30" fill="#f8fafc"/>
+      <path d="M30 0h190a30 30 0 0 1 30 30v95H0V30A30 30 0 0 1 30 0z" fill="url(#capabilitiesHead)"/>
+      <circle cx="34" cy="35" r="18" fill="#fff7ed"/><text x="34" y="42" text-anchor="middle" fill="#c2410c" font-size="20" font-weight="800">6</text>
+      <text x="125" y="76" text-anchor="middle" fill="white" font-size="21" font-weight="800">APPLICAZIONE</text>
+      <text x="125" y="104" text-anchor="middle" fill="#fff7ed" font-size="18" font-weight="700">COMPLETA</text>
+      <use href="#tpsi-lock" x="88" y="158" width="74" height="90"/><text x="125" y="276" text-anchor="middle" fill="#9f1239" font-size="15" font-weight="800">AUTENTICAZIONE</text>
+      <path d="M30 300h190" stroke="#e2e8f0" stroke-width="3"/>
+      <use href="#tpsi-network" x="85" y="322" width="80" height="80"/><text x="125" y="428" text-anchor="middle" fill="#6d28d9" font-size="16" font-weight="800">REALTIME</text>
+      <path d="M30 450h190" stroke="#e2e8f0" stroke-width="3"/>
+      <use href="#tpsi-artifact" x="84" y="472" width="82" height="72"/><text x="125" y="572" text-anchor="middle" fill="#b45309" font-size="16" font-weight="800">DEPLOY</text>
+      <rect x="30" y="585" width="190" height="54" rx="20" fill="#fff7ed"/>
+      <text x="125" y="619" text-anchor="middle" fill="#9a3412" font-size="15" font-weight="800">SICURA · LIVE · ONLINE</text>
+    </g>
+  </g>
+
+  <rect x="300" y="968" width="1320" height="54" rx="27" fill="#e2e8f0" opacity=".12"/>
+  <text x="960" y="1003" text-anchor="middle" fill="#e2e8f0" font-family="Inter,Arial,sans-serif" font-size="21">Ogni modulo del corso aggiunge o rende più preciso un passaggio di questa catena.</text>
+</svg>

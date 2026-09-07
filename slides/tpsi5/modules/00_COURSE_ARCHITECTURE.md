@@ -43,6 +43,10 @@ Alla fine dovrai saper:
 
 ---
 
+![bg contain](../../../assets/tpsi5/00-course-path.svg)
+
+---
+
 ![bg contain](../../../assets/tpsi5/00-client-server-roles.svg)
 
 ---
