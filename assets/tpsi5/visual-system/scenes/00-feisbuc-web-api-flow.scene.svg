@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../00-feisbuc-web-api-flow.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Il percorso attraverso la Web API di Feisbuc</title>
+  <desc id="desc">Il frontend nel browser invia una richiesta HTTP alla Web API di Feisbuc, che attiva i servizi del backend e accede al database.</desc>
+  <defs id="visual-kit-components"/>
+  <defs>
+    <filter id="fwfShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#020617" flood-opacity=".3"/></filter>
+    <marker id="fwfRequest" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="21" refY="12" orient="auto"><path d="M0 0l24 12L0 24z" fill="#38bdf8"/></marker>
+    <marker id="fwfInternal" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="21" refY="12" orient="auto"><path d="M0 0l24 12L0 24z" fill="#0d9488"/></marker>
+    <marker id="fwfData" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="21" refY="12" orient="auto"><path d="M0 0l24 12L0 24z" fill="#4f46e5"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#08192c"/>
+  <circle cx="70" cy="100" r="300" fill="#2563eb" opacity=".08"/><circle cx="1870" cy="1020" r="390" fill="#4f46e5" opacity=".08"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="82" text-anchor="middle" fill="#f8fafc" font-size="48" font-weight="800">LA WEB API NEL PROGETTO FEISBUC</text>
+    <text x="960" y="126" text-anchor="middle" fill="#b8c8dc" font-size="23">Dal frontend ai dati: ogni elemento ha un compito preciso</text>
+
+    <path d="M430 530H565" fill="none" stroke="#38bdf8" stroke-width="8" marker-end="url(#fwfRequest)"/>
+    <path d="M905 530h135" fill="none" stroke="#0d9488" stroke-width="8" marker-end="url(#fwfInternal)"/>
+    <path d="M1380 530h135" fill="none" stroke="#4f46e5" stroke-width="8" marker-end="url(#fwfData)"/>
+    <rect x="397" y="195" width="200" height="46" rx="23" fill="#0c4a6e"/>
+    <rect x="892" y="195" width="160" height="46" rx="23" fill="#134e4a"/>
+    <rect x="1347" y="195" width="200" height="46" rx="23" fill="#312e81"/>
+    <text x="497" y="226" text-anchor="middle" fill="#7dd3fc" font-size="18" font-weight="800">RICHIESTA HTTP</text>
+    <text x="972" y="226" text-anchor="middle" fill="#5eead4" font-size="18" font-weight="800">ATTIVA</text>
+    <text x="1447" y="226" text-anchor="middle" fill="#c7d2fe" font-size="18" font-weight="800">LEGGE / SCRIVE</text>
+
+    <g filter="url(#fwfShadow)">
+      <rect x="70" y="270" width="360" height="520" rx="32" fill="#f8fafc"/>
+      <path d="M102 270h296a32 32 0 0 1 32 32v82H70v-82a32 32 0 0 1 32-32z" fill="#2563eb"/>
+      <text x="250" y="339" text-anchor="middle" fill="white" font-size="29" font-weight="800">FRONTEND</text>
+      <use href="#tpsi-browser" x="125" y="430" width="250" height="160"/>
+      <text x="250" y="650" text-anchor="middle" fill="#1e3a5f" font-size="23" font-weight="800">nel browser</text>
+      <text x="250" y="692" text-anchor="middle" fill="#52677f" font-size="18">HTML · CSS · JavaScript</text>
+      <rect x="120" y="730" width="260" height="40" rx="20" fill="#dbeafe"/>
+      <text x="250" y="757" text-anchor="middle" fill="#1d4ed8" font-size="17" font-weight="800">CHIEDE DATI E AZIONI</text>
+
+      <rect x="565" y="270" width="340" height="520" rx="32" fill="#f8fafc"/>
+      <path d="M597 270h276a32 32 0 0 1 32 32v82H565v-82a32 32 0 0 1 32-32z" fill="#0d9488"/>
+      <text x="735" y="339" text-anchor="middle" fill="white" font-size="29" font-weight="800">WEB API</text>
+      <use href="#tpsi-api" x="610" y="420" width="250" height="167"/>
+      <text x="735" y="650" text-anchor="middle" fill="#115e59" font-size="23" font-weight="800">di Feisbuc</text>
+      <text x="735" y="692" text-anchor="middle" fill="#52677f" font-size="18">metodo · URL · dati</text>
+      <rect x="605" y="730" width="260" height="40" rx="20" fill="#ccfbf1"/>
+      <text x="735" y="757" text-anchor="middle" fill="#0f766e" font-size="17" font-weight="800">ESPONE L'INTERFACCIA</text>
+
+      <rect x="1040" y="270" width="340" height="520" rx="32" fill="#f8fafc"/>
+      <path d="M1072 270h276a32 32 0 0 1 32 32v82h-340v-82a32 32 0 0 1 32-32z" fill="#059669"/>
+      <text x="1210" y="339" text-anchor="middle" fill="white" font-size="29" font-weight="800">BACKEND</text>
+      <use href="#tpsi-service" x="1085" y="410" width="250" height="203"/>
+      <text x="1210" y="650" text-anchor="middle" fill="#166534" font-size="23" font-weight="800">servizi</text>
+      <text x="1210" y="692" text-anchor="middle" fill="#52677f" font-size="18">Node.js · Express</text>
+      <rect x="1080" y="730" width="260" height="40" rx="20" fill="#d1fae5"/>
+      <text x="1210" y="757" text-anchor="middle" fill="#166534" font-size="17" font-weight="800">ESEGUE IL LAVORO</text>
+
+      <rect x="1515" y="270" width="340" height="520" rx="32" fill="#f8fafc"/>
+      <path d="M1547 270h276a32 32 0 0 1 32 32v82h-340v-82a32 32 0 0 1 32-32z" fill="#4f46e5"/>
+      <text x="1685" y="339" text-anchor="middle" fill="white" font-size="29" font-weight="800">DATABASE</text>
+      <use href="#tpsi-database" x="1555" y="420" width="260" height="186"/>
+      <text x="1685" y="650" text-anchor="middle" fill="#3730a3" font-size="23" font-weight="800">SQLite</text>
+      <text x="1685" y="692" text-anchor="middle" fill="#52677f" font-size="18">post · utenti · sessioni</text>
+      <rect x="1555" y="730" width="260" height="40" rx="20" fill="#e0e7ff"/>
+      <text x="1685" y="757" text-anchor="middle" fill="#4338ca" font-size="17" font-weight="800">CONSERVA I DATI</text>
+    </g>
+
+    <rect x="320" y="920" width="1280" height="70" rx="35" fill="#e2e8f0" opacity=".12"/>
+    <text x="960" y="966" text-anchor="middle" fill="#dbeafe" font-size="23" font-weight="800">il frontend non accede direttamente né ai servizi interni né al database</text>
+  </g>
+</svg>

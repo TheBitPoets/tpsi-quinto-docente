@@ -113,10 +113,6 @@ Il server offre **servizi**: recuperare, creare, modificare o cancellare post.
 
 Un'**API** (*Application Programming Interface*) è l'interfaccia attraverso cui un programma usa le funzionalità di un altro programma.
 
-```text
-client → API → servizio → risultato
-```
-
 Il client conosce il contratto dell'API, ma non deve conoscere:
 
 - il codice interno del backend;
@@ -127,21 +123,23 @@ Il client conosce il contratto dell'API, ma non deve conoscere:
 
 ---
 
+![bg contain](../../../assets/tpsi5/00-api-request-service.svg)
+
+---
+
 # Web service e Web API
 
 Un **web service** è un servizio software accessibile in rete con tecnologie del Web.
 
-Client diversi possono usare lo stesso servizio:
-
-```text
-browser ───────┐
-app mobile ────┼──► Web API ──► servizio sul server
-altro server ──┘
-```
+Browser, applicazioni mobili e altri server possono usare lo stesso servizio attraverso un'interfaccia comune.
 
 Non tutte le API usano la rete: anche il browser o una libreria JavaScript possiedono una API.
 
 Quando l'API è esposta da un server attraverso il Web, parliamo di **Web API**.
+
+---
+
+![bg contain](../../../assets/tpsi5/00-shared-web-service.svg)
 
 ---
 

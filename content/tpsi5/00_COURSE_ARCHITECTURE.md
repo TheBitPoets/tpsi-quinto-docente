@@ -155,18 +155,7 @@ API significa **Application Programming Interface**, cioè **interfaccia di prog
 
 Un'API è un insieme di regole che permette a un programma di utilizzare le funzionalità offerte da un altro programma.
 
-```text
-CLIENT
-“Voglio recuperare i post”
-        │
-        ▼
-API DEL SERVER
-“Puoi farlo in questo modo”
-        │
-        ▼
-SERVIZIO
-recupera i dati e produce il risultato
-```
+![Il client utilizza l'API per richiedere un servizio al server](../../assets/tpsi5/00-api-request-service.svg)
 
 Possiamo immaginare l'API come la reception di un albergo: il cliente esprime una richiesta alla reception, il lavoro viene svolto dalle parti interne dell'albergo e il cliente riceve il risultato senza dover conoscere l'organizzazione interna.
 
@@ -187,11 +176,7 @@ Per esempio, Feisbuc può offrire un servizio per pubblicare un post. Il servizi
 - un altro server;
 - uno strumento di test.
 
-```text
-Browser ───────┐
-App mobile ────┼──► Web API ──► servizio sul server
-Altro server ──┘
-```
+![Client diversi utilizzano la stessa Web API e lo stesso web service](../../assets/tpsi5/00-shared-web-service.svg)
 
 I client possono essere diversi, ma utilizzano tutti la stessa interfaccia esposta dal server. Per descrivere con precisione questa interfaccia dobbiamo ora distinguere il termine generale **API** dal caso particolare **Web API**.
 
@@ -201,28 +186,11 @@ Non tutte le API utilizzano Internet. Anche una libreria JavaScript possiede una
 
 Quando l'API è esposta da un server attraverso il Web, parliamo di **Web API**.
 
-```text
-API
-├── API di una libreria
-├── API del browser
-├── API del sistema operativo
-└── Web API esposta da un server
-```
+![Una API può appartenere a una libreria, al browser, al sistema operativo o essere esposta sul Web](../../assets/tpsi5/00-api-types.svg)
 
 Nel nostro progetto:
 
-```text
-frontend nel browser
-        │ richiesta HTTP
-        ▼
-Web API di Feisbuc
-        │
-        ▼
-servizi del backend
-        │
-        ▼
-database
-```
+![Il frontend usa la Web API di Feisbuc per raggiungere i servizi del backend e il database](../../assets/tpsi5/00-feisbuc-web-api-flow.svg)
 
 Nel nostro corso i web service saranno esposti principalmente tramite una **Web API basata su HTTP**. Ora che tutti i termini sono stati introdotti, l'immagine seguente riassume il loro rapporto. Subito dopo vedremo come organizzare questa Web API secondo lo stile REST.
 
