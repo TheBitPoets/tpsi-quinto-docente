@@ -127,6 +127,15 @@ Umbrella di progetto: `TheBitPoets/2cornot2c#728`. Standard authoring cross-cour
 
 La build converte esclusivamente le presentazioni Marp presenti in `slides/tpsi5/`. I file in `content/tpsi5/` sono le lezioni/dispense canoniche e non vengono trasformati in HTML o PDF da questo processo.
 
+I diagrammi condividono il sistema grafico documentato in [`assets/tpsi5/visual-system/`](assets/tpsi5/visual-system/). Quando viene modificato un componente o una scena, rigenerare prima gli SVG autonomi:
+
+```bash
+python3 scripts/build_course_diagrams.py
+python3 scripts/build_course_diagrams.py --check
+```
+
+Il primo comando rigenera cataloghi e diagrammi; il secondo verifica che gli SVG versionati coincidano con le scene e i componenti sorgente.
+
 ### Prerequisiti
 
 - Python 3.11 o successivo;
@@ -197,3 +206,59 @@ python3 scripts/build_slides.py --formats html --output /percorso/destinazione
 ```
 
 La cartella di output viene rigenerata a ogni build. Gli artifact sotto `build/tpsi5-slides/` sono derivati e ignorati da Git: eventuali correzioni devono essere applicate ai file Markdown o agli asset sorgente, non agli HTML, PDF o PPTX generati.
+
+## Generare manualmente le immagini del corso
+
+Le immagini architetturali del corso non sono disegni isolati: vengono costruite con il **TPSI Visual System**, un pack di componenti SVG condivisi. Questo permette di rappresentare laptop, browser, rete, server, API, database e tecnologie sempre con lo stesso stile.
+
+Il sistema grafico è composto da questi elementi:
+
+- [`assets/tpsi5/visual-system/README.md`](assets/tpsi5/visual-system/README.md) — **guida del Visual System**. Documenta principi grafici, significato dei colori, grammatica delle frecce, dimensioni del canvas, regole di accessibilità e procedura per aggiungere nuovi componenti.
+- [`assets/tpsi5/visual-system/components.svg`](assets/tpsi5/visual-system/components.svg) — **libreria dei 30 componenti SVG riutilizzabili**. Contiene le definizioni vettoriali di laptop, browser, smartphone, utente, server, rete, cloud, database, API, servizi, repository, route, documenti, sicurezza, test, artifact e badge tecnologici. È un file sorgente: i simboli vengono richiamati dalle scene tramite il loro identificatore `tpsi-*`.
+- [`assets/tpsi5/visual-system/tokens.json`](assets/tpsi5/visual-system/tokens.json) — **token grafici e colori semantici**. Definisce canvas, griglia, margini, font, dimensioni, raggi, spessori e colori canonici. Per esempio, blu indica il client, verde il backend, viola il realtime e indaco la persistenza.
+- [`assets/tpsi5/visual-system/catalog/component-catalog.svg`](assets/tpsi5/visual-system/catalog/component-catalog.svg) — **catalogo visuale dei componenti**. È la tavola da consultare per vedere rapidamente gli oggetti generici disponibili. È un file generato e non deve essere modificato direttamente.
+- [`assets/tpsi5/visual-system/catalog/technology-badges.svg`](assets/tpsi5/visual-system/catalog/technology-badges.svg) — **catalogo visuale delle tecnologie**. Mostra i badge didattici disponibili per HTML, CSS, JavaScript, Node.js, Express, SQLite, Vue, React, TypeScript e Python. Anche questo file è generato.
+- [`assets/tpsi5/visual-system/scenes/`](assets/tpsi5/visual-system/scenes) — **scene sorgente componibili**. Ogni file `.scene.svg` descrive una figura completa: posiziona i componenti, aggiunge testi e connettori e indica il percorso dello SVG finale. Questi sono i file da modificare quando cambia la composizione di un'immagine.
+- [`scripts/build_course_diagrams.py`](scripts/build_course_diagrams.py) — **generatore deterministico**. Legge la libreria e le scene, incorpora le definizioni condivise e produce SVG finali autonomi. A parità di sorgenti genera sempre lo stesso risultato e controlla che le scene non richiamino componenti inesistenti o destinazioni esterne all'area degli asset TPSI5.
+
+Le due immagini della lezione 00 sono già costruite realmente con questo sistema:
+
+- [`assets/tpsi5/00-client-server-roles.svg`](assets/tpsi5/00-client-server-roles.svg);
+- [`assets/tpsi5/00-full-stack-architecture.svg`](assets/tpsi5/00-full-stack-architecture.svg).
+
+Laptop e browser, per esempio, sono due componenti distinti: la scena colloca il browser nello spazio dello schermo del laptop. Lo stesso laptop potrà quindi contenere in futuro un editor, un terminale, DevTools o l'interfaccia di Feisbuc senza essere ridisegnato.
+
+### Rigenerare le immagini
+
+Dalla directory principale del repository eseguire:
+
+```bash
+python3 scripts/build_course_diagrams.py
+```
+
+Il comando legge `components.svg` e tutti i file `scenes/*.scene.svg`, quindi rigenera:
+
+- i cataloghi del Visual System;
+- le immagini autonome utilizzate nelle dispense;
+- le immagini autonome utilizzate dalle slide Marp.
+
+Gli SVG finali incorporano le definizioni dei componenti e non dipendono da CDN, connessioni Internet o riferimenti esterni durante la proiezione e l'esportazione.
+
+### Controllare che le immagini siano aggiornate
+
+```bash
+python3 scripts/build_course_diagrams.py --check
+```
+
+Questa modalità non modifica file. Rigenera il risultato in memoria e lo confronta con gli SVG presenti nel repository. Il controllo fallisce se un'immagine manca o non corrisponde più ai componenti e alle scene sorgente.
+
+### Flusso di lavoro consigliato
+
+1. modificare `components.svg` se cambia un oggetto condiviso, per esempio l'icona della rete;
+2. modificare o aggiungere un file `.scene.svg` se cambia la composizione di una figura;
+3. eseguire `python3 scripts/build_course_diagrams.py`;
+4. controllare visivamente gli SVG generati;
+5. eseguire `python3 scripts/build_course_diagrams.py --check`;
+6. eseguire `python3 scripts/build_slides.py --check-only` prima di generare HTML, PDF o PPTX.
+
+Non modificare direttamente i cataloghi o gli SVG finali della lezione: alla rigenerazione verrebbero sovrascritti. Le modifiche permanenti devono essere applicate alla libreria dei componenti o alle scene sorgente.

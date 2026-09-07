@@ -14,6 +14,8 @@ Il deck overview resta una mappa rapida. I deck modulari sono la **narrazione da
 
 Quando una slide viene corretta o chiarita durante l'anno, registrare la modifica in [`../../doc/DELIVERY_CHANGELOG.md`](../../doc/DELIVERY_CHANGELOG.md).
 
+I diagrammi condividono il [`TPSI Visual System`](../../assets/tpsi5/visual-system/README.md): colori, componenti e connettori hanno significato stabile tra i moduli. Modificare le scene sorgente e rigenerare gli SVG autonomi con `python3 scripts/build_course_diagrams.py`; non modificare a mano i diagrammi generati.
+
 ## Indice slide
 
 | Modulo | UDA | Deck da lezione | Overview | Lezione canonica |

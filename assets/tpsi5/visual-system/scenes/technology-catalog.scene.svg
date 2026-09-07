@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../catalog/technology-badges.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Catalogo dei badge tecnologici TPSI5</title>
+  <desc id="desc">Badge didattici coerenti per le tecnologie principali del corso.</desc>
+  <defs id="visual-kit-components"/>
+  <rect width="1920" height="1080" fill="#08192c"/>
+  <text x="960" y="80" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="46" font-weight="800">TPSI VISUAL KIT · TECNOLOGIE</text>
+  <text x="960" y="122" text-anchor="middle" fill="#b8c8dc" font-family="Inter,Arial,sans-serif" font-size="22">Badge didattici; i marchi ufficiali richiedono provenance e licenza dedicate</text>
+  <g font-family="Inter,Arial,sans-serif" text-anchor="middle" font-size="22" font-weight="800" fill="#102a43">
+    <g transform="translate(85 190)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-html" x="65" y="35" width="180" height="180"/><text x="155" y="275">HTML</text></g>
+    <g transform="translate(445 190)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-css" x="65" y="35" width="180" height="180"/><text x="155" y="275">CSS</text></g>
+    <g transform="translate(805 190)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-js" x="65" y="35" width="180" height="180"/><text x="155" y="275">JAVASCRIPT</text></g>
+    <g transform="translate(1165 190)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-node" x="50" y="45" width="210" height="180"/><text x="155" y="275">NODE.JS</text></g>
+    <g transform="translate(1525 190)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-express" x="35" y="55" width="240" height="150"/><text x="155" y="275">EXPRESS</text></g>
+    <g transform="translate(85 580)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-sqlite" x="35" y="55" width="240" height="150"/><text x="155" y="275">SQLITE</text></g>
+    <g transform="translate(445 580)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-vue" x="45" y="40" width="220" height="180"/><text x="155" y="275">VUE</text></g>
+    <g transform="translate(805 580)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-react" x="45" y="40" width="220" height="180"/><text x="155" y="275">REACT</text></g>
+    <g transform="translate(1165 580)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-ts" x="65" y="35" width="180" height="180"/><text x="155" y="275">TYPESCRIPT</text></g>
+    <g transform="translate(1525 580)"><rect width="310" height="330" rx="30" fill="#f8fafc"/><use href="#tpsi-badge-python" x="45" y="40" width="220" height="180"/><text x="155" y="275">PYTHON</text></g>
+  </g>
+</svg>

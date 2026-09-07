@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../catalog/component-catalog.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Catalogo dei componenti grafici TPSI5</title>
+  <desc id="desc">Venti componenti vettoriali riutilizzabili per dispositivi, infrastruttura, applicazioni, sicurezza, test e deploy.</desc>
+  <defs id="visual-kit-components"/>
+  <rect width="1920" height="1080" fill="#08192c"/>
+  <text x="960" y="62" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="44" font-weight="800">TPSI VISUAL KIT · COMPONENTI</text>
+  <text x="960" y="98" text-anchor="middle" fill="#b8c8dc" font-family="Inter,Arial,sans-serif" font-size="21">Oggetti generici da comporre nelle scene del corso</text>
+
+  <g font-family="Inter,Arial,sans-serif" text-anchor="middle" font-size="18" font-weight="800" fill="#102a43">
+    <g transform="translate(55 130)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-laptop" x="66" y="16" width="198" height="132"/><text x="165" y="179">LAPTOP</text></g>
+    <g transform="translate(425 130)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-browser" x="57" y="18" width="216" height="138"/><text x="165" y="179">BROWSER</text></g>
+    <g transform="translate(795 130)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-smartphone" x="118" y="12" width="94" height="154"/><text x="165" y="184">SMARTPHONE</text></g>
+    <g transform="translate(1165 130)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-user" x="105" y="15" width="120" height="130"/><text x="165" y="179">UTENTE</text></g>
+    <g transform="translate(1535 130)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-server" x="62" y="18" width="206" height="146"/><text x="165" y="184">SERVER</text></g>
+
+    <g transform="translate(55 365)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-network" x="95" y="16" width="140" height="140"/><text x="165" y="181">RETE</text></g>
+    <g transform="translate(425 365)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-cloud" x="55" y="30" width="220" height="126"/><text x="165" y="181">CLOUD</text></g>
+    <g transform="translate(795 365)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-database" x="55" y="20" width="220" height="150"/><text x="165" y="181">DATABASE</text></g>
+    <g transform="translate(1165 365)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-api" x="68" y="18" width="194" height="132"/><text x="165" y="181">API</text></g>
+    <g transform="translate(1535 365)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-service" x="88" y="16" width="154" height="132"/><text x="165" y="181">SERVIZIO</text></g>
+
+    <g transform="translate(55 600)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-repository" x="69" y="16" width="192" height="144"/><text x="165" y="183">REPOSITORY</text></g>
+    <g transform="translate(425 600)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-route" x="83" y="14" width="164" height="142"/><text x="165" y="183">ROUTE</text></g>
+    <g transform="translate(795 600)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-document" x="106" y="12" width="118" height="146"/><text x="165" y="183">DOCUMENTO</text></g>
+    <g transform="translate(1165 600)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-terminal" x="55" y="22" width="220" height="142"/><text x="165" y="183">TERMINALE</text></g>
+    <g transform="translate(1535 600)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-component" x="66" y="20" width="198" height="142"/><text x="165" y="183">COMPONENTE UI</text></g>
+
+    <g transform="translate(55 835)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-cookie" x="102" y="16" width="126" height="126"/><text x="165" y="180">COOKIE</text></g>
+    <g transform="translate(425 835)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-lock" x="110" y="12" width="110" height="138"/><text x="165" y="180">SICUREZZA</text></g>
+    <g transform="translate(795 835)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-test" x="106" y="10" width="118" height="136"/><text x="165" y="180">TEST</text></g>
+    <g transform="translate(1165 835)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-health" x="56" y="24" width="218" height="126"/><text x="165" y="180">HEALTH</text></g>
+    <g transform="translate(1535 835)"><rect width="330" height="200" rx="24" fill="#f8fafc"/><use href="#tpsi-artifact" x="88" y="12" width="154" height="138"/><text x="165" y="180">ARTIFACT</text></g>
+  </g>
+</svg>
