@@ -165,6 +165,10 @@ Per `/api/posts/42`:
 
 ---
 
+![bg contain](../../../assets/tpsi5/00-rest-api-request-flow.svg)
+
+---
+
 # Metodo HTTP + URL
 
 L'URL indica **su quale risorsa** operare. Il metodo indica **quale azione** richiedere.

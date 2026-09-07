@@ -263,6 +263,10 @@ Quando l'API è esposta da un server attraverso il Web, parliamo di <strong>Web 
 Una <strong>REST API</strong> è una Web API organizzata seguendo lo stile architetturale REST. Il suo modello fondamentale è basato sulle <strong>risorse</strong>.</p>
 </td></tr></table>
 
+<p align="justify">Seguiamo una richiesta completa: il client chiede il post con ID 42, la REST API riconosce metodo e URL, associa l'URL alla route del server, estrae l'identificatore, attiva il servizio e restituisce il risultato in JSON.</p>
+
+<p align="center"><img src="../../assets/tpsi5/00-rest-api-request-flow.svg" alt="Flusso completo di una richiesta REST dal client alla route del server, al servizio e al database, con risposta HTTP in JSON"></p>
+
 <p align="justify">Una risorsa è qualcosa che il sistema gestisce e che possiamo identificare. In Feisbuc avremo, per esempio, post, utenti, commenti e sessioni.</p>
 
 <p align="justify">Ogni risorsa accessibile attraverso l'API possiede un identificatore rappresentato da un URL.</p>
