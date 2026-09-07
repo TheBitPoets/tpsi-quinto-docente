@@ -74,7 +74,35 @@ Un **protocollo** è un insieme di regole condivise che stabilisce, per esempio:
 - in quale ordine possono essere inviati;
 - come segnalare un risultato o un errore.
 
-È simile a una conversazione: per capirsi non basta poter parlare, bisogna usare regole e significati condivisi.
+### Un protocollo nella vita quotidiana
+
+Immaginiamo questa conversazione:
+
+> **Marco:** «Ciao Giulia, posso chiederti una cosa?»<br>
+> **Giulia:** «Sì, dimmi.»<br>
+> **Marco:** «Mi passi il quaderno blu?»<br>
+> **Giulia:** «Non ho capito quale quaderno. Puoi ripetere?»<br>
+> **Marco:** «Quello blu sul banco vicino alla finestra.»<br>
+> **Giulia:** «Ricevuto, eccolo.»<br>
+> **Marco:** «Grazie, ciao.»
+
+Anche questa semplice conversazione funziona perché Marco e Giulia seguono alcune regole condivise.
+
+![Le cinque regole di un protocollo mappate su una conversazione tra Marco e Giulia](../../assets/tpsi5/00-conversation-protocol.svg)
+
+| Regola del protocollo | Esempio nella conversazione |
+|---|---|
+| **1. Come iniziare la comunicazione** | Marco saluta e chiede se può parlare. Giulia risponde e accetta di iniziare la conversazione. |
+| **2. Come sono costruiti i messaggi** | Entrambi usano frasi in italiano. La richiesta contiene un'azione, «passare», e l'oggetto interessato, «il quaderno blu». |
+| **3. Quale significato hanno i messaggi** | Marco e Giulia attribuiscono lo stesso significato alle parole «quaderno», «blu» e «sul banco». |
+| **4. In quale ordine vengono inviati** | Prima avviene il saluto, poi la richiesta, quindi la risposta e infine la chiusura. Giulia non consegna un quaderno prima di sapere quale deve prendere. |
+| **5. Come indicare un risultato o un errore** | «Ricevuto, eccolo» indica che la richiesta è stata completata. «Non ho capito» segnala invece un errore e richiede un messaggio più preciso. |
+
+Se uno dei due ignorasse queste regole — parlasse una lingua sconosciuta, rispondesse prima della richiesta o non segnalasse di non aver capito — la comunicazione potrebbe fallire.
+
+Allo stesso modo, client e server devono concordare come iniziare lo scambio, come rappresentare i messaggi, che cosa significa ogni messaggio, in quale ordine scambiarli e come comunicare risultati ed errori.
+
+La differenza è che, tra programmi, queste regole devono essere definite con grande precisione: un computer non può affidarsi all'intuizione per interpretare un messaggio ambiguo.
 
 Nel corso incontreremo soprattutto due protocolli: **HTTP** e **WebSocket**.
 

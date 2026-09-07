@@ -76,11 +76,16 @@ Essere collegati alla stessa rete non basta.
 Client e server devono condividere regole che stabiliscono:
 
 - come iniziare la comunicazione;
-- come sono costruiti e interpretati i messaggi;
+- come sono costruiti i messaggi;
+- quale significato hanno;
 - in quale ordine possono essere inviati;
 - come indicare un risultato o un errore.
 
 Nel corso useremo soprattutto **HTTP** e **WebSocket**.
+
+---
+
+![bg contain](../../../assets/tpsi5/00-conversation-protocol.svg)
 
 ---
 
