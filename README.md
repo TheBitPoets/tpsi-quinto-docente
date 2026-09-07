@@ -122,3 +122,78 @@ Il futuro corso SQL separato potrà approfondire e riusare milestone condivise, 
 Le capability di piattaforma #729 (browser/HTML grader) e #731 (TypeScript Activity runner) restano follow-up indipendenti e non bloccano il curriculum freeze.
 
 Umbrella di progetto: `TheBitPoets/2cornot2c#728`. Standard authoring cross-course accettato: `TheBitPoets/2cornot2c#723`. Delivery standard cross-course in rollout: `TheBitPoets/2cornot2c#737`.
+
+## Generare manualmente le slide
+
+La build converte esclusivamente le presentazioni Marp presenti in `slides/tpsi5/`. I file in `content/tpsi5/` sono le lezioni/dispense canoniche e non vengono trasformati in HTML o PDF da questo processo.
+
+### Prerequisiti
+
+- Python 3.11 o successivo;
+- Node.js 18 o successivo, con `npx` disponibile;
+- Google Chrome o Chromium per generare PDF e PowerPoint.
+
+I comandi devono essere eseguiti dalla directory principale del repository. Lo script usa automaticamente `@marp-team/marp-cli` nella versione fissata dal progetto; al primo utilizzo `npx` potrebbe doverla scaricare.
+
+### Controllare i sorgenti senza generare file
+
+```bash
+python3 scripts/build_slides.py --check-only
+```
+
+Controlla che siano presenti l'overview e i 19 deck modulari, che il front matter Marp sia valido e che ogni modulo sia collegato al contenuto canonico. Non genera slide e non richiede Chrome.
+
+### Generare le slide HTML
+
+```bash
+python3 scripts/build_slides.py --formats html
+```
+
+Genera presentazioni navigabili nel browser. Questo formato è utile per una verifica rapida e non richiede Chrome.
+
+### Generare le slide PDF
+
+```bash
+python3 scripts/build_slides.py --formats pdf --browser chrome
+```
+
+Genera un PDF per l'overview e per ciascun modulo. Richiede Chrome o Chromium perché Marp deve renderizzare le pagine.
+
+### Generare le slide PowerPoint
+
+```bash
+python3 scripts/build_slides.py --formats pptx --browser chrome
+```
+
+Genera un file `.pptx` per l'overview e per ciascun modulo. Anche questa conversione richiede Chrome o Chromium.
+
+### Generare tutti i formati
+
+```bash
+python3 scripts/build_slides.py --formats html,pdf,pptx --browser chrome
+```
+
+Esegue la validazione e genera tutti i formati supportati. HTML e PDF possono essere elaborati in parallelo; la generazione PowerPoint è intenzionalmente seriale per evitare timeout del browser.
+
+### Cartella di output
+
+Per impostazione predefinita i file vengono scritti in:
+
+```text
+build/tpsi5-slides/
+├── html/
+├── pdf/
+├── pptx/
+├── MANIFEST.json
+└── SHA256SUMS.txt
+```
+
+`MANIFEST.json` registra sorgenti, formati, dimensioni e hash degli artifact. `SHA256SUMS.txt` permette di verificarne l'integrità.
+
+Per usare una destinazione differente:
+
+```bash
+python3 scripts/build_slides.py --formats html --output /percorso/destinazione
+```
+
+La cartella di output viene rigenerata a ogni build. Gli artifact sotto `build/tpsi5-slides/` sono derivati e ignorati da Git: eventuali correzioni devono essere applicate ai file Markdown o agli asset sorgente, non agli HTML, PDF o PPTX generati.

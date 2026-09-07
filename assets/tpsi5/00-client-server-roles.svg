@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Client e server: hardware e software</title>
+  <desc id="desc">A sinistra il computer dell'utente e i browser nel ruolo di client; a destra una macchina server e i software web nel ruolo di server. Al centro richieste e risposte attraversano la rete.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071426"/>
+      <stop offset="1" stop-color="#132a46"/>
+    </linearGradient>
+    <linearGradient id="client" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="server" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#020617" flood-opacity=".35"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0l12 6-12 6z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0l12 6-12 6z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="120" cy="90" r="220" fill="#0ea5e9" opacity=".08"/>
+  <circle cx="1500" cy="820" r="300" fill="#10b981" opacity=".08"/>
+
+  <text x="800" y="72" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="700">CLIENT E SERVER: DUE RUOLI</text>
+  <text x="800" y="112" text-anchor="middle" fill="#b6c6dc" font-family="Inter,Arial,sans-serif" font-size="24">Possiamo osservarli come dispositivi e come programmi</text>
+
+  <g filter="url(#shadow)">
+    <rect x="75" y="155" width="570" height="620" rx="34" fill="#f8fafc"/>
+    <rect x="75" y="155" width="570" height="94" rx="34" fill="url(#client)"/>
+    <path d="M75 215h570v34H75z" fill="url(#client)"/>
+    <text x="115" y="214" fill="white" font-family="Inter,Arial,sans-serif" font-size="36" font-weight="800">CLIENT</text>
+    <text x="602" y="212" text-anchor="end" fill="#dbeafe" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="600">CHIEDE</text>
+
+    <text x="115" y="303" fill="#1e3a5f" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="800" letter-spacing="2">HARDWARE</text>
+    <rect x="115" y="330" width="490" height="182" rx="22" fill="#eaf5ff"/>
+    <rect x="238" y="356" width="244" height="124" rx="10" fill="#0f2942"/>
+    <rect x="252" y="370" width="216" height="96" rx="4" fill="#dff3ff"/>
+    <circle cx="360" cy="418" r="28" fill="#38bdf8" opacity=".28"/>
+    <path d="M195 488h330l35 29H160z" fill="#55718f"/>
+    <text x="360" y="550" text-anchor="middle" fill="#334155" font-family="Inter,Arial,sans-serif" font-size="22">PC · tablet · smartphone</text>
+
+    <text x="115" y="600" fill="#1e3a5f" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="800" letter-spacing="2">SOFTWARE</text>
+    <rect x="115" y="625" width="490" height="106" rx="22" fill="#eaf5ff"/>
+    <circle cx="162" cy="666" r="24" fill="#ef4444"/>
+    <circle cx="162" cy="666" r="12" fill="#fbbf24"/>
+    <circle cx="262" cy="666" r="24" fill="#22c55e"/>
+    <circle cx="262" cy="666" r="12" fill="#2563eb"/>
+    <circle cx="362" cy="666" r="24" fill="#38bdf8"/>
+    <circle cx="362" cy="666" r="12" fill="#f8fafc"/>
+    <text x="565" y="674" text-anchor="end" fill="#0f2942" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="700">BROWSER</text>
+    <text x="360" y="714" text-anchor="middle" fill="#475569" font-family="Inter,Arial,sans-serif" font-size="18">Firefox · Chrome · Safari · Edge</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="955" y="155" width="570" height="620" rx="34" fill="#f8fafc"/>
+    <rect x="955" y="155" width="570" height="94" rx="34" fill="url(#server)"/>
+    <path d="M955 215h570v34H955z" fill="url(#server)"/>
+    <text x="995" y="214" fill="white" font-family="Inter,Arial,sans-serif" font-size="36" font-weight="800">SERVER</text>
+    <text x="1482" y="212" text-anchor="end" fill="#d1fae5" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="600">RISPONDE</text>
+
+    <text x="995" y="303" fill="#14532d" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="800" letter-spacing="2">HARDWARE</text>
+    <rect x="995" y="330" width="490" height="182" rx="22" fill="#eafbf3"/>
+    <g fill="#183e3a">
+      <rect x="1118" y="352" width="244" height="42" rx="8"/>
+      <rect x="1118" y="404" width="244" height="42" rx="8"/>
+      <rect x="1118" y="456" width="244" height="42" rx="8"/>
+    </g>
+    <g fill="#34d399">
+      <circle cx="1332" cy="373" r="7"/><circle cx="1308" cy="373" r="7"/>
+      <circle cx="1332" cy="425" r="7"/><circle cx="1308" cy="425" r="7"/>
+      <circle cx="1332" cy="477" r="7"/><circle cx="1308" cy="477" r="7"/>
+    </g>
+    <text x="1240" y="550" text-anchor="middle" fill="#334155" font-family="Inter,Arial,sans-serif" font-size="22">macchina fisica · virtuale · cloud</text>
+
+    <text x="995" y="600" fill="#14532d" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="800" letter-spacing="2">SOFTWARE</text>
+    <rect x="995" y="625" width="490" height="106" rx="22" fill="#eafbf3"/>
+    <text x="1240" y="666" text-anchor="middle" fill="#064e3b" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800">WEB SERVER / BACKEND</text>
+    <text x="1240" y="704" text-anchor="middle" fill="#475569" font-family="Inter,Arial,sans-serif" font-size="19">Apache · Nginx · IIS · Node.js + Express</text>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif" text-anchor="middle">
+    <circle cx="800" cy="420" r="88" fill="#172d49" stroke="#5f7898" stroke-width="3"/>
+    <path d="M746 421c32-34 76-34 108 0M756 388c27 18 61 18 88 0M756 454c27-18 61-18 88 0M800 338c-31 43-31 121 0 164M800 338c31 43 31 121 0 164" fill="none" stroke="#d4e3f5" stroke-width="5" stroke-linecap="round"/>
+    <text x="800" y="545" fill="#dbeafe" font-size="22" font-weight="700">RETE</text>
+    <path d="M660 345H925" fill="none" stroke="#38bdf8" stroke-width="8" marker-end="url(#arrowBlue)"/>
+    <text x="800" y="322" fill="#7dd3fc" font-size="20" font-weight="700">RICHIESTA</text>
+    <path d="M940 615H675" fill="none" stroke="#34d399" stroke-width="8" marker-end="url(#arrowGreen)"/>
+    <text x="800" y="654" fill="#6ee7b7" font-size="20" font-weight="700">RISPOSTA</text>
+  </g>
+
+  <rect x="315" y="812" width="970" height="54" rx="27" fill="#e2e8f0" opacity=".12"/>
+  <text x="800" y="847" text-anchor="middle" fill="#e2e8f0" font-family="Inter,Arial,sans-serif" font-size="22">Su localhost i due ruoli possono essere svolti da programmi eseguiti sullo stesso computer.</text>
+</svg>
