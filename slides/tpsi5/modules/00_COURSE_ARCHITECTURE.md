@@ -145,6 +145,10 @@ Quando l'API è esposta da un server attraverso il Web, parliamo di **Web API**.
 
 ---
 
+![bg contain](../../../assets/tpsi5/00-web-service-interface.svg)
+
+---
+
 # REST API: risorse identificabili
 
 Una **REST API** è una Web API organizzata intorno alle **risorse**.
