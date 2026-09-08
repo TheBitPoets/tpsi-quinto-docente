@@ -42,6 +42,18 @@ Alla fine dovrai saper:
 
 ---
 
+![bg contain](../../../assets/tpsi5/01-mdn-basic-html-coverage.svg)
+
+---
+
+![bg contain](../../../assets/tpsi5/01-mdn-metadata-coverage.svg)
+
+---
+
+![bg contain](../../../assets/tpsi5/01-mdn-semantics-coverage.svg)
+
+---
+
 ![bg contain](../../../assets/tpsi5/01-http-html-dom.svg)
 
 ---

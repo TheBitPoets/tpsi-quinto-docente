@@ -37,6 +37,43 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </td></tr>
 </table>
 
+## Mappa di copertura della documentazione MDN
+
+<p align="justify">La dispensa costruisce un percorso guidato in italiano, mentre MDN rimane la documentazione tecnica da imparare a consultare. Le mappe seguenti mettono a sinistra i paragrafi della lezione e a destra le parti corrispondenti di MDN: le frecce mostrano il raccordo e i colori indicano fino a quale profondità è richiesto lo studio.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128506;</span> Come leggere i colori:</strong>
+<strong>coperto</strong> significa che l'argomento è spiegato in italiano e deve essere compreso ora;
+<strong>introdotto</strong> indica una prima presentazione da riconoscere o sperimentare;
+<strong>più avanti</strong> segnala una parte della pagina MDN che verrà studiata in una lezione futura. Ogni stato è scritto anche dentro i riquadri: il colore non è l'unico segnale.</p>
+</td></tr></table>
+
+### Mappa 1 — Sintassi HTML di base
+
+<p align="justify">La prima mappa segue l'indice del tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN — Basic HTML syntax</a> e collega definizioni, sintassi, documento minimo ed esercizi alle parti della dispensa.</p>
+
+<p align="center">
+  <img src="../../assets/tpsi5/01-mdn-basic-html-coverage.svg" alt="Mappa tra i paragrafi della dispensa e il tutorial MDN Basic HTML syntax. La legenda distingue contenuti coperti, introdotti e rimandati a lezioni future">
+</p>
+
+### Mappa 2 — Metadati della pagina
+
+<p align="justify">La seconda mappa mostra la copertura del tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata">MDN — What's in the head? Web page metadata</a>. Le basi di <code>head</code>, titolo, metadati, favicon, CSS, JavaScript e lingua sono spiegate; alcune varianti vengono soltanto presentate.</p>
+
+<p align="center">
+  <img src="../../assets/tpsi5/01-mdn-metadata-coverage.svg" alt="Mappa tra i paragrafi della dispensa e il tutorial MDN sui metadati della pagina. La legenda distingue contenuti coperti, introdotti e rimandati a lezioni future">
+</p>
+
+### Mappa 3 — Semantica, accessibilità e strumenti
+
+<p align="justify">L'ultima mappa unisce i riferimenti MDN usati per la struttura semantica, l'accessibilità, il DOM e gli strumenti di sviluppo. In questo caso è particolarmente importante distinguere ciò che viene spiegato completamente da ciò che viene soltanto introdotto.</p>
+
+<p align="center">
+  <img src="../../assets/tpsi5/01-mdn-semantics-coverage.svg" alt="Mappa tra i paragrafi della dispensa e le pagine MDN su struttura, accessibilità, DOM e strumenti di sviluppo. La legenda distingue contenuti coperti, introdotti e rimandati a lezioni future">
+</p>
+
+<p align="justify">Le mappe sono un orientamento, non una percentuale di importanza: una parte indicata come “più avanti” può essere fondamentale, ma non appartiene ancora agli obiettivi di questa lezione. I collegamenti puntuali accanto ai singoli paragrafi restano il modo più rapido per aprire il punto esatto di MDN.</p>
+
 ## Dal server alla pagina visualizzata
 
 <p align="justify">Nella lezione 00 abbiamo visto che il browser svolge il ruolo di client. Quando richiede una pagina, il server può rispondere tramite HTTP inviando un documento HTML. All'inizio quel documento non è ancora la pagina grafica che vediamo sullo schermo: è una sequenza di caratteri che descrive i contenuti e le relazioni tra essi.</p>
