@@ -94,13 +94,17 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </td></tr></table>
 
 <a id="lesson-mdn-cross-index"></a>
-<table align="center"><tr><td>
+<table align="center" width="100%"><tr><td>
 <details>
 <summary>&#128279; <strong>Indice incrociato navigabile — Dispensa ↔ MDN</strong></summary>
 
-<p align="justify">La tabella traduce le mappe in un indice utilizzabile durante lo studio. Ogni testo è un collegamento: nella colonna sinistra porta al punto esatto della dispensa, in quella destra apre il paragrafo o la scheda MDN corrispondente. Una cella vuota indica volutamente che, a questo livello dell'indice, non esiste una corrispondenza diretta.</p>
+<p align="justify">La tabella traduce le mappe in un indice utilizzabile durante lo studio. Soltanto i titoli sono collegamenti: nella colonna sinistra portano al punto esatto della dispensa, in quella destra aprono il paragrafo o la scheda MDN corrispondente. I punti elenco descrivono brevemente il contenuto e non sono cliccabili. Una cella vuota indica volutamente che non esiste una corrispondenza diretta.</p>
 
-<table align="center">
+<table width="100%">
+<colgroup>
+  <col width="50%">
+  <col width="50%">
+</colgroup>
 <thead>
 <tr>
   <th>Indice dei contenuti della dispensa</th>
@@ -109,196 +113,196 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </thead>
 <tbody>
 <tr>
-  <td><a href="#lesson-objectives"><strong>In questa unità impareremo</strong><br>Contesto, domande guida, obiettivi e collegamento con la lezione CSS.</a></td>
-  <td></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-objectives">In questa unità impareremo</a></strong><ul><li>Contesto, domande guida e obiettivi della lezione.</li></ul></td>
+  <td width="50%" valign="top"></td>
 </tr>
 <tr>
-  <td><a href="#lesson-mdn-map-basic"><strong>Mappa 1 — Sintassi HTML di base</strong><br>Copertura visuale di definizioni, sintassi, documento ed esercizi.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"><strong>Basic HTML syntax</strong><br>Indice completo del tutorial MDN sulla sintassi HTML.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-mdn-map-basic">Mappa 1 — Sintassi HTML di base</a></strong><ul><li>Raccordo visuale tra sintassi, documento ed esercizi.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">Basic HTML syntax</a></strong><ul><li>Tutorial MDN sui fondamenti della sintassi HTML.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-mdn-map-metadata"><strong>Mappa 2 — Metadati della pagina</strong><br>Copertura visuale dei contenuti inseriti in <code>head</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata"><strong>What's in the head? Web page metadata</strong><br>Indice completo del tutorial MDN sui metadati.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-mdn-map-metadata">Mappa 2 — Metadati della pagina</a></strong><ul><li>Raccordo visuale dei contenuti inseriti in <code>head</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata">What's in the head? Web page metadata</a></strong><ul><li>Tutorial MDN sui metadati del documento.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-mdn-map-semantics"><strong>Mappa 3 — Semantica, accessibilità e strumenti</strong><br>Copertura visuale delle diverse pagine MDN impiegate.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents"><strong>Structuring documents</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML"><strong>HTML: A good basis for accessibility</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model"><strong>Document Object Model</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-mdn-map-semantics">Mappa 3 — Semantica, accessibilità e strumenti</a></strong><ul><li>Raccordo visuale tra struttura, accessibilità e DOM.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents">Structuring documents</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML">HTML: A good basis for accessibility</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">Document Object Model</a></strong><ul><li>Le tre fonti MDN collegate dalla mappa.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-server-to-page"><strong>Dal server alla pagina visualizzata</strong><br>Risposta HTTP, documento HTML, DOM e rendering nel browser.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works#clients_and_servers"><strong>How the web works — Clients and servers</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works#so_what_happens_exactly"><strong>So what happens, exactly?</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-server-to-page">Dal server alla pagina visualizzata</a></strong><ul><li>Dalla risposta HTTP al documento, al DOM e alla pagina.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works#clients_and_servers">Clients and servers</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works#so_what_happens_exactly">So what happens, exactly?</a></strong><ul><li>Richiesta del browser, risposta del server e caricamento della pagina.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-web-platform"><strong>Che cos'è la Web Platform</strong><br>Ruoli di HTML, CSS, JavaScript e API del browser; documenti <code>.html</code> e <code>index.html</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#what_is_html"><strong>Basic HTML syntax — What is HTML?</strong><br>Definizione di HTML, documenti e convenzione dei tag minuscoli.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-web-platform">Che cos'è la Web Platform</a></strong><ul><li>Ruoli di HTML, CSS, JavaScript e API del browser.</li><li>Documenti <code>.html</code>, <code>index.html</code> e tag minuscoli.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#what_is_html">What is HTML?</a></strong><ul><li>Definizione di HTML e convenzioni dei documenti.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-html-living-standard"><strong>HTML5 o HTML Living Standard?</strong><br>Differenza tra il nome storico e lo standard mantenuto nel tempo.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5"><strong>Glossary — HTML5</strong><br>Uso storico e significati del termine HTML5.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-html-living-standard">HTML5 o HTML Living Standard?</a></strong><ul><li>Nome storico e standard HTML aggiornato continuamente.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5">Glossary — HTML5</a></strong><ul><li>Significati storici e moderni del termine HTML5.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-element-anatomy"><strong>Anatomia di un elemento HTML</strong><br>Tag di apertura, contenuto, chiusura, attributi ed elemento completo.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_element"><strong>Anatomy of an HTML element</strong><br>Parti che compongono un elemento HTML.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-element-anatomy">Anatomia di un elemento HTML</a></strong><ul><li>Tag di apertura, attributi, contenuto e tag di chiusura.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_element">Anatomy of an HTML element</a></strong><ul><li>Parti che formano un elemento completo.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-void-elements"><strong>Elementi vuoti</strong><br><code>meta</code>, <code>img</code>, <code>br</code> e barra finale facoltativa.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#void_elements"><strong>Void elements</strong><br>Elementi che non possono contenere altro HTML.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-void-elements">Elementi vuoti</a></strong><ul><li><code>meta</code>, <code>img</code>, <code>br</code> e barra finale facoltativa.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#void_elements">Void elements</a></strong><ul><li>Elementi che non possono contenere altro HTML.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-nesting"><strong>Annidamento</strong><br>Ordine corretto di apertura e chiusura degli elementi.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#nesting_elements"><strong>Nesting elements</strong><br>Annidamento corretto ed elementi sovrapposti per errore.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-nesting">Annidamento</a></strong><ul><li>Ordine corretto delle aperture e delle chiusure.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#nesting_elements">Nesting elements</a></strong><ul><li>Confronto tra annidamento corretto ed elementi sovrapposti.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-attributes"><strong>Attributi: informazioni aggiuntive</strong><br>Posizione, nome, valore, attributi globali e specifici.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#attributes"><strong>Attributes</strong><br>Sintassi e funzione delle informazioni aggiunte agli elementi.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-attributes">Attributi: informazioni aggiuntive</a></strong><ul><li>Posizione, nome, valore e attributi globali o specifici.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#attributes">Attributes</a></strong><ul><li>Sintassi e funzione degli attributi.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-boolean-attributes"><strong>Attributi booleani</strong><br>Presenza, assenza e caso dell'attributo <code>disabled</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#boolean_attributes"><strong>Boolean attributes</strong><br>Perché la presenza dell'attributo rappresenta il valore vero.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-boolean-attributes">Attributi booleani</a></strong><ul><li>Presenza, assenza ed esempio con <code>disabled</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#boolean_attributes">Boolean attributes</a></strong><ul><li>La presenza dell'attributo rappresenta il valore vero.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-attribute-quotes"><strong>Virgolette nei valori</strong><br>Errori evitati dalle virgolette e convenzione delle virgolette doppie.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#omitting_quotes_around_attribute_values"><strong>Omitting quotes around attribute values</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#single_or_double_quotes"><strong>Single or double quotes?</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-attribute-quotes">Virgolette nei valori</a></strong><ul><li>Errori evitati dalle virgolette e convenzione delle doppie.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#omitting_quotes_around_attribute_values">Omitting quotes around attribute values</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#single_or_double_quotes">Single or double quotes?</a></strong><ul><li>Quando l'omissione rompe il markup e quali virgolette usare.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-whitespace"><strong>Spazi bianchi e indentazione</strong><br>Normalizzazione degli spazi e indentazione a due spazi.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#whitespace_in_html"><strong>Whitespace in HTML</strong><br>Come il parser tratta gli spazi e come formattare il sorgente.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-whitespace">Spazi bianchi e indentazione</a></strong><ul><li>Normalizzazione degli spazi e indentazione leggibile.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#whitespace_in_html">Whitespace in HTML</a></strong><ul><li>Comportamento del parser e formattazione del sorgente.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-character-references"><strong>Riferimenti ai caratteri speciali</strong><br><code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;quot;</code>, <code>&amp;apos;</code> e <code>&amp;amp;</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#character_references_including_special_characters_in_html"><strong>Character references</strong><br>Rappresentare nel contenuto i caratteri riservati dalla sintassi.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-character-references">Riferimenti ai caratteri speciali</a></strong><ul><li>Scrittura sicura di <code>&lt;</code>, <code>&gt;</code>, virgolette e <code>&amp;</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#character_references_including_special_characters_in_html">Character references</a></strong><ul><li>Codici per rappresentare i caratteri riservati.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-comments"><strong>Commenti HTML</strong><br>Sintassi, utilità e limiti dei commenti nel sorgente.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#html_comments"><strong>HTML comments</strong><br>Testo presente nel sorgente ma non visualizzato nella pagina.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-comments">Commenti HTML</a></strong><ul><li>Sintassi, usi corretti e informazioni da non inserire.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#html_comments">HTML comments</a></strong><ul><li>Testo nel sorgente che il browser non visualizza.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-document-skeleton"><strong>Lo scheletro moderno di una pagina</strong><br>Struttura completa minima di un documento HTML.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_document"><strong>Anatomy of an HTML document</strong><br>Combinazione degli elementi in una pagina completa.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-document-skeleton">Lo scheletro moderno di una pagina</a></strong><ul><li>Struttura minima completa di un documento HTML.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_document">Anatomy of an HTML document</a></strong><ul><li>Come gli elementi formano una pagina completa.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-doctype"><strong><code>&lt;!doctype html&gt;</code></strong><br>Modalità standard e significato storico del doctype.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_document"><strong>Anatomy of an HTML document — punto 1</strong><br>Forma moderna e origine del doctype.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-doctype"><code>&lt;!doctype html&gt;</code></a></strong><ul><li>Modalità standard e origine storica del doctype.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_document">Anatomy of an HTML document — punto 1</a></strong><ul><li>Forma moderna e funzione del doctype.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-html-lang"><strong><code>&lt;html lang="it"&gt;</code></strong><br>Elemento radice e lingua principale o locale del contenuto.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#setting_the_primary_language_of_the_document"><strong>Setting the primary language of the document</strong><br>Lingua del documento e cambi di lingua interni.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-html-lang"><code>&lt;html lang="it"&gt;</code></a></strong><ul><li>Elemento radice e lingua principale o locale.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#setting_the_primary_language_of_the_document">Setting the primary language</a></strong><ul><li>Lingua del documento e cambi di lingua interni.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-head"><strong><code>&lt;head&gt;</code></strong><br>Contenitore delle informazioni sul documento non mostrate nel corpo.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#what_is_the_html_head"><strong>What is the HTML head?</strong><br>Differenza tra metadati in <code>head</code> e contenuto in <code>body</code>.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-head"><code>&lt;head&gt;</code></a></strong><ul><li>Contenitore delle informazioni sul documento.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#what_is_the_html_head">What is the HTML head?</a></strong><ul><li>Differenza tra metadati in <code>head</code> e contenuto in <code>body</code>.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-meta-charset"><strong><code>&lt;meta charset="utf-8"&gt;</code></strong><br>Codifica del documento e corretta rappresentazione dei caratteri.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#specifying_your_documents_character_encoding"><strong>Specifying your document's character encoding</strong><br>Perché impostare UTF-8.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-meta-charset"><code>&lt;meta charset="utf-8"&gt;</code></a></strong><ul><li>Codifica e corretta rappresentazione dei caratteri.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#specifying_your_documents_character_encoding">Specifying the character encoding</a></strong><ul><li>Perché dichiarare UTF-8.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-viewport"><strong>Viewport</strong><br><code>width=device-width</code>, <code>initial-scale</code> e comportamento mobile.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/viewport"><strong><code>meta name="viewport"</code></strong><br>Riferimento alle direttive della viewport.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-viewport">Viewport</a></strong><ul><li>Larghezza del dispositivo, scala iniziale e resa mobile.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/viewport"><code>meta name="viewport"</code></a></strong><ul><li>Direttive disponibili e indicazioni di accessibilità.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-title"><strong><code>&lt;title&gt;</code></strong><br>Titolo del documento, scheda del browser, preferiti e differenza da <code>h1</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#adding_a_title"><strong>Adding a title</strong><br>Ruoli differenti di <code>title</code> e <code>h1</code>.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-title"><code>&lt;title&gt;</code></a></strong><ul><li>Titolo del documento, scheda, preferiti e differenza da <code>h1</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#adding_a_title">Adding a title</a></strong><ul><li>Ruoli differenti di <code>title</code> e <code>h1</code>.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-body"><strong><code>&lt;body&gt;</code></strong><br>Contenitore di tutto ciò che forma il contenuto della pagina.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_document"><strong>Anatomy of an HTML document — punto 6</strong><br>Ruolo del corpo del documento.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-body"><code>&lt;body&gt;</code></a></strong><ul><li>Contenitore del contenuto visibile della pagina.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#anatomy_of_an_html_document">Anatomy of an HTML document — punto 6</a></strong><ul><li>Funzione del corpo del documento.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-meta-name-content"><strong>Metadati con <code>name</code> e <code>content</code></strong><br>Autore, descrizione e metadato <code>keywords</code> ormai superato.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#adding_an_author_and_description"><strong>Adding an author and description</strong><br>Metadati descrittivi e possibili usi della descrizione.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-meta-name-content">Metadati con <code>name</code> e <code>content</code></a></strong><ul><li>Autore, descrizione e limite del vecchio metadato <code>keywords</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#adding_an_author_and_description">Adding an author and description</a></strong><ul><li>Metadati descrittivi e loro possibili usi.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-open-graph"><strong>Altri metadati: riconoscere Open Graph</strong><br>Proprietà sociali presentate senza richiederne la memorizzazione.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#other_types_of_metadata"><strong>Other types of metadata</strong><br>Esempio di metadati proprietari e Open Graph Data.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-open-graph">Altri metadati: riconoscere Open Graph</a></strong><ul><li>Proprietà sociali da riconoscere, non da memorizzare.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#other_types_of_metadata">Other types of metadata</a></strong><ul><li>Metadati proprietari ed esempio Open Graph.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-favicon"><strong>Collegare una favicon</strong><br><code>link</code> con <code>rel</code>, <code>href</code> e <code>type</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#adding_custom_icons_to_your_site"><strong>Adding custom icons to your site</strong><br>Favicon di base e varianti per dispositivi.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-favicon">Collegare una favicon</a></strong><ul><li>Uso di <code>link</code> con <code>rel</code>, <code>href</code> e <code>type</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#adding_custom_icons_to_your_site">Adding custom icons to your site</a></strong><ul><li>Favicon di base e varianti per dispositivi.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-css-javascript"><strong>Collegare CSS e JavaScript</strong><br>Foglio di stile, script esterno, <code>src</code> e <code>defer</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#applying_css_and_javascript_to_html"><strong>Applying CSS and JavaScript to HTML</strong><br>Collegare risorse esterne al documento.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-css-javascript">Collegare CSS e JavaScript</a></strong><ul><li>Foglio di stile e script esterno con <code>src</code> e <code>defer</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#applying_css_and_javascript_to_html">Applying CSS and JavaScript to HTML</a></strong><ul><li>Collegamento delle risorse esterne al documento.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-text-lists-links-images"><strong>Testo, liste, collegamenti e immagini</strong><br>Esempio combinato dei contenuti fondamentali inseriti in <code>body</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_some_features_to_an_html_document"><strong>Adding some features to an HTML document</strong><br>Esercizio con heading, testo, link e immagine.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-text-lists-links-images">Testo, liste, collegamenti e immagini</a></strong><ul><li>Esempio combinato dei contenuti inseriti in <code>body</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_some_features_to_an_html_document">Adding features to an HTML document</a></strong><ul><li>Esercizio con heading, testo, link e immagine.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-headings-paragraphs"><strong>Heading e paragrafi</strong><br>Gerarchia dei titoli, paragrafi, importanza ed enfasi.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements"><strong><code>&lt;h1&gt;–&lt;h6&gt;</code></strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p"><strong><code>&lt;p&gt;</code></strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/strong"><strong><code>&lt;strong&gt;</code></strong></a> · <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em"><strong><code>&lt;em&gt;</code></strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-headings-paragraphs">Heading e paragrafi</a></strong><ul><li>Gerarchia dei titoli, paragrafi, importanza ed enfasi.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements"><code>&lt;h1&gt;–&lt;h6&gt;</code></a></strong> · <strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p"><code>&lt;p&gt;</code></a></strong> · <strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/strong"><code>&lt;strong&gt;</code></a></strong> · <strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em"><code>&lt;em&gt;</code></a></strong><ul><li>Significato e uso corretto degli elementi testuali.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-lists"><strong>Liste</strong><br>Liste ordinate, non ordinate e relativi elementi.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul"><strong><code>&lt;ul&gt;</code></strong></a> · <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol"><strong><code>&lt;ol&gt;</code></strong></a> · <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li"><strong><code>&lt;li&gt;</code></strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul">Schede MDN degli elementi di lista.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-lists">Liste</a></strong><ul><li>Liste ordinate, non ordinate e singole voci.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul"><code>&lt;ul&gt;</code></a></strong> · <strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol"><code>&lt;ol&gt;</code></a></strong> · <strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li"><code>&lt;li&gt;</code></a></strong><ul><li>Schede degli elementi che costruiscono le liste.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-links"><strong>Collegamenti</strong><br><code>href</code>, URL assoluti, percorsi relativi, frammenti e differenza tra link e pulsante.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"><strong><code>&lt;a&gt;</code>: The Anchor element</strong><br>Destinazioni e attributi dei collegamenti.</a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#more_on_links"><strong>More on links</strong><br>Testi dei link comprensibili.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-links">Collegamenti</a></strong><ul><li><code>href</code>, URL assoluti, percorsi relativi e frammenti.</li><li>Differenza tra link e pulsante.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"><code>&lt;a&gt;</code>: The Anchor element</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#more_on_links">More on links</a></strong><ul><li>Attributi, destinazioni e testi dei link comprensibili.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-images"><strong>Immagini</strong><br><code>src</code>, <code>alt</code>, <code>width</code>, <code>height</code> e primo richiamo a <code>loading</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_attributes_to_an_element"><strong>Adding attributes to an element</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"><strong><code>&lt;img&gt;</code>: The Image Embed element</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#text_alternatives"><strong>Text alternatives</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-images">Immagini</a></strong><ul><li><code>src</code>, <code>alt</code>, dimensioni e primo richiamo a <code>loading</code>.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_attributes_to_an_element">Adding attributes to an element</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"><code>&lt;img&gt;</code>: The Image Embed element</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#text_alternatives">Text alternatives</a></strong><ul><li>Attributi dell'immagine e alternative testuali accessibili.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-semantics"><strong>Semantica: scegliere l'elemento per ciò che significa</strong><br>Dalla struttura visuale alla descrizione esplicita dei ruoli.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#basic_sections_of_a_document"><strong>Basic sections of a document</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#html_layout_elements_in_more_detail"><strong>HTML layout elements in more detail</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-semantics">Semantica: scegliere l'elemento per il significato</a></strong><ul><li>Dalla struttura visuale alla descrizione esplicita dei ruoli.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#basic_sections_of_a_document">Basic sections of a document</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#html_layout_elements_in_more_detail">HTML layout elements in more detail</a></strong><ul><li>Parti tipiche della pagina ed elementi semantici disponibili.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-structural-elements"><strong>Elementi strutturali che useremo spesso</strong><br><code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>aside</code>, <code>footer</code>; uso consapevole di <code>div</code>.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#html_layout_elements_in_more_detail"><strong>HTML layout elements in more detail</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#non-semantic_wrappers"><strong>Non-semantic wrappers</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-structural-elements">Elementi strutturali che useremo spesso</a></strong><ul><li><code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>aside</code> e <code>footer</code>.</li><li>Quando <code>div</code> rimane corretto.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#html_layout_elements_in_more_detail">HTML layout elements in more detail</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#non-semantic_wrappers">Non-semantic wrappers</a></strong><ul><li>Ruolo degli elementi strutturali e dei contenitori generici.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-accessibility"><strong>Accessibilità: iniziamo subito</strong><br>Lingua, heading, semantica, alternative testuali, link, pulsanti ed etichette.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#good_semantics"><strong>Good semantics</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#use_semantic_ui_controls_where_possible"><strong>Use semantic UI controls where possible</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#text_alternatives"><strong>Text alternatives</strong></a> · <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#more_on_links"><strong>More on links</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-accessibility">Accessibilità: iniziamo subito</a></strong><ul><li>Lingua, heading, semantica, immagini, link e controlli.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#good_semantics">Good semantics</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#use_semantic_ui_controls_where_possible">Use semantic UI controls</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#text_alternatives">Text alternatives</a></strong> · <strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#more_on_links">More on links</a></strong><ul><li>Basi dell'accessibilità fornite dall'HTML semantico.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-dom-devtools"><strong>Il DOM e gli strumenti di sviluppo</strong><br>Albero DOM, pannello Elements/Inspector, modifiche temporanee e validazione.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model#what_is_a_dom_tree"><strong>What is a DOM tree?</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools#the_inspector_dom_explorer_and_css_editor"><strong>The Inspector: DOM explorer and CSS editor</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-dom-devtools">Il DOM e gli strumenti di sviluppo</a></strong><ul><li>Albero DOM, Inspector, modifiche temporanee e validazione.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model#what_is_a_dom_tree">What is a DOM tree?</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools#the_inspector_dom_explorer_and_css_editor">The Inspector: DOM explorer and CSS editor</a></strong><ul><li>Struttura ad albero e strumenti per ispezionarla.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-feisbuc-m0"><strong>Esempio realistico: Feisbuc milestone 0</strong><br>Applicazione di una struttura semantica a una singola pagina.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#html_for_structuring_content"><strong>HTML for structuring content</strong><br>Tradurre le parti visuali di una pagina in elementi HTML.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-feisbuc-m0">Esempio realistico: Feisbuc milestone 0</a></strong><ul><li>Struttura semantica completa di una singola pagina.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#html_for_structuring_content">HTML for structuring content</a></strong><ul><li>Traduzione delle parti visuali in elementi HTML.</li></ul></td>
 </tr>
 <tr>
-  <td></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#structuring_a_basic_website"><strong>Structuring a basic website</strong><br>Architettura dell'informazione e organizzazione di un sito multipagina: verrà affrontata più avanti.</a></td>
+  <td width="50%" valign="top"></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#structuring_a_basic_website">Structuring a basic website</a></strong><ul><li>Architettura dell'informazione di un sito multipagina.</li><li>Contenuto previsto più avanti.</li></ul></td>
 </tr>
 <tr>
-  <td></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#accessible_data_tables"><strong>Accessible data tables</strong><br>Intestazioni e struttura accessibile delle tabelle: verrà affrontato più avanti.</a></td>
+  <td width="50%" valign="top"></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#accessible_data_tables">Accessible data tables</a></strong><ul><li>Intestazioni e struttura accessibile delle tabelle.</li><li>Contenuto previsto più avanti.</li></ul></td>
 </tr>
 <tr>
-  <td></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#figures_and_figure_captions"><strong>Figures and figure captions</strong><br><code>figure</code> e <code>figcaption</code>: verranno affrontati più avanti.</a></td>
+  <td width="50%" valign="top"></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#figures_and_figure_captions">Figures and figure captions</a></strong><ul><li>Uso di <code>figure</code> e <code>figcaption</code>.</li><li>Contenuto previsto più avanti.</li></ul></td>
 </tr>
 <tr>
-  <td></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#building_keyboard_accessibility_back_in"><strong>Building keyboard accessibility back in</strong><br><code>tabindex</code>, focus e comportamento da tastiera: verranno affrontati più avanti.</a></td>
+  <td width="50%" valign="top"></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML#building_keyboard_accessibility_back_in">Building keyboard accessibility back in</a></strong><ul><li><code>tabindex</code>, focus e comportamento da tastiera.</li><li>Contenuto previsto più avanti.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-common-errors"><strong>Errori frequenti</strong><br>Dieci controlli sugli sbagli più comuni della lezione.</a></td>
-  <td></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-common-errors">Errori frequenti</a></strong><ul><li>Controllo degli sbagli tipici nella struttura HTML.</li></ul></td>
+  <td width="50%" valign="top"></td>
 </tr>
 <tr>
-  <td><a href="#lesson-lab"><strong>Laboratorio</strong><br>Anatomia del documento e trasformazione semantica di Feisbuc.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#creating_your_first_html_element"><strong>Creating your first HTML element</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_attributes_to_an_element"><strong>Adding attributes to an element</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-lab">Laboratorio</a></strong><ul><li>Completamento del documento e trasformazione semantica di Feisbuc.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#creating_your_first_html_element">Creating your first HTML element</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_attributes_to_an_element">Adding attributes to an element</a></strong><ul><li>Esercizi MDN collegati alle abilità del laboratorio.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-checkpoint"><strong>Verifica rapida</strong><br>Quindici domande per controllare la comprensione.</a></td>
-  <td></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-checkpoint">Verifica rapida</a></strong><ul><li>Domande per controllare concetti e scelte operative.</li></ul></td>
+  <td width="50%" valign="top"></td>
 </tr>
 <tr>
-  <td><a href="#lesson-summary"><strong>Sintesi</strong><br>Concetti essenziali della lezione e passaggio al modulo CSS.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#summary"><strong>Basic HTML syntax — Summary</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#summary"><strong>Web page metadata — Summary</strong></a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#summary"><strong>Structuring documents — Summary</strong></a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-summary">Sintesi</a></strong><ul><li>Concetti essenziali e passaggio al modulo CSS.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#summary">Basic HTML syntax — Summary</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#summary">Web page metadata — Summary</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#summary">Structuring documents — Summary</a></strong><ul><li>Riepiloghi dei tre tutorial MDN principali.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-reading-mdn"><strong>Imparare a leggere MDN</strong><br>Metodo di consultazione e tabella degli elementi da studiare ora o riconoscere.</a></td>
-  <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements"><strong>HTML elements reference</strong><br>Indice delle schede tecniche dei singoli elementi.</a></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-reading-mdn">Imparare a leggere MDN</a></strong><ul><li>Metodo di consultazione e profondità di studio richiesta.</li></ul></td>
+  <td width="50%" valign="top"><strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements">HTML elements reference</a></strong><ul><li>Indice delle schede tecniche dei singoli elementi.</li></ul></td>
 </tr>
 <tr>
-  <td><a href="#lesson-sources"><strong>Fonti e documentazione</strong><br>Raccolta finale delle fonti MDN, WHATWG e del validatore.</a></td>
-  <td></td>
+  <td width="50%" valign="top"><strong><a href="#lesson-sources">Fonti e documentazione</a></strong><ul><li>Raccolta di MDN, WHATWG e validatore HTML.</li></ul></td>
+  <td width="50%" valign="top"></td>
 </tr>
 </tbody>
 </table>
