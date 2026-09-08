@@ -52,15 +52,17 @@ nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e 
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128506;</span> Come leggere i colori:</strong>
-<strong>studiare ora</strong> indica i contenuti spiegati dalla dispensa e richiesti in questa lezione; <strong>riconoscere o studiare più avanti</strong> segnala gli argomenti da saper individuare nella documentazione, senza approfondirli ancora. Ogni stato è scritto anche accanto al colore, che non è quindi l'unico segnale.</p>
+<strong>coperto</strong> indica i contenuti spiegati dalla dispensa e richiesti in questa lezione; <strong>introdotto</strong> segnala una prima presentazione da riconoscere o sperimentare; <strong>più avanti</strong> identifica gli argomenti esclusi dallo studio attuale. Ogni stato è scritto anche accanto al colore, che non è quindi l'unico segnale.</p>
 </td></tr></table>
 
 <table align="center"><tr><td>
 <details>
-<summary>&#128506;&#65039; <strong>Mappa — profondità richiesta</strong></summary>
+<summary>&#128506;&#65039; <strong>Mappa — CSS moderno, layout e responsive design</strong></summary>
+
+<p align="justify">La mappa collega i nuclei della dispensa alle pagine e alle sezioni MDN corrispondenti. Le frecce verdi indicano ciò che viene spiegato in italiano, la freccia ambra una prima introduzione e quella grigia gli argomenti esclusi dallo studio attuale.</p>
 
 <p align="center">
-  <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
+  <img src="../../assets/tpsi5/02-mdn-css-coverage.svg" alt="Mappa tra i paragrafi della dispensa su CSS moderno, layout e responsive design e le pagine MDN corrispondenti. La legenda distingue contenuti coperti, introdotti e rimandati">
 </p>
 
 </details>
@@ -74,11 +76,12 @@ nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e 
 <table align="center">
 <thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
 <tbody>
-<tr><td><a href="#lesson-css-foundations">Ruolo, sintassi e selettori</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS">What is CSS?</a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors">Basic CSS selectors</a></td><td>&#128994; studiare ora</td></tr>
-<tr><td><a href="#lesson-css-cascade">Cascade, specificità ed ereditarietà</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a></td><td>&#128994; studiare ora</td></tr>
-<tr><td><a href="#lesson-css-layout">Box model, Flexbox e Grid</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout">CSS layout</a></td><td>&#128994; studiare ora</td></tr>
-<tr><td><a href="#lesson-css-responsive">Responsive design e media query</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a></td><td>&#128994; studiare ora</td></tr>
-<tr><td>Writing modes, animazioni e layout avanzati</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS reference</a></td><td>&#128993; riconoscere o studiare più avanti</td></tr>
+<tr><td><a href="#lesson-css-foundations">Ruolo, sintassi e selettori</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS">What is CSS?</a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors">Basic CSS selectors</a></td><td>&#128994; coperto</td></tr>
+<tr><td><a href="#lesson-css-cascade">Cascade, specificità ed ereditarietà</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a></td><td>&#128994; coperto</td></tr>
+<tr><td><a href="#lesson-css-layout">Box model, Flexbox e Grid</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout">CSS layout</a></td><td>&#128994; coperto</td></tr>
+<tr><td><a href="#lesson-css-responsive">Responsive design e media query</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a></td><td>&#128994; coperto</td></tr>
+<tr><td><a href="#lesson-css-custom-properties">Custom properties</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">Using CSS custom properties</a></td><td>&#128993; introdotto</td></tr>
+<tr><td>Writing modes, animazioni e layout avanzati</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS reference</a></td><td>&#9898; più avanti</td></tr>
 </tbody>
 </table>
 
@@ -548,6 +551,7 @@ img {
 
 <p align="justify">Non risolve da sola art direction, formati o performance delle immagini, ma impedisce spesso che un'immagine superi il contenitore.</p>
 
+<a id="lesson-css-custom-properties"></a>
 ## Custom properties: valori con un nome
 
 <p align="justify">Possiamo dichiarare valori riusabili:</p>
