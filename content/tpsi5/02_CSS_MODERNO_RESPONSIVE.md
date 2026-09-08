@@ -18,9 +18,10 @@ come decide il browser quale dichiarazione CSS applicare? Quando conviene Flexbo
 Al termine lo studente dovrà saper:</p>
 <ul>
   <li>spiegare il ruolo di CSS nella Web Platform senza confonderlo con HTML;</li>
+  <li>descrivere il percorso semplificato che porta da DOM e regole CSS ai box visualizzati;</li>
   <li>leggere e scrivere regole CSS composte da selettore, proprietà e valore;</li>
-  <li>prevedere il risultato di conflitti semplici usando cascade, specificità e ordine;</li>
-  <li>usare il box model e <code>box-sizing: border-box</code> in modo consapevole;</li>
+  <li>prevedere il risultato di conflitti semplici distinguendo cascade, specificità, ordine ed ereditarietà;</li>
+  <li>calcolare le dimensioni di un box e usare <code>box-sizing: border-box</code> in modo consapevole;</li>
   <li>distinguere normal flow, <code>block</code>, <code>inline</code> e contenitori di layout;</li>
   <li>scegliere Flexbox per problemi prevalentemente monodimensionali;</li>
   <li>scegliere Grid per layout bidimensionali;</li>
@@ -288,6 +289,7 @@ nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e 
 <tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-content"><code>justify-content</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-items"><code>align-items</code></a></li></ul></td><td><ul><li>Allineamento sull'asse principale.</li><li>Allineamento sull'asse trasversale.</li></ul></td><td><ul><li><code>align-content</code>.</li><li><code>align-self</code> e <code>justify-self</code>.</li></ul></td></tr>
 <tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex"><code>flex</code></a></li></ul></td><td><ul><li>Crescita e restringimento degli item.</li><li>Uso della shorthand nei casi semplici.</li></ul></td><td><ul><li><code>flex-grow</code>, <code>flex-shrink</code> e <code>flex-basis</code> separati.</li></ul></td></tr>
 <tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"><code>grid-template-columns</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/minmax"><code>minmax()</code></a></li></ul></td><td><ul><li>Colonne esplicite e unità <code>fr</code>.</li><li>Limiti minimi e massimi delle track.</li><li><code>minmax(0, 1fr)</code>.</li></ul></td><td><ul><li><code>repeat()</code> e auto-fit.</li><li>Subgrid e named lines.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-column"><code>grid-column</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-row"><code>grid-row</code></a></li></ul></td><td><ul><li>Posizionamento mediante linee.</li><li>Estensione su più track.</li></ul></td><td><ul><li>Named lines.</li><li>Posizionamento avanzato e sovrapposizione.</li></ul></td></tr>
 <tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media"><code>@media</code></a></li></ul></td><td><ul><li>Condizione <code>min-width</code>.</li><li>Strategia mobile-first.</li><li>Breakpoint scelti dal contenuto.</li></ul></td><td><ul><li>Preferenze utente e altri media feature.</li><li>Media type diversi dallo schermo.</li></ul></td></tr>
 <tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">Custom properties</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/var"><code>var()</code></a></li></ul></td><td><ul><li>Dichiarazione con prefisso <code>--</code>.</li><li>Lettura di un valore riusabile.</li></ul></td><td><ul><li>Fallback di <code>var()</code>.</li><li>Scope, ereditarietà e registrazione con <code>@property</code>.</li></ul></td></tr>
 <tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/float"><code>float</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow-x"><code>overflow-x</code></a></li></ul></td><td><ul><li>Riconoscere perché non sostituiscono un layout moderno.</li><li>Non nascondere un overflow senza diagnosticarlo.</li></ul></td><td><ul><li>Contornamento del testo con <code>float</code>.</li><li>Gestione completa dell'overflow.</li></ul></td></tr>
@@ -315,6 +317,23 @@ nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e 
 
 <p align="justify">Questo è il problema che affrontiamo con CSS.</p>
 
+<table align="center"><tr><td>
+<details>
+<summary>&#129517; <strong>Articolazione suggerita — cinque incontri</strong></summary>
+
+<ol>
+  <li>ruolo di CSS, sintassi, selettori e percorso dal documento alla pagina;</li>
+  <li>cascade, specificità, ereditarietà e box model osservati con DevTools;</li>
+  <li>normal flow e Flexbox;</li>
+  <li>Grid e scelta motivata del sistema di layout;</li>
+  <li>responsive design, shell Feisbuc e debug.</li>
+</ol>
+
+<p align="justify">I cinque passaggi appartengono alla stessa unità: ogni incontro riprende il modello precedente e aggiunge un solo livello di controllo sul layout.</p>
+
+</details>
+</td></tr></table>
+
 <a id="lesson-css-foundations"></a>
 ## HTML e CSS hanno responsabilità diverse
 
@@ -339,6 +358,29 @@ HTML descrive soprattutto <strong>struttura e significato</strong>. CSS descrive
 ```
 
 <p align="justify">Cambiare il bordo non trasforma <code>article</code> in un altro tipo di contenuto: cambia il modo in cui viene presentato.</p>
+
+### Dal documento alla pagina visualizzata
+
+<p align="justify">HTML e CSS arrivano al browser come sorgenti distinti, ma vengono combinati per produrre la pagina. Nel modello semplificato che useremo nel corso:</p>
+
+<ol>
+  <li>il browser interpreta l'HTML e costruisce il DOM;</li>
+  <li>interpreta le regole CSS e individua quali elementi corrispondono ai selettori;</li>
+  <li>risolve eventuali conflitti con la cascade e calcola gli stili;</li>
+  <li>genera le scatole, ne calcola posizione e dimensioni durante il layout;</li>
+  <li>disegna il risultato nella finestra del browser.</li>
+</ol>
+
+<p align="center">
+  <img src="../../assets/tpsi5/02-css-rendering-pipeline.svg" alt="Percorso semplificato dal documento HTML e dal foglio CSS al DOM, agli stili calcolati, al layout e alla pagina disegnata dal browser">
+</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Modello mentale — CSS non modifica il significato:</strong>
+il DOM descrive gli elementi del documento; CSS decide come le scatole associate a quegli elementi devono essere presentate. Il risultato visivo nasce dalla loro combinazione.</p>
+</td></tr></table>
+
+<p align="justify">Questo percorso è volutamente semplificato: ci serve per collegare selettori, cascade, box model e layout. Il riferimento è <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS#how_is_css_applied_to_html">MDN — How is CSS applied to HTML?</a>.</p>
 
 ### Da dove arriva lo stile
 
@@ -372,11 +414,17 @@ HTML descrive soprattutto <strong>struttura e significato</strong>. CSS descrive
 
 <ul>
   <li><code>.post</code> è il <strong>selettore</strong>;</li>
-  <li><code>padding</code> e <code>border</code> sono <strong>proprietà</strong>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding"><code>padding</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/border"><code>border</code></a> sono <strong>proprietà</strong>;</li>
   <li><code>1rem</code> e <code>1px solid #bbb</code> sono <strong>valori</strong>;</li>
   <li><code>padding: 1rem</code> è una <strong>dichiarazione</strong>;</li>
   <li>l'insieme fra <code>{</code> e <code>}</code> è il blocco delle dichiarazioni.</li>
 </ul>
+
+<p align="justify">Il punto e virgola separa le dichiarazioni. Il browser può ignorare una dichiarazione che non comprende senza annullare necessariamente l'intera regola: per questo, quando uno stile non appare, dobbiamo controllare sia la sintassi sia il valore ammesso dalla proprietà.</p>
+
+<p align="center">
+  <img src="../../assets/tpsi5/02-css-rule-anatomy.svg" alt="Anatomia di una regola CSS con selettore, blocco delle dichiarazioni, proprietà, valore, due punti e punto e virgola">
+</p>
 
 ### Selettori da padroneggiare nel core
 
@@ -410,19 +458,16 @@ input[type="email"] { }
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — cascade:</strong>
-CSS significa <em>Cascading Style Sheets</em>: più dichiarazioni possono riguardare lo stesso elemento e il browser deve decidere quale applicare.</p>
+CSS significa <em>Cascading Style Sheets</em>: quando più dichiarazioni assegnano valori diversi alla stessa proprietà dello stesso elemento, la cascade stabilisce quale dichiarazione vince.</p>
 </td></tr></table>
 
-<p align="justify">Per i casi iniziali ragioniamo in questo ordine mentale:</p>
+<p align="justify">Consideriamo un post che corrisponde a entrambe le regole:</p>
 
-<ol>
-  <li>le dichiarazioni sono entrambe applicabili all'elemento?</li>
-  <li>c'è un'importanza/origine diversa?</li>
-  <li>quale selettore è più specifico?</li>
-  <li>se la priorità è equivalente, quale dichiarazione arriva dopo?</li>
-</ol>
-
-<p align="justify">Esempio:</p>
+```html
+<main id="feed">
+  <article class="post">...</article>
+</main>
+```
 
 ```css
 .post {
@@ -430,24 +475,89 @@ CSS significa <em>Cascading Style Sheets</em>: più dichiarazioni possono riguar
 }
 
 #feed .post {
-  color: #333;
+  color: #334155;
 }
 ```
 
-<p align="justify">Il secondo selettore ha specificità maggiore.</p>
+<p align="justify">Le due dichiarazioni sono entrambe candidate per <code>color</code>, ma non vengono sommate: dopo il confronto ne rimane una vincente. Per i casi del corso useremo questo algoritmo semplificato:</p>
+
+<ol>
+  <li><strong>rilevanza:</strong> la regola corrisponde all'elemento e le eventuali condizioni, come una media query, sono vere?</li>
+  <li><strong>origine e importanza:</strong> lo stile proviene dal browser, dall'utente o dall'autore? La dichiarazione è normale oppure <code>!important</code>?</li>
+  <li><strong>specificità:</strong> fra dichiarazioni rimaste nello stesso livello, quale selettore identifica l'elemento in modo più specifico?</li>
+  <li><strong>ordine nel sorgente:</strong> se anche la specificità è equivalente, quale dichiarazione compare dopo?</li>
+</ol>
+
+<p align="center">
+  <img src="../../assets/tpsi5/02-cascade-decision.svg" alt="Algoritmo semplificato della cascade: rilevanza, origine e importanza, specificità e ordine nel sorgente determinano la dichiarazione vincente">
+</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Confine del modello:</strong>
+animazioni, transizioni, cascade layers e prossimità di <code>@scope</code> fanno parte dell'algoritmo completo, ma non sono richieste in questa lezione. Dobbiamo saperne riconoscere i nomi nella documentazione senza usarli ancora.</p>
+</td></tr></table>
+
+### Rilevanza: la regola partecipa davvero?
+
+<p align="justify">Una dichiarazione entra nel confronto soltanto se il selettore corrisponde all'elemento. Inoltre una regola racchiusa in <code>@media</code> partecipa soltanto quando la condizione è vera.</p>
+
+```css
+@media (min-width: 56rem) {
+  .profile {
+    display: block;
+  }
+}
+```
+
+<p align="justify">Su un viewport più stretto di <code>56rem</code>, quella dichiarazione non perde per specificità: <strong>non è rilevante</strong> e quindi non entra affatto nella competizione.</p>
+
+### Origine e importanza
+
+<p align="justify">Gli stili possono provenire da più origini. Il browser possiede un foglio predefinito, l'autore della pagina collega il proprio CSS e l'utente può avere preferenze o stili personali. Nei normali esempi del corso lavoriamo quasi sempre con dichiarazioni dell'autore non importanti: in quel contesto saranno soprattutto specificità e ordine a risolvere i conflitti.</p>
+
+<p align="justify"><code>!important</code> sposta una dichiarazione in un livello di importanza differente. Non significa “rendila molto specifica” e non aggiunge peso al selettore: modifica una fase precedente della cascade.</p>
 
 ### Specificità senza formule magiche
 
-<p align="justify">Per il livello core basta ricordare una gerarchia pratica:</p>
+<p align="justify">La specificità si confronta soltanto fra dichiarazioni che hanno già superato le fasi precedenti. Per i selettori del corso possiamo rappresentarla con tre colonne, confrontate da sinistra verso destra:</p>
 
-<ul>
-  <li>selettori di tipo (<code>article</code>) hanno peso basso;</li>
-  <li>classi, attributi e pseudo-classi (<code>.post</code>, <code>[hidden]</code>, <code>:hover</code>) hanno peso maggiore;</li>
-  <li>ID (<code>#feed</code>) hanno peso ancora maggiore;</li>
-  <li>gli stili inline sono ancora più difficili da sovrascrivere nel normale CSS dell'autore.</li>
-</ul>
+<table align="center">
+<thead><tr><th>Colonna</th><th>Che cosa conta</th><th>Esempio</th></tr></thead>
+<tbody>
+<tr><td>ID</td><td>Selettori ID</td><td><code>#feed</code></td></tr>
+<tr><td>Classi</td><td>Classi, attributi e pseudo-classi</td><td><code>.post</code>, <code>[hidden]</code>, <code>:hover</code></td></tr>
+<tr><td>Tipi</td><td>Elementi e pseudo-elementi</td><td><code>article</code>, <code>::first-line</code></td></tr>
+</tbody>
+</table>
 
-<p align="justify">Non useremo la specificità come una gara a costruire il selettore più lungo. Il buon obiettivo è il contrario: <strong>regole semplici e prevedibili</strong>.</p>
+<table align="center">
+<thead><tr><th>Selettore</th><th>ID</th><th>Classi</th><th>Tipi</th></tr></thead>
+<tbody>
+<tr><td><code>.post</code></td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td><code>article.post</code></td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td><code>#feed .post</code></td><td>1</td><td>1</td><td>0</td></tr>
+</tbody>
+</table>
+
+<p align="justify"><code>#feed .post</code> vince su <code>article.post</code> perché la colonna degli ID è già maggiore. Non trasformiamo queste colonne in un numero decimale e non costruiamo selettori più lunghi solo per “vincere”: l'obiettivo è mantenere regole semplici e prevedibili.</p>
+
+<p align="justify">Gli stili inline partecipano con una precedenza particolare rispetto ai normali selettori dell'autore. Nel corso li riconosceremo nei DevTools, ma non li useremo come strategia abituale di styling.</p>
+
+### Ordine nel sorgente: l'ultimo criterio
+
+<p align="justify">Se origine, importanza e specificità sono equivalenti, prevale la dichiarazione che compare più tardi:</p>
+
+```css
+.post {
+  color: #222;
+}
+
+.post {
+  color: #334155;
+}
+```
+
+<p align="justify">In questo caso il colore finale è <code>#334155</code>. L'ordine risolve il conflitto soltanto perché i due selettori hanno la stessa specificità.</p>
 
 ### Perché evitare `!important` come soluzione abituale
 
@@ -475,7 +585,10 @@ CSS significa <em>Cascading Style Sheets</em>: più dichiarazioni possono riguar
 
 ## Ereditarietà
 
-<p align="justify">Alcune proprietà possono essere ereditate dai discendenti, altre no.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — ereditarietà:</strong>
+alcune proprietà, soprattutto legate al testo, possono ricevere dal genitore il valore calcolato; altre proprietà partono invece dal proprio valore iniziale.</p>
+</td></tr></table>
 
 ```css
 body {
@@ -484,9 +597,18 @@ body {
 }
 ```
 
-<p align="justify">Molto testo dentro <code>body</code> userà naturalmente questi valori. Un <code>margin</code> assegnato a <code>body</code>, invece, non viene semplicemente ereditato da tutti i figli.</p>
+<p align="justify">Il testo contenuto nei discendenti di <code>body</code> userà normalmente questi valori di <code>color</code> e <code>font-family</code>, finché una dichiarazione più vicina non assegna un valore differente. Un <code>margin</code> impostato su <code>body</code>, invece, non viene ereditato dai figli.</p>
 
-<p align="justify">Quando non ricordi se una proprietà eredita, consulta la sezione <strong>Formal definition</strong> della pagina MDN della proprietà.</p>
+<table align="center">
+<thead><tr><th>Tende a ereditare</th><th>Non tende a ereditare</th></tr></thead>
+<tbody>
+<tr><td><code>color</code>, <code>font-family</code>, <code>line-height</code></td><td><code>margin</code>, <code>padding</code>, <code>border</code>, <code>width</code></td></tr>
+</tbody>
+</table>
+
+<p align="justify">Cascade ed ereditarietà rispondono quindi a domande differenti: la cascade sceglie fra dichiarazioni concorrenti; l'ereditarietà può fornire un valore quando la proprietà lo consente. Nei DevTools gli stili ereditati vengono normalmente mostrati separati dalle regole applicate direttamente.</p>
+
+<p align="justify">Quando non ricordi se una proprietà eredita, consulta la voce <strong>Inherited</strong> nella sezione <strong>Formal definition</strong> della sua pagina MDN. Il percorso completo di riferimento è <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">MDN — Handling conflicts</a>.</p>
 
 <a id="lesson-css-box-model"></a>
 ## Box model: ogni elemento genera scatole
@@ -496,39 +618,52 @@ body {
 ogni elemento genera una scatola composta dall'area del contenuto e, procedendo verso l'esterno, da padding, bordo e margine.</p>
 </td></tr></table>
 
-<p align="justify">Per capire dimensioni e spazi dobbiamo visualizzare:</p>
+<p align="center">
+  <img src="../../assets/tpsi5/02-box-model-anatomy.svg" alt="Anatomia del box model CSS con content al centro, padding, border e margin procedendo verso l'esterno">
+</p>
 
-```text
-margin
-└─ border
-   └─ padding
-      └─ content
-```
-
-<p align="justify">Un elemento può avere:</p>
+<p align="justify">Le quattro zone hanno ruoli differenti:</p>
 
 <ul>
-  <li>area del contenuto;</li>
-  <li>padding attorno al contenuto;</li>
-  <li>bordo;</li>
-  <li>margine esterno.</li>
+  <li><strong>content:</strong> contiene testo, immagini o altri elementi;</li>
+  <li><strong>padding:</strong> crea spazio interno fra contenuto e bordo; lo sfondo dell'elemento si estende normalmente anche qui;</li>
+  <li><strong>border:</strong> delimita la scatola ed entra nel calcolo della sua dimensione;</li>
+  <li><strong>margin:</strong> crea spazio esterno rispetto alle altre scatole; non appartiene allo sfondo e non fa parte della larghezza dichiarata.</li>
 </ul>
 
-<p align="justify">Esempio:</p>
+### Calcolare la larghezza reale
+
+<p align="justify">Usiamo valori in pixel per rendere visibile il calcolo:</p>
 
 ```css
 .post {
-  width: 20rem;
-  padding: 1rem;
-  border: 0.25rem solid #777;
+  width: 300px;
+  padding: 20px;
+  border: 4px solid #777;
+  margin: 16px;
 }
 ```
 
-<p align="justify">Con il box model standard la <code>width</code> indica la larghezza del <strong>content box</strong>, quindi padding e border si sommano alla dimensione finale.</p>
+<p align="justify">Con il modello standard, chiamato <code>content-box</code>, <code>width: 300px</code> descrive soltanto il contenuto. La larghezza visibile fino al bordo è:</p>
+
+```text
+300px content
++ 20px padding sinistro + 20px padding destro
++  4px border sinistro  +  4px border destro
+= 348px fino al bordo
+```
+
+<p align="justify">I margini aggiungono spazio esterno occupato nel layout, ma non cambiano la dimensione della scatola fino al bordo. In questo esempio lo spazio orizzontale complessivo arriva a <code>380px</code>: <code>348px + 16px + 16px</code>.</p>
 
 ### `box-sizing: border-box`
 
-<p align="justify">Per interfacce applicative è spesso più facile ragionare così:</p>
+<p align="justify">Con <code>border-box</code>, la larghezza dichiarata comprende content, padding e border. A parità di dichiarazioni, la scatola fino al bordo rimane larga <code>300px</code> e il browser riduce lo spazio disponibile per il contenuto.</p>
+
+<p align="center">
+  <img src="../../assets/tpsi5/02-box-sizing-comparison.svg" alt="Confronto numerico tra content-box largo 348 pixel e border-box largo 300 pixel usando la stessa width, lo stesso padding e lo stesso bordo">
+</p>
+
+<p align="justify">Per molte interfacce è quindi più semplice applicare:</p>
 
 ```css
 *,
@@ -538,18 +673,41 @@ margin
 }
 ```
 
-<p align="justify">Con <code>border-box</code>, quando impostiamo una larghezza, padding e border rientrano nella dimensione dichiarata.</p>
+<p align="justify">Lo pseudo-elemento <code>::before</code> e <code>::after</code> viene incluso perché può generare una propria scatola. Questa regola non è un reset universale: rende prevedibile il calcolo delle dimensioni e non modifica automaticamente margini, font o colori.</p>
 
-<p align="justify">Questo non è un reset magico di tutto il CSS: risolve un problema preciso di calcolo delle dimensioni.</p>
+### Margini verticali che possono collassare
+
+<p align="justify">Nel normale flusso, i margini verticali di alcuni elementi block adiacenti possono <strong>collassare</strong>: invece di sommarsi, viene normalmente mantenuto il margine maggiore. Due paragrafi con <code>margin-bottom: 24px</code> e <code>margin-top: 16px</code> possono quindi risultare separati da <code>24px</code>, non da <code>40px</code>.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Attenzione — il padding non collassa:</strong>
+il comportamento riguarda determinati margini nel normale flusso. Padding, border e <code>gap</code> seguono regole differenti.</p>
+</td></tr></table>
+
+<p align="justify">Per esercizi ed eccezioni consulta <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">MDN — The box model</a>. In questa lezione devi saper riconoscere il fenomeno e verificarlo nei DevTools.</p>
 
 <a id="lesson-css-normal-flow"></a>
 ## Normal flow prima del layout speciale
 
-<p align="justify">Prima di Flexbox e Grid, il browser ha già un algoritmo di layout: il <strong>normal flow</strong>.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — normal flow:</strong>
+è il modo predefinito con cui il browser dispone gli elementi quando nessuna regola CSS attiva un metodo di layout differente o li rimuove dal flusso.</p>
+</td></tr></table>
 
-<p align="justify">Gli elementi block tendono a disporsi uno dopo l'altro lungo la direzione di blocco. Il contenuto inline scorre invece dentro le righe.</p>
+<p align="center">
+  <img src="../../assets/tpsi5/02-normal-flow.svg" alt="Confronto tra scatole block disposte una sotto l'altra e contenuto inline disposto all'interno delle righe nel normale flusso CSS">
+</p>
 
-<p align="justify">Capire il normal flow serve perché Flexbox e Grid non sostituiscono CSS: cambiano il modo in cui vengono disposti i figli di uno specifico contenitore.</p>
+<table align="center">
+<thead><tr><th>Scatola block</th><th>Scatola inline</th></tr></thead>
+<tbody>
+<tr><td><ul><li>inizia normalmente su una nuova riga;</li><li>tende a occupare lo spazio disponibile nella direzione inline;</li><li><code>width</code> e <code>height</code> vengono rispettati.</li></ul></td><td><ul><li>scorre insieme al testo;</li><li>va a capo quando termina lo spazio;</li><li>le dimensioni dipendono soprattutto dal contenuto.</li></ul></td></tr>
+</tbody>
+</table>
+
+<p align="justify">La proprietà <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display"><code>display</code></a> controlla sia il modo in cui la scatola partecipa al flusso esterno sia il layout usato per i suoi figli. Con <code>display: flex</code> o <code>display: grid</code> l'elemento continua ad avere una propria scatola nel documento, ma i suoi figli diretti vengono organizzati da un nuovo algoritmo.</p>
+
+<p align="justify">Un documento semanticamente corretto dovrebbe rimanere leggibile anche nel normal flow. Flexbox e Grid servono a migliorare la disposizione, non a riparare un ordine HTML privo di significato. Il riferimento è <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Introduction">MDN — Introduction to CSS layout</a>.</p>
 
 <a id="lesson-css-layout"></a>
 ## Flexbox: una dimensione alla volta
@@ -559,7 +717,37 @@ margin
 Flexbox è adatto quando il problema principale è distribuire elementi in una <strong>riga oppure colonna</strong>.</p>
 </td></tr></table>
 
-<p align="justify">Esempio: il menu di Feisbuc.</p>
+<p align="justify">Quando assegniamo <code>display: flex</code> a un elemento, quell'elemento diventa il <strong>flex container</strong> e i suoi figli diretti diventano <strong>flex item</strong>. I discendenti più profondi non diventano automaticamente flex item.</p>
+
+<p align="center">
+  <img src="../../assets/tpsi5/02-flexbox-axes.svg" alt="Flex container con tre item, asse principale, asse trasversale, direzioni start ed end e collegamento alle proprietà justify-content e align-items">
+</p>
+
+### Assi, direzione e allineamento
+
+<p align="justify">Flexbox ragiona sempre rispetto a due assi:</p>
+
+<ul>
+  <li>il <strong>main axis</strong> segue <code>flex-direction</code>;</li>
+  <li>il <strong>cross axis</strong> è perpendicolare al main axis;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-content"><code>justify-content</code></a> distribuisce lo spazio lungo il main axis;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-items"><code>align-items</code></a> allinea gli item lungo il cross axis;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap"><code>gap</code></a> crea uno spazio regolare fra gli item senza aggiungerlo ai bordi esterni.</li>
+</ul>
+
+<p align="justify">Con il valore iniziale <code>flex-direction: row</code>, in una pagina italiana il main axis è normalmente orizzontale. Se impostiamo <code>column</code>, il main axis diventa verticale: per questo non dobbiamo memorizzare <code>justify-content</code> come sinonimo di “allineamento orizzontale”.</p>
+
+### Esempio Feisbuc: menu che può andare a capo
+
+```html
+<nav aria-label="Navigazione principale">
+  <ul class="nav-list">
+    <li><a href="#feed">Feed</a></li>
+    <li><a href="#profile">Profilo</a></li>
+    <li><a href="#settings">Impostazioni</a></li>
+  </ul>
+</nav>
+```
 
 ```css
 .nav-list {
@@ -567,27 +755,31 @@ Flexbox è adatto quando il problema principale è distribuire elementi in una <
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
+  padding: 0;
+  list-style: none;
 }
 ```
 
-<p align="justify">Concetti essenziali:</p>
+<p align="justify"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap"><code>flex-wrap: wrap</code></a> consente agli item di creare nuove righe quando lo spazio non basta. Senza wrapping, il browser tenta normalmente di mantenere tutti gli item sulla stessa linea flessibile, restringendoli quando possibile.</p>
+
+### Crescita e restringimento degli item
+
+<p align="justify">Ogni flex item possiede tre idee fondamentali:</p>
 
 <ul>
-  <li>flex container;</li>
-  <li>flex item;</li>
-  <li>main axis;</li>
-  <li>cross axis;</li>
-  <li><code>flex-direction</code>;</li>
-  <li><code>justify-content</code>;</li>
-  <li><code>align-items</code>;</li>
-  <li><code>gap</code>;</li>
-  <li><code>flex-wrap</code>;</li>
-  <li><code>flex</code> / crescita e restringimento quando serve.</li>
+  <li><strong>base:</strong> la dimensione di partenza;</li>
+  <li><strong>grow:</strong> quanto può ricevere dello spazio positivo disponibile;</li>
+  <li><strong>shrink:</strong> quanto può restringersi quando lo spazio è insufficiente.</li>
 </ul>
 
-### Errore comune: memorizzare `justify` = orizzontale
+<p align="justify">La proprietà shorthand <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex"><code>flex</code></a> combina questi comportamenti. In questa lezione è sufficiente comprendere il modello e saper leggere un caso semplice; le differenze precise fra <code>flex-basis</code>, <code>width</code> e le varie shorthand restano nella scheda MDN.</p>
 
-<p align="justify">Non è corretto. <code>justify-content</code> lavora sull'<strong>asse principale</strong>. Se cambi <code>flex-direction</code>, cambia anche l'orientamento dell'asse principale.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Attenzione — ordine visivo:</strong>
+valori come <code>row-reverse</code> e la proprietà <code>order</code> possono cambiare l'ordine visuale senza cambiare l'ordine nel DOM. Non usarli per nascondere una sequenza HTML scorretta.</p>
+</td></tr></table>
+
+<p align="justify">Il percorso completo per gli argomenti richiesti è <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">MDN — Flexbox</a>: concentrati su flex model, direzione, wrapping, sizing e allineamento.</p>
 
 <a id="lesson-css-grid"></a>
 ## Grid: righe e colonne coordinate
@@ -597,11 +789,37 @@ Flexbox è adatto quando il problema principale è distribuire elementi in una <
 Grid è adatto quando il layout deve ragionare contemporaneamente su <strong>due dimensioni</strong>.</p>
 </td></tr></table>
 
-<p align="justify">Per Feisbuc, su uno schermo ampio potremmo voler coordinare:</p>
+<p align="justify">Con <code>display: grid</code> l'elemento diventa un <strong>grid container</strong> e i suoi figli diretti diventano <strong>grid item</strong>. Il contenitore definisce una griglia di linee orizzontali e verticali sulla quale vengono collocati gli item.</p>
 
-```text
-profilo | feed | tendenze
+<p align="center">
+  <img src="../../assets/tpsi5/02-grid-anatomy.svg" alt="Anatomia di CSS Grid con linee numerate, tre colonne, due righe, track, celle, gap e un item che occupa più celle">
+</p>
+
+<ul>
+  <li>una <strong>grid line</strong> è una linea che delimita righe o colonne;</li>
+  <li>una <strong>track</strong> è lo spazio fra due linee adiacenti: può essere una riga o una colonna;</li>
+  <li>una <strong>cell</strong> è l'intersezione fra una riga e una colonna;</li>
+  <li>il <strong>gap</strong> è lo spazio fra le track;</li>
+  <li>un <strong>grid item</strong> può occupare una o più celle.</li>
+</ul>
+
+<p align="justify">Se non assegniamo esplicitamente una posizione agli item, entra in funzione l'<strong>auto-placement</strong>: il browser li colloca nella griglia seguendo il proprio algoritmo e l'ordine del DOM.</p>
+
+### Posizionare un item usando le linee
+
+<p align="justify">La numerazione riguarda le <strong>linee</strong>, non le colonne. In una griglia con tre colonne esistono quattro linee verticali. Possiamo fare occupare a un elemento lo spazio compreso fra la prima e la terza linea:</p>
+
+```css
+.post--featured {
+  grid-column: 1 / 3;
+}
 ```
+
+<p align="justify">L'item attraversa così due track di colonna. La forma <code>grid-column: 1 / 3</code> è una shorthand per inizio e fine; <code>grid-row</code> usa lo stesso modello sulle linee orizzontali. Questa lettura spiega perché nell'immagine un item può occupare più celle senza trasformare le celle in contenitori separati.</p>
+
+### Esempio Feisbuc: tre regioni coordinate
+
+<p align="justify">Su uno schermo ampio vogliamo coordinare profilo, feed e tendenze. Le tre regioni appartengono alla stessa struttura bidimensionale:</p>
 
 ```css
 .page-shell {
@@ -614,24 +832,26 @@ profilo | feed | tendenze
 }
 ```
 
-<p align="justify">Concetti core:</p>
+<p align="justify">Leggiamo <code>grid-template-columns</code> una colonna alla volta:</p>
 
-<ul>
-  <li>grid container;</li>
-  <li>grid item;</li>
-  <li>righe e colonne;</li>
-  <li>track;</li>
-  <li><code>fr</code>;</li>
-  <li><code>gap</code>;</li>
-  <li><code>grid-template-columns</code>;</li>
-  <li><code>minmax()</code>;</li>
-  <li>auto-placement;</li>
-  <li>grid areas solo dopo avere capito le colonne di base.</li>
-</ul>
+<ol>
+  <li><code>minmax(12rem, 16rem)</code>: il profilo può crescere da <code>12rem</code> a <code>16rem</code>;</li>
+  <li><code>minmax(0, 1fr)</code>: il feed riceve una frazione dello spazio disponibile e può restringersi prima che il contenuto provochi overflow;</li>
+  <li><code>minmax(12rem, 16rem)</code>: la colonna delle tendenze segue gli stessi limiti del profilo.</li>
+</ol>
+
+<p align="justify">L'unità <code>fr</code> rappresenta una quota dello <strong>spazio disponibile nella griglia</strong>, non una percentuale rigida della larghezza totale. Prima vengono considerati limiti, track non flessibili e gap; poi lo spazio rimanente viene distribuito fra le frazioni.</p>
 
 ### Perché `minmax(0, 1fr)` nel feed?
 
 <p align="justify">Il valore <code>1fr</code> distribuisce spazio flessibile. In certi layout, un contenuto lungo può però impedire alla colonna di restringersi come immaginiamo. Rendere esplicito il minimo <code>0</code> è una tecnica utile per permettere alla colonna centrale di contrarsi e gestire correttamente l'overflow.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Attenzione — Grid non corregge il DOM:</strong>
+anche se possiamo posizionare visivamente gli item in celle differenti, l'ordine del documento continua a essere importante per lettura, tastiera e tecnologie assistive.</p>
+</td></tr></table>
+
+<p align="justify">Nella pagina <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">MDN — CSS grid layout</a> studia creazione della griglia, righe, colonne, gap e posizionamento di base. Grid areas, named lines e subgrid sono approfondimenti successivi.</p>
 
 <a id="lesson-css-layout-choice"></a>
 ## Flexbox o Grid?
@@ -642,6 +862,20 @@ profilo | feed | tendenze
 <p align="justify"><strong><span style="font-size: 1.15em;">&#10067;</span> Domanda guida:</strong>
 sto organizzando soprattutto una fila o una colonna, oppure devo coordinare righe e colonne?</p>
 </td></tr></table>
+
+<p align="center">
+  <img src="../../assets/tpsi5/02-flex-grid-choice.svg" alt="Confronto visuale tra Flexbox usato per una riga o una colonna e Grid usato per coordinare contemporaneamente righe e colonne">
+</p>
+
+<table align="center">
+<thead><tr><th>Domanda</th><th>Flexbox</th><th>Grid</th></tr></thead>
+<tbody>
+<tr><td>Quante dimensioni coordino?</td><td>Soprattutto una: riga oppure colonna.</td><td>Due: righe e colonne insieme.</td></tr>
+<tr><td>Chi guida la disposizione?</td><td>Il contenuto e lo spazio lungo un asse.</td><td>La struttura delle track definita dal contenitore.</td></tr>
+<tr><td>Esempio Feisbuc</td><td>Menu, pulsanti, avatar e azioni di un post.</td><td>Profilo, feed, tendenze e griglie di card.</td></tr>
+<tr><td>Possono essere combinati?</td><td colspan="2">Sì: Grid per il macro-layout e Flexbox dentro le singole regioni.</td></tr>
+</tbody>
+</table>
 
 <p align="justify">Esempi Feisbuc:</p>
 
@@ -662,6 +896,32 @@ sto organizzando soprattutto una fila o una colonna, oppure devo coordinare righ
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — responsive design:</strong>
 responsive design significa progettare affinché il contenuto rimanga utilizzabile in una gamma di spazi disponibili.</p>
 </td></tr></table>
+
+<p align="justify">Un layout responsive non corrisponde a tre schermate progettate separatamente. È un unico sistema che utilizza:</p>
+
+<ul>
+  <li>contenitori fluidi, capaci di crescere e restringersi;</li>
+  <li>dimensioni relative e limiti minimi o massimi;</li>
+  <li>Flexbox e Grid, che reagiscono allo spazio disponibile;</li>
+  <li>media query, soltanto quando la struttura deve cambiare;</li>
+  <li>testo e immagini che rimangono leggibili e contenuti.</li>
+</ul>
+
+<p align="center">
+  <img src="../../assets/tpsi5/02-responsive-feisbuc.svg" alt="La stessa interfaccia Feisbuc passa da una colonna su viewport piccolo a due regioni su viewport intermedio e tre colonne su viewport ampio">
+</p>
+
+### Viewport del dispositivo e viewport CSS
+
+<p align="justify">La lezione HTML ha introdotto il metadato viewport. Senza una configurazione corretta, i browser mobili possono usare un viewport virtuale più ampio e poi ridurre la pagina, rendendo inaffidabile il ragionamento sui breakpoint.</p>
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+<p align="justify"><code>width=device-width</code> collega la larghezza del viewport CSS alla larghezza del dispositivo. <code>initial-scale=1</code> stabilisce la scala iniziale. Il responsive design nasce quindi dalla collaborazione fra documento HTML e regole CSS.</p>
+
+### Mobile-first: una base completa, non una versione ridotta
 
 <p align="justify">Partiamo da un layout semplice per viewport piccoli:</p>
 
@@ -688,6 +948,25 @@ responsive design significa progettare affinché il contenuto rimanga utilizzabi
 
 <p align="justify">Questo è un approccio mobile-first: la base funziona con poco spazio; una media query aggiunge il layout ampio.</p>
 
+<p align="justify">Mobile-first non significa progettare soltanto per il telefono. Significa partire dalla condizione con meno spazio, assicurarsi che contenuto e funzionalità siano già utilizzabili e aggiungere una disposizione più articolata quando lo spazio la rende sostenibile.</p>
+
+### Anatomia della media query
+
+```css
+@media (min-width: 56rem) {
+  /* queste regole partecipano alla cascade da 56rem in poi */
+}
+```
+
+<ul>
+  <li><code>@media</code> introduce una regola condizionale;</li>
+  <li><code>min-width</code> è la caratteristica verificata;</li>
+  <li><code>56rem</code> è la soglia;</li>
+  <li>le dichiarazioni interne sono rilevanti soltanto quando la condizione risulta vera.</li>
+</ul>
+
+<p align="justify">La media query non sostituisce le regole di base: le affianca. Se una proprietà viene dichiarata sia fuori sia dentro la condizione, quando la condizione è vera il conflitto viene risolto dalla cascade.</p>
+
 ### Media query solo quando serve
 
 <p align="justify">Flexbox e Grid sono già flessibili. Non dobbiamo creare un breakpoint per ogni modello di telefono.</p>
@@ -704,19 +983,40 @@ responsive design significa progettare affinché il contenuto rimanga utilizzabi
 
 <p align="justify">Aggiungi <code>@media</code> quando la struttura ha davvero bisogno di cambiare.</p>
 
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Come scegliere un breakpoint:</strong>
+riduci gradualmente il viewport finché il contenuto non è più leggibile o il layout non dispone bene le regioni. La larghezza appena precedente al problema è una candidata da verificare, non un numero universale legato al nome di un dispositivo.</p>
+</td></tr></table>
+
+<p align="justify">Il percorso di riferimento è formato da <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">MDN — Responsive web design</a> e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">MDN — Media query fundamentals</a>.</p>
+
 <a id="lesson-css-units"></a>
 ## Unità utili
 
-<p align="justify">Non esiste una singola unità corretta per tutto.</p>
+<p align="justify">Una lunghezza CSS è formata da un numero e da un'unità. Le unità <strong>assolute</strong>, come <code>px</code>, non dipendono da un'altra misura dichiarata nel foglio; quelle <strong>relative</strong> ricavano invece il proprio valore da un contesto, per esempio la dimensione del font, il contenitore o il viewport. Relativo non significa automaticamente migliore: dobbiamo scegliere quale relazione esprime davvero il progetto.</p>
 
-<ul>
-  <li><code>px</code>: utile per dettagli come alcuni border;</li>
-  <li><code>%</code>: relativo a un riferimento contestuale;</li>
-  <li><code>rem</code>: utile per spazi e dimensioni scalabili rispetto alla root;</li>
-  <li><code>fr</code>: quota dello spazio disponibile in Grid;</li>
-  <li><code>vw</code>/<code>vh</code>: viewport-relative, da usare con consapevolezza;</li>
-  <li><code>min()</code>, <code>max()</code>, <code>clamp()</code> possono esprimere dimensioni fluide, ma sono un passo successivo.</li>
-</ul>
+<table align="center">
+<thead><tr><th>Unità</th><th>Riferimento</th><th>Uso ragionato nella lezione</th></tr></thead>
+<tbody>
+<tr><td><code>px</code></td><td>CSS pixel</td><td>Bordi sottili e dettagli che non devono scalare con il font.</td></tr>
+<tr><td><code>%</code></td><td>Dipende dalla proprietà e dal containing block</td><td>Larghezze fluide; prima va compreso rispetto a che cosa viene calcolata.</td></tr>
+<tr><td><code>rem</code></td><td>Dimensione del font dell'elemento radice</td><td>Spaziature e dimensioni che devono seguire la scala tipografica della pagina.</td></tr>
+<tr><td><code>em</code></td><td>Dimensione del font nel contesto dell'elemento</td><td>Misure che devono seguire il componente; l'annidamento richiede attenzione.</td></tr>
+<tr><td><code>ch</code></td><td>Larghezza approssimativa del glifo <code>0</code></td><td>Limiti leggibili per righe di testo.</td></tr>
+<tr><td><code>fr</code></td><td>Quota dello spazio disponibile nella Grid</td><td>Track flessibili dopo aver considerato limiti e gap.</td></tr>
+<tr><td><code>vw</code>/<code>vh</code></td><td>Percentuale del viewport</td><td>Effetti legati allo schermo, senza usarli ciecamente per tutto il testo.</td></tr>
+</tbody>
+</table>
+
+<p align="justify">Le funzioni <code>min()</code>, <code>max()</code> e <code>clamp()</code> possono confrontare limiti e valori fluidi. In questa unità usiamo <code>min()</code>; è sufficiente riconoscere le altre due e consultarle quando il progetto le richiederà.</p>
+
+```css
+.page-shell {
+  width: min(100% - 2rem, 75rem);
+}
+```
+
+<p align="justify">La shell occupa lo spazio disponibile meno due margini complessivi di <code>2rem</code>, ma smette di crescere a <code>75rem</code>. Non stiamo scegliendo fra “fluido” e “limitato”: stiamo combinando le due esigenze nella stessa dichiarazione.</p>
 
 <p align="justify">Evitiamo layout come:</p>
 
@@ -726,7 +1026,9 @@ responsive design significa progettare affinché il contenuto rimanga utilizzabi
 }
 ```
 
-<p align="justify">se quella larghezza rigida è l'unico modo in cui la pagina funziona.</p>
+<p align="justify">se quella larghezza rigida è l'unico modo in cui la pagina funziona. Uno schermo più stretto non dispone infatti dei <code>1200px</code> richiesti e la pagina può produrre overflow orizzontale.</p>
+
+<p align="justify">La pagina <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units">MDN — CSS values and units</a> approfondisce i tipi di valore e il riferimento usato da ciascuna unità.</p>
 
 ### Testo leggibile: font, ritmo e colore
 
@@ -747,8 +1049,8 @@ body {
 
 <ul>
   <li>una <strong>font stack</strong> offre alternative se il primo font non è disponibile;</li>
-  <li><code>rem</code> collega le dimensioni alla base del documento e rispetta meglio le preferenze utente;</li>
-  <li><code>line-height</code> senza unità mantiene una proporzione utile anche nei discendenti;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-size"><code>font-size</code></a> in <code>rem</code> collega le dimensioni alla base del documento e rispetta meglio le preferenze utente;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-height"><code>line-height</code></a> senza unità mantiene una proporzione utile anche nei discendenti;</li>
   <li><code>ch</code> può limitare righe di testo troppo lunghe;</li>
   <li>il colore deve avere contrasto sufficiente e non deve essere l'unico segnale di stato.</li>
 </ul>
@@ -757,7 +1059,7 @@ body {
 
 ## Immagini responsive
 
-<p align="justify">Una regola semplice evita molte sorprese:</p>
+<p align="justify">Un'immagine possiede dimensioni intrinseche. Se la sua larghezza naturale è maggiore dello spazio disponibile, può uscire dal contenitore. Questa regola stabilisce un limite senza ingrandire forzatamente le immagini più piccole:</p>
 
 ```css
 img {
@@ -766,12 +1068,17 @@ img {
 }
 ```
 
-<p align="justify">Non risolve da sola art direction, formati o performance delle immagini, ma impedisce spesso che un'immagine superi il contenitore.</p>
+<p align="justify"><code>max-width: 100%</code> impedisce di superare la larghezza del contenitore; <code>height: auto</code> conserva il rapporto d'aspetto quando cambia la larghezza. La regola non risolve da sola art direction, scelta del formato, densità o performance: questi aspetti appartengono al tema più ampio delle responsive images.</p>
 
 <a id="lesson-css-custom-properties"></a>
 ## Custom properties: valori con un nome
 
-<p align="justify">Possiamo dichiarare valori riusabili:</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — custom property:</strong>
+una custom property è una proprietà CSS il cui nome inizia con <code>--</code> e alla quale assegniamo un valore riusabile. <code>var()</code> legge quel valore nel punto in cui serve.</p>
+</td></tr></table>
+
+<p align="justify">Possiamo dichiarare i valori condivisi su <code>:root</code>, così saranno disponibili nel documento tramite l'ereditarietà:</p>
 
 ```css
 :root {
@@ -788,11 +1095,21 @@ img {
 }
 ```
 
-<p align="justify">Il vantaggio didattico non è solo evitare copia-incolla: i nomi permettono di esprimere intenzioni.</p>
+<p align="justify">Quando il browser incontra <code>var(--space-2)</code>, cerca il valore della custom property nel contesto dell'elemento. Possiamo ridefinire lo stesso nome in un sottoalbero per creare una variante locale senza modificare tutti i componenti.</p>
+
+```css
+.post--featured {
+  --surface: #eef6ff;
+}
+```
+
+<p align="justify">È possibile dichiarare anche un fallback, per esempio <code>var(--surface, white)</code>. In questa lezione è sufficiente saperlo riconoscere: la gestione completa di scope, fallback e temi resta nella <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">guida MDN alle custom properties</a>.</p>
+
+<p align="justify">Il vantaggio non è solo evitare copia-incolla. Nomi come <code>--surface</code> e <code>--space-2</code> esprimono un'intenzione; valori isolati come <code>#fff</code> e <code>1rem</code> non spiegano invece il ruolo che svolgono nel sistema grafico.</p>
 
 ## Feisbuc milestone 1: shell responsive
 
-<p align="justify">Partiamo dallo scheletro semantico della milestone 0.</p>
+<p align="justify">Partiamo dallo scheletro semantico della milestone 0. Prima conserviamo l'ordine logico del contenuto nel DOM; poi affidiamo a CSS la disposizione visuale. Profilo, feed e tendenze rimangono così comprensibili anche prima che il layout venga applicato.</p>
 
 ```html
 <main class="page-shell">
@@ -802,7 +1119,7 @@ img {
 </main>
 ```
 
-<p align="justify">La base mobile:</p>
+<p align="justify">La base mobile crea un contenitore fluido ma limitato, lo centra e dispone tutte le regioni in una sola colonna:</p>
 
 ```css
 .page-shell {
@@ -814,7 +1131,7 @@ img {
 }
 ```
 
-<p align="justify">La versione ampia:</p>
+<p align="justify">La versione ampia entra in gioco solo quando il contenuto dispone di almeno <code>56rem</code>. Il breakpoint non rappresenta un particolare telefono o computer: rappresenta lo spazio nel quale le tre regioni diventano sostenibili.</p>
 
 ```css
 @media (min-width: 56rem) {
@@ -837,6 +1154,15 @@ Grid    → macro layout della pagina
 Flexbox → gruppi monodimensionali dentro le regioni
 ```
 
+<table align="center">
+<thead><tr><th>Viewport</th><th>Struttura attesa</th><th>Controllo</th></tr></thead>
+<tbody>
+<tr><td>Stretto</td><td>Una colonna nell'ordine del DOM.</td><td>Nessun contenuto provoca scroll orizzontale.</td></tr>
+<tr><td>Vicino al breakpoint</td><td>La singola colonna rimane leggibile finché c'è spazio reale.</td><td>Ridimensionamento continuo, non soltanto due preset.</td></tr>
+<tr><td>Ampio</td><td>Profilo, feed e tendenze in tre track.</td><td>Il feed può restringersi e le colonne laterali rispettano i limiti.</td></tr>
+</tbody>
+</table>
+
 <a id="lesson-css-debug"></a>
 ## Debug CSS: osserva prima di cambiare
 
@@ -853,6 +1179,26 @@ Flexbox → gruppi monodimensionali dentro le regioni
 </ol>
 
 <p align="justify">Non partire aggiungendo <code>overflow-x: hidden</code>: potrebbe nascondere il sintomo senza correggere la causa.</p>
+
+### Dalla manifestazione alla causa
+
+<table align="center">
+<thead><tr><th>Sintomo</th><th>Che cosa osservare</th><th>Ipotesi da verificare</th></tr></thead>
+<tbody>
+<tr><td>Una regola non appare applicata</td><td>Pannello Styles: dichiarazione assente, non valida o barrata.</td><td>Selettore errato, errore di sintassi oppure altra dichiarazione vincente.</td></tr>
+<tr><td>La pagina scorre orizzontalmente</td><td>Elemento che supera il viewport e dimensioni nel box model.</td><td>Larghezza fissa, contenuto non spezzabile, padding aggiunto a <code>content-box</code> o minima dimensione implicita.</td></tr>
+<tr><td>Il breakpoint non cambia il layout</td><td>Condizione della media query e regole effettivamente attive.</td><td>Soglia non raggiunta, viewport HTML mancante o conflitto nella cascade.</td></tr>
+<tr><td>Flexbox allinea sull'asse sbagliato</td><td>Valore calcolato di <code>flex-direction</code>.</td><td>Main axis diverso da quello immaginato.</td></tr>
+<tr><td>Una colonna Grid non si restringe</td><td>Dimensione intrinseca del contenuto e definizione della track.</td><td>Contenuto lungo oppure minimo automatico: confrontare <code>1fr</code> con <code>minmax(0, 1fr)</code>.</td></tr>
+</tbody>
+</table>
+
+<p align="justify">Supponiamo che un URL molto lungo allarghi il feed. Nascondere l'overflow eliminerebbe soltanto la prova visibile. La diagnosi corretta seleziona prima il nodo, identifica se a resistere è la track, il flex item o il testo, poi prova la correzione più vicina alla causa: una track restringibile, <code>min-width: 0</code> sull'item appropriato oppure una strategia di spezzatura del testo. Non esiste una proprietà universale da aggiungere senza osservare il caso.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#129514;</span> Metodo di debug:</strong>
+prima formula un'ipotesi, poi cambia una sola variabile e osserva il risultato. Una modifica che “sembra funzionare” ma non spiega la causa non conclude la diagnosi.</p>
+</td></tr></table>
 
 ## Errori frequenti
 
@@ -892,15 +1238,15 @@ CSS può modificare la posizione visuale. L'ordine del DOM rimane però importan
 <a id="lesson-lab"></a>
 ## Laboratorio
 
-<p align="justify">Il laboratorio procede dall'osservazione del box model alla costruzione e al debug della shell responsive di Feisbuc. Gli ultimi due punti anticipano prodotti che verranno completati nelle lezioni successive.</p>
+<p align="justify">Il laboratorio procede dall'osservazione del box model alla costruzione e al debug della shell responsive di Feisbuc. È pensato per accompagnare più incontri: ogni passaggio produce un risultato osservabile prima di aggiungere il successivo. Gli ultimi due punti anticipano prodotti che verranno completati nelle lezioni successive.</p>
 
 <table align="center"><tr><td>
 <details>
 <summary>&#128187; <strong>Esercizi A e B — osservazione e modifica controllata</strong></summary>
 
 <ul>
-  <li><strong>A — osservazione:</strong> modifica <code>padding</code>, <code>border</code> e <code>margin</code> di una card e osserva il box model nei DevTools.</li>
-  <li><strong>B — modifica controllata:</strong> trasforma un menu verticale in un flex container con wrapping.</li>
+  <li><strong>A — osservazione:</strong> modifica <code>padding</code>, <code>border</code> e <code>margin</code> di una card; annota dimensione dichiarata, dimensione esterna calcolata e differenza fra <code>content-box</code> e <code>border-box</code> nei DevTools.</li>
+  <li><strong>B — modifica controllata:</strong> trasforma un menu verticale in un flex container con wrapping; prima prevedi main axis e comportamento con poco spazio, poi verifica ridimensionando il viewport.</li>
 </ul>
 
 </details>
@@ -949,17 +1295,20 @@ CSS può modificare la posizione visuale. L'ordine del DOM rimane però importan
 
 <ol>
   <li>Che differenza c'è fra HTML e CSS?</li>
-  <li>Da quali parti è composto il box model?</li>
-  <li>Che cosa cambia con <code>box-sizing: border-box</code>?</li>
-  <li>Quando useresti Flexbox invece di Grid?</li>
-  <li>Perché <code>justify-content</code> non significa semplicemente “allinea orizzontalmente”?</li>
+  <li>Quali passaggi trasformano in modo semplificato DOM e CSS nella pagina visualizzata?</li>
+  <li>In quale ordine controlli rilevanza, origine, specificità e ordine di sorgente?</li>
+  <li>Qual è la differenza fra una dichiarazione che perde la cascade e una proprietà ereditata?</li>
+  <li>Da quali parti è composto il box model e quale dimensione esterna produce un box largo <code>300px</code> con <code>20px</code> di padding e <code>4px</code> di border per lato?</li>
+  <li>Che cosa cambia con <code>box-sizing: border-box</code>? Quando possono collassare due margini verticali?</li>
+  <li>Che differenza c'è fra un elemento block e uno inline nel normal flow?</li>
+  <li>Quali elementi diventano flex item? Perché <code>justify-content</code> non significa sempre “allinea orizzontalmente”?</li>
+  <li>Che differenza c'è fra grid line, track e cell? Che cosa rappresenta <code>1fr</code>?</li>
+  <li>Quando useresti Flexbox invece di Grid e quando li combineresti?</li>
   <li>Perché un layout <code>width: 1200px</code> può essere fragile?</li>
-  <li>A cosa serve una media query?</li>
+  <li>A cosa serve il metadato viewport e quando va introdotta una media query?</li>
   <li>Perché non serve una media query per ogni telefono?</li>
-  <li>Che cosa risolve la specificità?</li>
   <li>Perché <code>!important</code> non deve essere la prima soluzione?</li>
-  <li>Che cosa rappresenta <code>1fr</code> in Grid?</li>
-  <li>Perché in un debug CSS è utile vedere le regole barrate nei DevTools?</li>
+  <li>Perché in un debug CSS è utile vedere regole barrate e dimensioni calcolate nei DevTools?</li>
 </ol>
 
 </details>
@@ -968,21 +1317,22 @@ CSS può modificare la posizione visuale. L'ordine del DOM rimane però importan
 <a id="lesson-summary"></a>
 ## Sintesi
 
+<ul>
+  <li><strong>HTML</strong> descrive struttura e significato; <strong>CSS</strong> controlla presentazione e disposizione.</li>
+  <li>Il browser abbina le regole agli elementi, risolve i conflitti, calcola stili e box, dispone e disegna la pagina.</li>
+  <li>La <strong>cascade</strong> è l'intero processo di scelta; la <strong>specificità</strong> è soltanto uno dei criteri.</li>
+  <li>Il <strong>box model</strong> distingue content, padding, border e margin; <code>border-box</code> rende più diretto il controllo della dimensione dichiarata.</li>
+  <li>Il <strong>normal flow</strong> è il punto di partenza da comprendere prima di applicare sistemi di layout.</li>
+  <li><strong>Flexbox</strong> coordina soprattutto una dimensione; <strong>Grid</strong> coordina righe e colonne; possono essere combinati.</li>
+  <li>Un progetto <strong>responsive</strong> reagisce allo spazio e al contenuto; le media query introducono cambi strutturali quando servono.</li>
+  <li>Unità relative, limiti, immagini contenute e testo leggibile fanno parte del layout, non sono rifiniture indipendenti.</li>
+  <li>Le <strong>custom properties</strong> danno un nome ai valori condivisi e aiutano a costruire un linguaggio visuale coerente.</li>
+  <li>Il debug parte dall'osservazione di cascade, computed style e box model, non da proprietà aggiunte per tentativi.</li>
+</ul>
+
 ```text
-HTML → che cosa significa il contenuto
-CSS  → come viene presentato e disposto
-
-Cascade → quale dichiarazione vince
-Box model → content + padding + border + margin
-
-Flexbox → soprattutto una dimensione
-Grid    → due dimensioni
-
-Responsive → layout che si adatta allo spazio
-Media query → cambia regole quando una condizione lo richiede
-
-Feisbuc mobile → una colonna
-Feisbuc wide   → profilo | feed | tendenze
+Feisbuc stretto → profilo ↓ feed ↓ tendenze
+Feisbuc ampio  → profilo | feed | tendenze
 ```
 
 <a id="lesson-reading-mdn"></a>
@@ -991,11 +1341,14 @@ Feisbuc wide   → profilo | feed | tendenze
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — CSS:</strong> usa il metodo generale della <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a> e, quando apri la scheda di una proprietà, segui l'ordine indicato in <a href="GUIDA_USO_MDN.md#mdn-guide-css">Come leggere una reference CSS</a>.</p>
 <ul>
+  <li><strong>Fondamenti e sintassi:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS">What is CSS?</a> e la sezione <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS#css_syntax_basics">CSS syntax basics</a>; collega regola, selettore, dichiarazione, proprietà e valore;</li>
   <li><strong>Cascade e specificità:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a>; ricostruisci quali dichiarazioni sono candidate e perché una vince;</li>
   <li><strong>box model:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">The box model</a>; confronta content, padding, border e margin nei DevTools;</li>
+  <li><strong>normal flow:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Introduction">Introduction to CSS layout</a>; osserva prima la disposizione predefinita, poi identifica che cosa cambia con <code>display</code>;</li>
   <li><strong>Flexbox:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">Flexbox</a>; identifica container, item, main axis e cross axis;</li>
   <li><strong>Grid:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">CSS grid layout</a>; identifica track, righe, colonne, gap e posizione degli item;</li>
-  <li><strong>responsive:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a> e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">Media query fundamentals</a>; aggiungi un breakpoint soltanto quando lo richiede il contenuto.</li>
+  <li><strong>responsive:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a> e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">Media query fundamentals</a>; aggiungi un breakpoint soltanto quando lo richiede il contenuto;</li>
+  <li><strong>valori e unità:</strong> usa <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units">CSS values and units</a> per dichiarare sempre rispetto a che cosa viene calcolata una misura.</li>
 </ul>
 <p align="justify"><strong>Prodotto atteso:</strong> per ogni problema annota la regola CSS responsabile, la prova svolta nei DevTools e il cambiamento osservato.</p>
 <p align="justify">Per sapere esattamente quali schede tecniche aprire usa la <a href="#lesson-mdn-property-map">mappa delle proprietà CSS</a>, collocata nell'orientamento iniziale subito dopo l'indice incrociato.</p>
@@ -1008,12 +1361,17 @@ Feisbuc wide   → profilo | feed | tendenze
 
 <ul>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN — CSS reference</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS">MDN — What is CSS?</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started">MDN — Getting started with CSS</a>;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">MDN — Handling conflicts</a>;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">MDN — The box model</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Introduction">MDN — Introduction to CSS layout</a>;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">MDN — Flexbox</a>;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">MDN — CSS grid layout</a>;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">MDN — Responsive web design</a>;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">MDN — Media query fundamentals</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units">MDN — CSS values and units</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals">MDN — Fundamental text and font styling</a>;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">MDN — Using CSS custom properties</a>.</li>
 </ul>
 
