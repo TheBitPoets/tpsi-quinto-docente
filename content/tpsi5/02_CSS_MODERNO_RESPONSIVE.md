@@ -266,6 +266,39 @@ nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e 
 </details>
 </td></tr></table>
 
+<a id="lesson-mdn-property-map"></a>
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#129513; <strong>Mappa delle schede proprietà CSS collegate alla lezione</strong></summary>
+
+<p align="justify">“Studiare ora” indica i valori e i comportamenti da comprendere e utilizzare in questa lezione; “riconoscere per dopo” segnala varianti e funzionalità che verranno approfondite quando saranno necessarie.</p>
+
+<table align="center">
+<thead><tr><th>Proprietà o funzione MDN</th><th>Studiare ora</th><th>Riconoscere per dopo</th></tr></thead>
+<tbody>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display"><code>display</code></a></li></ul></td><td><ul><li><code>block</code> e <code>inline</code>.</li><li><code>flex</code> e <code>grid</code>.</li></ul></td><td><ul><li><code>inline-block</code>.</li><li><code>none</code> e altri valori.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing"><code>box-sizing</code></a></li></ul></td><td><ul><li><code>content-box</code>.</li><li><code>border-box</code>.</li></ul></td><td><ul><li>Valori globali.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/width"><code>width</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/max-width"><code>max-width</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/height"><code>height</code></a></li></ul></td><td><ul><li>Dimensioni fisse e relative.</li><li>Limite massimo del contenitore.</li><li><code>height: auto</code> per le immagini.</li></ul></td><td><ul><li><code>min-width</code> e <code>min-height</code>.</li><li>Funzioni di sizing avanzate.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin"><code>margin</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin-inline"><code>margin-inline</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding"><code>padding</code></a></li></ul></td><td><ul><li>Spazio esterno e interno nel box model.</li><li>Centratura con margini automatici.</li></ul></td><td><ul><li>Shorthand da uno a quattro valori.</li><li>Proprietà logiche per ogni lato.</li><li>Margini negativi.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/border"><code>border</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/border-radius"><code>border-radius</code></a></li></ul></td><td><ul><li>Spessore, stile e colore del bordo.</li><li>Arrotondamento degli angoli.</li></ul></td><td><ul><li>Bordi e raggi differenti per lato.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/color"><code>color</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/background"><code>background</code></a></li></ul></td><td><ul><li>Colore del testo e dello sfondo.</li><li>Contrasto e significato non affidato al solo colore.</li></ul></td><td><ul><li>Gradienti e sfondi multipli.</li><li>Spazi colore avanzati.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-family"><code>font-family</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-size"><code>font-size</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-height"><code>line-height</code></a></li></ul></td><td><ul><li>Font stack con fallback.</li><li>Dimensioni relative con <code>rem</code>.</li><li>Interlinea senza unità.</li></ul></td><td><ul><li>Web font e font variabili.</li><li>Proprietà tipografiche avanzate.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap"><code>gap</code></a></li></ul></td><td><ul><li>Spazio fra elementi Flexbox e track Grid.</li></ul></td><td><ul><li><code>row-gap</code> e <code>column-gap</code>.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-direction"><code>flex-direction</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap"><code>flex-wrap</code></a></li></ul></td><td><ul><li>Asse principale in riga o colonna.</li><li>Disposizione su più righe.</li></ul></td><td><ul><li>Valori <code>*-reverse</code>.</li><li>Effetti sull'ordine visivo.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/justify-content"><code>justify-content</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/align-items"><code>align-items</code></a></li></ul></td><td><ul><li>Allineamento sull'asse principale.</li><li>Allineamento sull'asse trasversale.</li></ul></td><td><ul><li><code>align-content</code>.</li><li><code>align-self</code> e <code>justify-self</code>.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex"><code>flex</code></a></li></ul></td><td><ul><li>Crescita e restringimento degli item.</li><li>Uso della shorthand nei casi semplici.</li></ul></td><td><ul><li><code>flex-grow</code>, <code>flex-shrink</code> e <code>flex-basis</code> separati.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns"><code>grid-template-columns</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/minmax"><code>minmax()</code></a></li></ul></td><td><ul><li>Colonne esplicite e unità <code>fr</code>.</li><li>Limiti minimi e massimi delle track.</li><li><code>minmax(0, 1fr)</code>.</li></ul></td><td><ul><li><code>repeat()</code> e auto-fit.</li><li>Subgrid e named lines.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media"><code>@media</code></a></li></ul></td><td><ul><li>Condizione <code>min-width</code>.</li><li>Strategia mobile-first.</li><li>Breakpoint scelti dal contenuto.</li></ul></td><td><ul><li>Preferenze utente e altri media feature.</li><li>Media type diversi dallo schermo.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">Custom properties</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/var"><code>var()</code></a></li></ul></td><td><ul><li>Dichiarazione con prefisso <code>--</code>.</li><li>Lettura di un valore riusabile.</li></ul></td><td><ul><li>Fallback di <code>var()</code>.</li><li>Scope, ereditarietà e registrazione con <code>@property</code>.</li></ul></td></tr>
+<tr><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/float"><code>float</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow-x"><code>overflow-x</code></a></li></ul></td><td><ul><li>Riconoscere perché non sostituiscono un layout moderno.</li><li>Non nascondere un overflow senza diagnosticarlo.</li></ul></td><td><ul><li>Contornamento del testo con <code>float</code>.</li><li>Gestione completa dell'overflow.</li></ul></td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
+
+<p align="justify">Le mappe sono un orientamento, non una percentuale di importanza: una parte indicata come “riconoscere per dopo” può essere fondamentale, ma non appartiene ancora agli obiettivi operativi della lezione. I collegamenti puntuali accanto ai singoli paragrafi restano il modo più rapido per aprire il punto esatto di MDN.</p>
+
 ## Problema iniziale
 
 <p align="justify">Il nostro HTML semantico sa già dire che cosa sono header, navigazione, feed e post. Ma il browser, senza istruzioni di presentazione, li mostra quasi tutti nel normale flusso del documento.</p>
@@ -965,6 +998,7 @@ Feisbuc wide   → profilo | feed | tendenze
   <li><strong>responsive:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a> e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">Media query fundamentals</a>; aggiungi un breakpoint soltanto quando lo richiede il contenuto.</li>
 </ul>
 <p align="justify"><strong>Prodotto atteso:</strong> per ogni problema annota la regola CSS responsabile, la prova svolta nei DevTools e il cambiamento osservato.</p>
+<p align="justify">Per sapere esattamente quali schede tecniche aprire usa la <a href="#lesson-mdn-property-map">mappa delle proprietà CSS</a>, collocata nell'orientamento iniziale subito dopo l'indice incrociato.</p>
 </td></tr></table>
 
 <a id="lesson-sources"></a>
