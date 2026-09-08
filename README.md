@@ -69,6 +69,72 @@ Le slide sono in formato **Markdown compatibile con Marp**: possono essere lette
 | UDA-26 | 17 | [Testing strategy e integration boundaries](content/tpsi5/17_TESTING_INTEGRATION_BOUNDARIES.md) | [Slide 17](slides/tpsi5/COURSE_SLIDES.md#slides-17) | Fixture, tmp_path, integration test reali, HTTP contract e restart test. |
 | UDA-26 | 18 | [Runtime configuration, health/readiness, deploy e capstone](content/tpsi5/18_RUNTIME_DEPLOY_HEALTH_CAPSTONE.md) | [Slide 18](slides/tpsi5/COURSE_SLIDES.md#slides-18) | Config fail-fast, prestart, liveness/readiness, Uvicorn e evidence bundle. |
 
+## Pianificazione annuale, docenti e consuntivo
+
+Il piano usa le **132 ore nominali** della disciplina (`33 settimane × 4 ore`) senza separare rigidamente teoria e laboratorio. Le lezioni sono affidate alternativamente al prof. **Antonio Caristia** e all'ITP **Antonino Pirri**; se una lezione richiede più tempo del previsto, viene conclusa dal docente responsabile. Gli scostamenti vengono compensati su ore future o sulla riserva, senza passare una lezione incompleta all'altro docente.
+
+La previsione mantiene **16 ore non vincolate a nuovi contenuti**: 4 ore per almeno un compito scritto o pratico di due ore in ciascun quadrimestre e 12 ore per recuperi, consolidamento, ulteriori verifiche, ritardi o sospensioni. Le date nella tabella dettagliata vengono inserite soltanto dopo lo svolgimento effettivo; gli eventi che non producono ore di lezione sono registrati separatamente.
+
+### Distribuzione delle ore per UDA
+
+| UDA | Settimane | Lezioni e Activity | Compiti | Riserva flessibile | Totale UDA | Antonio Caristia | Antonino Pirri |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| UDA-20 — Avvio e architettura | 1 | 4 | 0 | 0 | 4 | 4 | 0 |
+| UDA-21 — Web Platform, HTML, CSS e Bootstrap | 6 | 22 | 0 | 2 | 24 | 7 | 17 |
+| UDA-22 — JavaScript, DOM e Browser API | 6 | 19 | 0 | 5 | 24 | 22 | 2 |
+| UDA-23 — HTTP, Fetch e REST | 4 | 13 | 2 | 1 | 16 | 2 | 14 |
+| UDA-24 — Node, Express, SQL, autenticazione e SSR | 7 | 26 | 0 | 2 | 28 | 14 | 14 |
+| UDA-25 — Vue, TypeScript, realtime e React | 5 | 18 | 0 | 2 | 20 | 11 | 9 |
+| UDA-26 — Mirror Python, testing e deploy | 4 | 14 | 2 | 0 | 16 | 6 | 10 |
+| **Totale** | **33** | **116** | **4** | **12** | **132** | **66** | **66** |
+
+Le ore nelle ultime due colonne comprendono lezioni, compiti e quote di riserva. La distribuzione per singola lezione riportata sotto assegna 58 ore di contenuto a ciascun docente; un compito da 2 ore e 6 ore di riserva completano le 66 ore individuali.
+
+### Lezioni e Activity associate
+
+Ogni titolo di lezione apre la dispensa corrispondente. Ogni Activity apre direttamente la consegna dello studente; quando il bundle non possiede ancora una pagina studente autonoma, il collegamento conduce al relativo `activity.json` canonico.
+
+| UDA | Lezione | Activity associate | Ore | Docente responsabile | Date e ore svolte |
+|---|---|---|---:|---|---|
+| UDA-20 | [00 — Architettura didattica del corso Full Stack](content/tpsi5/00_COURSE_ARCHITECTURE.md) | — | 4 | prof. Antonio Caristia | 07/09/2026 — 2/4 ore, in corso |
+| UDA-21 | [01 — Web Platform e HTML moderno](content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md) | [A — Anatomia di un documento HTML moderno](activities/tpsi5/html_anatomy_a/student/README.md)<br>[B — Feisbuc: da div generici a HTML semantico](activities/tpsi5/feisbuc_semantic_b/student/README.md) | 10 | ITP Antonino Pirri | — |
+| UDA-21 | [02 — CSS moderno, layout e responsive design](content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md) | [C — Shell responsive Feisbuc](activities/tpsi5/feisbuc_responsive_c/student/README.md)<br>[D — Debug del layout responsive](activities/tpsi5/css_debug_d/student/README.md) | 6 | prof. Antonio Caristia | — |
+| UDA-21 | [03 — Bootstrap: dal CSS nativo a un framework](content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md) | [E — Interfaccia Bootstrap Feisbuc](activities/tpsi5/feisbuc_bootstrap_e/student/README.md) | 6 | ITP Antonino Pirri | — |
+| UDA-22 | [04 — JavaScript moderno, DOM e Browser API](content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md) | [A — Pipeline JavaScript del feed](activities/tpsi5/js_feed_pipeline_a/student/README.md)<br>[B — Refactoring dello stato di un post](activities/tpsi5/js_post_refactor_b/student/README.md)<br>[C — Feed dinamico Feisbuc](activities/tpsi5/feisbuc_dynamic_c/student/README.md)<br>[D — Debug JavaScript, DOM e storage](activities/tpsi5/js_debug_d/student/README.md) | 19 | prof. Antonio Caristia | — |
+| UDA-23 | [05 — HTTP, asincronia, Fetch e REST](content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md) | [A — HTTP al microscopio](activities/tpsi5/http_microscope_a/student/README.md)<br>[B — Interpretare una response asincrona](activities/tpsi5/async_response_b/student/README.md)<br>[C — Client REST Feisbuc](activities/tpsi5/feisbuc_rest_c/student/README.md)<br>[D — Debug Fetch e HTTP](activities/tpsi5/fetch_debug_d/student/README.md) | 13 | ITP Antonino Pirri | — |
+| UDA-24 | [06 — Node.js ed Express 5](content/tpsi5/06_NODE_EXPRESS_BACKEND.md) | [A — Dal server nativo a Express](activities/tpsi5/node_http_express_a/student/README.md)<br>[B — Validazione di un nuovo post](activities/tpsi5/post_validation_b/student/README.md)<br>[C — API Express Feisbuc](activities/tpsi5/feisbuc_express_c/student/README.md)<br>[D — Debug della pipeline Express](activities/tpsi5/express_debug_d/student/README.md) | 7 | prof. Antonio Caristia | — |
+| UDA-24 | [07 — SQL raw e persistenza SQLite](content/tpsi5/07_SQL_RAW_PERSISTENCE.md) | [A — Schema SQL dei post](activities/tpsi5/sql_posts_schema_a/student/README.md)<br>[B — DML sui post](activities/tpsi5/sql_posts_dml_b/student/README.md)<br>[C — Repository SQLite Feisbuc](activities/tpsi5/feisbuc_sql_c/student/README.md)<br>[D — Debug dello stato SQL](activities/tpsi5/sql_debug_d/student/README.md) | 7 | ITP Antonino Pirri | — |
+| UDA-24 | [08 — Autenticazione, sessioni e autorizzazione](content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md) | [A — Policy delle credenziali](activities/tpsi5/auth_credential_policy_a/student/README.md)<br>[B — Autorizzazione server-side sui post](activities/tpsi5/auth_post_authorization_b/student/README.md)<br>[C — Sessioni e ownership Feisbuc](activities/tpsi5/feisbuc_auth_c/student/README.md)<br>[D — Security review e debug](activities/tpsi5/auth_debug_d/student/README.md) | 6 | prof. Antonio Caristia | — |
+| UDA-24 | [09 — SSR e template Nunjucks](content/tpsi5/09_SSR_NUNJUCKS_CONFRONTO.md) | [A — View model SSR](activities/tpsi5/ssr_view_model_a/student/README.md)<br>[B — Autoescape Nunjucks](activities/tpsi5/nunjucks_autoescape_b/student/README.md)<br>[C — SSR Feisbuc](activities/tpsi5/feisbuc_ssr_c/student/README.md)<br>[D — Debug dei boundary SSR](activities/tpsi5/ssr_debug_d/student/README.md) | 6 | ITP Antonino Pirri | — |
+| UDA-25 | [10 — Vue 3, componenti e reattività](content/tpsi5/10_VUE3_COMPONENTI_REATTIVITA.md) | [A — Reattività Vue](activities/tpsi5/vue_reactivity_a/student/OBSERVATIONS.md)<br>[B — Componente Vue PostCard](activities/tpsi5/vue_post_card_b/student/README.md)<br>[C — SPA Vue Feisbuc](activities/tpsi5/feisbuc_vue_c/student/README.md)<br>[D — Debug Vue](activities/tpsi5/vue_debug_d/student/DIAGNOSI.md) | 5 | prof. Antonio Caristia | — |
+| UDA-25 | [11 — Vue Router e navigazione SPA](content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md) | [A — Microscopio Vue Router](activities/tpsi5/vue_router_microscope_a/student/OBSERVATIONS.md)<br>[B — Navigation policy](activities/tpsi5/navigation_policy_b/student/README.md)<br>[C — Vue Router in Feisbuc](activities/tpsi5/feisbuc_vue_router_c/student/README.md)<br>[D — Debug Vue Router](activities/tpsi5/vue_router_debug_d/activity.json) | 4 | ITP Antonino Pirri | — |
+| UDA-25 | [12 — TypeScript nei boundary frontend](content/tpsi5/12_TYPESCRIPT_CONTRATTI_FRONTEND.md) | [A — Contratti TypeScript](activities/tpsi5/typescript_contract_microscope_a/student/README.md)<br>[B — Navigation policy tipizzata](activities/tpsi5/typescript_navigation_policy_b/student/README.md)<br>[C — Boundary TypeScript Feisbuc](activities/tpsi5/feisbuc_typescript_c/student/README.md)<br>[D — Debug TypeScript](activities/tpsi5/typescript_debug_d/activity.json) | 3 | prof. Antonio Caristia | — |
+| UDA-25 | [13 — WebSocket e Socket.IO](content/tpsi5/13_WEBSOCKET_SOCKETIO_REALTIME.md) | [A — Microscopio realtime](activities/tpsi5/websocket_realtime_microscope_a/student/OSSERVAZIONI.md)<br>[B — Event reducer realtime](activities/tpsi5/realtime_event_reducer_b/student/README.md)<br>[C — Socket.IO in Feisbuc](activities/tpsi5/feisbuc_realtime_c/student/README.md)<br>[D — Debug dei boundary realtime](activities/tpsi5/realtime_debug_d/student/DIAGNOSI.md) | 4 | ITP Antonino Pirri | — |
+| UDA-25 | [14 — React translation lab](content/tpsi5/14_REACT_TRANSLATION_COMPARISON.md) | [A — Traduzione da Vue a React](activities/tpsi5/react_translation_microscope_a/student/MAPPING.md)<br>[B — Componente React PostCard](activities/tpsi5/react_post_card_b/student/README.md) | 2 | prof. Antonio Caristia | — |
+| UDA-26 | [15 — FastAPI e OpenAPI](content/tpsi5/15_FASTAPI_OPENAPI_MIRROR.md) | [A — Microscopio FastAPI e OpenAPI](activities/tpsi5/fastapi_openapi_microscope_a/student/OBSERVATIONS.md)<br>[B — Validazione Python dei post](activities/tpsi5/fastapi_post_validation_b/student/README.md)<br>[C — Mirror FastAPI Feisbuc](activities/tpsi5/feisbuc_fastapi_mirror_c/student/README.md)<br>[D — Debug dei boundary FastAPI](activities/tpsi5/fastapi_debug_d/student/DIAGNOSI.md) | 4 | ITP Antonino Pirri | — |
+| UDA-26 | [16 — SQLAlchemy e persistenza ORM](content/tpsi5/16_SQLALCHEMY_PERSISTENCE_MIRROR.md) | [A — Mapping e Session SQLAlchemy](activities/tpsi5/sqlalchemy_mapping_microscope_a/student/OBSERVATIONS.md)<br>[B — Repository SQLAlchemy](activities/tpsi5/sqlalchemy_repository_b/student/README.md)<br>[C — FastAPI con SQLAlchemy](activities/tpsi5/feisbuc_fastapi_sqlalchemy_c/student/README.md)<br>[D — Debug di Session e transazioni](activities/tpsi5/sqlalchemy_debug_d/student/DIAGNOSI.md) | 3 | prof. Antonio Caristia | — |
+| UDA-26 | [17 — Testing e integration boundary](content/tpsi5/17_TESTING_INTEGRATION_BOUNDARIES.md) | [A — Microscopio dei livelli di test](activities/tpsi5/testing_boundary_microscope_a/student/TEST_MATRIX.md)<br>[B — Fixture pytest e isolamento](activities/tpsi5/pytest_fixture_boundary_b/student/README.md)<br>[C — Test d'integrazione Feisbuc](activities/tpsi5/feisbuc_testing_boundaries_c/student/README.md)<br>[D — Debug della strategia di test](activities/tpsi5/testing_debug_d/activity.json) | 4 | ITP Antonino Pirri | — |
+| UDA-26 | [18 — Runtime, deploy, health e capstone](content/tpsi5/18_RUNTIME_DEPLOY_HEALTH_CAPSTONE.md) | [A — Microscopio runtime e deploy](activities/tpsi5/runtime_deploy_microscope_a/student/RUNTIME_MAP.md)<br>[B — Contratto di configurazione runtime](activities/tpsi5/runtime_config_contract_b/student/README.md)<br>[C — Health e readiness](activities/tpsi5/health_readiness_c/student/README.md)<br>[D — Debug runtime e deploy](activities/tpsi5/runtime_debug_d/activity.json)<br>[E — Evidence bundle](activities/tpsi5/evidence_bundle_e/student/README.md)<br>[F — Runtime capstone Feisbuc](activities/tpsi5/feisbuc_runtime_capstone_f/student/README.md) | 3 | prof. Antonio Caristia | — |
+
+### Ripartizione complessiva fra i docenti
+
+| Docente | Lezioni e Activity | Compito assegnato | Riserva flessibile | Totale annuale | Ore svolte | Ore ancora da svolgere |
+|---|---:|---:|---:|---:|---:|---:|
+| prof. Antonio Caristia | 58 | 2 | 6 | **66** | 2 | 64 |
+| ITP Antonino Pirri | 58 | 2 | 6 | **66** | 0 | 66 |
+| **Totale** | **116** | **4** | **12** | **132** | **2** | **130** |
+
+La verifica del primo quadrimestre è affidata ad Antonio Caristia; quella del secondo quadrimestre ad Antonino Pirri. Ulteriori prove da due ore vengono assorbite dalla riserva e devono essere distribuite in coppia o compensate, così da conservare il 50% esatto del carico assegnato.
+
+### Registro iniziale delle ore e degli imprevisti
+
+| Data | Lezione | Docente previsto | Ore previste | Ore svolte | Esito |
+|---|---|---|---:|---:|---|
+| 07/09/2026 | [00 — Introduzione al corso](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 2 | 2 | Svolta; lezione 00 ancora in corso. |
+| 08/09/2026 | [00 — Continuazione](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 1 | 0 | Annullata per rottura della conduttura dell'acqua; consumata 1 ora della riserva annuale. |
+
+Situazione dopo l'8 settembre: **2 ore svolte**, **2 ore ancora necessarie per concludere la lezione 00** e **11 ore di riserva flessibile residue**. Le sospensioni non vengono attribuite come ore svolte al docente; il controllo del 50% riguarda il carico annuale assegnato, mentre il consuntivo effettivo resta separato.
+
 ## Stack core congelato
 
 ```text
