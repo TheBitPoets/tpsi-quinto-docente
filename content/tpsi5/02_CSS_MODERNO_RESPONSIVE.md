@@ -55,6 +55,7 @@ nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e 
 <strong>coperto</strong> indica i contenuti spiegati dalla dispensa e richiesti in questa lezione; <strong>introdotto</strong> segnala una prima presentazione da riconoscere o sperimentare; <strong>più avanti</strong> identifica gli argomenti esclusi dallo studio attuale. Ogni stato è scritto anche accanto al colore, che non è quindi l'unico segnale.</p>
 </td></tr></table>
 
+<a id="lesson-mdn-map-css"></a>
 <table align="center"><tr><td>
 <details>
 <summary>&#128506;&#65039; <strong>Mappa — CSS moderno, layout e responsive design</strong></summary>
@@ -73,17 +74,194 @@ nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e 
 <details>
 <summary>&#128279; <strong>Indice incrociato navigabile — Dispensa ↔ MDN</strong></summary>
 
-<table align="center">
-<thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
-<tbody>
-<tr><td><a href="#lesson-css-foundations">Ruolo, sintassi e selettori</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS">What is CSS?</a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors">Basic CSS selectors</a></td><td>&#128994; coperto</td></tr>
-<tr><td><a href="#lesson-css-cascade">Cascade, specificità ed ereditarietà</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a></td><td>&#128994; coperto</td></tr>
-<tr><td><a href="#lesson-css-layout">Box model, Flexbox e Grid</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout">CSS layout</a></td><td>&#128994; coperto</td></tr>
-<tr><td><a href="#lesson-css-responsive">Responsive design e media query</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a></td><td>&#128994; coperto</td></tr>
-<tr><td><a href="#lesson-css-custom-properties">Custom properties</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">Using CSS custom properties</a></td><td>&#128993; introdotto</td></tr>
-<tr><td>Writing modes, animazioni e layout avanzati</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS reference</a></td><td>&#9898; più avanti</td></tr>
-</tbody>
-</table>
+<p align="justify">L’indice è organizzato in gruppi espandibili e in schede abbinate. In ogni scheda, il titolo della dispensa conduce al punto esatto della lezione e il titolo MDN apre la documentazione corrispondente. Le descrizioni sono brevi punti elenco e non sono cliccabili.</p>
+
+<p><strong>Legenda:</strong> &#128309; contenuto della dispensa · &#128994; contenuto MDN · una voce in corsivo segnala che non esiste una corrispondenza diretta.</p>
+
+<details>
+<summary><strong>Orientamento e fondamenti</strong> · 4 voci</summary>
+
+<blockquote>
+<p><strong>01 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-objectives">In questa unità impareremo</a></strong></p>
+<ul><li>Contesto, domande guida, obiettivi e prerequisiti.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<em>Nessun riferimento MDN diretto per questa voce.</em></p>
+</blockquote>
+
+<blockquote>
+<p><strong>02 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-mdn-map-css">Mappa — CSS moderno, layout e responsive design</a></strong></p>
+<ul><li>Raccordo visuale fra i nuclei della dispensa e le fonti MDN.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics">CSS styling basics</a></strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout">CSS layout</a></strong></p>
+<ul><li>I due moduli MDN attraversati dalla lezione.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>03 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-foundations">HTML e CSS hanno responsabilità diverse</a></strong></p>
+<ul><li>Ruolo di CSS, stili predefiniti e collegamento del foglio esterno.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS">What is CSS?</a></strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started#applying_css_to_html">Applying CSS to HTML</a></strong></p>
+<ul><li>Scopo di CSS, stili del browser e modalità di applicazione.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>04 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-rule">Anatomia di una regola CSS</a></strong></p>
+<ul><li>Selettore, dichiarazioni, proprietà, valori e selettori core.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS#css_syntax_basics">CSS syntax basics</a></strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors">Basic CSS selectors</a></strong></p>
+<ul><li>Sintassi di una regola e selettori fondamentali.</li></ul>
+</blockquote>
+
+</details>
+
+<details>
+<summary><strong>Cascade e dimensioni</strong> · 3 voci</summary>
+
+<blockquote>
+<p><strong>05 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-cascade">Cascade, specificità ed ereditarietà</a></strong></p>
+<ul><li>Scelta della dichiarazione vincente e uso prudente di <code>!important</code>.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a></strong></p>
+<ul><li>Inheritance, cascade, specificity e ordine delle regole.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>06 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-box-model">Box model: ogni elemento genera scatole</a></strong></p>
+<ul><li>Content, padding, border, margin e <code>border-box</code>.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">The box model</a></strong></p>
+<ul><li>Parti della scatola e modelli alternativi di calcolo.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>07 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-normal-flow">Normal flow prima del layout speciale</a></strong></p>
+<ul><li>Disposizione iniziale di contenuti block e inline.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Introduction">Introduction to CSS layout</a></strong></p>
+<ul><li>Flusso normale e panoramica dei metodi di layout.</li></ul>
+</blockquote>
+
+</details>
+
+<details>
+<summary><strong>Sistemi di layout</strong> · 3 voci</summary>
+
+<blockquote>
+<p><strong>08 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-layout">Flexbox: una dimensione alla volta</a></strong></p>
+<ul><li>Container, item, assi, allineamento, gap e wrapping.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">Flexbox</a></strong></p>
+<ul><li>Modello monodimensionale e proprietà fondamentali.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>09 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-grid">Grid: righe e colonne coordinate</a></strong></p>
+<ul><li>Track, frazioni, gap, auto-placement e <code>minmax()</code>.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">CSS grid layout</a></strong></p>
+<ul><li>Griglie bidimensionali, righe, colonne e posizionamento.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>10 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-layout-choice">Flexbox o Grid?</a></strong></p>
+<ul><li>Criterio pratico per scegliere il sistema di layout.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<em>Nessun paragrafo MDN unico: la scelta nasce dal confronto fra i due modelli.</em></p>
+</blockquote>
+
+</details>
+
+<details>
+<summary><strong>Responsive design e riuso</strong> · 3 voci</summary>
+
+<blockquote>
+<p><strong>11 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-responsive">Responsive design e media query</a></strong></p>
+<ul><li>Layout mobile-first, breakpoint guidati dal contenuto e fluidità.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a></strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">Media query fundamentals</a></strong></p>
+<ul><li>Strategia responsive e condizioni applicate tramite media query.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>12 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-units">Unità, testo e immagini responsive</a></strong></p>
+<ul><li>Misure relative, leggibilità e contenuti che non superano il contenitore.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units">Values and units</a></strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals">Fundamental text and font styling</a></strong></p>
+<ul><li>Unità CSS e proprietà tipografiche fondamentali.</li></ul>
+</blockquote>
+
+<blockquote>
+<p><strong>13 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-custom-properties">Custom properties: valori con un nome</a></strong></p>
+<ul><li>Dichiarazione di valori riusabili e prima applicazione di <code>var()</code>.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">Using CSS custom properties</a></strong></p>
+<ul><li>Guida completa alle proprietà personalizzate e ai valori di fallback.</li></ul>
+</blockquote>
+
+</details>
+
+<details>
+<summary><strong>Applicazione, debug e confini</strong> · 3 voci</summary>
+
+<blockquote>
+<p><strong>14 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-css-debug">Debug CSS ed errori frequenti</a></strong></p>
+<ul><li>Procedura con DevTools per overflow, cascade e breakpoint errati.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<em>Nessun riferimento MDN diretto selezionato per questa voce.</em></p>
+</blockquote>
+
+<blockquote>
+<p><strong>15 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<strong><a href="#lesson-lab">Laboratorio</a></strong></p>
+<ul><li>Osservazione, shell responsive Feisbuc e diagnosi guidata.</li></ul>
+<p><strong>&#128994; MDN</strong><br>
+<em>Le Activity applicano i concetti senza riprodurre un esercizio MDN.</em></p>
+</blockquote>
+
+<blockquote>
+<p><strong>16 · CORRISPONDENZA</strong></p>
+<p><strong>&#128309; DISPENSA</strong><br>
+<em>Nessun paragrafo operativo: contenuti esclusi dalla lezione.</em></p>
+<p><strong>&#128994; MDN</strong><br>
+<strong><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS reference</a></strong></p>
+<ul><li>Writing modes, animazioni e moduli avanzati da studiare più avanti.</li></ul>
+</blockquote>
+
+</details>
 
 </details>
 </td></tr></table>
@@ -149,6 +327,7 @@ HTML descrive soprattutto <strong>struttura e significato</strong>. CSS descrive
 
 <p align="justify">Il riferimento guidato è <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started#applying_css_to_html">Applying CSS to HTML</a>: studia il collegamento esterno e riconosci le altre due possibilità.</p>
 
+<a id="lesson-css-rule"></a>
 ## Anatomia di una regola CSS
 
 ```css
@@ -276,6 +455,7 @@ body {
 
 <p align="justify">Quando non ricordi se una proprietà eredita, consulta la sezione <strong>Formal definition</strong> della pagina MDN della proprietà.</p>
 
+<a id="lesson-css-box-model"></a>
 ## Box model: ogni elemento genera scatole
 
 <table align="center"><tr><td>
@@ -329,6 +509,7 @@ margin
 
 <p align="justify">Questo non è un reset magico di tutto il CSS: risolve un problema preciso di calcolo delle dimensioni.</p>
 
+<a id="lesson-css-normal-flow"></a>
 ## Normal flow prima del layout speciale
 
 <p align="justify">Prima di Flexbox e Grid, il browser ha già un algoritmo di layout: il <strong>normal flow</strong>.</p>
@@ -375,6 +556,7 @@ Flexbox è adatto quando il problema principale è distribuire elementi in una <
 
 <p align="justify">Non è corretto. <code>justify-content</code> lavora sull'<strong>asse principale</strong>. Se cambi <code>flex-direction</code>, cambia anche l'orientamento dell'asse principale.</p>
 
+<a id="lesson-css-grid"></a>
 ## Grid: righe e colonne coordinate
 
 <table align="center"><tr><td>
@@ -418,6 +600,7 @@ profilo | feed | tendenze
 
 <p align="justify">Il valore <code>1fr</code> distribuisce spazio flessibile. In certi layout, un contenuto lungo può però impedire alla colonna di restringersi come immaginiamo. Rendere esplicito il minimo <code>0</code> è una tecnica utile per permettere alla colonna centrale di contrarsi e gestire correttamente l'overflow.</p>
 
+<a id="lesson-css-layout-choice"></a>
 ## Flexbox o Grid?
 
 <p align="justify">Usa questa domanda, non una regola religiosa:</p>
@@ -488,6 +671,7 @@ responsive design significa progettare affinché il contenuto rimanga utilizzabi
 
 <p align="justify">Aggiungi <code>@media</code> quando la struttura ha davvero bisogno di cambiare.</p>
 
+<a id="lesson-css-units"></a>
 ## Unità utili
 
 <p align="justify">Non esiste una singola unità corretta per tutto.</p>
@@ -620,6 +804,7 @@ Grid    → macro layout della pagina
 Flexbox → gruppi monodimensionali dentro le regioni
 ```
 
+<a id="lesson-css-debug"></a>
 ## Debug CSS: osserva prima di cambiare
 
 <p align="justify">Quando un layout si rompe:</p>
