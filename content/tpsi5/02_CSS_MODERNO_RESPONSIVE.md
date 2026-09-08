@@ -1,23 +1,21 @@
+<a id="lesson-start"></a>
 # CSS moderno, layout e responsive design
 
-<table align="center" width="100%"><tr><td>
+<a id="lesson-objectives"></a>
+## In questa unità impareremo
+
+<table align="center"><tr><td>
 <details>
-<summary>&#128506; <strong>Orientamento della lezione</strong></summary>
+<summary>&#129517; <strong>Orientamento della sezione</strong></summary>
 
-<p align="justify"><strong>Contesto:</strong> la lezione precedente ha dato struttura e significato alla pagina. Ora dobbiamo controllarne presentazione e layout senza compromettere semantica, leggibilità e adattamento allo spazio disponibile.</p>
-<p align="justify"><strong>Domande guida:</strong> come decide il browser quale dichiarazione CSS applicare? Quando conviene Flexbox e quando Grid? Come si costruisce un layout che reagisce al contenuto invece che a un elenco di dispositivi?</p>
-<p align="justify"><strong>Obiettivi osservabili:</strong> prevedere la cascade, ispezionare il box model, scegliere il sistema di layout adatto, individuare un overflow e realizzare una shell Feisbuc mobile-first.</p>
-<p align="justify"><strong>Prossimo passo:</strong> nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e i componenti di Bootstrap.</p>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128506;</span> Contesto:</strong>
+la lezione precedente ha dato struttura e significato alla pagina. Ora dobbiamo controllarne presentazione e layout senza compromettere semantica, leggibilità e adattamento allo spazio disponibile.</p>
 
-</details>
-</td></tr></table>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#10067;</span> Domande guida:</strong>
+come decide il browser quale dichiarazione CSS applicare? Quando conviene Flexbox e quando Grid? Come si costruisce un layout che reagisce al contenuto invece che a un elenco di dispositivi?</p>
 
-<p align="justify">Stato: <strong>draft didattico</strong>. Questa lezione prosegue UDA 21 dopo <code>01_WEB_PLATFORM_HTML_MODERNO.md</code> e trasforma lo scheletro semantico di Feisbuc in una interfaccia responsive senza introdurre ancora Bootstrap o framework frontend.</p>
-
-## Obiettivi
-
-<p align="justify">Al termine della lezione lo studente deve saper:</p>
-
+<p align="justify"><strong><span style="font-size: 1.15em;">&#127919;</span> Obiettivi:</strong>
+Al termine lo studente dovrà saper:</p>
 <ul>
   <li>spiegare il ruolo di CSS nella Web Platform senza confonderlo con HTML;</li>
   <li>leggere e scrivere regole CSS composte da selettore, proprietà e valore;</li>
@@ -33,24 +31,45 @@
   <li>realizzare la milestone responsive iniziale di Feisbuc.</li>
 </ul>
 
-## Prerequisiti
-
+<p align="justify"><strong><span style="font-size: 1.15em;">&#129504;</span> Prerequisiti:</strong></p>
 <ul>
-  <li>completamento di <code>01_WEB_PLATFORM_HTML_MODERNO.md</code>;</li>
-  <li>struttura semantica con <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>footer</code>;</li>
-  <li>uso essenziale di browser DevTools;</li>
-  <li>nessuna conoscenza di Bootstrap richiesta.</li>
+  <li>aver completato la lezione <a href="01_WEB_PLATFORM_HTML_MODERNO.md">Web Platform e HTML moderno</a>;</li>
+  <li>saper riconoscere una struttura semantica con <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code> e <code>footer</code>;</li>
+  <li>saper usare le funzioni essenziali dei browser DevTools;</li>
+  <li>non è richiesta alcuna conoscenza di Bootstrap.</li>
 </ul>
 
-## Orientamento nella documentazione
+<p align="justify"><strong><span style="font-size: 1.15em;">&#10145;</span> Prossimo passo:</strong>
+nella lezione 03 confronteremo il CSS scritto direttamente con le convenzioni e i componenti di Bootstrap.</p>
+
+</details>
+</td></tr></table>
+
+<a id="lesson-mdn-maps"></a>
+## Orientamento nella documentazione MDN
+
+<p align="justify">La dispensa costruisce un percorso guidato in italiano, mentre MDN rimane la documentazione tecnica da imparare a consultare. Se è la prima volta che la usi, apri prima la <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a>. La mappa e l'indice seguenti mostrano quali argomenti studiare ora e quali riconoscere per un approfondimento successivo.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128506;</span> Come leggere i colori:</strong>
+<strong>studiare ora</strong> indica i contenuti spiegati dalla dispensa e richiesti in questa lezione; <strong>riconoscere o studiare più avanti</strong> segnala gli argomenti da saper individuare nella documentazione, senza approfondirli ancora. Ogni stato è scritto anche accanto al colore, che non è quindi l'unico segnale.</p>
+</td></tr></table>
+
+<table align="center"><tr><td>
+<details>
+<summary>&#128506;&#65039; <strong>Mappa — profondità richiesta</strong></summary>
 
 <p align="center">
   <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
 </p>
 
-<table align="center"><tr><td>
+</details>
+</td></tr></table>
+
+<a id="lesson-mdn-cross-index"></a>
+<table align="center" width="100%"><tr><td>
 <details>
-<summary>&#128279; <strong>Indice incrociato — CSS ↔ MDN</strong></summary>
+<summary>&#128279; <strong>Indice incrociato navigabile — Dispensa ↔ MDN</strong></summary>
 
 <table align="center">
 <thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
@@ -68,24 +87,27 @@
 
 ## Problema iniziale
 
-<p align="justify">Il nostro HTML semantico sa gia dire che cosa sono header, navigazione, feed e post. Ma il browser, senza istruzioni di presentazione, li mostra quasi tutti nel normale flusso del documento.</p>
+<p align="justify">Il nostro HTML semantico sa già dire che cosa sono header, navigazione, feed e post. Ma il browser, senza istruzioni di presentazione, li mostra quasi tutti nel normale flusso del documento.</p>
 
 <p align="justify">Vogliamo ottenere una pagina che:</p>
 
 <ul>
   <li>resti leggibile su uno smartphone;</li>
-  <li>sfrutti piu spazio su un desktop;</li>
+  <li>sfrutti più spazio su un desktop;</li>
   <li>non abbia larghezze fissate per un solo monitor;</li>
   <li>non dipenda da <code>float</code> per costruire le colonne;</li>
   <li>non richieda una cascata di <code>!important</code> per funzionare.</li>
 </ul>
 
-<p align="justify">Questo e il problema che affrontiamo con CSS.</p>
+<p align="justify">Questo è il problema che affrontiamo con CSS.</p>
 
 <a id="lesson-css-foundations"></a>
-## HTML e CSS hanno responsabilita diverse
+## HTML e CSS hanno responsabilità diverse
 
-<p align="justify">HTML descrive soprattutto <strong>struttura e significato</strong>. CSS descrive <strong>presentazione e layout</strong>.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Idea chiave — responsabilità distinte:</strong>
+HTML descrive soprattutto <strong>struttura e significato</strong>. CSS descrive <strong>presentazione e layout</strong>.</p>
+</td></tr></table>
 
 ```html
 <article class="post">
@@ -106,12 +128,12 @@
 
 ### Da dove arriva lo stile
 
-<p align="justify">Prima ancora del nostro CSS, il browser applica un proprio foglio di stile: e il motivo per cui, per esempio, un <code>h1</code> appare grande e in grassetto anche in una pagina senza CSS. Questi <strong>stili predefiniti</strong> sono una base utile, non un errore da eliminare alla cieca.</p>
+<p align="justify">Prima ancora del nostro CSS, il browser applica un proprio foglio di stile: è il motivo per cui, per esempio, un <code>h1</code> appare grande e in grassetto anche in una pagina senza CSS. Questi <strong>stili predefiniti</strong> sono una base utile, non un errore da eliminare alla cieca.</p>
 
 <p align="justify">Possiamo aggiungere CSS in tre modi:</p>
 
 <ol>
-  <li>con un foglio esterno collegato da <code>&lt;link&gt;</code>: e la scelta normale del corso, perche separa struttura e presentazione e permette il riuso;</li>
+  <li>con un foglio esterno collegato da <code>&lt;link&gt;</code>: è la scelta normale del corso, perché separa struttura e presentazione e permette il riuso;</li>
   <li>con un elemento <code>&lt;style&gt;</code> nel documento: utile per una demo isolata o una pagina autosufficiente;</li>
   <li>con l'attributo <code>style</code> sul singolo elemento: da riconoscere e saper ispezionare, ma da non usare come strategia abituale.</li>
 </ol>
@@ -122,7 +144,7 @@
 </head>
 ```
 
-<p align="justify">Il riferimento guidato e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started#applying_css_to_html">Applying CSS to HTML</a>: studia il collegamento esterno e riconosci le altre due possibilita.</p>
+<p align="justify">Il riferimento guidato è <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started#applying_css_to_html">Applying CSS to HTML</a>: studia il collegamento esterno e riconosci le altre due possibilità.</p>
 
 ## Anatomia di una regola CSS
 
@@ -134,11 +156,11 @@
 ```
 
 <ul>
-  <li><code>.post</code> e il <strong>selettore</strong>;</li>
-  <li><code>padding</code> e <code>border</code> sono <strong>proprieta</strong>;</li>
+  <li><code>.post</code> è il <strong>selettore</strong>;</li>
+  <li><code>padding</code> e <code>border</code> sono <strong>proprietà</strong>;</li>
   <li><code>1rem</code> e <code>1px solid #bbb</code> sono <strong>valori</strong>;</li>
-  <li><code>padding: 1rem</code> e una <strong>dichiarazione</strong>;</li>
-  <li>l'insieme fra <code>{</code> e <code>}</code> e il blocco delle dichiarazioni.</li>
+  <li><code>padding: 1rem</code> è una <strong>dichiarazione</strong>;</li>
+  <li>l'insieme fra <code>{</code> e <code>}</code> è il blocco delle dichiarazioni.</li>
 </ul>
 
 ### Selettori da padroneggiare nel core
@@ -160,26 +182,29 @@ input[type="email"] { }
 <ul>
   <li><code>article</code>, <code>.post</code>, <code>#feed</code> sono selettori di tipo, classe e ID;</li>
   <li><code>[type="email"]</code> seleziona in base a un attributo;</li>
-  <li><code>:hover</code> descrive uno stato, quindi e una pseudo-classe;</li>
-  <li><code>::first-line</code> seleziona una parte generata dell'elemento, quindi e uno pseudo-elemento;</li>
+  <li><code>:hover</code> descrive uno stato, quindi è una pseudo-classe;</li>
+  <li><code>::first-line</code> seleziona una parte generata dell'elemento, quindi è uno pseudo-elemento;</li>
   <li>lo spazio, <code>&gt;</code> e <code>+</code> mettono in relazione elementi discendenti, figli o fratelli adiacenti;</li>
   <li>una virgola raggruppa selettori che condividono le stesse dichiarazioni.</li>
 </ul>
 
-<p align="justify">Nel corso preferiremo normalmente classi e selettori semplici per lo styling. Gli ID rimangono utili per identificazione, fragment link, accessibilita e casi mirati, ma non vogliamo costruire fogli di stile impossibili da sovrascrivere. Nella <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors">guida MDN ai selettori</a> studia i selettori di base; combinatori, pseudo-classi e pseudo-elementi vanno saputi leggere e cercare nella documentazione.</p>
+<p align="justify">Nel corso preferiremo normalmente classi e selettori semplici per lo styling. Gli ID rimangono utili per identificazione, collegamenti a frammenti, accessibilità e casi mirati, ma non vogliamo costruire fogli di stile impossibili da sovrascrivere. Nella <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors">guida MDN ai selettori</a> studia i selettori di base; combinatori, pseudo-classi e pseudo-elementi vanno saputi leggere e cercare nella documentazione.</p>
 
 <a id="lesson-css-cascade"></a>
-## Cascade: perche una regola vince su un'altra?
+## Cascade: perché una regola vince su un'altra?
 
-<p align="justify">CSS significa <em>Cascading Style Sheets</em>: piu dichiarazioni possono riguardare lo stesso elemento e il browser deve decidere quale applicare.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — cascade:</strong>
+CSS significa <em>Cascading Style Sheets</em>: più dichiarazioni possono riguardare lo stesso elemento e il browser deve decidere quale applicare.</p>
+</td></tr></table>
 
 <p align="justify">Per i casi iniziali ragioniamo in questo ordine mentale:</p>
 
 <ol>
   <li>le dichiarazioni sono entrambe applicabili all'elemento?</li>
-  <li>c'e un'importanza/origine diversa?</li>
-  <li>quale selettore e piu specifico?</li>
-  <li>se la priorita e equivalente, quale dichiarazione arriva dopo?</li>
+  <li>c'è un'importanza/origine diversa?</li>
+  <li>quale selettore è più specifico?</li>
+  <li>se la priorità è equivalente, quale dichiarazione arriva dopo?</li>
 </ol>
 
 <p align="justify">Esempio:</p>
@@ -194,9 +219,9 @@ input[type="email"] { }
 }
 ```
 
-<p align="justify">Il secondo selettore ha specificita maggiore.</p>
+<p align="justify">Il secondo selettore ha specificità maggiore.</p>
 
-### Specificita senza formule magiche
+### Specificità senza formule magiche
 
 <p align="justify">Per il livello core basta ricordare una gerarchia pratica:</p>
 
@@ -204,14 +229,17 @@ input[type="email"] { }
   <li>selettori di tipo (<code>article</code>) hanno peso basso;</li>
   <li>classi, attributi e pseudo-classi (<code>.post</code>, <code>[hidden]</code>, <code>:hover</code>) hanno peso maggiore;</li>
   <li>ID (<code>#feed</code>) hanno peso ancora maggiore;</li>
-  <li>gli stili inline sono ancora piu difficili da sovrascrivere nel normale author CSS.</li>
+  <li>gli stili inline sono ancora più difficili da sovrascrivere nel normale CSS dell'autore.</li>
 </ul>
 
-<p align="justify">Non useremo la specificita come una gara a costruire il selettore piu lungo. Il buon obiettivo e il contrario: <strong>regole semplici e prevedibili</strong>.</p>
+<p align="justify">Non useremo la specificità come una gara a costruire il selettore più lungo. Il buon obiettivo è il contrario: <strong>regole semplici e prevedibili</strong>.</p>
 
-### Perche evitare `!important` come soluzione abituale
+### Perché evitare `!important` come soluzione abituale
 
-<p align="justify"><code>!important</code> cambia la priorita nella cascata. Esistono casi reali in cui e utile, ma non deve diventare il cerotto con cui nascondiamo una architettura CSS confusa.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Attenzione — <code>!important</code>:</strong>
+<code>!important</code> cambia la priorità nella cascata. Esistono casi reali in cui è utile, ma non deve diventare il cerotto con cui nascondiamo un'architettura CSS confusa.</p>
+</td></tr></table>
 
 <p align="justify">Quando senti il bisogno di scrivere:</p>
 
@@ -226,13 +254,13 @@ input[type="email"] { }
 <ul>
   <li>sto usando selettori troppo specifici?</li>
   <li>sto duplicando regole?</li>
-  <li>l'ordine del foglio e comprensibile?</li>
+  <li>l'ordine del foglio è comprensibile?</li>
   <li>posso modellare meglio i componenti con classi?</li>
 </ul>
 
-## Inheritance
+## Ereditarietà
 
-<p align="justify">Alcune proprieta possono essere ereditate dai discendenti, altre no.</p>
+<p align="justify">Alcune proprietà possono essere ereditate dai discendenti, altre no.</p>
 
 ```css
 body {
@@ -241,11 +269,16 @@ body {
 }
 ```
 
-<p align="justify">Molto testo dentro <code>body</code> usera naturalmente questi valori. Un <code>margin</code> assegnato a <code>body</code>, invece, non viene semplicemente ereditato da tutti i figli.</p>
+<p align="justify">Molto testo dentro <code>body</code> userà naturalmente questi valori. Un <code>margin</code> assegnato a <code>body</code>, invece, non viene semplicemente ereditato da tutti i figli.</p>
 
-<p align="justify">Quando non ricordi se una proprieta eredita, consulta la sezione <strong>Formal definition</strong> della pagina MDN della proprieta.</p>
+<p align="justify">Quando non ricordi se una proprietà eredita, consulta la sezione <strong>Formal definition</strong> della pagina MDN della proprietà.</p>
 
 ## Box model: ogni elemento genera scatole
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — box model:</strong>
+ogni elemento genera una scatola composta dall'area del contenuto e, procedendo verso l'esterno, da padding, bordo e margine.</p>
+</td></tr></table>
 
 <p align="justify">Per capire dimensioni e spazi dobbiamo visualizzare:</p>
 
@@ -256,7 +289,7 @@ margin
       └─ content
 ```
 
-<p align="justify">Un elemento puo avere:</p>
+<p align="justify">Un elemento può avere:</p>
 
 <ul>
   <li>area del contenuto;</li>
@@ -279,7 +312,7 @@ margin
 
 ### `box-sizing: border-box`
 
-<p align="justify">Per interfacce applicative e spesso piu facile ragionare cosi:</p>
+<p align="justify">Per interfacce applicative è spesso più facile ragionare così:</p>
 
 ```css
 *,
@@ -291,20 +324,23 @@ margin
 
 <p align="justify">Con <code>border-box</code>, quando impostiamo una larghezza, padding e border rientrano nella dimensione dichiarata.</p>
 
-<p align="justify">Questo non e un reset magico di tutto il CSS: risolve un problema preciso di calcolo delle dimensioni.</p>
+<p align="justify">Questo non è un reset magico di tutto il CSS: risolve un problema preciso di calcolo delle dimensioni.</p>
 
 ## Normal flow prima del layout speciale
 
-<p align="justify">Prima di Flexbox e Grid, il browser ha gia un algoritmo di layout: il <strong>normal flow</strong>.</p>
+<p align="justify">Prima di Flexbox e Grid, il browser ha già un algoritmo di layout: il <strong>normal flow</strong>.</p>
 
 <p align="justify">Gli elementi block tendono a disporsi uno dopo l'altro lungo la direzione di blocco. Il contenuto inline scorre invece dentro le righe.</p>
 
-<p align="justify">Capire il normal flow serve perche Flexbox e Grid non sostituiscono CSS: cambiano il modo in cui vengono disposti i figli di uno specifico contenitore.</p>
+<p align="justify">Capire il normal flow serve perché Flexbox e Grid non sostituiscono CSS: cambiano il modo in cui vengono disposti i figli di uno specifico contenitore.</p>
 
 <a id="lesson-css-layout"></a>
 ## Flexbox: una dimensione alla volta
 
-<p align="justify">Flexbox e adatto quando il problema principale e distribuire elementi in una <strong>riga oppure colonna</strong>.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Modello mentale — Flexbox:</strong>
+Flexbox è adatto quando il problema principale è distribuire elementi in una <strong>riga oppure colonna</strong>.</p>
+</td></tr></table>
 
 <p align="justify">Esempio: il menu di Feisbuc.</p>
 
@@ -334,11 +370,14 @@ margin
 
 ### Errore comune: memorizzare `justify` = orizzontale
 
-<p align="justify">Non e corretto. <code>justify-content</code> lavora sull'<strong>asse principale</strong>. Se cambi <code>flex-direction</code>, cambia anche l'orientamento dell'asse principale.</p>
+<p align="justify">Non è corretto. <code>justify-content</code> lavora sull'<strong>asse principale</strong>. Se cambi <code>flex-direction</code>, cambia anche l'orientamento dell'asse principale.</p>
 
 ## Grid: righe e colonne coordinate
 
-<p align="justify">Grid e adatto quando il layout deve ragionare contemporaneamente su <strong>due dimensioni</strong>.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Modello mentale — Grid:</strong>
+Grid è adatto quando il layout deve ragionare contemporaneamente su <strong>due dimensioni</strong>.</p>
+</td></tr></table>
 
 <p align="justify">Per Feisbuc, su uno schermo ampio potremmo voler coordinare:</p>
 
@@ -372,17 +411,18 @@ profilo | feed | tendenze
   <li>grid areas solo dopo avere capito le colonne di base.</li>
 </ul>
 
-### Perche `minmax(0, 1fr)` nel feed?
+### Perché `minmax(0, 1fr)` nel feed?
 
-<p align="justify">Il valore <code>1fr</code> distribuisce spazio flessibile. In certi layout, un contenuto lungo puo pero impedire alla colonna di restringersi come immaginiamo. Rendere esplicito il minimo <code>0</code> e una tecnica utile per permettere alla colonna centrale di contrarsi e gestire correttamente l'overflow.</p>
+<p align="justify">Il valore <code>1fr</code> distribuisce spazio flessibile. In certi layout, un contenuto lungo può però impedire alla colonna di restringersi come immaginiamo. Rendere esplicito il minimo <code>0</code> è una tecnica utile per permettere alla colonna centrale di contrarsi e gestire correttamente l'overflow.</p>
 
 ## Flexbox o Grid?
 
 <p align="justify">Usa questa domanda, non una regola religiosa:</p>
 
-<blockquote>
-<p align="justify">Sto organizzando soprattutto una fila/colonna, oppure devo coordinare righe e colonne?</p>
-</blockquote>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#10067;</span> Domanda guida:</strong>
+sto organizzando soprattutto una fila o una colonna, oppure devo coordinare righe e colonne?</p>
+</td></tr></table>
 
 <p align="justify">Esempi Feisbuc:</p>
 
@@ -399,7 +439,10 @@ profilo | feed | tendenze
 <a id="lesson-css-responsive"></a>
 ## Responsive design: non significa scegliere tre telefoni
 
-<p align="justify">Responsive design significa progettare affinche il contenuto rimanga utilizzabile in una gamma di spazi disponibili.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — responsive design:</strong>
+responsive design significa progettare affinché il contenuto rimanga utilizzabile in una gamma di spazi disponibili.</p>
+</td></tr></table>
 
 <p align="justify">Partiamo da un layout semplice per viewport piccoli:</p>
 
@@ -411,7 +454,7 @@ profilo | feed | tendenze
 }
 ```
 
-<p align="justify">Poi aggiungiamo un breakpoint quando <strong>il contenuto</strong> ha spazio sufficiente per una struttura piu ricca:</p>
+<p align="justify">Poi aggiungiamo un breakpoint quando <strong>il contenuto</strong> ha spazio sufficiente per una struttura più ricca:</p>
 
 ```css
 @media (min-width: 56rem) {
@@ -424,11 +467,11 @@ profilo | feed | tendenze
 }
 ```
 
-<p align="justify">Questo e un approccio mobile-first: la base funziona con poco spazio; una media query aggiunge il layout ampio.</p>
+<p align="justify">Questo è un approccio mobile-first: la base funziona con poco spazio; una media query aggiunge il layout ampio.</p>
 
 ### Media query solo quando serve
 
-<p align="justify">Flexbox e Grid sono gia flessibili. Non dobbiamo creare un breakpoint per ogni modello di telefono.</p>
+<p align="justify">Flexbox e Grid sono già flessibili. Non dobbiamo creare un breakpoint per ogni modello di telefono.</p>
 
 <p align="justify">Prima prova:</p>
 
@@ -442,9 +485,9 @@ profilo | feed | tendenze
 
 <p align="justify">Aggiungi <code>@media</code> quando la struttura ha davvero bisogno di cambiare.</p>
 
-## Unita utili
+## Unità utili
 
-<p align="justify">Non esiste una singola unita corretta per tutto.</p>
+<p align="justify">Non esiste una singola unità corretta per tutto.</p>
 
 <ul>
   <li><code>px</code>: utile per dettagli come alcuni border;</li>
@@ -463,11 +506,11 @@ profilo | feed | tendenze
 }
 ```
 
-<p align="justify">se quella larghezza rigida e l'unico modo in cui la pagina funziona.</p>
+<p align="justify">se quella larghezza rigida è l'unico modo in cui la pagina funziona.</p>
 
 ### Testo leggibile: font, ritmo e colore
 
-<p align="justify">Lo stile del testo non e decorazione separata dal layout: dimensione, interlinea e larghezza della riga decidono se il contenuto si legge bene.</p>
+<p align="justify">Lo stile del testo non è decorazione separata dal layout: dimensione, interlinea e larghezza della riga decidono se il contenuto si legge bene.</p>
 
 ```css
 body {
@@ -483,14 +526,14 @@ body {
 ```
 
 <ul>
-  <li>una <strong>font stack</strong> offre alternative se il primo font non e disponibile;</li>
+  <li>una <strong>font stack</strong> offre alternative se il primo font non è disponibile;</li>
   <li><code>rem</code> collega le dimensioni alla base del documento e rispetta meglio le preferenze utente;</li>
-  <li><code>line-height</code> senza unita mantiene una proporzione utile anche nei discendenti;</li>
-  <li><code>ch</code> puo limitare righe di testo troppo lunghe;</li>
+  <li><code>line-height</code> senza unità mantiene una proporzione utile anche nei discendenti;</li>
+  <li><code>ch</code> può limitare righe di testo troppo lunghe;</li>
   <li>il colore deve avere contrasto sufficiente e non deve essere l'unico segnale di stato.</li>
 </ul>
 
-<p align="justify">Nella pagina MDN <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals">Fundamental text and font styling</a> studia famiglie, dimensioni, peso, stile e interlinea; le proprieta tipografiche avanzate restano materiale di consultazione.</p>
+<p align="justify">Nella pagina MDN <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Text_styling/Fundamentals">Fundamental text and font styling</a> studia famiglie, dimensioni, peso, stile e interlinea; le proprietà tipografiche avanzate restano materiale di consultazione.</p>
 
 ## Immagini responsive
 
@@ -503,7 +546,7 @@ img {
 }
 ```
 
-<p align="justify">Non risolve da sola art direction, formati o performance delle immagini, ma impedisce spesso che una immagine superi il contenitore.</p>
+<p align="justify">Non risolve da sola art direction, formati o performance delle immagini, ma impedisce spesso che un'immagine superi il contenitore.</p>
 
 ## Custom properties: valori con un nome
 
@@ -524,7 +567,7 @@ img {
 }
 ```
 
-<p align="justify">Il vantaggio didattico non e solo evitare copia-incolla: i nomi permettono di esprimere intenzioni.</p>
+<p align="justify">Il vantaggio didattico non è solo evitare copia-incolla: i nomi permettono di esprimere intenzioni.</p>
 
 ## Feisbuc milestone 1: shell responsive
 
@@ -566,7 +609,7 @@ img {
 
 <p align="justify">Il menu e le azioni di un post possono invece essere Flexbox.</p>
 
-<p align="justify">Questa separazione e intenzionale:</p>
+<p align="justify">Questa separazione è intenzionale:</p>
 
 ```text
 Grid    → macro layout della pagina
@@ -583,7 +626,7 @@ Flexbox → gruppi monodimensionali dentro le regioni
   <li>usa DevTools per vedere regole applicate e barrate;</li>
   <li>controlla box model e dimensioni calcolate;</li>
   <li>controlla quale regola vince nella cascade;</li>
-  <li>modifica una ipotesi alla volta;</li>
+  <li>modifica un'ipotesi alla volta;</li>
   <li>verifica di nuovo mobile e desktop.</li>
 </ol>
 
@@ -599,11 +642,11 @@ main {
 }
 ```
 
-<p align="justify">Su un viewport piu piccolo puo produrre overflow.</p>
+<p align="justify">Su un viewport più piccolo può produrre overflow.</p>
 
 ### 2. Usare `float` come sistema principale di colonne
 
-<p align="justify"><code>float</code> resta una funzionalita CSS reale, ma non e il nostro strumento principale per costruire il layout applicativo moderno di Feisbuc.</p>
+<p align="justify"><code>float</code> resta una funzionalità CSS reale, ma non è il nostro strumento principale per costruire il layout applicativo moderno di Feisbuc.</p>
 
 ### 3. `!important` ovunque
 
@@ -611,74 +654,97 @@ main {
 
 ### 4. Breakpoint invertiti
 
-<p align="justify">Se la base e mobile-first, una regola <code>min-width</code> dovrebbe normalmente aggiungere complessita quando cresce lo spazio, non forzare la singola colonna proprio sui viewport piu larghi.</p>
+<p align="justify">Se la base è mobile-first, una regola <code>min-width</code> dovrebbe normalmente aggiungere complessità quando cresce lo spazio, non forzare la singola colonna proprio sui viewport più larghi.</p>
 
 ### 5. Confondere Grid e Flex
 
-<p align="justify">Usare Flexbox per simulare una tabella bidimensionale o Grid per una semplice riga di bottoni puo rendere il codice piu difficile del necessario.</p>
+<p align="justify">Usare Flexbox per simulare una tabella bidimensionale o Grid per una semplice riga di bottoni può rendere il codice più difficile del necessario.</p>
 
 ### 6. Riordinare visivamente senza pensare alla semantica
 
-<p align="justify">CSS puo modificare la posizione visuale. L'ordine del DOM rimane pero importante per lettura, tastiera e tecnologie assistive. Non usiamo il layout per mascherare una struttura HTML sbagliata.</p>
-
-## Approfondimento guidato su MDN
-
 <table align="center"><tr><td>
-<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — CSS:</strong> usa il metodo generale della <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a> e, quando apri la scheda di una proprietà, segui l'ordine indicato in <a href="GUIDA_USO_MDN.md#mdn-guide-css">Come leggere una reference CSS</a>.</p>
-<ul>
-  <li><strong>Cascade e specificità:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a>; ricostruisci quali dichiarazioni sono candidate e perché una vince;</li>
-  <li><strong>box model:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">The box model</a>; confronta content, padding, border e margin nei DevTools;</li>
-  <li><strong>Flexbox:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">Flexbox</a>; identifica container, item, main axis e cross axis;</li>
-  <li><strong>Grid:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">CSS grid layout</a>; identifica track, righe, colonne, gap e posizione degli item;</li>
-  <li><strong>responsive:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a> e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">Media query fundamentals</a>; aggiungi un breakpoint soltanto quando lo richiede il contenuto.</li>
-</ul>
-<p align="justify"><strong>Prodotto atteso:</strong> per ogni problema annota la regola CSS responsabile, la prova svolta nei DevTools e il cambiamento osservato.</p>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Attenzione — ordine visivo e ordine del DOM:</strong>
+CSS può modificare la posizione visuale. L'ordine del DOM rimane però importante per lettura, tastiera e tecnologie assistive. Non usiamo il layout per mascherare una struttura HTML sbagliata.</p>
 </td></tr></table>
 
-## Esempi da modificare
+<a id="lesson-lab"></a>
+## Laboratorio
 
-### A — osservazione
+<p align="justify">Il laboratorio procede dall'osservazione del box model alla costruzione e al debug della shell responsive di Feisbuc. Gli ultimi due punti anticipano prodotti che verranno completati nelle lezioni successive.</p>
 
-<p align="justify">Modifica <code>padding</code>, <code>border</code> e <code>margin</code> di una card e osserva il box model nei DevTools.</p>
+<table align="center"><tr><td>
+<details>
+<summary>&#128187; <strong>Esercizi A e B — osservazione e modifica controllata</strong></summary>
 
-### B — modifica controllata
+<ul>
+  <li><strong>A — osservazione:</strong> modifica <code>padding</code>, <code>border</code> e <code>margin</code> di una card e osserva il box model nei DevTools.</li>
+  <li><strong>B — modifica controllata:</strong> trasforma un menu verticale in un flex container con wrapping.</li>
+</ul>
 
-<p align="justify">Trasforma un menu verticale in un flex container con wrapping.</p>
+</details>
+</td></tr></table>
 
-### C — implementazione autonoma
+<table align="center"><tr><td>
+<details>
+<summary>&#128187; <strong>Activity C — Feisbuc responsive</strong></summary>
 
-<p align="justify"><strong>Activity <code>tpsi5-activity-c-feisbuc-responsive-layout-001</code></strong>: costruisci la shell responsive di Feisbuc usando Grid per il macro-layout e Flexbox per i gruppi interni.</p>
+<p align="justify">Costruisci la shell responsive di Feisbuc usando Grid per il macro-layout e Flexbox per i gruppi interni.</p>
 
-### D — debug e diagnosi
+<p align="justify"><a href="../../activities/tpsi5/feisbuc_responsive_c/student/README.md">Apri la consegna dell'Activity C</a> e lavora sullo <a href="../../activities/tpsi5/feisbuc_responsive_c/starter/index.html">starter <code>index.html</code></a>.</p>
 
-<p align="justify"><strong>Activity <code>tpsi5-activity-d-debug-responsive-css-001</code></strong>: ricevi una pagina che funziona apparentemente solo su desktop. Prima documenta le cause, poi correggi il CSS senza <code>!important</code> e senza nascondere l'overflow.</p>
+</details>
+</td></tr></table>
 
-### E — mini-progetto futuro
+<table align="center"><tr><td>
+<details>
+<summary>&#128187; <strong>Activity D — Debug responsive CSS</strong></summary>
 
-<p align="justify">Costruire una pagina profilo completa con layout responsive, form e componenti visuali riusabili.</p>
+<p align="justify">Ricevi una pagina che funziona apparentemente solo su desktop. Prima documenta le cause, poi correggi il CSS senza <code>!important</code> e senza nascondere l'overflow.</p>
 
-### F — prodotto integrato futuro
+<p align="justify"><a href="../../activities/tpsi5/css_debug_d/student/README.md">Apri la consegna dell'Activity D</a>, lavora sullo <a href="../../activities/tpsi5/css_debug_d/starter/index.html">starter <code>index.html</code></a> e documenta la diagnosi nel file <a href="../../activities/tpsi5/css_debug_d/starter/DIAGNOSI.md"><code>DIAGNOSI.md</code></a>.</p>
 
-<p align="justify">Integrare layout, comportamento JavaScript, API e backend nel Feisbuc full stack.</p>
+</details>
+</td></tr></table>
 
+<table align="center"><tr><td>
+<details>
+<summary>&#10145; <strong>Sviluppi successivi — punti E e F</strong></summary>
+
+<ul>
+  <li><strong>E — mini-progetto futuro:</strong> costruire una pagina profilo completa con layout responsive, form e componenti visuali riusabili.</li>
+  <li><strong>F — prodotto integrato futuro:</strong> integrare layout, comportamento JavaScript, API e backend nel Feisbuc full stack.</li>
+</ul>
+
+</details>
+</td></tr></table>
+
+<a id="lesson-checkpoint"></a>
 ## Verifica rapida
 
+<table align="center"><tr><td>
+<details>
+<summary>&#9989; <strong>Checkpoint — controlla ciò che hai compreso</strong></summary>
+
 <ol>
-  <li>Che differenza c'e fra HTML e CSS?</li>
-  <li>Da quali parti e composto il box model?</li>
+  <li>Che differenza c'è fra HTML e CSS?</li>
+  <li>Da quali parti è composto il box model?</li>
   <li>Che cosa cambia con <code>box-sizing: border-box</code>?</li>
   <li>Quando useresti Flexbox invece di Grid?</li>
-  <li>Perche <code>justify-content</code> non significa semplicemente “allinea orizzontalmente”?</li>
-  <li>Perche un layout <code>width: 1200px</code> puo essere fragile?</li>
+  <li>Perché <code>justify-content</code> non significa semplicemente “allinea orizzontalmente”?</li>
+  <li>Perché un layout <code>width: 1200px</code> può essere fragile?</li>
   <li>A cosa serve una media query?</li>
-  <li>Perche non serve una media query per ogni telefono?</li>
-  <li>Che cosa risolve la specificita?</li>
-  <li>Perche <code>!important</code> non deve essere la prima soluzione?</li>
+  <li>Perché non serve una media query per ogni telefono?</li>
+  <li>Che cosa risolve la specificità?</li>
+  <li>Perché <code>!important</code> non deve essere la prima soluzione?</li>
   <li>Che cosa rappresenta <code>1fr</code> in Grid?</li>
-  <li>Perche in un debug CSS e utile vedere le regole barrate nei DevTools?</li>
+  <li>Perché in un debug CSS è utile vedere le regole barrate nei DevTools?</li>
 </ol>
 
-## Sintesi inclusiva
+</details>
+</td></tr></table>
+
+<a id="lesson-summary"></a>
+## Sintesi
 
 ```text
 HTML → che cosa significa il contenuto
@@ -697,32 +763,53 @@ Feisbuc mobile → una colonna
 Feisbuc wide   → profilo | feed | tendenze
 ```
 
-## Fonti e provenance
+<a id="lesson-reading-mdn"></a>
+## MDN in questa lezione
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — CSS:</strong> usa il metodo generale della <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a> e, quando apri la scheda di una proprietà, segui l'ordine indicato in <a href="GUIDA_USO_MDN.md#mdn-guide-css">Come leggere una reference CSS</a>.</p>
+<ul>
+  <li><strong>Cascade e specificità:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a>; ricostruisci quali dichiarazioni sono candidate e perché una vince;</li>
+  <li><strong>box model:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">The box model</a>; confronta content, padding, border e margin nei DevTools;</li>
+  <li><strong>Flexbox:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">Flexbox</a>; identifica container, item, main axis e cross axis;</li>
+  <li><strong>Grid:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">CSS grid layout</a>; identifica track, righe, colonne, gap e posizione degli item;</li>
+  <li><strong>responsive:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a> e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">Media query fundamentals</a>; aggiungi un breakpoint soltanto quando lo richiede il contenuto.</li>
+</ul>
+<p align="justify"><strong>Prodotto atteso:</strong> per ogni problema annota la regola CSS responsabile, la prova svolta nei DevTools e il cambiamento osservato.</p>
+</td></tr></table>
+
+<a id="lesson-sources"></a>
+## Fonti e documentazione
 
 <p align="justify">Fonti tecniche professionali:</p>
 
 <ul>
-  <li>MDN CSS: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">https://developer.mozilla.org/en-US/docs/Web/CSS</a></li>
-  <li>MDN Handling conflicts: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts</a></li>
-  <li>MDN Box model: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model</a></li>
-  <li>MDN Flexbox: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox</a></li>
-  <li>MDN Grid: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids</a></li>
-  <li>MDN Responsive design: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design</a></li>
-  <li>MDN Media queries: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries</a></li>
-  <li>MDN Custom properties: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN — CSS reference</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">MDN — Handling conflicts</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">MDN — The box model</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">MDN — Flexbox</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">MDN — CSS grid layout</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">MDN — Responsive web design</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">MDN — Media query fundamentals</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties">MDN — Using CSS custom properties</a>.</li>
 </ul>
 
-<p align="justify">Provenance interna:</p>
+<p align="justify">Provenienza interna:</p>
 
 <ul>
-  <li><code>TheBitPoets/html_css_summary</code> pinned: sintassi CSS, box model, block/inline, padding/margin/border;</li>
-  <li><code>TheBitPoets/feisbuc</code> pinned: layout legacy basato su colonne/float e progetto longitudinale da modernizzare.</li>
+  <li><code>TheBitPoets/html_css_summary</code>, versione fissata: sintassi CSS, box model, block/inline, padding/margin/border;</li>
+  <li><code>TheBitPoets/feisbuc</code>, versione fissata: layout precedente basato su colonne/float e progetto longitudinale da modernizzare.</li>
 </ul>
 
-<p align="justify">Riferimento docente licensed, non riprodotto nel corso:</p>
+<p align="justify">Riferimento per il docente acquistato con licenza e non riprodotto nel corso:</p>
 
 <ul>
   <li>Manning, <em>CSS in Depth, Second Edition</em>.</li>
 </ul>
 
 <p align="justify">Il testo, gli esempi canonici, le Activity e le soluzioni di riferimento di questo modulo sono materiale originale del corso.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#10145;</span> Prossimo passo:</strong>
+nella lezione <a href="03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md">Da CSS a Bootstrap</a> confronteremo queste scelte di layout con il sistema responsive e i componenti offerti da un framework frontend.</p>
+</td></tr></table>
