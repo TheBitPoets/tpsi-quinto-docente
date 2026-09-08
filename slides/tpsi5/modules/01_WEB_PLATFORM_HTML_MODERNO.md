@@ -32,7 +32,9 @@ Alla fine dovrai saper:
 
 - collocare HTML nella Web Platform;
 - riconoscere elementi, tag, attributi e annidamento;
+- usare attributi normali e booleani;
 - costruire un documento HTML moderno;
+- descrivere i metadati principali di `head`;
 - usare elementi semantici;
 - distinguere file sorgente, DOM e pagina visualizzata;
 - ispezionare il DOM con DevTools;
@@ -84,6 +86,24 @@ Non descrive algoritmi o procedure: **non è un linguaggio di programmazione**.
 
 ---
 
+# Attributi
+
+Gli attributi aggiungono informazioni all'elemento e si scrivono nel tag di apertura:
+
+```html
+<p class="introduzione" lang="it">Benvenuti.</p>
+```
+
+- spazio dopo il nome dell'elemento;
+- nome dell'attributo;
+- segno `=`;
+- valore tra virgolette;
+- spazi tra attributi diversi.
+
+[MDN — Attributes](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#attributes)
+
+---
+
 # Annidamento ed elementi vuoti
 
 Un elemento può contenerne un altro:
@@ -100,6 +120,44 @@ Alcuni elementi non racchiudono contenuto e non hanno tag di chiusura:
 <meta charset="utf-8">
 <img src="ada.jpg" alt="Ada sorride davanti al computer">
 ```
+
+[MDN — Nesting](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#nesting_elements) · [MDN — Void elements](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#void_elements)
+
+---
+
+# Attributi booleani e virgolette
+
+La presenza di un attributo booleano rappresenta il valore vero:
+
+```html
+<input id="nome" name="nome" disabled>
+```
+
+`disabled="false"` non significa falso: l'attributo è presente.
+
+Negli esempi del corso useremo sempre virgolette doppie:
+
+```html
+<a href="profilo.html" title="Profilo di Ada">Profilo</a>
+```
+
+[MDN — Boolean attributes](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#boolean_attributes)
+
+---
+
+# Spazi, caratteri speciali e commenti
+
+- gli spazi consecutivi vengono normalmente ridotti a uno;
+- l'indentazione rende visibile l'annidamento;
+- i caratteri della sintassi si rappresentano con riferimenti come `&lt;` e `&amp;`;
+- i commenti restano nel sorgente, ma non vengono visualizzati.
+
+```html
+<!-- Navigazione principale -->
+<p>Un paragrafo si scrive con &lt;p&gt; e &lt;/p&gt;.</p>
+```
+
+[MDN — Whitespace](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#whitespace_in_html) · [Character references](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#character_references_including_special_characters_in_html) · [Comments](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#html_comments)
 
 ---
 
@@ -135,6 +193,42 @@ head   → informazioni sul documento
 header → intestazione visibile di una pagina o sezione
 ```
 
+[MDN — What is the HTML head?](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#what_is_the_html_head)
+
+---
+
+# Metadati descrittivi
+
+```html
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Classe 5A Informatica">
+<meta name="description" content="Progetto full stack Feisbuc">
+```
+
+- `charset` → codifica;
+- `name` → tipo di metadato;
+- `content` → valore del metadato;
+- `keywords` → vecchio metadato ignorato dai motori di ricerca.
+
+[MDN — The meta element](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#metadata_the_meta_element)
+
+---
+
+# Favicon, CSS e JavaScript
+
+```html
+<head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+```
+
+`link` è un elemento vuoto. `script` **non** lo è e richiede `</script>`.
+
+[MDN — Custom icons](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#adding_custom_icons_to_your_site) · [CSS and JavaScript](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata#applying_css_and_javascript_to_html)
+
 ---
 
 # Il contenuto dentro `body`
@@ -153,6 +247,27 @@ header → intestazione visibile di una pagina o sezione
 ```
 
 Gli heading descrivono la gerarchia, non la dimensione del testo.
+
+[MDN — Adding features](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_some_features_to_an_html_document)
+
+---
+
+# Immagini: attributi da conoscere
+
+```html
+<img
+  src="images/ada.jpg"
+  alt="Ada collega un cavo di rete al computer"
+  width="1200"
+  height="800">
+```
+
+- `src` → risorsa da caricare;
+- `alt` → sostituzione testuale;
+- `width` e `height` → dimensioni intrinseche e spazio riservato;
+- `loading="lazy"` → caricamento differito, quando appropriato.
+
+[MDN — `<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img) · [Tutorial sugli attributi di `img`](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax#adding_attributes_to_an_element)
 
 ---
 
@@ -190,6 +305,8 @@ Il secondo documento rende espliciti i ruoli delle parti.
 
 > `div` rimane corretto quando serve davvero un contenitore generico.
 
+[MDN — HTML layout elements](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents#html_layout_elements_in_more_detail)
+
 ---
 
 # Accessibilità fin dall'inizio
@@ -206,6 +323,8 @@ Il secondo documento rende espliciti i ruoli delle parti.
 ```
 
 Un'immagine puramente decorativa usa `alt=""`.
+
+[MDN — HTML accessibility](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/HTML)
 
 ---
 
@@ -226,6 +345,8 @@ Nel pannello **Elements/Inspector** puoi:
 Il browser può correggere alcuni errori di markup.
 
 > “Si vede” non significa automaticamente “è corretto”.
+
+[MDN — DOM Inspector](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools#the_inspector_dom_explorer_and_css_editor)
 
 ---
 
@@ -287,10 +408,13 @@ Vincoli comuni:
 1. Qual è il percorso dalla risposta HTTP alla pagina?
 2. Quali ruoli hanno HTML, CSS e JavaScript?
 3. Qual è la differenza tra tag ed elemento?
-4. Qual è la differenza tra `head` e `header`?
-5. Quando `div` è ancora corretto?
-6. Che differenza c'è tra sorgente e DOM?
-7. Perché “si vede bene” non prova che l'HTML sia corretto?
+4. Come riconosci un attributo booleano?
+5. Qual è la differenza tra `head` e `header`?
+6. Che cosa descrivono `name` e `content` in un elemento `meta`?
+7. Quali attributi devi conoscere per `img`?
+8. Quando `div` è ancora corretto?
+9. Che differenza c'è tra sorgente e DOM?
+10. Perché “si vede bene” non prova che l'HTML sia corretto?
 
 ---
 
@@ -299,6 +423,8 @@ Vincoli comuni:
 - HTML descrive struttura e significato;
 - il browser interpreta il markup e costruisce il DOM;
 - il documento moderno contiene metadati essenziali;
+- attributi, spazi, riferimenti a caratteri e commenti hanno regole precise;
+- `head` collega anche favicon, CSS e JavaScript;
 - gli elementi semantici comunicano il ruolo dei contenuti;
 - accessibilità e validazione iniziano subito;
 - Feisbuc parte da una struttura corretta, non dall'aspetto.
