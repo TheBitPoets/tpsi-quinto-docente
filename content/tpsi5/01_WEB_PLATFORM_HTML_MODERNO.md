@@ -638,6 +638,41 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </details>
 </td></tr></table>
 
+<a id="lesson-mdn-element-map"></a>
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#129513; <strong>Mappa delle schede elemento collegate alla lezione</strong></summary>
+
+<p align="justify">“Studiare ora” indica ciò che deve essere compreso e utilizzato in questa lezione; “riconoscere per dopo” segnala attributi e funzionalità che verranno approfonditi più avanti.</p>
+
+<table align="center">
+<thead><tr><th>Elemento MDN</th><th>Studiare ora</th><th>Riconoscere per dopo</th></tr></thead>
+<tbody>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/html"><code>&lt;html&gt;</code></a></td><td>elemento radice, <code>lang</code></td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/head"><code>&lt;head&gt;</code></a></td><td>contenitore dei metadati</td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/title"><code>&lt;title&gt;</code></a></td><td>titolo del documento, differenza da <code>h1</code></td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"><code>&lt;meta&gt;</code></a></td><td><code>charset</code>, <code>name</code>, <code>content</code>, viewport</td><td>metadati sociali</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/body"><code>&lt;body&gt;</code></a></td><td>contenitore del contenuto della pagina</td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements"><code>&lt;h1&gt;–&lt;h6&gt;</code></a></td><td>gerarchia dei contenuti</td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p"><code>&lt;p&gt;</code></a></td><td>paragrafo e contenuto ammesso</td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/strong"><code>&lt;strong&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em"><code>&lt;em&gt;</code></a></td><td>importanza ed enfasi</td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul"><code>&lt;ul&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol"><code>&lt;ol&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li"><code>&lt;li&gt;</code></a></td><td>liste ordinate e non ordinate</td><td><code>start</code>, <code>reversed</code></td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"><code>&lt;a&gt;</code></a></td><td><code>href</code>, URL assoluti, percorsi relativi, frammenti</td><td><code>target</code>, <code>rel</code>, <code>download</code></td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"><code>&lt;img&gt;</code></a></td><td><code>src</code>, <code>alt</code>, <code>width</code>, <code>height</code></td><td><code>loading</code>, <code>srcset</code>, <code>sizes</code></td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/br"><code>&lt;br&gt;</code></a></td><td>interruzione di riga motivata dal contenuto</td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header"><code>&lt;header&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"><code>&lt;nav&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main"><code>&lt;main&gt;</code></a></td><td>intestazione, navigazione, contenuto principale</td><td>landmark di accessibilità</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section"><code>&lt;section&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article"><code>&lt;article&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/aside"><code>&lt;aside&gt;</code></a></td><td>sezione tematica, contenuto autonomo, contenuto complementare</td><td>annidamento di sezioni e articoli</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer"><code>&lt;footer&gt;</code></a></td><td>informazioni conclusive del contesto</td><td>—</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div"><code>&lt;div&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span"><code>&lt;span&gt;</code></a></td><td>contenitori generici di blocco e in linea</td><td>uso con CSS e JavaScript</td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link"><code>&lt;link&gt;</code></a></td><td><code>rel</code>, <code>href</code>, foglio di stile e favicon</td><td><code>type</code>, <code>sizes</code></td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script"><code>&lt;script&gt;</code></a></td><td><code>src</code>, <code>defer</code>, tag di chiusura</td><td><code>type="module"</code></td></tr>
+<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"><code>&lt;label&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"><code>&lt;input&gt;</code></a></td><td>solo esempio dell'attributo booleano <code>disabled</code></td><td>form e controlli accessibili</td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
+
 <p align="justify">Le mappe sono un orientamento, non una percentuale di importanza: una parte indicata come “più avanti” può essere fondamentale, ma non appartiene ancora agli obiettivi di questa lezione. I collegamenti puntuali accanto ai singoli paragrafi restano il modo più rapido per aprire il punto esatto di MDN.</p>
 
 <a id="lesson-server-to-page"></a>
@@ -1495,32 +1530,7 @@ DOM significa <em>Document Object Model</em>. È la rappresentazione ad albero d
   <li>gli errori più frequenti e gli eventuali vincoli.</li>
 </ol>
 
-<p align="justify">Questa è la mappa delle schede elemento collegate alla lezione. “Studiare ora” indica ciò che deve essere compreso e utilizzato; “riconoscere” indica funzionalità che verranno approfondite più avanti.</p>
-
-<table align="center">
-<thead><tr><th>Elemento MDN</th><th>Studiare ora</th><th>Riconoscere per dopo</th></tr></thead>
-<tbody>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/html"><code>&lt;html&gt;</code></a></td><td>elemento radice, <code>lang</code></td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/head"><code>&lt;head&gt;</code></a></td><td>contenitore dei metadati</td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/title"><code>&lt;title&gt;</code></a></td><td>titolo del documento, differenza da <code>h1</code></td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta"><code>&lt;meta&gt;</code></a></td><td><code>charset</code>, <code>name</code>, <code>content</code>, viewport</td><td>metadati sociali</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/body"><code>&lt;body&gt;</code></a></td><td>contenitore del contenuto della pagina</td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements"><code>&lt;h1&gt;–&lt;h6&gt;</code></a></td><td>gerarchia dei contenuti</td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p"><code>&lt;p&gt;</code></a></td><td>paragrafo e contenuto ammesso</td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/strong"><code>&lt;strong&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em"><code>&lt;em&gt;</code></a></td><td>importanza ed enfasi</td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul"><code>&lt;ul&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol"><code>&lt;ol&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li"><code>&lt;li&gt;</code></a></td><td>liste ordinate e non ordinate</td><td><code>start</code>, <code>reversed</code></td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a"><code>&lt;a&gt;</code></a></td><td><code>href</code>, URL assoluti, percorsi relativi, frammenti</td><td><code>target</code>, <code>rel</code>, <code>download</code></td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"><code>&lt;img&gt;</code></a></td><td><code>src</code>, <code>alt</code>, <code>width</code>, <code>height</code></td><td><code>loading</code>, <code>srcset</code>, <code>sizes</code></td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/br"><code>&lt;br&gt;</code></a></td><td>interruzione di riga motivata dal contenuto</td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header"><code>&lt;header&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav"><code>&lt;nav&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main"><code>&lt;main&gt;</code></a></td><td>intestazione, navigazione, contenuto principale</td><td>landmark di accessibilità</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section"><code>&lt;section&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article"><code>&lt;article&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/aside"><code>&lt;aside&gt;</code></a></td><td>sezione tematica, contenuto autonomo, contenuto complementare</td><td>annidamento di sezioni e articoli</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer"><code>&lt;footer&gt;</code></a></td><td>informazioni conclusive del contesto</td><td>—</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div"><code>&lt;div&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span"><code>&lt;span&gt;</code></a></td><td>contenitori generici di blocco e in linea</td><td>uso con CSS e JavaScript</td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link"><code>&lt;link&gt;</code></a></td><td><code>rel</code>, <code>href</code>, foglio di stile e favicon</td><td><code>type</code>, <code>sizes</code></td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script"><code>&lt;script&gt;</code></a></td><td><code>src</code>, <code>defer</code>, tag di chiusura</td><td><code>type="module"</code></td></tr>
-<tr><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label"><code>&lt;label&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"><code>&lt;input&gt;</code></a></td><td>solo esempio dell'attributo booleano <code>disabled</code></td><td>form e controlli accessibili</td></tr>
-</tbody>
-</table>
+<p align="justify">La <a href="#lesson-mdn-element-map">mappa delle schede elemento</a> è collocata nell'orientamento iniziale della lezione, subito dopo l'indice incrociato, così può essere consultata prima di iniziare lo studio.</p>
 
 <a id="lesson-sources"></a>
 ## Fonti e documentazione
