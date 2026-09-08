@@ -40,7 +40,7 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </table>
 
 <a id="lesson-mdn-maps"></a>
-## Mappa di copertura della documentazione MDN
+## Orientamento nella documentazione MDN
 
 <p align="justify">La dispensa costruisce un percorso guidato in italiano, mentre MDN rimane la documentazione tecnica da imparare a consultare. Le mappe seguenti mettono a sinistra i paragrafi della lezione e a destra le parti corrispondenti di MDN: le frecce mostrano il raccordo e i colori indicano fino a quale profondità è richiesto lo studio.</p>
 
@@ -52,7 +52,9 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </td></tr></table>
 
 <a id="lesson-mdn-map-basic"></a>
-### Mappa 1 — Sintassi HTML di base
+<table align="center"><tr><td>
+<details>
+<summary>&#128506;&#65039; <strong>Mappa 1 — Sintassi HTML di base</strong></summary>
 
 <p align="justify">La prima mappa segue l'indice del tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN — Basic HTML syntax</a> e collega definizioni, sintassi, documento minimo ed esercizi alle parti della dispensa.</p>
 
@@ -60,8 +62,13 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
   <img src="../../assets/tpsi5/01-mdn-basic-html-coverage.svg" alt="Mappa tra i paragrafi della dispensa e il tutorial MDN Basic HTML syntax. La legenda distingue contenuti coperti, introdotti e rimandati a lezioni future">
 </p>
 
+</details>
+</td></tr></table>
+
 <a id="lesson-mdn-map-metadata"></a>
-### Mappa 2 — Metadati della pagina
+<table align="center"><tr><td>
+<details>
+<summary>&#128506;&#65039; <strong>Mappa 2 — Metadati della pagina</strong></summary>
 
 <p align="justify">La seconda mappa mostra la copertura del tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata">MDN — What's in the head? Web page metadata</a>. Le basi di <code>head</code>, titolo, metadati, favicon, CSS, JavaScript e lingua sono spiegate; alcune varianti vengono soltanto presentate.</p>
 
@@ -69,8 +76,13 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
   <img src="../../assets/tpsi5/01-mdn-metadata-coverage.svg" alt="Mappa tra i paragrafi della dispensa e il tutorial MDN sui metadati della pagina. La legenda distingue contenuti coperti, introdotti e rimandati a lezioni future">
 </p>
 
+</details>
+</td></tr></table>
+
 <a id="lesson-mdn-map-semantics"></a>
-### Mappa 3 — Semantica, accessibilità e strumenti
+<table align="center"><tr><td>
+<details>
+<summary>&#128506;&#65039; <strong>Mappa 3 — Semantica, accessibilità e strumenti</strong></summary>
 
 <p align="justify">L'ultima mappa unisce i riferimenti MDN usati per la struttura semantica, l'accessibilità, il DOM e gli strumenti di sviluppo. In questo caso è particolarmente importante distinguere ciò che viene spiegato completamente da ciò che viene soltanto introdotto.</p>
 
@@ -78,8 +90,13 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
   <img src="../../assets/tpsi5/01-mdn-semantics-coverage.svg" alt="Mappa tra i paragrafi della dispensa e le pagine MDN su struttura, accessibilità, DOM e strumenti di sviluppo. La legenda distingue contenuti coperti, introdotti e rimandati a lezioni future">
 </p>
 
+</details>
+</td></tr></table>
+
 <a id="lesson-mdn-cross-index"></a>
-### Indice incrociato navigabile: dispensa e MDN
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Indice incrociato navigabile — Dispensa ↔ MDN</strong></summary>
 
 <p align="justify">La tabella traduce le mappe in un indice utilizzabile durante lo studio. Ogni testo è un collegamento: nella colonna sinistra porta al punto esatto della dispensa, in quella destra apre il paragrafo o la scheda MDN corrispondente. Una cella vuota indica volutamente che, a questo livello dell'indice, non esiste una corrispondenza diretta.</p>
 
@@ -285,6 +302,9 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </tr>
 </tbody>
 </table>
+
+</details>
+</td></tr></table>
 
 <p align="justify">Le mappe sono un orientamento, non una percentuale di importanza: una parte indicata come “più avanti” può essere fondamentale, ma non appartiene ancora agli obiettivi di questa lezione. I collegamenti puntuali accanto ai singoli paragrafi restano il modo più rapido per aprire il punto esatto di MDN.</p>
 
