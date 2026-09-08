@@ -1,34 +1,74 @@
 # Vue Router: URL, navigazione e route protette nella SPA
 
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#128506; <strong>Orientamento della lezione</strong></summary>
+
+<p align="justify"><strong>Contesto:</strong> la prima SPA possiede componenti e stato, ma non può ancora rappresentare viste differenti con URL condivisibili e navigazione avanti/indietro.</p>
+<p align="justify"><strong>Domande guida:</strong> quale vista corrisponde a una URL? Che differenza c'è fra navigazione interna e deep link? Perché una route guard migliora la UX ma non sostituisce l'authorization del backend?</p>
+<p align="justify"><strong>Obiettivi osservabili:</strong> definire route record, usare link e navigazione programmatica, configurare history e fallback, preservare la destinazione dopo il login e diagnosticare una 404 al livello corretto.</p>
+<p align="justify"><strong>Prossimo passo:</strong> la lezione 12 renderà espliciti con TypeScript i contratti già stabilizzati nei boundary frontend.</p>
+
+</details>
+</td></tr></table>
+
 ## Obiettivi
 
-Al termine del modulo lo studente sa:
+<p align="justify">Al termine del modulo lo studente sa:</p>
 
-- spiegare perche una SPA con piu viste deve rappresentare la navigazione nell'URL;
-- distinguere navigazione browser, client-side routing e routing HTTP server-side;
-- configurare Vue Router con `createRouter()` e `createWebHistory()`;
-- usare route record, route name, `RouterLink` e `RouterView`;
-- usare `router.push()`, `router.replace()`, `useRouter()` e `useRoute()`;
-- distinguere path, params e query string;
-- costruire una pagina 404 client-side con catch-all route;
-- spiegare perche HTML5 history richiede un fallback server-side per i deep link;
-- usare `meta.requiresAuth` e una navigation guard senza confonderla con authorization backend;
-- gestire lo stato iniziale della sessione come `unknown`, `anonymous` o `authenticated`;
-- preservare la destinazione richiesta dopo il login;
-- usare lazy route components quando il progetto cresce;
-- diagnosticare redirect loop, 404 server/client e guard incoerenti.
+<ul>
+  <li>spiegare perche una SPA con piu viste deve rappresentare la navigazione nell'URL;</li>
+  <li>distinguere navigazione browser, client-side routing e routing HTTP server-side;</li>
+  <li>configurare Vue Router con <code>createRouter()</code> e <code>createWebHistory()</code>;</li>
+  <li>usare route record, route name, <code>RouterLink</code> e <code>RouterView</code>;</li>
+  <li>usare <code>router.push()</code>, <code>router.replace()</code>, <code>useRouter()</code> e <code>useRoute()</code>;</li>
+  <li>distinguere path, params e query string;</li>
+  <li>costruire una pagina 404 client-side con catch-all route;</li>
+  <li>spiegare perche HTML5 history richiede un fallback server-side per i deep link;</li>
+  <li>usare <code>meta.requiresAuth</code> e una navigation guard senza confonderla con authorization backend;</li>
+  <li>gestire lo stato iniziale della sessione come <code>unknown</code>, <code>anonymous</code> o <code>authenticated</code>;</li>
+  <li>preservare la destinazione richiesta dopo il login;</li>
+  <li>usare lazy route components quando il progetto cresce;</li>
+  <li>diagnosticare redirect loop, 404 server/client e guard incoerenti.</li>
+</ul>
 
 ## Prerequisiti
 
-- `10_VUE3_COMPONENTI_REATTIVITA.md`;
-- HTTP request/response e status code;
-- History API concettuale;
-- auth/session/authorization di UDA24;
-- Feisbuc milestone 9.
+<ul>
+  <li><code>10_VUE3_COMPONENTI_REATTIVITA.md</code>;</li>
+  <li>HTTP request/response e status code;</li>
+  <li>History API concettuale;</li>
+  <li>auth/session/authorization di UDA24;</li>
+  <li>Feisbuc milestone 9.</li>
+</ul>
+
+## Orientamento nella documentazione
+
+<p align="center">
+  <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
+</p>
+
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Indice incrociato — Vue Router, URL e History API</strong></summary>
+
+<table align="center">
+<thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
+<tbody>
+<tr><td><a href="#lesson-router-model">Route record, router e route corrente</a></td><td><a href="https://router.vuejs.org/guide/essentials/dynamic-matching.html">Vue Router — Dynamic matching</a><br><a href="https://router.vuejs.org/guide/advanced/composition-api.html">Composition API</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-router-navigation">Link e navigazione programmatica</a></td><td><a href="https://router.vuejs.org/guide/essentials/navigation.html">Programmatic navigation</a><br><a href="https://router.vuejs.org/guide/essentials/named-routes.html">Named routes</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-router-history">History mode e deep link</a></td><td><a href="https://router.vuejs.org/guide/essentials/history-mode.html">Vue Router — History modes</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">MDN — History API</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-router-guards">Route meta e navigation guard</a></td><td><a href="https://router.vuejs.org/guide/advanced/navigation-guards.html">Navigation guards</a><br><a href="https://router.vuejs.org/guide/advanced/meta.html">Route meta fields</a></td><td>&#128994; studiare il caso del corso</td></tr>
+<tr><td>Nested route avanzate, scroll behavior e data loader</td><td><a href="https://router.vuejs.org/guide/">Vue Router Guide</a></td><td>&#128993; riconoscere, fuori dal core</td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
 
 ## Problema iniziale
 
-Milestone 9 e una SPA, ma ha una sola vista applicativa:
+<p align="justify">Milestone 9 e una SPA, ma ha una sola vista applicativa:</p>
 
 ```text
 /vue/
@@ -36,15 +76,15 @@ Milestone 9 e una SPA, ma ha una sola vista applicativa:
   -> feed se autenticato
 ```
 
-Se aggiungiamo pagine distinte senza un router, possiamo nascondere/mostrare componenti con variabili locali:
+<p align="justify">Se aggiungiamo pagine distinte senza un router, possiamo nascondere/mostrare componenti con variabili locali:</p>
 
 ```text
 currentView = "feed" | "about" | "login"
 ```
 
-ma il browser non sa quale vista stiamo mostrando.
+<p align="justify">ma il browser non sa quale vista stiamo mostrando.</p>
 
-Problemi:
+<p align="justify">Problemi:</p>
 
 ```text
 refresh          -> perde la vista
@@ -55,15 +95,16 @@ condividi URL    -> impossibile
 404 client       -> non modellato
 ```
 
-Il nuovo requisito e quindi:
+<p align="justify">Il nuovo requisito e quindi:</p>
 
 ```text
 URL <-> stato di navigazione della SPA
 ```
 
+<a id="lesson-router-model"></a>
 ## 1. Tre routing diversi
 
-Non usare la parola "routing" senza precisare il livello.
+<p align="justify">Non usare la parola "routing" senza precisare il livello.</p>
 
 ```text
 HTTP server routing
@@ -76,11 +117,11 @@ rete IP routing
 packet -> router di rete -> next hop
 ```
 
-In questo modulo studiamo il **client-side routing**.
+<p align="justify">In questo modulo studiamo il <strong>client-side routing</strong>.</p>
 
 ## 2. Vue Router nel corso
 
-Baseline riproducibile:
+<p align="justify">Baseline riproducibile:</p>
 
 ```text
 Vue             3.5.40
@@ -90,7 +131,7 @@ Vite            8.2.1
 Node            >=22.18
 ```
 
-Dipendenza:
+<p align="justify">Dipendenza:</p>
 
 ```json
 {
@@ -101,11 +142,11 @@ Dipendenza:
 }
 ```
 
-Vue Router e il router ufficiale per Vue.
+<p align="justify">Vue Router e il router ufficiale per Vue.</p>
 
 ## 3. Route record
 
-Una route collega una location a un componente:
+<p align="justify">Una route collega una location a un componente:</p>
 
 ```js
 const routes = [
@@ -122,7 +163,7 @@ const routes = [
 ];
 ```
 
-Modello:
+<p align="justify">Modello:</p>
 
 ```text
 URL /feed
@@ -132,7 +173,7 @@ route record
 FeedView
 ```
 
-I nomi evitano di spargere stringhe URL in tutta l'applicazione:
+<p align="justify">I nomi evitano di spargere stringhe URL in tutta l'applicazione:</p>
 
 ```vue
 <RouterLink :to="{ name: 'feed' }">Feed</RouterLink>
@@ -149,7 +190,7 @@ export const router = createRouter({
 });
 ```
 
-Poi:
+<p align="justify">Poi:</p>
 
 ```js
 createApp(App)
@@ -157,7 +198,7 @@ createApp(App)
   .mount("#app");
 ```
 
-`RouterView` indica dove renderizzare la view corrente:
+<p align="justify"><code>RouterView</code> indica dove renderizzare la view corrente:</p>
 
 ```vue
 <main>
@@ -165,33 +206,36 @@ createApp(App)
 </main>
 ```
 
-`App.vue` diventa quindi soprattutto un **layout applicativo**.
+<p align="justify"><code>App.vue</code> diventa quindi soprattutto un <strong>layout applicativo</strong>.</p>
 
+<a id="lesson-router-navigation"></a>
 ## 5. `RouterLink` non e soltanto un `<a>` decorato
 
 ```vue
 <RouterLink :to="{ name: 'feed' }">Feed</RouterLink>
 ```
 
-Vue Router:
+<p align="justify">Vue Router:</p>
 
-- genera l'URL;
-- aggiorna la History API senza reload completo;
-- mantiene la semantica di link;
-- gestisce classi active;
-- supporta encoding e route name.
+<ul>
+  <li>genera l'URL;</li>
+  <li>aggiorna la History API senza reload completo;</li>
+  <li>mantiene la semantica di link;</li>
+  <li>gestisce classi active;</li>
+  <li>supporta encoding e route name.</li>
+</ul>
 
-Non sostituire sistematicamente i link con:
+<p align="justify">Non sostituire sistematicamente i link con:</p>
 
 ```vue
 <button @click="router.push('/feed')">Feed</button>
 ```
 
-se semanticamente stai navigando verso una risorsa/vista.
+<p align="justify">se semanticamente stai navigando verso una risorsa/vista.</p>
 
 ## 6. Navigazione programmatica
 
-Dentro `<script setup>`:
+<p align="justify">Dentro <code>&lt;script setup&gt;</code>:</p>
 
 ```js
 import { useRouter } from "vue-router";
@@ -201,15 +245,15 @@ const router = useRouter();
 await router.push({ name: "feed" });
 ```
 
-`push()` aggiunge una entry alla history.
+<p align="justify"><code>push()</code> aggiunge una entry alla history.</p>
 
-`replace()` sostituisce quella corrente:
+<p align="justify"><code>replace()</code> sostituisce quella corrente:</p>
 
 ```js
 await router.replace({ name: "login" });
 ```
 
-Collegamento Web Platform:
+<p align="justify">Collegamento Web Platform:</p>
 
 ```text
 router.push()    ~ history.pushState()
@@ -225,7 +269,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 ```
 
-Informazioni utili:
+<p align="justify">Informazioni utili:</p>
 
 ```text
 route.path
@@ -236,17 +280,17 @@ route.query
 route.meta
 ```
 
-Non copiare l'intero `route` in un altro `ref` solo per tenerlo sincronizzato: e gia reattivo.
+<p align="justify">Non copiare l'intero <code>route</code> in un altro <code>ref</code> solo per tenerlo sincronizzato: e gia reattivo.</p>
 
 ## 8. Params e query
 
-Path param:
+<p align="justify">Path param:</p>
 
 ```text
 /post/42
 ```
 
-route:
+<p align="justify">route:</p>
 
 ```js
 {
@@ -256,7 +300,7 @@ route:
 }
 ```
 
-navigation:
+<p align="justify">navigation:</p>
 
 ```js
 router.push({
@@ -265,7 +309,7 @@ router.push({
 });
 ```
 
-Query:
+<p align="justify">Query:</p>
 
 ```text
 /feed?liked=true
@@ -275,13 +319,14 @@ Query:
 route.query.liked
 ```
 
-Regola concettuale:
+<p align="justify">Regola concettuale:</p>
 
 ```text
 param -> identifica una parte del path/risorsa
 query -> modifica filtro, ricerca o rappresentazione
 ```
 
+<a id="lesson-router-history"></a>
 ## 9. HTML5 history e deep link
 
 <table align="center"><tr><td>
@@ -289,22 +334,22 @@ query -> modifica filtro, ricerca o rappresentazione
 <p align="justify"><strong>Studia ora:</strong> history entry, navigazione avanti/indietro, path e query. <strong>Riconosci per dopo:</strong> i metodi nativi dettagliati che Vue Router incapsula. <strong>Prodotto atteso:</strong> spiega separatamente che cosa accade durante una navigazione interna e durante il caricamento diretto di un deep link.</p>
 </td></tr></table>
 
-Con:
+<p align="justify">Con:</p>
 
 ```js
 createWebHistory()
 ```
 
-la URL e pulita:
+<p align="justify">la URL e pulita:</p>
 
 ```text
 /vue/feed
 /vue/about
 ```
 
-Ma c'e una differenza importante.
+<p align="justify">Ma c'e una differenza importante.</p>
 
-Navigazione interna:
+<p align="justify">Navigazione interna:</p>
 
 ```text
 /vue/ -> click Feed
@@ -312,7 +357,7 @@ Vue Router intercetta
 -> /vue/feed
 ```
 
-Deep link/refesh:
+<p align="justify">Deep link/refesh:</p>
 
 ```text
 browser -> GET /vue/feed HTTP
@@ -320,9 +365,9 @@ browser -> GET /vue/feed HTTP
           Express
 ```
 
-Il server deve quindi sapere che `/vue/feed` appartiene alla SPA e servire `index.html`.
+<p align="justify">Il server deve quindi sapere che <code>/vue/feed</code> appartiene alla SPA e servire <code>index.html</code>.</p>
 
-Nel nostro Express 5 reference:
+<p align="justify">Nel nostro Express 5 reference:</p>
 
 ```js
 app.use("/vue", express.static(vueRoot));
@@ -332,11 +377,11 @@ app.get("/vue/{*splat}", (req, res) => {
 });
 ```
 
-In Express 5 il wildcard di route deve essere **nominato**.
+<p align="justify">In Express 5 il wildcard di route deve essere <strong>nominato</strong>.</p>
 
 ## 10. Server fallback e client 404 sono problemi diversi
 
-Server fallback:
+<p align="justify">Server fallback:</p>
 
 ```text
 GET /vue/qualunque-cosa
@@ -344,7 +389,7 @@ GET /vue/qualunque-cosa
 server restituisce SPA index.html
 ```
 
-Client catch-all:
+<p align="justify">Client catch-all:</p>
 
 ```js
 {
@@ -354,7 +399,7 @@ Client catch-all:
 }
 ```
 
-Quindi:
+<p align="justify">Quindi:</p>
 
 ```text
 server 200 index.html
@@ -364,7 +409,7 @@ Vue Router
 NotFoundView
 ```
 
-Per una SPA statica semplice questa separazione e normale.
+<p align="justify">Per una SPA statica semplice questa separazione e normale.</p>
 
 ## 11. Redirect iniziale
 
@@ -375,11 +420,12 @@ Per una SPA statica semplice questa separazione e normale.
 }
 ```
 
-Il redirect e un route record, non una view.
+<p align="justify">Il redirect e un route record, non una view.</p>
 
+<a id="lesson-router-guards"></a>
 ## 12. Route protette
 
-Il feed richiede una sessione valida:
+<p align="justify">Il feed richiede una sessione valida:</p>
 
 ```js
 {
@@ -390,9 +436,9 @@ Il feed richiede una sessione valida:
 }
 ```
 
-La metadata descrive una proprieta della route.
+<p align="justify">La metadata descrive una proprieta della route.</p>
 
-Navigation guard:
+<p align="justify">Navigation guard:</p>
 
 ```js
 router.beforeEach(async (to) => {
@@ -409,7 +455,7 @@ router.beforeEach(async (to) => {
 
 ## 13. Guard != sicurezza del backend
 
-La guard migliora UX:
+<p align="justify">La guard migliora UX:</p>
 
 ```text
 anonimo -> /feed
@@ -417,13 +463,13 @@ anonimo -> /feed
       redirect /login
 ```
 
-Ma un client puo sempre tentare direttamente:
+<p align="justify">Ma un client puo sempre tentare direttamente:</p>
 
 ```http
 GET /api/posts
 ```
 
-La sicurezza resta:
+<p align="justify">La sicurezza resta:</p>
 
 ```text
 loadAuth
@@ -432,15 +478,17 @@ ownership
 401 / 403 server-side
 ```
 
-Regola del corso:
+<p align="justify">Regola del corso:</p>
 
-> Una route guard protegge la navigazione dell'interfaccia. Non autorizza una API.
+<blockquote>
+<p align="justify">Una route guard protegge la navigazione dell'interfaccia. Non autorizza una API.</p>
+</blockquote>
 
 ## 14. Il problema dello stato auth iniziale
 
-All'avvio non sappiamo ancora se il cookie HttpOnly corrisponde a una sessione valida.
+<p align="justify">All'avvio non sappiamo ancora se il cookie HttpOnly corrisponde a una sessione valida.</p>
 
-Tre stati:
+<p align="justify">Tre stati:</p>
 
 ```text
 unknown
@@ -448,20 +496,22 @@ anonymous
 authenticated
 ```
 
-Non ridurre subito tutto a:
+<p align="justify">Non ridurre subito tutto a:</p>
 
 ```js
 const loggedIn = ref(false);
 ```
 
-perche `false` significherebbe contemporaneamente:
+<p align="justify">perche <code>false</code> significherebbe contemporaneamente:</p>
 
-- non abbiamo ancora chiesto `/me`;
-- abbiamo chiesto `/me` e ricevuto 401.
+<ul>
+  <li>non abbiamo ancora chiesto <code>/me</code>;</li>
+  <li>abbiamo chiesto <code>/me</code> e ricevuto 401.</li>
+</ul>
 
 ## 15. Un composable piccolo prima di Pinia
 
-Per questo requisito basta un modulo condiviso:
+<p align="justify">Per questo requisito basta un modulo condiviso:</p>
 
 ```js
 const status = ref("unknown");
@@ -472,7 +522,7 @@ export function useSession() {
 }
 ```
 
-E una scelta consapevole:
+<p align="justify">E una scelta consapevole:</p>
 
 ```text
 problema piccolo di stato condiviso
@@ -484,31 +534,31 @@ problema di store piu ampio
 valuteremo Pinia
 ```
 
-Non introduciamo una libreria perche "nelle SPA si usa".
+<p align="justify">Non introduciamo una libreria perche "nelle SPA si usa".</p>
 
 ## 16. Preservare la destinazione dopo login
 
-Utente anonimo visita:
+<p align="justify">Utente anonimo visita:</p>
 
 ```text
 /vue/feed?liked=true
 ```
 
-Guard:
+<p align="justify">Guard:</p>
 
 ```text
 /login?redirect=/feed?liked=true
 ```
 
-Dopo login:
+<p align="justify">Dopo login:</p>
 
 ```js
 await router.replace(safeRedirect(route.query.redirect));
 ```
 
-Non fidarti ciecamente di una destinazione arbitraria ricevuta dalla query.
+<p align="justify">Non fidarti ciecamente di una destinazione arbitraria ricevuta dalla query.</p>
 
-Nel nostro caso accettiamo soltanto path interni:
+<p align="justify">Nel nostro caso accettiamo soltanto path interni:</p>
 
 ```js
 function safeRedirect(value) {
@@ -520,7 +570,7 @@ function safeRedirect(value) {
 
 ## 17. Login route e redirect loop
 
-Errore comune:
+<p align="justify">Errore comune:</p>
 
 ```js
 router.beforeEach(async to => {
@@ -528,17 +578,17 @@ router.beforeEach(async to => {
 });
 ```
 
-Quando il target e gia `/login`:
+<p align="justify">Quando il target e gia <code>/login</code>:</p>
 
 ```text
 /login -> guard -> /login -> guard -> /login -> ...
 ```
 
-La policy deve distinguere route pubbliche/protette e utente autenticato/anonimo.
+<p align="justify">La policy deve distinguere route pubbliche/protette e utente autenticato/anonimo.</p>
 
 ## 18. Una policy di navigazione pura
 
-Prima della guard estraiamo:
+<p align="justify">Prima della guard estraiamo:</p>
 
 ```js
 decideNavigation({
@@ -549,13 +599,13 @@ decideNavigation({
 })
 ```
 
-Output possibile:
+<p align="justify">Output possibile:</p>
 
 ```json
 {"action":"allow"}
 ```
 
-oppure:
+<p align="justify">oppure:</p>
 
 ```json
 {
@@ -565,7 +615,7 @@ oppure:
 }
 ```
 
-Vantaggio:
+<p align="justify">Vantaggio:</p>
 
 ```text
 policy pura -> test deterministico
@@ -574,7 +624,7 @@ Vue Router guard -> adapter/orchestrazione
 
 ## 19. Lazy route components
 
-Quando una view diventa una boundary naturale:
+<p align="justify">Quando una view diventa una boundary naturale:</p>
 
 ```js
 {
@@ -583,13 +633,13 @@ Quando una view diventa una boundary naturale:
 }
 ```
 
-Vite puo produrre chunk separati per route.
+<p align="justify">Vite puo produrre chunk separati per route.</p>
 
-Nel corso non useremo lazy loading per nascondere concetti: prima route record e navigation, poi code splitting.
+<p align="justify">Nel corso non useremo lazy loading per nascondere concetti: prima route record e navigation, poi code splitting.</p>
 
 ## 20. Feisbuc milestone 10
 
-Struttura:
+<p align="justify">Struttura:</p>
 
 ```text
 App.vue
@@ -611,7 +661,7 @@ api.js
 /api/*
 ```
 
-Route:
+<p align="justify">Route:</p>
 
 ```text
 /             -> redirect feed
@@ -623,7 +673,7 @@ Route:
 
 ## 21. FeedView
 
-`FeedView` possiede lo stato specifico del feed:
+<p align="justify"><code>FeedView</code> possiede lo stato specifico del feed:</p>
 
 ```text
 posts
@@ -631,9 +681,9 @@ loading feed
 errore feed
 ```
 
-La sessione non appartiene al feed: e condivisa da router, layout e login.
+<p align="justify">La sessione non appartiene al feed: e condivisa da router, layout e login.</p>
 
-Questo rende il confine piu chiaro:
+<p align="justify">Questo rende il confine piu chiaro:</p>
 
 ```text
 session state -> composable condiviso
@@ -642,17 +692,19 @@ feed state    -> FeedView
 
 ## 22. LoginView
 
-`LoginView`:
+<p align="justify"><code>LoginView</code>:</p>
 
-- usa `AuthPanel`;
-- chiama login/register del session composable;
-- legge `route.query.redirect`;
-- naviga dopo successo;
-- non legge il cookie.
+<ul>
+  <li>usa <code>AuthPanel</code>;</li>
+  <li>chiama login/register del session composable;</li>
+  <li>legge <code>route.query.redirect</code>;</li>
+  <li>naviga dopo successo;</li>
+  <li>non legge il cookie.</li>
+</ul>
 
 ## 23. App come layout
 
-`App.vue` non deve tornare a diventare un controller monolitico.
+<p align="justify"><code>App.vue</code> non deve tornare a diventare un controller monolitico.</p>
 
 ```vue
 <template>
@@ -665,24 +717,24 @@ feed state    -> FeedView
 </template>
 ```
 
-Il layout puo mostrare utente/logout perche sono concern applicativi globali minimi.
+<p align="justify">Il layout puo mostrare utente/logout perche sono concern applicativi globali minimi.</p>
 
 ## 24. 401 durante una sessione gia caricata
 
-Una sessione puo scadere dopo che la SPA ha caricato `user`.
+<p align="justify">Una sessione puo scadere dopo che la SPA ha caricato <code>user</code>.</p>
 
-Se una request protetta riceve 401:
+<p align="justify">Se una request protetta riceve 401:</p>
 
 ```text
 client state authenticated
 backend session expired
 ```
 
-Il backend vince.
+<p align="justify">Il backend vince.</p>
 
-La SPA deve poter invalidare lo stato locale e tornare al login.
+<p align="justify">La SPA deve poter invalidare lo stato locale e tornare al login.</p>
 
-Non assumere:
+<p align="justify">Non assumere:</p>
 
 ```text
 user != null -> sessione sicuramente valida per sempre
@@ -699,23 +751,23 @@ bottone nascosto / guard -> UX
 
 ### Usare `window.location` per navigazione interna
 
-Causa reload completo e bypassa il modello del router.
+<p align="justify">Causa reload completo e bypassa il modello del router.</p>
 
 ### Hardcodare path ovunque
 
-Preferire route name per destinazioni stabili.
+<p align="justify">Preferire route name per destinazioni stabili.</p>
 
 ### Dimenticare il server fallback
 
-Funziona cliccando dentro la SPA ma refresh `/vue/feed` produce 404 HTTP.
+<p align="justify">Funziona cliccando dentro la SPA ma refresh <code>/vue/feed</code> produce 404 HTTP.</p>
 
 ### Catch-all server senza catch-all client
 
-Ogni URL restituisce index.html ma l'app non spiega all'utente che la route non esiste.
+<p align="justify">Ogni URL restituisce index.html ma l'app non spiega all'utente che la route non esiste.</p>
 
 ### Redirect loop
 
-Guard che redirige anche la login route verso se stessa.
+<p align="justify">Guard che redirige anche la login route verso se stessa.</p>
 
 ### Duplicare auth state
 
@@ -725,47 +777,55 @@ appUser
 loginUser
 ```
 
-che divergono.
+<p align="justify">che divergono.</p>
 
 ## 26. Debug in quattro livelli
 
-Quando `/vue/feed` non funziona:
+<p align="justify">Quando <code>/vue/feed</code> non funziona:</p>
 
-1. **HTTP** — il server restituisce `index.html` o 404?
-2. **route match** — quale route record ha matchato?
-3. **guard** — allow, redirect o loop?
-4. **view/API** — la view monta e le request ricevono 200/401/403?
+<ol>
+  <li><strong>HTTP</strong> — il server restituisce <code>index.html</code> o 404?</li>
+  <li><strong>route match</strong> — quale route record ha matchato?</li>
+  <li><strong>guard</strong> — allow, redirect o loop?</li>
+  <li><strong>view/API</strong> — la view monta e le request ricevono 200/401/403?</li>
+</ol>
 
-Non correggere un server 404 modificando `RouterView`.
+<p align="justify">Non correggere un server 404 modificando <code>RouterView</code>.</p>
 
 ## 27. Esercizi A-F
 
-- **A** — osserva URL, `RouterLink`, `RouterView`, back/forward e deep link;
-- **B** — implementa la navigation policy pura;
-- **C** — porta Feisbuc a milestone 10 con route protette e server fallback;
-- **D** — diagnostica redirect loop, 404 e guard incoerenti;
-- **E** — prossimo incremento: TypeScript mirato sui boundary Vue/API oppure state management se emerge un requisito reale;
-- **F** — integrazione realtime WebSocket/Socket.IO.
+<ul>
+  <li><strong>A</strong> — osserva URL, <code>RouterLink</code>, <code>RouterView</code>, back/forward e deep link;</li>
+  <li><strong>B</strong> — implementa la navigation policy pura;</li>
+  <li><strong>C</strong> — porta Feisbuc a milestone 10 con route protette e server fallback;</li>
+  <li><strong>D</strong> — diagnostica redirect loop, 404 e guard incoerenti;</li>
+  <li><strong>E</strong> — prossimo incremento: TypeScript mirato sui boundary Vue/API oppure state management se emerge un requisito reale;</li>
+  <li><strong>F</strong> — integrazione realtime WebSocket/Socket.IO.</li>
+</ul>
 
 ## 28. Activity collegate
 
-- `tpsi5-activity-a-vue-router-microscope-001`;
-- `tpsi5-activity-b-navigation-policy-001`;
-- `tpsi5-activity-c-feisbuc-vue-router-001`;
-- `tpsi5-activity-d-debug-vue-router-001`.
+<ul>
+  <li><code>tpsi5-activity-a-vue-router-microscope-001</code>;</li>
+  <li><code>tpsi5-activity-b-navigation-policy-001</code>;</li>
+  <li><code>tpsi5-activity-c-feisbuc-vue-router-001</code>;</li>
+  <li><code>tpsi5-activity-d-debug-vue-router-001</code>.</li>
+</ul>
 
 ## 29. Verifica rapida
 
-1. Perche una SPA multi-view deve aggiornare l'URL?
-2. Differenza tra `RouterLink` e `RouterView`?
-3. Perche `createWebHistory()` richiede server fallback?
-4. Differenza tra server fallback e client 404?
-5. Perche `authStatus="unknown"` e diverso da `anonymous`?
-6. Una navigation guard protegge `/api/posts`?
-7. Perche usare route name?
-8. Quando serve `replace()` invece di `push()`?
-9. Perche non introduciamo ancora Pinia?
-10. Quali quattro livelli controlli quando un deep link non funziona?
+<ol>
+  <li>Perche una SPA multi-view deve aggiornare l'URL?</li>
+  <li>Differenza tra <code>RouterLink</code> e <code>RouterView</code>?</li>
+  <li>Perche <code>createWebHistory()</code> richiede server fallback?</li>
+  <li>Differenza tra server fallback e client 404?</li>
+  <li>Perche <code>authStatus="unknown"</code> e diverso da <code>anonymous</code>?</li>
+  <li>Una navigation guard protegge <code>/api/posts</code>?</li>
+  <li>Perche usare route name?</li>
+  <li>Quando serve <code>replace()</code> invece di <code>push()</code>?</li>
+  <li>Perche non introduciamo ancora Pinia?</li>
+  <li>Quali quattro livelli controlli quando un deep link non funziona?</li>
+</ol>
 
 ## 30. Sintesi inclusiva
 
@@ -786,15 +846,17 @@ route guard      -> UX/navigation
 
 ## 31. Fonti e collegamenti
 
-- Vue Router official documentation — Getting Started, History Modes, Named Routes, Navigation Guards, Route Meta Fields, Lazy Loading;
-- Express 5 migration guide — named wildcard syntax;
-- `10_VUE3_COMPONENTI_REATTIVITA.md`;
-- `08_AUTH_SESSIONI_SICUREZZA.md`.
+<ul>
+  <li>Vue Router official documentation — Getting Started, History Modes, Named Routes, Navigation Guards, Route Meta Fields, Lazy Loading;</li>
+  <li>Express 5 migration guide — named wildcard syntax;</li>
+  <li><code>10_VUE3_COMPONENTI_REATTIVITA.md</code>;</li>
+  <li><code>08_AUTH_SESSIONI_SICUREZZA.md</code>.</li>
+</ul>
 
 ## 32. Prossimo passo
 
-Dopo routing abbiamo finalmente una SPA con piu view e URL reale.
+<p align="justify">Dopo routing abbiamo finalmente una SPA con piu view e URL reale.</p>
 
-Il prossimo gate didattico e decidere se introdurre **TypeScript mirato** sui confini gia stabili (`Post`, `User`, route meta, props e payload API) prima del realtime.
+<p align="justify">Il prossimo gate didattico e decidere se introdurre <strong>TypeScript mirato</strong> sui confini gia stabili (<code>Post</code>, <code>User</code>, route meta, props e payload API) prima del realtime.</p>
 
-Pinia resta rinviata: verra introdotta solo se il progetto sviluppa un requisito di stato condiviso piu complesso del piccolo session composable.
+<p align="justify">Pinia resta rinviata: verra introdotta solo se il progetto sviluppa un requisito di stato condiviso piu complesso del piccolo session composable.</p>

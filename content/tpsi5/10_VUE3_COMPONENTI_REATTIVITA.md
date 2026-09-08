@@ -1,31 +1,71 @@
 # Vue 3: reattivita, componenti e prima SPA Feisbuc
 
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#128506; <strong>Orientamento della lezione</strong></summary>
+
+<p align="justify"><strong>Contesto:</strong> abbiamo già costruito stato, rendering, eventi e chiamate HTTP senza framework. Vue organizza gli stessi problemi con componenti dichiarativi e reattività.</p>
+<p align="justify"><strong>Domande guida:</strong> quale stato appartiene a un componente? Quando un valore è derivato? Come comunicano parent e child senza creare fonti di verità concorrenti?</p>
+<p align="justify"><strong>Obiettivi osservabili:</strong> leggere un Single File Component, usare <code>ref</code> e <code>computed</code>, progettare props ed emits e collegare la SPA alla stessa API Feisbuc.</p>
+<p align="justify"><strong>Prossimo passo:</strong> la lezione 11 renderà l'URL parte dello stato applicativo con Vue Router.</p>
+
+</details>
+</td></tr></table>
+
 ## Obiettivi
 
-Al termine del modulo lo studente sa:
+<p align="justify">Al termine del modulo lo studente sa:</p>
 
-- spiegare perche un framework frontend diventa utile dopo avere implementato manualmente `state -> render`;
-- creare una applicazione Vue 3 con Vite;
-- leggere e scrivere un Single File Component (`.vue`);
-- usare Composition API con `<script setup>`;
-- usare `ref()` per stato locale e `computed()` per stato derivato;
-- usare template dichiarativi con interpolazione, `v-if`, `v-for`, binding ed eventi;
-- separare componenti tramite `props` ed `emits`;
-- usare `v-model` mantenendo il collegamento concettuale con `value` + evento;
-- riusare l'API Feisbuc esistente senza modificare autenticazione, sessione, autorizzazione o persistenza;
-- distinguere stato locale, derivato e remoto;
-- fare debug di reattivita, component contract e rete.
+<ul>
+  <li>spiegare perche un framework frontend diventa utile dopo avere implementato manualmente <code>state -&gt; render</code>;</li>
+  <li>creare una applicazione Vue 3 con Vite;</li>
+  <li>leggere e scrivere un Single File Component (<code>.vue</code>);</li>
+  <li>usare Composition API con <code>&lt;script setup&gt;</code>;</li>
+  <li>usare <code>ref()</code> per stato locale e <code>computed()</code> per stato derivato;</li>
+  <li>usare template dichiarativi con interpolazione, <code>v-if</code>, <code>v-for</code>, binding ed eventi;</li>
+  <li>separare componenti tramite <code>props</code> ed <code>emits</code>;</li>
+  <li>usare <code>v-model</code> mantenendo il collegamento concettuale con <code>value</code> + evento;</li>
+  <li>riusare l'API Feisbuc esistente senza modificare autenticazione, sessione, autorizzazione o persistenza;</li>
+  <li>distinguere stato locale, derivato e remoto;</li>
+  <li>fare debug di reattivita, component contract e rete.</li>
+</ul>
 
 ## Prerequisiti
 
-- UDA21: HTML/CSS/Bootstrap;
-- UDA22: JavaScript, DOM, eventi, moduli, `state -> render`;
-- UDA23: HTTP, `fetch`, REST;
-- UDA24: Express, SQL, auth/session/authorization e confronto SSR.
+<ul>
+  <li>UDA21: HTML/CSS/Bootstrap;</li>
+  <li>UDA22: JavaScript, DOM, eventi, moduli, <code>state -&gt; render</code>;</li>
+  <li>UDA23: HTTP, <code>fetch</code>, REST;</li>
+  <li>UDA24: Express, SQL, auth/session/authorization e confronto SSR.</li>
+</ul>
+
+## Orientamento nella documentazione
+
+<p align="center">
+  <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
+</p>
+
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Indice incrociato — Vue 3 ↔ Web Platform</strong></summary>
+
+<table align="center">
+<thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
+<tbody>
+<tr><td><a href="#lesson-vue-reactivity">Reattività e stato derivato</a></td><td><a href="https://vuejs.org/guide/essentials/reactivity-fundamentals.html">Vue — Reactivity fundamentals</a><br><a href="https://vuejs.org/guide/essentials/computed.html">Vue — Computed properties</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-vue-template">Template, binding, eventi e form</a></td><td><a href="https://vuejs.org/guide/essentials/template-syntax.html">Vue — Template syntax</a><br><a href="https://vuejs.org/guide/essentials/forms.html">Vue — Form input bindings</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-vue-components">Componenti, props ed emits</a></td><td><a href="https://vuejs.org/guide/essentials/component-basics.html">Vue — Components basics</a><br><a href="https://vuejs.org/guide/components/props.html">Vue — Props</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-vue-lifecycle">Lifecycle e side effect</a></td><td><a href="https://vuejs.org/guide/essentials/lifecycle.html">Vue — Lifecycle hooks</a><br><a href="https://vuejs.org/guide/essentials/watchers.html">Vue — Watchers</a></td><td>&#128994; lifecycle minimo; watcher mirato</td></tr>
+<tr><td>Provide/inject, plugin, custom directive e state manager</td><td><a href="https://vuejs.org/guide/introduction.html">Vue Guide</a></td><td>&#128993; riconoscere o studiare più avanti</td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
 
 ## Problema iniziale
 
-Nelle milestone precedenti Feisbuc funziona, ma il client dinamico coordina manualmente molte responsabilita:
+<p align="justify">Nelle milestone precedenti Feisbuc funziona, ma il client dinamico coordina manualmente molte responsabilita:</p>
 
 ```text
 state
@@ -37,11 +77,11 @@ state
   -> render() di nuovo
 ```
 
-Questa architettura e fondamentale per capire il browser. Quando pero l'interfaccia cresce, vogliamo rendere dichiarativi e componibili concetti che conosciamo gia.
+<p align="justify">Questa architettura e fondamentale per capire il browser. Quando pero l'interfaccia cresce, vogliamo rendere dichiarativi e componibili concetti che conosciamo gia.</p>
 
 ## 1. Vue non sostituisce la Web Platform
 
-Mapping didattico:
+<p align="justify">Mapping didattico:</p>
 
 ```text
 prima                              Vue
@@ -59,7 +99,7 @@ argomenti funzione                 props
 callback                           emits
 ```
 
-Il framework non rende inutili i fondamenti: li organizza.
+<p align="justify">Il framework non rende inutili i fondamenti: li organizza.</p>
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> MDN e documentazione Vue:</strong> la <a href="GUIDA_USO_MDN.md#mdn-guide-source-choice">guida trasversale</a> spiega come scegliere la fonte. Per <code>ref()</code>, <code>computed()</code>, props, emits e direttive usa la documentazione ufficiale Vue; per elementi HTML, eventi DOM, Fetch e comportamento del browser usa MDN.</p>
@@ -68,7 +108,7 @@ Il framework non rende inutili i fondamenti: li organizza.
 
 ## 2. Tooling del corso
 
-Per il primo blocco pinniamo:
+<p align="justify">Per il primo blocco pinniamo:</p>
 
 ```text
 Vue 3.5.40
@@ -77,9 +117,9 @@ Vite 8.2.1
 Node >= 22.18
 ```
 
-La documentazione Vue corrente usa Vite come build setup per le SPA con Single File Components.
+<p align="justify">La documentazione Vue corrente usa Vite come build setup per le SPA con Single File Components.</p>
 
-Progetto minimo:
+<p align="justify">Progetto minimo:</p>
 
 ```text
 index.html
@@ -90,7 +130,7 @@ src/
   App.vue
 ```
 
-Comandi essenziali:
+<p align="justify">Comandi essenziali:</p>
 
 ```bash
 npm install
@@ -99,7 +139,7 @@ npm run build
 npm run preview
 ```
 
-La CI deve eseguire davvero `npm run build` sulle reference del corso.
+<p align="justify">La CI deve eseguire davvero <code>npm run build</code> sulle reference del corso.</p>
 
 ## 3. Single File Components
 
@@ -117,8 +157,9 @@ La CI deve eseguire davvero `npm run build` sulle reference del corso.
 </style>
 ```
 
-Nel core usiamo Composition API + `<script setup>`. Options API resta leggibile come documentazione professionale, ma non viene insegnata come secondo stile parallelo.
+<p align="justify">Nel core usiamo Composition API + <code>&lt;script setup&gt;</code>. Options API resta leggibile come documentazione professionale, ma non viene insegnata come secondo stile parallelo.</p>
 
+<a id="lesson-vue-reactivity"></a>
 ## 4. `ref()` e reattivita
 
 ```js
@@ -131,9 +172,9 @@ function increment() {
 }
 ```
 
-Nel codice JavaScript il ref e un contenitore e si modifica tramite `.value`.
+<p align="justify">Nel codice JavaScript il ref e un contenitore e si modifica tramite <code>.value</code>.</p>
 
-Nel template Vue effettua l'unwrapping:
+<p align="justify">Nel template Vue effettua l'unwrapping:</p>
 
 ```vue
 <button @click="increment">{{ count }}</button>
@@ -148,8 +189,9 @@ const likedCount = computed(
 );
 ```
 
-Regola del corso: **`computed` prima di `watch`**. Se un valore deriva soltanto da altro stato, non va mantenuto manualmente in una seconda variabile sincronizzata.
+<p align="justify">Regola del corso: <strong><code>computed</code> prima di <code>watch</code></strong>. Se un valore deriva soltanto da altro stato, non va mantenuto manualmente in una seconda variabile sincronizzata.</p>
 
+<a id="lesson-vue-template"></a>
 ## 6. Template dichiarativo
 
 ### Interpolazione
@@ -170,7 +212,7 @@ Regola del corso: **`computed` prima di `watch`**. Se un valore deriva soltanto 
 <form @submit.prevent="submitPost">
 ```
 
-`.prevent` astrae il gia noto `event.preventDefault()`.
+<p align="justify"><code>.prevent</code> astrae il gia noto <code>event.preventDefault()</code>.</p>
 
 ### Condizioni
 
@@ -188,7 +230,7 @@ Regola del corso: **`computed` prima di `watch`**. Se un valore deriva soltanto 
 />
 ```
 
-Usiamo una key stabile del dominio, non l'indice dell'array quando esiste `post.id`.
+<p align="justify">Usiamo una key stabile del dominio, non l'indice dell'array quando esiste <code>post.id</code>.</p>
 
 ## 7. `v-model`: binding + evento
 
@@ -196,12 +238,13 @@ Usiamo una key stabile del dominio, non l'indice dell'array quando esiste `post.
 <textarea v-model="draft"></textarea>
 ```
 
-Va ricondotto a:
+<p align="justify">Va ricondotto a:</p>
 
 ```text
 value + input/change event -> v-model
 ```
 
+<a id="lesson-vue-components"></a>
 ## 8. Props ed emits
 
 ### Parent -> child: props
@@ -215,7 +258,7 @@ defineProps({
 </script>
 ```
 
-Le props sono input. Il child non deve mutarle per cambiare lo stato autorevole del parent.
+<p align="justify">Le props sono input. Il child non deve mutarle per cambiare lo stato autorevole del parent.</p>
 
 ### Child -> parent: emits
 
@@ -229,7 +272,7 @@ const emit = defineEmits(["toggle-like", "delete"]);
 </template>
 ```
 
-Schema:
+<p align="justify">Schema:</p>
 
 ```text
 parent state
@@ -241,7 +284,7 @@ parent action
 
 ## 9. Stato locale, derivato e remoto
 
-Nel client Feisbuc distinguiamo:
+<p align="justify">Nel client Feisbuc distinguiamo:</p>
 
 ```text
 locale
@@ -254,7 +297,41 @@ remoto
   user, posts
 ```
 
-`user` e `posts` sono copie client di risorse la cui fonte autorevole resta il backend.
+<p align="justify"><code>user</code> e <code>posts</code> sono copie client di risorse la cui fonte autorevole resta il backend.</p>
+
+<a id="lesson-vue-lifecycle"></a>
+### Lifecycle minimo e side effect
+
+<p align="justify">Un componente viene creato, montato nel DOM, aggiornato quando cambia lo stato e infine smontato. Non dobbiamo memorizzare tutti gli hook: dobbiamo riconoscere <strong>quando una risorsa esterna deve essere avviata e ripulita</strong>.</p>
+
+```vue
+<script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+
+const online = ref(navigator.onLine);
+const updateStatus = () => { online.value = navigator.onLine; };
+
+onMounted(() => {
+  window.addEventListener("online", updateStatus);
+  window.addEventListener("offline", updateStatus);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("online", updateStatus);
+  window.removeEventListener("offline", updateStatus);
+});
+</script>
+```
+
+<ul>
+  <li><code>onMounted</code> serve quando il lavoro dipende dal DOM gia creato o da un'integrazione esterna;</li>
+  <li><code>onUnmounted</code> rimuove listener, timer, subscription e connessioni possedute dal componente;</li>
+  <li><code>computed</code> descrive un valore derivato senza effetti;</li>
+  <li><code>watch</code> osserva un cambiamento per coordinare un <strong>side effect</strong>, non per duplicare un valore calcolabile;</li>
+  <li>una richiesta dati non va spostata automaticamente in <code>onMounted</code>: la posizione dipende da chi possiede il caricamento e da quali dipendenze usa.</li>
+</ul>
+
+<p align="justify">Nella documentazione Vue studia <a href="https://vuejs.org/guide/essentials/lifecycle.html">Lifecycle Hooks</a> e la sezione iniziale di <a href="https://vuejs.org/guide/essentials/watchers.html">Watchers</a>. Gli hook avanzati restano da consultare quando compare un'esigenza concreta.</p>
 
 ## 10. API Feisbuc: il contratto resta invariato
 
@@ -270,9 +347,9 @@ PATCH  /api/posts/:id
 DELETE /api/posts/:id
 ```
 
-Il session token resta nel cookie `HttpOnly`.
+<p align="justify">Il session token resta nel cookie <code>HttpOnly</code>.</p>
 
-La SPA:
+<p align="justify">La SPA:</p>
 
 ```text
 NON legge document.cookie
@@ -280,7 +357,7 @@ NON salva token in localStorage/sessionStorage
 NON sceglie authorId
 ```
 
-Le richieste sono same-origin.
+<p align="justify">Le richieste sono same-origin.</p>
 
 ## 11. Feisbuc milestone 9: Vue SPA shell
 
@@ -299,26 +376,30 @@ api.js
 sessione + Express + SQLite
 ```
 
-Non introduciamo ancora:
+<p align="justify">Non introduciamo ancora:</p>
 
-- Vue Router;
-- Pinia;
-- TypeScript;
-- WebSocket/Socket.IO;
-- ORM.
+<ul>
+  <li>Vue Router;</li>
+  <li>Pinia;</li>
+  <li>TypeScript;</li>
+  <li>WebSocket/Socket.IO;</li>
+  <li>ORM.</li>
+</ul>
 
-Li aggiungiamo solo quando emerge un requisito osservabile.
+<p align="justify">Li aggiungiamo solo quando emerge un requisito osservabile.</p>
 
 ## 12. `PostCard` come boundary
 
-Responsabilita:
+<p align="justify">Responsabilita:</p>
 
-- mostra autore/testo/likes;
-- riceve `post` e `canDelete`;
-- emette `toggle-like` e `delete`;
-- non conosce `fetch`;
-- non conosce cookie/sessione;
-- non muta direttamente il post ricevuto.
+<ul>
+  <li>mostra autore/testo/likes;</li>
+  <li>riceve <code>post</code> e <code>canDelete</code>;</li>
+  <li>emette <code>toggle-like</code> e <code>delete</code>;</li>
+  <li>non conosce <code>fetch</code>;</li>
+  <li>non conosce cookie/sessione;</li>
+  <li>non muta direttamente il post ricevuto.</li>
+</ul>
 
 ```text
 PostCard
@@ -334,7 +415,7 @@ HTTP
 
 ## 13. Auth nella SPA
 
-All'avvio:
+<p align="justify">All'avvio:</p>
 
 ```text
 GET /api/auth/me
@@ -342,13 +423,13 @@ GET /api/auth/me
   401 -> mostra login/register
 ```
 
-Il `401` iniziale e uno stato previsto dell'interfaccia, non necessariamente un errore inatteso.
+<p align="justify">Il <code>401</code> iniziale e uno stato previsto dell'interfaccia, non necessariamente un errore inatteso.</p>
 
-Dopo register/login il server imposta il cookie e restituisce l'utente pubblico. Dopo logout il client azzera `user` e `posts`.
+<p align="justify">Dopo register/login il server imposta il cookie e restituisce l'utente pubblico. Dopo logout il client azzera <code>user</code> e <code>posts</code>.</p>
 
 ## 14. Like e delete
 
-Like:
+<p align="justify">Like:</p>
 
 ```text
 PostCard emit
@@ -358,7 +439,7 @@ PostCard emit
   -> sostituzione nello state
 ```
 
-Delete:
+<p align="justify">Delete:</p>
 
 ```text
 PostCard emit
@@ -367,7 +448,7 @@ PostCard emit
   -> rimozione dallo state
 ```
 
-Il bottone delete puo essere mostrato solo sui propri post come UX; l'authorization resta server-side.
+<p align="justify">Il bottone delete puo essere mostrato solo sui propri post come UX; l'authorization resta server-side.</p>
 
 ## 15. Errori frequenti
 
@@ -377,7 +458,7 @@ Il bottone delete puo essere mostrato solo sui propri post come UX; l'authorizat
 props.post.liked = !props.post.liked;
 ```
 
-Meglio: emit dell'intenzione al parent.
+<p align="justify">Meglio: emit dell'intenzione al parent.</p>
 
 ### Dimenticare `.value` nello script
 
@@ -385,7 +466,7 @@ Meglio: emit dell'intenzione al parent.
 posts = [];
 ```
 
-Corretto:
+<p align="justify">Corretto:</p>
 
 ```js
 posts.value = [];
@@ -397,9 +478,9 @@ posts.value = [];
 const postCount = ref(0);
 ```
 
-sincronizzato a mano in piu punti e fragile.
+<p align="justify">sincronizzato a mano in piu punti e fragile.</p>
 
-Meglio:
+<p align="justify">Meglio:</p>
 
 ```js
 const postCount = computed(() => posts.value.length);
@@ -407,25 +488,27 @@ const postCount = computed(() => posts.value.length);
 
 ### `watch` per calcolare dati derivati
 
-Se non c'e un side effect, probabilmente serve `computed`.
+<p align="justify">Se non c'e un side effect, probabilmente serve <code>computed</code>.</p>
 
 ### App monolitica
 
-Mettere tutto in `App.vue` non rende l'app ben progettata. I componenti devono avere contratti osservabili.
+<p align="justify">Mettere tutto in <code>App.vue</code> non rende l'app ben progettata. I componenti devono avere contratti osservabili.</p>
 
 ### Global state troppo presto
 
-Pinia non entra finche props/emits e funzioni/composable locali sono sufficienti.
+<p align="justify">Pinia non entra finche props/emits e funzioni/composable locali sono sufficienti.</p>
 
 ## 16. Debug
 
-Tre domande distinte:
+<p align="justify">Tre domande distinte:</p>
 
-1. **reattivita** — il valore nel componente e quello atteso?
-2. **component contract** — prop/evento viaggiano nella direzione giusta?
-3. **rete** — method/status/body della request sono corretti?
+<ol>
+  <li><strong>reattivita</strong> — il valore nel componente e quello atteso?</li>
+  <li><strong>component contract</strong> — prop/evento viaggiano nella direzione giusta?</li>
+  <li><strong>rete</strong> — method/status/body della request sono corretti?</li>
+</ol>
 
-Non correggere un 403 modificando un template; non correggere un prop sbagliato toccando il DB.
+<p align="justify">Non correggere un 403 modificando un template; non correggere un prop sbagliato toccando il DB.</p>
 
 ## 17. Esempio minimo
 
@@ -444,34 +527,40 @@ const doubled = computed(() => count.value * 2);
 </template>
 ```
 
-Nel template il ref viene unwrapped; nello script useremmo `count.value`.
+<p align="justify">Nel template il ref viene unwrapped; nello script useremmo <code>count.value</code>.</p>
 
 ## 18. Esercizi A-F
 
-- **A** — osserva `ref` e `computed` in una app Vite minima;
-- **B** — completa `PostCard` con props/emits;
-- **C** — costruisci Feisbuc milestone 9 sopra API/auth esistenti;
-- **D** — diagnostica bug di reattivita e component boundary;
-- **E** — prossimo incremento: routing SPA e stati di navigazione;
-- **F** — milestone integrata successiva con realtime.
+<ul>
+  <li><strong>A</strong> — osserva <code>ref</code> e <code>computed</code> in una app Vite minima;</li>
+  <li><strong>B</strong> — completa <code>PostCard</code> con props/emits;</li>
+  <li><strong>C</strong> — costruisci Feisbuc milestone 9 sopra API/auth esistenti;</li>
+  <li><strong>D</strong> — diagnostica bug di reattivita e component boundary;</li>
+  <li><strong>E</strong> — prossimo incremento: routing SPA e stati di navigazione;</li>
+  <li><strong>F</strong> — milestone integrata successiva con realtime.</li>
+</ul>
 
 ## 19. Activity collegate
 
-- `tpsi5-activity-a-vue-reactivity-microscope-001`;
-- `tpsi5-activity-b-vue-post-card-001`;
-- `tpsi5-activity-c-feisbuc-vue-spa-001`;
-- `tpsi5-activity-d-debug-vue-reactivity-001`.
+<ul>
+  <li><code>tpsi5-activity-a-vue-reactivity-microscope-001</code>;</li>
+  <li><code>tpsi5-activity-b-vue-post-card-001</code>;</li>
+  <li><code>tpsi5-activity-c-feisbuc-vue-spa-001</code>;</li>
+  <li><code>tpsi5-activity-d-debug-vue-reactivity-001</code>.</li>
+</ul>
 
 ## 20. Verifica rapida
 
-1. Perche Vue non rende inutile conoscere il DOM?
-2. Qual e la differenza tra `ref` e il valore contenuto nel ref?
-3. Quando usare `computed`?
-4. Quale direzione seguono props ed emits?
-5. Perche `PostCard` non dovrebbe chiamare direttamente l'API?
-6. Perche la SPA non deve leggere il session cookie?
-7. Perche nascondere il bottone delete non e authorization?
-8. Quale requisito ci fara introdurre Vue Router?
+<ol>
+  <li>Perche Vue non rende inutile conoscere il DOM?</li>
+  <li>Qual e la differenza tra <code>ref</code> e il valore contenuto nel ref?</li>
+  <li>Quando usare <code>computed</code>?</li>
+  <li>Quale direzione seguono props ed emits?</li>
+  <li>Perche <code>PostCard</code> non dovrebbe chiamare direttamente l'API?</li>
+  <li>Perche la SPA non deve leggere il session cookie?</li>
+  <li>Perche nascondere il bottone delete non e authorization?</li>
+  <li>Quale requisito ci fara introdurre Vue Router?</li>
+</ol>
 
 ## 21. Sintesi inclusiva
 
@@ -492,10 +581,12 @@ API/auth/DB non cambiano perche cambia il presentation layer.
 
 ## 22. Fonti e collegamenti
 
-- Vue Documentation: Quick Start, Reactivity Fundamentals, Computed Properties, Components, Props, Component Events, SFC;
-- Vite Documentation: Getting Started e build;
-- `doc/FRONTEND_FRAMEWORK_DECISION.md`;
-- moduli UDA22–24 come prerequisiti concettuali.
+<ul>
+  <li>Vue Documentation: Quick Start, Reactivity Fundamentals, Computed Properties, Components, Props, Component Events, SFC;</li>
+  <li>Vite Documentation: Getting Started e build;</li>
+  <li><code>doc/FRONTEND_FRAMEWORK_DECISION.md</code>;</li>
+  <li>moduli UDA22–24 come prerequisiti concettuali.</li>
+</ul>
 
 ## 23. Prossimo passo
 

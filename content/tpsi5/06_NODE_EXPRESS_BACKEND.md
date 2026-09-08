@@ -1,8 +1,20 @@
 # Node.js ed Express 5: dal protocollo al backend
 
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#128506; <strong>Orientamento della lezione</strong></summary>
+
+<p align="justify"><strong>Contesto:</strong> conosciamo ormai HTTP dal punto di vista del client. Ora JavaScript viene eseguito in un processo server e il flusso della richiesta diventa una pipeline esplicita di middleware, router, validazione e risposta.</p>
+<p align="justify"><strong>Domande guida:</strong> che cosa cambia fra browser e runtime Node? In quale ordine attraversa Express una richiesta? Dove devono vivere validation, error handling e dipendenze?</p>
+<p align="justify"><strong>Obiettivi osservabili:</strong> avviare un processo Node ESM, leggere una fixture <code>node:http</code>, costruire router e middleware Express 5, propagare errori asincroni e separare applicazione e listener.</p>
+<p align="justify"><strong>Prossimo passo:</strong> la lezione 07 sostituirà il <code>MemoryPostStore</code> con una persistenza SQLite mantenendo invariata la API.</p>
+
+</details>
+</td></tr></table>
+
 ## Perché questa lezione arriva adesso
 
-In UDA 23 abbiamo usato un server `node:http` come **fixture trasparente**. Sapevamo cosa chiedergli:
+<p align="justify">In UDA 23 abbiamo usato un server <code>node:http</code> come <strong>fixture trasparente</strong>. Sapevamo cosa chiedergli:</p>
 
 ```text
 GET   /api/posts
@@ -10,11 +22,11 @@ POST  /api/posts
 PATCH /api/posts/:id
 ```
 
-ma non avevamo ancora studiato come un backend riceve una request, sceglie il codice da eseguire, valida il body e produce una response.
+<p align="justify">ma non avevamo ancora studiato come un backend riceve una request, sceglie il codice da eseguire, valida il body e produce una response.</p>
 
-Adesso apriamo quella scatola.
+<p align="justify">Adesso apriamo quella scatola.</p>
 
-L'ordine didattico resta intenzionale:
+<p align="justify">L'ordine didattico resta intenzionale:</p>
 
 ```text
 HTTP
@@ -30,37 +42,73 @@ HTTP
   -> API Feisbuc
 ```
 
-Express non sostituisce HTTP: organizza codice che deve comunque rispettare il contratto HTTP.
+<p align="justify">Express non sostituisce HTTP: organizza codice che deve comunque rispettare il contratto HTTP.</p>
 
 ---
 
 ## Obiettivi
 
-Al termine del modulo lo studente deve saper:
+<p align="justify">Al termine del modulo lo studente deve saper:</p>
 
-1. distinguere JavaScript, browser e runtime Node.js;
-2. spiegare il ruolo di `package.json`, npm, script e dipendenze;
-3. usare ES modules in Node;
-4. descrivere a livello concettuale event loop e I/O non bloccante;
-5. leggere un server minimale costruito con `node:http`;
-6. spiegare quali responsabilità Express elimina dal routing manuale;
-7. costruire una applicazione Express 5 con `Router`;
-8. usare e ordinare correttamente middleware;
-9. distinguere `req.params`, `req.query` e `req.body` come proiezioni della request HTTP;
-10. validare input al confine dell'applicazione;
-11. progettare un error model JSON coerente;
-12. separare avvio server, composizione app, routing, validation e storage;
-13. usare `process.env` per configurazione esterna;
-14. spiegare perché CORS non va abilitato automaticamente in ogni progetto;
-15. mantenere il contratto HTTP di Feisbuc invariato mentre cambia l'implementazione server.
+<ol>
+  <li>distinguere JavaScript, browser e runtime Node.js;</li>
+  <li>spiegare il ruolo di <code>package.json</code>, npm, script e dipendenze;</li>
+  <li>usare ES modules in Node;</li>
+  <li>descrivere a livello concettuale event loop e I/O non bloccante;</li>
+  <li>leggere un server minimale costruito con <code>node:http</code>;</li>
+  <li>spiegare quali responsabilità Express elimina dal routing manuale;</li>
+  <li>costruire una applicazione Express 5 con <code>Router</code>;</li>
+  <li>usare e ordinare correttamente middleware;</li>
+  <li>distinguere <code>req.params</code>, <code>req.query</code> e <code>req.body</code> come proiezioni della request HTTP;</li>
+  <li>validare input al confine dell'applicazione;</li>
+  <li>progettare un error model JSON coerente;</li>
+  <li>separare avvio server, composizione app, routing, validation e storage;</li>
+  <li>usare <code>process.env</code> per configurazione esterna;</li>
+  <li>spiegare perché CORS non va abilitato automaticamente in ogni progetto;</li>
+  <li>mantenere il contratto HTTP di Feisbuc invariato mentre cambia l'implementazione server.</li>
+</ol>
+
+## Prerequisiti
+
+<ul>
+  <li>HTTP request/response, metodi, status, header e body;</li>
+  <li>Promise, <code>async</code>/<code>await</code> e moduli ES;</li>
+  <li>REST API Feisbuc della milestone 4;</li>
+  <li>uso essenziale di terminale e file di progetto.</li>
+</ul>
+
+## Orientamento nella documentazione
+
+<p align="center">
+  <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
+</p>
+
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Indice incrociato — Node.js ed Express ↔ documentazione ufficiale</strong></summary>
+
+<table align="center">
+<thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
+<tbody>
+<tr><td><a href="#lesson-node-runtime">Runtime, processo, npm ed ESM</a></td><td><a href="https://nodejs.org/api/documentation.html">Node.js documentation</a><br><a href="https://nodejs.org/api/esm.html">ECMAScript modules</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-node-http">Server <code>node:http</code></a></td><td><a href="https://nodejs.org/api/http.html">Node.js HTTP</a></td><td>&#128994; leggere l'esempio minimo</td></tr>
+<tr><td><a href="#lesson-express-pipeline">Middleware, ordine e Router</a></td><td><a href="https://expressjs.com/en/5x/guide/writing-middleware.html">Express 5 — Writing middleware</a><br><a href="https://expressjs.com/en/guide/routing.html">Express — Routing</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-express-boundaries">Validation ed error pipeline</a></td><td><a href="https://expressjs.com/en/5x/guide/error-handling.html">Express 5 — Error handling</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td>Streaming, cluster, performance e middleware di terze parti</td><td><a href="https://nodejs.org/api/stream.html">Node.js streams</a><br><a href="https://expressjs.com/en/resources/middleware.html">Express middleware</a></td><td>&#128993; riconoscere o studiare più avanti</td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
 
 ---
 
-# 1. JavaScript non significa browser
+<a id="lesson-node-runtime"></a>
+## 1. JavaScript non significa browser
 
-JavaScript è un linguaggio.
+<p align="justify">JavaScript è un linguaggio.</p>
 
-Il browser è un ambiente che fornisce API come:
+<p align="justify">Il browser è un ambiente che fornisce API come:</p>
 
 ```text
 document
@@ -69,7 +117,7 @@ localStorage
 fetch
 ```
 
-Node.js è un altro runtime JavaScript. Fornisce invece API come:
+<p align="justify">Node.js è un altro runtime JavaScript. Fornisce invece API come:</p>
 
 ```text
 process
@@ -80,23 +128,23 @@ node:path
 node:crypto
 ```
 
-Quindi questo codice:
+<p align="justify">Quindi questo codice:</p>
 
 ```js
 console.log(document.querySelector("h1"));
 ```
 
-ha senso in un browser ma non in un normale processo Node.
+<p align="justify">ha senso in un browser ma non in un normale processo Node.</p>
 
-Questo invece:
+<p align="justify">Questo invece:</p>
 
 ```js
 console.log(process.version);
 ```
 
-ha senso in Node.
+<p align="justify">ha senso in Node.</p>
 
-## Modello mentale
+### Modello mentale
 
 ```text
 ECMAScript
@@ -106,21 +154,21 @@ ECMAScript
    +-- Node.js runtime -> filesystem, process, HTTP server...
 ```
 
-Non studiamo quindi un nuovo linguaggio: studiamo un nuovo **runtime** e nuove API.
+<p align="justify">Non studiamo quindi un nuovo linguaggio: studiamo un nuovo <strong>runtime</strong> e nuove API.</p>
 
 ---
 
-# 2. Il processo Node
+## 2. Il processo Node
 
-Quando eseguiamo:
+<p align="justify">Quando eseguiamo:</p>
 
 ```bash
 node server.mjs
 ```
 
-il sistema operativo avvia un processo Node.
+<p align="justify">il sistema operativo avvia un processo Node.</p>
 
-Nel programma possiamo leggere informazioni dal runtime:
+<p align="justify">Nel programma possiamo leggere informazioni dal runtime:</p>
 
 ```js
 console.log(process.version);
@@ -128,21 +176,21 @@ console.log(process.platform);
 console.log(process.pid);
 ```
 
-E possiamo leggere configurazione esterna:
+<p align="justify">E possiamo leggere configurazione esterna:</p>
 
 ```js
 const port = Number(process.env.PORT ?? 3000);
 ```
 
-Questa separazione è importante.
+<p align="justify">Questa separazione è importante.</p>
 
-Evitiamo:
+<p align="justify">Evitiamo:</p>
 
 ```js
 const productionPassword = "segreto";
 ```
 
-Preferiamo il principio:
+<p align="justify">Preferiamo il principio:</p>
 
 ```text
 codice       -> repository
@@ -150,15 +198,15 @@ configurazione -> environment
 segreti      -> secret management / environment protetto
 ```
 
-I segreti verranno approfonditi nella parte sicurezza.
+<p align="justify">I segreti verranno approfonditi nella parte sicurezza.</p>
 
 ---
 
-# 3. npm e package.json
+## 3. npm e package.json
 
-`npm` è il package manager normalmente distribuito insieme a Node.js.
+<p align="justify"><code>npm</code> è il package manager normalmente distribuito insieme a Node.js.</p>
 
-Un progetto può dichiarare la propria identità e le dipendenze in `package.json`:
+<p align="justify">Un progetto può dichiarare la propria identità e le dipendenze in <code>package.json</code>:</p>
 
 ```json
 {
@@ -178,11 +226,11 @@ Un progetto può dichiarare la propria identità e le dipendenze in `package.jso
 }
 ```
 
-Per il corso usiamo una versione Express **pinned** per rendere gli esempi riproducibili.
+<p align="justify">Per il corso usiamo una versione Express <strong>pinned</strong> per rendere gli esempi riproducibili.</p>
 
-## dependencies e devDependencies
+### dependencies e devDependencies
 
-In modo semplificato:
+<p align="justify">In modo semplificato:</p>
 
 ```text
 dependencies
@@ -192,22 +240,24 @@ devDependencies
   -> strumenti necessari allo sviluppo/test/build
 ```
 
-Non aggiungiamo pacchetti senza motivo.
+<p align="justify">Non aggiungiamo pacchetti senza motivo.</p>
 
-Ogni dipendenza:
+<p align="justify">Ogni dipendenza:</p>
 
-- aumenta il codice di terze parti;
-- deve essere aggiornata;
-- può avere vulnerabilità;
-- rende l'applicazione più complessa da riprodurre.
+<ul>
+  <li>aumenta il codice di terze parti;</li>
+  <li>deve essere aggiornata;</li>
+  <li>può avere vulnerabilità;</li>
+  <li>rende l'applicazione più complessa da riprodurre.</li>
+</ul>
 
 ---
 
-# 4. ES modules anche nel backend
+## 4. ES modules anche nel backend
 
-Nel corso usiamo ES modules come modello principale.
+<p align="justify">Nel corso usiamo ES modules come modello principale.</p>
 
-Con:
+<p align="justify">Con:</p>
 
 ```json
 {
@@ -215,14 +265,14 @@ Con:
 }
 ```
 
-possiamo scrivere:
+<p align="justify">possiamo scrivere:</p>
 
 ```js
 import express from "express";
 import { randomUUID } from "node:crypto";
 ```
 
-ed esportare:
+<p align="justify">ed esportare:</p>
 
 ```js
 export function validatePostInput(value) {
@@ -230,26 +280,26 @@ export function validatePostInput(value) {
 }
 ```
 
-Perché preferiamo un solo modello iniziale?
+<p align="justify">Perché preferiamo un solo modello iniziale?</p>
 
-Per ridurre context switching fra browser e backend:
+<p align="justify">Per ridurre context switching fra browser e backend:</p>
 
 ```text
 browser modules -> import/export
 Node modules    -> import/export
 ```
 
-CommonJS (`require`, `module.exports`) verrà comunque riconosciuto quando incontreremo codice legacy.
+<p align="justify">CommonJS (<code>require</code>, <code>module.exports</code>) verrà comunque riconosciuto quando incontreremo codice legacy.</p>
 
 ---
 
-# 5. Event loop: quanto ci serve davvero
+## 5. Event loop: quanto ci serve davvero
 
-Non serve trasformare questa UDA in un corso sugli internals di V8/libuv.
+<p align="justify">Non serve trasformare questa UDA in un corso sugli internals di V8/libuv.</p>
 
-Serve però capire perché questo server può gestire molte connessioni senza creare un thread JavaScript per ogni request.
+<p align="justify">Serve però capire perché questo server può gestire molte connessioni senza creare un thread JavaScript per ogni request.</p>
 
-Modello didattico minimo:
+<p align="justify">Modello didattico minimo:</p>
 
 ```text
 JavaScript call stack
@@ -269,25 +319,28 @@ event loop
 callback / continuation
 ```
 
-Il punto fondamentale è:
+<p align="justify">Il punto fondamentale è:</p>
 
-> non bloccare inutilmente il thread JavaScript con lavoro sincrono lungo.
+<blockquote>
+<p align="justify">non bloccare inutilmente il thread JavaScript con lavoro sincrono lungo.</p>
+</blockquote>
 
-Quindi:
+<p align="justify">Quindi:</p>
 
 ```js
 const data = await loadSomething();
 ```
 
-non significa "Node si ferma completamente".
+<p align="justify">non significa "Node si ferma completamente".</p>
 
-La funzione sospende la propria continuazione mentre il runtime può gestire altro lavoro.
+<p align="justify">La funzione sospende la propria continuazione mentre il runtime può gestire altro lavoro.</p>
 
 ---
 
-# 6. Apriamo la fixture: node:http
+<a id="lesson-node-http"></a>
+## 6. Apriamo la fixture: node:http
 
-Un server minimale può essere costruito senza Express:
+<p align="justify">Un server minimale può essere costruito senza Express:</p>
 
 ```js
 import { createServer } from "node:http";
@@ -310,7 +363,7 @@ const server = createServer((req, res) => {
 server.listen(3000);
 ```
 
-Riconosciamo immediatamente concetti di UDA 23:
+<p align="justify">Riconosciamo immediatamente concetti di UDA 23:</p>
 
 ```text
 req.method       -> HTTP method
@@ -321,11 +374,11 @@ res.setHeader    -> response headers
 res.end          -> termina response
 ```
 
-## Leggere il body
+### Leggere il body
 
-Nel server HTTP nativo il body arriva come stream.
+<p align="justify">Nel server HTTP nativo il body arriva come stream.</p>
 
-Un esempio minimale:
+<p align="justify">Un esempio minimale:</p>
 
 ```js
 let body = "";
@@ -337,31 +390,33 @@ for await (const chunk of req) {
 const value = JSON.parse(body);
 ```
 
-Subito emergono problemi reali:
+<p align="justify">Subito emergono problemi reali:</p>
 
-- dimensione massima del body;
-- JSON invalido;
-- `Content-Type` sbagliato;
-- routing;
-- parametri dinamici;
-- static files;
-- logging;
-- error handling;
-- middleware comuni.
+<ul>
+  <li>dimensione massima del body;</li>
+  <li>JSON invalido;</li>
+  <li><code>Content-Type</code> sbagliato;</li>
+  <li>routing;</li>
+  <li>parametri dinamici;</li>
+  <li>static files;</li>
+  <li>logging;</li>
+  <li>error handling;</li>
+  <li>middleware comuni.</li>
+</ul>
 
-Potremmo implementare tutto a mano.
+<p align="justify">Potremmo implementare tutto a mano.</p>
 
-Ma finiremmo per costruire un framework.
+<p align="justify">Ma finiremmo per costruire un framework.</p>
 
 ---
 
-# 7. Perché Express
+## 7. Perché Express
 
-Express ci fornisce un modello semplice per organizzare il request-response cycle.
+<p align="justify">Express ci fornisce un modello semplice per organizzare il request-response cycle.</p>
 
-Nel corso usiamo **Express 5.x**.
+<p align="justify">Nel corso usiamo <strong>Express 5.x</strong>.</p>
 
-Esempio equivalente:
+<p align="justify">Esempio equivalente:</p>
 
 ```js
 import express from "express";
@@ -379,7 +434,7 @@ app.use((req, res) => {
 app.listen(3000);
 ```
 
-Il protocollo non cambia:
+<p align="justify">Il protocollo non cambia:</p>
 
 ```text
 GET /api/health
@@ -389,26 +444,29 @@ GET /missing
        -> 404 application/json
 ```
 
-Cambia il modo in cui organizziamo il codice.
+<p align="justify">Cambia il modo in cui organizziamo il codice.</p>
 
 ---
 
-# 8. Middleware: la pipeline della request
+<a id="lesson-express-pipeline"></a>
+## 8. Middleware: la pipeline della request
 
-Una funzione middleware riceve normalmente:
+<p align="justify">Una funzione middleware riceve normalmente:</p>
 
 ```js
 (req, res, next)
 ```
 
-Può:
+<p align="justify">Può:</p>
 
-- leggere request;
-- modificare request/response;
-- terminare il ciclo;
-- chiamare `next()` per continuare.
+<ul>
+  <li>leggere request;</li>
+  <li>modificare request/response;</li>
+  <li>terminare il ciclo;</li>
+  <li>chiamare <code>next()</code> per continuare.</li>
+</ul>
 
-Esempio:
+<p align="justify">Esempio:</p>
 
 ```js
 function requestLogger(req, res, next) {
@@ -419,7 +477,7 @@ function requestLogger(req, res, next) {
 app.use(requestLogger);
 ```
 
-Modello:
+<p align="justify">Modello:</p>
 
 ```text
 request
@@ -439,9 +497,9 @@ route handler
 response
 ```
 
-## L'ordine è comportamento
+### L'ordine è comportamento
 
-Queste due configurazioni non sono equivalenti:
+<p align="justify">Queste due configurazioni non sono equivalenti:</p>
 
 ```js
 app.use(express.json());
@@ -453,39 +511,43 @@ app.use("/api", apiRouter);
 app.use(express.json());
 ```
 
-Nel secondo caso le route del router vengono eseguite **prima** del parser JSON.
+<p align="justify">Nel secondo caso le route del router vengono eseguite <strong>prima</strong> del parser JSON.</p>
 
-Quindi `req.body` non contiene ciò che ci aspettiamo.
+<p align="justify">Quindi <code>req.body</code> non contiene ciò che ci aspettiamo.</p>
 
-Questo diventerà parte dell'Activity D.
+<p align="justify">Questo diventerà parte dell'Activity D.</p>
 
 ---
 
-# 9. Middleware built-in utili
+## 9. Middleware built-in utili
 
-## JSON body parser
+### JSON body parser
 
 ```js
 app.use(express.json({ limit: "32kb" }));
 ```
 
-Non significa:
+<p align="justify">Non significa:</p>
 
-> ogni request del mondo contiene JSON.
+<blockquote>
+<p align="justify">ogni request del mondo contiene JSON.</p>
+</blockquote>
 
-Significa:
+<p align="justify">Significa:</p>
 
-> quando la request ha una representation JSON compatibile, Express può produrre `req.body`.
+<blockquote>
+<p align="justify">quando la request ha una representation JSON compatibile, Express può produrre <code>req.body</code>.</p>
+</blockquote>
 
-## Static files
+### Static files
 
 ```js
 app.use(express.static("public"));
 ```
 
-Possiamo così servire il client Feisbuc dallo stesso origin della API.
+<p align="justify">Possiamo così servire il client Feisbuc dallo stesso origin della API.</p>
 
-Questo mantiene semplice la prima architettura:
+<p align="justify">Questo mantiene semplice la prima architettura:</p>
 
 ```text
 http://localhost:3000/
@@ -493,15 +555,15 @@ http://localhost:3000/app.js
 http://localhost:3000/api/posts
 ```
 
-Stesso scheme + host + port -> stesso origin.
+<p align="justify">Stesso scheme + host + port -> stesso origin.</p>
 
 ---
 
-# 10. Router: separare le risorse
+## 10. Router: separare le risorse
 
-Un'applicazione con tutto in `server.js` cresce male.
+<p align="justify">Un'applicazione con tutto in <code>server.js</code> cresce male.</p>
 
-Creiamo un Router:
+<p align="justify">Creiamo un Router:</p>
 
 ```js
 import { Router } from "express";
@@ -513,13 +575,13 @@ postsRouter.post("/", createPost);
 postsRouter.patch("/:id", updatePost);
 ```
 
-E lo montiamo:
+<p align="justify">E lo montiamo:</p>
 
 ```js
 app.use("/api/posts", postsRouter);
 ```
 
-La composizione finale è:
+<p align="justify">La composizione finale è:</p>
 
 ```text
 /api/posts       + GET
@@ -529,43 +591,43 @@ La composizione finale è:
 
 ---
 
-# 11. params, query e body
+## 11. params, query e body
 
-UDA 23 ci ha già insegnato dove vivono i dati nella request.
+<p align="justify">UDA 23 ci ha già insegnato dove vivono i dati nella request.</p>
 
-Express li rende comodi da leggere.
+<p align="justify">Express li rende comodi da leggere.</p>
 
-## Path parameter
+### Path parameter
 
-Request:
+<p align="justify">Request:</p>
 
 ```http
 PATCH /api/posts/p-42
 ```
 
-Express:
+<p align="justify">Express:</p>
 
 ```js
 req.params.id
 ```
 
-## Query string
+### Query string
 
-Request:
+<p align="justify">Request:</p>
 
 ```http
 GET /api/posts?liked=true
 ```
 
-Express:
+<p align="justify">Express:</p>
 
 ```js
 req.query.liked
 ```
 
-## JSON body
+### JSON body
 
-Request:
+<p align="justify">Request:</p>
 
 ```http
 POST /api/posts
@@ -574,23 +636,24 @@ Content-Type: application/json
 {"text":"ciao"}
 ```
 
-Express:
+<p align="justify">Express:</p>
 
 ```js
 req.body.text
 ```
 
-Questa è una **proiezione conveniente del protocollo**, non una nuova forma di comunicazione.
+<p align="justify">Questa è una <strong>proiezione conveniente del protocollo</strong>, non una nuova forma di comunicazione.</p>
 
 ---
 
-# 12. Validation: non fidarti del confine esterno
+<a id="lesson-express-boundaries"></a>
+## 12. Validation: non fidarti del confine esterno
 
-Il client Feisbuc prova a inviare dati validi.
+<p align="justify">Il client Feisbuc prova a inviare dati validi.</p>
 
-Ma il server non può assumere che ogni client sia corretto.
+<p align="justify">Ma il server non può assumere che ogni client sia corretto.</p>
 
-Una funzione pura di validation può essere:
+<p align="justify">Una funzione pura di validation può essere:</p>
 
 ```js
 export function validateNewPost(input) {
@@ -617,34 +680,36 @@ export function validateNewPost(input) {
 }
 ```
 
-Notare che questa funzione:
+<p align="justify">Notare che questa funzione:</p>
 
-- non conosce Express;
-- non conosce HTTP;
-- può essere testata deterministicamente;
-- separa business rule da trasporto.
+<ul>
+  <li>non conosce Express;</li>
+  <li>non conosce HTTP;</li>
+  <li>può essere testata deterministicamente;</li>
+  <li>separa business rule da trasporto.</li>
+</ul>
 
-Questa separazione prepara anche SQL e FastAPI.
+<p align="justify">Questa separazione prepara anche SQL e FastAPI.</p>
 
 ---
 
-# 13. Error model
+## 13. Error model
 
-Evitiamo error response casuali:
+<p align="justify">Evitiamo error response casuali:</p>
 
 ```json
 {"message":"male"}
 ```
 
-poi:
+<p align="justify">poi:</p>
 
 ```json
 {"error":"qualcosa"}
 ```
 
-poi plain text.
+<p align="justify">poi plain text.</p>
 
-Definiamo un formato semplice:
+<p align="justify">Definiamo un formato semplice:</p>
 
 ```json
 {
@@ -656,9 +721,9 @@ Definiamo un formato semplice:
 }
 ```
 
-Il codice macchina e il messaggio umano hanno ruoli diversi.
+<p align="justify">Il codice macchina e il messaggio umano hanno ruoli diversi.</p>
 
-## Status + error body
+### Status + error body
 
 ```text
 400 -> request sintatticamente/semanticamente non valida
@@ -667,13 +732,13 @@ Il codice macchina e il messaggio umano hanno ruoli diversi.
 500 -> errore inatteso server
 ```
 
-La scelta precisa dipende dal contratto API, ma deve essere intenzionale.
+<p align="justify">La scelta precisa dipende dal contratto API, ma deve essere intenzionale.</p>
 
 ---
 
-# 14. Error middleware
+## 14. Error middleware
 
-Un error middleware Express ha **quattro argomenti**:
+<p align="justify">Un error middleware Express ha <strong>quattro argomenti</strong>:</p>
 
 ```js
 function errorHandler(error, req, res, next) {
@@ -689,11 +754,11 @@ function errorHandler(error, req, res, next) {
 }
 ```
 
-Anche se `next` non viene usato, la firma a quattro argomenti identifica il middleware come error handler.
+<p align="justify">Anche se <code>next</code> non viene usato, la firma a quattro argomenti identifica il middleware come error handler.</p>
 
-Con Express 5, se un route handler `async` lancia un errore o restituisce una Promise rejected, l'errore può raggiungere automaticamente la pipeline di error handling.
+<p align="justify">Con Express 5, se un route handler <code>async</code> lancia un errore o restituisce una Promise rejected, l'errore può raggiungere automaticamente la pipeline di error handling.</p>
 
-Esempio:
+<p align="justify">Esempio:</p>
 
 ```js
 router.get("/:id", async (req, res) => {
@@ -707,13 +772,13 @@ router.get("/:id", async (req, res) => {
 });
 ```
 
-Più avanti distingueremo errori applicativi attesi dagli errori inattesi.
+<p align="justify">Più avanti distingueremo errori applicativi attesi dagli errori inattesi.</p>
 
 ---
 
-# 15. Request ID e logging
+## 15. Request ID e logging
 
-Quando una request attraversa più livelli è utile avere una identità.
+<p align="justify">Quando una request attraversa più livelli è utile avere una identità.</p>
 
 ```js
 import { randomUUID } from "node:crypto";
@@ -725,7 +790,7 @@ export function requestId(req, res, next) {
 }
 ```
 
-Un logger minimale:
+<p align="justify">Un logger minimale:</p>
 
 ```js
 export function requestLogger(req, res, next) {
@@ -745,9 +810,9 @@ export function requestLogger(req, res, next) {
 }
 ```
 
-Non è ancora observability completa.
+<p align="justify">Non è ancora observability completa.</p>
 
-Ma introduce il concetto:
+<p align="justify">Ma introduce il concetto:</p>
 
 ```text
 una request
@@ -757,11 +822,11 @@ una request
 
 ---
 
-# 16. Configurazione dell'applicazione
+## 16. Configurazione dell'applicazione
 
-Evitiamo di spargere `process.env` ovunque.
+<p align="justify">Evitiamo di spargere <code>process.env</code> ovunque.</p>
 
-Possiamo centralizzare:
+<p align="justify">Possiamo centralizzare:</p>
 
 ```js
 export function loadConfig(env = process.env) {
@@ -778,15 +843,15 @@ export function loadConfig(env = process.env) {
 }
 ```
 
-Il server startup usa config.
+<p align="justify">Il server startup usa config.</p>
 
-L'applicazione HTTP non deve conoscere il modo in cui la configurazione è stata caricata.
+<p align="justify">L'applicazione HTTP non deve conoscere il modo in cui la configurazione è stata caricata.</p>
 
 ---
 
-# 17. Separare app e server
+## 17. Separare app e server
 
-Pattern utile:
+<p align="justify">Pattern utile:</p>
 
 ```text
 src/
@@ -794,9 +859,9 @@ src/
   server.js
 ```
 
-## app.js
+### app.js
 
-Costruisce Express:
+<p align="justify">Costruisce Express:</p>
 
 ```js
 export function createApp(dependencies) {
@@ -806,26 +871,26 @@ export function createApp(dependencies) {
 }
 ```
 
-## server.js
+### server.js
 
-Fa startup:
+<p align="justify">Fa startup:</p>
 
 ```js
 const app = createApp(...);
 app.listen(port);
 ```
 
-Perché?
+<p align="justify">Perché?</p>
 
-Perché possiamo testare `app` senza dover fissare una porta nel modulo che la costruisce.
+<p align="justify">Perché possiamo testare <code>app</code> senza dover fissare una porta nel modulo che la costruisce.</p>
 
 ---
 
-# 18. Dependency injection minimale
+## 18. Dependency injection minimale
 
-Non serve un framework DI.
+<p align="justify">Non serve un framework DI.</p>
 
-Basta non creare ogni dipendenza dentro ogni route.
+<p align="justify">Basta non creare ogni dipendenza dentro ogni route.</p>
 
 ```js
 export function createPostsRouter({ postStore }) {
@@ -839,11 +904,11 @@ export function createPostsRouter({ postStore }) {
 }
 ```
 
-Oggi `postStore` sarà in-memory.
+<p align="justify">Oggi <code>postStore</code> sarà in-memory.</p>
 
-Più avanti potrà diventare SQL.
+<p align="justify">Più avanti potrà diventare SQL.</p>
 
-Il router non deve cambiare completamente.
+<p align="justify">Il router non deve cambiare completamente.</p>
 
 ```text
 Router
@@ -856,13 +921,13 @@ postStore interface
   +-- SQL repository    <- prossima fase
 ```
 
-Questo è uno dei passaggi architetturali più importanti del corso.
+<p align="justify">Questo è uno dei passaggi architetturali più importanti del corso.</p>
 
 ---
 
-# 19. Feisbuc milestone 5: stessa API, nuovo backend
+## 19. Feisbuc milestone 5: stessa API, nuovo backend
 
-In UDA 23 il client usava:
+<p align="justify">In UDA 23 il client usava:</p>
 
 ```text
 GET   /api/posts
@@ -870,9 +935,9 @@ POST  /api/posts
 PATCH /api/posts/:id
 ```
 
-Questa milestone mantiene lo stesso contratto.
+<p align="justify">Questa milestone mantiene lo stesso contratto.</p>
 
-Cambia il server:
+<p align="justify">Cambia il server:</p>
 
 ```text
 prima
@@ -887,30 +952,30 @@ Express app
   -> error middleware
 ```
 
-Il client dovrebbe quasi non accorgersene.
+<p align="justify">Il client dovrebbe quasi non accorgersene.</p>
 
-Questa è una proprietà desiderabile.
+<p align="justify">Questa è una proprietà desiderabile.</p>
 
-Un contratto stabile permette di evolvere l'implementazione.
+<p align="justify">Un contratto stabile permette di evolvere l'implementazione.</p>
 
 ---
 
-# 20. CORS: non usare cors() come superstizione
+## 20. CORS: non usare cors() come superstizione
 
-Nel vecchio lab didattico il frontend e il backend potevano essere eseguiti su origin diversi e veniva aggiunto middleware CORS.
+<p align="justify">Nel vecchio lab didattico il frontend e il backend potevano essere eseguiti su origin diversi e veniva aggiunto middleware CORS.</p>
 
-Nel Feisbuc attuale serviamo client e API dallo stesso server:
+<p align="justify">Nel Feisbuc attuale serviamo client e API dallo stesso server:</p>
 
 ```text
 http://localhost:3000/
 http://localhost:3000/api/posts
 ```
 
-Quindi il flusso principale è same-origin.
+<p align="justify">Quindi il flusso principale è same-origin.</p>
 
-Non abbiamo bisogno di aggiungere CORS solo perché stiamo costruendo una API.
+<p align="justify">Non abbiamo bisogno di aggiungere CORS solo perché stiamo costruendo una API.</p>
 
-Quando frontend e backend saranno realmente cross-origin studieremo una policy esplicita:
+<p align="justify">Quando frontend e backend saranno realmente cross-origin studieremo una policy esplicita:</p>
 
 ```text
 quali origin?
@@ -919,33 +984,37 @@ quali header?
 credentials sì/no?
 ```
 
-Regola:
+<p align="justify">Regola:</p>
 
-> CORS è una policy di accesso cross-origin del browser, non una decorazione obbligatoria delle API.
+<blockquote>
+<p align="justify">CORS è una policy di accesso cross-origin del browser, non una decorazione obbligatoria delle API.</p>
+</blockquote>
 
 ---
 
-# 21. Cosa NON facciamo ancora
+## 21. Cosa NON facciamo ancora
 
-Questa prima parte di UDA 24 non introduce ancora:
+<p align="justify">Questa prima parte di UDA 24 non introduce ancora:</p>
 
-- database;
-- ORM;
-- password;
-- sessioni;
-- JWT;
-- Nunjucks;
-- SSR completo;
-- upload;
-- deploy production.
+<ul>
+  <li>database;</li>
+  <li>ORM;</li>
+  <li>password;</li>
+  <li>sessioni;</li>
+  <li>JWT;</li>
+  <li>Nunjucks;</li>
+  <li>SSR completo;</li>
+  <li>upload;</li>
+  <li>deploy production.</li>
+</ul>
 
-Lo storage è volutamente in memoria.
+<p align="justify">Lo storage è volutamente in memoria.</p>
 
-Perché?
+<p align="justify">Perché?</p>
 
-Perché vogliamo poter attribuire ogni errore a uno strato preciso.
+<p align="justify">Perché vogliamo poter attribuire ogni errore a uno strato preciso.</p>
 
-Se una POST non funziona, dobbiamo sapere se il problema è:
+<p align="justify">Se una POST non funziona, dobbiamo sapere se il problema è:</p>
 
 ```text
 HTTP?
@@ -956,42 +1025,44 @@ middleware order?
 store?
 ```
 
-prima di aggiungere SQL.
+<p align="justify">prima di aggiungere SQL.</p>
 
 ---
 
-# 22. Errori frequenti
+## 22. Errori frequenti
 
-## 22.1 `express.json()` dopo il router
+### 22.1 `express.json()` dopo il router
 
-Sintomo:
+<p align="justify">Sintomo:</p>
 
 ```text
 GET funziona
 POST ha req.body undefined
 ```
 
-Domanda corretta:
+<p align="justify">Domanda corretta:</p>
 
-> in quale ordine passa la request nei middleware?
+<blockquote>
+<p align="justify">in quale ordine passa la request nei middleware?</p>
+</blockquote>
 
 ---
 
-## 22.2 Confondere params e query
+### 22.2 Confondere params e query
 
-Route:
+<p align="justify">Route:</p>
 
 ```text
 /api/posts/:id
 ```
 
-Errore:
+<p align="justify">Errore:</p>
 
 ```js
 req.query.id
 ```
 
-Corretto:
+<p align="justify">Corretto:</p>
 
 ```js
 req.params.id
@@ -999,17 +1070,17 @@ req.params.id
 
 ---
 
-## 22.3 Error middleware con tre argomenti
+### 22.3 Error middleware con tre argomenti
 
-Errore:
+<p align="justify">Errore:</p>
 
 ```js
 function errorHandler(err, req, res) {}
 ```
 
-Express lo vede come middleware normale.
+<p align="justify">Express lo vede come middleware normale.</p>
 
-Corretto:
+<p align="justify">Corretto:</p>
 
 ```js
 function errorHandler(err, req, res, next) {}
@@ -1017,59 +1088,61 @@ function errorHandler(err, req, res, next) {}
 
 ---
 
-## 22.4 Non chiamare next()
+### 22.4 Non chiamare next()
 
-Un middleware che non termina la response e non chiama `next()` lascia il ciclo sospeso.
-
----
-
-## 22.5 Usare GET per modificare dati
-
-Se una route crea, modifica o cancella stato, GET è quasi certamente il metodo sbagliato.
-
-Questo è un punto che correggiamo esplicitamente rispetto ad alcuni lab legacy.
+<p align="justify">Un middleware che non termina la response e non chiama <code>next()</code> lascia il ciclo sospeso.</p>
 
 ---
 
-## 22.6 Mandare password nei log
+### 22.5 Usare GET per modificare dati
 
-Nel vecchio materiale didattico alcune credenziali venivano stampate per mostrare il flusso.
+<p align="justify">Se una route crea, modifica o cancella stato, GET è quasi certamente il metodo sbagliato.</p>
 
-Nel nuovo corso questa pratica diventa un anti-pattern esplicito.
-
-La sicurezza verrà approfondita nella fase auth.
+<p align="justify">Questo è un punto che correggiamo esplicitamente rispetto ad alcuni lab legacy.</p>
 
 ---
 
-# 23. Esercizi A-F
+### 22.6 Mandare password nei log
 
-## A — osserva
+<p align="justify">Nel vecchio materiale didattico alcune credenziali venivano stampate per mostrare il flusso.</p>
 
-Confronta due server equivalenti:
+<p align="justify">Nel nuovo corso questa pratica diventa un anti-pattern esplicito.</p>
+
+<p align="justify">La sicurezza verrà approfondita nella fase auth.</p>
+
+---
+
+## 23. Esercizi A-F
+
+### A — osserva
+
+<p align="justify">Confronta due server equivalenti:</p>
 
 ```text
 node:http
 Express
 ```
 
-Individua dove vivono:
+<p align="justify">Individua dove vivono:</p>
 
-- method matching;
-- path matching;
-- JSON parsing;
-- status;
-- headers;
-- 404.
+<ul>
+  <li>method matching;</li>
+  <li>path matching;</li>
+  <li>JSON parsing;</li>
+  <li>status;</li>
+  <li>headers;</li>
+  <li>404.</li>
+</ul>
 
-## B — modifica controllata
+### B — modifica controllata
 
-Completa una funzione di validation pura per i post.
+<p align="justify">Completa una funzione di validation pura per i post.</p>
 
-La funzione viene corretta deterministicamente senza avviare un server.
+<p align="justify">La funzione viene corretta deterministicamente senza avviare un server.</p>
 
-## C — implementazione autonoma
+### C — implementazione autonoma
 
-Costruisci Feisbuc milestone 5:
+<p align="justify">Costruisci Feisbuc milestone 5:</p>
 
 ```text
 app.js
@@ -1080,52 +1153,58 @@ validator
 memory store
 ```
 
-mantenendo invariato il contratto REST di UDA 23.
+<p align="justify">mantenendo invariato il contratto REST di UDA 23.</p>
 
-## D — debug
+### D — debug
 
-Diagnostica una app Express in cui:
+<p align="justify">Diagnostica una app Express in cui:</p>
 
-- JSON parser è nell'ordine sbagliato;
-- params/query sono confusi;
-- l'error handler non ha la firma corretta;
-- una route modifica dati con metodo improprio;
-- il 404 middleware è posizionato male.
+<ul>
+  <li>JSON parser è nell'ordine sbagliato;</li>
+  <li>params/query sono confusi;</li>
+  <li>l'error handler non ha la firma corretta;</li>
+  <li>una route modifica dati con metodo improprio;</li>
+  <li>il 404 middleware è posizionato male.</li>
+</ul>
 
-## E — mini-progetto futuro
+### E — mini-progetto futuro
 
-Sostituire il memory store con repository SQL senza cambiare il contratto HTTP.
+<p align="justify">Sostituire il memory store con repository SQL senza cambiare il contratto HTTP.</p>
 
-## F — prodotto integrato futuro
+### F — prodotto integrato futuro
 
-Feisbuc con:
+<p align="justify">Feisbuc con:</p>
 
-- API;
-- database;
-- auth;
-- frontend;
-- realtime;
-- test;
-- deployment.
-
----
-
-# 24. Verifica rapida
-
-1. Qual è la differenza fra ECMAScript e Node.js?
-2. Cosa indica `"type": "module"` in `package.json`?
-3. Perché `process.env` è preferibile a una configurazione hard-coded?
-4. Che cosa fa `next()`?
-5. Perché l'ordine dei middleware è importante?
-6. Qual è la differenza fra `req.params`, `req.query` e `req.body`?
-7. Perché validation e route handler non devono essere necessariamente la stessa funzione?
-8. Perché un error middleware Express ha quattro parametri?
-9. Perché non abilitiamo CORS automaticamente?
-10. Perché in questa milestone usiamo un memory store invece del database?
+<ul>
+  <li>API;</li>
+  <li>database;</li>
+  <li>auth;</li>
+  <li>frontend;</li>
+  <li>realtime;</li>
+  <li>test;</li>
+  <li>deployment.</li>
+</ul>
 
 ---
 
-# 25. Sintesi inclusiva
+## 24. Verifica rapida
+
+<ol>
+  <li>Qual è la differenza fra ECMAScript e Node.js?</li>
+  <li>Cosa indica <code>"type": "module"</code> in <code>package.json</code>?</li>
+  <li>Perché <code>process.env</code> è preferibile a una configurazione hard-coded?</li>
+  <li>Che cosa fa <code>next()</code>?</li>
+  <li>Perché l'ordine dei middleware è importante?</li>
+  <li>Qual è la differenza fra <code>req.params</code>, <code>req.query</code> e <code>req.body</code>?</li>
+  <li>Perché validation e route handler non devono essere necessariamente la stessa funzione?</li>
+  <li>Perché un error middleware Express ha quattro parametri?</li>
+  <li>Perché non abilitiamo CORS automaticamente?</li>
+  <li>Perché in questa milestone usiamo un memory store invece del database?</li>
+</ol>
+
+---
+
+## 25. Sintesi inclusiva
 
 ```text
 Node.js
@@ -1156,7 +1235,7 @@ error handler
 = punto comune per error response
 ```
 
-E soprattutto:
+<p align="justify">E soprattutto:</p>
 
 ```text
 Express non inventa HTTP.
@@ -1165,42 +1244,46 @@ Express rende più gestibile implementare HTTP.
 
 ---
 
-# 26. Fonti e approfondimenti
+## 26. Fonti e approfondimenti
 
-Riferimenti tecnici primari:
+<p align="justify">Riferimenti tecnici primari:</p>
 
-- Node.js documentation — runtime, process, modules, HTTP;
-- Express 5.x documentation — application, Router, middleware, error handling;
-- RFC 9110 — semantica HTTP già introdotta in UDA 23.
+<ul>
+  <li>Node.js documentation — runtime, process, modules, HTTP;</li>
+  <li>Express 5.x documentation — application, Router, middleware, error handling;</li>
+  <li>RFC 9110 — semantica HTTP già introdotta in UDA 23.</li>
+</ul>
 
-Teacher-reference legacy auditata:
+<p align="justify">Teacher-reference legacy auditata:</p>
 
-- `kinderp/lab5` — Express/fetch/CORS;
-- `kinderp/lab6` — form POST;
-- `kinderp/lab7` — query/path/body;
-- `kinderp/lab8` — Express + SQLite;
-- `kinderp/lab9` — register/login;
-- `kinderp/lab10` — Express + SQLite + Nunjucks.
+<ul>
+  <li><code>kinderp/lab5</code> — Express/fetch/CORS;</li>
+  <li><code>kinderp/lab6</code> — form POST;</li>
+  <li><code>kinderp/lab7</code> — query/path/body;</li>
+  <li><code>kinderp/lab8</code> — Express + SQLite;</li>
+  <li><code>kinderp/lab9</code> — register/login;</li>
+  <li><code>kinderp/lab10</code> — Express + SQLite + Nunjucks.</li>
+</ul>
 
-Il materiale legacy viene usato come provenance e confronto storico; esempi, architettura e soluzioni canoniche di questo corso sono riscritti.
+<p align="justify">Il materiale legacy viene usato come provenance e confronto storico; esempi, architettura e soluzioni canoniche di questo corso sono riscritti.</p>
 
 ---
 
-# 27. Prossimo passo
+## 27. Prossimo passo
 
-La seconda parte di UDA 24 sostituirà:
+<p align="justify">La seconda parte di UDA 24 sostituirà:</p>
 
 ```text
 MemoryPostStore
 ```
 
-con:
+<p align="justify">con:</p>
 
 ```text
 SQL raw repository
 ```
 
-mantenendo il più possibile invariati:
+<p align="justify">mantenendo il più possibile invariati:</p>
 
 ```text
 client
@@ -1210,4 +1293,4 @@ validation
 error model
 ```
 
-Solo dopo aggiungeremo auth sicura e il breve confronto SSR/template.
+<p align="justify">Solo dopo aggiungeremo auth sicura e il breve confronto SSR/template.</p>

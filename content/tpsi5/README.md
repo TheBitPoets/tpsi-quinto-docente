@@ -8,7 +8,7 @@ Contratto di authoring: `thebitlab.content-pack.v1`, pinned alla revisione Accet
 
 Tutte le dispense del corso seguono lo [standard di formattazione HTML/Markdown](STYLE_GUIDE.md), derivato dal corso `2cornot2c`: titoli Markdown, paragrafi HTML giustificati, immagini centrate, callout con icone semantiche e pannelli `details/summary` per orientamento, checkpoint e laboratori.
 
-Lo standard è obbligatorio per i nuovi contenuti e viene applicato progressivamente alle lezioni esistenti durante la loro revisione.
+Lo standard è applicato alle lezioni 00–18 ed è obbligatorio per i nuovi contenuti. Il rapporto [`TPSI5_LESSON_STRUCTURE_AUDIT.md`](../../doc/TPSI5_LESSON_STRUCTURE_AUDIT.md) documenta criteri, criticità rilevate e interventi di profondità; il controllo automatico del formato è descritto nella guida di stile.
 
 ## Guida trasversale a MDN
 

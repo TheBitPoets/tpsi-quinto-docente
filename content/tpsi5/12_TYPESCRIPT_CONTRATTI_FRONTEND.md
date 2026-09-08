@@ -1,34 +1,73 @@
 # TypeScript mirato: contratti statici nei boundary frontend
 
-Stato didattico: **draft**  
-UDA: **25 — Frontend framework, SPA e realtime**
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#128506; <strong>Orientamento della lezione</strong></summary>
+
+<p align="justify"><strong>Contesto:</strong> dominio, API, route e componenti esistono già. TypeScript viene introdotto ora per rendere verificabili questi confini, non per riscrivere l'intera applicazione o sostituire la validation runtime.</p>
+<p align="justify"><strong>Domande guida:</strong> quali stati impossibili possiamo escludere? Perché un JSON esterno resta <code>unknown</code>? Dove conviene concentrare tipi e narrowing?</p>
+<p align="justify"><strong>Obiettivi osservabili:</strong> modellare DTO e union, restringere valori <code>unknown</code>, mantenere <code>strict</code>, tipizzare props, route meta e adapter API e distinguere compilazione da validazione.</p>
+<p align="justify"><strong>Prossimo passo:</strong> la lezione 13 userà questi boundary per gestire payload ed eventi realtime.</p>
+
+</details>
+</td></tr></table>
+
+<p align="justify">Stato didattico: <strong>draft</strong> UDA: <strong>25 — Frontend framework, SPA e realtime</strong></p>
 
 ## Obiettivi
 
-Al termine del modulo lo studente sa:
+<p align="justify">Al termine del modulo lo studente sa:</p>
 
-- spiegare cosa aggiunge TypeScript a JavaScript e cosa **non** aggiunge;
-- sfruttare l'inferenza prima di introdurre annotazioni manuali;
-- modellare dati applicativi con `type`, `interface`, union e literal type;
-- usare `unknown` e narrowing al posto di `any` nei boundary non affidabili;
-- distinguere tipo statico e validazione runtime;
-- modellare `null`/`undefined` senza nasconderli con assertion arbitrarie;
-- tipizzare `ref`, `computed`, props ed emits in Vue 3;
-- tipizzare una navigation policy e `RouteMeta` di Vue Router;
-- eseguire un type-check separato dalla build Vite;
-- riconoscere quando TypeScript migliora un boundary e quando invece produce solo rumore.
+<ul>
+  <li>spiegare cosa aggiunge TypeScript a JavaScript e cosa <strong>non</strong> aggiunge;</li>
+  <li>sfruttare l'inferenza prima di introdurre annotazioni manuali;</li>
+  <li>modellare dati applicativi con <code>type</code>, <code>interface</code>, union e literal type;</li>
+  <li>usare <code>unknown</code> e narrowing al posto di <code>any</code> nei boundary non affidabili;</li>
+  <li>distinguere tipo statico e validazione runtime;</li>
+  <li>modellare <code>null</code>/<code>undefined</code> senza nasconderli con assertion arbitrarie;</li>
+  <li>tipizzare <code>ref</code>, <code>computed</code>, props ed emits in Vue 3;</li>
+  <li>tipizzare una navigation policy e <code>RouteMeta</code> di Vue Router;</li>
+  <li>eseguire un type-check separato dalla build Vite;</li>
+  <li>riconoscere quando TypeScript migliora un boundary e quando invece produce solo rumore.</li>
+</ul>
 
 ## Prerequisiti
 
-- JavaScript moderno, funzioni, oggetti, moduli e asincronia;
-- `fetch` e contratti HTTP;
-- Vue 3 Composition API e `<script setup>`;
-- Vue Router, route meta e navigation guard;
-- Feisbuc milestone 10 funzionante.
+<ul>
+  <li>JavaScript moderno, funzioni, oggetti, moduli e asincronia;</li>
+  <li><code>fetch</code> e contratti HTTP;</li>
+  <li>Vue 3 Composition API e <code>&lt;script setup&gt;</code>;</li>
+  <li>Vue Router, route meta e navigation guard;</li>
+  <li>Feisbuc milestone 10 funzionante.</li>
+</ul>
+
+## Orientamento nella documentazione
+
+<p align="center">
+  <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
+</p>
+
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Indice incrociato — TypeScript, Vue e validation runtime</strong></summary>
+
+<table align="center">
+<thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
+<tbody>
+<tr><td><a href="#lesson-ts-modeling">Tipi di dominio, literal e union</a></td><td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">TypeScript — Everyday Types</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-ts-narrowing"><code>unknown</code> e narrowing</a></td><td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">TypeScript — Narrowing</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-ts-strict">Nullability e modalità strict</a></td><td><a href="https://www.typescriptlang.org/tsconfig/strict.html">TSConfig — strict</a><br><a href="https://www.typescriptlang.org/tsconfig/strictNullChecks.html">strictNullChecks</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-ts-vue">Boundary Vue e API</a></td><td><a href="https://vuejs.org/guide/typescript/composition-api.html">Vue — TypeScript with Composition API</a></td><td>&#128994; studiare i pattern del corso</td></tr>
+<tr><td>Generics avanzati, conditional type e type-level programming</td><td><a href="https://www.typescriptlang.org/docs/handbook/2/types-from-types.html">Creating Types from Types</a></td><td>&#128993; riconoscere, fuori dal core</td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
 
 ## Problema iniziale
 
-La milestone 10 funziona, ma molti contratti esistono solo nella nostra testa:
+<p align="justify">La milestone 10 funziona, ma molti contratti esistono solo nella nostra testa:</p>
 
 ```js
 async function createPost(text) { ... }
@@ -38,47 +77,52 @@ function toggleLike(id) { ... }
 const userState = ref(null)
 ```
 
-Domande che JavaScript da solo non può verificare prima dell'esecuzione:
+<p align="justify">Domande che JavaScript da solo non può verificare prima dell'esecuzione:</p>
 
-- `id` è una stringa o un numero?
-- `userState` può contenere qualunque oggetto?
-- `liked` è davvero boolean?
-- una navigation decision può avere contemporaneamente `action: "allow"` e `name: "login"`?
-- un componente può emettere `delete` con un oggetto invece che con un id?
+<ul>
+  <li><code>id</code> è una stringa o un numero?</li>
+  <li><code>userState</code> può contenere qualunque oggetto?</li>
+  <li><code>liked</code> è davvero boolean?</li>
+  <li>una navigation decision può avere contemporaneamente <code>action: "allow"</code> e <code>name: "login"</code>?</li>
+  <li>un componente può emettere <code>delete</code> con un oggetto invece che con un id?</li>
+</ul>
 
-TypeScript nasce per rendere molti di questi contratti controllabili **prima** del runtime.
+<p align="justify">TypeScript nasce per rendere molti di questi contratti controllabili <strong>prima</strong> del runtime.</p>
 
 ---
 
 ## 1. TypeScript non sostituisce JavaScript
 
-TypeScript è JavaScript con un sistema di tipi statici sovrapposto.
+<p align="justify">TypeScript è JavaScript con un sistema di tipi statici sovrapposto.</p>
 
 ```ts
 const title = "Feisbuc"
 const count = 3
 ```
 
-Non serve scrivere:
+<p align="justify">Non serve scrivere:</p>
 
 ```ts
 const title: string = "Feisbuc"
 const count: number = 3
 ```
 
-se il compilatore può già inferire i tipi.
+<p align="justify">se il compilatore può già inferire i tipi.</p>
 
 ### Regola del corso
 
-> annota quando l'annotazione chiarisce un contratto o impedisce un errore; lascia inferire quando il tipo è già evidente.
+<blockquote>
+<p align="justify">annota quando l'annotazione chiarisce un contratto o impedisce un errore; lascia inferire quando il tipo è già evidente.</p>
+</blockquote>
 
-Questo evita il falso obiettivo di “mettere un tipo su ogni variabile”.
+<p align="justify">Questo evita il falso obiettivo di “mettere un tipo su ogni variabile”.</p>
 
 ---
 
+<a id="lesson-ts-modeling"></a>
 ## 2. Tipi di dominio
 
-Feisbuc ha ormai concetti stabili. Possiamo renderli espliciti:
+<p align="justify">Feisbuc ha ormai concetti stabili. Possiamo renderli espliciti:</p>
 
 ```ts
 export interface User {
@@ -97,22 +141,24 @@ export interface Post {
 }
 ```
 
-Un tipo di dominio non è un DTO casuale: descrive un concetto che attraversa più componenti.
+<p align="justify">Un tipo di dominio non è un DTO casuale: descrive un concetto che attraversa più componenti.</p>
 
 ### `type` oppure `interface`?
 
-Per questo corso:
+<p align="justify">Per questo corso:</p>
 
-- `interface` per shape di oggetti di dominio estendibili;
-- `type` per union, literal e composizioni.
+<ul>
+  <li><code>interface</code> per shape di oggetti di dominio estendibili;</li>
+  <li><code>type</code> per union, literal e composizioni.</li>
+</ul>
 
-Non trasformiamo questa distinzione in dogma: entrambi gli strumenti hanno aree sovrapposte.
+<p align="justify">Non trasformiamo questa distinzione in dogma: entrambi gli strumenti hanno aree sovrapposte.</p>
 
 ---
 
 ## 3. Literal type e union
 
-La sessione della milestone 10 aveva già tre stati reali:
+<p align="justify">La sessione della milestone 10 aveva già tre stati reali:</p>
 
 ```text
 unknown
@@ -120,31 +166,31 @@ anonymous
 authenticated
 ```
 
-In TypeScript possiamo impedire stati inventati:
+<p align="justify">In TypeScript possiamo impedire stati inventati:</p>
 
 ```ts
 export type AuthStatus = "unknown" | "anonymous" | "authenticated"
 ```
 
-Quindi:
+<p align="justify">Quindi:</p>
 
 ```ts
 const status = ref<AuthStatus>("unknown")
 ```
 
-rifiuta:
+<p align="justify">rifiuta:</p>
 
 ```ts
 status.value = "logged"
 ```
 
-Il vantaggio non è scrivere più codice: è ridurre lo spazio degli stati possibili.
+<p align="justify">Il vantaggio non è scrivere più codice: è ridurre lo spazio degli stati possibili.</p>
 
 ---
 
 ## 4. Discriminated union: modellare decisioni impossibili da confondere
 
-La navigation policy restituisce decisioni differenti:
+<p align="justify">La navigation policy restituisce decisioni differenti:</p>
 
 ```ts
 export type NavigationDecision =
@@ -153,7 +199,7 @@ export type NavigationDecision =
   | { action: "redirect"; name: RouteName; redirect?: string }
 ```
 
-La proprietà `action` discrimina i casi.
+<p align="justify">La proprietà <code>action</code> discrimina i casi.</p>
 
 ```ts
 if (decision.action === "redirect") {
@@ -161,11 +207,11 @@ if (decision.action === "redirect") {
 }
 ```
 
-Dentro quel ramo TypeScript sa che `name` esiste.
+<p align="justify">Dentro quel ramo TypeScript sa che <code>name</code> esiste.</p>
 
-Fuori da quel ramo non possiamo usare `decision.name` senza verificare il caso.
+<p align="justify">Fuori da quel ramo non possiamo usare <code>decision.name</code> senza verificare il caso.</p>
 
-Questo è più forte di un oggetto generico come:
+<p align="justify">Questo è più forte di un oggetto generico come:</p>
 
 ```ts
 {
@@ -175,10 +221,11 @@ Questo è più forte di un oggetto generico come:
 }
 ```
 
-perché quest'ultimo permette combinazioni prive di significato.
+<p align="justify">perché quest'ultimo permette combinazioni prive di significato.</p>
 
 ---
 
+<a id="lesson-ts-narrowing"></a>
 ## 5. `unknown` non è `any`
 
 ### `any`
@@ -189,7 +236,7 @@ function parsePayload(payload: any) {
 }
 ```
 
-`any` disattiva gran parte del controllo statico.
+<p align="justify"><code>any</code> disattiva gran parte del controllo statico.</p>
 
 ### `unknown`
 
@@ -199,7 +246,7 @@ function parsePayload(payload: unknown) {
 }
 ```
 
-Per usarlo dobbiamo restringere il tipo.
+<p align="justify">Per usarlo dobbiamo restringere il tipo.</p>
 
 ```ts
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -207,37 +254,41 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 ```
 
-Ora possiamo costruire controlli espliciti.
+<p align="justify">Ora possiamo costruire controlli espliciti.</p>
 
 ### Regola del boundary
 
-> dato esterno non verificato → `unknown`; dopo narrowing/validation → tipo di dominio.
+<blockquote>
+<p align="justify">dato esterno non verificato → <code>unknown</code>; dopo narrowing/validation → tipo di dominio.</p>
+</blockquote>
 
-Questo principio vale per:
+<p align="justify">Questo principio vale per:</p>
 
-- JSON HTTP;
-- `localStorage` quando usato per dati non sensibili;
-- input utente;
-- messaggi WebSocket che introdurremo dopo;
-- dati provenienti da API di terze parti.
+<ul>
+  <li>JSON HTTP;</li>
+  <li><code>localStorage</code> quando usato per dati non sensibili;</li>
+  <li>input utente;</li>
+  <li>messaggi WebSocket che introdurremo dopo;</li>
+  <li>dati provenienti da API di terze parti.</li>
+</ul>
 
 ---
 
 ## 6. TypeScript non valida il JSON a runtime
 
-Questo codice è staticamente comodo ma non rende vera la risposta:
+<p align="justify">Questo codice è staticamente comodo ma non rende vera la risposta:</p>
 
 ```ts
 const payload = await response.json() as Post
 ```
 
-Se il server invia:
+<p align="justify">Se il server invia:</p>
 
 ```json
 {"id": 42, "liked": "yes"}
 ```
 
-l'assertion `as Post` non modifica il dato.
+<p align="justify">l'assertion <code>as Post</code> non modifica il dato.</p>
 
 ### Due livelli diversi
 
@@ -249,13 +300,13 @@ runtime validation
   controlla il dato arrivato davvero
 ```
 
-Nel corso iniziamo con parser/guard piccoli e leggibili; librerie di schema potranno essere confrontate più avanti, ma non vengono introdotte qui per nascondere il concetto.
+<p align="justify">Nel corso iniziamo con parser/guard piccoli e leggibili; librerie di schema potranno essere confrontate più avanti, ma non vengono introdotte qui per nascondere il concetto.</p>
 
 ---
 
 ## 7. Narrowing di un Post
 
-Esempio volutamente esplicito:
+<p align="justify">Esempio volutamente esplicito:</p>
 
 ```ts
 function isPost(value: unknown): value is Post {
@@ -272,7 +323,7 @@ function isPost(value: unknown): value is Post {
 }
 ```
 
-Poi:
+<p align="justify">Poi:</p>
 
 ```ts
 function parsePost(value: unknown): Post {
@@ -281,25 +332,25 @@ function parsePost(value: unknown): Post {
 }
 ```
 
-Non useremo parser manuali giganteschi per sempre. Qui servono a rendere visibile il boundary.
+<p align="justify">Non useremo parser manuali giganteschi per sempre. Qui servono a rendere visibile il boundary.</p>
 
 ---
 
 ## 8. Nullability
 
-Con `strictNullChecks`, `User` e `User | null` non sono la stessa cosa.
+<p align="justify">Con <code>strictNullChecks</code>, <code>User</code> e <code>User | null</code> non sono la stessa cosa.</p>
 
 ```ts
 const user = ref<User | null>(null)
 ```
 
-Questo impedisce:
+<p align="justify">Questo impedisce:</p>
 
 ```ts
 user.value.displayName
 ```
 
-finché non dimostriamo che `user.value` esiste.
+<p align="justify">finché non dimostriamo che <code>user.value</code> esiste.</p>
 
 ```ts
 if (user.value) {
@@ -313,13 +364,14 @@ if (user.value) {
 user.value!.displayName
 ```
 
-significa: “so più del compilatore”. È legittimo solo quando abbiamo una prova che TypeScript non può vedere; non è uno strumento per silenziare errori scomodi.
+<p align="justify">significa: “so più del compilatore”. È legittimo solo quando abbiamo una prova che TypeScript non può vedere; non è uno strumento per silenziare errori scomodi.</p>
 
 ---
 
+<a id="lesson-ts-strict"></a>
 ## 9. `strict` come baseline
 
-Il corso usa una configurazione intenzionalmente severa:
+<p align="justify">Il corso usa una configurazione intenzionalmente severa:</p>
 
 ```json
 {
@@ -331,31 +383,31 @@ Il corso usa una configurazione intenzionalmente severa:
 }
 ```
 
-`strict` abilita i principali controlli rigorosi; `noUncheckedIndexedAccess` ricorda che un accesso tramite indice può non trovare nulla; `exactOptionalPropertyTypes` distingue meglio proprietà assenti e proprietà presenti con valore `undefined`.
+<p align="justify"><code>strict</code> abilita i principali controlli rigorosi; <code>noUncheckedIndexedAccess</code> ricorda che un accesso tramite indice può non trovare nulla; <code>exactOptionalPropertyTypes</code> distingue meglio proprietà assenti e proprietà presenti con valore <code>undefined</code>.</p>
 
-Non disabilitiamo `strict` per far passare il codice: correggiamo il modello.
+<p align="justify">Non disabilitiamo <code>strict</code> per far passare il codice: correggiamo il modello.</p>
 
 ---
 
 ## 10. Type-only imports
 
-Quando importiamo solo un tipo:
+<p align="justify">Quando importiamo solo un tipo:</p>
 
 ```ts
 import type { Post, User } from "./domain"
 ```
 
-comunichiamo che quell'import non deve produrre una dipendenza runtime.
+<p align="justify">comunichiamo che quell'import non deve produrre una dipendenza runtime.</p>
 
-È particolarmente utile con una toolchain ESM/Vite.
+<p align="justify">È particolarmente utile con una toolchain ESM/Vite.</p>
 
 ---
 
 ## 11. Vite transpila; `vue-tsc` controlla
 
-Vite sa trasformare `.ts`, ma la build Vite non garantisce da sola che il progetto sia type-safe.
+<p align="justify">Vite sa trasformare <code>.ts</code>, ma la build Vite non garantisce da sola che il progetto sia type-safe.</p>
 
-Perciò separiamo:
+<p align="justify">Perciò separiamo:</p>
 
 ```json
 {
@@ -366,19 +418,19 @@ Perciò separiamo:
 }
 ```
 
-Il comando didatticamente importante è:
+<p align="justify">Il comando didatticamente importante è:</p>
 
 ```bash
 npm run type-check
 ```
 
-`--noEmit` significa: verifica i tipi senza generare JavaScript.
+<p align="justify"><code>--noEmit</code> significa: verifica i tipi senza generare JavaScript.</p>
 
 ---
 
 ## 12. Versione del corso
 
-Baseline riproducibile di questa unità:
+<p align="justify">Baseline riproducibile di questa unità:</p>
 
 ```text
 Vue             3.5.40
@@ -390,10 +442,11 @@ vue-tsc          3.3.8
 Node            >=22.18
 ```
 
-TypeScript 7 è già disponibile nel 2026, ma il tooling Vue CLI di type-check ha avuto incompatibilità documentate con la nuova implementazione. Il corso non insegue una versione solo perché più nuova: privilegia una combinazione verificata e aggiornerà il pin quando il boundary `vue-tsc`/TS7 sarà stabile.
+<p align="justify">TypeScript 7 è già disponibile nel 2026, ma il tooling Vue CLI di type-check ha avuto incompatibilità documentate con la nuova implementazione. Il corso non insegue una versione solo perché più nuova: privilegia una combinazione verificata e aggiornerà il pin quando il boundary <code>vue-tsc</code>/TS7 sarà stabile.</p>
 
 ---
 
+<a id="lesson-ts-vue"></a>
 ## 13. Vue: `<script setup lang="ts">`
 
 ```vue
@@ -412,7 +465,7 @@ const emit = defineEmits<{
 </script>
 ```
 
-Ora questi errori sono osservabili prima del browser:
+<p align="justify">Ora questi errori sono osservabili prima del browser:</p>
 
 ```ts
 emit("delete", 42)
@@ -423,27 +476,27 @@ emit("toggle")
 
 ## 14. `ref` e `computed`
 
-Vue inferisce molti tipi:
+<p align="justify">Vue inferisce molti tipi:</p>
 
 ```ts
 const loading = ref(false)
 const count = computed(() => posts.value.length)
 ```
 
-Annotiamo quando lo stato iniziale non basta:
+<p align="justify">Annotiamo quando lo stato iniziale non basta:</p>
 
 ```ts
 const posts = ref<Post[]>([])
 const user = ref<User | null>(null)
 ```
 
-Non scriviamo il tipo esplicito quando l'inferenza è già esatta.
+<p align="justify">Non scriviamo il tipo esplicito quando l'inferenza è già esatta.</p>
 
 ---
 
 ## 15. Event handler DOM
 
-Con `strict`, un parametro evento non tipizzato può diventare `any` implicito.
+<p align="justify">Con <code>strict</code>, un parametro evento non tipizzato può diventare <code>any</code> implicito.</p>
 
 ```ts
 function onInput(event: Event) {
@@ -452,7 +505,7 @@ function onInput(event: Event) {
 }
 ```
 
-Anche qui l'assertion è locale e motivata dal DOM element che ha generato l'evento.
+<p align="justify">Anche qui l'assertion è locale e motivata dal DOM element che ha generato l'evento.</p>
 
 ---
 
@@ -469,7 +522,7 @@ export interface NavigationInput {
 }
 ```
 
-La policy diventa:
+<p align="justify">La policy diventa:</p>
 
 ```ts
 export function decideNavigation(input: NavigationInput): NavigationDecision {
@@ -477,13 +530,13 @@ export function decideNavigation(input: NavigationInput): NavigationDecision {
 }
 ```
 
-Il comportamento non cambia; cambia la capacità di verificare il contratto.
+<p align="justify">Il comportamento non cambia; cambia la capacità di verificare il contratto.</p>
 
 ---
 
 ## 17. Route meta tipizzata
 
-Vue Router permette di estendere `RouteMeta`:
+<p align="justify">Vue Router permette di estendere <code>RouteMeta</code>:</p>
 
 ```ts
 import "vue-router"
@@ -495,21 +548,21 @@ declare module "vue-router" {
 }
 ```
 
-Questo impedisce typo silenziosi come:
+<p align="justify">Questo impedisce typo silenziosi come:</p>
 
 ```ts
 meta: { requireAuth: true }
 ```
 
-che avevamo già usato intenzionalmente come bug nella Activity D del routing.
+<p align="justify">che avevamo già usato intenzionalmente come bug nella Activity D del routing.</p>
 
-TypeScript qui chiude un cerchio didattico: un bug già osservato a runtime diventa un errore statico.
+<p align="justify">TypeScript qui chiude un cerchio didattico: un bug già osservato a runtime diventa un errore statico.</p>
 
 ---
 
 ## 18. API adapter: contratto e runtime check
 
-Il boundary HTTP è uno dei punti dove TypeScript vale di più.
+<p align="justify">Il boundary HTTP è uno dei punti dove TypeScript vale di più.</p>
 
 ```ts
 async function requestJson(path: string, init?: RequestInit): Promise<unknown> {
@@ -520,7 +573,7 @@ async function requestJson(path: string, init?: RequestInit): Promise<unknown> {
 }
 ```
 
-Poi:
+<p align="justify">Poi:</p>
 
 ```ts
 async function listPosts(): Promise<Post[]> {
@@ -529,16 +582,18 @@ async function listPosts(): Promise<Post[]> {
 }
 ```
 
-Il codice comunica due cose:
+<p align="justify">Il codice comunica due cose:</p>
 
-1. la rete è un boundary non affidabile;
-2. dopo il parser abbiamo un `Post[]` affidabile per il resto dell'app.
+<ol>
+  <li>la rete è un boundary non affidabile;</li>
+  <li>dopo il parser abbiamo un <code>Post[]</code> affidabile per il resto dell'app.</li>
+</ol>
 
 ---
 
 ## 19. Errore frequente: duplicare i tipi
 
-Non vogliamo:
+<p align="justify">Non vogliamo:</p>
 
 ```text
 FeedView/Post
@@ -548,15 +603,15 @@ session/User
 router/User
 ```
 
-Vogliamo una piccola sorgente comune:
+<p align="justify">Vogliamo una piccola sorgente comune:</p>
 
 ```text
 src/domain.ts
 ```
 
-che rappresenta il linguaggio del frontend.
+<p align="justify">che rappresenta il linguaggio del frontend.</p>
 
-Quando il progetto crescerà, potremo separare domain, transport e UI model. Non anticipiamo cartelle senza un problema reale.
+<p align="justify">Quando il progetto crescerà, potremo separare domain, transport e UI model. Non anticipiamo cartelle senza un problema reale.</p>
 
 ---
 
@@ -566,9 +621,9 @@ Quando il progetto crescerà, potremo separare domain, transport e UI model. Non
 const payload: any = await response.json()
 ```
 
-fa sparire gli errori ma anche la protezione.
+<p align="justify">fa sparire gli errori ma anche la protezione.</p>
 
-Nel core TPSI5:
+<p align="justify">Nel core TPSI5:</p>
 
 ```text
 any      -> eccezione da giustificare
@@ -579,43 +634,47 @@ unknown  -> default per boundary non tipizzato
 
 ## 21. Errore frequente: TypeScript come validatore server
 
-Tipizzare:
+<p align="justify">Tipizzare:</p>
 
 ```ts
 interface CreatePostInput { text: string }
 ```
 
-nel frontend **non autorizza** il backend a fidarsi del client.
+<p align="justify">nel frontend <strong>non autorizza</strong> il backend a fidarsi del client.</p>
 
-Express deve continuare a:
+<p align="justify">Express deve continuare a:</p>
 
-- validare body;
-- derivare l'identità dalla sessione;
-- applicare ownership;
-- produrre 400/401/403 quando necessario.
+<ul>
+  <li>validare body;</li>
+  <li>derivare l'identità dalla sessione;</li>
+  <li>applicare ownership;</li>
+  <li>produrre 400/401/403 quando necessario.</li>
+</ul>
 
-I tipi frontend migliorano il client; non spostano il trust boundary.
+<p align="justify">I tipi frontend migliorano il client; non spostano il trust boundary.</p>
 
 ---
 
 ## 22. Errore frequente: type gymnastics premature
 
-Fuori dal core di questa unità:
+<p align="justify">Fuori dal core di questa unità:</p>
 
-- conditional types complessi;
-- mapped types avanzati;
-- template literal types sofisticati;
-- decorators;
-- utility type annidati difficili da leggere;
-- generic framework abstractions costruite prima del bisogno.
+<ul>
+  <li>conditional types complessi;</li>
+  <li>mapped types avanzati;</li>
+  <li>template literal types sofisticati;</li>
+  <li>decorators;</li>
+  <li>utility type annidati difficili da leggere;</li>
+  <li>generic framework abstractions costruite prima del bisogno.</li>
+</ul>
 
-Questi argomenti possono entrare nel percorso senior, non nella verticale minima del quinto anno.
+<p align="justify">Questi argomenti possono entrare nel percorso senior, non nella verticale minima del quinto anno.</p>
 
 ---
 
 ## 23. Feisbuc milestone 11
 
-La nuova milestone non riscrive il sistema:
+<p align="justify">La nuova milestone non riscrive il sistema:</p>
 
 ```text
 milestone 10
@@ -625,7 +684,7 @@ milestone 11
 boundary TypeScript
 ```
 
-Restano invariati:
+<p align="justify">Restano invariati:</p>
 
 ```text
 HTTP contract
@@ -635,7 +694,7 @@ authorization
 SQLite
 ```
 
-Cambiano soprattutto:
+<p align="justify">Cambiano soprattutto:</p>
 
 ```text
 src/domain.ts
@@ -679,20 +738,22 @@ const posts = ref<Post[]>([])
 async function createPost(text: string): Promise<Post> { ... }
 ```
 
-Il secondo non è “migliore” perché ha più simboli. È migliore se quel contratto aiuta IDE, refactoring, review e prevenzione degli errori.
+<p align="justify">Il secondo non è “migliore” perché ha più simboli. È migliore se quel contratto aiuta IDE, refactoring, review e prevenzione degli errori.</p>
 
 ---
 
 ## 25. Errori frequenti
 
-1. annotare ogni costante invece di usare inference;
-2. usare `any` per silenziare il compilatore;
-3. usare `as` per fingere validato un JSON esterno;
-4. usare `!` per eliminare nullability senza prova;
-5. credere che `vite build` equivalga a type-check;
-6. duplicare `Post` e `User` in più componenti;
-7. tipizzare il client e rimuovere validation/autorizzazione dal server;
-8. introdurre tipi avanzati prima di aver stabilizzato i boundary.
+<ol>
+  <li>annotare ogni costante invece di usare inference;</li>
+  <li>usare <code>any</code> per silenziare il compilatore;</li>
+  <li>usare <code>as</code> per fingere validato un JSON esterno;</li>
+  <li>usare <code>!</code> per eliminare nullability senza prova;</li>
+  <li>credere che <code>vite build</code> equivalga a type-check;</li>
+  <li>duplicare <code>Post</code> e <code>User</code> in più componenti;</li>
+  <li>tipizzare il client e rimuovere validation/autorizzazione dal server;</li>
+  <li>introdurre tipi avanzati prima di aver stabilizzato i boundary.</li>
+</ol>
 
 ---
 
@@ -700,58 +761,62 @@ Il secondo non è “migliore” perché ha più simboli. È migliore se quel co
 
 ### A — osservazione
 
-Esegui il microscope TypeScript e osserva errori intercettati da inference, union, nullability e `unknown`.
+<p align="justify">Esegui il microscope TypeScript e osserva errori intercettati da inference, union, nullability e <code>unknown</code>.</p>
 
 ### B — modifica controllata
 
-Tipizza la navigation policy già nota usando discriminated union e route-name literal.
+<p align="justify">Tipizza la navigation policy già nota usando discriminated union e route-name literal.</p>
 
 ### C — scrittura autonoma
 
-Applica il boundary typing alla milestone 10 di Feisbuc e ottieni milestone 11.
+<p align="justify">Applica il boundary typing alla milestone 10 di Feisbuc e ottieni milestone 11.</p>
 
 ### D — debugging
 
-Diagnostica `any`, assertion unsafe, nullability nascosta e contratto emit errato prima di correggere il progetto.
+<p align="justify">Diagnostica <code>any</code>, assertion unsafe, nullability nascosta e contratto emit errato prima di correggere il progetto.</p>
 
 ### E — mini-project
 
-Aggiungi una view profilo tipizzata partendo da un endpoint documentato, mantenendo `unknown` sul boundary rete.
+<p align="justify">Aggiungi una view profilo tipizzata partendo da un endpoint documentato, mantenendo <code>unknown</code> sul boundary rete.</p>
 
 ### F — prodotto integrato
 
-Nel capstone, documenta quali boundary meritano tipi condivisi, quali richiedono runtime validation e quali restano semplici tipi locali.
+<p align="justify">Nel capstone, documenta quali boundary meritano tipi condivisi, quali richiedono runtime validation e quali restano semplici tipi locali.</p>
 
 ---
 
 ## 27. Laboratorio
 
-Definition of done della milestone 11:
+<p align="justify">Definition of done della milestone 11:</p>
 
-- `npm run type-check` verde;
-- `npm run build` verde;
-- `strict: true` non disabilitato;
-- nessun `any` nei file core della milestone;
-- `Post`, `User` e `AuthStatus` centralizzati;
-- navigation decision modellata come discriminated union;
-- `RouteMeta.requiresAuth` tipizzato;
-- props/emits principali tipizzati;
-- JSON API trattato come `unknown` prima del parser;
-- nessun cambiamento a security/ownership server-side;
-- deep-link `/vue/feed` ancora funzionante.
+<ul>
+  <li><code>npm run type-check</code> verde;</li>
+  <li><code>npm run build</code> verde;</li>
+  <li><code>strict: true</code> non disabilitato;</li>
+  <li>nessun <code>any</code> nei file core della milestone;</li>
+  <li><code>Post</code>, <code>User</code> e <code>AuthStatus</code> centralizzati;</li>
+  <li>navigation decision modellata come discriminated union;</li>
+  <li><code>RouteMeta.requiresAuth</code> tipizzato;</li>
+  <li>props/emits principali tipizzati;</li>
+  <li>JSON API trattato come <code>unknown</code> prima del parser;</li>
+  <li>nessun cambiamento a security/ownership server-side;</li>
+  <li>deep-link <code>/vue/feed</code> ancora funzionante.</li>
+</ul>
 
 ---
 
 ## 28. Verifica rapida
 
-1. Perché `as Post` non valida una risposta HTTP?
-2. Quando usare `unknown` invece di `any`?
-3. Che vantaggio offre una discriminated union per la navigation policy?
-4. Perché `User | null` è più corretto di `User` per una sessione non ancora nota?
-5. Perché Vite build e type-check sono due gate separati?
-6. Che cosa impedisce la tipizzazione di `RouteMeta`?
-7. TypeScript può sostituire la validation Express? Perché?
-8. Quando un'annotazione esplicita è rumore?
+<ol>
+  <li>Perché <code>as Post</code> non valida una risposta HTTP?</li>
+  <li>Quando usare <code>unknown</code> invece di <code>any</code>?</li>
+  <li>Che vantaggio offre una discriminated union per la navigation policy?</li>
+  <li>Perché <code>User | null</code> è più corretto di <code>User</code> per una sessione non ancora nota?</li>
+  <li>Perché Vite build e type-check sono due gate separati?</li>
+  <li>Che cosa impedisce la tipizzazione di <code>RouteMeta</code>?</li>
+  <li>TypeScript può sostituire la validation Express? Perché?</li>
+  <li>Quando un'annotazione esplicita è rumore?</li>
+</ol>
 
 ---
 
@@ -784,20 +849,24 @@ TypeScript NON sostituisce il backend
 
 ## 30. Fonti e collegamenti
 
-Riferimenti tecnici primari:
+<p align="justify">Riferimenti tecnici primari:</p>
 
-- TypeScript Handbook e compiler options;
-- Vue — Using Vue with TypeScript;
-- Vue — TypeScript with Composition API;
-- Vue Router — typed routes e RouteMeta;
-- Vite — TypeScript / transpile-only;
-- Vue Language Tools — `vue-tsc`.
+<ul>
+  <li>TypeScript Handbook e compiler options;</li>
+  <li>Vue — Using Vue with TypeScript;</li>
+  <li>Vue — TypeScript with Composition API;</li>
+  <li>Vue Router — typed routes e RouteMeta;</li>
+  <li>Vite — TypeScript / transpile-only;</li>
+  <li>Vue Language Tools — <code>vue-tsc</code>.</li>
+</ul>
 
-Collegamenti interni:
+<p align="justify">Collegamenti interni:</p>
 
-- `10_VUE3_COMPONENTI_REATTIVITA.md`;
-- `11_VUE_ROUTER_NAVIGAZIONE_SPA.md`;
-- Activity A `tpsi5-activity-a-typescript-contract-microscope-001`;
-- Activity B `tpsi5-activity-b-typescript-navigation-policy-001`;
-- Activity C `tpsi5-activity-c-feisbuc-typescript-boundaries-001`;
-- Activity D `tpsi5-activity-d-debug-typescript-boundaries-001`.
+<ul>
+  <li><code>10_VUE3_COMPONENTI_REATTIVITA.md</code>;</li>
+  <li><code>11_VUE_ROUTER_NAVIGAZIONE_SPA.md</code>;</li>
+  <li>Activity A <code>tpsi5-activity-a-typescript-contract-microscope-001</code>;</li>
+  <li>Activity B <code>tpsi5-activity-b-typescript-navigation-policy-001</code>;</li>
+  <li>Activity C <code>tpsi5-activity-c-feisbuc-typescript-boundaries-001</code>;</li>
+  <li>Activity D <code>tpsi5-activity-d-debug-typescript-boundaries-001</code>.</li>
+</ul>

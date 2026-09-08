@@ -1,30 +1,50 @@
 # HTTP, asincronia, Fetch e REST
 
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#128506; <strong>Orientamento della lezione</strong></summary>
+
+<p align="justify"><strong>Contesto:</strong> il Feisbuc dinamico conserva ancora lo stato in un solo browser. Per condividerlo dobbiamo comprendere il contratto request/response prima dei framework che lo rendono più comodo da programmare.</p>
+<p align="justify"><strong>Domande guida:</strong> quali informazioni viaggiano in request e response? Come esprimono intento e risultato metodi e status? Perché <code>fetch()</code> non tratta automaticamente uno status 4xx/5xx come errore di rete?</p>
+<p align="justify"><strong>Obiettivi osservabili:</strong> leggere uno scambio HTTP nei DevTools, progettare endpoint orientati a risorse, usare Promise e <code>async</code>/<code>await</code> e gestire correttamente una <code>Response</code>.</p>
+<p align="justify"><strong>Prossimo passo:</strong> la lezione 06 aprirà il server e implementerà lo stesso contratto con Node.js ed Express 5.</p>
+
+</details>
+</td></tr></table>
+
 ## Obiettivi
 
-Al termine del modulo lo studente deve saper:
+<p align="justify">Al termine del modulo lo studente deve saper:</p>
 
-- leggere una richiesta e una risposta HTTP distinguendo metodo, target, header, content e status;
-- spiegare che HTTP definisce semantica request/response indipendentemente dal framework server;
-- scegliere metodi e status code coerenti con l'intento dell'operazione;
-- distinguere path, query string, header e body;
-- interpretare `Content-Type` e JSON come rappresentazione, non come sinonimi di HTTP;
-- spiegare statelessness, safe/idempotent in modo operativo;
-- leggere una chiamata asincrona come `Promise` e riscriverla con `async`/`await`;
-- usare `fetch()` senza confondere errore HTTP con errore di rete;
-- controllare `response.ok`, status e content type prima di interpretare la risposta;
-- progettare una piccola API REST orientata a risorse;
-- usare DevTools Network e `curl` per osservare il protocollo;
-- distinguere same-origin e cross-origin e spiegare il ruolo di CORS;
-- trasformare Feisbuc da applicazione con `localStorage` a client di una API HTTP.
+<ul>
+  <li>leggere una richiesta e una risposta HTTP distinguendo metodo, target, header, content e status;</li>
+  <li>spiegare che HTTP definisce semantica request/response indipendentemente dal framework server;</li>
+  <li>scegliere metodi e status code coerenti con l'intento dell'operazione;</li>
+  <li>distinguere path, query string, header e body;</li>
+  <li>interpretare <code>Content-Type</code> e JSON come rappresentazione, non come sinonimi di HTTP;</li>
+  <li>spiegare statelessness, safe/idempotent in modo operativo;</li>
+  <li>leggere una chiamata asincrona come <code>Promise</code> e riscriverla con <code>async</code>/<code>await</code>;</li>
+  <li>usare <code>fetch()</code> senza confondere errore HTTP con errore di rete;</li>
+  <li>controllare <code>response.ok</code>, status e content type prima di interpretare la risposta;</li>
+  <li>progettare una piccola API REST orientata a risorse;</li>
+  <li>usare DevTools Network e <code>curl</code> per osservare il protocollo;</li>
+  <li>distinguere same-origin e cross-origin e spiegare il ruolo di CORS;</li>
+  <li>trasformare Feisbuc da applicazione con <code>localStorage</code> a client di una API HTTP.</li>
+</ul>
 
 ## Prerequisiti
 
-- UDA 21: HTML, CSS, Bootstrap;
-- UDA 22: JavaScript, moduli ES, DOM, eventi, stato e `localStorage`;
-- concetto generale di client e server.
+<ul>
+  <li>UDA 21: HTML, CSS, Bootstrap;</li>
+  <li>UDA 22: JavaScript, moduli ES, DOM, eventi, stato e <code>localStorage</code>;</li>
+  <li>concetto generale di client e server.</li>
+</ul>
 
-## MDN in questa lezione
+## Orientamento nella documentazione
+
+<p align="center">
+  <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
+</p>
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — HTTP e Fetch:</strong> usa la <a href="GUIDA_USO_MDN.md#mdn-guide-http">checklist per le reference HTTP</a> e la <a href="GUIDA_USO_MDN.md#mdn-guide-js-api">checklist per le Web API</a>. Qui MDN serve a collegare ciò che osservi nel pannello Network con il contratto usato da JavaScript.</p>
@@ -36,9 +56,27 @@ Al termine del modulo lo studente deve saper:
 <p align="justify"><strong>Prodotto atteso:</strong> scegli una richiesta del Feisbuc, annota metodo, URL, header, body, status e rappresentazione; collega ogni campo alla sezione MDN che ne chiarisce il significato.</p>
 </td></tr></table>
 
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Indice incrociato — HTTP, Fetch e REST ↔ fonti ufficiali</strong></summary>
+
+<table align="center">
+<thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
+<tbody>
+<tr><td><a href="#lesson-http-messages">Request, response e messaggi</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview">MDN — Overview of HTTP</a><br><a href="https://www.rfc-editor.org/rfc/rfc9110">RFC 9110</a></td><td>&#128994; MDN ora; RFC come riferimento</td></tr>
+<tr><td><a href="#lesson-http-semantics">Metodi, status e rappresentazioni</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods">HTTP methods</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">HTTP status codes</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-fetch-api">Promise, Fetch e Response</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">Using the Fetch API</a><br><a href="https://fetch.spec.whatwg.org/">Fetch Standard</a></td><td>&#128994; MDN ora; standard per precisione</td></tr>
+<tr><td><a href="#lesson-rest-resources">Risorse e REST API</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Glossary/REST">MDN — REST</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td>Streaming, service worker e cache avanzata</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a></td><td>&#128993; riconoscere o studiare più avanti</td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
+
 ## Problema iniziale
 
-Nella milestone precedente Feisbuc conserva i post nel browser:
+<p align="justify">Nella milestone precedente Feisbuc conserva i post nel browser:</p>
 
 ```text
 browser
@@ -48,11 +86,11 @@ browser
    +-- localStorage
 ```
 
-Funziona, ma solo su quel browser.
+<p align="justify">Funziona, ma solo su quel browser.</p>
 
-Se apriamo Feisbuc da un altro computer non vediamo gli stessi dati.
+<p align="justify">Se apriamo Feisbuc da un altro computer non vediamo gli stessi dati.</p>
 
-Per condividere lo stato serve un altro componente:
+<p align="justify">Per condividere lo stato serve un altro componente:</p>
 
 ```text
 browser                         server
@@ -62,21 +100,24 @@ browser                         server
    | <------ risposta HTTP ------- |
 ```
 
-La domanda di questa UDA è:
+<p align="justify">La domanda di questa UDA è:</p>
 
-> Che cosa viene realmente scambiato fra client e server prima ancora di parlare di Express, FastAPI o Vue?
+<blockquote>
+<p align="justify">Che cosa viene realmente scambiato fra client e server prima ancora di parlare di Express, FastAPI o Vue?</p>
+</blockquote>
 
-La risposta è il contratto HTTP.
+<p align="justify">La risposta è il contratto HTTP.</p>
 
 ---
 
-# 1. HTTP prima dei framework
+<a id="lesson-http-messages"></a>
+## 1. HTTP prima dei framework
 
-HTTP è un protocollo request/response.
+<p align="justify">HTTP è un protocollo request/response.</p>
 
-Un client invia una richiesta che esprime un intento verso una risorsa; il server interpreta quell'intento e produce una risposta.
+<p align="justify">Un client invia una richiesta che esprime un intento verso una risorsa; il server interpreta quell'intento e produce una risposta.</p>
 
-Modello mentale:
+<p align="justify">Modello mentale:</p>
 
 ```text
 REQUEST
@@ -90,11 +131,11 @@ RESPONSE
 status + headers + content
 ```
 
-Express non crea questo modello: lo rende più comodo da programmare.
+<p align="justify">Express non crea questo modello: lo rende più comodo da programmare.</p>
 
-## 1.1 Una richiesta osservabile
+### 1.1 Una richiesta osservabile
 
-Esempio concettuale:
+<p align="justify">Esempio concettuale:</p>
 
 ```http
 POST /api/posts HTTP/1.1
@@ -105,9 +146,9 @@ Accept: application/json
 {"text":"Primo post via API"}
 ```
 
-La stessa informazione può essere costruita dal browser con `fetch()` o da `curl`.
+<p align="justify">La stessa informazione può essere costruita dal browser con <code>fetch()</code> o da <code>curl</code>.</p>
 
-## 1.2 Una risposta osservabile
+### 1.2 Una risposta osservabile
 
 ```http
 HTTP/1.1 201 Created
@@ -117,40 +158,40 @@ Location: /api/posts/p3
 {"id":"p3","text":"Primo post via API","likes":0,"liked":false}
 ```
 
-Non bisogna leggere solo il JSON: anche `201`, `Content-Type` e `Location` fanno parte del contratto.
+<p align="justify">Non bisogna leggere solo il JSON: anche <code>201</code>, <code>Content-Type</code> e <code>Location</code> fanno parte del contratto.</p>
 
 ---
 
-# 2. URL, path, query, header, body
+## 2. URL, path, query, header, body
 
-Questi canali non sono intercambiabili.
+<p align="justify">Questi canali non sono intercambiabili.</p>
 
 ```text
 http://localhost:3000/api/posts?author=ada&limit=10
 |---- origin --------| |-- path -| |---- query -------|
 ```
 
-## 2.1 Path
+### 2.1 Path
 
-Il path identifica normalmente la risorsa o la collezione:
+<p align="justify">Il path identifica normalmente la risorsa o la collezione:</p>
 
 ```text
 /api/posts
 /api/posts/p42
 ```
 
-## 2.2 Query string
+### 2.2 Query string
 
-La query modifica la vista o la selezione senza cambiare l'identità di base della risorsa:
+<p align="justify">La query modifica la vista o la selezione senza cambiare l'identità di base della risorsa:</p>
 
 ```text
 /api/posts?author=ada
 /api/posts?limit=10
 ```
 
-## 2.3 Header
+### 2.3 Header
 
-Gli header trasportano metadati e controllo del protocollo:
+<p align="justify">Gli header trasportano metadati e controllo del protocollo:</p>
 
 ```text
 Accept: application/json
@@ -158,9 +199,9 @@ Content-Type: application/json
 Authorization: ...        # verra approfondito piu avanti
 ```
 
-## 2.4 Body/content
+### 2.4 Body/content
 
-Il content contiene una rappresentazione da elaborare:
+<p align="justify">Il content contiene una rappresentazione da elaborare:</p>
 
 ```json
 {
@@ -168,25 +209,55 @@ Il content contiene una rappresentazione da elaborare:
 }
 ```
 
-Nel vecchio `lab7` query, path parameter e body erano gia presenti; nel nuovo corso vengono prima letti come parti della request HTTP e solo dopo verranno mappati a `req.query`, `req.params` e `req.body` in Express.
+<p align="justify">Nel vecchio <code>lab7</code> query, path parameter e body erano gia presenti; nel nuovo corso vengono prima letti come parti della request HTTP e solo dopo verranno mappati a <code>req.query</code>, <code>req.params</code> e <code>req.body</code> in Express.</p>
 
 ---
 
-# 3. Metodi HTTP: intento, non CRUD meccanico
+<a id="lesson-http-semantics"></a>
+## 3. Metodi HTTP: intento, non CRUD meccanico
 
-Per il core del corso:
+<p align="justify">Per il core del corso:</p>
 
-| Metodo | Intenzione tipica |
-| --- | --- |
-| `GET` | leggere una rappresentazione |
-| `POST` | creare/processare secondo la semantica della risorsa |
-| `PUT` | sostituire la rappresentazione di una risorsa |
-| `PATCH` | applicare una modifica parziale |
-| `DELETE` | rimuovere una risorsa |
-| `HEAD` | come GET, ma senza trasferire il content della rappresentazione |
-| `OPTIONS` | descrivere opzioni di comunicazione |
+<table align="center">
+<thead>
+<tr>
+<th>Metodo</th>
+<th>Intenzione tipica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td>leggere una rappresentazione</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>creare/processare secondo la semantica della risorsa</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>sostituire la rappresentazione di una risorsa</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>applicare una modifica parziale</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>rimuovere una risorsa</td>
+</tr>
+<tr>
+<td><code>HEAD</code></td>
+<td>come GET, ma senza trasferire il content della rappresentazione</td>
+</tr>
+<tr>
+<td><code>OPTIONS</code></td>
+<td>descrivere opzioni di comunicazione</td>
+</tr>
+</tbody>
+</table>
 
-Non insegniamo la falsa regola:
+<p align="justify">Non insegniamo la falsa regola:</p>
 
 ```text
 GET = SELECT
@@ -195,16 +266,18 @@ PUT = UPDATE
 DELETE = DELETE SQL
 ```
 
-HTTP non e SQL.
+<p align="justify">HTTP non e SQL.</p>
 
-## 3.1 Safe e idempotent
+### 3.1 Safe e idempotent
 
-Due concetti utili per ragionare sulle API:
+<p align="justify">Due concetti utili per ragionare sulle API:</p>
 
-- **safe**: il client non richiede un cambiamento di stato sul server;
-- **idempotent**: ripetere la stessa richiesta intenzionale una o piu volte deve avere lo stesso effetto previsto della singola richiesta.
+<ul>
+  <li><strong>safe</strong>: il client non richiede un cambiamento di stato sul server;</li>
+  <li><strong>idempotent</strong>: ripetere la stessa richiesta intenzionale una o piu volte deve avere lo stesso effetto previsto della singola richiesta.</li>
+</ul>
 
-Esempi operativi:
+<p align="justify">Esempi operativi:</p>
 
 ```text
 GET     safe + idempotent
@@ -213,15 +286,15 @@ DELETE  non safe + idempotent nella semantica dell'intento
 POST    non e garantito idempotent
 ```
 
-Questa distinzione diventa importante con retry, cache e sistemi distribuiti.
+<p align="justify">Questa distinzione diventa importante con retry, cache e sistemi distribuiti.</p>
 
 ---
 
-# 4. Status code: il risultato appartiene al protocollo
+## 4. Status code: il risultato appartiene al protocollo
 
-Lo status code non e decorazione.
+<p align="justify">Lo status code non e decorazione.</p>
 
-Le classi principali:
+<p align="justify">Le classi principali:</p>
 
 ```text
 1xx  informational
@@ -231,38 +304,72 @@ Le classi principali:
 5xx  errore del server nell'elaborare una richiesta apparentemente valida
 ```
 
-Per Feisbuc useremo soprattutto:
+<p align="justify">Per Feisbuc useremo soprattutto:</p>
 
-| Status | Uso didattico |
-| --- | --- |
-| `200 OK` | lettura o modifica con representation in risposta |
-| `201 Created` | nuova risorsa creata |
-| `204 No Content` | successo senza content |
-| `400 Bad Request` | request non interpretabile/valida |
-| `404 Not Found` | risorsa non trovata |
-| `405 Method Not Allowed` | metodo noto ma non ammesso sulla risorsa |
-| `415 Unsupported Media Type` | representation inviata con media type non supportato |
-| `500 Internal Server Error` | errore non gestito lato server |
+<table align="center">
+<thead>
+<tr>
+<th>Status</th>
+<th>Uso didattico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>lettura o modifica con representation in risposta</td>
+</tr>
+<tr>
+<td><code>201 Created</code></td>
+<td>nuova risorsa creata</td>
+</tr>
+<tr>
+<td><code>204 No Content</code></td>
+<td>successo senza content</td>
+</tr>
+<tr>
+<td><code>400 Bad Request</code></td>
+<td>request non interpretabile/valida</td>
+</tr>
+<tr>
+<td><code>404 Not Found</code></td>
+<td>risorsa non trovata</td>
+</tr>
+<tr>
+<td><code>405 Method Not Allowed</code></td>
+<td>metodo noto ma non ammesso sulla risorsa</td>
+</tr>
+<tr>
+<td><code>415 Unsupported Media Type</code></td>
+<td>representation inviata con media type non supportato</td>
+</tr>
+<tr>
+<td><code>500 Internal Server Error</code></td>
+<td>errore non gestito lato server</td>
+</tr>
+</tbody>
+</table>
 
-Regola didattica:
+<p align="justify">Regola didattica:</p>
 
-> Prima interpretiamo lo status, poi il payload.
+<blockquote>
+<p align="justify">Prima interpretiamo lo status, poi il payload.</p>
+</blockquote>
 
 ---
 
-# 5. Representation e Content-Type
+## 5. Representation e Content-Type
 
-HTTP trasferisce representation.
+<p align="justify">HTTP trasferisce representation.</p>
 
-JSON e una possibile representation, non il protocollo.
+<p align="justify">JSON e una possibile representation, non il protocollo.</p>
 
 ```http
 Content-Type: application/json
 ```
 
-significa che il content della message e JSON.
+<p align="justify">significa che il content della message e JSON.</p>
 
-Se inviamo JSON con `fetch`:
+<p align="justify">Se inviamo JSON con <code>fetch</code>:</p>
 
 ```js
 await fetch("/api/posts", {
@@ -274,24 +381,24 @@ await fetch("/api/posts", {
 });
 ```
 
-Le due parti hanno ruoli diversi:
+<p align="justify">Le due parti hanno ruoli diversi:</p>
 
 ```text
 Content-Type       descrive i byte inviati
 JSON.stringify()   produce una stringa JSON
 ```
 
-Dimenticarne una delle due e un bug diverso.
+<p align="justify">Dimenticarne una delle due e un bug diverso.</p>
 
 ---
 
-# 6. Statelessness
+## 6. Statelessness
 
-HTTP e stateless a livello di semantica del protocollo: ogni request deve poter essere interpretata nel proprio contesto senza assumere una conversazione nascosta nel protocollo stesso.
+<p align="justify">HTTP e stateless a livello di semantica del protocollo: ogni request deve poter essere interpretata nel proprio contesto senza assumere una conversazione nascosta nel protocollo stesso.</p>
 
-Questo non significa che una applicazione non possa mantenere stato.
+<p align="justify">Questo non significa che una applicazione non possa mantenere stato.</p>
 
-Lo stato puo vivere, per esempio:
+<p align="justify">Lo stato puo vivere, per esempio:</p>
 
 ```text
 database
@@ -301,21 +408,21 @@ cache
 browser state
 ```
 
-Cookie e session verranno approfonditi nell'UDA backend/auth.
+<p align="justify">Cookie e session verranno approfonditi nell'UDA backend/auth.</p>
 
 ---
 
-# 7. Osservare HTTP con DevTools e curl
+## 7. Osservare HTTP con DevTools e curl
 
-Prima di programmare `fetch`, osserviamo richieste vere.
+<p align="justify">Prima di programmare <code>fetch</code>, osserviamo richieste vere.</p>
 
-Esempio:
+<p align="justify">Esempio:</p>
 
 ```bash
 curl -i http://localhost:3000/api/posts
 ```
 
-Per inviare JSON:
+<p align="justify">Per inviare JSON:</p>
 
 ```bash
 curl -i \
@@ -326,7 +433,7 @@ curl -i \
   http://localhost:3000/api/posts
 ```
 
-Nel pannello **Network** del browser cerchiamo sempre:
+<p align="justify">Nel pannello <strong>Network</strong> del browser cerchiamo sempre:</p>
 
 ```text
 Request URL
@@ -339,15 +446,16 @@ Response / Preview
 Timing
 ```
 
-Il browser diventa uno strumento di protocol analysis, non solo un visualizzatore della pagina.
+<p align="justify">Il browser diventa uno strumento di protocol analysis, non solo un visualizzatore della pagina.</p>
 
 ---
 
-# 8. Dal callback alla Promise
+<a id="lesson-fetch-api"></a>
+## 8. Dal callback alla Promise
 
-Una operazione asincrona termina in futuro.
+<p align="justify">Una operazione asincrona termina in futuro.</p>
 
-Invece di bloccare il programma:
+<p align="justify">Invece di bloccare il programma:</p>
 
 ```text
 start request
@@ -359,9 +467,9 @@ response disponibile
 callback/promise continuation
 ```
 
-Una `Promise` rappresenta un risultato futuro.
+<p align="justify">Una <code>Promise</code> rappresenta un risultato futuro.</p>
 
-Stati concettuali:
+<p align="justify">Stati concettuali:</p>
 
 ```text
 pending
@@ -371,7 +479,7 @@ pending
   +--> rejected
 ```
 
-Esempio:
+<p align="justify">Esempio:</p>
 
 ```js
 fetch("/api/posts")
@@ -380,13 +488,13 @@ fetch("/api/posts")
   .catch((error) => console.error(error));
 ```
 
-Il problema non e che `.then()` sia sbagliato: il problema e leggere pipeline lunghe senza rendere evidente il flusso e la gestione errori.
+<p align="justify">Il problema non e che <code>.then()</code> sia sbagliato: il problema e leggere pipeline lunghe senza rendere evidente il flusso e la gestione errori.</p>
 
 ---
 
-# 9. async/await
+## 9. async/await
 
-Una funzione `async` restituisce una Promise.
+<p align="justify">Una funzione <code>async</code> restituisce una Promise.</p>
 
 ```js
 const loadPosts = async () => {
@@ -395,7 +503,7 @@ const loadPosts = async () => {
 };
 ```
 
-Con `try/catch`:
+<p align="justify">Con <code>try/catch</code>:</p>
 
 ```js
 const loadPosts = async () => {
@@ -410,23 +518,23 @@ const loadPosts = async () => {
 };
 ```
 
-Quale controllo manca?
+<p align="justify">Quale controllo manca?</p>
 
-`response.ok`.
+<p align="justify"><code>response.ok</code>.</p>
 
 ---
 
-# 10. fetch(): errore di rete != errore HTTP
+## 10. fetch(): errore di rete != errore HTTP
 
-Questa e una delle idee piu importanti dell'UDA.
+<p align="justify">Questa e una delle idee piu importanti dell'UDA.</p>
 
 ```js
 const response = await fetch("/api/posts/manca");
 ```
 
-Se il server risponde `404`, abbiamo comunque ricevuto una risposta HTTP.
+<p align="justify">Se il server risponde <code>404</code>, abbiamo comunque ricevuto una risposta HTTP.</p>
 
-Per questo il codice robusto controlla:
+<p align="justify">Per questo il codice robusto controlla:</p>
 
 ```js
 if (!response.ok) {
@@ -434,9 +542,9 @@ if (!response.ok) {
 }
 ```
 
-Poi interpreta il content.
+<p align="justify">Poi interpreta il content.</p>
 
-## 10.1 Helper minimo
+### 10.1 Helper minimo
 
 ```js
 const requestJson = async (url, options = {}) => {
@@ -455,7 +563,7 @@ const requestJson = async (url, options = {}) => {
 };
 ```
 
-Notare l'ordine:
+<p align="justify">Notare l'ordine:</p>
 
 ```text
 fetch
@@ -468,11 +576,11 @@ fetch
 
 ---
 
-# 11. Abort e timeout applicativo
+## 11. Abort e timeout applicativo
 
-Una request non dovrebbe necessariamente restare pendente per sempre.
+<p align="justify">Una request non dovrebbe necessariamente restare pendente per sempre.</p>
 
-Pattern:
+<p align="justify">Pattern:</p>
 
 ```js
 const controller = new AbortController();
@@ -488,23 +596,28 @@ try {
 }
 ```
 
-Per il core basta capire:
+<p align="justify">Per il core basta capire:</p>
 
-- abort e timeout applicativo sono decisioni del client;
-- un timeout non e uno status HTTP;
-- non va confuso `500` con una mancata connessione.
+<ul>
+  <li>abort e timeout applicativo sono decisioni del client;</li>
+  <li>un timeout non e uno status HTTP;</li>
+  <li>non va confuso <code>500</code> con una mancata connessione.</li>
+</ul>
 
 ---
 
-# 12. REST: modellare risorse
+<a id="lesson-rest-resources"></a>
+## 12. REST: modellare risorse
 
-REST non significa soltanto usare JSON con quattro verbi.
+<p align="justify">REST non significa soltanto usare JSON con quattro verbi.</p>
 
-Nel core usiamo una regola pratica:
+<p align="justify">Nel core usiamo una regola pratica:</p>
 
-> URL descrive la risorsa; metodo descrive l'intento; status descrive il risultato; representation descrive i dati.
+<blockquote>
+<p align="justify">URL descrive la risorsa; metodo descrive l'intento; status descrive il risultato; representation descrive i dati.</p>
+</blockquote>
 
-Per Feisbuc:
+<p align="justify">Per Feisbuc:</p>
 
 ```text
 GET   /api/posts
@@ -513,7 +626,7 @@ GET   /api/posts/p42
 PATCH /api/posts/p42
 ```
 
-Esempi:
+<p align="justify">Esempi:</p>
 
 ```text
 GET /api/posts
@@ -528,45 +641,45 @@ PATCH /api/posts/p42
 -> 200 + representation aggiornata
 ```
 
-## 12.1 Endpoint orientati alle azioni
+### 12.1 Endpoint orientati alle azioni
 
-Un endpoint come:
+<p align="justify">Un endpoint come:</p>
 
 ```text
 POST /api/likePost42
 ```
 
-lega URL e azione in modo rigido.
+<p align="justify">lega URL e azione in modo rigido.</p>
 
-Per il nostro modello preferiamo:
+<p align="justify">Per il nostro modello preferiamo:</p>
 
 ```text
 PATCH /api/posts/p42
 { "liked": true }
 ```
 
-Non e una legge universale: e una scelta di design coerente con una risorsa `post`.
+<p align="justify">Non e una legge universale: e una scelta di design coerente con una risorsa <code>post</code>.</p>
 
 ---
 
-# 13. Query e filtri
+## 13. Query e filtri
 
-Per leggere subset di una collezione:
+<p align="justify">Per leggere subset di una collezione:</p>
 
 ```text
 GET /api/posts?author=ada
 GET /api/posts?limit=10
 ```
 
-Non useremo un body GET per passare filtri ordinari.
+<p align="justify">Non useremo un body GET per passare filtri ordinari.</p>
 
 ---
 
-# 14. Error model della API
+## 14. Error model della API
 
-Una API didattica deve avere errori prevedibili.
+<p align="justify">Una API didattica deve avere errori prevedibili.</p>
 
-Formato scelto:
+<p align="justify">Formato scelto:</p>
 
 ```json
 {
@@ -575,39 +688,41 @@ Formato scelto:
 }
 ```
 
-Il client non deve cercare stringhe casuali nell'HTML di errore.
+<p align="justify">Il client non deve cercare stringhe casuali nell'HTML di errore.</p>
 
 ---
 
-# 15. Same-origin e CORS
+## 15. Same-origin e CORS
 
-Origin comprende schema, host e porta.
+<p align="justify">Origin comprende schema, host e porta.</p>
 
-Quindi:
+<p align="justify">Quindi:</p>
 
 ```text
 http://localhost:3000
 http://localhost:5173
 ```
 
-sono origin diverse perche cambia la porta.
+<p align="justify">sono origin diverse perche cambia la porta.</p>
 
-Il protocollo CORS appartiene al modello Fetch/browser e decide quando una risposta cross-origin puo essere esposta allo script chiamante.
+<p align="justify">Il protocollo CORS appartiene al modello Fetch/browser e decide quando una risposta cross-origin puo essere esposta allo script chiamante.</p>
 
-Strategia didattica:
+<p align="justify">Strategia didattica:</p>
 
-1. prima Feisbuc e API sono same-origin, cosi HTTP resta il problema principale;
-2. poi facciamo un micro-esperimento cross-origin;
-3. osserviamo `Origin`, eventuale preflight `OPTIONS` e header `Access-Control-Allow-*`;
-4. solo dopo, in Express, vedremo middleware/librerie che configurano CORS.
+<ol>
+  <li>prima Feisbuc e API sono same-origin, cosi HTTP resta il problema principale;</li>
+  <li>poi facciamo un micro-esperimento cross-origin;</li>
+  <li>osserviamo <code>Origin</code>, eventuale preflight <code>OPTIONS</code> e header <code>Access-Control-Allow-*</code>;</li>
+  <li>solo dopo, in Express, vedremo middleware/librerie che configurano CORS.</li>
+</ol>
 
-Non insegniamo:
+<p align="justify">Non insegniamo:</p>
 
 ```text
 CORS = problema del server che blocca Internet
 ```
 
-ma:
+<p align="justify">ma:</p>
 
 ```text
 browser + origin policy + protocol CORS
@@ -615,11 +730,11 @@ browser + origin policy + protocol CORS
 
 ---
 
-# 16. Caching: concetto minimo
+## 16. Caching: concetto minimo
 
-HTTP prevede meccanismi di caching.
+<p align="justify">HTTP prevede meccanismi di caching.</p>
 
-In questa UDA ci basta riconoscere che header come:
+<p align="justify">In questa UDA ci basta riconoscere che header come:</p>
 
 ```text
 Cache-Control
@@ -627,15 +742,15 @@ ETag
 If-None-Match
 ```
 
-possono cambiare se e quando una representation viene riusata.
+<p align="justify">possono cambiare se e quando una representation viene riusata.</p>
 
-La progettazione avanzata della cache resta nel track advanced/senior.
+<p align="justify">La progettazione avanzata della cache resta nel track advanced/senior.</p>
 
 ---
 
-# 17. Feisbuc milestone 4: da localStorage a API
+## 17. Feisbuc milestone 4: da localStorage a API
 
-Prima:
+<p align="justify">Prima:</p>
 
 ```text
 UI
@@ -647,7 +762,7 @@ posts.js
 localStorage
 ```
 
-Dopo:
+<p align="justify">Dopo:</p>
 
 ```text
 UI
@@ -663,9 +778,9 @@ fixture server Node/http
 in-memory posts
 ```
 
-Il server e volutamente una fixture: in questa UDA non vogliamo ancora studiare routing e middleware server-side.
+<p align="justify">Il server e volutamente una fixture: in questa UDA non vogliamo ancora studiare routing e middleware server-side.</p>
 
-## 17.1 Contratto
+### 17.1 Contratto
 
 ```text
 GET /api/posts
@@ -682,9 +797,9 @@ Content-Type: application/json
 -> 200
 ```
 
-## 17.2 Responsabilita client
+### 17.2 Responsabilita client
 
-`api.js`:
+<p align="justify"><code>api.js</code>:</p>
 
 ```text
 requestJson
@@ -693,7 +808,7 @@ createPost
 setLiked
 ```
 
-`app.js`:
+<p align="justify"><code>app.js</code>:</p>
 
 ```text
 DOM
@@ -704,13 +819,13 @@ render
 error feedback
 ```
 
-Lo stato persistente non vive piu nel browser.
+<p align="justify">Lo stato persistente non vive piu nel browser.</p>
 
 ---
 
-# 18. Errori frequenti
+## 18. Errori frequenti
 
-## 18.1 `catch()` come unico controllo
+### 18.1 `catch()` come unico controllo
 
 ```js
 try {
@@ -721,50 +836,50 @@ try {
 }
 ```
 
-Manca `response.ok`.
+<p align="justify">Manca <code>response.ok</code>.</p>
 
-## 18.2 JSON senza stringify
+### 18.2 JSON senza stringify
 
 ```js
 body: { text: "ciao" }
 ```
 
-non e un body JSON valido per `fetch`.
+<p align="justify">non e un body JSON valido per <code>fetch</code>.</p>
 
-## 18.3 Stringify senza Content-Type
+### 18.3 Stringify senza Content-Type
 
-Il server riceve bytes JSON ma il metadata non dichiara correttamente il media type.
+<p align="justify">Il server riceve bytes JSON ma il metadata non dichiara correttamente il media type.</p>
 
-## 18.4 Content-Type senza JSON
+### 18.4 Content-Type senza JSON
 
 ```js
 headers: { "Content-Type": "application/json" },
 body: new URLSearchParams(...)
 ```
 
-metadata e content non concordano.
+<p align="justify">metadata e content non concordano.</p>
 
-## 18.5 Parsing cieco
+### 18.5 Parsing cieco
 
 ```js
 const body = await response.json();
 ```
 
-non tutte le response devono avere JSON o content.
+<p align="justify">non tutte le response devono avere JSON o content.</p>
 
-## 18.6 Usare `200` per tutto
+### 18.6 Usare `200` per tutto
 
-Status code diversi esprimono semantica diversa.
+<p align="justify">Status code diversi esprimono semantica diversa.</p>
 
-## 18.7 Confondere CORS con autenticazione
+### 18.7 Confondere CORS con autenticazione
 
-CORS non e un sistema di login e non protegge una API da client non-browser.
+<p align="justify">CORS non e un sistema di login e non protegge una API da client non-browser.</p>
 
 ---
 
-# 19. Metodo di debug HTTP/fetch
+## 19. Metodo di debug HTTP/fetch
 
-Quando una richiesta fallisce:
+<p align="justify">Quando una richiesta fallisce:</p>
 
 ```text
 1. La request e partita?
@@ -779,72 +894,80 @@ Quando una richiesta fallisce:
 10. La UI rappresenta loading/error/success in modo coerente?
 ```
 
-DevTools Network viene prima delle modifiche casuali al codice.
+<p align="justify">DevTools Network viene prima delle modifiche casuali al codice.</p>
 
 ---
 
-# 20. Esercizi A-F
+## 20. Esercizi A-F
 
-## A — osserva
+### A — osserva
 
-Avvia la fixture HTTP e confronta con `curl -i`:
+<p align="justify">Avvia la fixture HTTP e confronta con <code>curl -i</code>:</p>
 
-- `GET /api/posts`;
-- `GET /api/posts/missing`;
-- `POST /api/posts` JSON;
-- richiesta con `Content-Type` sbagliato.
+<ul>
+  <li><code>GET /api/posts</code>;</li>
+  <li><code>GET /api/posts/missing</code>;</li>
+  <li><code>POST /api/posts</code> JSON;</li>
+  <li>richiesta con <code>Content-Type</code> sbagliato.</li>
+</ul>
 
-Annota method, status, header e body.
+<p align="justify">Annota method, status, header e body.</p>
 
-## B — modifica controllata
+### B — modifica controllata
 
-Completa una funzione asincrona che interpreta metadata di una Response distinguendo:
+<p align="justify">Completa una funzione asincrona che interpreta metadata di una Response distinguendo:</p>
 
-- `ok`;
-- classe status;
-- presenza di content;
-- JSON/non JSON.
+<ul>
+  <li><code>ok</code>;</li>
+  <li>classe status;</li>
+  <li>presenza di content;</li>
+  <li>JSON/non JSON.</li>
+</ul>
 
-## C — implementazione autonoma
+### C — implementazione autonoma
 
-Porta Feisbuc milestone 3 da `localStorage` a API HTTP.
+<p align="justify">Porta Feisbuc milestone 3 da <code>localStorage</code> a API HTTP.</p>
 
-## D — debug
+### D — debug
 
-Correggi un client che:
+<p align="justify">Correggi un client che:</p>
 
-- non controlla `response.ok`;
-- invia object senza `JSON.stringify`;
-- usa `Content-Type` incoerente;
-- interpreta qualunque response come JSON;
-- confonde errore HTTP e network error.
+<ul>
+  <li>non controlla <code>response.ok</code>;</li>
+  <li>invia object senza <code>JSON.stringify</code>;</li>
+  <li>usa <code>Content-Type</code> incoerente;</li>
+  <li>interpreta qualunque response come JSON;</li>
+  <li>confonde errore HTTP e network error.</li>
+</ul>
 
-## E — mini-progetto
+### E — mini-progetto
 
-Estendi API/client con filtro `?liked=true` o `?limit=n`, documentando contract e status.
+<p align="justify">Estendi API/client con filtro <code>?liked=true</code> o <code>?limit=n</code>, documentando contract e status.</p>
 
-## F — prodotto integrato
+### F — prodotto integrato
 
-Verrà completato nelle UDA successive quando la fixture server verra sostituita dal backend Express con database e auth.
-
----
-
-# 21. Verifica rapida
-
-1. Quali sono le quattro parti che vogliamo riconoscere in una request HTTP?
-2. Perche `GET /posts?id=7` e `GET /posts/7` non esprimono necessariamente lo stesso design?
-3. Che cosa comunica `Content-Type`?
-4. Perche `fetch()` con response 404 non deve essere trattato come una semplice eccezione di rete?
-5. Quando `response.ok` e vero?
-6. Differenza fra `201` e `200` nel nostro POST `/api/posts`?
-7. Che cosa significa idempotent?
-8. Perche CORS entra in gioco con `localhost:3000` e `localhost:5173`?
-9. Perche `JSON.stringify` e `Content-Type: application/json` servono a problemi diversi?
-10. Quale componente sostituisce `localStorage` nella milestone 4 di Feisbuc?
+<p align="justify">Verrà completato nelle UDA successive quando la fixture server verra sostituita dal backend Express con database e auth.</p>
 
 ---
 
-# 22. Sintesi inclusiva
+## 21. Verifica rapida
+
+<ol>
+  <li>Quali sono le quattro parti che vogliamo riconoscere in una request HTTP?</li>
+  <li>Perche <code>GET /posts?id=7</code> e <code>GET /posts/7</code> non esprimono necessariamente lo stesso design?</li>
+  <li>Che cosa comunica <code>Content-Type</code>?</li>
+  <li>Perche <code>fetch()</code> con response 404 non deve essere trattato come una semplice eccezione di rete?</li>
+  <li>Quando <code>response.ok</code> e vero?</li>
+  <li>Differenza fra <code>201</code> e <code>200</code> nel nostro POST <code>/api/posts</code>?</li>
+  <li>Che cosa significa idempotent?</li>
+  <li>Perche CORS entra in gioco con <code>localhost:3000</code> e <code>localhost:5173</code>?</li>
+  <li>Perche <code>JSON.stringify</code> e <code>Content-Type: application/json</code> servono a problemi diversi?</li>
+  <li>Quale componente sostituisce <code>localStorage</code> nella milestone 4 di Feisbuc?</li>
+</ol>
+
+---
+
+## 22. Sintesi inclusiva
 
 ```text
 HTTP
@@ -883,37 +1006,43 @@ representation = dati
 
 ---
 
-# 23. Fonti e provenance
+## 23. Fonti e provenance
 
-Fonti tecniche/professionali:
+<p align="justify">Fonti tecniche/professionali:</p>
 
-- RFC 9110 — HTTP Semantics;
-- WHATWG Fetch Standard;
-- Node.js HTTP documentation per la fixture didattica;
-- MDN Web Docs come documentazione professionale per studenti;
-- ECMAScript Language Specification per Promise/async functions quando serve risalire allo standard.
+<ul>
+  <li>RFC 9110 — HTTP Semantics;</li>
+  <li>WHATWG Fetch Standard;</li>
+  <li>Node.js HTTP documentation per la fixture didattica;</li>
+  <li>MDN Web Docs come documentazione professionale per studenti;</li>
+  <li>ECMAScript Language Specification per Promise/async functions quando serve risalire allo standard.</li>
+</ul>
 
-Teacher-reference legacy auditate:
+<p align="justify">Teacher-reference legacy auditate:</p>
 
-- `kinderp/lab5` snapshot `b518922bf346ffe6402d67806acf4c5bc78916b9`;
-- `kinderp/lab6` snapshot `79f4d056958b083b70f75b178ef08f00b3f902a8`;
-- `kinderp/lab7` snapshot `b4ee8a661d0127d5dc92254e5b3bc0a24b6075e5`;
-- `TheBitPoets/labs_summary` snapshot gia registrato nel Content Pack.
+<ul>
+  <li><code>kinderp/lab5</code> snapshot <code>b518922bf346ffe6402d67806acf4c5bc78916b9</code>;</li>
+  <li><code>kinderp/lab6</code> snapshot <code>79f4d056958b083b70f75b178ef08f00b3f902a8</code>;</li>
+  <li><code>kinderp/lab7</code> snapshot <code>b4ee8a661d0127d5dc92254e5b3bc0a24b6075e5</code>;</li>
+  <li><code>TheBitPoets/labs_summary</code> snapshot gia registrato nel Content Pack.</li>
+</ul>
 
-I lab legacy sono usati come provenance e confronto storico; codice, esempi e struttura del nuovo modulo sono riscritti.
+<p align="justify">I lab legacy sono usati come provenance e confronto storico; codice, esempi e struttura del nuovo modulo sono riscritti.</p>
 
 ---
 
-# 24. Activity correlate
+## 24. Activity correlate
 
-- `tpsi5-activity-a-http-microscope-001`;
-- `tpsi5-activity-b-async-response-policy-001`;
-- `tpsi5-activity-c-feisbuc-rest-client-001`;
-- `tpsi5-activity-d-debug-fetch-http-001`.
+<ul>
+  <li><code>tpsi5-activity-a-http-microscope-001</code>;</li>
+  <li><code>tpsi5-activity-b-async-response-policy-001</code>;</li>
+  <li><code>tpsi5-activity-c-feisbuc-rest-client-001</code>;</li>
+  <li><code>tpsi5-activity-d-debug-fetch-http-001</code>.</li>
+</ul>
 
 ## Prossimo passo
 
-UDA 24 prende il server-fixture che qui trattiamo come black box e lo apre:
+<p align="justify">UDA 24 prende il server-fixture che qui trattiamo come black box e lo apre:</p>
 
 ```text
 Node.js runtime

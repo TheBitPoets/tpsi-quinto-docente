@@ -1,29 +1,49 @@
 # WebSocket e Socket.IO: dal request/response al realtime
 
-Stato didattico: **draft**.
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#128506; <strong>Orientamento della lezione</strong></summary>
+
+<p align="justify"><strong>Contesto:</strong> REST aggiorna correttamente il server, ma gli altri browser non conoscono la mutazione finché non eseguono una nuova richiesta. Il realtime aggiunge un event path senza eliminare il command path HTTP.</p>
+<p align="justify"><strong>Domande guida:</strong> che cosa aggiunge WebSocket al modello di comunicazione? Che cosa aggiunge Socket.IO a WebSocket? Come recupera lo stato un client che ha perso eventi?</p>
+<p align="justify"><strong>Obiettivi osservabili:</strong> separare protocollo e libreria, progettare eventi piccoli, autenticare il handshake, aggiornare lo stato con un reducer idempotente e usare uno snapshot REST dopo reconnect.</p>
+<p align="justify"><strong>Prossimo passo:</strong> la lezione 14 tradurrà gli stessi concetti di componenti e stato da Vue a React per distinguere il modello dalla sintassi.</p>
+
+</details>
+</td></tr></table>
+
+<p align="justify">Stato didattico: <strong>draft</strong>.</p>
 
 ## Obiettivi
 
-Al termine del modulo lo studente sa:
+<p align="justify">Al termine del modulo lo studente sa:</p>
 
-- distinguere polling, HTTP request/response, Server-Sent Events, WebSocket e Socket.IO a livello concettuale;
-- spiegare perche WebSocket crea un canale bidirezionale persistente ma non definisce da solo eventi applicativi, riconnessione, rooms o recovery;
-- spiegare perche Socket.IO **non e semplicemente WebSocket**: normalmente usa WebSocket quando disponibile, puo usare HTTP long-polling e aggiunge semantica event-based, riconnessione e broadcasting;
-- progettare eventi applicativi piccoli e versionabili;
-- mantenere separati **command path** e **event path**;
-- autenticare una connessione realtime usando la stessa sessione server-side gia verificata dal backend;
-- evitare di fidarsi di identita o mutazioni dichiarate dal client realtime;
-- gestire disconnessione e riconnessione senza assumere consegna perfetta degli eventi;
-- integrare Socket.IO in Feisbuc senza cambiare il contratto REST, l'authorization o SQLite.
+<ul>
+  <li>distinguere polling, HTTP request/response, Server-Sent Events, WebSocket e Socket.IO a livello concettuale;</li>
+  <li>spiegare perche WebSocket crea un canale bidirezionale persistente ma non definisce da solo eventi applicativi, riconnessione, rooms o recovery;</li>
+  <li>spiegare perche Socket.IO <strong>non e semplicemente WebSocket</strong>: normalmente usa WebSocket quando disponibile, puo usare HTTP long-polling e aggiunge semantica event-based, riconnessione e broadcasting;</li>
+  <li>progettare eventi applicativi piccoli e versionabili;</li>
+  <li>mantenere separati <strong>command path</strong> e <strong>event path</strong>;</li>
+  <li>autenticare una connessione realtime usando la stessa sessione server-side gia verificata dal backend;</li>
+  <li>evitare di fidarsi di identita o mutazioni dichiarate dal client realtime;</li>
+  <li>gestire disconnessione e riconnessione senza assumere consegna perfetta degli eventi;</li>
+  <li>integrare Socket.IO in Feisbuc senza cambiare il contratto REST, l'authorization o SQLite.</li>
+</ul>
 
 ## Prerequisiti
 
-- UDA23: HTTP, status, fetch e REST;
-- UDA24: Express, SQLite, sessioni HttpOnly e authorization;
-- UDA25: Vue 3, Vue Router e TypeScript boundary typing;
-- modello `state -> render` e idea di source of truth.
+<ul>
+  <li>UDA23: HTTP, status, fetch e REST;</li>
+  <li>UDA24: Express, SQLite, sessioni HttpOnly e authorization;</li>
+  <li>UDA25: Vue 3, Vue Router e TypeScript boundary typing;</li>
+  <li>modello <code>state -&gt; render</code> e idea di source of truth.</li>
+</ul>
 
-## MDN in questa lezione
+## Orientamento nella documentazione
+
+<p align="center">
+  <img src="../../assets/tpsi5/lesson-documentation-depth.svg" alt="La dispensa seleziona nelle fonti ufficiali i contenuti da studiare ora, riconoscere, rimandare o dichiarare fuori confine">
+</p>
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> MDN e Socket.IO:</strong> usa la <a href="GUIDA_USO_MDN.md#mdn-guide-source-choice">guida alla scelta delle fonti</a>. MDN documenta il protocollo e l'API WebSocket disponibile nel browser; la documentazione Socket.IO definisce eventi, riconnessione, transport fallback, rooms e API della libreria.</p>
@@ -35,38 +55,60 @@ Al termine del modulo lo studente sa:
 <p align="justify"><strong>Prodotto atteso:</strong> costruisci una tabella a due colonne “WebSocket” e “Socket.IO” e assegna ogni caratteristica al livello corretto.</p>
 </td></tr></table>
 
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Indice incrociato — WebSocket, Socket.IO e recovery</strong></summary>
+
+<table align="center">
+<thead><tr><th>Dispensa</th><th>Documentazione ufficiale</th><th>Profondità</th></tr></thead>
+<tbody>
+<tr><td><a href="#lesson-realtime-model">Polling, push e canale persistente</a></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">MDN — WebSocket API</a></td><td>&#128994; studiare il modello</td></tr>
+<tr><td><a href="#lesson-realtime-socketio">WebSocket e Socket.IO</a></td><td><a href="https://socket.io/docs/v4/">Socket.IO documentation</a><br><a href="https://socket.io/docs/v4/how-it-works/">How it works</a></td><td>&#128994; distinguere i livelli</td></tr>
+<tr><td><a href="#lesson-realtime-events">Eventi, reducer e broadcast</a></td><td><a href="https://socket.io/docs/v4/emitting-events/">Emitting events</a><br><a href="https://socket.io/docs/v4/broadcasting-events/">Broadcasting events</a></td><td>&#128994; studiare ora</td></tr>
+<tr><td><a href="#lesson-realtime-recovery">Disconnessione, delivery e recovery</a></td><td><a href="https://socket.io/docs/v4/tutorial/handling-disconnections">Handling disconnections</a><br><a href="https://socket.io/docs/v4/delivery-guarantees/">Delivery guarantees</a></td><td>&#128994; baseline REST; recovery avanzata da riconoscere</td></tr>
+<tr><td>Room, namespace e scaling multi-processo</td><td><a href="https://socket.io/docs/v4/rooms/">Socket.IO — Rooms</a></td><td>&#128993; riconoscere, fuori dal core</td></tr>
+</tbody>
+</table>
+
+</details>
+</td></tr></table>
+
 ## Problema iniziale
 
-Feisbuc milestone 11 e corretta ma ogni browser conosce solo cio che ha appena richiesto al server.
+<p align="justify">Feisbuc milestone 11 e corretta ma ogni browser conosce solo cio che ha appena richiesto al server.</p>
 
-Supponiamo che Alice e Bob abbiano entrambi aperto `/vue/feed`.
+<p align="justify">Supponiamo che Alice e Bob abbiano entrambi aperto <code>/vue/feed</code>.</p>
 
-1. Alice crea un post con `POST /api/posts`;
-2. il database contiene subito il nuovo post;
-3. Alice aggiorna il proprio state con la response `201`;
-4. Bob non sa ancora che il post esiste.
+<ol>
+  <li>Alice crea un post con <code>POST /api/posts</code>;</li>
+  <li>il database contiene subito il nuovo post;</li>
+  <li>Alice aggiorna il proprio state con la response <code>201</code>;</li>
+  <li>Bob non sa ancora che il post esiste.</li>
+</ol>
 
-Bob potrebbe fare polling:
+<p align="justify">Bob potrebbe fare polling:</p>
 
 ```text
 ogni 2 s -> GET /api/posts
 ```
 
-ma molte request non riporterebbero alcuna novita.
+<p align="justify">ma molte request non riporterebbero alcuna novita.</p>
 
-Il requisito nuovo e diverso:
+<p align="justify">Il requisito nuovo e diverso:</p>
 
-> quando lo stato condiviso cambia, il server deve poter notificare i client connessi senza aspettare una nuova request applicativa.
+<blockquote>
+<p align="justify">quando lo stato condiviso cambia, il server deve poter notificare i client connessi senza aspettare una nuova request applicativa.</p>
+</blockquote>
 
-Questo e il problema del **realtime push**.
+<p align="justify">Questo e il problema del <strong>realtime push</strong>.</p>
 
 ---
 
 ## 1. HTTP request/response non scompare
 
-L'introduzione del realtime non rende REST inutile.
+<p align="justify">L'introduzione del realtime non rende REST inutile.</p>
 
-Nel nostro progetto REST continua a essere adatto per i **comandi**:
+<p align="justify">Nel nostro progetto REST continua a essere adatto per i <strong>comandi</strong>:</p>
 
 ```text
 POST   /api/posts       crea
@@ -75,7 +117,7 @@ DELETE /api/posts/:id   elimina
 GET    /api/posts       snapshot corrente
 ```
 
-Il realtime aggiunge un secondo flusso:
+<p align="justify">Il realtime aggiunge un secondo flusso:</p>
 
 ```text
 server -> client
@@ -84,7 +126,7 @@ post:updated
 post:deleted
 ```
 
-Quindi:
+<p align="justify">Quindi:</p>
 
 ```text
 COMMAND PATH
@@ -96,14 +138,17 @@ EVENT PATH
 server -> realtime event -> altri client -> local state
 ```
 
-Regola TPSI5:
+<p align="justify">Regola TPSI5:</p>
 
-> **un evento realtime annuncia una mutazione gia autorizzata e completata; non sostituisce automaticamente la API dei comandi.**
+<blockquote>
+<p align="justify"><strong>un evento realtime annuncia una mutazione gia autorizzata e completata; non sostituisce automaticamente la API dei comandi.</strong></p>
+</blockquote>
 
-Questo evita di duplicare validation, status HTTP e authorization dentro handler socket improvvisati.
+<p align="justify">Questo evita di duplicare validation, status HTTP e authorization dentro handler socket improvvisati.</p>
 
 ---
 
+<a id="lesson-realtime-model"></a>
 ## 2. Polling, push e connessione persistente
 
 ### Polling
@@ -117,11 +162,11 @@ client -> server: ci sono novita?
 server -> client: si
 ```
 
-E semplice e robusto ma puo produrre traffico e latenza inutili.
+<p align="justify">E semplice e robusto ma puo produrre traffico e latenza inutili.</p>
 
 ### WebSocket
 
-Un WebSocket crea un canale persistente e bidirezionale:
+<p align="justify">Un WebSocket crea un canale persistente e bidirezionale:</p>
 
 ```text
 HTTP handshake
@@ -130,9 +175,9 @@ WebSocket aperto
 client <----------> server
 ```
 
-Dopo l'handshake, entrambi i lati possono inviare messaggi senza aprire una nuova request HTTP applicativa per ogni messaggio.
+<p align="justify">Dopo l'handshake, entrambi i lati possono inviare messaggi senza aprire una nuova request HTTP applicativa per ogni messaggio.</p>
 
-Il browser espone l'API `WebSocket`:
+<p align="justify">Il browser espone l'API <code>WebSocket</code>:</p>
 
 ```js
 const ws = new WebSocket("wss://example.test/realtime");
@@ -144,23 +189,26 @@ ws.addEventListener("message", (event) => {
 ws.send("hello");
 ```
 
-Ma WebSocket non decide per noi:
+<p align="justify">Ma WebSocket non decide per noi:</p>
 
-- come chiamare gli eventi;
-- come serializzare il dominio;
-- come fare broadcast;
-- come raggruppare client;
-- come riconnettersi;
-- come recuperare eventi persi;
-- come rappresentare acknowledgements applicativi.
+<ul>
+  <li>come chiamare gli eventi;</li>
+  <li>come serializzare il dominio;</li>
+  <li>come fare broadcast;</li>
+  <li>come raggruppare client;</li>
+  <li>come riconnettersi;</li>
+  <li>come recuperare eventi persi;</li>
+  <li>come rappresentare acknowledgements applicativi.</li>
+</ul>
 
-Queste sono responsabilita del protocollo/applicazione costruita sopra WebSocket.
+<p align="justify">Queste sono responsabilita del protocollo/applicazione costruita sopra WebSocket.</p>
 
 ---
 
+<a id="lesson-realtime-socketio"></a>
 ## 3. Socket.IO non e un alias di WebSocket
 
-Socket.IO fornisce un modello ad eventi ispirato a `EventEmitter`:
+<p align="justify">Socket.IO fornisce un modello ad eventi ispirato a <code>EventEmitter</code>:</p>
 
 ```js
 socket.on("post:created", (post) => {
@@ -168,21 +216,21 @@ socket.on("post:created", (post) => {
 });
 ```
 
-Sul server:
+<p align="justify">Sul server:</p>
 
 ```js
 io.emit("post:created", post);
 ```
 
-In condizioni normali la connessione puo usare WebSocket; Socket.IO puo anche usare HTTP long-polling quando necessario e aggiunge funzionalita come riconnessione automatica e broadcasting.
+<p align="justify">In condizioni normali la connessione puo usare WebSocket; Socket.IO puo anche usare HTTP long-polling quando necessario e aggiunge funzionalita come riconnessione automatica e broadcasting.</p>
 
-Per questo e scorretto insegnare:
+<p align="justify">Per questo e scorretto insegnare:</p>
 
 ```text
 Socket.IO = wrapper WebSocket
 ```
 
-Meglio:
+<p align="justify">Meglio:</p>
 
 ```text
 WebSocket = protocollo/canale bidirezionale
@@ -191,7 +239,7 @@ Socket.IO = protocollo + libreria event-based con fallback e servizi applicativi
 
 ### Baseline riproducibile del corso
 
-La reference 2026/27 pinna:
+<p align="justify">La reference 2026/27 pinna:</p>
 
 ```text
 socket.io         4.8.3
@@ -206,11 +254,12 @@ Node              >=22.18
 
 ---
 
+<a id="lesson-realtime-events"></a>
 ## 4. Evento applicativo != riga del database
 
-Un buon evento dice **che cosa e successo nel dominio**.
+<p align="justify">Un buon evento dice <strong>che cosa e successo nel dominio</strong>.</p>
 
-Per Feisbuc useremo un contratto piccolo:
+<p align="justify">Per Feisbuc useremo un contratto piccolo:</p>
 
 ```ts
 export type RealtimeEvent =
@@ -219,7 +268,7 @@ export type RealtimeEvent =
   | { type: "post:deleted"; postId: string };
 ```
 
-Non inviamo:
+<p align="justify">Non inviamo:</p>
 
 ```text
 SQL statement
@@ -228,13 +277,13 @@ req/res Express
 oggetto DatabaseSync
 ```
 
-L'evento usa lo stesso modello pubblico `Post` gia esposto dalla API.
+<p align="justify">L'evento usa lo stesso modello pubblico <code>Post</code> gia esposto dalla API.</p>
 
 ---
 
 ## 5. Reducer realtime: evento -> nuovo state
 
-Prima di aprire un socket separiamo la logica pura.
+<p align="justify">Prima di aprire un socket separiamo la logica pura.</p>
 
 ```ts
 function applyRealtimeEvent(posts: Post[], event: RealtimeEvent): Post[] {
@@ -255,25 +304,27 @@ function applyRealtimeEvent(posts: Post[], event: RealtimeEvent): Post[] {
 }
 ```
 
-Perche evitare semplicemente:
+<p align="justify">Perche evitare semplicemente:</p>
 
 ```ts
 posts.value.push(event.post);
 ```
 
-Perche una UI realtime deve ragionare anche su:
+<p align="justify">Perche una UI realtime deve ragionare anche su:</p>
 
-- eventi duplicati;
-- update di un elemento esistente;
-- delete;
-- source of truth;
-- riconnessione e snapshot.
+<ul>
+  <li>eventi duplicati;</li>
+  <li>update di un elemento esistente;</li>
+  <li>delete;</li>
+  <li>source of truth;</li>
+  <li>riconnessione e snapshot.</li>
+</ul>
 
 ---
 
 ## 6. Command path ed event path
 
-Quando Alice crea un post:
+<p align="justify">Quando Alice crea un post:</p>
 
 ```text
 Alice
@@ -297,24 +348,26 @@ Express Router
                                    └─► Bob
 ```
 
-La REST response resta importante per chi ha eseguito il comando.
+<p align="justify">La REST response resta importante per chi ha eseguito il comando.</p>
 
-L'evento permette agli altri client di convergere sul nuovo stato.
+<p align="justify">L'evento permette agli altri client di convergere sul nuovo stato.</p>
 
 ### Duplicazione apparente
 
-Alice puo ricevere:
+<p align="justify">Alice puo ricevere:</p>
 
-1. la response HTTP con il post creato;
-2. l'evento `post:created` dello stesso post.
+<ol>
+  <li>la response HTTP con il post creato;</li>
+  <li>l'evento <code>post:created</code> dello stesso post.</li>
+</ol>
 
-Per questo il reducer deve essere idempotente rispetto allo stesso `post.id`.
+<p align="justify">Per questo il reducer deve essere idempotente rispetto allo stesso <code>post.id</code>.</p>
 
 ---
 
 ## 7. Non fidarsi del socket client
 
-Il modello insicuro sarebbe:
+<p align="justify">Il modello insicuro sarebbe:</p>
 
 ```js
 socket.on("post:create", ({ authorId, text }) => {
@@ -323,23 +376,25 @@ socket.on("post:create", ({ authorId, text }) => {
 });
 ```
 
-Problemi:
+<p align="justify">Problemi:</p>
 
-- duplica la API POST;
-- rischia di saltare validation;
-- rischia identity spoofing;
-- rende piu difficile esprimere errori HTTP e audit;
-- crea due command path differenti per la stessa operazione.
+<ul>
+  <li>duplica la API POST;</li>
+  <li>rischia di saltare validation;</li>
+  <li>rischia identity spoofing;</li>
+  <li>rende piu difficile esprimere errori HTTP e audit;</li>
+  <li>crea due command path differenti per la stessa operazione.</li>
+</ul>
 
-Nel core TPSI5 il client socket **non esegue mutazioni di dominio**.
+<p align="justify">Nel core TPSI5 il client socket <strong>non esegue mutazioni di dominio</strong>.</p>
 
-Le mutazioni passano dalla API gia protetta.
+<p align="justify">Le mutazioni passano dalla API gia protetta.</p>
 
 ---
 
 ## 8. Autenticare il handshake realtime
 
-La SPA usa gia una sessione server-side:
+<p align="justify">La SPA usa gia una sessione server-side:</p>
 
 ```text
 browser cookie HttpOnly
@@ -351,9 +406,9 @@ sessions table
 user
 ```
 
-La connessione Socket.IO same-origin invia l'header Cookie durante il handshake.
+<p align="justify">La connessione Socket.IO same-origin invia l'header Cookie durante il handshake.</p>
 
-Il server puo riusare lo stesso modello:
+<p align="justify">Il server puo riusare lo stesso modello:</p>
 
 ```text
 socket.request.headers.cookie
@@ -367,41 +422,44 @@ authStore.findSessionUser(...)
 socket.data.user
 ```
 
-Se la sessione non e valida:
+<p align="justify">Se la sessione non e valida:</p>
 
 ```text
 handshake -> connect_error(authentication-required)
 ```
 
-Non creiamo quindi una seconda identita realtime.
+<p align="justify">Non creiamo quindi una seconda identita realtime.</p>
 
 ---
 
 ## 9. Broadcast
 
-Dopo una mutazione autorizzata:
+<p align="justify">Dopo una mutazione autorizzata:</p>
 
 ```js
 io.emit("post:created", created);
 ```
 
-significa: invia l'evento ai socket connessi nel namespace corrente.
+<p align="justify">significa: invia l'evento ai socket connessi nel namespace corrente.</p>
 
-Socket.IO supporta anche room e namespace, ma Feisbuc core non ne ha ancora bisogno.
+<p align="justify">Socket.IO supporta anche room e namespace, ma Feisbuc core non ne ha ancora bisogno.</p>
 
-Principio:
+<p align="justify">Principio:</p>
 
-> non introdurre una room solo per poter dire di avere usato una room.
+<blockquote>
+<p align="justify">non introdurre una room solo per poter dire di avere usato una room.</p>
+</blockquote>
 
-Una futura feature `classroom:<id>` potrebbe invece giustificarla.
+<p align="justify">Una futura feature <code>classroom:&lt;id&gt;</code> potrebbe invece giustificarla.</p>
 
 ---
 
+<a id="lesson-realtime-recovery"></a>
 ## 10. Disconnessione: il caso che rompe le demo ingenue
 
-Un client realtime **non e sempre connesso**.
+<p align="justify">Un client realtime <strong>non e sempre connesso</strong>.</p>
 
-Scenario:
+<p align="justify">Scenario:</p>
 
 ```text
 Bob online
@@ -414,9 +472,9 @@ Alice elimina P1
 Bob si riconnette
 ```
 
-Se Bob assume che la riconnessione significhi "ho ricevuto tutto", il suo state puo essere sbagliato.
+<p align="justify">Se Bob assume che la riconnessione significhi "ho ricevuto tutto", il suo state puo essere sbagliato.</p>
 
-La strategia core del corso e intenzionalmente semplice:
+<p align="justify">La strategia core del corso e intenzionalmente semplice:</p>
 
 ```text
 socket connect/reconnect
@@ -430,29 +488,31 @@ replace local state
 continua ad applicare eventi live
 ```
 
-Quindi:
+<p align="justify">Quindi:</p>
 
 ```text
 REST snapshot = recovery baseline
 Socket events  = aggiornamenti fra snapshot
 ```
 
-Socket.IO offre anche connection state recovery e strategie di delivery piu avanzate: le studieremo come estensione, non come prerequisito della prima app realtime.
+<p align="justify">Socket.IO offre anche connection state recovery e strategie di delivery piu avanzate: le studieremo come estensione, non come prerequisito della prima app realtime.</p>
 
 ---
 
 ## 11. Ordering e delivery
 
-Non confondiamo:
+<p align="justify">Non confondiamo:</p>
 
-- **ordine degli eventi durante una connessione**;
-- **consegna degli eventi durante una disconnessione**.
+<ul>
+  <li><strong>ordine degli eventi durante una connessione</strong>;</li>
+  <li><strong>consegna degli eventi durante una disconnessione</strong>.</li>
+</ul>
 
-L'applicazione deve sempre progettare il recovery.
+<p align="justify">L'applicazione deve sempre progettare il recovery.</p>
 
-Nel nostro caso il recovery e `GET /api/posts`.
+<p align="justify">Nel nostro caso il recovery e <code>GET /api/posts</code>.</p>
 
-Questo produce un modello facile da spiegare:
+<p align="justify">Questo produce un modello facile da spiegare:</p>
 
 ```text
 connect
@@ -474,9 +534,9 @@ nuovo snapshot
 
 ## 12. Socket lifecycle nel frontend
 
-Non vogliamo listener duplicati ad ogni mount.
+<p align="justify">Non vogliamo listener duplicati ad ogni mount.</p>
 
-Un adapter realtime deve avere lifecycle esplicito:
+<p align="justify">Un adapter realtime deve avere lifecycle esplicito:</p>
 
 ```ts
 const realtime = createRealtimeClient();
@@ -490,14 +550,14 @@ realtime.start({
 realtime.stop();
 ```
 
-Errori frequenti:
+<p align="justify">Errori frequenti:</p>
 
 ```text
 socket.on(...) dentro una funzione chiamata piu volte
 senza socket.off(...)
 ```
 
-oppure:
+<p align="justify">oppure:</p>
 
 ```text
 ogni render -> nuovo socket
@@ -507,9 +567,9 @@ ogni render -> nuovo socket
 
 ## 13. Stato condiviso e Pinia
 
-Il realtime aumenta lo stato condiviso, ma non significa automaticamente che dobbiamo aggiungere Pinia.
+<p align="justify">Il realtime aumenta lo stato condiviso, ma non significa automaticamente che dobbiamo aggiungere Pinia.</p>
 
-Milestone 12 mantiene:
+<p align="justify">Milestone 12 mantiene:</p>
 
 ```text
 session singleton/composable
@@ -517,30 +577,34 @@ FeedView owns posts
 realtime adapter aggiorna FeedView
 ```
 
-Se in seguito piu route indipendenti avranno bisogno dello stesso feed/cache, avremo un requisito concreto per valutare uno store globale.
+<p align="justify">Se in seguito piu route indipendenti avranno bisogno dello stesso feed/cache, avremo un requisito concreto per valutare uno store globale.</p>
 
 ---
 
 ## 14. Debugging realtime
 
-Usare contemporaneamente:
+<p align="justify">Usare contemporaneamente:</p>
 
-- DevTools Network;
-- tab WS/frames quando il browser la espone;
-- log di `connect`, `disconnect`, `connect_error`;
-- server log con `socket.id` e `socket.data.user.id`;
-- due browser/profili separati;
-- simulazione offline/online;
-- snapshot REST di controllo.
+<ul>
+  <li>DevTools Network;</li>
+  <li>tab WS/frames quando il browser la espone;</li>
+  <li>log di <code>connect</code>, <code>disconnect</code>, <code>connect_error</code>;</li>
+  <li>server log con <code>socket.id</code> e <code>socket.data.user.id</code>;</li>
+  <li>due browser/profili separati;</li>
+  <li>simulazione offline/online;</li>
+  <li>snapshot REST di controllo.</li>
+</ul>
 
-Domande utili:
+<p align="justify">Domande utili:</p>
 
-1. il comando HTTP ha avuto successo?
-2. il server ha pubblicato l'evento?
-3. il client era connesso?
-4. il listener era registrato una sola volta?
-5. il reducer ha applicato l'evento?
-6. il client deve fare resync?
+<ol>
+  <li>il comando HTTP ha avuto successo?</li>
+  <li>il server ha pubblicato l'evento?</li>
+  <li>il client era connesso?</li>
+  <li>il listener era registrato una sola volta?</li>
+  <li>il reducer ha applicato l'evento?</li>
+  <li>il client deve fare resync?</li>
+</ol>
 
 ---
 
@@ -548,31 +612,31 @@ Domande utili:
 
 ### Trattare Socket.IO come WebSocket puro
 
-Nasconde fallback, protocollo e servizi aggiunti dalla libreria.
+<p align="justify">Nasconde fallback, protocollo e servizi aggiunti dalla libreria.</p>
 
 ### Eseguire tutte le mutazioni via socket
 
-Duplica il backend REST senza un requisito architetturale.
+<p align="justify">Duplica il backend REST senza un requisito architetturale.</p>
 
 ### Fidarsi di `authorId` inviato dal client
 
-Viola il trust model costruito in UDA24.
+<p align="justify">Viola il trust model costruito in UDA24.</p>
 
 ### Assumere exactly-once
 
-Una riconnessione richiede una strategia di recupero/sincronizzazione.
+<p align="justify">Una riconnessione richiede una strategia di recupero/sincronizzazione.</p>
 
 ### Aggiungere listener ad ogni mount senza cleanup
 
-Produce eventi elaborati piu volte.
+<p align="justify">Produce eventi elaborati piu volte.</p>
 
 ### Fare optimistic update + applicare ciecamente lo stesso broadcast
 
-Puo duplicare lo stesso post.
+<p align="justify">Puo duplicare lo stesso post.</p>
 
 ### Introdurre Pinia solo perche "le SPA lo usano"
 
-Uno store e una risposta a un problema di ownership/condivisione dello state, non una decorazione tecnologica.
+<p align="justify">Uno store e una risposta a un problema di ownership/condivisione dello state, non una decorazione tecnologica.</p>
 
 ---
 
@@ -580,61 +644,65 @@ Uno store e una risposta a un problema di ownership/condivisione dello state, no
 
 ### A — osservazione
 
-Disegnare la timeline HTTP/polling/WebSocket/Socket.IO e identificare handshake, push e reconnect.
+<p align="justify">Disegnare la timeline HTTP/polling/WebSocket/Socket.IO e identificare handshake, push e reconnect.</p>
 
 ### B — modifica controllata
 
-Implementare `applyRealtimeEvent(posts, event)` come funzione pura e idempotente.
+<p align="justify">Implementare <code>applyRealtimeEvent(posts, event)</code> come funzione pura e idempotente.</p>
 
 ### C — scrittura autonoma
 
-Integrare Socket.IO nella milestone 11 mantenendo REST come command path.
+<p align="justify">Integrare Socket.IO nella milestone 11 mantenendo REST come command path.</p>
 
 ### D — debugging
 
-Diagnosticare listener duplicati, auth handshake mancante, evento trusted dal client e resync assente.
+<p align="justify">Diagnosticare listener duplicati, auth handshake mancante, evento trusted dal client e resync assente.</p>
 
 ### E — mini-progetto
 
-Aggiungere presence online come evento **volatile/non persistente**, motivando perche non deve entrare nella tabella posts.
+<p align="justify">Aggiungere presence online come evento <strong>volatile/non persistente</strong>, motivando perche non deve entrare nella tabella posts.</p>
 
 ### F — progetto integrato
 
-Feisbuc realtime multiutente con evidence di due client, disconnect/reconnect e stato finale convergente.
+<p align="justify">Feisbuc realtime multiutente con evidence di due client, disconnect/reconnect e stato finale convergente.</p>
 
 ---
 
 ## 17. Laboratorio milestone 12
 
-Definition of Done:
+<p align="justify">Definition of Done:</p>
 
-- Socket.IO server/client pinned;
-- HTTP server esplicito con Express + Socket.IO sullo stesso origin;
-- socket handshake autenticato tramite la sessione esistente;
-- client anonimo rifiutato;
-- POST/PATCH/DELETE restano API REST;
-- eventi `post:created`, `post:updated`, `post:deleted` derivano da mutazioni riuscite;
-- nessun `authorId` trusted dal socket client;
-- reducer client idempotente;
-- reconnect esegue snapshot REST;
-- nessun Pinia;
-- TypeScript strict resta verde;
-- due client autenticati convergono sullo stesso feed.
+<ul>
+  <li>Socket.IO server/client pinned;</li>
+  <li>HTTP server esplicito con Express + Socket.IO sullo stesso origin;</li>
+  <li>socket handshake autenticato tramite la sessione esistente;</li>
+  <li>client anonimo rifiutato;</li>
+  <li>POST/PATCH/DELETE restano API REST;</li>
+  <li>eventi <code>post:created</code>, <code>post:updated</code>, <code>post:deleted</code> derivano da mutazioni riuscite;</li>
+  <li>nessun <code>authorId</code> trusted dal socket client;</li>
+  <li>reducer client idempotente;</li>
+  <li>reconnect esegue snapshot REST;</li>
+  <li>nessun Pinia;</li>
+  <li>TypeScript strict resta verde;</li>
+  <li>due client autenticati convergono sullo stesso feed.</li>
+</ul>
 
 ---
 
 ## 18. Verifica rapida
 
-1. Qual e la differenza fra HTTP polling e server push?
-2. Perche Socket.IO non e sinonimo di WebSocket?
-3. Perche Feisbuc conserva REST come command path?
-4. Dove viene autenticato il socket?
-5. Perche `io.emit()` dopo una mutazione non sostituisce la response HTTP?
-6. Che cosa succede a Bob se perde rete mentre Alice modifica il feed?
-7. Perche il reconnect deve fare un nuovo snapshot?
-8. Perche un reducer idempotente e utile?
-9. Che differenza c'e fra navigation guard e socket authentication?
-10. Perche Pinia non entra ancora automaticamente?
+<ol>
+  <li>Qual e la differenza fra HTTP polling e server push?</li>
+  <li>Perche Socket.IO non e sinonimo di WebSocket?</li>
+  <li>Perche Feisbuc conserva REST come command path?</li>
+  <li>Dove viene autenticato il socket?</li>
+  <li>Perche <code>io.emit()</code> dopo una mutazione non sostituisce la response HTTP?</li>
+  <li>Che cosa succede a Bob se perde rete mentre Alice modifica il feed?</li>
+  <li>Perche il reconnect deve fare un nuovo snapshot?</li>
+  <li>Perche un reducer idempotente e utile?</li>
+  <li>Che differenza c'e fra navigation guard e socket authentication?</li>
+  <li>Perche Pinia non entra ancora automaticamente?</li>
+</ol>
 
 ---
 
@@ -662,20 +730,24 @@ Feisbuc milestone 12
 
 ## 20. Fonti e collegamenti
 
-Riferimenti tecnici, non testo da copiare:
+<p align="justify">Riferimenti tecnici, non testo da copiare:</p>
 
-- WHATWG WebSockets Standard;
-- Socket.IO 4.x documentation e tutorial;
-- Socket.IO emitting/listening/broadcasting documentation;
-- Socket.IO handling disconnections e connection state recovery;
-- Node.js HTTP/ESM documentation;
-- precedente modulo `05_HTTP_ASYNC_FETCH_REST.md`;
-- `08_AUTH_SESSIONI_SICUREZZA.md`;
-- `12_TYPESCRIPT_CONTRATTI_FRONTEND.md`.
+<ul>
+  <li>WHATWG WebSockets Standard;</li>
+  <li>Socket.IO 4.x documentation e tutorial;</li>
+  <li>Socket.IO emitting/listening/broadcasting documentation;</li>
+  <li>Socket.IO handling disconnections e connection state recovery;</li>
+  <li>Node.js HTTP/ESM documentation;</li>
+  <li>precedente modulo <code>05_HTTP_ASYNC_FETCH_REST.md</code>;</li>
+  <li><code>08_AUTH_SESSIONI_SICUREZZA.md</code>;</li>
+  <li><code>12_TYPESCRIPT_CONTRATTI_FRONTEND.md</code>.</li>
+</ul>
 
-Activity correlate:
+<p align="justify">Activity correlate:</p>
 
-- `tpsi5-activity-a-websocket-realtime-microscope-001`;
-- `tpsi5-activity-b-realtime-event-reducer-001`;
-- `tpsi5-activity-c-feisbuc-socketio-realtime-001`;
-- `tpsi5-activity-d-debug-realtime-boundaries-001`.
+<ul>
+  <li><code>tpsi5-activity-a-websocket-realtime-microscope-001</code>;</li>
+  <li><code>tpsi5-activity-b-realtime-event-reducer-001</code>;</li>
+  <li><code>tpsi5-activity-c-feisbuc-socketio-realtime-001</code>;</li>
+  <li><code>tpsi5-activity-d-debug-realtime-boundaries-001</code>.</li>
+</ul>

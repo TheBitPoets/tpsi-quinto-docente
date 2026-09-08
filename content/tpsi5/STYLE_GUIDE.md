@@ -2,7 +2,7 @@
 
 Questo documento definisce il formato editoriale canonico delle pagine del corso TPSI5. Il modello deriva dalla grammatica HTML/Markdown usata nel corso [2cornot2c](https://github.com/TheBitPoets/2cornot2c), adattata alle dispense di sviluppo full stack.
 
-Lo standard si applica a tutte le lezioni in `content/tpsi5/`. Le pagine esistenti vengono adeguate progressivamente quando sono revisionate; ogni contenuto nuovo deve nascere già conforme.
+Lo standard si applica a tutte le lezioni in `content/tpsi5/`. Le lezioni numerate 00–18 sono state adeguate; ogni contenuto nuovo deve nascere già conforme.
 
 ## Principio generale
 
@@ -28,6 +28,64 @@ I titoli restano in Markdown:
 ```
 
 Questo preserva gli anchor generati da GitHub. Non sostituire i titoli con `<h1>`, `<h2>` o `<h3>`.
+
+Gerarchia obbligatoria:
+
+- un solo titolo `#` per il documento;
+- sezioni principali con `##`;
+- sottosezioni con `###`;
+- livelli più profondi soltanto quando servono davvero.
+
+Per le destinazioni richiamate da mappe e indici usare un anchor esplicito e stabile prima del titolo:
+
+```html
+<a id="lesson-example"></a>
+## Titolo della sezione
+```
+
+## Struttura canonica di una lezione
+
+La lezione `01_WEB_PLATFORM_HTML_MODERNO.md` è il riferimento strutturale. Ogni nuova dispensa, e ogni dispensa sottoposta a revisione completa, segue questo ordine adattandolo all'argomento:
+
+1. titolo della lezione;
+2. pannello espandibile di orientamento con contesto, domande guida, obiettivi osservabili e prossimo passo;
+3. obiettivi e prerequisiti dettagliati;
+4. orientamento nella documentazione con fonti ufficiali, profondità richiesta e prodotto osservabile;
+5. problema iniziale concreto;
+6. spiegazione progressiva dei concetti;
+7. applicazione al progetto Feisbuc o confronto fra implementazioni;
+8. errori frequenti e metodo di debug;
+9. esercizi o laboratorio;
+10. verifica rapida;
+11. sintesi inclusiva;
+12. fonti, provenance e collegamento alla lezione successiva.
+
+L'ordine non obbliga tutte le lezioni ad avere la stessa lunghezza. Un translation lab può essere più breve di una lezione fondativa, ma non può omettere il modello mentale, gli esempi verificabili o i confini dichiarati.
+
+## Struttura di un argomento
+
+Quando introduce un concetto nuovo, il paragrafo cerca di rendere visibili almeno questi passaggi:
+
+1. problema o domanda a cui il concetto risponde;
+2. definizione semplice e precisa;
+3. modello mentale o rappresentazione osservabile;
+4. esempio minimo;
+5. applicazione nel progetto del corso;
+6. errore frequente o limite;
+7. riferimento ufficiale puntuale.
+
+Non è necessario trasformare ogni punto in un sottotitolo. È invece necessario evitare sequenze di API o sintassi prive di una spiegazione del perché e di una prova concreta.
+
+## Audit di profondità
+
+La qualità non si misura contando righe o tentando di riprodurre integralmente MDN e le documentazioni dei framework. Per ogni lezione si confrontano gli obiettivi dichiarati con le fonti ufficiali e si classificano i contenuti:
+
+- <strong>studiare ora:</strong> indispensabili per raggiungere gli obiettivi della lezione;
+- <strong>riconoscere:</strong> presentati per orientarsi nella documentazione ma non ancora richiesti in autonomia;
+- <strong>più avanti:</strong> pertinenti, ma assegnati esplicitamente a una lezione successiva;
+- <strong>fuori confine:</strong> esclusi intenzionalmente dal curriculum corrente.
+
+Una lezione è sufficientemente profonda quando spiega tutti i concetti necessari ai propri obiettivi, li rende osservabili e dichiara i confini. Non deve copiare l'intero indice della fonte esterna.
 
 ## Paragrafi
 
@@ -199,9 +257,18 @@ Controlli minimi del repository:
 
 ```bash
 git diff --check
+python3 scripts/format_tpsi5_lessons.py --check
 python3 scripts/build_course_diagrams.py --check
 python3 scripts/build_slides.py --check-only
 ```
+
+Il normalizzatore controlla le lezioni 00–18; la conversione iniziale ha interessato soprattutto le lezioni 02–18, che usavano prevalentemente Markdown. Conserva titoli e blocchi di codice Markdown, non modifica i componenti HTML già presenti e converte prosa, liste, citazioni e tabelle semplici nel formato ibrido canonico. Per applicare intenzionalmente la normalizzazione:
+
+```bash
+python3 scripts/format_tpsi5_lessons.py --write
+```
+
+La lezione 01 resta il riferimento editoriale verificato a mano; la lezione 00 contiene componenti introduttivi costruiti direttamente nel visual system.
 
 ## Rapporto con le slide
 
