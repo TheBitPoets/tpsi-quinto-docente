@@ -6,23 +6,23 @@ title: 01 — Web Platform e HTML moderno
 ---
 
 # 01 — Web Platform e HTML moderno
-## Struttura, semantica e documento
+## Dal documento ricevuto alla struttura della pagina
 
 UDA 21 — Frontend foundations
 
 ---
 
-# Richiamo
+# Richiamo dalla lezione 00
 
-Nel modulo 00 abbiamo separato:
+Abbiamo separato:
 
 ```text
-browser ↔ HTTP ↔ backend ↔ database
+browser ↔ HTTP ↔ server ↔ database
 ```
 
-Oggi restiamo nel browser e rispondiamo a una domanda:
+Oggi seguiamo un solo passaggio:
 
-> Che cosa riceve davvero il browser prima che esista una pagina “visiva”?
+> Che cosa succede quando il server invia un documento HTML al browser?
 
 ---
 
@@ -30,28 +30,76 @@ Oggi restiamo nel browser e rispondiamo a una domanda:
 
 Alla fine dovrai saper:
 
-- riconoscere la struttura minima di un documento HTML;
-- distinguere struttura da presentazione;
+- collocare HTML nella Web Platform;
+- riconoscere elementi, tag, attributi e annidamento;
+- costruire un documento HTML moderno;
 - usare elementi semantici;
-- spiegare il ruolo di metadata e landmark;
-- leggere il DOM con DevTools;
-- migliorare la prima pagina Feisbuc.
+- distinguere file sorgente, DOM e pagina visualizzata;
+- ispezionare il DOM con DevTools;
+- costruire la milestone 0 di Feisbuc.
 
 ---
 
-# HTML non è “grafica”
+![bg contain](../../../assets/tpsi5/01-http-html-dom.svg)
 
-HTML descrive **che cosa è** un contenuto.
+---
+
+# Tre rappresentazioni collegate
+
+## File HTML
+
+Testo sorgente scritto dallo sviluppatore o inviato dal server.
+
+## DOM
+
+Albero di nodi costruito dal browser interpretando il markup.
+
+## Pagina visualizzata
+
+Risultato prodotto dal browser usando DOM, regole CSS e altre informazioni.
+
+> Sono collegate, ma non sono la stessa cosa.
+
+---
+
+![bg contain](../../../assets/tpsi5/01-web-platform-roles.svg)
+
+---
+
+# HTML è un linguaggio di markup
+
+**HTML** significa *HyperText Markup Language*.
+
+Descrive:
+
+- che cosa è un contenuto;
+- come è strutturato;
+- quali relazioni ha con gli altri contenuti.
+
+Non descrive algoritmi o procedure: **non è un linguaggio di programmazione**.
+
+---
+
+![bg contain](../../../assets/tpsi5/01-html-element-anatomy.svg)
+
+---
+
+# Annidamento ed elementi vuoti
+
+Un elemento può contenerne un altro:
 
 ```html
-<h1>Feisbuc</h1>
-<p>Il tuo feed didattico</p>
+<p>Sto studiando <strong>HTML</strong>.</p>
 ```
 
-CSS descriverà come appare.
-JavaScript descriverà come reagisce.
+Le chiusure devono rispettare l'ordine delle aperture.
 
-Separare i ruoli ci rende più bravi a fare debug.
+Alcuni elementi non racchiudono contenuto e non hanno tag di chiusura:
+
+```html
+<meta charset="utf-8">
+<img src="ada.jpg" alt="Ada sorride davanti al computer">
+```
 
 ---
 
@@ -60,18 +108,51 @@ Separare i ruoli ci rende più bravi a fare debug.
 ```html
 <!doctype html>
 <html lang="it">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Feisbuc</title>
-</head>
-<body>
-  <h1>Feisbuc</h1>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feisbuc</title>
+  </head>
+  <body>
+    <h1>Feisbuc</h1>
+  </body>
 </html>
 ```
 
-Quali righe servono al browser? Quali servono agli utenti?
+---
+
+# Che cosa appartiene a `head`?
+
+- `meta charset` → codifica dei caratteri;
+- `meta viewport` → area iniziale sui dispositivi mobili;
+- `title` → titolo del documento e della scheda;
+- altri metadati e collegamenti a risorse.
+
+`head` non è l'intestazione grafica della pagina.
+
+```text
+head   → informazioni sul documento
+header → intestazione visibile di una pagina o sezione
+```
+
+---
+
+# Il contenuto dentro `body`
+
+```html
+<h1>Profilo di Ada</h1>
+<p>Sviluppatrice web.</p>
+
+<h2>Interessi</h2>
+<ul>
+  <li>Web Platform</li>
+  <li>Accessibilità</li>
+</ul>
+
+<a href="https://developer.mozilla.org/">Consulta MDN</a>
+```
+
+Gli heading descrivono la gerarchia, non la dimensione del testo.
 
 ---
 
@@ -80,7 +161,7 @@ Quali righe servono al browser? Quali servono agli utenti?
 Confronta:
 
 ```html
-<div class="top">...</div>
+<div class="header">...</div>
 <div class="menu">...</div>
 <div class="main">...</div>
 ```
@@ -93,157 +174,133 @@ con:
 <main>...</main>
 ```
 
-Il secondo documento comunica meglio struttura e responsabilità.
+Il secondo documento rende espliciti i ruoli delle parti.
 
 ---
 
-# Un post Feisbuc
+# Elementi strutturali
+
+- `header` → contenuto introduttivo;
+- `nav` → navigazione importante;
+- `main` → contenuto principale;
+- `section` → sezione tematica, normalmente con un titolo;
+- `article` → contenuto autonomo, come un post;
+- `aside` → contenuto complementare;
+- `footer` → informazioni conclusive.
+
+> `div` rimane corretto quando serve davvero un contenitore generico.
+
+---
+
+# Accessibilità fin dall'inizio
+
+- dichiarare la lingua con `lang`;
+- costruire una gerarchia di heading coerente;
+- usare elementi semantici;
+- decidere consapevolmente il valore di `alt`;
+- usare link per le destinazioni;
+- usare pulsanti per le azioni.
 
 ```html
-<article>
-  <header>
-    <h2>Mario Rossi</h2>
-    <time datetime="2026-09-12T10:15">10:15</time>
-  </header>
-  <p>Primo post del corso.</p>
-</article>
+<img src="ada.jpg" alt="Ada lavora al portatile">
 ```
 
-Perché `article` è più informativo di un `div`?
+Un'immagine puramente decorativa usa `alt=""`.
 
 ---
 
-# Form: struttura di un'interazione
+![bg contain](../../../assets/tpsi5/01-html-dom-tree.svg)
+
+---
+
+# DevTools: osservare il DOM
+
+Nel pannello **Elements/Inspector** puoi:
+
+- espandere i nodi dell'albero;
+- leggere elementi e attributi;
+- modificare temporaneamente il DOM;
+- confrontare sorgente e struttura interpretata;
+- individuare il nodo coinvolto in un problema.
+
+Il browser può correggere alcuni errori di markup.
+
+> “Si vede” non significa automaticamente “è corretto”.
+
+---
+
+# Rendering e validazione
+
+Sono due controlli differenti:
+
+| Rendering nel browser | Nu Html Checker |
+|---|---|
+| mostra ciò che il browser rappresenta | controlla le regole del markup |
+| può tollerare o correggere errori | segnala errori e avvertimenti |
+| serve anche al debug visivo | serve alla verifica strutturale |
+
+Validator: `https://validator.w3.org/nu/`
+
+---
+
+# Feisbuc milestone 0
 
 ```html
-<form>
-  <label for="post-text">Nuovo post</label>
-  <textarea id="post-text" name="text"></textarea>
-  <button type="submit">Pubblica</button>
-</form>
+<header>
+  <h1>Feisbuc</h1>
+  <nav aria-label="Navigazione principale">
+    <a href="#feed">Feed</a>
+    <a href="#profilo">Profilo</a>
+  </nav>
+</header>
+<main>
+  <section id="feed">...</section>
+  <section id="profilo">...</section>
+</main>
+<footer>...</footer>
 ```
 
-Nota:
-
-- label collegata;
-- `name` utile al dato;
-- button con tipo esplicito.
-
----
-
-# Metadata e viewport
-
-```html
-<meta charset="utf-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1">
-```
-
-Senza viewport, un layout mobile può essere interpretato come una pagina desktop rimpicciolita.
-
-HTML prepara già il terreno al responsive design.
-
----
-
-# DevTools: leggere il documento vero
-
-Il file sorgente e il DOM non sono sempre identici.
-
-Con DevTools puoi:
-
-- ispezionare elementi;
-- vedere la struttura DOM;
-- modificare attributi temporaneamente;
-- controllare accessibilità di base;
-- capire quale nodo è coinvolto in un problema.
-
----
-
-# Errore tipico: div soup
-
-```html
-<div>
-  <div>
-    <div>Mario</div>
-    <div>Testo del post</div>
-  </div>
-</div>
-```
-
-Problema: il browser lo renderizza, ma il significato è quasi tutto perso.
-
-Correzione: usare elementi semantici quando descrivono davvero il contenuto.
-
----
-
-# Checkpoint
-
-Scegli l'elemento più adatto:
-
-1. contenuto principale della pagina;
-2. blocco indipendente di un post;
-3. collegamenti di navigazione;
-4. data/ora di pubblicazione;
-5. campo con etichetta per scrivere il post.
-
-Motiva ogni scelta.
-
----
-
-# Feisbuc milestone
-
-Obiettivo pratico:
-
-- costruire uno skeleton semantico;
-- header/nav/main riconoscibili;
-- feed fatto di `article`;
-- form accessibile;
-- struttura pronta a ricevere CSS.
-
-Non serve ancora “farlo bello”.
+Ogni collegamento interno deve avere una destinazione esistente.
 
 ---
 
 # Handoff al laboratorio
 
-Prima Activity concreta:
+## Activity A — Anatomia del documento
 
-**A — Anatomia di un documento HTML moderno**  
-`tpsi5-activity-a-html-anatomy-001`
+Osserva → modifica → ricarica → confronta sorgente e DOM → spiega.
 
-Percorso studente nel repository:
+## Activity B — Feisbuc semantico
 
-`activities/tpsi5/html_anatomy_a/student/README.md`
+Trasforma la “div soup” scegliendo ogni elemento in base al significato.
 
-Starter:
+Vincoli comuni:
 
-`activities/tpsi5/html_anatomy_a/starter/index.html`
-
-Durante il lab: osserva → modifica → ricarica → confronta sorgente e DOM → spiega.
+- nessun CSS;
+- nessun JavaScript;
+- le scelte devono essere motivate.
 
 ---
 
-# Grading di questa Activity
+# Checkpoint
 
-In questa release il browser/HTML grader generico **non è ancora disponibile**.
-
-Quindi:
-
-- lavoro locale con browser + editor + DevTools;
-- checklist e rubrica docente;
-- TheBitLab può registrare/assegnare l'Activity;
-- non presentiamo test automatici HTML inesistenti.
+1. Qual è il percorso dalla risposta HTTP alla pagina?
+2. Quali ruoli hanno HTML, CSS e JavaScript?
+3. Qual è la differenza tra tag ed elemento?
+4. Qual è la differenza tra `head` e `header`?
+5. Quando `div` è ancora corretto?
+6. Che differenza c'è tra sorgente e DOM?
+7. Perché “si vede bene” non prova che l'HTML sia corretto?
 
 ---
 
 # Recap
 
-HTML moderno significa:
-
-- documento valido;
-- semantica esplicita;
-- metadata corretti;
-- form comprensibili;
-- struttura leggibile da persone e strumenti.
+- HTML descrive struttura e significato;
+- il browser interpreta il markup e costruisce il DOM;
+- il documento moderno contiene metadati essenziali;
+- gli elementi semantici comunicano il ruolo dei contenuti;
+- accessibilità e validazione iniziano subito;
+- Feisbuc parte da una struttura corretta, non dall'aspetto.
 
 Prossimo modulo: **CSS moderno e responsive design**.

@@ -52,7 +52,7 @@
     "usa un solo main",
     "usa un solo h1",
     "ogni post deve essere un article",
-    "non sostituire automaticamente tutti i div: se un contenitore non ha un significato semantico puo restare div"
+    "non sostituire automaticamente tutti i div: se un contenitore non ha un significato semantico può restare div"
   ],
   "assets": [
     {
@@ -107,15 +107,15 @@
     },
     {
       "name": "post",
-      "criterion": "ogni post e un article con heading h3"
+      "criterion": "ogni post è un article con heading h3"
     },
     {
       "name": "feed",
-      "criterion": "section#feed e collegata al titolo tramite aria-labelledby"
+      "criterion": "section#feed è collegata al titolo tramite aria-labelledby"
     },
     {
       "name": "gerarchia",
-      "criterion": "un solo h1 e gerarchia h1/h2/h3 coerente"
+      "criterion": "un solo h1 e una gerarchia h1/h2/h3 coerente"
     }
   ],
   "rubrica": [
@@ -132,7 +132,7 @@
       "punti": 2
     },
     {
-      "criterio": "Capacita di motivare quando usare div e quando un elemento semantico",
+      "criterio": "Capacità di motivare quando usare div e quando un elemento semantico",
       "punti": 2
     }
   ]

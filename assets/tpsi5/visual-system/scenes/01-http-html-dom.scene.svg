@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../01-http-html-dom.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Dalla risposta HTTP alla pagina visualizzata</title>
+  <desc id="desc">Il server invia un documento HTML nella risposta HTTP. Il browser interpreta il testo, costruisce il DOM e produce la pagina visualizzata.</desc>
+  <defs id="visual-kit-components"/>
+  <defs>
+    <linearGradient id="flowBackground" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient>
+    <filter id="flowShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#020617" flood-opacity=".34"/></filter>
+    <marker id="flowArrow" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="21" refY="12" orient="auto"><path d="M0 0l24 12L0 24z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#flowBackground)"/>
+  <circle cx="70" cy="80" r="270" fill="#0ea5e9" opacity=".08"/><circle cx="1850" cy="1010" r="360" fill="#10b981" opacity=".07"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="72" text-anchor="middle" fill="#f8fafc" font-size="46" font-weight="800">DALLA RISPOSTA HTTP ALLA PAGINA</text>
+    <text x="960" y="116" text-anchor="middle" fill="#b8c8dc" font-size="22">Il browser trasforma un documento di testo in una struttura che può visualizzare</text>
+
+    <g filter="url(#flowShadow)">
+      <g transform="translate(55 250)">
+        <rect width="330" height="570" rx="30" fill="#f8fafc"/>
+        <path d="M30 0h270a30 30 0 0 1 30 30v82H0V30A30 30 0 0 1 30 0z" fill="#059669"/>
+        <text x="165" y="70" text-anchor="middle" fill="white" font-size="28" font-weight="800">SERVER</text>
+        <use href="#tpsi-server" x="60" y="150" width="210" height="160"/>
+        <text x="165" y="366" text-anchor="middle" fill="#102a43" font-size="19" font-weight="800">PREPARA LA RISPOSTA</text>
+        <rect x="38" y="410" width="254" height="100" rx="20" fill="#d1fae5"/>
+        <text x="165" y="449" text-anchor="middle" fill="#065f46" font-size="17" font-weight="800">HTTP 200 OK</text>
+        <text x="165" y="483" text-anchor="middle" fill="#166534" font-size="16">Content-Type: text/html</text>
+      </g>
+
+      <g transform="translate(515 250)">
+        <rect width="330" height="570" rx="30" fill="#f8fafc"/>
+        <path d="M30 0h270a30 30 0 0 1 30 30v82H0V30A30 30 0 0 1 30 0z" fill="#0ea5e9"/>
+        <text x="165" y="70" text-anchor="middle" fill="white" font-size="27" font-weight="800">DOCUMENTO HTML</text>
+        <use href="#tpsi-document" x="101" y="142" width="128" height="160"/>
+        <rect x="34" y="342" width="262" height="174" rx="20" fill="#e0f2fe"/>
+        <text x="165" y="382" text-anchor="middle" fill="#075985" font-family="ui-monospace,Menlo,monospace" font-size="16">&lt;body&gt;</text>
+        <text x="165" y="416" text-anchor="middle" fill="#075985" font-family="ui-monospace,Menlo,monospace" font-size="16">&lt;h1&gt;Feisbuc&lt;/h1&gt;</text>
+        <text x="165" y="450" text-anchor="middle" fill="#075985" font-family="ui-monospace,Menlo,monospace" font-size="16">&lt;p&gt;Il tuo feed&lt;/p&gt;</text>
+        <text x="165" y="484" text-anchor="middle" fill="#075985" font-family="ui-monospace,Menlo,monospace" font-size="16">&lt;/body&gt;</text>
+      </g>
+
+      <g transform="translate(975 250)">
+        <rect width="390" height="570" rx="30" fill="#f8fafc"/>
+        <path d="M30 0h330a30 30 0 0 1 30 30v82H0V30A30 30 0 0 1 30 0z" fill="#2563eb"/>
+        <text x="195" y="70" text-anchor="middle" fill="white" font-size="28" font-weight="800">BROWSER</text>
+        <use href="#tpsi-browser" x="68" y="145" width="254" height="163"/>
+        <rect x="42" y="344" width="306" height="72" rx="20" fill="#dbeafe"/>
+        <text x="195" y="389" text-anchor="middle" fill="#1e3a8a" font-size="18" font-weight="800">1 · interpreta il markup</text>
+        <rect x="42" y="438" width="306" height="72" rx="20" fill="#ede9fe"/>
+        <text x="195" y="483" text-anchor="middle" fill="#6d28d9" font-size="18" font-weight="800">2 · costruisce il DOM</text>
+      </g>
+
+      <g transform="translate(1495 250)">
+        <rect width="370" height="570" rx="30" fill="#f8fafc"/>
+        <path d="M30 0h310a30 30 0 0 1 30 30v82H0V30A30 30 0 0 1 30 0z" fill="#8b5cf6"/>
+        <text x="185" y="70" text-anchor="middle" fill="white" font-size="28" font-weight="800">DOM → PAGINA</text>
+        <g fill="none" stroke="#8b5cf6" stroke-width="5">
+          <path d="M185 170v45M185 215H92v54M185 215h93v54M92 325v42"/>
+        </g>
+        <g font-size="16" font-weight="800" text-anchor="middle">
+          <rect x="125" y="135" width="120" height="54" rx="16" fill="#ede9fe" stroke="#8b5cf6" stroke-width="3"/><text x="185" y="169" fill="#5b21b6">body</text>
+          <rect x="35" y="269" width="114" height="54" rx="16" fill="#f3e8ff" stroke="#a855f7" stroke-width="3"/><text x="92" y="303" fill="#6b21a8">h1</text>
+          <rect x="221" y="269" width="114" height="54" rx="16" fill="#f3e8ff" stroke="#a855f7" stroke-width="3"/><text x="278" y="303" fill="#6b21a8">p</text>
+        </g>
+        <rect x="40" y="400" width="290" height="116" rx="20" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="3"/>
+        <text x="185" y="446" text-anchor="middle" fill="#065f46" font-size="27" font-weight="800">Feisbuc</text>
+        <text x="185" y="482" text-anchor="middle" fill="#166534" font-size="18">Il tuo feed</text>
+      </g>
+    </g>
+
+    <g fill="none" stroke="#38bdf8" stroke-width="8" marker-end="url(#flowArrow)">
+      <path d="M385 535h108"/><path d="M845 535h108"/><path d="M1365 535h108"/>
+    </g>
+    <text x="439" y="500" text-anchor="middle" fill="#7dd3fc" font-size="16" font-weight="800">RISPOSTA</text>
+    <text x="899" y="500" text-anchor="middle" fill="#7dd3fc" font-size="16" font-weight="800">PARSING</text>
+    <text x="1419" y="500" text-anchor="middle" fill="#7dd3fc" font-size="16" font-weight="800">RENDERING</text>
+
+    <rect x="310" y="918" width="1300" height="68" rx="34" fill="#e2e8f0" opacity=".12"/>
+    <text x="960" y="960" text-anchor="middle" fill="#e2e8f0" font-size="21">Il file sorgente, il DOM costruito dal browser e la pagina visualizzata sono collegati, ma non sono la stessa cosa.</text>
+  </g>
+</svg>

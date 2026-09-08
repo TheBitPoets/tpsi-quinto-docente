@@ -4,7 +4,7 @@ Tempo indicativo: 30 minuti.
 
 ## Obiettivo
 
-Partire da una pagina che il browser riesce gia a visualizzare e renderla un documento HTML moderno e consapevole, senza cambiare il contenuto mostrato.
+Partire da una pagina che il browser riesce già a visualizzare e renderla un documento HTML moderno e consapevole, senza cambiare il contenuto mostrato.
 
 ## Procedura
 
@@ -28,8 +28,8 @@ Partire da una pagina che il browser riesce gia a visualizzare e renderla un doc
 
 Dopo ogni modifica chiediti:
 
-- il contenuto visibile e cambiato?
-- la struttura del documento e cambiata?
+- il contenuto visibile è cambiato?
+- la struttura del documento è cambiata?
 - DevTools mostra gli elementi come li hai scritti?
 - il browser ha aggiunto o corretto qualcosa automaticamente?
 
@@ -45,8 +45,8 @@ Non cercare la soluzione completa. Cerca e verifica separatamente:
 
 Pagine di partenza:
 
-- https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax
-- https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata
+- [Basic HTML syntax](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax)
+- [What's in the head? Web page metadata](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata)
 
 ## Checklist consegna
 

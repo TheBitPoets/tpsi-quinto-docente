@@ -1,5 +1,7 @@
 # Activity B — Feisbuc milestone 0
 
+Tempo indicativo: 45 minuti.
+
 ## Obiettivo
 
 Trasformare una pagina che usa contenitori generici in un documento che esprime meglio il significato delle sue parti.
@@ -12,7 +14,7 @@ Per ogni `div` chiediti:
 
 > questo blocco ha un ruolo riconoscibile nella pagina?
 
-Se la risposta e si, valuta un elemento semantico. Se la risposta e no, `div` puo rimanere la scelta corretta.
+Se la risposta è sì, valuta un elemento semantico. Se la risposta è no, `div` può rimanere la scelta corretta.
 
 ## Trasformazioni richieste
 
@@ -25,7 +27,7 @@ Se la risposta e si, valuta un elemento semantico. Se la risposta e no, `div` pu
 - autore del post → `h3`;
 - blocco finale → `footer`.
 
-Il profilo puo essere una seconda `section` oppure un contenitore semanticamente motivato: spiega la tua scelta.
+Il profilo può essere una seconda `section` oppure un contenitore semanticamente motivato: spiega la tua scelta.
 
 ## Regola importante
 
@@ -41,9 +43,9 @@ sarebbe sbagliato quanto usare sempre `div`.
 
 Prima di consegnare verifica almeno:
 
-- https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents
-- https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main
-- https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article
+- [Document and website structure](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents)
+- [Elemento `main`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main)
+- [Elemento `article`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article)
 
 ## Checklist
 
@@ -59,6 +61,6 @@ Prima di consegnare verifica almeno:
 - [ ] nessun JavaScript;
 - [ ] so indicare almeno un caso in cui `div` rimane corretto.
 
-## Perche e una milestone Feisbuc
+## Perché è una milestone Feisbuc
 
-Questo file non verra buttato via. Le prossime milestone aggiungeranno progressivamente layout CSS, responsive design, JavaScript, API REST, database, autenticazione e realtime.
+Questo file non verrà buttato via. Le prossime milestone aggiungeranno progressivamente layout CSS, responsive design, JavaScript, API REST, database, autenticazione e realtime.

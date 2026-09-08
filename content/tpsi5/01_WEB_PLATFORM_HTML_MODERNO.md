@@ -1,69 +1,137 @@
 # Web Platform e HTML moderno
 
-Stato: **Content Pack 1.0.0 / approved**. Questa lezione inaugura UDA 21 e sostituisce la parte introduttiva di `html_css_summary` con una versione moderna, semantica e orientata alla documentazione professionale.
+## In questa unità impareremo
 
-## Obiettivi
+<table align="center">
+<tr><td>
+<details>
+<summary>&#129517; <strong>Orientamento della sezione</strong></summary>
 
-Al termine della lezione lo studente deve saper:
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128506;</span> Contesto:</strong>
+Nella lezione precedente abbiamo osservato l'intera applicazione full stack: browser, protocolli, backend e database. Ora rimaniamo nel frontend e studiamo il primo documento che il server può inviare al browser: il documento HTML.</p>
 
-- spiegare il ruolo di HTML nella Web Platform;
-- distinguere struttura, semantica e presentazione;
-- riconoscere elemento, tag, contenuto e attributi;
-- scrivere lo scheletro di un documento HTML moderno;
-- usare `lang`, `meta charset`, `viewport` e `title` in modo consapevole;
-- scegliere elementi semantici invece di usare `div` per ogni contenitore;
-- leggere una pagina MDN individuando sintassi, esempi e riferimenti;
-- usare DevTools per ispezionare il DOM prodotto dal browser;
-- costruire il primo scheletro semantico del progetto Feisbuc.
+<p align="justify"><strong><span style="font-size: 1.15em;">&#10067;</span> Domande guida:</strong>
+Che cosa riceve il browser prima di mostrare una pagina? Come riconosce un titolo, una navigazione o il contenuto principale? Qual è la differenza tra il file HTML, il DOM e ciò che vediamo sullo schermo?</p>
 
-## Prerequisiti
+<p align="justify"><strong><span style="font-size: 1.15em;">&#127919;</span> Obiettivi:</strong>
+Al termine lo studente dovrà saper:</p>
+<ul>
+  <li>spiegare il ruolo di HTML nella Web Platform;</li>
+  <li>distinguere struttura, significato, presentazione e comportamento;</li>
+  <li>riconoscere elemento, tag, contenuto e attributi;</li>
+  <li>scrivere lo scheletro di un documento HTML moderno;</li>
+  <li>usare consapevolmente <code>lang</code>, <code>meta charset</code>, viewport e <code>title</code>;</li>
+  <li>scegliere elementi semantici invece di usare <code>div</code> come contenitore universale;</li>
+  <li>distinguere file sorgente, DOM e pagina visualizzata;</li>
+  <li>ispezionare il DOM con gli strumenti di sviluppo del browser;</li>
+  <li>costruire il primo scheletro semantico del progetto Feisbuc.</li>
+</ul>
 
-- saper creare e salvare file di testo;
-- saper usare un browser e un editor;
-- conoscenza intuitiva di pagina web, client e server;
-- nessuna conoscenza HTML formale richiesta.
+<p align="justify"><strong><span style="font-size: 1.15em;">&#10145;</span> Prossimo passo:</strong>
+Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarne presentazione, layout e adattamento alle diverse dimensioni dello schermo.</p>
 
-## Problema iniziale
+</details>
+</td></tr>
+</table>
 
-Un browser riceve un documento come testo. Come fa a capire che una parte e un titolo, una parte e un menu di navigazione e un'altra e il contenuto principale?
+## Dal server alla pagina visualizzata
 
-HTML risolve proprio questo problema: **descrive la struttura e il significato del contenuto**. CSS descrivera soprattutto la presentazione; JavaScript aggiungera comportamento e interazione.
+<p align="justify">Nella lezione 00 abbiamo visto che il browser svolge il ruolo di client. Quando richiede una pagina, il server può rispondere tramite HTTP inviando un documento HTML. All'inizio quel documento non è ancora la pagina grafica che vediamo sullo schermo: è una sequenza di caratteri che descrive i contenuti e le relazioni tra essi.</p>
 
-Una prima regola del corso e quindi:
+<p align="justify">Il browser interpreta il markup HTML, costruisce una rappresentazione ad albero chiamata <strong>DOM</strong> e usa questa struttura per produrre la pagina visualizzata. Più avanti CSS contribuirà alla presentazione e JavaScript potrà leggere o modificare il DOM.</p>
 
-> prima costruiamo una struttura con un significato, poi decidiamo come appare e come si comporta.
+<p align="center">
+  <img src="../../assets/tpsi5/01-http-html-dom.svg" alt="Il server invia HTML in una risposta HTTP; il browser interpreta il documento, costruisce il DOM e visualizza la pagina">
+</p>
 
-## HTML5 o HTML Living Standard?
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Idea chiave:</strong>
+il file HTML, il DOM costruito dal browser e la pagina visualizzata sono tre rappresentazioni collegate, ma non sono la stessa cosa.</p>
+</td></tr></table>
 
-Nel linguaggio comune continueremo a dire spesso "HTML5" per indicare l'HTML moderno. La specifica tecnica di riferimento e pero mantenuta come **HTML Living Standard** dal WHATWG. Questo ci permette di insegnare agli studenti una distinzione utile anche nel lavoro reale: il nome storico di una generazione tecnologica non coincide necessariamente con il modo in cui lo standard viene mantenuto oggi.
+## Che cos'è la Web Platform
 
-Riferimento: <https://html.spec.whatwg.org/>
+<p align="justify">La <strong>Web Platform</strong> è l'insieme delle tecnologie standard che i browser comprendono e mettono a disposizione per costruire applicazioni web. Nel frontend incontreremo soprattutto HTML, CSS, JavaScript e le API fornite dal browser.</p>
 
-## Anatomia di un elemento
+<p align="justify">Queste tecnologie collaborano, ma hanno responsabilità differenti:</p>
+<ul>
+  <li><strong>HTML</strong> descrive la struttura e il significato del contenuto;</li>
+  <li><strong>CSS</strong> descrive la presentazione e il layout;</li>
+  <li><strong>JavaScript</strong> aggiunge comportamento e interazione;</li>
+  <li>le <strong>API del browser</strong> offrono al codice funzionalità come DOM, eventi, rete, storage e multimedia.</li>
+</ul>
+
+<p align="center">
+  <img src="../../assets/tpsi5/01-web-platform-roles.svg" alt="Nel browser HTML si occupa di struttura e significato, CSS di presentazione e layout, JavaScript di comportamento e interazione">
+</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — HTML:</strong>
+HTML significa <em>HyperText Markup Language</em>. È un <strong>linguaggio di markup</strong>: usa marcatori per descrivere la struttura e il significato dei contenuti. Non è un linguaggio di programmazione, perché non descrive algoritmi o procedure da eseguire.</p>
+</td></tr></table>
+
+<p align="justify">La prima regola di questa parte del corso sarà quindi: prima costruiamo una struttura con un significato, poi decidiamo come appare e come si comporta.</p>
+
+### HTML5 o HTML Living Standard?
+
+<p align="justify">Nel linguaggio comune si usa ancora spesso il nome “HTML5” per indicare l'HTML moderno. La specifica viene però mantenuta e aggiornata dal WHATWG come <strong>HTML Living Standard</strong>. Per scrivere le nostre pagine non cambia la sintassi di base: questa distinzione ci ricorda semplicemente che lo standard continua a evolvere.</p>
+
+<p align="justify">Riferimento ufficiale: <a href="https://html.spec.whatwg.org/">WHATWG — HTML Living Standard</a>.</p>
+
+## Anatomia di un elemento HTML
 
 ```html
 <p class="intro">Ciao Web!</p>
 ```
 
-Possiamo leggerlo come una piccola frase strutturata:
+<p align="justify">Possiamo leggere questo frammento come una piccola frase strutturata:</p>
+<ul>
+  <li><code>p</code> è il nome del tipo di elemento;</li>
+  <li><code>&lt;p class="intro"&gt;</code> è il tag di apertura;</li>
+  <li><code>class="intro"</code> è un attributo formato da nome e valore;</li>
+  <li><code>Ciao Web!</code> è il contenuto;</li>
+  <li><code>&lt;/p&gt;</code> è il tag di chiusura;</li>
+  <li>l'intera espressione è un elemento HTML.</li>
+</ul>
 
-- `p` indica il tipo di elemento;
-- `<p>` e il tag di apertura;
-- `</p>` e il tag di chiusura;
-- `Ciao Web!` e il contenuto;
-- `class="intro"` e un attributo.
+<p align="center">
+  <img src="../../assets/tpsi5/01-html-element-anatomy.svg" alt="Anatomia dell'elemento HTML p con tag di apertura, attributo class, contenuto e tag di chiusura">
+</p>
 
-Gli attributi aggiungono informazioni all'elemento. Non tutti gli elementi hanno un tag di chiusura: alcuni elementi sono *void*, per esempio `meta` e `img`.
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Attenzione — tag ed elemento:</strong>
+un tag è una parte della sintassi, per esempio <code>&lt;p&gt;</code>. L'elemento comprende invece il tag di apertura, gli eventuali attributi, il contenuto e il tag di chiusura.</p>
+</td></tr></table>
+
+### Elementi vuoti
+
+<p align="justify">Non tutti gli elementi racchiudono un contenuto. Alcuni sono detti <em>void elements</em>, cioè elementi vuoti, e non hanno un tag di chiusura. Due esempi che useremo presto sono <code>meta</code> e <code>img</code>.</p>
+
+```html
+<meta charset="utf-8">
+<img src="ada.jpg" alt="Ada sorride davanti al suo computer">
+```
 
 ### Annidamento
 
-Gli elementi possono stare dentro altri elementi, ma devono essere annidati in modo coerente.
+<p align="justify">Gli elementi possono contenere altri elementi. Questa relazione si chiama <strong>annidamento</strong>. Le aperture e le chiusure devono essere coerenti: se apriamo un elemento dentro un altro, chiudiamo prima quello più interno.</p>
 
 ```html
 <p>Sto studiando <strong>HTML</strong>.</p>
 ```
 
-Pensali come scatole: se apri una scatola dentro un'altra, devi chiudere prima quella interna.
+<p align="justify">Possiamo pensarli come scatole: <code>strong</code> è contenuto dentro <code>p</code>, quindi viene chiuso prima di <code>p</code>.</p>
+
+### Convenzioni di scrittura del corso
+
+<p align="justify">Il browser tollera diverse varianti sintattiche, ma un progetto condiviso ha bisogno di uno stile leggibile e prevedibile. Negli esempi del corso:</p>
+<ul>
+  <li>scriveremo in minuscolo i nomi degli elementi e degli attributi;</li>
+  <li>racchiuderemo tra virgolette i valori degli attributi;</li>
+  <li>chiuderemo tutti gli elementi che prevedono un tag di chiusura;</li>
+  <li>useremo l'indentazione per rendere visibile l'annidamento;</li>
+  <li>sceglieremo nomi e struttura in base al significato, non all'aspetto desiderato.</li>
+</ul>
 
 ## Lo scheletro moderno di una pagina
 
@@ -83,44 +151,84 @@ Pensali come scatole: se apri una scatola dentro un'altra, devi chiudere prima q
 
 ### `<!doctype html>`
 
-Non e un normale elemento HTML. Serve a far interpretare il documento al browser nella modalita standard prevista per l'HTML moderno.
+<p align="justify">Non è un normale elemento HTML. Comunica al browser che deve interpretare il documento nella modalità standard prevista per l'HTML moderno.</p>
 
 ### `<html lang="it">`
 
-`html` e l'elemento radice. `lang="it"` comunica che il contenuto principale e in italiano. L'informazione e utile anche alle tecnologie assistive e ad altri strumenti che devono interpretare correttamente il testo.
+<p align="justify"><code>html</code> è l'elemento radice: contiene l'intero documento. L'attributo <code>lang="it"</code> indica che la lingua principale è l'italiano. Questa informazione aiuta browser, motori di ricerca e tecnologie assistive a interpretare correttamente il testo.</p>
 
 ### `<head>`
 
-Contiene metadati e collegamenti a risorse del documento, non il contenuto principale mostrato nella pagina.
+<p align="justify">Contiene informazioni sul documento e collegamenti alle sue risorse. Queste informazioni sono chiamate <strong>metadati</strong> e non costituiscono il contenuto principale mostrato nella pagina.</p>
 
 ### `<meta charset="utf-8">`
 
-Dichiara UTF-8 come codifica dei caratteri. Nel corso lo inseriremo sempre nei documenti HTML.
+<p align="justify">Dichiara UTF-8 come codifica dei caratteri. Permette di interpretare correttamente lettere accentate, simboli e caratteri appartenenti a molte lingue. Nel corso lo inseriremo sempre all'inizio di <code>head</code>.</p>
 
-### viewport
+### Viewport
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
 
-Dice ai browser mobili di usare come base la larghezza reale del dispositivo. Diventera importante quando studieremo responsive design.
+<p align="justify">Chiede al browser mobile di impostare la larghezza iniziale dell'area di visualizzazione in base alla larghezza del dispositivo, espressa in pixel CSS. Diventerà importante quando studieremo il responsive design.</p>
 
 ### `<title>`
 
-Descrive il titolo del documento, usato per esempio nella scheda del browser. Non sostituisce il titolo visibile della pagina, che puo essere espresso con un heading come `h1`.
+<p align="justify">Descrive il titolo del documento e viene usato, per esempio, nella scheda del browser e nei preferiti. Non sostituisce il titolo visibile della pagina, normalmente espresso con un heading come <code>h1</code>.</p>
 
 ### `<body>`
 
-Contiene il contenuto del documento destinato alla pagina: testo, immagini, collegamenti, moduli e strutture dell'interfaccia.
+<p align="justify">Contiene ciò che appartiene alla pagina: testo, immagini, collegamenti, moduli e strutture dell'interfaccia.</p>
 
-Riferimenti MDN:
+<table align="center"><tr><td>
+<details>
+<summary>&#128279; <strong>Riferimenti MDN per lo scheletro del documento</strong></summary>
 
-- Basic HTML syntax: <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax>
-- Web page metadata: <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata>
+<p align="justify">Nel tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">Basic HTML syntax</a> concentrati su anatomia degli elementi, attributi, annidamento, elementi vuoti e anatomia del documento.</p>
 
-## Semantica: scegliere l'elemento per cio che significa
+<p align="justify">Nel tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata">What's in the head? Web page metadata</a> studia <code>title</code>, metadati, codifica dei caratteri e lingua principale del documento.</p>
 
-Considera questa struttura:
+</details>
+</td></tr></table>
+
+## Testo, liste, collegamenti e immagini
+
+<p align="justify">HTML non indica soltanto dove inizia e finisce un contenuto: ne descrive anche il ruolo. Un titolo, un paragrafo, una lista e un collegamento hanno significati differenti.</p>
+
+```html
+<h1>Profilo di Ada</h1>
+<p>Sviluppatrice web.</p>
+
+<h2>Interessi</h2>
+<ul>
+  <li>Web Platform</li>
+  <li>Accessibilità</li>
+  <li>JavaScript</li>
+</ul>
+
+<p>
+  Consulta la
+  <a href="https://developer.mozilla.org/">documentazione MDN</a>.
+</p>
+
+<img src="ada.jpg" alt="Ada lavora al portatile nella biblioteca della scuola">
+```
+
+<p align="justify">Un heading non si sceglie per ottenere un testo più grande: descrive la gerarchia del contenuto. La dimensione e lo stile arriveranno con CSS.</p>
+
+<p align="justify">L'attributo <code>alt</code> descrive il contenuto o la funzione di un'immagine quando questa informazione è necessaria. Se un'immagine è puramente decorativa, useremo un testo alternativo vuoto: <code>alt=""</code>. Approfondiremo i casi possibili quando studieremo le immagini in modo sistematico.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Link o pulsante?</strong>
+Un link porta l'utente verso una destinazione, come un'altra pagina o una sezione. Un pulsante esegue un'azione, come pubblicare un post o aprire un menu. L'aspetto grafico non deve determinare la scelta dell'elemento.</p>
+</td></tr></table>
+
+<a id="semantica-scegliere-lelemento-per-cio-che-significa"></a>
+
+## Semantica: scegliere l'elemento per ciò che significa
+
+<p align="justify">Consideriamo una pagina costruita soltanto con contenitori generici:</p>
 
 ```html
 <div class="header">
@@ -130,7 +238,7 @@ Considera questa struttura:
 <div class="footer">...</div>
 ```
 
-Il browser vede contenitori generici. Possiamo esprimere meglio l'intenzione:
+<p align="justify">Il browser riconosce tre contenitori, ma i nomi delle classi non assegnano automaticamente un significato strutturale. Possiamo esprimere meglio l'intenzione usando elementi semantici:</p>
 
 ```html
 <header>
@@ -140,110 +248,75 @@ Il browser vede contenitori generici. Possiamo esprimere meglio l'intenzione:
 <footer>...</footer>
 ```
 
-Gli elementi semantici rendono piu esplicito il ruolo delle parti del documento.
+<p align="justify">Gli elementi semantici rendono più esplicito il ruolo delle parti del documento per chi legge il codice, per il browser e per le tecnologie assistive.</p>
 
 ### Elementi strutturali che useremo spesso
 
-- `header`: introduzione/intestazione di una pagina o sezione;
-- `nav`: area con collegamenti di navigazione;
-- `main`: contenuto principale del documento;
-- `section`: sezione tematica;
-- `article`: contenuto autonomo o riutilizzabile, per esempio un post;
-- `aside`: contenuto complementare;
-- `footer`: informazioni di chiusura.
-
-`div` non e sbagliato: e un contenitore generico e rimane utile quando non esiste un significato semantico piu preciso.
-
-Riferimento MDN: <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents>
-
-## Testo, liste e collegamenti
-
-I primi elementi del vecchio `html_css_summary` rimangono validi come concetti, ma vengono riposizionati dentro una logica semantica:
-
-```html
-<h1>Profilo di Ada</h1>
-<p>Sviluppatrice web.</p>
-
-<h2>Interessi</h2>
 <ul>
-  <li>Web Platform</li>
-  <li>Accessibilita</li>
-  <li>JavaScript</li>
+  <li><code>header</code>: contenuto introduttivo o intestazione di una pagina o di una sezione;</li>
+  <li><code>nav</code>: una sezione che contiene collegamenti di navigazione importanti;</li>
+  <li><code>main</code>: il contenuto principale e specifico del documento;</li>
+  <li><code>section</code>: una sezione tematica del documento, normalmente identificata da un titolo;</li>
+  <li><code>article</code>: un contenuto autonomo, per esempio un post;</li>
+  <li><code>aside</code>: un contenuto collegato, ma complementare rispetto a quello principale;</li>
+  <li><code>footer</code>: informazioni conclusive sulla pagina o sulla sezione a cui appartiene.</li>
 </ul>
 
-<p>
-  Consulta la
-  <a href="https://developer.mozilla.org/">documentazione MDN</a>.
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9888;</span> Attenzione — <code>div</code> non è sbagliato:</strong>
+<code>div</code> è un contenitore generico e rimane utile quando non esiste un elemento con un significato più preciso. L'errore consiste nell'usarlo automaticamente per qualsiasi blocco.</p>
+</td></tr></table>
+
+## Accessibilità: iniziamo subito
+
+<p align="justify">L'accessibilità non sarà un'aggiunta da applicare alla fine. Alcune abitudini devono nascere insieme alla struttura HTML.</p>
+
+<p align="justify">Da subito:</p>
+<ul>
+  <li>impostiamo correttamente la lingua con <code>lang</code>;</li>
+  <li>costruiamo una gerarchia di heading comprensibile;</li>
+  <li>usiamo elementi semantici adatti al loro scopo;</li>
+  <li>forniamo alle immagini il testo alternativo appropriato;</li>
+  <li>usiamo link per le destinazioni e pulsanti per le azioni;</li>
+  <li>quando introdurremo i form, assoceremo ogni controllo alla sua etichetta.</li>
+</ul>
+
+## Il DOM e gli strumenti di sviluppo
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — DOM:</strong>
+DOM significa <em>Document Object Model</em>. È la rappresentazione ad albero del documento che il browser costruisce dopo aver interpretato l'HTML. Ogni elemento, attributo e contenuto diventa parte di questa struttura.</p>
+</td></tr></table>
+
+<p align="center">
+  <img src="../../assets/tpsi5/01-html-dom-tree.svg" alt="Un frammento di codice HTML di Feisbuc viene trasformato dal browser in un albero DOM con body, header, main, h1, article e p">
 </p>
-```
 
-Un heading non va scelto per avere testo piu grande: descrive la gerarchia del contenuto. Lo stile arrivera con CSS.
+<p align="justify">Apri una pagina HTML e usa il pannello <strong>Elements</strong> o <strong>Inspector</strong> degli strumenti di sviluppo. Nella maggior parte dei browser puoi aprirlo con <code>F12</code>, con il menu degli strumenti per sviluppatori oppure scegliendo “Ispeziona” dal menu contestuale.</p>
 
-## Accessibilita: iniziamo subito
+<p align="justify">Con DevTools puoi:</p>
+<ul>
+  <li>osservare la struttura DOM prodotta dal browser;</li>
+  <li>espandere e richiudere i nodi dell'albero;</li>
+  <li>leggere e modificare temporaneamente contenuti e attributi;</li>
+  <li>confrontare il file sorgente con la struttura interpretata;</li>
+  <li>individuare il nodo coinvolto in un problema.</li>
+</ul>
 
-Non faremo un modulo di accessibilita separato "alla fine": alcune abitudini devono nascere insieme all'HTML.
+<p align="justify">Il browser può correggere automaticamente alcuni errori di markup. Per questo motivo “la pagina si vede” non significa necessariamente “l'HTML è corretto”. Le modifiche effettuate nel pannello Elements sono inoltre temporanee: ricaricando la pagina, il browser ricostruisce il DOM dal documento sorgente.</p>
 
-Da subito:
+<table align="center"><tr><td>
+<details>
+<summary>&#9989; <strong>Controllo aggiuntivo — validare il documento</strong></summary>
 
-- impostare correttamente `lang`;
-- usare heading con una gerarchia comprensibile;
-- usare elementi semantici;
-- fornire testo alternativo significativo alle immagini quando necessario;
-- usare veri link e veri pulsanti quando servono link e pulsanti;
-- in seguito associare correttamente `label` e controlli dei form.
+<p align="justify">Il <a href="https://validator.w3.org/nu/">Nu Html Checker</a> controlla il markup e segnala errori o avvertimenti. Il rendering nel browser e la validazione rispondono a domande diverse: il primo mostra che cosa il browser riesce a rappresentare; la seconda aiuta a verificare se il documento rispetta le regole del linguaggio.</p>
 
-## Imparare a leggere MDN
-
-MDN non deve essere una pagina da copiare. Nel corso la useremo come **strumento di lavoro**.
-
-Quando incontri un elemento o una API:
-
-1. cerca il concetto;
-2. leggi prima la descrizione breve;
-3. individua sintassi e struttura;
-4. prova l'esempio;
-5. modifica una sola cosa e osserva l'effetto;
-6. controlla le note di accessibilita o compatibilita quando sono rilevanti;
-7. torna al nostro problema e riscrivilo senza copiare l'esempio.
-
-Per il primo modulo useremo spesso il percorso MDN `Structuring content with HTML`:
-<https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content>
-
-## DevTools: il browser non vede il file come lo vedi tu
-
-Apri una pagina HTML, premi `F12` e osserva il pannello Elements/Inspector.
-
-Il browser ha analizzato il testo HTML e costruito una rappresentazione ad albero che piu avanti chiameremo DOM. In questa fase basta notare due cose:
-
-- file sorgente e albero interpretato non sono concetti identici;
-- il browser puo correggere automaticamente alcuni errori di markup, quindi "si vede bene" non significa necessariamente "HTML corretto".
-
-Quando faremo debugging useremo anche un validator e gli strumenti del browser.
-
-## Esempio minimo
-
-```html
-<!doctype html>
-<html lang="it">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prima pagina</title>
-  </head>
-  <body>
-    <header>
-      <h1>Prima pagina</h1>
-    </header>
-    <main>
-      <p>Sto imparando a descrivere il contenuto, non a decorarlo.</p>
-    </main>
-  </body>
-</html>
-```
+</details>
+</td></tr></table>
 
 ## Esempio realistico: Feisbuc milestone 0
 
-La prima versione di Feisbuc non deve ancora essere bella e non deve ancora avere JavaScript. Deve essere **strutturata bene**.
+<p align="justify">La prima versione di Feisbuc non deve ancora essere bella e non deve avere JavaScript. Deve descrivere in modo chiaro l'intestazione, la navigazione, il contenuto principale, i post, il profilo e il piè di pagina.</p>
 
 ```html
 <body>
@@ -260,9 +333,14 @@ La prima versione di Feisbuc non deve ancora essere bella e non deve ancora aver
       <h2 id="feed-title">Feed</h2>
 
       <article>
-        <h3>Ada</h3>
+        <h3>Post di Ada</h3>
         <p>Il mio primo post semantico.</p>
       </article>
+    </section>
+
+    <section id="profilo" aria-labelledby="profilo-title">
+      <h2 id="profilo-title">Profilo</h2>
+      <p>Studente TPSI quinto anno.</p>
     </section>
   </main>
 
@@ -272,110 +350,108 @@ La prima versione di Feisbuc non deve ancora essere bella e non deve ancora aver
 </body>
 ```
 
-Questo e il primo mattone del capstone. Nei moduli successivi lo stesso documento ricevera CSS, layout responsive, comportamento JavaScript, REST API, database, autenticazione e realtime.
+<p align="justify">Ora entrambi i collegamenti della navigazione hanno una destinazione nel documento: <code>#feed</code> identifica la sezione con <code>id="feed"</code>, mentre <code>#profilo</code> identifica quella con <code>id="profilo"</code>.</p>
 
-## Confronto con il materiale legacy
-
-| Elemento legacy | Decisione | Evoluzione nel corso |
-| --- | --- | --- |
-| scheletro `html/head/body` | reuse + rewrite | aggiungere doctype, `lang`, charset, viewport e spiegazione semantica |
-| `p`, `ol`, `ul`, `a` | reuse | esempi nuovi e semanticamente corretti |
-| uso di `div` | keep with context | usare `div` quando serve un contenitore generico, non come default universale |
-| JSFiddle | keep as legacy tool | affiancare MDN Playground e file/repo locali |
-| esempio `<ul>` con `<ol>` | retire/fix | sostituire con esempio corretto |
-| HTML orientato all'aspetto | rewrite | separare struttura HTML e presentazione CSS |
-
-Provenienza legacy: `TheBitPoets/html_css_summary` @ `d71da420f1aa2ea39b61356e4f9900c6371e7a42`.
+<p align="justify">Questo è il primo mattone di Feisbuc. Nei moduli successivi lo stesso documento riceverà CSS, layout responsive, comportamento JavaScript, REST API, database, autenticazione e funzionalità realtime.</p>
 
 ## Errori frequenti
 
-1. dimenticare `<!doctype html>`;
-2. omettere `lang`;
-3. pensare che `head` sia l'header grafico della pagina;
-4. usare `h1/h2/...` solo per ottenere una dimensione del testo;
-5. usare `div` per qualsiasi cosa;
-6. annidare male gli elementi;
-7. usare un'immagine senza considerare `alt`;
-8. confondere `title` con `h1`;
-9. copiare esempi dalla documentazione senza capire il problema che risolvono;
-10. considerare il rendering visivo come prova che il markup sia corretto.
-
-## Esercizi graduati A-F
-
-### A — osserva e modifica
-
-Apri [Activity A — Anatomia di un documento HTML moderno](../../activities/tpsi5/html_anatomy_a/student/README.md) (`tpsi5-activity-a-html-anatomy-001`), lavora sullo [starter `index.html`](../../activities/tpsi5/html_anatomy_a/starter/index.html), aggiungi i metadati mancanti e osserva il DOM con DevTools.
-
-### B — modifica controllata
-
-Nell'[Activity B — Feisbuc semantico](../../activities/tpsi5/feisbuc_semantic_b/student/README.md) (`tpsi5-activity-b-feisbuc-semantic-001`), trasforma uno scheletro Feisbuc composto quasi soltanto da `div` in una struttura semantica.
-
-### C — scrittura autonoma
-
-Progetta da zero la struttura HTML di una pagina profilo senza copiare gli starter. Sara formalizzata in una Activity successiva.
-
-### D — debugging
-
-Riceverai un documento con nesting scorretto, heading incoerenti e problemi di accessibilita da diagnosticare.
-
-### E — mini-progetto
-
-Costruisci due pagine semanticamente coerenti con navigazione reciproca.
-
-### F — prodotto integrato
-
-Feisbuc crescera fino a diventare l'applicazione full stack del corso.
+<ol>
+  <li>dimenticare <code>&lt;!doctype html&gt;</code>;</li>
+  <li>omettere l'attributo <code>lang</code>;</li>
+  <li>confondere <code>head</code> con l'header visibile della pagina;</li>
+  <li>confondere <code>title</code> con <code>h1</code>;</li>
+  <li>scegliere <code>h1</code>, <code>h2</code> o <code>h3</code> soltanto per la loro dimensione;</li>
+  <li>usare <code>div</code> per qualsiasi contenitore;</li>
+  <li>annidare gli elementi in modo scorretto;</li>
+  <li>usare un'immagine senza decidere consapevolmente il valore di <code>alt</code>;</li>
+  <li>usare un link per eseguire un'azione o un pulsante per raggiungere una destinazione;</li>
+  <li>considerare il rendering visivo come prova che il markup sia corretto.</li>
+</ol>
 
 ## Laboratorio
 
-Le prime due Activity sono pensate per lavorare in locale con browser + editor e per essere registrabili da TheBitLab. Il grader HTML/browser generico di 2cornot2c e ancora pianificato: in questa fase la valutazione e guidata da checklist e rubrica docente, senza simulare test automatici inesistenti.
+<p align="justify">La lezione può essere distribuita in tre momenti: una prima parte guidata sui concetti e sui diagrammi, circa 30 minuti per l'Activity A e circa 45 minuti per l'Activity B. Le due Activity non devono necessariamente essere completate nella stessa ora.</p>
 
-Per l'indice navigabile delle Activity del corso vedere [`../../activities/tpsi5/README.md`](../../activities/tpsi5/README.md).
+<table align="center"><tr><td>
+<details>
+<summary>&#128187; <strong>Activity A — Anatomia di un documento HTML moderno</strong></summary>
+
+<p align="justify">Parti da una pagina che il browser riesce già a visualizzare, aggiungi i metadati mancanti e confronta il file sorgente con il DOM mostrato da DevTools.</p>
+
+<p align="justify"><a href="../../activities/tpsi5/html_anatomy_a/student/README.md">Apri la consegna dell'Activity A</a> e lavora sullo <a href="../../activities/tpsi5/html_anatomy_a/starter/index.html">starter <code>index.html</code></a>.</p>
+
+</details>
+</td></tr></table>
+
+<table align="center"><tr><td>
+<details>
+<summary>&#128187; <strong>Activity B — Feisbuc semantico</strong></summary>
+
+<p align="justify">Trasforma uno scheletro Feisbuc composto quasi soltanto da <code>div</code> in una struttura semantica. Non sostituire meccanicamente ogni <code>div</code>: scegli gli elementi in base al significato del contenuto.</p>
+
+<p align="justify"><a href="../../activities/tpsi5/feisbuc_semantic_b/student/README.md">Apri la consegna dell'Activity B</a> e lavora sullo <a href="../../activities/tpsi5/feisbuc_semantic_b/starter/index.html">starter <code>index.html</code></a>.</p>
+
+</details>
+</td></tr></table>
 
 ## Verifica rapida
 
-1. Perche HTML non dovrebbe descrivere principalmente l'aspetto grafico?
-2. Qual e la differenza tra `head` e `header`?
-3. A cosa serve `lang="it"`?
-4. Perche `main`, `nav` e `article` possono essere migliori di tre `div` generici?
-5. Quando `div` resta una scelta corretta?
-6. Che differenza c'e tra il file HTML e cio che osservi nel pannello Elements?
+<table align="center"><tr><td>
+<details>
+<summary>&#9989; <strong>Checkpoint — controlla ciò che hai compreso</strong></summary>
 
-## Sintesi inclusiva
+<ol>
+  <li>Quale percorso trasforma una risposta HTTP in una pagina visualizzata?</li>
+  <li>Quali responsabilità hanno HTML, CSS e JavaScript?</li>
+  <li>Qual è la differenza tra un tag e un elemento?</li>
+  <li>Qual è la differenza tra <code>head</code> e <code>header</code>?</li>
+  <li>A che cosa servono <code>lang="it"</code>, <code>meta charset</code> e viewport?</li>
+  <li>Perché <code>main</code>, <code>nav</code> e <code>article</code> possono comunicare più significato di tre <code>div</code>?</li>
+  <li>Quando <code>div</code> rimane una scelta corretta?</li>
+  <li>Qual è la differenza tra file HTML, DOM e pagina visualizzata?</li>
+  <li>Perché il fatto che una pagina sia visibile non dimostra che il markup sia corretto?</li>
+</ol>
 
-```text
-HTML = struttura + significato
+</details>
+</td></tr></table>
 
-Documento
-├── doctype
-└── html lang="it"
-    ├── head
-    │   ├── charset
-    │   ├── viewport
-    │   └── title
-    └── body
-        ├── header
-        ├── nav
-        ├── main
-        │   ├── section
-        │   └── article
-        └── footer
+## Sintesi
 
-CSS        -> aspetto/layout
-JavaScript -> comportamento
-HTTP       -> comunicazione client/server
-```
+<ul>
+  <li>il server può inviare HTML nel corpo di una risposta HTTP;</li>
+  <li>HTML descrive struttura e significato, non l'aspetto grafico;</li>
+  <li>il browser interpreta il documento e costruisce il DOM;</li>
+  <li>elementi, attributi e annidamento formano il markup;</li>
+  <li><code>head</code> contiene metadati, mentre <code>body</code> contiene la pagina;</li>
+  <li>gli elementi semantici comunicano il ruolo delle parti del documento;</li>
+  <li>DevTools mostra il DOM; un validator controlla le regole del markup;</li>
+  <li>CSS controllerà l'aspetto e JavaScript il comportamento.</li>
+</ul>
 
-## Fonti e collegamenti
+## Imparare a leggere MDN
 
-- MDN — Structuring content with HTML: <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content>
-- MDN — Basic HTML syntax: <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax>
-- MDN — Web page metadata: <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata>
-- MDN — Structuring documents: <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents>
-- WHATWG — HTML Living Standard: <https://html.spec.whatwg.org/>
-- Legacy snapshot: `TheBitPoets/html_css_summary@d71da420f1aa2ea39b61356e4f9900c6371e7a42`
+<p align="justify">La dispensa costruisce il percorso didattico in italiano; MDN viene usata come documentazione tecnica di riferimento. Quando incontriamo un elemento, non dobbiamo copiare l'intera pagina: dobbiamo saper trovare le informazioni necessarie per usarlo correttamente.</p>
 
-## Activity correlate
+<p align="justify">Per ogni elemento HTML controlleremo progressivamente:</p>
+<ol>
+  <li>quale problema risolve e quale significato esprime;</li>
+  <li>la sintassi e un esempio minimo;</li>
+  <li>gli attributi importanti per il nostro caso d'uso;</li>
+  <li>quali elementi può contenere e dove può essere inserito;</li>
+  <li>le note di accessibilità;</li>
+  <li>gli errori più frequenti e gli eventuali vincoli.</li>
+</ol>
 
-- [A — `tpsi5-activity-a-html-anatomy-001`](../../activities/tpsi5/html_anatomy_a/student/README.md)
-- [B — `tpsi5-activity-b-feisbuc-semantic-001`](../../activities/tpsi5/feisbuc_semantic_b/student/README.md)
+<p align="justify">Nella prossima revisione estenderemo questa lezione con una selezione esplicita degli elementi da studiare e, per ciascuno, con il collegamento alla relativa pagina MDN e l'indicazione delle sezioni e degli attributi da conoscere.</p>
+
+## Fonti e documentazione
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content">MDN — Structuring content with HTML</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN — Basic HTML syntax</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Webpage_metadata">MDN — What's in the head? Web page metadata</a>;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents">MDN — Document and website structure</a>;</li>
+  <li><a href="https://html.spec.whatwg.org/">WHATWG — HTML Living Standard</a>;</li>
+  <li><a href="https://validator.w3.org/nu/">Nu Html Checker</a>.</li>
+</ul>

@@ -2,13 +2,13 @@
 
 ## Scopo
 
-Questa Activity non valuta la capacita di memorizzare una lista di tag. Valuta la capacita di scegliere un elemento in base al significato del contenuto.
+Questa Activity non valuta la capacità di memorizzare una lista di tag. Valuta la capacità di scegliere un elemento in base al significato del contenuto.
 
 ## Alternative accettabili
 
-La soluzione di riferimento usa una `section` anche per il profilo, ma e accettabile una diversa struttura se lo studente sa motivarla e conserva una gerarchia coerente.
+La soluzione di riferimento usa una `section` anche per il profilo, ma è accettabile una diversa struttura se lo studente sa motivarla e conserva una gerarchia coerente.
 
-`div` non deve essere penalizzato in quanto tale: va penalizzato quando sostituisce un elemento semanticamente piu adatto senza una motivazione.
+`div` non deve essere penalizzato in quanto tale: va penalizzato quando sostituisce un elemento semanticamente più adatto senza una motivazione.
 
 ## Discussione finale consigliata
 
@@ -18,7 +18,7 @@ Mostrare tre versioni dello stesso markup:
 2. sostituzione meccanica `div -> section`;
 3. soluzione semantica ragionata.
 
-Chiedere quale delle tre comunica meglio l'intenzione e perche.
+Chiedere quale delle tre comunica meglio l'intenzione e perché.
 
 ## Collegamento col Feisbuc legacy
 
@@ -26,4 +26,4 @@ La milestone deriva dal progetto `TheBitPoets/feisbuc` pinned allo SHA `086995ec
 
 ## Limite runtime attuale
 
-Come per Activity A, `html` e ancora `planned` nel grader generico 2cornot2c. La correzione resta manuale/rubric-based; CI e Activity validator controllano il contratto e la presenza degli asset, non la correttezza semantica della consegna dello studente.
+Come per Activity A, `html` è ancora `planned` nel grader generico 2cornot2c. La correzione resta manuale/rubric-based; CI e Activity validator controllano il contratto e la presenza degli asset, non la correttezza semantica della consegna dello studente.

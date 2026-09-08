@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../01-html-element-anatomy.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Anatomia di un elemento HTML</title>
+  <desc id="desc">Il codice di un paragrafo mostra il tag di apertura, il nome dell'elemento, l'attributo class, il contenuto e il tag di chiusura.</desc>
+  <defs id="visual-kit-components"/>
+  <defs>
+    <linearGradient id="anatomyBackground" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient>
+    <filter id="anatomyShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#020617" flood-opacity=".34"/></filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#anatomyBackground)"/>
+  <circle cx="90" cy="90" r="290" fill="#f97316" opacity=".08"/><circle cx="1840" cy="1010" r="370" fill="#8b5cf6" opacity=".07"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="76" text-anchor="middle" fill="#f8fafc" font-size="46" font-weight="800">ANATOMIA DI UN ELEMENTO HTML</text>
+    <text x="960" y="120" text-anchor="middle" fill="#b8c8dc" font-size="22">Ogni parte del markup comunica un'informazione precisa</text>
+
+    <g filter="url(#anatomyShadow)">
+      <rect x="120" y="210" width="1680" height="300" rx="34" fill="#f8fafc"/>
+      <rect x="165" y="265" width="1590" height="175" rx="24" fill="#0f172a"/>
+      <text x="960" y="378" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="62" font-weight="700">
+        <tspan fill="#94a3b8">&lt;</tspan><tspan fill="#fb923c">p</tspan><tspan fill="#e2e8f0"> </tspan><tspan fill="#38bdf8">class</tspan><tspan fill="#e2e8f0">=</tspan><tspan fill="#86efac">&quot;intro&quot;</tspan><tspan fill="#94a3b8">&gt;</tspan><tspan fill="#f8fafc">Ciao Web!</tspan><tspan fill="#94a3b8">&lt;/</tspan><tspan fill="#fb923c">p</tspan><tspan fill="#94a3b8">&gt;</tspan>
+      </text>
+    </g>
+
+    <g font-size="19" font-weight="800" text-anchor="middle">
+      <g><path d="M345 450v105" stroke="#fb923c" stroke-width="5"/><rect x="185" y="555" width="320" height="105" rx="22" fill="#fff7ed" stroke="#fb923c" stroke-width="3"/><text x="345" y="597" fill="#9a3412">TAG DI APERTURA</text><text x="345" y="630" fill="#7c2d12" font-size="17">inizia l'elemento</text></g>
+      <g><path d="M685 450v250" stroke="#38bdf8" stroke-width="5"/><rect x="525" y="700" width="320" height="105" rx="22" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3"/><text x="685" y="742" fill="#075985">ATTRIBUTO</text><text x="685" y="775" fill="#0c4a6e" font-size="17">nome e valore</text></g>
+      <g><path d="M1050 450v105" stroke="#a78bfa" stroke-width="5"/><rect x="890" y="555" width="320" height="105" rx="22" fill="#ede9fe" stroke="#a78bfa" stroke-width="3"/><text x="1050" y="597" fill="#5b21b6">CONTENUTO</text><text x="1050" y="630" fill="#6b21a8" font-size="17">testo o altri elementi</text></g>
+      <g><path d="M1510 450v250" stroke="#34d399" stroke-width="5"/><rect x="1350" y="700" width="320" height="105" rx="22" fill="#d1fae5" stroke="#34d399" stroke-width="3"/><text x="1510" y="742" fill="#065f46">TAG DI CHIUSURA</text><text x="1510" y="775" fill="#166534" font-size="17">termina l'elemento</text></g>
+    </g>
+
+    <rect x="310" y="910" width="1300" height="72" rx="36" fill="#e2e8f0" opacity=".12"/>
+    <text x="960" y="955" text-anchor="middle" fill="#e2e8f0" font-size="21">L'elemento completo comprende tag, attributi e contenuto; il tag è soltanto una parte dell'elemento.</text>
+  </g>
+</svg>
