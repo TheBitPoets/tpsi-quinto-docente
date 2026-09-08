@@ -35,6 +35,18 @@ Al termine del modulo lo studente deve saper:
 - SQL raw, constraint, prepared statement e repository;
 - Feisbuc milestone 6 con `SqlPostStore`.
 
+## MDN in questa lezione
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — cookie e sessione:</strong> riprendi la <a href="GUIDA_USO_MDN.md#mdn-guide-http">checklist HTTP della guida trasversale</a>. MDN chiarisce il comportamento del browser e del protocollo; RFC, OWASP e NIST guidano le decisioni di sicurezza del modulo.</p>
+<ul>
+  <li><strong>Studia:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies">Using HTTP cookies</a>, distinguendo cookie, sessione server-side e identificatore di sessione;</li>
+  <li><strong>consulta:</strong> la reference di <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie"><code>Set-Cookie</code></a> per sintassi e direttive <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite</code>, <code>Path</code> e scadenza;</li>
+  <li><strong>riconosci:</strong> gli avvisi di sicurezza e compatibilità, senza trasformarli in una policy completa per l'applicazione.</li>
+</ul>
+<p align="justify"><strong>Prodotto atteso:</strong> parti da un header <code>Set-Cookie</code> del laboratorio e spiega chi lo produce, chi lo conserva, quando viene rinviato e quali attacchi riduce ogni direttiva scelta.</p>
+</td></tr></table>
+
 ---
 
 # Problema iniziale

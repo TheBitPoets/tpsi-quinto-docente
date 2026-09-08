@@ -490,49 +490,19 @@ Usare Flexbox per simulare una tabella bidimensionale o Grid per una semplice ri
 
 CSS puo modificare la posizione visuale. L'ordine del DOM rimane pero importante per lettura, tastiera e tecnologie assistive. Non usiamo il layout per mascherare una struttura HTML sbagliata.
 
-## Come studiare con MDN
+## MDN in questa lezione
 
-Per ogni concetto non leggere MDN dall'inizio alla fine come un romanzo.
-
-### Cascade e specificita
-
-Cerca:
-
-- “Introduction to the CSS cascade”;
-- “Specificity”;
-- “Handling conflicts”.
-
-Domande:
-
-1. quali regole sono candidate?
-2. quale dichiarazione vince?
-3. il problema si puo risolvere semplificando il selettore?
-
-### Box model
-
-Apri la guida “The box model” e usa DevTools per confrontare content, padding, border e margin.
-
-### Flexbox
-
-Apri “Flexbox” e identifica sempre:
-
-- container;
-- items;
-- main axis;
-- cross axis.
-
-### Grid
-
-Apri “CSS grid layout” e identifica:
-
-- tracks;
-- columns/rows;
-- gap;
-- posizione degli item.
-
-### Responsive
-
-Apri “Responsive web design” e “Media query fundamentals”. Prova prima a rendere flessibile il layout senza breakpoint, poi aggiungi una media query solo quando il contenuto lo richiede.
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — CSS:</strong> usa il metodo generale della <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a> e, quando apri la scheda di una proprietà, segui l'ordine indicato in <a href="GUIDA_USO_MDN.md#mdn-guide-css">Come leggere una reference CSS</a>.</p>
+<ul>
+  <li><strong>Cascade e specificità:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts">Handling conflicts</a>; ricostruisci quali dichiarazioni sono candidate e perché una vince;</li>
+  <li><strong>box model:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model">The box model</a>; confronta content, padding, border e margin nei DevTools;</li>
+  <li><strong>Flexbox:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox">Flexbox</a>; identifica container, item, main axis e cross axis;</li>
+  <li><strong>Grid:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids">CSS grid layout</a>; identifica track, righe, colonne, gap e posizione degli item;</li>
+  <li><strong>responsive:</strong> studia <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design">Responsive web design</a> e <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Media_queries">Media query fundamentals</a>; aggiungi un breakpoint soltanto quando lo richiede il contenuto.</li>
+</ul>
+<p align="justify"><strong>Prodotto atteso:</strong> per ogni problema annota la regola CSS responsabile, la prova svolta nei DevTools e il cambiamento osservato.</p>
+</td></tr></table>
 
 ## Esempi da modificare
 

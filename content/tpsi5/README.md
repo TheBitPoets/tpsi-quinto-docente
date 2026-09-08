@@ -10,6 +10,10 @@ Tutte le dispense del corso seguono lo [standard di formattazione HTML/Markdown]
 
 Lo standard è obbligatorio per i nuovi contenuti e viene applicato progressivamente alle lezioni esistenti durante la loro revisione.
 
+## Guida trasversale a MDN
+
+La pagina [`GUIDA_USO_MDN.md`](GUIDA_USO_MDN.md) insegna a distinguere Learn, Guide, Reference e Glossary, leggere le diverse schede tecniche, interpretare stato e compatibilità e trasformare la consultazione in una prova osservabile. Non è una lezione numerata: accompagna tutte le UDA e viene richiamata dai pannelli “MDN in questa lezione”.
+
 ## Principi
 
 - Web Platform prima dei framework;

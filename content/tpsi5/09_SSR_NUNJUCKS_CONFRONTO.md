@@ -23,6 +23,18 @@ Al termine del modulo lo studente sa:
 - autenticazione, session cookie e ownership;
 - HTML semantico e form.
 
+## MDN in questa lezione
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — form, rappresentazioni e redirect:</strong> usa la <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a> per separare le responsabilità della Web Platform da quelle di Express e Nunjucks.</p>
+<ul>
+  <li><strong>Studia:</strong> la reference di <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form"><code>&lt;form&gt;</code></a>, concentrandoti su <code>action</code>, <code>method</code>, controlli associati e invio;</li>
+  <li><strong>studia:</strong> la guida alle <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections">redirezioni HTTP</a> e la scheda dello status <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/303"><code>303 See Other</code></a> per il pattern Post/Redirect/Get;</li>
+  <li><strong>consulta:</strong> la reference di <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Type"><code>Content-Type</code></a> per distinguere una risposta HTML da una rappresentazione JSON.</li>
+</ul>
+<p align="justify"><strong>Prodotto atteso:</strong> traccia un invio form completo e indica richiesta POST, risposta 303, nuova richiesta GET e risposta HTML, motivando ogni passaggio con il riferimento pertinente.</p>
+</td></tr></table>
+
 ---
 
 ## Problema iniziale

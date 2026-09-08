@@ -24,6 +24,18 @@ Al termine del modulo lo studente deve saper:
 - UDA 22: JavaScript, moduli ES, DOM, eventi, stato e `localStorage`;
 - concetto generale di client e server.
 
+## MDN in questa lezione
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — HTTP e Fetch:</strong> usa la <a href="GUIDA_USO_MDN.md#mdn-guide-http">checklist per le reference HTTP</a> e la <a href="GUIDA_USO_MDN.md#mdn-guide-js-api">checklist per le Web API</a>. Qui MDN serve a collegare ciò che osservi nel pannello Network con il contratto usato da JavaScript.</p>
+<ul>
+  <li><strong>Studia:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods">metodi HTTP</a> e <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">status code</a>, aprendo le singole schede quando serve un dettaglio;</li>
+  <li><strong>studia:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">Using the Fetch API</a>, in particolare richiesta, risposta, controllo dello status e lettura del body;</li>
+  <li><strong>consulta:</strong> le reference di <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch"><code>fetch()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request"><code>Request</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response"><code>Response</code></a> per sintassi, proprietà e valori restituiti.</li>
+</ul>
+<p align="justify"><strong>Prodotto atteso:</strong> scegli una richiesta del Feisbuc, annota metodo, URL, header, body, status e rappresentazione; collega ogni campo alla sezione MDN che ne chiarisce il significato.</p>
+</td></tr></table>
+
 ## Problema iniziale
 
 Nella milestone precedente Feisbuc conserva i post nel browser:

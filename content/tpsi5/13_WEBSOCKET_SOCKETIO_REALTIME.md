@@ -23,6 +23,18 @@ Al termine del modulo lo studente sa:
 - UDA25: Vue 3, Vue Router e TypeScript boundary typing;
 - modello `state -> render` e idea di source of truth.
 
+## MDN in questa lezione
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> MDN e Socket.IO:</strong> usa la <a href="GUIDA_USO_MDN.md#mdn-guide-source-choice">guida alla scelta delle fonti</a>. MDN documenta il protocollo e l'API WebSocket disponibile nel browser; la documentazione Socket.IO definisce eventi, riconnessione, transport fallback, rooms e API della libreria.</p>
+<ul>
+  <li><strong>Studia:</strong> la panoramica della <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">WebSocket API</a> e la reference di <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket"><code>WebSocket</code></a>;</li>
+  <li><strong>riconosci:</strong> apertura, messaggi, errori e chiusura nell'esempio <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications">Writing WebSocket client applications</a>;</li>
+  <li><strong>confronta:</strong> ciò che appartiene allo standard WebSocket con ciò che Socket.IO aggiunge come libreria applicativa.</li>
+</ul>
+<p align="justify"><strong>Prodotto atteso:</strong> costruisci una tabella a due colonne “WebSocket” e “Socket.IO” e assegna ogni caratteristica al livello corretto.</p>
+</td></tr></table>
+
 ## Problema iniziale
 
 Feisbuc milestone 11 e corretta ma ogni browser conosce solo cio che ha appena richiesto al server.

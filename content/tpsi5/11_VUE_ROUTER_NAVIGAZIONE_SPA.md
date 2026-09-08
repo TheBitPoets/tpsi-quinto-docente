@@ -284,6 +284,11 @@ query -> modifica filtro, ricerca o rappresentazione
 
 ## 9. HTML5 history e deep link
 
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> MDN sotto Vue Router:</strong> per l'API del router usa la documentazione ufficiale Vue Router; per comprendere URL e history del browser usa la <a href="GUIDA_USO_MDN.md#mdn-guide-source-choice">regola di scelta delle fonti</a>, la <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">History API</a> e la reference di <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL"><code>URL</code></a>.</p>
+<p align="justify"><strong>Studia ora:</strong> history entry, navigazione avanti/indietro, path e query. <strong>Riconosci per dopo:</strong> i metodi nativi dettagliati che Vue Router incapsula. <strong>Prodotto atteso:</strong> spiega separatamente che cosa accade durante una navigazione interna e durante il caricamento diretto di un deep link.</p>
+</td></tr></table>
+
 Con:
 
 ```js

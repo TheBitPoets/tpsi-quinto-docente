@@ -103,6 +103,11 @@ Quando incontri una classe nuova:
 
 MDN resta il riferimento per capire **CSS e Web Platform**; la documentazione Bootstrap descrive invece l'API del framework.
 
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Due documentazioni, due responsabilità:</strong> consulta <a href="GUIDA_USO_MDN.md#mdn-guide-source-choice">come scegliere la fonte nel corso full stack</a>. Per una classe Bootstrap parti dalla documentazione Bootstrap; per comprendere la regola <code>display</code>, il layout Flex/Grid, il box model o il comportamento HTML sottostante usa MDN.</p>
+<p align="justify"><strong>Prodotto atteso:</strong> per ogni utility nuova indica sia la classe del framework sia il concetto Web Platform che sta applicando.</p>
+</td></tr></table>
+
 ## Caricare Bootstrap
 
 Per gli esempi iniziali possiamo usare i link CDN documentati ufficialmente.

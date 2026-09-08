@@ -42,7 +42,7 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 <a id="lesson-mdn-maps"></a>
 ## Orientamento nella documentazione MDN
 
-<p align="justify">La dispensa costruisce un percorso guidato in italiano, mentre MDN rimane la documentazione tecnica da imparare a consultare. Le mappe seguenti mettono a sinistra i paragrafi della lezione e a destra le parti corrispondenti di MDN: le frecce mostrano il raccordo e i colori indicano fino a quale profondità è richiesto lo studio.</p>
+<p align="justify">La dispensa costruisce un percorso guidato in italiano, mentre MDN rimane la documentazione tecnica da imparare a consultare. Se è la prima volta che la usi, apri prima la <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a>. Le mappe seguenti mettono a sinistra i paragrafi della lezione e a destra le parti corrispondenti di MDN: le frecce mostrano il raccordo e i colori indicano fino a quale profondità è richiesto lo studio.</p>
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128506;</span> Come leggere i colori:</strong>
@@ -617,7 +617,7 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 <blockquote>
 <p><strong>47 · CORRISPONDENZA</strong></p>
 <p><strong>&#128309; DISPENSA</strong><br>
-<strong><a href="#lesson-reading-mdn">Imparare a leggere MDN</a></strong></p>
+<strong><a href="#lesson-reading-mdn">MDN in questa lezione</a></strong></p>
 <ul><li>Metodo di consultazione e profondità di studio richiesta.</li></ul>
 <p><strong>&#128994; MDN</strong><br>
 <strong><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements">HTML elements reference</a></strong></p>
@@ -1516,21 +1516,17 @@ DOM significa <em>Document Object Model</em>. È la rappresentazione ad albero d
 </ul>
 
 <a id="lesson-reading-mdn"></a>
-## Imparare a leggere MDN
+## MDN in questa lezione
 
-<p align="justify">La dispensa costruisce il percorso didattico in italiano; MDN viene usata come documentazione tecnica di riferimento. Quando incontriamo un elemento, non dobbiamo copiare l'intera pagina: dobbiamo saper trovare le informazioni necessarie per usarlo correttamente.</p>
-
-<p align="justify">Per ogni elemento HTML controlleremo progressivamente:</p>
-<ol>
-  <li>quale problema risolve e quale significato esprime;</li>
-  <li>la sintassi e un esempio minimo;</li>
-  <li>gli attributi importanti per il nostro caso d'uso;</li>
-  <li>quali elementi può contenere e dove può essere inserito;</li>
-  <li>le note di accessibilità;</li>
-  <li>gli errori più frequenti e gli eventuali vincoli.</li>
-</ol>
-
-<p align="justify">La <a href="#lesson-mdn-element-map">mappa delle schede elemento</a> è collocata nell'orientamento iniziale della lezione, subito dopo l'indice incrociato, così può essere consultata prima di iniziare lo studio.</p>
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — HTML:</strong> prima di consultare le schede tecniche, leggi nella <a href="GUIDA_USO_MDN.md">guida trasversale a MDN</a> la <a href="GUIDA_USO_MDN.md#mdn-guide-map">differenza fra Learn, Guide e Reference</a> e il metodo per <a href="GUIDA_USO_MDN.md#mdn-guide-html">leggere la reference di un elemento HTML</a>.</p>
+<ul>
+  <li><strong>Studia ora:</strong> significato, sintassi, attributi indicati dalla dispensa, contenuto ammesso e accessibilità;</li>
+  <li><strong>riconosci per dopo:</strong> API DOM, eventi e dettagli avanzati non richiesti dalla lezione;</li>
+  <li><strong>prodotto atteso:</strong> spiega la scelta dell'elemento e verifica il markup con DevTools e validator.</li>
+</ul>
+<p align="justify">Per sapere esattamente quali parti aprire usa la <a href="#lesson-mdn-element-map">mappa delle schede elemento</a>, collocata nell'orientamento iniziale subito dopo l'indice incrociato.</p>
+</td></tr></table>
 
 <a id="lesson-sources"></a>
 ## Fonti e documentazione

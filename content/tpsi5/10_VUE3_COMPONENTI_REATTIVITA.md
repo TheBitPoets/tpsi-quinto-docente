@@ -61,6 +61,11 @@ callback                           emits
 
 Il framework non rende inutili i fondamenti: li organizza.
 
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> MDN e documentazione Vue:</strong> la <a href="GUIDA_USO_MDN.md#mdn-guide-source-choice">guida trasversale</a> spiega come scegliere la fonte. Per <code>ref()</code>, <code>computed()</code>, props, emits e direttive usa la documentazione ufficiale Vue; per elementi HTML, eventi DOM, Fetch e comportamento del browser usa MDN.</p>
+<p align="justify"><strong>Prodotto atteso:</strong> quando incontri un costrutto Vue, indica quale concetto della Web Platform organizza e quale documentazione definisce ciascuno dei due livelli.</p>
+</td></tr></table>
+
 ## 2. Tooling del corso
 
 Per il primo blocco pinniamo:

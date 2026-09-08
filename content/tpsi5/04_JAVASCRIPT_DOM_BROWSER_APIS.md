@@ -973,30 +973,18 @@ Lo storage conserva stringhe: serializzare/deserializzare esplicitamente.
 
 Il selettore puo essere sbagliato o il markup puo cambiare.
 
-## Come leggere MDN in questo modulo
+## MDN in questa lezione
 
-Per ogni API usiamo sempre lo stesso rituale:
-
-```text
-1. nome dell'API
-2. che oggetto la espone
-3. sintassi
-4. input
-5. valore restituito
-6. esempio minimo
-7. eccezioni / edge cases
-8. compatibilita
-9. link alla specifica
-```
-
-Esempio per `querySelector`:
-
-- API: `Document.querySelector()`;
-- input: selettore CSS;
-- output: primo `Element` corrispondente oppure `null`;
-- poi modifichiamo l'esempio nel nostro Feisbuc.
-
-Questo e il comportamento che vogliamo trasferire al lavoro reale: **la documentazione non e una pagina da imparare a memoria, e uno strumento di lavoro**.
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Percorso MDN — JavaScript e Web API:</strong> applica il processo della <a href="GUIDA_USO_MDN.md#mdn-guide-workflow">guida trasversale a MDN</a> e usa la checklist per <a href="GUIDA_USO_MDN.md#mdn-guide-js-api">JavaScript e Web API</a>.</p>
+<ul>
+  <li><strong>JavaScript:</strong> individua oggetto proprietario, parametri, valore restituito, mutazione e casi limite;</li>
+  <li><strong>DOM:</strong> individua interfaccia, metodo, input, possibile assenza ed eccezioni;</li>
+  <li><strong>eventi:</strong> individua target, tipo di evento, fase di propagazione e possibilità di annullamento;</li>
+  <li><strong>storage:</strong> individua durata, formato dei dati, origine e limiti dell'API.</li>
+</ul>
+<p align="justify"><strong>Prodotto atteso:</strong> compila una <a href="GUIDA_USO_MDN.md#mdn-guide-study-card">scheda di lettura</a> per <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"><code>Document.querySelector()</code></a>, poi modifica l'esempio minimo nel Feisbuc e gestisci esplicitamente il caso <code>null</code>.</p>
+</td></tr></table>
 
 ## Esercizi A-F
 

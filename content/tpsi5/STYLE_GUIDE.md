@@ -154,6 +154,17 @@ All'inizio di ogni lezione inserire un pannello `Orientamento della sezione` con
 
 Il pannello serve a collegare la lezione a quella precedente e a quella successiva, non a ripetere l'indice.
 
+## Riferimenti MDN
+
+Il metodo generale di consultazione vive in `GUIDA_USO_MDN.md` e non deve essere duplicato nelle singole dispense. Quando MDN è una fonte operativa per lo studente, la lezione inserisce un pannello visibile “MDN in questa lezione” che contiene:
+
+- il collegamento alla sezione pertinente della guida trasversale;
+- le pagine MDN selezionate per l'argomento;
+- la profondità richiesta, distinguendo ciò che va studiato da ciò che basta riconoscere;
+- un prodotto osservabile, per esempio una scheda di lettura, una prova nei DevTools o una scelta tecnica motivata.
+
+La documentazione specifica di framework, runtime e librerie resta la fonte primaria per le rispettive API. MDN viene affiancata per rendere esplicito il comportamento della Web Platform sottostante.
+
 ## Codice
 
 Fuori dai blocchi HTML sono ammessi i fenced code block Markdown:
