@@ -94,6 +94,7 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </td></tr></table>
 
 <a id="lesson-mdn-cross-index"></a>
+<table align="center" width="100%"><tr><td>
 <details>
 <summary>&#128279; <strong>Indice incrociato navigabile — Dispensa ↔ MDN</strong></summary>
 
@@ -635,6 +636,7 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
 </details>
 
 </details>
+</td></tr></table>
 
 <p align="justify">Le mappe sono un orientamento, non una percentuale di importanza: una parte indicata come “più avanti” può essere fondamentale, ma non appartiene ancora agli obiettivi di questa lezione. I collegamenti puntuali accanto ai singoli paragrafi restano il modo più rapido per aprire il punto esatto di MDN.</p>
 
