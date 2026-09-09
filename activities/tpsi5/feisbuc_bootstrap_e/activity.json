@@ -12,7 +12,7 @@
     "utilities",
     "navbar",
     "card",
-    "accessibilita",
+    "accessibilità",
     "refactoring"
   ],
   "linguaggio": "html",
@@ -28,13 +28,13 @@
     {
       "source_id": "tpsi5-source-originali",
       "path": "content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md",
-      "anchor": "feisbuc-milestone-2",
+      "anchor": "lesson-bootstrap-feisbuc",
       "role": "lesson"
     },
     {
       "source_id": "tpsi5-source-originali",
       "path": "content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md",
-      "anchor": "feisbuc-milestone-1-layout-responsive",
+      "anchor": "feisbuc-milestone-1-shell-responsive",
       "role": "baseline"
     },
     {
@@ -54,7 +54,7 @@
     "usa almeno una utility Flexbox e una utility di spacing",
     "non usare style inline",
     "non usare !important",
-    "custom.css non deve implementare display grid, display flex o media query del macro-layout",
+    "come vincolo didattico di questa Activity, custom.css non deve implementare display grid, display flex o media query del macro-layout",
     "mantieni un solo h1 e la gerarchia h1/h2/h3",
     "compila almeno sei righe sostanziali in MAPPING.md",
     "il risultato deve restare leggibile anche se Bootstrap viene sostituito in futuro"
@@ -138,7 +138,7 @@
     },
     {
       "name": "navbar",
-      "criterion": "navbar e collapse sono collegati correttamente e il bundle Bootstrap e incluso"
+      "criterion": "navbar e collapse sono collegati correttamente e il bundle Bootstrap è incluso"
     },
     {
       "name": "semantica",
@@ -151,6 +151,10 @@
     {
       "name": "mapping",
       "criterion": "MAPPING.md contiene almeno sei mapping corretti con il concetto CSS sottostante"
+    },
+    {
+      "name": "matrice di prova",
+      "criterion": "sono documentati gli esiti a 375, 991, 992 e 1280 px, con tastiera, zoom 200% e bundle disabilitato"
     }
   ],
   "rubrica": [
@@ -163,11 +167,11 @@
       "punti": 2
     },
     {
-      "criterio": "Semantica e accessibilita preservate",
+      "criterio": "Semantica e accessibilità preservate",
       "punti": 2
     },
     {
-      "criterio": "Qualita del mapping CSS nativo -> Bootstrap",
+      "criterio": "Qualità del mapping CSS nativo -> Bootstrap",
       "punti": 2
     },
     {

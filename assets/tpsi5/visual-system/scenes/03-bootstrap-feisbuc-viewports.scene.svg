@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../03-bootstrap-feisbuc-viewports.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Feisbuc Bootstrap su viewport mobile e desktop</title>
+  <desc id="desc">A sinistra una viewport mobile mostra navbar collassata e regioni Profilo, Feed e Tendenze in una colonna. A destra una viewport desktop mostra navbar espansa e proporzione 3 6 3.</desc>
+  <defs id="visual-kit-components"/>
+  <defs><linearGradient id="bfvBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient><filter id="bfvShadow"><feDropShadow dx="0" dy="11" stdDeviation="16" flood-opacity=".3"/></filter></defs>
+  <rect width="1920" height="1080" fill="url(#bfvBg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="72" text-anchor="middle" fill="#f8fafc" font-size="44" font-weight="800">FEISBUC · STESSO DOM, DUE VIEWPORT</text>
+    <text x="960" y="116" text-anchor="middle" fill="#b8c8dc" font-size="21">Il breakpoint modifica disposizione e navbar; contenuti e ordine semantico restano coerenti</text>
+    <g filter="url(#bfvShadow)"><rect x="130" y="180" width="500" height="770" rx="42" fill="#f8fafc" stroke="#38bdf8" stroke-width="6"/><rect x="730" y="180" width="1060" height="770" rx="42" fill="#f8fafc" stroke="#22c55e" stroke-width="6"/></g>
+    <g><rect x="170" y="225" width="420" height="86" rx="18" fill="#dbeafe"/><text x="205" y="278" fill="#075985" font-size="24" font-weight="800">Feisbuc</text><rect x="510" y="246" width="48" height="44" rx="8" fill="#fff" stroke="#075985" stroke-width="3"/><path d="M522 258h24M522 268h24M522 278h24" stroke="#075985" stroke-width="3"/></g>
+    <g text-anchor="middle" font-weight="800"><rect x="170" y="345" width="420" height="130" rx="20" fill="#e0f2fe"/><text x="380" y="417" fill="#075985" font-size="25">PROFILO · col-12</text><rect x="170" y="505" width="420" height="210" rx="20" fill="#ede9fe"/><text x="380" y="615" fill="#5b21b6" font-size="25">FEED · col-12</text><rect x="170" y="745" width="420" height="130" rx="20" fill="#e0f2fe"/><text x="380" y="817" fill="#075985" font-size="25">TENDENZE · col-12</text></g>
+    <rect x="770" y="225" width="980" height="86" rx="18" fill="#dcfce7"/><text x="810" y="278" fill="#166534" font-size="24" font-weight="800">Feisbuc</text><text x="1515" y="278" fill="#166534" font-size="20">Profilo · Feed · Tendenze</text>
+    <g text-anchor="middle" font-weight="800"><rect x="770" y="345" width="235" height="530" rx="24" fill="#e0f2fe"/><text x="887" y="585" fill="#075985" font-size="25">PROFILO</text><text x="887" y="625" fill="#075985" font-size="19">col-lg-3</text><rect x="1030" y="345" width="460" height="530" rx="24" fill="#ede9fe"/><text x="1260" y="585" fill="#5b21b6" font-size="25">FEED</text><text x="1260" y="625" fill="#5b21b6" font-size="19">col-lg-6</text><rect x="1515" y="345" width="235" height="530" rx="24" fill="#e0f2fe"/><text x="1632" y="585" fill="#075985" font-size="25">TENDENZE</text><text x="1632" y="625" fill="#075985" font-size="19">col-lg-3</text></g>
+    <text x="380" y="1015" text-anchor="middle" fill="#7dd3fc" font-size="22" font-weight="800">SOTTO LG · menu collassabile · 1 colonna</text>
+    <text x="1260" y="1015" text-anchor="middle" fill="#86efac" font-size="22" font-weight="800">DA LG · menu espanso · 3 + 6 + 3</text>
+  </g>
+</svg>

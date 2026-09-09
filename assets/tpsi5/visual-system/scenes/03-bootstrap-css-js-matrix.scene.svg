@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../03-bootstrap-css-js-matrix.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Bootstrap CSS e Bootstrap JavaScript</title>
+  <desc id="desc">La colonna sinistra raccoglie layout, utility e presentazione che funzionano col CSS. La colonna destra raccoglie i cambi di stato dei componenti interattivi che richiedono il JavaScript Bootstrap.</desc>
+  <defs id="visual-kit-components"/>
+  <defs><linearGradient id="bcjBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient><filter id="bcjShadow"><feDropShadow dx="0" dy="12" stdDeviation="17" flood-opacity=".28"/></filter></defs>
+  <rect width="1920" height="1080" fill="url(#bcjBg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="78" text-anchor="middle" fill="#f8fafc" font-size="45" font-weight="800">PRESENTAZIONE O CAMBIO DI STATO?</text>
+    <text x="960" y="124" text-anchor="middle" fill="#b8c8dc" font-size="21">La risposta stabilisce se basta il foglio CSS oppure serve anche il bundle JavaScript</text>
+    <g filter="url(#bcjShadow)"><rect x="120" y="205" width="790" height="700" rx="40" fill="#eff6ff" stroke="#38bdf8" stroke-width="6"/><rect x="1010" y="205" width="790" height="700" rx="40" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="6"/></g>
+    <text x="515" y="285" text-anchor="middle" fill="#075985" font-size="31" font-weight="800">BASTA BOOTSTRAP CSS</text>
+    <text x="1405" y="285" text-anchor="middle" fill="#5b21b6" font-size="31" font-weight="800">SERVE BOOTSTRAP JS</text>
+    <g font-size="23" font-weight="800" text-anchor="middle">
+      <g fill="#dbeafe"><rect x="210" y="350" width="610" height="82" rx="20"/><rect x="210" y="460" width="610" height="82" rx="20"/><rect x="210" y="570" width="610" height="82" rx="20"/><rect x="210" y="680" width="610" height="82" rx="20"/></g>
+      <g fill="#1e3a5f"><text x="515" y="401">container · row · col · gutter</text><text x="515" y="511">display · flex · spacing</text><text x="515" y="621">card · stile dei button</text><text x="515" y="731">stile form-control</text></g>
+      <g fill="#ede9fe"><rect x="1100" y="350" width="610" height="82" rx="20"/><rect x="1100" y="460" width="610" height="82" rx="20"/><rect x="1100" y="570" width="610" height="82" rx="20"/><rect x="1100" y="680" width="610" height="82" rx="20"/></g>
+      <g fill="#5b21b6"><text x="1405" y="401">Collapse · mostra / nascondi</text><text x="1405" y="511">toggler navbar su mobile</text><text x="1405" y="621">modal · dropdown</text><text x="1405" y="731">tooltip · popover</text></g>
+    </g>
+    <rect x="310" y="942" width="1300" height="82" rx="40" fill="#f8fafc"/>
+    <text x="960" y="994" text-anchor="middle" fill="#102a43" font-size="22" font-weight="800">Il CSS presenta; i plugin JavaScript osservano eventi e modificano lo stato del DOM.</text>
+  </g>
+</svg>

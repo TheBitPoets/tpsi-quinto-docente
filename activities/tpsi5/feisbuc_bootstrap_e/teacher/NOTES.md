@@ -2,9 +2,9 @@
 
 ## Scopo
 
-Questa Activity verifica che lo studente sappia **rifattorizzare** una soluzione CSS nativa in un framework senza perdere semantica, accessibilita e modello mentale.
+Questa Activity verifica che lo studente sappia **rifattorizzare** una soluzione CSS nativa in un framework senza perdere semantica, accessibilità e modello mentale.
 
-Non valutare il numero assoluto di classi Bootstrap. Valutare la qualita delle scelte e la capacita di collegarle ai concetti CSS.
+Non valutare il numero assoluto di classi Bootstrap. Valutare la qualità delle scelte e la capacità di collegarle ai concetti CSS.
 
 ## Evidenze attese
 
@@ -17,6 +17,7 @@ Non valutare il numero assoluto di classi Bootstrap. Valutare la qualita delle s
 - nessuna perdita di heading/landmark;
 - `custom.css` minimo e senza reimplementazione di layout;
 - almeno sei mapping sostanziali.
+- matrice di prova compilata con viewport, tastiera, zoom e dipendenza dal bundle.
 
 ## Alternative accettabili
 
@@ -28,7 +29,9 @@ Non valutare il numero assoluto di classi Bootstrap. Valutare la qualita delle s
 
 La soluzione di riferimento usa il CDN ufficialmente documentato per Bootstrap 5.3.8.
 
-In laboratorio offline si possono distribuire i file compilati e sostituire i link CDN con path locali. Non penalizzare questa sostituzione: il requisito e usare Bootstrap 5.3.x, non un particolare CDN.
+In laboratorio offline si possono distribuire i file compilati e sostituire i link CDN con path locali. Non penalizzare questa sostituzione: il requisito è usare Bootstrap 5.3.x, non un particolare CDN.
+
+Il divieto di `display: grid`, `display: flex` e `@media` in `custom.css` è un **vincolo didattico di questa rifattorizzazione**: costringe lo studente a dimostrare di saper delegare il layout. Non è una regola generale dei progetti Bootstrap, nei quali CSS nativo e framework possono convivere.
 
 ## Errori frequenti
 
@@ -42,10 +45,10 @@ In laboratorio offline si possono distribuire i file compilati e sostituire i li
 ## Domande orali
 
 1. Cosa fa concettualmente `d-flex`?
-2. Perche `col-12 col-lg-6` e mobile-first?
+2. Perché `col-12 col-lg-6` è mobile-first?
 3. Quale parte della navbar richiede JavaScript?
-4. Perche il post resta `article` anche se diventa una card?
-5. Quale regola hai mantenuto in `custom.css` e perche non e una responsabilita Bootstrap?
+4. Perché il post resta `article` anche se diventa una card?
+5. Quale regola hai mantenuto in `custom.css` e perché non è una responsabilità Bootstrap?
 6. Se togliessi Bootstrap, quali parti sapresti riscrivere con CSS nativo?
 
 ## Rubrica

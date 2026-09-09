@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../03-bootstrap-cascade-layers.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Bootstrap dentro la cascade CSS</title>
+  <desc id="desc">Cinque livelli, dagli stili del browser al CSS personalizzato, convergono negli stili computati. Le utility Bootstrap possono usare important e non vengono sempre superate da un file caricato dopo.</desc>
+  <defs id="visual-kit-components"/>
+  <defs>
+    <linearGradient id="bclBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient>
+    <filter id="bclShadow"><feDropShadow dx="0" dy="9" stdDeviation="13" flood-opacity=".28"/></filter>
+    <marker id="bclArrow" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto"><path d="M0 0l18 9L0 18z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bclBg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="72" text-anchor="middle" fill="#f8fafc" font-size="44" font-weight="800">BOOTSTRAP PARTECIPA ALLA CASCADE</text>
+    <text x="960" y="116" text-anchor="middle" fill="#b8c8dc" font-size="21">“Caricato dopo” aiuta, ma non decide da solo quale dichiarazione vince</text>
+    <g filter="url(#bclShadow)">
+      <rect x="90" y="200" width="300" height="500" rx="30" fill="#f8fafc" stroke="#94a3b8" stroke-width="5"/>
+      <rect x="450" y="200" width="300" height="500" rx="30" fill="#ecfdf5" stroke="#22c55e" stroke-width="5"/>
+      <rect x="810" y="200" width="300" height="500" rx="30" fill="#eff6ff" stroke="#38bdf8" stroke-width="5"/>
+      <rect x="1170" y="200" width="300" height="500" rx="30" fill="#fff7ed" stroke="#f59e0b" stroke-width="5"/>
+      <rect x="1530" y="200" width="300" height="500" rx="30" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="5"/>
+    </g>
+    <g text-anchor="middle" font-weight="800">
+      <text x="240" y="274" fill="#334155" font-size="25">1 · BROWSER</text>
+      <text x="600" y="274" fill="#166534" font-size="25">2 · REBOOT</text>
+      <text x="960" y="274" fill="#075985" font-size="25">3 · COMPONENTI</text>
+      <text x="1320" y="274" fill="#92400e" font-size="25">4 · UTILITY</text>
+      <text x="1680" y="274" fill="#5b21b6" font-size="25">5 · CUSTOM CSS</text>
+    </g>
+    <g text-anchor="middle" fill="#52677f" font-size="19">
+      <text x="240" y="360">stili iniziali</text><text x="240" y="394">degli elementi HTML</text>
+      <text x="600" y="360">regole globali</text><text x="600" y="394">anche senza classi</text>
+      <text x="960" y="360">card · navbar</text><text x="960" y="394">button · form</text>
+      <text x="1320" y="350">display · spacing</text><text x="1320" y="384">spesso generate con</text><text x="1320" y="428" fill="#b91c1c" font-weight="800">!important</text>
+      <text x="1680" y="350">identità e regole</text><text x="1680" y="384">specifiche del prodotto</text><text x="1680" y="428">non vince sempre</text>
+    </g>
+    <path d="M240 735V808H1680" fill="none" stroke="#38bdf8" stroke-width="7" marker-end="url(#bclArrow)"/>
+    <path d="M600 735V808M960 735V808M1320 735V808" stroke="#38bdf8" stroke-width="7"/>
+    <rect x="420" y="840" width="1080" height="142" rx="36" fill="#f8fafc"/>
+    <text x="960" y="895" text-anchor="middle" fill="#102a43" font-size="27" font-weight="800">DEVTOOLS · STYLES + COMPUTED</text>
+    <text x="960" y="935" text-anchor="middle" fill="#52677f" font-size="20">Individua file, selettore, importanza e dichiarazione realmente vincente.</text>
+  </g>
+</svg>

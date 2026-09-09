@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
-  <title id="title">Copertura della documentazione nella lezione Bootstrap</title>
-  <desc id="desc">Otto nuclei della dispensa sono collegati alle pagine Bootstrap e MDN. Verde significa coperto, ambra da riconoscere e grigio più avanti.</desc>
+  <title id="title">Confronto dello stesso HTML senza Bootstrap e con Reboot</title>
+  <desc id="desc">Due finestre mostrano lo stesso HTML senza classi. A sinistra agiscono soltanto gli stili del browser; a destra il foglio Bootstrap introduce Reboot. DevTools consente di confrontare gli stili computati.</desc>
   <defs>
     <style>
       .tpsi-line{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:8}
@@ -207,101 +207,49 @@
     </symbol>
   </defs>
   <defs>
-    <linearGradient id="bcdBg" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="brcBg" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#071426" />
       <stop offset="1" stop-color="#132b45" />
     </linearGradient>
-    <filter id="bcdShadow">
-      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity=".28" />
+    <filter id="brcShadow">
+      <feDropShadow dx="0" dy="11" stdDeviation="16" flood-opacity=".3" />
     </filter>
-    <marker id="bcdGreen" markerUnits="userSpaceOnUse" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto">
-      <path d="M0 0l16 8L0 16z" fill="#22c55e" />
-    </marker>
-    <marker id="bcdAmber" markerUnits="userSpaceOnUse" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto">
-      <path d="M0 0l16 8L0 16z" fill="#f59e0b" />
-    </marker>
   </defs>
-  <rect width="1920" height="1080" fill="url(#bcdBg)" />
+  <rect width="1920" height="1080" fill="url(#brcBg)" />
   <g font-family="Inter,Arial,sans-serif">
-    <text x="960" y="62" text-anchor="middle" fill="#f8fafc" font-size="42" font-weight="800">DISPENSA ↔ BOOTSTRAP + MDN</text>
-    <text x="960" y="102" text-anchor="middle" fill="#b8c8dc" font-size="21">La lezione seleziona il contratto del framework e rende visibile la Web Platform sottostante</text>
-    <text x="350" y="152" text-anchor="middle" fill="#7dd3fc" font-size="22" font-weight="800">DISPENSA IN ITALIANO</text>
-    <text x="1510" y="152" text-anchor="middle" fill="#86efac" font-size="22" font-weight="800">FONTI UFFICIALI</text>
-    <g filter="url(#bcdShadow)" font-size="18">
-      <g fill="#eff6ff" stroke="#38bdf8" stroke-width="3">
-        <rect x="70" y="180" width="630" height="70" rx="18" />
-        <rect x="70" y="268" width="630" height="70" rx="18" />
-        <rect x="70" y="356" width="630" height="70" rx="18" />
-        <rect x="70" y="444" width="630" height="70" rx="18" />
-        <rect x="70" y="532" width="630" height="70" rx="18" />
-        <rect x="70" y="620" width="630" height="70" rx="18" />
-        <rect x="70" y="708" width="630" height="70" rx="18" />
-        <rect x="70" y="796" width="630" height="70" rx="18" />
-      </g>
-      <g fill="#ecfdf5" stroke="#22c55e" stroke-width="3">
-        <rect x="1220" y="180" width="630" height="70" rx="18" />
-        <rect x="1220" y="268" width="630" height="70" rx="18" />
-        <rect x="1220" y="356" width="630" height="70" rx="18" />
-        <rect x="1220" y="444" width="630" height="70" rx="18" />
-        <rect x="1220" y="532" width="630" height="70" rx="18" />
-        <rect x="1220" y="620" width="630" height="70" rx="18" />
-        <rect x="1220" y="708" width="630" height="70" rx="18" />
-      </g>
-      <rect x="1220" y="796" width="630" height="70" rx="18" fill="#fffbeb" stroke="#f59e0b" stroke-width="3" />
+    <text x="960" y="72" text-anchor="middle" fill="#f8fafc" font-size="44" font-weight="800">STESSO HTML · NESSUNA CLASSE · ASPETTO DIVERSO</text>
+    <text x="960" y="116" text-anchor="middle" fill="#b8c8dc" font-size="21">Collegare bootstrap.css attiva Reboot prima ancora di usare utility o componenti</text>
+    <g filter="url(#brcShadow)">
+      <rect x="110" y="200" width="790" height="660" rx="34" fill="#f8fafc" />
+      <rect x="1020" y="200" width="790" height="660" rx="34" fill="#f8fafc" />
     </g>
-    <g fill="#0c4a6e" font-size="19" font-weight="800">
-      <text x="96" y="222">Framework, Web Platform e Reboot</text>
-      <text x="96" y="310">CSS, bundle JavaScript e caricamento</text>
-      <text x="96" y="398">Container, grid Flexbox e gutter</text>
-      <text x="96" y="486">Breakpoint mobile-first</text>
-      <text x="96" y="574">Grammatica delle utility</text>
-      <text x="96" y="662">Card, button, navbar e Collapse</text>
-      <text x="96" y="750">Form, validazione e accessibilità</text>
-      <text x="96" y="838">Confini dichiarati</text>
+    <path d="M110 276H900M1020 276H1810" stroke="#bdd5e8" stroke-width="5" />
+    <g>
+      <circle cx="150" cy="238" r="10" fill="#ef4444" />
+      <circle cx="182" cy="238" r="10" fill="#f59e0b" />
+      <circle cx="214" cy="238" r="10" fill="#22c55e" />
+      <circle cx="1060" cy="238" r="10" fill="#ef4444" />
+      <circle cx="1092" cy="238" r="10" fill="#f59e0b" />
+      <circle cx="1124" cy="238" r="10" fill="#22c55e" />
     </g>
-    <g fill="#14532d" font-size="18" font-weight="800">
-      <text x="1246" y="210">COPERTO · Introduction + Reboot</text>
-      <text x="1246" y="298">COPERTO · Quick start + JavaScript</text>
-      <text x="1246" y="386">COPERTO · Containers + Grid + Gutters</text>
-      <text x="1246" y="474">COPERTO · Breakpoints + media query</text>
-      <text x="1246" y="562">COPERTO · Display + Flex + Spacing</text>
-      <text x="1246" y="650">COPERTO · Components + data-*</text>
-      <text x="1246" y="738">COPERTO · Form nativo + Accessibility</text>
+    <text x="505" y="332" text-anchor="middle" fill="#334155" font-size="26" font-weight="800">SOLO USER-AGENT STYLES</text>
+    <text x="1415" y="332" text-anchor="middle" fill="#166534" font-size="26" font-weight="800">USER-AGENT STYLES + REBOOT</text>
+    <g fill="#102a43">
+      <text x="180" y="420" font-size="38" font-weight="800">Titolo</text>
+      <text x="180" y="480" font-size="21">Un paragrafo con gli stili iniziali.</text>
+      <rect x="180" y="540" width="150" height="55" rx="4" fill="#e5e7eb" stroke="#64748b" />
+      <text x="255" y="575" text-anchor="middle" font-size="18">Pulsante</text>
+      <rect x="180" y="660" width="600" height="74" fill="#fff" stroke="#94a3b8" />
     </g>
-    <g fill="#52677f" font-size="15">
-      <text x="1246" y="233">MDN: cascade e !important</text>
-      <text x="1246" y="321">CSS nel head, JS prima di /body</text>
-      <text x="1246" y="409">Flexbox, 12 colonne, righe e gutter</text>
-      <text x="1246" y="497">xs, sm, md, lg, xl, xxl</text>
-      <text x="1246" y="585">classi piccole → proprietà CSS</text>
-      <text x="1246" y="673">semantica + stati Collapse</text>
-      <text x="1246" y="761">contratto HTML e prove osservabili</text>
+    <g fill="#102a43">
+      <text x="1090" y="420" font-size="38" font-weight="600">Titolo</text>
+      <text x="1090" y="480" font-size="21">Lo stesso paragrafo dopo Reboot.</text>
+      <rect x="1090" y="540" width="150" height="55" rx="7" fill="#f8fafc" stroke="#6c757d" />
+      <text x="1165" y="575" text-anchor="middle" font-size="18">Pulsante</text>
+      <rect x="1090" y="660" width="600" height="74" fill="#fff" stroke="#94a3b8" />
     </g>
-    <text x="1246" y="826" fill="#78350f" font-size="18" font-weight="800">RICONOSCERE · validazione custom + Sass</text>
-    <text x="1246" y="849" fill="#785e32" font-size="15">JS dei form e personalizzazione avanzata: dopo</text>
-    <g fill="none" stroke-width="6">
-      <path d="M700 215H1194" stroke="#22c55e" marker-end="url(#bcdGreen)" />
-      <path d="M700 303H1194" stroke="#22c55e" marker-end="url(#bcdGreen)" />
-      <path d="M700 391H1194" stroke="#22c55e" marker-end="url(#bcdGreen)" />
-      <path d="M700 479H1194" stroke="#22c55e" marker-end="url(#bcdGreen)" />
-      <path d="M700 567H1194" stroke="#22c55e" marker-end="url(#bcdGreen)" />
-      <path d="M700 655H1194" stroke="#22c55e" marker-end="url(#bcdGreen)" />
-      <path d="M700 743H1194" stroke="#22c55e" marker-end="url(#bcdGreen)" />
-      <path d="M700 831H1194" stroke="#f59e0b" stroke-dasharray="14 10" marker-end="url(#bcdAmber)" />
-    </g>
-    <g transform="translate(70 910)">
-      <rect width="1780" height="112" rx="26" fill="#f8fafc" />
-      <text x="32" y="42" fill="#102a43" font-size="20" font-weight="800">LEGENDA</text>
-      <circle cx="240" cy="36" r="13" fill="#22c55e" />
-      <text x="264" y="43" fill="#14532d" font-size="18">
-        <tspan font-weight="800">COPERTO</tspan> · comprendere e usare ora</text>
-      <circle cx="760" cy="36" r="13" fill="#f59e0b" />
-      <text x="784" y="43" fill="#78350f" font-size="18">
-        <tspan font-weight="800">RICONOSCERE</tspan> · orientarsi, senza autonomia</text>
-      <circle cx="1330" cy="36" r="13" fill="#94a3b8" />
-      <text x="1354" y="43" fill="#334155" font-size="18">
-        <tspan font-weight="800">PIÙ AVANTI</tspan> · fuori verifica</text>
-      <text x="890" y="82" text-anchor="middle" fill="#52677f" font-size="17">Il testo accompagna sempre il colore.</text>
-    </g>
+    <rect x="340" y="920" width="1240" height="92" rx="46" fill="#eff6ff" />
+    <text x="960" y="960" text-anchor="middle" fill="#075985" font-size="22" font-weight="800">PROVA · disattiva e riattiva bootstrap.css</text>
+    <text x="960" y="990" text-anchor="middle" fill="#52677f" font-size="18">Confronta margin, font, line-height, box-sizing e controlli nel pannello Computed.</text>
   </g>
 </svg>

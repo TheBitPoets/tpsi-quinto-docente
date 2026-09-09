@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../03-bootstrap-reboot-comparison.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Confronto dello stesso HTML senza Bootstrap e con Reboot</title>
+  <desc id="desc">Due finestre mostrano lo stesso HTML senza classi. A sinistra agiscono soltanto gli stili del browser; a destra il foglio Bootstrap introduce Reboot. DevTools consente di confrontare gli stili computati.</desc>
+  <defs id="visual-kit-components"/>
+  <defs><linearGradient id="brcBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient><filter id="brcShadow"><feDropShadow dx="0" dy="11" stdDeviation="16" flood-opacity=".3"/></filter></defs>
+  <rect width="1920" height="1080" fill="url(#brcBg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="72" text-anchor="middle" fill="#f8fafc" font-size="44" font-weight="800">STESSO HTML · NESSUNA CLASSE · ASPETTO DIVERSO</text>
+    <text x="960" y="116" text-anchor="middle" fill="#b8c8dc" font-size="21">Collegare bootstrap.css attiva Reboot prima ancora di usare utility o componenti</text>
+    <g filter="url(#brcShadow)"><rect x="110" y="200" width="790" height="660" rx="34" fill="#f8fafc"/><rect x="1020" y="200" width="790" height="660" rx="34" fill="#f8fafc"/></g>
+    <path d="M110 276H900M1020 276H1810" stroke="#bdd5e8" stroke-width="5"/>
+    <g><circle cx="150" cy="238" r="10" fill="#ef4444"/><circle cx="182" cy="238" r="10" fill="#f59e0b"/><circle cx="214" cy="238" r="10" fill="#22c55e"/><circle cx="1060" cy="238" r="10" fill="#ef4444"/><circle cx="1092" cy="238" r="10" fill="#f59e0b"/><circle cx="1124" cy="238" r="10" fill="#22c55e"/></g>
+    <text x="505" y="332" text-anchor="middle" fill="#334155" font-size="26" font-weight="800">SOLO USER-AGENT STYLES</text>
+    <text x="1415" y="332" text-anchor="middle" fill="#166534" font-size="26" font-weight="800">USER-AGENT STYLES + REBOOT</text>
+    <g fill="#102a43"><text x="180" y="420" font-size="38" font-weight="800">Titolo</text><text x="180" y="480" font-size="21">Un paragrafo con gli stili iniziali.</text><rect x="180" y="540" width="150" height="55" rx="4" fill="#e5e7eb" stroke="#64748b"/><text x="255" y="575" text-anchor="middle" font-size="18">Pulsante</text><rect x="180" y="660" width="600" height="74" fill="#fff" stroke="#94a3b8"/></g>
+    <g fill="#102a43"><text x="1090" y="420" font-size="38" font-weight="600">Titolo</text><text x="1090" y="480" font-size="21">Lo stesso paragrafo dopo Reboot.</text><rect x="1090" y="540" width="150" height="55" rx="7" fill="#f8fafc" stroke="#6c757d"/><text x="1165" y="575" text-anchor="middle" font-size="18">Pulsante</text><rect x="1090" y="660" width="600" height="74" fill="#fff" stroke="#94a3b8"/></g>
+    <rect x="340" y="920" width="1240" height="92" rx="46" fill="#eff6ff"/>
+    <text x="960" y="960" text-anchor="middle" fill="#075985" font-size="22" font-weight="800">PROVA · disattiva e riattiva bootstrap.css</text>
+    <text x="960" y="990" text-anchor="middle" fill="#52677f" font-size="18">Confronta margin, font, line-height, box-sizing e controlli nel pannello Computed.</text>
+  </g>
+</svg>
