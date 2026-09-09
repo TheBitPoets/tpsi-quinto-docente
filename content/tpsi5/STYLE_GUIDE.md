@@ -2,7 +2,7 @@
 
 Questo documento definisce il formato editoriale canonico delle pagine del corso TPSI5. Il modello deriva dalla grammatica HTML/Markdown usata nel corso [2cornot2c](https://github.com/TheBitPoets/2cornot2c), adattata alle dispense di sviluppo full stack.
 
-Lo standard si applica a tutte le lezioni in `content/tpsi5/`. Le lezioni numerate 00–18 sono state adeguate; ogni contenuto nuovo deve nascere già conforme.
+Lo standard si applica a tutte le lezioni in `content/tpsi5/`. Le lezioni revisionate manualmente costituiscono il riferimento qualitativo; la sola normalizzazione automatica dell'HTML non equivale a una revisione editoriale completa. Ogni contenuto nuovo deve nascere già conforme.
 
 ## Principio generale
 
@@ -61,6 +61,35 @@ La lezione `01_WEB_PLATFORM_HTML_MODERNO.md` è il riferimento strutturale. Ogni
 12. fonti, provenance e collegamento alla lezione successiva.
 
 L'ordine non obbliga tutte le lezioni ad avere la stessa lunghezza. Un translation lab può essere più breve di una lezione fondativa, ma non può omettere il modello mentale, gli esempi verificabili o i confini dichiarati.
+
+### Componenti editoriali obbligatori
+
+Le lezioni sottoposte a revisione completa devono rendere riconoscibili, nello stesso ordine e con le stesse icone, almeno questi componenti:
+
+1. un pannello espandibile <strong>Orientamento della sezione</strong>, che contiene contesto, domande guida, obiettivi, prerequisiti e prossimo passo;
+2. quando si usa documentazione esterna, una sezione di orientamento con legenda, mappa di copertura specifica della lezione e indice incrociato navigabile;
+3. una mappa espandibile delle schede tecniche operative — elementi, proprietà, classi, componenti o API — quando lo studente deve consultarle durante la lezione;
+4. anchor espliciti e stabili per ogni sezione raggiunta dalle mappe o dagli indici;
+5. callout canonici per definizioni, modelli mentali, attenzioni e decisioni;
+6. laboratorio e Activity dentro pannelli espandibili con collegamenti cliccabili a consegna e starter;
+7. checkpoint dentro un pannello espandibile con icona coerente;
+8. sintesi visibile, fonti ufficiali, provenienza interna e rimando alla lezione successiva.
+
+Il testo fondamentale della spiegazione <strong>non deve essere collassato</strong>. I pannelli espandibili organizzano orientamento, mappe, materiale operativo, approfondimenti e verifiche; non devono nascondere la definizione necessaria per comprendere il paragrafo seguente.
+
+### Forma dell'indice incrociato
+
+L'indice incrociato non usa una tabella larga con molte colonne. Per evitare lo scorrimento orizzontale, viene suddiviso in gruppi espandibili e schede verticali abbinate:
+
+- il titolo della dispensa è cliccabile e conduce all'anchor locale;
+- il titolo della fonte ufficiale è cliccabile e apre la pagina pertinente;
+- le descrizioni sono elenchi brevi e non cliccabili;
+- una voce senza corrispondenza viene dichiarata esplicitamente;
+- stato e profondità non dipendono soltanto dal colore.
+
+### Diagrammi richiesti dalla spiegazione
+
+L'immagine generale sulla profondità della documentazione non sostituisce una mappa di copertura specifica. Quando una lezione introduce relazioni, flussi, gerarchie, anatomie o confronti con almeno tre elementi, deve usare un diagramma locale del Visual System. Gli schemi ASCII possono restare soltanto per micro-esempi testuali; non sostituiscono un'immagine quando lo schema svolge una funzione didattica centrale.
 
 ## Struttura di un argomento
 

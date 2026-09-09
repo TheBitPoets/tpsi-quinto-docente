@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Tre strati di un componente Bootstrap</title>
+  <desc id="desc">Un componente conserva la semantica HTML, applica struttura e varianti Bootstrap e può aggiungere un comportamento JavaScript opzionale.</desc>
+  <defs>
+    <style>
+      .tpsi-line{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:8}
+      .tpsi-thin{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:5}
+      .tpsi-label{font-family:Inter,Arial,sans-serif;font-weight:800;text-anchor:middle}
+      .tpsi-small{font-family:Inter,Arial,sans-serif;font-weight:700;text-anchor:middle}
+    </style>
+    <symbol id="tpsi-laptop" viewBox="0 0 600 400">
+      <rect x="70" y="28" width="460" height="292" rx="24" fill="#102a43" />
+      <rect x="92" y="50" width="416" height="248" rx="8" fill="#dcecf8" />
+      <path d="M35 320h530l35 47H0z" fill="#718aa4" />
+      <rect x="234" y="337" width="132" height="10" rx="5" fill="#b5c7d7" />
+    </symbol>
+    <symbol id="tpsi-browser" viewBox="0 0 500 320">
+      <rect x="3" y="3" width="494" height="314" rx="16" fill="#fff" stroke="#bdd5e8" stroke-width="6" />
+      <path d="M3 19A16 16 0 0 1 19 3h462a16 16 0 0 1 16 16v52H3z" fill="#dceaf6" />
+      <circle cx="32" cy="37" r="9" fill="#ef4444" />
+      <circle cx="61" cy="37" r="9" fill="#f59e0b" />
+      <circle cx="90" cy="37" r="9" fill="#22c55e" />
+      <rect x="125" y="20" width="330" height="34" rx="17" fill="#fff" />
+    </symbol>
+    <symbol id="tpsi-smartphone" viewBox="0 0 220 360">
+      <rect x="25" y="5" width="170" height="350" rx="30" fill="#102a43" />
+      <rect x="40" y="38" width="140" height="270" rx="9" fill="#dcecf8" />
+      <rect x="82" y="18" width="56" height="7" rx="4" fill="#8da4b9" />
+      <circle cx="110" cy="331" r="12" fill="#8da4b9" />
+    </symbol>
+    <symbol id="tpsi-user" viewBox="0 0 240 260">
+      <circle cx="120" cy="75" r="56" fill="#60a5fa" />
+      <path d="M28 246c4-75 39-116 92-116s88 41 92 116z" fill="#2563eb" />
+      <circle cx="120" cy="75" r="34" fill="#dbeafe" opacity=".65" />
+    </symbol>
+    <symbol id="tpsi-server" viewBox="0 0 420 320">
+      <rect x="35" y="25" width="350" height="270" rx="24" fill="#dff8ed" stroke="#73d5a8" stroke-width="6" />
+      <g fill="#164e45">
+        <rect x="75" y="65" width="270" height="52" rx="10" />
+        <rect x="75" y="134" width="270" height="52" rx="10" />
+        <rect x="75" y="203" width="270" height="52" rx="10" />
+      </g>
+      <g fill="#34d399">
+        <circle cx="311" cy="91" r="8" />
+        <circle cx="285" cy="91" r="8" />
+        <circle cx="311" cy="160" r="8" />
+        <circle cx="285" cy="160" r="8" />
+        <circle cx="311" cy="229" r="8" />
+        <circle cx="285" cy="229" r="8" />
+      </g>
+    </symbol>
+    <symbol id="tpsi-network" viewBox="0 0 260 260">
+      <defs>
+        <radialGradient id="tpsi-network-globe" cx="36%" cy="30%" r="78%">
+          <stop offset="0" stop-color="#7dd3fc" />
+          <stop offset=".58" stop-color="#0ea5e9" />
+          <stop offset="1" stop-color="#2563eb" />
+        </radialGradient>
+        <filter id="tpsi-network-glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <circle cx="130" cy="130" r="116" fill="#102a43" stroke="#385875" stroke-width="4" />
+      <ellipse cx="130" cy="130" rx="119" ry="55" transform="rotate(-28 130 130)" fill="none" stroke="#8b5cf6" stroke-width="7" opacity=".9" />
+      <circle cx="39" cy="61" r="10" fill="#c4b5fd" filter="url(#tpsi-network-glow)" />
+      <circle cx="224" cy="193" r="10" fill="#a7f3d0" filter="url(#tpsi-network-glow)" />
+      <circle cx="130" cy="130" r="88" fill="url(#tpsi-network-globe)" stroke="#bae6fd" stroke-width="5" />
+      <ellipse cx="130" cy="130" rx="38" ry="88" fill="none" stroke="#e0f2fe" stroke-width="5" opacity=".86" />
+      <path d="M48 130h164M65 91c39 24 91 24 130 0M65 169c39-24 91-24 130 0" fill="none" stroke="#e0f2fe" stroke-width="5" stroke-linecap="round" opacity=".86" />
+      <circle cx="130" cy="130" r="11" fill="#f8fafc" opacity=".95" />
+    </symbol>
+    <symbol id="tpsi-cloud" viewBox="0 0 400 260">
+      <path d="M88 220C39 220 17 188 24 151c7-36 37-56 69-54 16-47 57-75 105-67 37 6 66 32 78 66 51-5 92 28 95 73 3 33-22 51-55 51z" fill="#dbeafe" stroke="#60a5fa" stroke-width="7" />
+    </symbol>
+    <symbol id="tpsi-database" viewBox="0 0 420 300">
+      <ellipse cx="210" cy="58" rx="170" ry="48" fill="#93c5fd" />
+      <rect x="40" y="58" width="340" height="170" fill="#4f46e5" />
+      <ellipse cx="210" cy="228" rx="170" ry="48" fill="#3730a3" />
+      <ellipse cx="210" cy="58" rx="145" ry="30" fill="#dbeafe" opacity=".72" />
+      <path d="M40 116c0 27 76 48 170 48s170-21 170-48M40 174c0 27 76 48 170 48s170-21 170-48" fill="none" stroke="#a5b4fc" stroke-width="5" opacity=".7" />
+    </symbol>
+    <symbol id="tpsi-api" viewBox="0 0 360 240">
+      <rect x="14" y="18" width="332" height="204" rx="30" fill="#dffaf5" stroke="#2dd4bf" stroke-width="6" />
+      <path d="M89 68H64v104h25M271 68h25v104h-25" class="tpsi-line" stroke="#0d9488" />
+      <text x="180" y="143" fill="#0f766e" font-size="62" class="tpsi-label">API</text>
+    </symbol>
+    <symbol id="tpsi-service" viewBox="0 0 320 260">
+      <polygon points="160,15 246,65 246,165 160,215 74,165 74,65" fill="#ccfbf1" stroke="#14b8a6" stroke-width="6" />
+      <circle cx="160" cy="115" r="52" fill="#0d9488" />
+      <circle cx="160" cy="115" r="22" fill="#ccfbf1" />
+      <path d="M160 42v30M160 158v30M87 115h30M203 115h30M108 63l21 21M191 146l21 21M212 63l-21 21M129 146l-21 21" class="tpsi-thin" stroke="#0d9488" />
+    </symbol>
+    <symbol id="tpsi-repository" viewBox="0 0 360 280">
+      <rect x="45" y="32" width="270" height="64" rx="14" fill="#d1fae5" stroke="#34d399" stroke-width="5" />
+      <rect x="45" y="108" width="270" height="64" rx="14" fill="#a7f3d0" stroke="#10b981" stroke-width="5" />
+      <rect x="45" y="184" width="270" height="64" rx="14" fill="#6ee7b7" stroke="#059669" stroke-width="5" />
+      <path d="M82 64h196M82 140h196M82 216h196" class="tpsi-thin" stroke="#065f46" />
+    </symbol>
+    <symbol id="tpsi-route" viewBox="0 0 360 280">
+      <path d="M180 255V43" class="tpsi-line" stroke="#475569" />
+      <path d="M180 62H42l34 42-34 42h138z" fill="#38bdf8" />
+      <path d="M180 154h138l-34 42 34 42H180z" fill="#34d399" />
+      <circle cx="180" cy="34" r="22" fill="#64748b" />
+    </symbol>
+    <symbol id="tpsi-document" viewBox="0 0 280 340">
+      <path d="M35 10h140l70 70v250H35z" fill="#f8fafc" stroke="#94a3b8" stroke-width="6" />
+      <path d="M175 10v70h70" fill="#dbeafe" stroke="#94a3b8" stroke-width="6" />
+      <path d="M72 130h136M72 174h136M72 218h105M72 262h120" class="tpsi-thin" stroke="#64748b" />
+    </symbol>
+    <symbol id="tpsi-terminal" viewBox="0 0 420 280">
+      <rect x="10" y="15" width="400" height="250" rx="24" fill="#111827" stroke="#64748b" stroke-width="6" />
+      <path d="M10 60h400" stroke="#64748b" stroke-width="5" />
+      <circle cx="38" cy="38" r="8" fill="#ef4444" />
+      <circle cx="64" cy="38" r="8" fill="#f59e0b" />
+      <circle cx="90" cy="38" r="8" fill="#22c55e" />
+      <path d="M65 115l38 32-38 32M129 185h95" class="tpsi-line" stroke="#a7f3d0" />
+    </symbol>
+    <symbol id="tpsi-component" viewBox="0 0 360 280">
+      <rect x="20" y="20" width="320" height="240" rx="28" fill="#e0f2fe" stroke="#38bdf8" stroke-width="6" />
+      <rect x="54" y="58" width="252" height="44" rx="12" fill="#0ea5e9" />
+      <rect x="54" y="124" width="112" height="98" rx="16" fill="#bae6fd" />
+      <rect x="188" y="124" width="118" height="38" rx="12" fill="#7dd3fc" />
+      <rect x="188" y="184" width="118" height="38" rx="12" fill="#7dd3fc" />
+    </symbol>
+    <symbol id="tpsi-cookie" viewBox="0 0 280 280">
+      <path d="M236 75a48 48 0 0 1-55-54A114 114 0 1 0 259 99a48 48 0 0 1-23-24z" fill="#d6a35d" stroke="#92400e" stroke-width="6" />
+      <g fill="#78350f">
+        <circle cx="96" cy="91" r="12" />
+        <circle cx="79" cy="169" r="14" />
+        <circle cx="150" cy="207" r="11" />
+        <circle cx="165" cy="126" r="13" />
+      </g>
+    </symbol>
+    <symbol id="tpsi-lock" viewBox="0 0 280 320">
+      <rect x="32" y="128" width="216" height="174" rx="28" fill="#fb7185" stroke="#be123c" stroke-width="6" />
+      <path d="M78 128V89a62 62 0 0 1 124 0v39" fill="none" stroke="#e11d48" stroke-width="20" stroke-linecap="round" />
+      <circle cx="140" cy="202" r="20" fill="#881337" />
+      <path d="M140 220v38" stroke="#881337" stroke-width="14" stroke-linecap="round" />
+    </symbol>
+    <symbol id="tpsi-test" viewBox="0 0 300 320">
+      <path d="M108 20h84M126 20v89L55 261a27 27 0 0 0 25 39h140a27 27 0 0 0 25-39l-71-152V20" fill="#ede9fe" stroke="#7c3aed" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M83 238h134" stroke="#a78bfa" stroke-width="45" stroke-linecap="round" opacity=".7" />
+      <path d="M106 220l31 31 66-76" class="tpsi-line" stroke="#16a34a" />
+    </symbol>
+    <symbol id="tpsi-health" viewBox="0 0 360 260">
+      <rect x="15" y="24" width="330" height="212" rx="34" fill="#ecfdf5" stroke="#34d399" stroke-width="6" />
+      <path d="M50 142h62l28-72 54 132 34-82 20 22h62" fill="none" stroke="#059669" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="tpsi-artifact" viewBox="0 0 340 300">
+      <path d="M28 78l142-62 142 62-142 64z" fill="#fbbf24" />
+      <path d="M28 78v145l142 64V142z" fill="#d97706" />
+      <path d="M312 78v145l-142 64V142z" fill="#f59e0b" />
+      <path d="M112 42l143 64v58" fill="none" stroke="#fff7d6" stroke-width="10" opacity=".8" />
+    </symbol>
+    <symbol id="tpsi-badge-html" viewBox="0 0 180 180">
+      <path d="M25 12h130l-13 142-52 15-52-15z" fill="#e44d26" />
+      <path d="M90 26v127l39-11 11-116z" fill="#f16529" />
+      <text x="90" y="106" fill="white" font-size="33" class="tpsi-label">HTML</text>
+    </symbol>
+    <symbol id="tpsi-badge-css" viewBox="0 0 180 180">
+      <path d="M25 12h130l-13 142-52 15-52-15z" fill="#1572b6" />
+      <path d="M90 26v127l39-11 11-116z" fill="#33a9dc" />
+      <text x="90" y="106" fill="white" font-size="38" class="tpsi-label">CSS</text>
+    </symbol>
+    <symbol id="tpsi-badge-js" viewBox="0 0 180 180">
+      <rect x="13" y="13" width="154" height="154" rx="14" fill="#f7df1e" />
+      <text x="90" y="126" fill="#111827" font-size="72" class="tpsi-label">JS</text>
+    </symbol>
+    <symbol id="tpsi-badge-node" viewBox="0 0 210 180">
+      <polygon points="105,7 191,55 191,133 105,173 19,133 19,55" fill="#3c873a" />
+      <text x="105" y="108" fill="white" font-size="38" class="tpsi-label">Node.js</text>
+    </symbol>
+    <symbol id="tpsi-badge-express" viewBox="0 0 240 150">
+      <rect x="8" y="8" width="224" height="134" rx="24" fill="#1f2937" />
+      <text x="120" y="91" fill="white" font-size="38" class="tpsi-label">Express</text>
+    </symbol>
+    <symbol id="tpsi-badge-sqlite" viewBox="0 0 240 150">
+      <rect x="8" y="8" width="224" height="134" rx="24" fill="#4f46e5" />
+      <text x="120" y="91" fill="white" font-size="40" class="tpsi-label">SQLite</text>
+    </symbol>
+    <symbol id="tpsi-badge-vue" viewBox="0 0 220 180">
+      <path d="M12 18h50l48 82 48-82h50l-98 154z" fill="#41b883" />
+      <path d="M62 18h34l14 25 14-25h34l-48 82z" fill="#35495e" />
+    </symbol>
+    <symbol id="tpsi-badge-react" viewBox="0 0 220 180">
+      <circle cx="110" cy="90" r="17" fill="#61dafb" />
+      <g fill="none" stroke="#61dafb" stroke-width="7">
+        <ellipse cx="110" cy="90" rx="96" ry="36" />
+        <ellipse cx="110" cy="90" rx="96" ry="36" transform="rotate(60 110 90)" />
+        <ellipse cx="110" cy="90" rx="96" ry="36" transform="rotate(120 110 90)" />
+      </g>
+    </symbol>
+    <symbol id="tpsi-badge-ts" viewBox="0 0 180 180">
+      <rect x="12" y="12" width="156" height="156" rx="14" fill="#3178c6" />
+      <text x="90" y="126" fill="white" font-size="70" class="tpsi-label">TS</text>
+    </symbol>
+    <symbol id="tpsi-badge-python" viewBox="0 0 220 180">
+      <path d="M110 12c-54 0-51 24-51 24v28h54v9H38S10 70 10 113s25 42 25 42h20v-29s-1-25 25-25h62s23 0 23-23V36s4-24-55-24z" fill="#3776ab" />
+      <path d="M110 168c54 0 51-24 51-24v-28h-54v-9h75s28 3 28-40-25-42-25-42h-20v29s1 25-25 25H78s-23 0-23 23v42s-4 24 55 24z" fill="#ffd343" />
+      <circle cx="83" cy="39" r="8" fill="white" />
+      <circle cx="137" cy="141" r="8" fill="white" />
+    </symbol>
+  </defs>
+  <defs>
+    <linearGradient id="bclBg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#071426" />
+      <stop offset="1" stop-color="#132b45" />
+    </linearGradient>
+    <filter id="bclSh">
+      <feDropShadow dx="0" dy="14" stdDeviation="20" flood-opacity=".32" />
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bclBg)" />
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="80" text-anchor="middle" fill="#f8fafc" font-size="46" font-weight="800">ANATOMIA DI UN COMPONENTE</text>
+    <text x="960" y="124" text-anchor="middle" fill="#b8c8dc" font-size="22">Bootstrap aggiunge convenzioni; il significato HTML rimane una scelta dell’autore</text>
+    <g filter="url(#bclSh)">
+      <rect x="170" y="710" width="1580" height="210" rx="38" fill="#ffedd5" stroke="#fb923c" stroke-width="5" />
+      <rect x="290" y="455" width="1340" height="235" rx="38" fill="#dbeafe" stroke="#3b82f6" stroke-width="5" />
+      <rect x="410" y="200" width="1100" height="235" rx="38" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="5" />
+    </g>
+    <text x="960" y="266" text-anchor="middle" fill="#5b21b6" font-size="29" font-weight="800">3 · COMPORTAMENTO JAVASCRIPT · SE SERVE</text>
+    <text x="960" y="315" text-anchor="middle" fill="#52677f" font-size="21">Collapse cambia stato · il bundle ascolta l’azione · il target deve esistere</text>
+    <text x="960" y="360" text-anchor="middle" fill="#7c3aed" font-size="21" font-weight="800">card: nessun JS · navbar collassabile: JS richiesto</text>
+    <text x="960" y="522" text-anchor="middle" fill="#1d4ed8" font-size="29" font-weight="800">2 · STRUTTURA E VARIANTI BOOTSTRAP</text>
+    <text x="960" y="571" text-anchor="middle" fill="#52677f" font-size="21">card + card-body + card-title · btn + btn-primary</text>
+    <text x="960" y="616" text-anchor="middle" fill="#2563eb" font-size="21" font-weight="800">nomi, parti interne e stati documentati</text>
+    <text x="960" y="778" text-anchor="middle" fill="#9a3412" font-size="29" font-weight="800">1 · SEMANTICA HTML · SEMPRE</text>
+    <text x="960" y="827" text-anchor="middle" fill="#52677f" font-size="21">article per un post · nav per una navigazione · button per un’azione</text>
+    <text x="960" y="872" text-anchor="middle" fill="#c2410c" font-size="21" font-weight="800">il framework non può decidere il significato del contenuto</text>
+    <rect x="380" y="965" width="1160" height="70" rx="35" fill="#ecfdf5" />
+    <text x="960" y="1009" text-anchor="middle" fill="#14532d" font-size="21" font-weight="800">PARTI DAL SIGNIFICATO, POI APPLICA IL PATTERN DOCUMENTATO</text>
+  </g>
+</svg>
