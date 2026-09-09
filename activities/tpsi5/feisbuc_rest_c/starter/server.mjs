@@ -88,7 +88,7 @@ const server = createServer(async (request, response) => {
     if (!text || text.length > 280) {
       sendJson(response, 400, {
         error: "invalid-post",
-        message: "text e obbligatorio e deve avere massimo 280 caratteri"
+        message: "text è obbligatorio e deve avere massimo 280 caratteri"
       });
       return;
     }

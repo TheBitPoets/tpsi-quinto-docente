@@ -5,19 +5,19 @@
   "tipo": "laboratorio",
   "student_support_mode": "teoria-dispense",
   "difficolta": "B",
-  "argomenti": ["promise", "async-await", "http-status", "response-ok", "content-type", "json"],
+  "argomenti": ["http-status", "response-ok", "content-type", "json", "funzioni-pure"],
   "linguaggio": "javascript",
   "contesto": {"percorso": "quinto-anno", "uda": "uda-23"},
   "content_ids": ["tpsi5-content-http-async-fetch-rest"],
   "source_refs": [
-    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md", "anchor": "fetch-errore-di-rete-errore-http", "role": "lesson"}
+    {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/05_HTTP_ASYNC_FETCH_REST.md", "anchor": "lesson-fetch-response", "role": "lesson"}
   ],
-  "consegna": "Completa `analyzeResponse(meta)`. L'input descrive i metadata essenziali di una Response HTTP: `status` e `contentType`. La funzione deve essere `async`, attraversare almeno un confine Promise/await e restituire JSON deterministico con `ok` (status 200-299), `statusClass` (`2xx`, `4xx`, ...), `isJson` e `outcome` (`accept` oppure `http-error`). L'obiettivo e separare la semantica della Response dal successivo parsing del body.",
+  "consegna": "Completa `analyzeResponse(meta)`. L'input descrive i metadati essenziali di una Response HTTP: `status` e `contentType`. La funzione pura deve restituire JSON deterministico con `ok` (status 200-299), `statusClass` (`2xx`, `4xx`, ...), `isJson` e `outcome` (`accept` oppure `http-error`). L'obiettivo è separare la policy sincrona sui metadati dal successivo parsing asincrono del body.",
   "vincoli": [
     "non usare fetch in questa Activity",
-    "usa async/await o Promise in modo reale",
-    "ok e vero soltanto per status 200-299",
-    "riconosci application/json anche con charset",
+    "non aggiungere Promise o await: qui la decisione sui metadati è sincrona",
+    "ok è vero soltanto per status 200-299",
+    "riconosci application/json anche con charset e i media type con suffisso +json",
     "non dedurre successo dalla presenza di JSON",
     "stdout deve contenere solo il JSON richiesto"
   ],
@@ -39,7 +39,7 @@
     {"criterio": "Status e response.ok", "punti": 3},
     {"criterio": "Classificazione status", "punti": 2},
     {"criterio": "Content-Type/JSON", "punti": 2},
-    {"criterio": "Uso corretto async/Promise", "punti": 2},
+    {"criterio": "Funzione pura e separazione delle responsabilità", "punti": 2},
     {"criterio": "Output deterministico e leggibilita", "punti": 1}
   ]
 }

@@ -98,6 +98,7 @@ form.addEventListener("submit", async (event) => {
     posts = [created, ...posts];
     renderPosts();
     form.reset();
+    form.elements.namedItem("text")?.focus();
     status.textContent = "Post creato via HTTP.";
   } catch (error) {
     showError(error.message);
@@ -132,4 +133,4 @@ postList.addEventListener("click", async (event) => {
   }
 });
 
-await loadFeed();
+loadFeed();

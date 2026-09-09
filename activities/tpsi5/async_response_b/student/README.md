@@ -24,10 +24,10 @@ Output atteso:
 
 - `ok` vale `true` soltanto per status 200–299;
 - `statusClass` usa la prima cifra (`2xx`, `4xx`, ...);
-- `isJson` deve riconoscere `application/json` anche quando il media type contiene parametri come `charset`;
+- `isJson` deve riconoscere `application/json`, i parametri come `charset` e i media type con suffisso `+json`;
 - JSON e successo sono concetti indipendenti;
-- la funzione deve attraversare almeno un confine asincrono con Promise/`await`;
-- in questa Activity non usare `fetch`: stiamo isolando la logica di interpretazione della Response.
+- la funzione è pura e sincrona: non aggiungere Promise o `await` dove non esiste attesa;
+- in questa Activity non usare `fetch`: stiamo isolando la policy sui metadati della Response.
 
 ## Esecuzione manuale
 
@@ -35,12 +35,12 @@ Output atteso:
 echo '{"status":404,"contentType":"application/json"}' | node main.js
 ```
 
-## Perche prima di fetch?
+## Perché prima di Fetch?
 
-Perche nella prossima Activity vogliamo poter leggere:
+Perché nella prossima Activity vogliamo poter leggere:
 
 ```js
 const response = await fetch(url);
 ```
 
-sapendo gia che cosa fare con `status`, `ok` e `Content-Type`.
+sapendo già che cosa fare con `status`, `ok` e `Content-Type`. L'asincronia reale entra quando attendiamo la Response e consumiamo il body; non serve per calcolare una classe di status.

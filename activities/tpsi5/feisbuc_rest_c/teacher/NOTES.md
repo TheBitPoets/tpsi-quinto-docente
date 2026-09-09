@@ -4,26 +4,24 @@
 
 Non valutare "quanto codice fetch" scrive lo studente. Valutare se mantiene questo boundary:
 
-```text
-DOM/state temporaneo -> app.js -> api.js -> HTTP -> server
-```
+DOM e stato temporaneo restano in <code>app.js</code>; il confine HTTP resta in <code>api.js</code>; il server possiede lo stato condiviso.
 
 ## Osservazioni attese
 
 - il feed iniziale arriva con GET;
-- POST restituisce `201` e una representation gia completa di `id`;
+- POST restituisce `201` e una representation già completa di `id`;
 - PATCH restituisce la representation aggiornata;
-- il client non ricostruisce localmente `likes` dopo una modifica riuscita: usa la risposta del server come nuova fonte di verita;
+- il client non ricostruisce localmente `likes` dopo una modifica riuscita: usa la risposta del server come nuova fonte di verità;
 - `requestJson` interpreta `Content-Type` e `response.ok`;
 - `catch` gestisce anche gli errori che `requestJson` trasforma da status HTTP a `Error` JavaScript.
 
 ## Domande guida
 
-- "Perche il server restituisce il post creato invece di solo OK?"
-- "Perche app.js non deve sapere come si costruisce la request POST?"
-- "Che differenza c'e fra 404 e server spento?"
-- "Se il POST risponde 201, perche non aggiungiamo un id generato dal browser?"
-- "Che cosa succede se Content-Type non e application/json?"
+- “Perché il server restituisce il post creato invece di solo OK?”
+- “Perché app.js non deve sapere come si costruisce la request POST?”
+- “Che differenza c'è fra 404 e server spento?”
+- “Se il POST risponde 201, perché non aggiungiamo un id generato dal browser?”
+- “Che cosa succede se Content-Type non è application/json?”
 
 ## Confine con UDA 24
 

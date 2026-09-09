@@ -41,7 +41,7 @@ Le Activity pure JavaScript possono usare il runner deterministico quando `activ
 | Livello | Scopo | Percorso |
 | --- | --- | --- |
 | A | microscopio request/response HTTP | [`http_microscope_a/`](http_microscope_a/) |
-| B | asincronia e gestione della risposta | [`async_response_b/`](async_response_b/) |
+| B | policy pura su status e Content-Type della Response | [`async_response_b/`](async_response_b/) |
 | C | Feisbuc client REST | [`feisbuc_rest_c/`](feisbuc_rest_c/) |
 | D | debug Fetch/HTTP | [`fetch_debug_d/`](fetch_debug_d/) |
 

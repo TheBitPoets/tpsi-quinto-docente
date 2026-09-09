@@ -8,7 +8,7 @@ node server.mjs
 
 Apri l'URL stampato dal server, normalmente `http://127.0.0.1:3000`.
 
-La fixture serve **sia** la pagina **sia** la API: il primo esercizio e same-origin.
+La fixture serve **sia** la pagina **sia** la API: il primo esercizio è same-origin.
 
 ## Contratto API
 
@@ -44,43 +44,17 @@ Content-Type: application/json
 
 ## Architettura richiesta
 
-```text
-DOM / event delegation
-        |
-      app.js
-        |
-      api.js
-        |
-      fetch
-        |
-       HTTP
-        |
-   server fixture
-```
+![DOM ed eventi sono coordinati da app.js, api.js isola Fetch e Response e il server possiede lo stato condiviso](../../../../assets/tpsi5/05-feisbuc-rest-architecture.svg)
 
-Non deve piu esistere:
+`app.js` non deve più salvare lo stato persistente in `localStorage`: la fonte condivisa è il server, mentre l'array JavaScript rimane soltanto lo stato corrente dell'interfaccia.
 
-```text
-app.js -> localStorage
-```
-
-## requestJson
+## La policy di `requestJson`
 
 Il tuo helper deve ragionare in questo ordine:
 
-```text
-await fetch
-   ↓
-Response
-   ↓
-Content-Type
-   ↓
-payload (JSON/text/nessuno)
-   ↓
-response.ok ?
-   ├─ si -> ritorna payload
-   └─ no -> Error utile
-```
+![Fetch può fallire prima della Response oppure durante controllo HTTP, parsing e validazione dei dati](../../../../assets/tpsi5/05-fetch-error-layers.svg)
+
+L'ordine è: attendi `fetch`, leggi status e `Content-Type`, consuma il payload una sola volta, trasforma `!response.ok` in un errore utile e infine valida la struttura dei dati prima di aggiornare lo stato.
 
 ## DevTools obbligatorio
 
@@ -101,6 +75,8 @@ Per ciascuno controlla method, status, request payload e response.
 - [ ] `api.js` non manipola il DOM;
 - [ ] `app.js` non costruisce manualmente URL/status handling duplicato;
 - [ ] response 4xx/5xx diventa un messaggio UI;
+- [ ] JSON valido ma non conforme al contratto viene rifiutato;
 - [ ] testo utente scritto con `textContent`;
 - [ ] loading state visibile/semanticamente rappresentato;
+- [ ] dopo il POST la form viene svuotata e il focus torna al campo di testo;
 - [ ] Network panel usato per verificare le tre request.

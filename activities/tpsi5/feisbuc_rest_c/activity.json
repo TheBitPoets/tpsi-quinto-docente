@@ -14,19 +14,21 @@
     {"source_id": "tpsi5-source-originali", "path": "content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md", "anchor": "feisbuc-milestone-3-feed-dinamico-locale", "role": "baseline"}
   ],
   "project_milestone": "feisbuc-04-rest-api-client",
-  "consegna": "Parti dalla stessa architettura DOM/state della milestone 3, ma elimina la persistenza `localStorage`. La fixture `server.mjs` espone e serve same-origin `GET /api/posts`, `POST /api/posts` e `PATCH /api/posts/:id`. Completa `api.js` con un helper `requestJson` robusto e completa `app.js` affinche carichi il feed, crei post e aggiorni like con `async/await`. Ogni risposta HTTP deve essere interpretata tramite status/`response.ok` e Content-Type; gli errori devono diventare feedback visibile nella UI. Non modificare il server e non usare Express.",
+  "consegna": "Parti dalla stessa architettura DOM/state della milestone 3, ma elimina la persistenza `localStorage`. La fixture `server.mjs` espone e serve same-origin `GET /api/posts`, `POST /api/posts` e `PATCH /api/posts/:id`. Completa `api.js` con un helper `requestJson` robusto e completa `app.js` affinché carichi il feed, crei post e aggiorni like con `async/await`. Ogni risposta HTTP deve essere interpretata tramite status/`response.ok` e Content-Type; i dati ricevuti devono essere validati e gli errori devono diventare feedback visibile nella UI. Non modificare il server e non usare Express.",
   "vincoli": [
     "non modificare server.mjs",
     "non usare localStorage o sessionStorage",
     "usa un modulo api.js separato dal DOM",
     "controlla response.ok prima di considerare riuscita la richiesta",
     "leggi Content-Type prima di scegliere json/text",
+    "valida almeno la struttura della lista e del post prima di aggiornare lo stato",
     "POST usa Content-Type application/json e JSON.stringify",
     "PATCH invia liked boolean",
     "app.js usa async/await e try/catch/finally dove appropriato",
     "mantieni event delegation per i like",
     "mantieni textContent per il testo utente",
     "mostra loading/error/success senza usare alert()",
+    "dopo un POST riuscito ripristina la form e riporta il focus al campo di testo",
     "non usare Express, Axios o altre librerie HTTP"
   ],
   "assets": [
@@ -49,6 +51,7 @@
     {"name": "post", "criterion": "POST crea una risorsa e usa representation restituita"},
     {"name": "patch", "criterion": "like usa PATCH su /api/posts/:id"},
     {"name": "ui states", "criterion": "loading/error/success sono rappresentati nella UI"},
+    {"name": "data contract", "criterion": "JSON valido ma non conforme non entra nello stato"},
     {"name": "no storage", "criterion": "non rimane persistenza localStorage/sessionStorage"}
   ],
   "rubrica": [
@@ -56,6 +59,6 @@
     {"criterio": "Async/await e gestione errori", "punti": 2},
     {"criterio": "REST GET/POST/PATCH", "punti": 2},
     {"criterio": "Separazione api/DOM e stato", "punti": 1},
-    {"criterio": "UX loading/error e accessibilita", "punti": 2}
+    {"criterio": "UX loading/error e accessibilità", "punti": 2}
   ]
 }

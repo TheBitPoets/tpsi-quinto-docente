@@ -1,14 +1,13 @@
 let input = "";
 process.stdin.setEncoding("utf8");
 process.stdin.on("data", (chunk) => input += chunk);
-process.stdin.on("end", async () => {
+process.stdin.on("end", () => {
   const meta = JSON.parse(input);
-  const result = await analyzeResponse(meta);
+  const result = analyzeResponse(meta);
   process.stdout.write(JSON.stringify(result));
 });
 
-const analyzeResponse = async (meta) => {
-  // TODO: usa await almeno una volta per rendere esplicito il confine asincrono.
+const analyzeResponse = (meta) => {
   // Restituisci:
   // {
   //   ok: boolean,

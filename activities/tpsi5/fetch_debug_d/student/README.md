@@ -19,22 +19,19 @@
 
 ## Obiettivo
 
-Arrivare a un helper che distingua:
+Arrivare a un helper che distingua quattro confini:
 
-```text
-fetch reject / runtime problem
-          !=
-HTTP response con status 4xx/5xx
-          !=
-response 2xx con parsing body scorretto
-```
+- <strong>network-or-cors</strong> o <strong>abort</strong>: nessuna Response utilizzabile;
+- <strong>http</strong>: Response ricevuta con status negativo;
+- <strong>representation</strong>: body incoerente o non interpretabile;
+- <strong>runtime</strong>: bug nel codice che non appartiene ai livelli precedenti.
 
 ## Definition of done
 
 - [ ] DIAGNOSI compilata prima del fix;
-- [ ] 404 non appare piu come successo;
+- [ ] 404 non appare più come successo;
 - [ ] POST usa representation JSON coerente e riceve 201;
 - [ ] 204 non viene parsato con `response.json()`;
-- [ ] UI distingue `http` da `network-or-runtime`;
+- [ ] UI conserva la categoria `http`, `network-or-cors`, `abort`, `representation` o `runtime`;
 - [ ] usi `response.ok`;
 - [ ] verifichi le correzioni dal pannello Network.

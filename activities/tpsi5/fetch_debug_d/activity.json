@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "id": "tpsi5-activity-d-debug-fetch-http-001",
-  "titolo": "Debug fetch: separa network error, HTTP error e parsing",
+  "titolo": "Debug Fetch: separa rete/CORS, HTTP, rappresentazione e runtime",
   "tipo": "debug-didattico",
   "student_support_mode": "teoria-dispense",
   "difficolta": "D",
@@ -14,7 +14,7 @@
     {"source_id": "tpsi5-ref-lab5-legacy", "path": "client.js", "anchor": "fetch-chain", "role": "legacy-provenance"},
     {"source_id": "tpsi5-ref-lab7-legacy", "path": "client.js", "anchor": "fetch-requests", "role": "legacy-provenance"}
   ],
-  "consegna": "Avvia la fixture e riproduci i tre bug dello starter: GET di una risorsa mancante, POST con representation errata e risposta 204. Prima compila `DIAGNOSI.md` usando Network/Console. Poi correggi `client.js` creando una policy coerente per leggere il payload, controllare `response.ok`, serializzare JSON correttamente e distinguere un esito HTTP negativo da un errore di rete/runtime.",
+  "consegna": "Avvia la fixture e riproduci i tre bug dello starter: GET di una risorsa mancante, POST con rappresentazione errata e risposta 204. Prima compila `DIAGNOSI.md` usando Network e Console. Poi correggi `client.js` creando una policy coerente per leggere il payload, controllare `response.ok`, serializzare JSON correttamente e distinguere rete/CORS, HTTP, parsing della rappresentazione, annullamento e runtime.",
   "vincoli": [
     "compila DIAGNOSI.md prima del fix",
     "non modificare server.mjs",
@@ -23,6 +23,7 @@
     "POST deve usare Content-Type application/json e JSON.stringify",
     "204 non deve essere parsato come JSON",
     "non etichettare automaticamente ogni catch come network error",
+    "assegna una categoria esplicita agli errori creati dalla policy",
     "non introdurre Axios o librerie esterne"
   ],
   "assets": [
@@ -42,10 +43,10 @@
     {"name": "404", "criterion": "response.ok governa l'esito HTTP"},
     {"name": "post json", "criterion": "header e body JSON sono coerenti"},
     {"name": "204", "criterion": "nessun parsing JSON su null-body success"},
-    {"name": "error taxonomy", "criterion": "HTTP e network/runtime sono distinti"}
+    {"name": "error taxonomy", "criterion": "rete/CORS, HTTP, rappresentazione, abort e runtime sono distinguibili"}
   ],
   "rubrica": [
-    {"criterio": "Qualita della diagnosi", "punti": 3},
+    {"criterio": "Qualità della diagnosi", "punti": 3},
     {"criterio": "Gestione status/response.ok", "punti": 2},
     {"criterio": "Serialization e Content-Type", "punti": 2},
     {"criterio": "Gestione 204/body", "punti": 1},

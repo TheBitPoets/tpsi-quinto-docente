@@ -5,19 +5,35 @@ const print = (value) => {
   output.textContent = typeof value === "string" ? value : JSON.stringify(value, null, 2);
 };
 
-async function readPayload(response) {
-  if (response.status === 204 || response.status === 205) return null;
+async function readPayload(response, method) {
+  if (method === "HEAD" || response.status === 204 || response.status === 205) return null;
 
   const contentType = response.headers.get("content-type") ?? "";
-  if (contentType.toLowerCase().includes("application/json")) {
-    return response.json();
+  const mediaType = contentType.split(";", 1)[0].trim().toLowerCase();
+  const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
+  try {
+    return isJson ? await response.json() : await response.text();
+  } catch (cause) {
+    const error = new Error(`Rappresentazione ${mediaType || "sconosciuta"} non valida`);
+    error.kind = "representation";
+    error.cause = cause;
+    throw error;
   }
-  return response.text();
 }
 
-async function request(url, options) {
-  const response = await fetch(url, options);
-  const payload = await readPayload(response);
+async function request(url, options = {}) {
+  const method = String(options.method ?? "GET").toUpperCase();
+  let response;
+  try {
+    response = await fetch(url, options);
+  } catch (cause) {
+    const kind = cause.name === "AbortError" ? "abort" : "network-or-cors";
+    const error = new Error(cause.message, { cause });
+    error.kind = kind;
+    throw error;
+  }
+
+  const payload = await readPayload(response, method);
 
   if (!response.ok) {
     const message = payload && typeof payload === "object"
@@ -37,11 +53,13 @@ async function run(label, operation) {
     const result = await operation();
     print({ case: label, success: true, result });
   } catch (error) {
-    if (error.kind === "http") {
-      print({ case: label, success: false, kind: "http", status: error.status, message: error.message });
-      return;
-    }
-    print({ case: label, success: false, kind: "network-or-runtime", message: error.message });
+    print({
+      case: label,
+      success: false,
+      kind: error.kind ?? "runtime",
+      status: error.status,
+      message: error.message
+    });
   }
 }
 

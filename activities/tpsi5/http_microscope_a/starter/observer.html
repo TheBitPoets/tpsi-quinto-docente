@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTTP observer</title>
+  <style>
+    body { max-width: 52rem; margin: 2rem auto; padding: 0 1rem; font: 1rem/1.5 system-ui, sans-serif; }
+    fieldset { display: grid; gap: .75rem; margin-block: 1rem; }
+    input { padding: .5rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+    button { padding: .55rem .8rem; }
+    pre { min-height: 10rem; padding: 1rem; overflow-wrap: anywhere; white-space: pre-wrap; background: #101828; color: #f9fafb; }
+  </style>
+</head>
+<body>
+  <h1>HTTP observer</h1>
+  <p>Apri DevTools → Network, esegui un caso e confronta ciò che appare qui con request e response reali.</p>
+  <fieldset>
+    <legend>Endpoint API</legend>
+    <label for="api-base">Origin del server</label>
+    <input id="api-base" value="http://127.0.0.1:3000" spellcheck="false">
+  </fieldset>
+  <div class="actions">
+    <button data-case="list">GET posts</button>
+    <button data-case="missing">GET missing</button>
+    <button data-case="create">POST JSON</button>
+    <button data-case="wrong-type">POST text/plain</button>
+    <button data-case="delete">DELETE</button>
+  </div>
+  <p id="status" role="status" aria-live="polite">Pronto.</p>
+  <pre id="output" tabindex="0">Scegli un esperimento.</pre>
+  <script type="module" src="./observer.mjs"></script>
+</body>
+</html>

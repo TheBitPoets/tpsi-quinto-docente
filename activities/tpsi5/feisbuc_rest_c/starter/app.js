@@ -43,4 +43,4 @@ postList.addEventListener("click", async (event) => {
   // TODO: event delegation come in UDA 22, ma il cambio like passa da PATCH HTTP.
 });
 
-await loadFeed();
+loadFeed();
