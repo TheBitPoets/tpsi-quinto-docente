@@ -96,7 +96,7 @@ Ogni titolo di lezione apre la dispensa corrispondente. Ogni Activity apre diret
 
 | UDA | Lezione | Activity associate | Ore | Docente responsabile | Date e ore svolte |
 |---|---|---|---:|---|---|
-| UDA-20 | [00 — Architettura didattica del corso Full Stack](content/tpsi5/00_COURSE_ARCHITECTURE.md) | — | 4 | prof. Antonio Caristia | 07/09/2026 — 2/4 ore, in corso |
+| UDA-20 | [00 — Architettura didattica del corso Full Stack](content/tpsi5/00_COURSE_ARCHITECTURE.md) | — | 4 | prof. Antonio Caristia | 07/09/2026 — 2 ore<br>09/09/2026 — 1 ora<br>Totale: 3/4 ore, in corso |
 | UDA-21 | [01 — Web Platform e HTML moderno](content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md) | [A — Anatomia di un documento HTML moderno](activities/tpsi5/html_anatomy_a/student/README.md)<br>[B — Feisbuc: da div generici a HTML semantico](activities/tpsi5/feisbuc_semantic_b/student/README.md) | 10 | ITP Antonino Pirri | — |
 | UDA-21 | [02 — CSS moderno, layout e responsive design](content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md) | [C — Shell responsive Feisbuc](activities/tpsi5/feisbuc_responsive_c/student/README.md)<br>[D — Debug del layout responsive](activities/tpsi5/css_debug_d/student/README.md) | 6 | prof. Antonio Caristia | — |
 | UDA-21 | [03 — Bootstrap: dal CSS nativo a un framework](content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md) | [E — Interfaccia Bootstrap Feisbuc](activities/tpsi5/feisbuc_bootstrap_e/student/README.md) | 6 | ITP Antonino Pirri | — |
@@ -120,9 +120,9 @@ Ogni titolo di lezione apre la dispensa corrispondente. Ogni Activity apre diret
 
 | Docente | Lezioni e Activity | Compito assegnato | Riserva flessibile | Totale annuale | Ore svolte | Ore ancora da svolgere |
 |---|---:|---:|---:|---:|---:|---:|
-| prof. Antonio Caristia | 58 | 2 | 6 | **66** | 2 | 64 |
+| prof. Antonio Caristia | 58 | 2 | 6 | **66** | 3 | 63 |
 | ITP Antonino Pirri | 58 | 2 | 6 | **66** | 0 | 66 |
-| **Totale** | **116** | **4** | **12** | **132** | **2** | **130** |
+| **Totale** | **116** | **4** | **12** | **132** | **3** | **129** |
 
 La verifica del primo quadrimestre è affidata ad Antonio Caristia; quella del secondo quadrimestre ad Antonino Pirri. Ulteriori prove da due ore vengono assorbite dalla riserva e devono essere distribuite in coppia o compensate, così da conservare il 50% esatto del carico assegnato.
 
@@ -132,8 +132,9 @@ La verifica del primo quadrimestre è affidata ad Antonio Caristia; quella del s
 |---|---|---|---:|---:|---|
 | 07/09/2026 | [00 — Introduzione al corso](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 2 | 2 | Svolta; lezione 00 ancora in corso. |
 | 08/09/2026 | [00 — Continuazione](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 1 | 0 | Annullata per rottura della conduttura dell'acqua; consumata 1 ora della riserva annuale. |
+| 09/09/2026 | [00 — Continuazione](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 1 | 1 | Svolta; lezione 00 ancora in corso. |
 
-Situazione dopo l'8 settembre: **2 ore svolte**, **2 ore ancora necessarie per concludere la lezione 00** e **11 ore di riserva flessibile residue**. Le sospensioni non vengono attribuite come ore svolte al docente; il controllo del 50% riguarda il carico annuale assegnato, mentre il consuntivo effettivo resta separato.
+Situazione dopo il 9 settembre: **3 ore svolte**, **1 ora ancora necessaria per concludere la lezione 00** e **11 ore di riserva flessibile residue**. Le sospensioni non vengono attribuite come ore svolte al docente; il controllo del 50% riguarda il carico annuale assegnato, mentre il consuntivo effettivo resta separato.
 
 ## Stack core congelato
 
