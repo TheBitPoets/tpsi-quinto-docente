@@ -686,14 +686,48 @@ Dopo aver dato struttura e significato ai contenuti, useremo CSS per controllarn
   <img src="../../assets/tpsi5/01-http-html-dom.svg" alt="Il server invia HTML in una risposta HTTP; il browser interpreta il documento, costruisce il DOM e visualizza la pagina">
 </p>
 
+### Chiariamo il DOM con un esempio minimo
+
+<p align="justify">Supponiamo che il corpo della risposta HTTP contenga questo documento. Per il browser, all'inizio, sono soltanto caratteri ricevuti dal server:</p>
+
+```html
+<!doctype html>
+<html lang="it">
+<head>
+  <title>Prima pagina</title>
+</head>
+<body>
+  <h1>Ciao!</h1>
+  <p>Benvenuti nel corso.</p>
+</body>
+</html>
+```
+
+<p align="justify">Il browser legge il testo dall'alto verso il basso. Quando incontra un tag di apertura crea un <strong>nodo elemento</strong>; l'annidamento del codice stabilisce quali nodi sono genitori e quali sono figli. Anche il testo racchiuso fra apertura e chiusura diventa un <strong>nodo di testo</strong>. Il risultato viene conservato nella memoria del browser come questo albero:</p>
+
+<p align="center">
+  <img src="../../assets/tpsi5/01-html-dom-minimal.svg" alt="Albero DOM costruito dal documento HTML minimo: il nodo document contiene doctype e html; html contiene head e body; title, h1 e p contengono i rispettivi nodi di testo">
+</p>
+
+<p align="justify">Leggiamo alcuni collegamenti dell'albero: <code>html</code> è figlio di <code>#document</code>; <code>head</code> e <code>body</code> sono figli di <code>html</code>; <code>h1</code> e <code>p</code> sono figli di <code>body</code>. Il testo <code>Ciao!</code> non è un altro elemento HTML: è un nodo di testo contenuto nel nodo <code>h1</code>. L'attributo <code>lang="it"</code> appartiene invece all'elemento <code>html</code>.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — DOM:</strong>
+DOM significa <em>Document Object Model</em>. È il modello a oggetti che rappresenta in memoria il documento interpretato dal browser. Ogni nodo è un oggetto collegato agli altri attraverso relazioni come genitore, figlio e fratello.</p>
+</td></tr></table>
+
+<p align="justify"><code>head</code> fa parte del DOM anche se il suo contenuto non appare nel corpo della pagina: in questo esempio <code>title</code> assegna il testo alla scheda del browser. I contenuti di <code>body</code> vengono invece usati per costruire la parte visibile. Il DOM non è quindi una fotografia dello schermo e non è il file sul server: è la struttura intermedia che il browser può usare per visualizzare la pagina e che, più avanti, JavaScript potrà leggere e modificare.</p>
+
+<p align="justify"><strong>Prova nel browser:</strong> salva il documento, aprilo e usa <em>Elements</em> o <em>Inspector</em>. Ritroverai lo stesso albero, potrai espandere <code>html</code>, <code>head</code> e <code>body</code> e osservare i nodi costruiti. Se modifichi temporaneamente <code>Ciao!</code> in DevTools, stai cambiando il DOM in memoria; ricaricando la pagina, il browser legge nuovamente l'HTML e ricostruisce l'albero.</p>
+
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> Idea chiave:</strong>
-il file HTML, il DOM costruito dal browser e la pagina visualizzata sono tre rappresentazioni collegate, ma non sono la stessa cosa.</p>
+il file HTML è testo, il DOM è un albero di oggetti in memoria e la pagina visualizzata è il risultato prodotto dal browser. Sono tre rappresentazioni collegate, ma non sono la stessa cosa.</p>
 </td></tr></table>
 
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128279;</span> Riferimenti MDN:</strong>
 <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works#clients_and_servers">How the web works — Clients and servers</a> e
-<a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works#so_what_happens_exactly">So what happens, exactly?</a>. Collega la richiesta del browser, la risposta del server e i file che formano una pagina.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works#so_what_happens_exactly">So what happens, exactly?</a>. Collega la richiesta del browser, la risposta del server e i file che formano una pagina. Per l'albero appena costruito usa <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model#what_is_a_dom_tree">Document Object Model — What is a DOM tree?</a>.</p>
 
 <a id="lesson-web-platform"></a>
 ## Che cos'è la Web Platform
@@ -1352,7 +1386,7 @@ Un link porta l'utente verso una destinazione, come un'altra pagina o una sezion
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128214;</span> Definizione — DOM:</strong>
-DOM significa <em>Document Object Model</em>. È la rappresentazione ad albero del documento che il browser costruisce dopo aver interpretato l'HTML. Ogni elemento, attributo e contenuto diventa parte di questa struttura.</p>
+nel primo esempio abbiamo visto che il browser trasforma il testo HTML in un albero di oggetti. Ora applichiamo lo stesso modello a una struttura Feisbuc più realistica e impariamo a osservarla con gli strumenti di sviluppo.</p>
 </td></tr></table>
 
 <p align="center">

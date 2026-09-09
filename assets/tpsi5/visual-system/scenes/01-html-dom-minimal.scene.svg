@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" data-output="../../01-html-dom-minimal.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Albero DOM di un documento HTML minimo</title>
+  <desc id="desc">Il nodo document contiene un nodo doctype e l'elemento html con attributo lang. Html contiene head e body. Head contiene title e il suo testo; body contiene h1 e p con i rispettivi nodi di testo.</desc>
+  <defs id="visual-kit-components"/>
+  <defs>
+    <linearGradient id="minimalDomBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#132b45"/></linearGradient>
+    <filter id="minimalDomShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#020617" flood-opacity=".32"/></filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#minimalDomBg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="960" y="70" text-anchor="middle" fill="#f8fafc" font-size="44" font-weight="800">IL BROWSER COSTRUISCE L'ALBERO DOM</text>
+    <text x="960" y="114" text-anchor="middle" fill="#b8c8dc" font-size="21">L'annidamento dei tag diventa una relazione tra oggetti padre e figli</text>
+
+    <g fill="none" stroke="#a78bfa" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M960 224V286M960 286H370V350M960 286V350"/>
+      <path d="M960 430V488M960 488H600V552M960 488H1320V552"/>
+      <path d="M600 632V702"/>
+      <path d="M1320 632V686M1320 686H1100V742M1320 686H1540V742"/>
+      <path d="M600 782V874M1100 822V874M1540 822V874"/>
+    </g>
+
+    <g filter="url(#minimalDomShadow)" text-anchor="middle" font-weight="800">
+      <rect x="820" y="154" width="280" height="72" rx="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="4"/>
+      <text x="960" y="199" fill="#5b21b6" font-size="23">#document</text>
+
+      <rect x="230" y="350" width="280" height="80" rx="22" fill="#fff7ed" stroke="#f59e0b" stroke-width="4"/>
+      <text x="370" y="382" fill="#92400e" font-size="19">DocumentType</text>
+      <text x="370" y="411" fill="#785e32" font-size="17">&lt;!doctype html&gt;</text>
+
+      <rect x="800" y="350" width="320" height="80" rx="22" fill="#ede9fe" stroke="#8b5cf6" stroke-width="4"/>
+      <text x="960" y="382" fill="#5b21b6" font-size="22">html</text>
+      <text x="960" y="411" fill="#6d28d9" font-size="17">lang="it"</text>
+
+      <rect x="470" y="552" width="260" height="80" rx="22" fill="#e0f2fe" stroke="#38bdf8" stroke-width="4"/>
+      <text x="600" y="601" fill="#075985" font-size="22">head</text>
+
+      <rect x="1190" y="552" width="260" height="80" rx="22" fill="#d1fae5" stroke="#34d399" stroke-width="4"/>
+      <text x="1320" y="601" fill="#065f46" font-size="22">body</text>
+
+      <rect x="470" y="702" width="260" height="80" rx="22" fill="#e0f2fe" stroke="#38bdf8" stroke-width="4"/>
+      <text x="600" y="751" fill="#075985" font-size="22">title</text>
+
+      <rect x="980" y="742" width="240" height="80" rx="22" fill="#d1fae5" stroke="#34d399" stroke-width="4"/>
+      <text x="1100" y="791" fill="#065f46" font-size="22">h1</text>
+
+      <rect x="1420" y="742" width="240" height="80" rx="22" fill="#d1fae5" stroke="#34d399" stroke-width="4"/>
+      <text x="1540" y="791" fill="#065f46" font-size="22">p</text>
+    </g>
+
+    <g text-anchor="middle">
+      <rect x="440" y="874" width="320" height="66" rx="33" fill="#f8fafc" stroke="#94a3b8" stroke-width="3"/>
+      <text x="600" y="916" fill="#334155" font-size="19">"Prima pagina"</text>
+      <rect x="960" y="874" width="280" height="66" rx="33" fill="#f8fafc" stroke="#94a3b8" stroke-width="3"/>
+      <text x="1100" y="916" fill="#334155" font-size="19">"Ciao!"</text>
+      <rect x="1340" y="874" width="400" height="66" rx="33" fill="#f8fafc" stroke="#94a3b8" stroke-width="3"/>
+      <text x="1540" y="916" fill="#334155" font-size="19">"Benvenuti nel corso."</text>
+    </g>
+
+    <g transform="translate(250 988)">
+      <rect width="1420" height="58" rx="29" fill="#e2e8f0" opacity=".12"/>
+      <rect x="55" y="16" width="28" height="28" rx="8" fill="#d1fae5" stroke="#34d399" stroke-width="3"/>
+      <text x="98" y="37" fill="#e2e8f0" font-size="17">nodo elemento</text>
+      <rect x="330" y="16" width="50" height="28" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="3"/>
+      <text x="395" y="37" fill="#e2e8f0" font-size="17">nodo di testo</text>
+      <text x="790" y="37" fill="#e2e8f0" font-size="17">head è nel DOM; h1 e p contribuiscono al contenuto visibile.</text>
+    </g>
+  </g>
+</svg>
