@@ -38,7 +38,7 @@
       "role": "legacy-provenance"
     }
   ],
-  "consegna": "Completa la funzione `prepareFeed(posts)` nello starter. L'input e un array JSON di post con `id`, `author`, `text`, `likes` e `published`. Mantieni soltanto i post con `published === true` e trasformali in nuovi oggetti `{id, label, popular}`. `label` deve essere `${author}: ${text.trim()}`; `popular` vale `true` quando `likes >= 5`. Non modificare il codice di lettura stdin/output JSON. Conserva l'ordine originale dei post pubblicati.",
+  "consegna": "Completa la funzione `prepareFeed(posts)` nello starter. L'input è un array JSON di post con `id`, `author`, `text`, `likes` e `published`. Mantieni soltanto i post con `published === true` e trasformali in nuovi oggetti `{id, label, popular}`. `label` deve essere `${author}: ${text.trim()}`; `popular` vale `true` quando `likes >= 5`. Non modificare il codice di lettura stdin/output JSON. Conserva l'ordine originale dei post pubblicati.",
   "vincoli": [
     "usa const come default e let soltanto se serve riassegnare",
     "usa filter e map nella pipeline",
@@ -116,7 +116,7 @@
       "criterion": "lo studente sa spiegare che filter seleziona e map trasforma"
     },
     {
-      "name": "immutabilita intenzionale",
+      "name": "immutabilità intenzionale",
       "criterion": "lo studente distingue nuova collezione da mutazione dell'input"
     }
   ],
@@ -130,7 +130,7 @@
       "punti": 2
     },
     {
-      "criterio": "Leggibilita e scelta const/let",
+      "criterio": "Leggibilità e scelta const/let",
       "punti": 1
     },
     {

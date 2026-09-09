@@ -47,7 +47,7 @@
     }
   ],
   "project_milestone": "feisbuc-03-dynamic-local-feed",
-  "consegna": "Trasforma la UI Bootstrap dello starter in un feed client-side dinamico. Implementa i moduli `posts.js`, `storage.js` e `app.js`: la form `#composer-form` deve creare post nello stato, `renderPosts()` deve costruire gli `article` con DOM API e `textContent`, il contenitore `#post-list` deve usare un unico listener con event delegation per i pulsanti `data-action=\"like\"`, e ogni modifica deve essere salvata in `localStorage`. All'avvio i post vengono letti dallo storage. Mantieni Bootstrap come presentazione e non usare `fetch`, backend o librerie JavaScript aggiuntive.",
+  "consegna": "Trasforma la UI Bootstrap dello starter in un feed client-side dinamico. Implementa i moduli `posts.js`, `storage.js` e `app.js`: la form `#composer-form` deve creare post nello stato, `renderPosts()` deve costruire gli `article` con DOM API e `textContent`, il contenitore `#post-list` deve usare un unico listener con event delegation per i pulsanti `data-action=\"like\"`, e ogni modifica deve passare da `commitPosts()` per aggiornare stato, storage, DOM e status accessibile. All'avvio i post vengono letti dallo storage. Mantieni Bootstrap come presentazione e non usare `fetch`, backend o librerie JavaScript aggiuntive.",
   "vincoli": [
     "usa script type=module e separa almeno app/posts/storage",
     "ascolta submit sulla form e usa preventDefault",
@@ -56,9 +56,11 @@
     "ogni post deve restare un article con data-post-id",
     "usa un solo listener click sul contenitore #post-list per i like dinamici",
     "identifica l'azione con data-action e il post con data-post-id",
-    "lo stato JavaScript e la fonte di verita per likes/liked",
+    "lo stato JavaScript è la fonte di verità per likes/liked",
     "salva e carica array/object tramite JSON in localStorage",
     "gestisci storage vuoto o JSON corrotto senza rendere inutilizzabile la pagina",
+    "gestisci anche il fallimento di setItem e comunicalo tramite #feed-status",
+    "dopo una pubblicazione valida ripristina il focus sul controllo text",
     "non usare fetch, Promise o async/await in questa milestone",
     "mantieni heading e attributi ARIA dello starter"
   ],
@@ -163,15 +165,15 @@
     },
     {
       "name": "storage",
-      "criterion": "creazione e like sopravvivono al reload tramite JSON/localStorage"
+      "criterion": "creazione e like sopravvivono al reload; errori di lettura o scrittura non rendono inutilizzabile la UI"
     },
     {
       "name": "dom-sicuro",
-      "criterion": "il testo del post passa da textContent e non da interpolazione innerHTML"
+      "criterion": "il testo passa da textContent; status, aria-pressed e focus rendono osservabili le modifiche"
     },
     {
       "name": "moduli",
-      "criterion": "posts/storage/app hanno responsabilita distinguibili"
+      "criterion": "posts/storage/app hanno responsabilità distinguibili"
     }
   ],
   "rubrica": [
@@ -188,11 +190,11 @@
       "punti": 2
     },
     {
-      "criterio": "Modularita e leggibilita",
+      "criterio": "Modularità e leggibilità",
       "punti": 1
     },
     {
-      "criterio": "Semantica, accessibilita e gestione sicura del testo",
+      "criterio": "Semantica, accessibilità e gestione sicura del testo",
       "punti": 2
     }
   ]

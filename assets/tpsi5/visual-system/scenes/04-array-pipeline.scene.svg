@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" data-output="../../04-array-pipeline.svg" role="img" aria-labelledby="title desc">
+  <title id="title">Pipeline filter e map applicata ai post</title>
+  <desc id="desc">Filter seleziona i post pubblicati senza modificare l'originale; map trasforma ciascun post selezionato in una nuova etichetta.</desc>
+  <defs id="visual-kit-components"/>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset="1" stop-color="#14324f"/></linearGradient><marker id="a" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto"><path d="M0 0l18 9L0 18z" fill="#38bdf8"/></marker></defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="800" y="70" text-anchor="middle" fill="#f8fafc" font-size="42" font-weight="800">DUE DOMANDE, DUE TRASFORMAZIONI</text>
+    <text x="800" y="112" text-anchor="middle" fill="#b8c8dc" font-size="21">filter sceglie quali elementi tenere · map decide che cosa produrre</text>
+    <g transform="translate(65 220)">
+      <rect width="330" height="470" rx="32" fill="#eff6ff" stroke="#38bdf8" stroke-width="5"/>
+      <text x="165" y="48" text-anchor="middle" fill="#075985" font-size="24" font-weight="800">POST ORIGINALI</text>
+      <g fill="#fff" stroke="#94a3b8" stroke-width="3"><rect x="35" y="85" width="260" height="84" rx="18"/><rect x="35" y="193" width="260" height="84" rx="18"/><rect x="35" y="301" width="260" height="84" rx="18"/></g>
+      <g fill="#334155" font-size="17"><text x="58" y="121">Ada · published: true</text><text x="58" y="148">“DOM”</text><text x="58" y="229">Linus · published: false</text><text x="58" y="256">“Bozza”</text><text x="58" y="337">Grace · published: true</text><text x="58" y="364">“JavaScript”</text></g>
+      <text x="165" y="430" text-anchor="middle" fill="#52677f" font-size="17">l'array non viene modificato</text>
+    </g>
+    <path d="M410 455h180" fill="none" stroke="#38bdf8" stroke-width="7" marker-end="url(#a)"/>
+    <g transform="translate(610 340)"><rect width="260" height="230" rx="34" fill="#ecfdf5" stroke="#22c55e" stroke-width="5"/><text x="130" y="76" text-anchor="middle" fill="#166534" font-size="30" font-weight="800">filter()</text><text x="130" y="120" text-anchor="middle" fill="#3f5f4b" font-size="18">“lo tengo?”</text><text x="130" y="164" text-anchor="middle" fill="#166534" font-size="17" font-family="monospace">published === true</text><text x="130" y="202" text-anchor="middle" fill="#3f5f4b" font-size="16">restituisce un nuovo array</text></g>
+    <path d="M885 455h170" fill="none" stroke="#38bdf8" stroke-width="7" marker-end="url(#a)"/>
+    <g transform="translate(1075 340)"><rect width="260" height="230" rx="34" fill="#fff7ed" stroke="#f59e0b" stroke-width="5"/><text x="130" y="76" text-anchor="middle" fill="#78350f" font-size="30" font-weight="800">map()</text><text x="130" y="120" text-anchor="middle" fill="#7c5b24" font-size="18">“che cosa diventa?”</text><text x="130" y="164" text-anchor="middle" fill="#78350f" font-size="17" font-family="monospace">post → label</text><text x="130" y="202" text-anchor="middle" fill="#7c5b24" font-size="16">un output per ogni input</text></g>
+    <path d="M1350 455h105" fill="none" stroke="#38bdf8" stroke-width="7" marker-end="url(#a)"/>
+    <g transform="translate(1445 275)"><rect width="130" height="360" rx="28" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="5"/><text x="65" y="50" text-anchor="middle" fill="#5b21b6" font-size="21" font-weight="800">OUTPUT</text><text x="65" y="135" text-anchor="middle" fill="#5b21b6" font-size="16">Ada: DOM</text><text x="65" y="220" text-anchor="middle" fill="#5b21b6" font-size="16">Grace:</text><text x="65" y="244" text-anchor="middle" fill="#5b21b6" font-size="16">JavaScript</text><text x="65" y="316" text-anchor="middle" fill="#6d5a90" font-size="14">2 valori</text></g>
+    <g transform="translate(300 750)"><rect width="1000" height="92" rx="28" fill="#f8fafc"/><text x="500" y="38" text-anchor="middle" fill="#102a43" font-size="20" font-weight="800">LEGGI LA PIPELINE DA SINISTRA A DESTRA</text><text x="500" y="68" text-anchor="middle" fill="#52677f" font-size="18">posts.filter(isPublished).map(toLabel) · selezione prima, trasformazione dopo</text></g>
+  </g>
+</svg>

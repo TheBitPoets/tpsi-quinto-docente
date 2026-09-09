@@ -17,7 +17,7 @@ Valutare **diagnosi**, non solo correzione.
 
 Chiedere allo studente di mostrare almeno:
 
-- una eccezione e relativo stack;
+- un'eccezione e il relativo stack;
 - valore di `localStorage.getItem()`;
 - NodeList dei like button prima/dopo la creazione di un post;
 - `event.target` durante il bubbling;
@@ -25,7 +25,7 @@ Chiedere allo studente di mostrare almeno:
 
 ## Errori di valutazione da evitare
 
-Non assegnare il massimo solo perche l'app finale sembra funzionare. Un fix che registra listener dopo ogni render, nasconde errori con `try/catch` generico o usa `innerHTML` puo mascherare i sintomi senza risolvere il modello.
+Non assegnare il massimo solo perché l'app finale sembra funzionare. Un fix che registra listener dopo ogni render, nasconde errori con `try/catch` generico o usa `innerHTML` può mascherare i sintomi senza risolvere il modello.
 
 ## Debrief consigliato
 

@@ -6,21 +6,11 @@ Implementare `toggleLike(posts, targetId)` senza modificare direttamente l'array
 
 ## Modello mentale
 
-```text
-old posts
-   |
-   v
-map
-   |
-   +--> post diverso -> invariato
-   |
-   +--> target -> nuovo object con spread
-   |
-   v
-new posts
-```
+![Confronto tra alias dello stesso object e copia superficiale creata con spread](../../../../assets/tpsi5/04-reference-copy.svg)
 
-Il DOM arrivera dopo. Qui vogliamo rendere testabile la logica che il browser chiamera quando avverra un evento.
+`map()` crea il nuovo array: un post diverso dal target viene restituito invariato; per il target, object spread crea un nuovo object con `liked` e `likes` aggiornati.
+
+Il DOM arriverà dopo. Qui vogliamo rendere testabile la logica che il browser chiamerà quando avverrà un evento.
 
 ## Regole
 
@@ -33,8 +23,8 @@ Il DOM arrivera dopo. Qui vogliamo rendere testabile la logica che il browser ch
 
 ## Domande da saper rispondere
 
-1. Perche `const post` non impedisce di mutare `post.likes`?
-2. Perche qui scegliamo di non mutare comunque il post ricevuto?
+1. Perché `const post` non impedisce di mutare `post.likes`?
+2. Perché qui scegliamo di non mutare comunque il post ricevuto?
 3. Quale parte del codice crea il nuovo array?
 4. Quale parte crea il nuovo object?
 5. Come collegheremo questa funzione a `event delegation` nel browser?

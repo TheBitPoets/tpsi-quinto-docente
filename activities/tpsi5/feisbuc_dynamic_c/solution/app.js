@@ -59,9 +59,9 @@ function renderPosts() {
 
 function commitPosts(nextPosts, message) {
   posts = nextPosts;
-  savePosts(posts);
+  const saved = savePosts(posts);
   renderPosts();
-  status.textContent = message;
+  status.textContent = saved ? message : `${message} Salvataggio non riuscito.`;
 }
 
 form.addEventListener("submit", (event) => {
@@ -78,6 +78,7 @@ form.addEventListener("submit", (event) => {
   const post = createPost("Studente", text);
   commitPosts([post, ...posts], "Post pubblicato.");
   form.reset();
+  form.elements.namedItem("text")?.focus();
 });
 
 postList.addEventListener("click", (event) => {

@@ -4,7 +4,7 @@
 
 Completare `prepareFeed(posts)` senza DOM e senza browser API.
 
-Il grader eseguira `main.js` con Node.js, inviera un array JSON su stdin e confrontera lo stdout con l'output atteso.
+Il grader eseguirà `main.js` con Node.js, invierà un array JSON su stdin e confronterà lo stdout con l'output atteso.
 
 ## Input
 
@@ -32,7 +32,7 @@ Esempio:
 3. `label` combina autore e testo `trim()`;
 4. `popular` vale `likes >= 5`;
 5. conserva l'ordine;
-6. non aggiungere `console.log` di debug: stdout e parte del contratto del test.
+6. non aggiungere `console.log` di debug: stdout è parte del contratto del test.
 
 ## Prima di consegnare
 
@@ -40,17 +40,12 @@ Esempio:
 - [ ] non ho modificato il codice che legge stdin;
 - [ ] non modifico l'array di input;
 - [ ] uso `const` come default;
-- [ ] l'output e JSON valido.
+- [ ] l'output è JSON valido.
 
 ## Collegamento al progetto
 
-La stessa idea ritornera nel browser:
+La stessa idea ritornerà nel browser:
 
-```text
-posts state
-   -> filter/map
-   -> createPostElement
-   -> DOM
-```
+![Pipeline filter e map applicata ai post](../../../../assets/tpsi5/04-array-pipeline.svg)
 
 Prima impariamo la trasformazione dei dati, poi aggiungiamo la rappresentazione visuale.

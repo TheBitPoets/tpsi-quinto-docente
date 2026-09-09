@@ -19,9 +19,17 @@ function createPostElement(post) {
 }
 
 function renderPosts() {
-  // TODO: se posts e vuoto mostra un messaggio esplicito.
+  // TODO: se posts è vuoto mostra un messaggio esplicito.
   // Altrimenti sostituisci i figli di #post-list con gli article
   // creati da createPostElement.
+}
+
+function commitPosts(nextPosts, message) {
+  // TODO: usa un solo punto per:
+  // 1. rendere nextPosts il nuovo stato;
+  // 2. salvare e controllare il booleano restituito da savePosts;
+  // 3. renderizzare;
+  // 4. aggiornare #feed-status, segnalando un eventuale errore di salvataggio.
 }
 
 form.addEventListener("submit", (event) => {
@@ -30,15 +38,15 @@ form.addEventListener("submit", (event) => {
   // 2. FormData
   // 3. trim e validazione testo
   // 4. createPost
-  // 5. aggiorna posts
-  // 6. savePosts + renderPosts + form.reset
+  // 5. usa commitPosts per confermare il nuovo stato
+  // 6. form.reset e focus sul controllo text
 });
 
 postList.addEventListener("click", (event) => {
   // TODO: event delegation.
   // Cerca il button [data-action="like"] con closest().
   // Risali all'article [data-post-id].
-  // Aggiorna lo state con toggleLike, salva e renderizza.
+  // Aggiorna lo state con toggleLike e passa il risultato a commitPosts.
 });
 
 renderPosts();

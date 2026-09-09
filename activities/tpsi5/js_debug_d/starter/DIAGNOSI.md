@@ -14,9 +14,9 @@ Non modificare `app.js` finche non hai compilato almeno cinque righe sostanziali
 
 ## Domande guida
 
-- Qual e la prima eccezione nella console quando invii la form?
+- Qual è la prima eccezione nella console quando invii la form?
 - Che tipo di valore restituisce `localStorage.getItem()`?
 - Quando viene eseguito `querySelectorAll(".like-button")` rispetto alla creazione dei post?
 - Dove vive davvero il numero di like?
 - Che cosa succede se il testo contiene `<strong>ciao</strong>`?
-- L'identita appartiene al post o al pulsante?
+- L'identità appartiene al post o al pulsante?

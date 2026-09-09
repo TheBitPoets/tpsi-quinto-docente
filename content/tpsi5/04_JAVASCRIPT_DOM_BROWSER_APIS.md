@@ -23,19 +23,22 @@
   <li>usare <code>const</code> e <code>let</code> in modo consapevole e spiegare perché <code>var</code> non è la scelta predefinita del corso;</li>
   <li>riconoscere primitive, array, object, <code>null</code> e <code>undefined</code> nei casi d'uso più comuni;</li>
   <li>distinguere riassegnazione di una variabile da mutazione di un oggetto;</li>
-  <li>usare template literal, destructuring, spread e optional chaining quando migliorano leggibilita;</li>
+  <li>usare template literal, destructuring, spread e optional chaining quando migliorano la leggibilità;</li>
   <li>manipolare collezioni con <code>map</code>, <code>filter</code>, <code>find</code>, <code>some</code>, <code>every</code> e, quando utile, <code>reduce</code>;</li>
   <li>scrivere funzioni, callback e arrow function senza trattarle come sintassi magica;</li>
   <li>comprendere scope a blocchi e problemi causati da stato globale non necessario;</li>
   <li>separare codice in ES modules con <code>import</code> ed <code>export</code>;</li>
+  <li>ricostruire la sequenza di inizializzazione di una piccola applicazione a moduli;</li>
   <li>selezionare elementi DOM con <code>querySelector</code>/<code>querySelectorAll</code>;</li>
   <li>creare e modificare nodi con <code>createElement</code>, <code>textContent</code>, <code>classList</code>, <code>dataset</code> e <code>append</code>;</li>
   <li>registrare eventi con <code>addEventListener</code> e usare correttamente l'oggetto <code>Event</code>;</li>
   <li>distinguere <code>target</code> e <code>currentTarget</code> e spiegare il bubbling;</li>
   <li>usare <strong>event delegation</strong> quando gli elementi possono essere creati dinamicamente;</li>
   <li>intercettare una form con <code>submit</code>, <code>preventDefault()</code> e <code>FormData</code>;</li>
-  <li>usare <code>localStorage</code> e <code>sessionStorage</code> per dati semplici, serializzando oggetti con JSON;</li>
+  <li>distinguere valori JavaScript e testo JSON, validando ciò che viene deserializzato;</li>
+  <li>usare <code>localStorage</code> e <code>sessionStorage</code> per dati semplici, gestendo anche gli errori di lettura e scrittura;</li>
   <li>organizzare una piccola UI secondo il flusso <code>state -&gt; render -&gt; events -&gt; new state</code>;</li>
+  <li>rendere osservabili le modifiche tramite status accessibili, stato dei controlli e gestione del focus;</li>
   <li>diagnosticare errori JavaScript con console, breakpoint, stack trace e DevTools.</li>
 </ul>
 
@@ -46,6 +49,29 @@
   <li>concetti generali di variabile, selezione, iterazione e funzione studiati negli anni precedenti;</li>
   <li>uso essenziale della console e di DevTools.</li>
 </ul>
+
+<a id="lesson-learning-path"></a>
+## Percorso didattico delle 19 ore
+
+<p align="justify">La lezione è un percorso di più incontri, non un capitolo da leggere tutto in una volta. Ogni blocco introduce soltanto i concetti necessari al prodotto successivo; le Activity verificano ciò che è già stato costruito.</p>
+
+<table align="center" width="100%"><tr><td>
+<details>
+<summary>&#129517; <strong>Sei blocchi progressivi — contenuti, prodotto e tempo</strong></summary>
+
+<ol>
+  <li><strong>3 ore — dal browser alle funzioni:</strong> ambiente JavaScript, console, valori, operatori, decisioni, funzioni e callback; prodotto: contatore interattivo minimo;</li>
+  <li><strong>3 ore — dai dati alle trasformazioni:</strong> array, object, riferimenti, copie e pipeline; prodotti: Activity A e B;</li>
+  <li><strong>3 ore — dai file al DOM:</strong> moduli, sequenza di avvio, selezione, creazione e modifica dei nodi;</li>
+  <li><strong>4 ore — dall'interazione all'intenzione:</strong> eventi, form, bubbling, delegation e accessibilità;</li>
+  <li><strong>4 ore — dallo stato alla persistenza:</strong> state/render, JSON, Web Storage e Activity C;</li>
+  <li><strong>2 ore — dalla diagnosi alla verifica:</strong> DevTools, Activity D, correzione motivata e checkpoint.</li>
+</ol>
+
+<p align="justify"><strong>Totale:</strong> 19 ore. Ogni blocco termina con una domanda di uscita prima di introdurre il successivo.</p>
+
+</details>
+</td></tr></table>
 
 <a id="lesson-docs-maps"></a>
 ## Orientamento nella documentazione MDN
@@ -195,8 +221,8 @@
 
 <blockquote>
 <p><strong>13 · CORRISPONDENZA</strong></p>
-<p><strong>&#128309; DISPENSA</strong><br><strong><a href="#lesson-js-storage">Web Storage e JSON</a></strong></p>
-<ul><li>Persistenza locale a stringhe, durata, origine, serializzazione ed errori.</li></ul>
+<p><strong>&#128309; DISPENSA</strong><br><strong><a href="#lesson-js-json">JSON: valori e testo</a></strong><br><strong><a href="#lesson-js-storage">Web Storage</a></strong></p>
+<ul><li>Serializzazione, validazione, persistenza locale a stringhe, durata, origine ed errori.</li></ul>
 <p><strong>&#128994; MDN</strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API">Web Storage API</a></strong><br><strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON">Working with JSON</a></strong></p>
 <ul><li><code>localStorage</code>, <code>sessionStorage</code> e conversione fra valori JavaScript e testo JSON.</li></ul>
 </blockquote>
@@ -236,7 +262,7 @@
 <tr><td><strong>Document</strong></td><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"><code>querySelector()</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll"><code>querySelectorAll()</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"><code>createElement()</code></a>.</li></ul></td><td><ul><li>Selettori legacy dedicati.</li><li><code>DocumentFragment</code>.</li></ul></td></tr>
 <tr><td><strong>Node ed Element</strong></td><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent"><code>textContent</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/append"><code>append()</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"><code>classList</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset"><code>dataset</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"><code>closest()</code></a>.</li></ul></td><td><ul><li><code>cloneNode()</code>.</li><li><code>DocumentFragment</code> e template avanzati.</li></ul></td></tr>
 <tr><td><strong>Eventi e form</strong></td><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener()</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/target"><code>target</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget"><code>currentTarget</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault"><code>preventDefault()</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData"><code>FormData</code></a>.</li></ul></td><td><ul><li>Capture e opzioni avanzate del listener.</li><li>Custom events.</li></ul></td></tr>
-<tr><td><strong>Storage</strong></td><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"><code>localStorage</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage"><code>sessionStorage</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem"><code>getItem()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem"><code>setItem()</code></a>.</li><li><code>JSON.stringify()</code> e <code>JSON.parse()</code>.</li></ul></td><td><ul><li>Evento <code>storage</code>.</li><li>IndexedDB per dati strutturati.</li></ul></td></tr>
+<tr><td><strong>Storage e JSON</strong></td><td><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"><code>localStorage</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage"><code>sessionStorage</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem"><code>getItem()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem"><code>setItem()</code></a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"><code>JSON.parse()</code></a>.</li></ul></td><td><ul><li>Evento <code>storage</code>.</li><li>IndexedDB per dati strutturati.</li></ul></td></tr>
 </tbody>
 </table>
 
@@ -256,7 +282,10 @@
   <li><strong>bubbling:</strong> propagazione di molti eventi dal target verso gli antenati;</li>
   <li><strong>state:</strong> dati correnti che descrivono l'applicazione;</li>
   <li><strong>rendering:</strong> trasformazione dello state nella rappresentazione DOM;</li>
-  <li><strong>serializzazione:</strong> conversione di un valore in un formato testuale memorizzabile o trasmissibile.</li>
+  <li><strong>serializzazione:</strong> conversione di un valore in un formato testuale memorizzabile o trasmissibile;</li>
+  <li><strong>truthy/falsy:</strong> modo in cui JavaScript interpreta un valore quando deve prendere una decisione booleana;</li>
+  <li><strong>alias:</strong> un secondo binding che fa riferimento allo stesso object;</li>
+  <li><strong>entry point:</strong> modulo dal quale parte l'inizializzazione dell'applicazione;</li>
 </ul>
 </details>
 </td></tr></table>
@@ -278,7 +307,7 @@
 
 <p align="justify">Lo standard del linguaggio si chiama <strong>ECMAScript</strong>. La specifica tecnica descrive sintassi e semantica di dichiarazioni, funzioni, object, array, moduli e così via. “JavaScript” è il nome normalmente usato per le implementazioni di ECMAScript e per l'ecosistema che le circonda.</p>
 
-<p align="justify">Il browser aggiunge oggetti come <code>Window</code>, <code>Document</code>, <code>Element</code>, <code>Event</code> e <code>Storage</code>, oltre ad API quali console, timer, Fetch e WebSocket. Questi oggetti non diventano parte del linguaggio: sono servizi pubblici dell'ambiente browser.</p>
+<p align="justify">Il browser aggiunge oggetti come <code>Window</code>, <code>Navigator</code>, <code>Document</code>, <code>Element</code>, <code>Event</code> e <code>Storage</code>, oltre ad API quali console, timer, Fetch e WebSocket. <code>Navigator</code>, per esempio, espone informazioni e funzionalità relative al browser e al dispositivo. Questi oggetti non diventano parte del linguaggio: sono servizi pubblici dell'ambiente browser.</p>
 
 <p align="center"><img src="../../assets/tpsi5/04-js-browser-boundary.svg" alt="Diagramma che separa il linguaggio ECMAScript, con valori, funzioni, array e moduli, dall'ambiente browser che aggiunge Window, Document, Event, Storage e altre Web API"></p>
 
@@ -309,6 +338,50 @@ const feed = document.querySelector("#feed");
   <li>ECMAScript specification: <a href="https://tc39.es/ecma262/">https://tc39.es/ecma262/</a></li>
   <li>MDN DOM scripting: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting">https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting</a></li>
 </ul>
+
+## Primo incontro: osservare un comportamento completo
+
+<p align="justify">Prima di studiare ogni parola osserviamo una piccola applicazione completa. Non serve ancora memorizzare la sintassi: segui il percorso dal dato alla pagina.</p>
+
+```html
+<button id="increment" type="button">Aggiungi</button>
+<output id="count">0</output>
+<script type="module" src="counter.js"></script>
+```
+
+```js
+const button = document.querySelector("#increment");
+const output = document.querySelector("#count");
+
+if (!button || !output) {
+  throw new Error("Interfaccia del contatore incompleta");
+}
+
+let count = 0;
+
+function render() {
+  output.textContent = String(count);
+}
+
+button.addEventListener("click", () => {
+  count += 1;
+  render();
+});
+```
+
+<ol>
+  <li>il browser costruisce gli oggetti corrispondenti a <code>button</code> e <code>output</code>;</li>
+  <li>JavaScript conserva il dato <code>count</code>;</li>
+  <li>il listener registra una funzione da eseguire più tardi;</li>
+  <li>il click modifica il dato;</li>
+  <li><code>render()</code> traduce il dato nel DOM.</li>
+</ol>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#128269;</span> Prima previsione:</strong> indica quali righe vengono eseguite una sola volta e quali vengono eseguite a ogni click. Poi aggiungi un <code>console.log(count)</code> nel listener e verifica la previsione.</p>
+</td></tr></table>
+
+<p align="justify">Feisbuc userà lo stesso meccanismo con un array di post al posto di un numero. I paragrafi successivi danno un nome preciso a ogni elemento appena osservato.</p>
 
 <a id="lesson-js-bindings"></a>
 ## `const`, `let` e il significato di una variabile
@@ -393,7 +466,7 @@ console.log(typeof likes);  // "number"
 console.log(typeof author); // "string"
 ```
 
-<p align="justify">Ricorda che JavaScript ha alcune particolarita storiche. Non cercheremo di impararle tutte a memoria: quando serve controlliamo MDN.</p>
+<p align="justify">Ricorda che JavaScript ha alcune particolarità storiche. Non cercheremo di impararle tutte a memoria: quando serve controlliamo MDN.</p>
 
 ### Tipizzazione dinamica e conversioni esplicite
 
@@ -401,7 +474,7 @@ console.log(typeof author); // "string"
 
 ```js
 const data = new FormData(form);
-const rawLikes = data.get("likes"); // FormDataEntryValue | null
+const rawLikes = data.get("likes"); // stringa, File oppure null
 const likes = Number(rawLikes);
 
 if (!Number.isFinite(likes) || likes < 0) {
@@ -423,7 +496,7 @@ if (post.likes === 0) {
 
 <p align="justify">invece di affidarsi alla conversione implicita di <code>==</code>.</p>
 
-<p align="justify">L'obiettivo e ridurre comportamento sorprendente mentre costruiamo un modello mentale solido.</p>
+<p align="justify">L'obiettivo è ridurre i comportamenti sorprendenti mentre costruiamo un modello mentale solido. Con i valori primitivi <code>===</code> confronta valore e tipo; con object e array confronta invece se i due operandi fanno riferimento allo stesso oggetto.</p>
 
 ## Stringhe e template literal
 
@@ -434,6 +507,105 @@ const label = `${author} ha ${likes} like`;
 ```
 
 <p align="justify">Le template literal sono particolarmente utili quando combiniamo testo e valori, ma non devono diventare un modo per costruire grandi blocchi HTML non controllati.</p>
+
+## Espressioni, operatori e valori booleani
+
+<p align="justify">Un'<strong>espressione</strong> produce un valore: <code>likes + 1</code> produce un numero, <code>likes === 0</code> produce un booleano. Una condizione decide il ramo da eseguire convertendo il proprio risultato in <code>true</code> o <code>false</code>.</p>
+
+<ul>
+  <li><code>!</code> nega un valore booleano;</li>
+  <li><code>&amp;&amp;</code> restituisce il primo operando falsy oppure l'ultimo, quindi permette di richiedere che più condizioni siano soddisfatte;</li>
+  <li><code>||</code> restituisce il primo operando truthy oppure l'ultimo e viene spesso usato per alternative generiche;</li>
+  <li><code>??</code> usa l'alternativa soltanto quando il primo valore è <code>null</code> o <code>undefined</code>;</li>
+  <li><code>condizione ? valoreA : valoreB</code> sceglie uno fra due valori.</li>
+</ul>
+
+<p align="justify">I valori <code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, la stringa vuota, <code>null</code>, <code>undefined</code> e <code>NaN</code> sono <strong>falsy</strong>; gli altri valori sono truthy. Per questo <code>if (!postList)</code> riconosce il <code>null</code> restituito da <code>querySelector()</code>. Non usiamo però la truthiness quando <code>0</code> o la stringa vuota sono dati validi che devono essere distinti dall'assenza.</p>
+
+```js
+const label = post.liked ? "Non mi piace più" : "Mi piace";
+const displayName = user.nickname ?? "Utente anonimo";
+```
+
+<p align="justify">Riferimenti: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators">MDN — Expressions and operators</a> e <a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">MDN — Falsy</a>.</p>
+
+<a id="lesson-js-functions"></a>
+## Funzioni: comportamento riutilizzabile
+
+<p align="justify">Una funzione definisce un piccolo contratto: riceve zero o più <strong>argomenti</strong>, li rende disponibili tramite i <strong>parametri</strong>, può restituire un valore con <code>return</code> e può produrre effetti osservabili. <code>formatPost</code> è una funzione; <code>posts.filter</code> è un metodo, cioè una funzione raggiunta come proprietà di un oggetto.</p>
+
+```js
+function formatPost(post, prefix = "Post") {
+  return `${prefix} di ${post.author}: ${post.text}`;
+}
+
+const label = formatPost(post, "Messaggio");
+```
+
+<p align="justify"><code>post</code> e <code>prefix</code> sono parametri; <code>"Messaggio"</code> è un argomento; <code>prefix</code> ha un valore predefinito. Scrivere <code>formatPost</code> indica il valore funzione, mentre <code>formatPost(post)</code> la invoca.</p>
+
+### Declaration, expression e arrow function
+
+```js
+function isPublished(post) {
+  return post.published === true;
+}
+
+const isPublishedExpression = function (post) {
+  return post.published === true;
+};
+
+const isPublishedArrow = (post) => post.published === true;
+```
+
+<p align="justify">Nel corso usiamo declaration per funzioni principali con un nome chiaro e arrow function soprattutto per callback brevi. Non scegliamo una arrow function perché è “più nuova”; il suo comportamento con <code>this</code> è diverso e verrà approfondito soltanto quando servirà.</p>
+
+### Valore restituito ed effetto
+
+<p align="justify"><code>return</code> conclude la funzione e consegna un valore al chiamante. Scrivere nel DOM, nella console o nello storage è invece un <strong>effetto</strong>. Separare il calcolo dagli effetti rende il codice più semplice da provare.</p>
+
+```js
+function increment(likes) {
+  return likes + 1; // calcolo
+}
+
+function showLikes(element, likes) {
+  element.textContent = String(likes); // effetto sul DOM
+}
+```
+
+### Le funzioni sono valori: le callback
+
+<p align="justify">Una <strong>callback</strong> è una funzione passata a un'altra funzione o API affinché venga invocata nel momento appropriato.</p>
+
+```js
+const published = posts.filter(isPublished);
+button.addEventListener("click", handleClick);
+```
+
+<p align="justify">Nel primo caso <code>filter()</code> invoca la callback una volta per ogni elemento; nel secondo il browser la invoca quando avviene il click. Non scriviamo <code>handleClick()</code> durante la registrazione, perché la eseguiremmo immediatamente.</p>
+
+<a id="lesson-js-scope"></a>
+## Scope: dove esiste un nome
+
+<p align="justify"><code>let</code> e <code>const</code> hanno scope di blocco. Una funzione può leggere i nomi definiti nel proprio scope e negli scope esterni in cui è stata creata.</p>
+
+```js
+let posts = [];
+
+function handleSubmit() {
+  const first = posts[0];
+  // first esiste soltanto dentro questa funzione
+}
+```
+
+<p align="justify">Il listener potrà leggere il valore aggiornato di <code>posts</code> anche quando verrà invocato più tardi. Questa relazione con lo scope esterno è alla base delle <strong>closure</strong>; per ora è sufficiente riconoscere chi può leggere o modificare ogni nome.</p>
+
+<p align="justify">Riferimenti: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Functions">MDN — Functions</a>, <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Return_values">MDN — Function return values</a> e <a href="https://developer.mozilla.org/en-US/docs/Glossary/Scope">MDN — Scope</a>.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9989;</span> Micro-checkpoint 1:</strong> spiega senza eseguire il codice quando viene invocata la callback di <code>filter()</code>, quando quella di <code>addEventListener()</code> e quale valore restituisce ciascuna. Poi verifica dalla console.</p>
+</td></tr></table>
 
 <a id="lesson-js-control-flow"></a>
 ## Controllo di flusso: scegliere e ripetere
@@ -448,7 +620,7 @@ function canDelete(post, currentUser) {
 }
 ```
 
-<p align="justify">Gli <strong>early return</strong> rendono espliciti i casi che interrompono una funzione ed evitano annidamenti profondi. <code>switch</code> e utile quando uno stesso valore deve essere confrontato con molti casi discreti, ma non sostituisce automaticamente <code>if</code>.</p>
+<p align="justify">Gli <strong>early return</strong> rendono espliciti i casi che interrompono una funzione ed evitano annidamenti profondi. <code>switch</code> è utile quando uno stesso valore deve essere confrontato con molti casi discreti, ma non sostituisce automaticamente <code>if</code>.</p>
 
 <p align="justify">Per attraversare una collezione scegliamo in base all'intenzione:</p>
 
@@ -486,6 +658,21 @@ console.log(posts.length);
 console.log(posts[0]);
 ```
 
+<p align="justify">Gli indici partono da zero: il primo elemento è <code>posts[0]</code>, mentre l'ultimo si trova in <code>posts[posts.length - 1]</code>. Possiamo sostituire un elemento assegnando un nuovo valore a un indice; questo modifica l'array.</p>
+
+### Aggiungere, rimuovere e cercare valori semplici
+
+```js
+const tags = ["html", "css"];
+tags.push("javascript");       // aggiunge in fondo e modifica tags
+const removed = tags.pop();   // rimuove e restituisce l'ultimo elemento
+const hasCss = tags.includes("css");
+const cssIndex = tags.indexOf("css");
+const label = tags.join(" · ");
+```
+
+<p align="justify"><code>split()</code> compie il percorso inverso su una stringa: <code>"html,css".split(",")</code> produce un array. Prima di usare un metodo controlliamo sempre input, risultato e possibile mutazione.</p>
+
 ### Cercare
 
 ```js
@@ -509,6 +696,19 @@ const labels = posts.map((item) => `${item.author}: ${item.likes}`);
 ```
 
 <p align="justify"><code>map</code> produce un nuovo array con un elemento di output per ogni elemento di input.</p>
+
+<p align="center"><img src="../../assets/tpsi5/04-array-pipeline.svg" alt="Pipeline che parte da tre post, usa filter per mantenere quelli pubblicati e map per trasformarli in due etichette, senza modificare l'array originale"></p>
+
+<table align="center" width="100%">
+<thead><tr><th>Metodo</th><th>Domanda</th><th>Risultato</th><th>Muta l'array?</th></tr></thead>
+<tbody>
+<tr><td><code>find()</code></td><td>Qual è il primo elemento valido?</td><td>elemento o <code>undefined</code></td><td>no</td></tr>
+<tr><td><code>filter()</code></td><td>Quali elementi tengo?</td><td>nuovo array</td><td>no</td></tr>
+<tr><td><code>map()</code></td><td>Che cosa diventa ogni elemento?</td><td>nuovo array</td><td>no</td></tr>
+<tr><td><code>some()</code>/<code>every()</code></td><td>Almeno uno/tutti superano il test?</td><td>booleano</td><td>no</td></tr>
+<tr><td><code>push()</code>/<code>pop()</code></td><td>Come aggiungo/rimuovo in fondo?</td><td>lunghezza/elemento rimosso</td><td>sì</td></tr>
+</tbody>
+</table>
 
 ### `reduce`: utile, non obbligatorio ovunque
 
@@ -534,6 +734,10 @@ const visiblePosts = posts.filter((post) => !post.hidden); // nuovo array
 
 <p align="justify">Riferimento: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array</a></p>
 
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9989;</span> Micro-checkpoint 2:</strong> dato l'array dei tre post, prevedi quanti elementi saranno prodotti da <code>filter()</code>, quante volte verrà invocata la callback di <code>map()</code> e se l'array originale cambierà. Verifica poi con l'Activity A.</p>
+</td></tr></table>
+
 <a id="lesson-js-objects"></a>
 ## Object: dati con un significato
 
@@ -546,6 +750,8 @@ const post = {
   liked: false,
 };
 ```
+
+<p align="justify"><code>crypto.randomUUID()</code> è una Web API del browser, non una funzione ECMAScript. Produce un identificatore adatto alla demo quando la pagina è servita in un contesto sicuro, compreso <code>localhost</code>. L'identità appartiene al post e verrà rappresentata nel DOM con <code>data-post-id</code>.</p>
 
 ### Property access
 
@@ -574,6 +780,19 @@ const [firstPost, secondPost] = posts;
 
 ## Spread: copiare una struttura superficiale
 
+<p align="justify">Assegnare un object a una nuova variabile non crea una copia: crea un secondo riferimento allo stesso object.</p>
+
+```js
+const original = { likes: 0, liked: false };
+const alias = original;
+alias.likes += 1;
+
+console.log(original.likes); // 1
+console.log(original === alias); // true
+```
+
+<p align="center"><img src="../../assets/tpsi5/04-reference-copy.svg" alt="Confronto tra due variabili che fanno riferimento allo stesso oggetto e una copia superficiale creata con object spread che produce un nuovo oggetto"></p>
+
 ```js
 const likedPost = {
   ...post,
@@ -590,7 +809,31 @@ const likedPost = {
 const newPosts = [...posts, newPost];
 ```
 
-<p align="justify">Lo spread e superficiale (<em>shallow</em>): se dentro l'oggetto ci sono altri oggetti/array, quei valori richiedono attenzione. La copia profonda non viene data per scontata.</p>
+<p align="justify">Lo spread è superficiale (<em>shallow</em>): se dentro l'oggetto ci sono altri object o array, quei valori richiedono attenzione. La copia profonda non viene data per scontata.</p>
+
+### Aggiornare un post dentro un array
+
+<p align="justify">L'Activity B combina <code>map()</code> e spread. <code>map()</code> crea il nuovo array; per il post con l'id cercato, spread crea un nuovo object. Gli altri post possono mantenere lo stesso riferimento perché non cambiano.</p>
+
+```js
+export function toggleLike(posts, targetId) {
+  return posts.map((post) => {
+    if (post.id !== targetId) {
+      return post;
+    }
+
+    const liked = !post.liked;
+
+    return {
+      ...post,
+      liked,
+      likes: liked ? post.likes + 1 : Math.max(0, post.likes - 1),
+    };
+  });
+}
+```
+
+<p align="justify"><code>Math.max(0, ...)</code> impedisce al contatore di diventare negativo. Questa trasformazione non rende l'intero programma “immutabile”: stabilisce soltanto una politica chiara per l'aggiornamento dello stato.</p>
 
 ## Optional chaining e nullish coalescing
 
@@ -606,104 +849,6 @@ const city = user.profile?.city ?? "Città non indicata";
 </ul>
 
 <p align="justify">Non sostituiscono una buona modellazione dei dati.</p>
-
-<a id="lesson-js-functions"></a>
-## Funzioni: comportamento riutilizzabile
-
-<p align="justify">Una funzione definisce un piccolo contratto: riceve zero o più <strong>argomenti</strong>, li rende disponibili tramite i <strong>parametri</strong>, può restituire un valore con <code>return</code> e può produrre effetti osservabili. Separare questi aspetti rende il codice più facile da provare.</p>
-
-### Function declaration
-
-```js
-function formatPost(post) {
-  return `${post.author}: ${post.text}`;
-}
-```
-
-### Function expression
-
-```js
-const formatPost = function (post) {
-  return `${post.author}: ${post.text}`;
-};
-```
-
-### Arrow function
-
-```js
-const formatPost = (post) => `${post.author}: ${post.text}`;
-```
-
-```js
-function createPost(author, text) { // author e text sono parametri
-  return { id: crypto.randomUUID(), author, text, likes: 0 };
-}
-
-const post = createPost("Ada", "Ciao!"); // le stringhe sono argomenti
-```
-
-<p align="justify"><code>return</code> conclude l'esecuzione della funzione e consegna un valore al chiamante. Scrivere nel DOM o nello storage è invece un <strong>effetto</strong>. Una funzione che calcola un nuovo post senza modificare l'esterno è più semplice da testare di una funzione che calcola, salva e renderizza contemporaneamente.</p>
-
-<p align="justify">Non scegliamo una arrow function perché è “più nuova”. La scegliamo spesso per callback brevi e funzioni locali. Prima di usare <code>this</code> in una arrow function bisogna conoscere la differenza semantica: verrà approfondita nel percorso avanzato quando servirà.</p>
-
-## Le funzioni sono valori
-
-<p align="justify">Possiamo passare una funzione a un'altra funzione:</p>
-
-```js
-const published = posts.filter((post) => post.published);
-```
-
-<p align="justify">La funzione:</p>
-
-```js
-(post) => post.published
-```
-
-<p align="justify">viene passata a <code>filter</code> come callback.</p>
-
-<p align="justify">Questo concetto ritornera continuamente con gli eventi:</p>
-
-```js
-button.addEventListener("click", handleClick);
-```
-
-<p align="justify">anche <code>handleClick</code> è un valore funzione passato a un'altra API.</p>
-
-<a id="lesson-js-scope"></a>
-## Scope: dove esiste un nome
-
-<p align="justify"><code>let</code> e <code>const</code> hanno scope di blocco.</p>
-
-```js
-if (posts.length > 0) {
-  const first = posts[0];
-  console.log(first);
-}
-
-// console.log(first); // first non esiste qui
-```
-
-<p align="justify">Ridurre lo stato globale rende più facile capire chi può modificare cosa.</p>
-
-### Evitare il contatore globale quando possiamo modellare meglio l'identità
-
-<p align="justify">Il Feisbuc legacy usa un <code>counter</code> globale per produrre id dei like button. Nel nuovo progetto possiamo dare un'identità al <strong>post</strong>, non al pulsante:</p>
-
-```js
-const post = {
-  id: crypto.randomUUID(),
-  text: "...",
-};
-```
-
-<p align="justify">Nel DOM possiamo poi usare:</p>
-
-```html
-<article data-post-id="..."></article>
-```
-
-<p align="justify">L'identità appartiene al dato; l'interfaccia la rappresenta.</p>
 
 ## Errori: fallire in modo comprensibile
 
@@ -774,6 +919,37 @@ console.log(post);
 
 <p align="justify">Riferimenti: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script"><code>&lt;script&gt;</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#defer"><code>defer</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">JavaScript modules</a>.</p>
 
+## Come parte Feisbuc
+
+<p align="justify">Un modulo principale è l'<strong>entry point</strong> dell'applicazione. Il browser risolve prima le sue dipendenze, poi esegue l'inizializzazione. Al termine non rimane un ciclo scritto da noi: sono i listener registrati ad attendere i futuri eventi del browser.</p>
+
+<p align="center"><img src="../../assets/tpsi5/04-app-bootstrap.svg" alt="Sequenza di avvio di Feisbuc: DOM pronto, caricamento di app.js, risoluzione di posts.js e storage.js, selezione DOM, caricamento stato, registrazione listener e primo rendering"></p>
+
+```js
+import { createPost, toggleLike } from "./posts.js";
+import { loadPosts, savePosts } from "./storage.js";
+
+const form = document.querySelector("#composer-form");
+const postList = document.querySelector("#post-list");
+const status = document.querySelector("#feed-status");
+
+if (!form || !postList || !status) {
+  throw new Error("Markup Feisbuc incompleto");
+}
+
+let posts = loadPosts();
+
+form.addEventListener("submit", handleSubmit);
+postList.addEventListener("click", handlePostListClick);
+renderPosts();
+```
+
+<p align="justify">Le dichiarazioni di funzione possono comparire più avanti nel file, ma la sequenza logica resta: importare, selezionare, caricare, registrare, renderizzare. Usare sempre gli stessi id dello starter permette di confrontare direttamente dispensa e codice.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9989;</span> Micro-checkpoint 3:</strong> se <code>storage.js</code> contiene un errore di sintassi, quale delle otto fasi viene raggiunta? Se invece <code>#post-list</code> manca, quale controllo interrompe l'avvio?</p>
+</td></tr></table>
+
 <a id="lesson-js-dom"></a>
 ## Il DOM: il documento come oggetti in memoria
 
@@ -782,6 +958,15 @@ console.log(post);
 <p align="center"><img src="../../assets/tpsi5/04-dom-api-tree.svg" alt="Diagramma dal file HTML al parser e all'albero DOM: window espone document, che contiene elementi html, head, body, h1, p e nodi di testo"></p>
 
 <p align="justify"><code>window</code> rappresenta la finestra o scheda e costituisce l'oggetto globale dell'ambiente browser. La sua proprietà <code>document</code> è il punto di ingresso al DOM della pagina. Nell'albero incontriamo diversi tipi di nodo: <code>Document</code> per il documento, <code>Element</code> per gli elementi HTML e nodi testuali per il testo contenuto negli elementi.</p>
+
+<ul>
+  <li><strong>root:</strong> il nodo radice dell'albero; nel documento HTML l'elemento radice è <code>html</code>;</li>
+  <li><strong>parent/child:</strong> relazione diretta fra contenitore e nodo contenuto;</li>
+  <li><strong>ancestor/descendant:</strong> relazione anche attraverso più livelli;</li>
+  <li><strong>sibling:</strong> nodi che hanno lo stesso parent.</li>
+</ul>
+
+<p align="justify">Queste non sono soltanto parole teoriche: i selettori CSS descrivono relazioni fra elementi, <code>closest()</code> risale gli ancestor e il bubbling attraversa il percorso dal target verso i suoi ancestor.</p>
 
 <table align="center"><tr><td>
 <p align="justify"><strong><span style="font-size: 1.15em;">&#128161;</span> File, DOM e riferimento:</strong> <code>document.querySelector("h1")</code> non restituisce una stringa HTML. Restituisce un riferimento all'oggetto <code>Element</code> già presente nel DOM, oppure <code>null</code>. Modificare quell'oggetto cambia la pagina visualizzata, non riscrive automaticamente il file <code>index.html</code> sul disco.</p>
@@ -792,8 +977,8 @@ console.log(post);
 ## Selezionare elementi
 
 ```js
-const feed = document.querySelector("#feed");
-const posts = document.querySelectorAll("#feed article");
+const postList = document.querySelector("#post-list");
+const postElements = document.querySelectorAll("#post-list article");
 ```
 
 <p align="justify"><code>querySelector()</code> restituisce il primo elemento che corrisponde al selettore oppure <code>null</code>.</p>
@@ -801,7 +986,7 @@ const posts = document.querySelectorAll("#feed article");
 <p align="justify"><code>querySelectorAll()</code> restituisce invece una <code>NodeList</code> statica con tutti i risultati. Una <code>NodeList</code> è iterabile con <code>for...of</code> o <code>forEach()</code>, ma <strong>non è un array</strong> e non possiede automaticamente tutti i metodi di <code>Array</code>.</p>
 
 ```js
-const cards = document.querySelectorAll("#feed article");
+const cards = document.querySelectorAll("#post-list article");
 
 for (const card of cards) {
   card.classList.add("feed-card");
@@ -811,10 +996,10 @@ for (const card of cards) {
 <p align="justify">Questo significa che dobbiamo ragionare anche sul caso "elemento non trovato":</p>
 
 ```js
-const feed = document.querySelector("#feed");
+const postList = document.querySelector("#post-list");
 
-if (!feed) {
-  throw new Error("#feed non trovato");
+if (!postList) {
+  throw new Error("#post-list non trovato");
 }
 ```
 
@@ -853,7 +1038,7 @@ const body = document.createElement("p");
 body.textContent = post.text;
 
 article.append(heading, body);
-feed.append(article);
+postList.append(article);
 ```
 
 <p align="justify">La pagina diventa dinamica senza perdere la semantica HTML.</p>
@@ -868,6 +1053,8 @@ feed.append(article);
 </ul>
 
 <p align="justify">Ogni operazione deve mantenere semantica e accessibilità. Se dopo il submit viene aggiunto un contenuto importante, valutiamo un messaggio con <code>aria-live</code>; se apriamo un pannello o una finestra modale, dobbiamo gestire anche focus e tastiera. Una UI dinamica non è accessibile soltanto perché il markup iniziale lo era.</p>
+
+<p align="justify">Aggiungere con <code>append()</code> un nodo già presente non lo copia: lo <strong>sposta</strong>. Per creare una copia distinta servirebbe <code>cloneNode()</code>, che non duplica automaticamente tutti i comportamenti collegati da JavaScript.</p>
 
 ## `classList` e `dataset`
 
@@ -886,6 +1073,19 @@ article.dataset.postId = post.id;
 ```
 
 <p align="justify"><code>dataset</code> è utile per collegare un elemento visuale all'identità del dato senza inventare id globali per ogni controllo.</p>
+
+### Stili dinamici: classi prima degli inline style
+
+<p align="justify">JavaScript può modificare <code>element.style</code>, ma nel corso teniamo le regole visuali nel CSS e usiamo <code>classList</code> per esprimere uno stato dell'interfaccia. Un valore veramente calcolato, come una percentuale di avanzamento, può invece giustificare uno stile inline o una custom property.</p>
+
+```js
+likeButton.classList.toggle("btn-primary", post.liked);
+likeButton.classList.toggle("btn-outline-primary", !post.liked);
+```
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9989;</span> Micro-checkpoint 4:</strong> seleziona un elemento in DevTools, salvalo in una variabile dalla Console, modificalo con <code>textContent</code> e spostalo con <code>append()</code>. Spiega perché il file HTML sul disco non cambia.</p>
+</td></tr></table>
 
 <a id="lesson-js-events"></a>
 ## Eventi: "quando succede X, esegui Y"
@@ -911,6 +1111,21 @@ button.addEventListener("click", handleShare);   // passa la funzione
 ```
 
 <p align="justify">Riferimento: <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener</a></p>
+
+### Perché usiamo `addEventListener()`
+
+<p align="justify">Evitiamo attributi HTML come <code>onclick="like()"</code>: mescolano struttura e comportamento, dipendono da nomi globali e rendono più difficile registrare più reazioni. <code>addEventListener()</code> mantiene il JavaScript nel modulo e permette di rimuovere un listener quando conserviamo la stessa funzione.</p>
+
+```js
+function handleShare(event) {
+  console.log(event.type);
+}
+
+button.addEventListener("click", handleShare);
+button.removeEventListener("click", handleShare);
+```
+
+<p align="justify">Una nuova arrow function, anche se scritta nello stesso modo, sarebbe un valore funzione diverso e non rimuoverebbe il listener precedente.</p>
 
 ## `target` e `currentTarget`
 
@@ -957,13 +1172,13 @@ function handleClick(event) {
 <p align="justify">Soluzione:</p>
 
 ```js
-feed.addEventListener("click", (event) => {
+postList.addEventListener("click", (event) => {
   const origin = event.target;
   if (!(origin instanceof Element)) return;
 
   const likeButton = origin.closest("[data-action='like']");
 
-  if (!likeButton || !feed.contains(likeButton)) {
+  if (!likeButton || !postList.contains(likeButton)) {
     return;
   }
 
@@ -1018,6 +1233,25 @@ form.addEventListener("submit", (event) => {
 <p align="justify"><code>FormData</code> include soltanto i controlli associati alla form che possiedono un attributo <code>name</code>. I valori possono essere stringhe o file e <code>get()</code> può restituire <code>null</code>: per questo convertiamo e validiamo esplicitamente. <code>required</code> offre una prima validazione del browser, ma il programma deve comunque trattare i dati come input non fidato.</p>
 
 <p align="justify">Riferimenti: <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event">evento <code>submit</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault"><code>preventDefault()</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData"><code>FormData</code></a>.</p>
+
+### Rendere osservabile e accessibile il risultato
+
+<p align="justify">Nello starter, <code>#feed-status</code> possiede <code>aria-live="polite"</code>: aggiornandone il testo comunichiamo l'esito anche a chi usa tecnologie assistive. Il pulsante Like comunica invece il proprio stato con <code>aria-pressed</code>.</p>
+
+```js
+likeButton.setAttribute("aria-pressed", String(post.liked));
+likeButton.textContent = `Mi piace (${post.likes})`;
+
+status.textContent = "Post pubblicato.";
+form.reset();
+form.elements.namedItem("text")?.focus();
+```
+
+<p align="justify">Usare un vero <code>button</code> ci offre già attivazione da tastiera e semantica corretta. Non ricreiamo con <code>div</code> e listener ciò che HTML fornisce nativamente.</p>
+
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9989;</span> Micro-checkpoint 5:</strong> prova il composer senza mouse, verifica <code>aria-pressed</code> nel pannello Elements e spiega perché il listener delegato continua a funzionare dopo la creazione di un nuovo post.</p>
+</td></tr></table>
 
 ### Un bug concreto del Feisbuc legacy
 
@@ -1097,11 +1331,61 @@ function createPostElement(post) {
 
 ```js
 function renderPosts() {
-  feed.replaceChildren(...posts.map(createPostElement));
+  postList.replaceChildren(...posts.map(createPostElement));
 }
 ```
 
 <p align="justify">Qui si incontrano due mondi del modulo: <code>posts.map(createPostElement)</code> trasforma una collezione di dati in una collezione di nodi, mentre <code>replaceChildren()</code> rende quei nodi la vista corrente. La funzione <code>createPostElement()</code> può essere provata separatamente e il rendering non deve decidere come salvare i dati.</p>
+
+### Un solo punto per confermare il nuovo stato
+
+<p align="justify">Nella solution di Feisbuc tutte le azioni passano da una piccola funzione di orchestrazione. Il nome <code>commitPosts</code> significa “rendi questo il nuovo stato e sincronizza le sue rappresentazioni”; non ha relazione con un commit Git.</p>
+
+```js
+function commitPosts(nextPosts, message) {
+  posts = nextPosts;
+  const saved = savePosts(posts);
+  renderPosts();
+  status.textContent = saved ? message : `${message} Salvataggio non riuscito.`;
+}
+```
+
+<p align="justify">Le funzioni di dominio come <code>toggleLike()</code> calcolano <code>nextPosts</code>; <code>commitPosts()</code> esegue gli effetti in un ordine unico. Questo evita che un handler salvi senza renderizzare e un altro renderizzi senza salvare.</p>
+
+<a id="lesson-js-json"></a>
+## JSON: testo per rappresentare dati strutturati
+
+<p align="justify"><strong>JSON</strong> significa JavaScript Object Notation, ma non è un object JavaScript: è un formato testuale indipendente dal linguaggio. Il programma manipola array e object; storage e rete conservano o trasmettono stringhe.</p>
+
+<p align="center"><img src="../../assets/tpsi5/04-json-storage-boundary.svg" alt="Diagramma che distingue un valore JavaScript dal testo JSON: JSON.stringify serializza, Web Storage conserva la stringa e JSON.parse deserializza un nuovo valore"></p>
+
+<table align="center" width="100%">
+<thead><tr><th>Object JavaScript</th><th>Testo JSON</th></tr></thead>
+<tbody>
+<tr><td><code>{ id: "p1", likes: 2 }</code></td><td><code>{"id":"p1","likes":2}</code></td></tr>
+<tr><td>valore in memoria</td><td>sequenza di caratteri</td></tr>
+<tr><td>può contenere metodi e <code>undefined</code></td><td>rappresenta object, array, stringhe, numeri, booleani e <code>null</code></td></tr>
+<tr><td>nomi proprietà anche senza virgolette</td><td>nomi proprietà e stringhe fra doppi apici</td></tr>
+</tbody>
+</table>
+
+<ul>
+  <li><code>JSON.stringify(value)</code> <strong>serializza</strong> un valore in una stringa;</li>
+  <li><code>JSON.parse(text)</code> <strong>deserializza</strong> una stringa e può lanciare <code>SyntaxError</code>;</li>
+  <li>il valore prodotto da <code>parse()</code> è nuovo e deve essere validato: JSON corretto non significa dati adatti all'applicazione;</li>
+  <li>funzioni, riferimenti circolari e alcuni valori speciali non possono essere rappresentati normalmente in JSON.</li>
+</ul>
+
+```js
+const json = JSON.stringify([{ id: "p1", likes: 2 }]);
+const value = JSON.parse(json);
+
+if (!Array.isArray(value)) {
+  throw new TypeError("Atteso un array di post");
+}
+```
+
+<p align="justify">Riferimenti: <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON">MDN — Working with JSON</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a> e <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"><code>JSON.parse()</code></a>.</p>
 
 <a id="lesson-js-storage"></a>
 ## Web Storage
@@ -1149,6 +1433,7 @@ localStorage.setItem("posts", JSON.stringify(posts));
 ```
 
 ```js
+// Versione minima: può lanciare SyntaxError se il testo è corrotto.
 const posts = JSON.parse(localStorage.getItem("posts") ?? "[]");
 ```
 
@@ -1190,6 +1475,10 @@ export function loadPosts() {
 
 <p align="justify">Il <code>try/catch</code> copre JSON corrotto, storage non disponibile e limiti di quota. Il controllo <code>Array.isArray()</code> verifica almeno la forma esterna; in un'applicazione reale controlleremmo anche ogni proprietà dei post. Se cambierà il formato dei dati, introdurremo una versione o una migrazione invece di assumere che ogni snapshot precedente sia compatibile.</p>
 
+<table align="center"><tr><td>
+<p align="justify"><strong><span style="font-size: 1.15em;">&#9989;</span> Micro-checkpoint 6:</strong> apri Application/Storage, identifica la chiave e dimostra che il valore è testo JSON. Corrompilo volontariamente, ricarica e spiega quale ramo di <code>loadPosts()</code> mantiene utilizzabile l'applicazione.</p>
+</td></tr></table>
+
 ## Feisbuc milestone 3: feed dinamico locale
 
 <p align="justify">Partiamo dalla UI Bootstrap della milestone 2 e applichiamo il ciclo mostrato nel diagramma precedente. Il submit produce un nuovo post, il click sul like viene riconosciuto tramite event delegation, entrambe le azioni calcolano un nuovo array <code>posts</code>, quindi salvano e renderizzano. Form e listener sono porte d'ingresso; lo stato è la fonte di verità; storage e DOM sono due rappresentazioni con scopi diversi.</p>
@@ -1215,10 +1504,20 @@ export function loadPosts() {
 
 ### Prototype internals, metaprogramming e performance avanzata
 
-<p align="justify">Track advanced/senior.</p>
+<p align="justify">Percorso avanzato: questi temi richiedono un modello del linguaggio più profondo e non sono necessari per costruire la milestone corrente.</p>
 
 <a id="lesson-js-debug"></a>
 ## Debug JavaScript: metodo prima della modifica
+
+<p align="justify">Prima distinguiamo tre famiglie di problema:</p>
+
+<ul>
+  <li><strong>errore di sintassi:</strong> il motore non riesce a interpretare il file e spesso il modulo non parte;</li>
+  <li><strong>errore runtime:</strong> il codice parte, ma durante un percorso incontra un'operazione non valida;</li>
+  <li><strong>errore logico:</strong> il programma termina senza eccezioni ma produce un risultato sbagliato.</li>
+</ul>
+
+<p align="justify">Un linter intercetta molti problemi prima dell'esecuzione; Console e stack trace mostrano le eccezioni; breakpoint e osservazione dei valori aiutano con errori runtime e logici.</p>
 
 <p align="justify">Quando qualcosa non funziona:</p>
 
@@ -1233,6 +1532,32 @@ export function loadPosts() {
   <li>modifica una causa alla volta;</li>
   <li>verifica anche il caso che funzionava già.</li>
 </ol>
+
+### Quale pannello usare
+
+<table align="center" width="100%">
+<thead><tr><th>Pannello DevTools</th><th>Domanda</th><th>Evidenza da annotare</th></tr></thead>
+<tbody>
+<tr><td><strong>Console</strong></td><td>Qual è la prima eccezione utile?</td><td>tipo, messaggio, file e riga</td></tr>
+<tr><td><strong>Sources/Debugger</strong></td><td>Quale percorso sta eseguendo il programma?</td><td>stack, breakpoint, valori e ramo scelto</td></tr>
+<tr><td><strong>Elements</strong></td><td>Il DOM rappresenta davvero lo stato?</td><td>nodo, attributi <code>data-*</code>, classi e <code>aria-pressed</code></td></tr>
+<tr><td><strong>Application/Storage</strong></td><td>Che cosa è stato persistito?</td><td>chiave, stringa JSON e comportamento al reload</td></tr>
+<tr><td><strong>Network</strong></td><td>Modulo e dipendenze sono stati caricati?</td><td>URL, status e Content-Type</td></tr>
+</tbody>
+</table>
+
+### Esempio di diagnosi completa
+
+<ol>
+  <li><strong>sintomo:</strong> premendo Pubblica la pagina si ricarica;</li>
+  <li><strong>evidenza:</strong> Console indica <code>ReferenceError: event is not defined</code> nel listener <code>submit</code>;</li>
+  <li><strong>causa:</strong> il parametro si chiama <code>e</code>, ma il codice usa un'altra variabile;</li>
+  <li><strong>ipotesi:</strong> usando il parametro ricevuto, <code>preventDefault()</code> verrà eseguito;</li>
+  <li><strong>fix minimo:</strong> rinominare il parametro in <code>event</code> oppure chiamare <code>e.preventDefault()</code>;</li>
+  <li><strong>regressione:</strong> verificare submit con pulsante e tastiera, testo vuoto e post valido.</li>
+</ol>
+
+<p align="justify">Activity D richiede per ogni problema questa catena: <strong>sintomo → causa → evidenza → modifica → verifica</strong>. “Ho cambiato una riga e ora funziona” non è ancora una diagnosi.</p>
 
 ### Errori frequenti
 
@@ -1261,7 +1586,7 @@ buttons.forEach((button) => button.addEventListener("click", like));
 
 <p align="justify">Se i post vengono aggiunti dopo, i nuovi pulsanti non hanno quel listener.</p>
 
-<p align="justify">Per un feed dinamico e spesso migliore la delegation sul contenitore stabile.</p>
+<p align="justify">Per un feed dinamico è spesso migliore la delegation sul contenitore stabile.</p>
 
 #### Costruire testo utente con HTML concatenato
 
@@ -1273,7 +1598,7 @@ feed.innerHTML += `<p>${userText}</p>`;
 
 #### Stato nel DOM ma non nei dati
 
-<p align="justify">Se il numero di like vive solo nel testo di un button, il programma perde una fonte di verita chiara.</p>
+<p align="justify">Se il numero di like vive solo nel testo di un button, il programma perde una fonte di verità chiara.</p>
 
 #### Salvare object direttamente in localStorage
 
@@ -1291,7 +1616,8 @@ feed.innerHTML += `<p>${userText}</p>`;
   <li><strong>JavaScript:</strong> individua oggetto proprietario, parametri, valore restituito, mutazione e casi limite;</li>
   <li><strong>DOM:</strong> individua interfaccia, metodo, input, possibile assenza ed eccezioni;</li>
   <li><strong>eventi:</strong> individua target, tipo di evento, fase di propagazione e possibilità di annullamento;</li>
-  <li><strong>storage:</strong> individua durata, formato dei dati, origine e limiti dell'API.</li>
+  <li><strong>storage:</strong> individua durata, formato dei dati, origine e limiti dell'API;</li>
+  <li><strong>JSON:</strong> distingui formato testuale, serializzazione, parsing e validazione della struttura ottenuta.</li>
 </ul>
 <p align="justify"><strong>Prodotto atteso:</strong> compila una <a href="GUIDA_USO_MDN.md#mdn-guide-study-card">scheda di lettura</a> per <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"><code>Document.querySelector()</code></a>, poi modifica l'esempio minimo nel Feisbuc e gestisci esplicitamente il caso <code>null</code>.</p>
 </td></tr></table>
@@ -1369,7 +1695,11 @@ feed.innerHTML += `<p>${userText}</p>`;
   <li>Perché <code>const</code> non rende immutabile un object?</li>
   <li>Che differenza c'è fra riassegnazione e mutazione? E fra <code>map()</code> e <code>filter()</code>?</li>
   <li>Qual è la differenza fra parametro, argomento, valore restituito ed effetto?</li>
+  <li>Quando viene invocata una callback passata a <code>filter()</code> e quando una passata ad <code>addEventListener()</code>?</li>
+  <li>Perché <code>||</code> e <code>??</code> non sono intercambiabili quando <code>0</code> o stringa vuota sono valori validi?</li>
+  <li>Che differenza c'è fra un alias e la copia superficiale creata con object spread?</li>
   <li>Perché uno script con <code>type="module"</code> va eseguito tramite un server locale?</li>
+  <li>In quale ordine <code>app.js</code> importa i moduli, seleziona il DOM, carica lo stato, registra gli eventi ed esegue il primo render?</li>
   <li>Qual è la differenza tra file HTML, albero DOM e oggetto <code>Element</code>?</li>
   <li>Cosa restituiscono <code>querySelector()</code> e <code>querySelectorAll()</code> quando non trovano elementi?</li>
   <li>Perché <code>textContent</code> è una buona scelta per testo inserito dall'utente?</li>
@@ -1379,7 +1709,9 @@ feed.innerHTML += `<p>${userText}</p>`;
   <li>Perché <code>preventDefault()</code> e <code>stopPropagation()</code> non sono equivalenti?</li>
   <li>Perché i controlli di una form richiedono <code>name</code> per entrare in <code>FormData</code>?</li>
   <li>Perché il DOM non dovrebbe essere la fonte primaria dello stato?</li>
+  <li>Perché un object JavaScript non è testo JSON e perché un JSON sintatticamente valido deve ancora essere validato?</li>
   <li>Quali limiti rendono Web Storage diverso da un database?</li>
+  <li>Quale pannello DevTools useresti per controllare un listener, un attributo ARIA e una chiave di storage?</li>
   <li>Perché <code>fetch</code> e <code>async/await</code> vengono spostati in UDA 23?</li>
 </ol>
 
@@ -1393,13 +1725,16 @@ feed.innerHTML += `<p>${userText}</p>`;
   <li><strong>ECMAScript</strong> definisce il linguaggio; il <strong>browser</strong> aggiunge Web API come DOM, eventi e storage.</li>
   <li><code>const</code> impedisce la riassegnazione del binding, non rende immutabili object e array.</li>
   <li>JavaScript è dinamicamente tipizzato: input da form, JSON e storage devono essere convertiti e controllati.</li>
-  <li>Una funzione riceve argomenti, può restituire un valore e può produrre effetti; separare calcolo ed effetti facilita i test.</li>
-  <li>Gli ES modules separano responsabilità e vengono caricati con <code>type="module"</code> tramite un server locale.</li>
+  <li>Truthy e falsy guidano le condizioni; <code>||</code> e <code>??</code> gestiscono casi diversi.</li>
+  <li>Una funzione riceve argomenti, può restituire un valore e può produrre effetti; una callback viene consegnata a chi la invocherà.</li>
+  <li>Array e object sono riferimenti: object spread crea un nuovo contenitore, ma soltanto una copia superficiale.</li>
+  <li>Gli ES modules separano responsabilità; l'entry point inizializza dipendenze, DOM, stato, listener e primo render in un ordine leggibile.</li>
   <li>Il DOM è l'albero di oggetti costruito dal browser, non il file HTML sul disco.</li>
   <li>Gli eventi attraversano capture, target e bubbling; la delegation usa il bubbling per gestire nodi dinamici.</li>
   <li><code>submit</code> rappresenta l'invio della form; <code>FormData</code> legge i controlli dotati di <code>name</code>.</li>
   <li>Lo <strong>state</strong> è la fonte di verità; il <strong>render</strong> lo trasforma in DOM.</li>
-  <li>Web Storage conserva piccole quantità di stringhe per origine ed è sincrono; JSON serializza object e array.</li>
+  <li>JSON è testo, non un object; parsing e validazione sono operazioni distinte.</li>
+  <li>Web Storage conserva piccole quantità di stringhe per origine ed è sincrono; letture e scritture possono fallire.</li>
 </ul>
 
 <p align="justify">Nel Feisbuc il percorso completo è: intenzione dell'utente → evento → handler → nuovo stato → salvataggio → rendering. Il diagramma <a href="#lesson-js-state">stato–rendering</a> rimane la mappa di riferimento per leggere il codice della milestone.</p>

@@ -44,7 +44,7 @@
       "role": "legacy-provenance"
     }
   ],
-  "consegna": "Lo starter e una versione volutamente fragile del feed Feisbuc ispirata al codice legacy. Prima di modificare il codice compila `DIAGNOSI.md` con almeno cinque problemi distinti indicando sintomo, causa tecnica, evidenza DevTools e fix proposto. Poi correggi `app.js`: la form deve usare correttamente l'oggetto Event; i post nuovi devono ricevere like senza registrare listener individuali; l'identita deve appartenere al post tramite `data-post-id`; likes/liked devono vivere nello stato JavaScript e non soltanto nel testo del DOM; lo storage deve usare JSON e recuperare da dati corrotti. Non usare `fetch` o backend.",
+  "consegna": "Lo starter è una versione volutamente fragile del feed Feisbuc ispirata al codice legacy. Prima di modificare il codice compila `DIAGNOSI.md` con almeno cinque problemi distinti indicando sintomo, causa tecnica, evidenza DevTools e fix proposto. Poi correggi `app.js`: la form deve usare correttamente l'oggetto Event; i post nuovi devono ricevere like senza registrare listener individuali; l'identità deve appartenere al post tramite `data-post-id`; likes/liked devono vivere nello stato JavaScript e non soltanto nel testo del DOM; lo storage deve usare JSON e recuperare da dati corrotti. Non usare `fetch` o backend.",
   "vincoli": [
     "scrivi la diagnosi prima del fix",
     "documenta almeno cinque cause concrete",
@@ -154,7 +154,7 @@
   ],
   "rubrica": [
     {
-      "criterio": "Qualita della diagnosi e uso DevTools",
+      "criterio": "Qualità della diagnosi e uso DevTools",
       "punti": 4
     },
     {

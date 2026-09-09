@@ -1,7 +1,13 @@
 const STORAGE_KEY = "feisbuc.posts";
 
 export function savePosts(posts) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    return true;
+  } catch (error) {
+    console.error("Impossibile salvare i post", error);
+    return false;
+  }
 }
 
 export function loadPosts() {

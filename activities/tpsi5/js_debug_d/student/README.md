@@ -4,7 +4,7 @@
 
 **Prima diagnosi, poi fix.**
 
-Lo starter contiene piu problemi indipendenti. Se cambi codice a caso potresti nascondere un sintomo senza capire la causa.
+Lo starter contiene più problemi indipendenti. Se cambi codice a caso potresti nascondere un sintomo senza capire la causa.
 
 ## Procedura
 
@@ -22,22 +22,18 @@ Lo starter contiene piu problemi indipendenti. Se cambi codice a caso potresti n
 
 - [ ] submit non produce eccezioni;
 - [ ] `preventDefault()` usa il parametro corretto del listener;
-- [ ] un nuovo post puo ricevere like;
+- [ ] un nuovo post può ricevere like;
 - [ ] esiste un solo listener click sul contenitore del feed;
-- [ ] l'identita del dato usa `data-post-id` e l'azione usa `data-action`;
+- [ ] l'identità del dato usa `data-post-id` e l'azione usa `data-action`;
 - [ ] likes/liked vivono in un array di stato;
 - [ ] il DOM viene renderizzato dallo stato;
 - [ ] localStorage contiene JSON valido;
 - [ ] storage assente/corrotto non blocca l'app;
 - [ ] testo utente viene trattato come testo (`textContent`);
-- [ ] nessun `fetch`/backend/async e stato introdotto.
+- [ ] nessun `fetch`/backend/async è stato introdotto.
 
 ## Debrief
 
-Preparati a spiegare per ogni fix:
+Preparati a spiegare per ogni fix la sequenza **sintomo → causa → evidenza → modifica → verifica**.
 
-```text
-sintomo -> causa -> evidenza -> modifica -> verifica
-```
-
-Un'app che "funziona" ma di cui non sai spiegare la causa del bug non completa l'obiettivo dell'Activity D.
+Un'app che “funziona” ma di cui non sai spiegare la causa del bug non completa l'obiettivo dell'Activity D.

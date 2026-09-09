@@ -36,7 +36,7 @@
       "role": "architecture-context"
     }
   ],
-  "consegna": "Completa `toggleLike(posts, targetId)`. La funzione deve restituire un nuovo array. Se un post ha `id === targetId`, crea un nuovo object con spread: se `liked` era false diventa true e `likes` aumenta di 1; se era true diventa false e `likes` diminuisce di 1 senza scendere sotto 0. Gli altri post devono restare invariati nel valore. Non modificare direttamente proprieta dell'array ricevuto. Il runner legge `{posts,targetId}` da stdin e stampa il nuovo array JSON.",
+  "consegna": "Completa `toggleLike(posts, targetId)`. La funzione deve restituire un nuovo array. Se un post ha `id === targetId`, crea un nuovo object con spread: se `liked` era false diventa true e `likes` aumenta di 1; se era true diventa false e `likes` diminuisce di 1 senza scendere sotto 0. Gli altri post devono restare invariati nel valore. Non modificare direttamente proprietà dell'array ricevuto. Il runner legge `{posts,targetId}` da stdin e stampa il nuovo array JSON.",
   "vincoli": [
     "usa Array.map per produrre il nuovo array",
     "usa object spread per il post modificato",
@@ -111,7 +111,7 @@
   "manual_checks": [
     {
       "name": "state update",
-      "criterion": "lo studente sa spiegare perche crea un nuovo array e un nuovo object del post modificato"
+      "criterion": "lo studente sa spiegare perché crea un nuovo array e un nuovo object del post modificato"
     },
     {
       "name": "preparazione DOM",
