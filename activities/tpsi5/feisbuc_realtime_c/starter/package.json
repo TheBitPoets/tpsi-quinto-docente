@@ -1,0 +1,20 @@
+{
+  "name": "feisbuc-milestone-12-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "node scripts/start-backend.mjs",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "build": "npm run build --workspace frontend && node scripts/sync-vue-dist.mjs",
+    "start": "npm run start --workspace backend",
+    "type-check": "npm run type-check --workspace frontend"
+  }
+}

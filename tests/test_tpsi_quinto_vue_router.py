@@ -45,7 +45,8 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, *, automatic:
     assert activity["contesto"]["uda"] == "uda-25"
     assert sum(entry["punti"] for entry in activity["rubrica"]) == 10
     for asset in activity["assets"]:
-        assert (root / asset["path"]).is_file(), asset
+        assert (root / asset["path"]).exists(), asset
+        assert not (root / asset["path"]).is_symlink(), asset
         if asset["visibility"] == "student":
             assert asset.get("target_path")
     assert activity["correzione"]["test"] is automatic

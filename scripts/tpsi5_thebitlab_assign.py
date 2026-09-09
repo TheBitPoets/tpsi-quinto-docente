@@ -43,17 +43,40 @@ def capability_for(activity_path: Path) -> Capability:
     if language == "typescript":
         return Capability(False, "typescript-runner/scaffold-not-supported-by-pinned-thebitlab")
 
-    for asset in activity.get("assets", []):
-        if not isinstance(asset, dict) or not asset_is_student_visible(asset):
-            continue
-        raw_path = asset.get("path")
-        if not isinstance(raw_path, str) or not raw_path:
-            continue
-        source = activity_path.parent / raw_path
-        if source.is_dir():
-            return Capability(False, "directory-asset-not-supported-by-pinned-thebitlab")
-
     return Capability(True)
+
+
+def expand_student_directory_asset(activity_path: Path, asset: dict[str, Any]) -> list[dict[str, Any]]:
+    """Expand one canonical directory asset for the pinned file-only scaffold."""
+    raw_path = asset.get("path")
+    raw_target = asset.get("target_path", raw_path)
+    if not isinstance(raw_path, str) or not raw_path:
+        raise ValueError("Asset studente senza path.")
+    if not isinstance(raw_target, str) or not raw_target:
+        raise ValueError(f"Asset studente senza target_path: {raw_path}")
+
+    source_root = activity_path.parent / raw_path
+    if not source_root.is_dir():
+        return [asset]
+
+    expanded: list[dict[str, Any]] = []
+    target_root = Path(raw_target)
+    for source in sorted(source_root.rglob("*")):
+        if source.is_symlink():
+            raise ValueError(f"Lo starter non puo contenere link simbolici: {source}")
+        if not source.is_file():
+            continue
+        relative = source.relative_to(source_root)
+        target = relative if raw_target == "." else target_root / relative
+        item = copy.deepcopy(asset)
+        item["path"] = (Path(raw_path) / relative).as_posix()
+        item["target_path"] = target.as_posix()
+        item["description"] = f"{asset.get('description', 'Starter completo')}: {relative.as_posix()}"
+        expanded.append(item)
+
+    if not expanded:
+        raise ValueError(f"Directory asset studente vuota: {raw_path}")
+    return expanded
 
 
 def verify_platform_revision(platform_root: Path) -> None:
@@ -95,9 +118,10 @@ def load_platform(platform_root: Path):
 def adapted_activity(activity_path: Path) -> Iterator[Path]:
     """Create an ephemeral bundle compatible with the pinned scaffold contract.
 
-    The canonical TPSI5 Activity is never modified. The platform owns README.md
-    in a student scaffold, so a student guide targeting README.md is exposed as
-    GUIDA.md only in the temporary delivery bundle.
+    The canonical TPSI5 Activity is never modified. Directory assets are expanded
+    into their individual files because the pinned platform accepts file assets
+    only. The platform owns README.md in a student scaffold, so a student guide
+    targeting README.md is exposed as GUIDA.md only in the temporary bundle.
     """
 
     activity_path = activity_path.resolve()
@@ -108,16 +132,21 @@ def adapted_activity(activity_path: Path) -> Iterator[Path]:
 
     adapted = copy.deepcopy(activity)
     assets = adapted.get("assets", [])
+    expanded_assets: list[Any] = []
     if isinstance(assets, list):
         for asset in assets:
             if not isinstance(asset, dict) or not asset_is_student_visible(asset):
+                expanded_assets.append(asset)
                 continue
-            if asset.get("target_path") == "README.md":
-                asset["target_path"] = "GUIDA.md"
+            for expanded in expand_student_directory_asset(activity_path, asset):
+                if expanded.get("target_path") == "README.md":
+                    expanded["target_path"] = "GUIDA.md"
+                expanded_assets.append(expanded)
+        adapted["assets"] = expanded_assets
 
     with tempfile.TemporaryDirectory(prefix="tpsi5-thebitlab-") as temp_dir:
         bundle_root = Path(temp_dir)
-        for asset in assets if isinstance(assets, list) else []:
+        for asset in expanded_assets:
             if not isinstance(asset, dict) or not asset_is_student_visible(asset):
                 continue
             raw_path = asset.get("path")

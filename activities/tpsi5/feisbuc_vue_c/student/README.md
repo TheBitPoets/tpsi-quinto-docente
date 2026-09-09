@@ -1,17 +1,37 @@
 # Feisbuc milestone 9 — Vue SPA
 
-Prerequisito: milestone 7 auth/session funzionante.
+Lo starter contiene già due progetti coordinati:
+
+- `backend/`: baseline Express, SQLite, autenticazione e sessioni già funzionante;
+- `frontend/`: applicazione Vue della milestone 9 con i TODO da completare.
+
+Non devi recuperare né copiare file da milestone precedenti.
 
 ## Dev
 
-1. avvia il backend milestone 7 su `PORT=3333`;
-2. in `frontend/`: `npm install`;
-3. `npm run dev`;
-4. Vite inoltra `/api` al backend; il browser continua a usare URL relativi.
+Esegui una sola volta dalla root dello starter:
+
+```bash
+npm install
+```
+
+Poi usa due terminali, sempre dalla root:
+
+```bash
+npm run dev:backend
+npm run dev:frontend
+```
+
+Il primo comando avvia automaticamente il backend sulla porta `3333`; il secondo avvia Vite. Vite inoltra `/api` al backend e il browser continua a usare URL relativi.
 
 ## Build
 
-`npm run build` produce `dist/` con base `/vue/`. In integrazione gli asset vengono copiati nel `public/vue` del backend e serviti dallo stesso origin.
+```bash
+npm run build
+npm start
+```
+
+`npm run build` produce `frontend/dist/` con base `/vue/` e lo integra automaticamente in `backend/public/vue/`. Non devi copiare manualmente la build.
 
 ## Definition of done
 

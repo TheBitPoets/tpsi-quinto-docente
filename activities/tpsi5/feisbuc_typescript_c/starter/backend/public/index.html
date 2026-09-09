@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feisbuc — autenticazione e sessione</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="custom.css">
+  </head>
+  <body class="bg-body-tertiary">
+    <header class="border-bottom bg-body">
+      <nav class="navbar" aria-label="Navigazione principale">
+        <div class="container d-flex justify-content-between">
+          <h1 class="navbar-brand mb-0">Feisbuc</h1>
+          <div id="user-panel" class="d-none align-items-center gap-2">
+            <span id="current-user" class="small"></span>
+            <button id="logout-button" class="btn btn-outline-secondary btn-sm" type="button">Esci</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container py-4">
+      <section id="auth-panel" class="row g-4 mb-4" aria-labelledby="auth-title">
+        <h2 id="auth-title" class="visually-hidden">Autenticazione</h2>
+        <div class="col-12 col-lg-6">
+          <form id="register-form" class="card h-100">
+            <div class="card-body">
+              <h3 class="h5">Registrati</h3>
+              <label class="form-label" for="register-name">Nome visibile</label>
+              <input id="register-name" name="displayName" class="form-control mb-3" maxlength="80" required>
+              <label class="form-label" for="register-email">Email</label>
+              <input id="register-email" name="email" type="email" class="form-control mb-3" autocomplete="email" required>
+              <label class="form-label" for="register-password">Password / passphrase</label>
+              <input id="register-password" name="password" type="password" class="form-control mb-2" autocomplete="new-password" minlength="15" required>
+              <p class="small text-body-secondary">Minimo 15 caratteri; nessun requisito artificiale su simboli/maiuscole.</p>
+              <button class="btn btn-primary" type="submit">Crea account</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-12 col-lg-6">
+          <form id="login-form" class="card h-100">
+            <div class="card-body">
+              <h3 class="h5">Accedi</h3>
+              <label class="form-label" for="login-email">Email</label>
+              <input id="login-email" name="email" type="email" class="form-control mb-3" autocomplete="email" required>
+              <label class="form-label" for="login-password">Password</label>
+              <input id="login-password" name="password" type="password" class="form-control mb-3" autocomplete="current-password" required>
+              <button class="btn btn-outline-primary" type="submit">Accedi</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <div id="app-alert" class="alert d-none" role="alert"></div>
+      <p id="app-status" class="visually-hidden" aria-live="polite"></p>
+
+      <section id="feed-shell" class="d-none" aria-labelledby="feed-title">
+        <div class="row g-4">
+          <section class="col-12 col-lg-3">
+            <div class="card"><div class="card-body"><h2 class="h5">Sessione</h2><p>Identita verificata dal backend.</p></div></div>
+          </section>
+          <section id="feed" class="col-12 col-lg-6">
+            <h2 id="feed-title" class="h4 mb-3">Feed</h2>
+            <form id="composer-form" class="card mb-4">
+              <div class="card-body">
+                <label for="post-text" class="form-label fw-semibold">Nuovo post</label>
+                <textarea id="post-text" name="text" class="form-control" rows="3" maxlength="280" required></textarea>
+                <div class="text-end mt-3"><button class="btn btn-primary" type="submit">Pubblica</button></div>
+              </div>
+            </form>
+            <div id="post-list" aria-busy="false"></div>
+          </section>
+          <aside class="col-12 col-lg-3">
+            <div class="card"><div class="card-body"><h2 class="h5">Sicurezza</h2><ul class="small mb-0"><li>HttpOnly session</li><li>server authorization</li><li>SQL prepared</li></ul></div></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+:root {
+  --feisbuc-brand: #243b53;
+}
+
+.navbar-brand {
+  color: var(--feisbuc-brand);
+  letter-spacing: 0.04em;
+}
+
+#post-list[aria-busy="true"]::before {
+  content: "Caricamento feed autenticato...";
+  display: block;
+  padding: 1rem;
+}

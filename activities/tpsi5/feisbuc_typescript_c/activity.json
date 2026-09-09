@@ -14,7 +14,8 @@
     {"source_id":"tpsi5-source-originali","path":"content/tpsi5/11_VUE_ROUTER_NAVIGAZIONE_SPA.md","anchor":"20-feisbuc-milestone-10","role":"previous-milestone"}
   ],
   "project_milestone":"feisbuc-11-typescript-boundaries",
-  "consegna":"Parti dalla milestone 10. Introduci la toolchain TypeScript senza riscrivere il backend. Centralizza User/Post/AuthStatus, tratta il JSON esterno come unknown prima del narrowing, tipizza navigation policy/session/router e i principali props/emits Vue. `npm run type-check` e `npm run build` devono essere verdi mantenendo deep link e API/security invariati.",
+  "starter_policy":{"delivery":"complete","baseline":"feisbuc-10-vue-router","generated_by":"scripts/build_feisbuc_starters.py"},
+  "consegna":"Usa direttamente lo starter full stack fornito, che contiene backend e frontend della milestone 10 insieme alla toolchain e ai TODO TypeScript della milestone 11. Centralizza User/Post/AuthStatus, tratta il JSON esterno come unknown prima del narrowing, tipizza navigation policy/session/router e i principali props/emits Vue. `npm run type-check` e `npm run build` devono essere verdi mantenendo deep link e API/security invariati. I moduli JavaScript sostituiti sono gia stati rimossi: non sono richieste copie, sovrapposizioni o eliminazioni manuali.",
   "vincoli":[
     "Vue 3.5.40, Vue Router 5.2.0, Vite 8.2.1, TypeScript 6.0.3, vue-tsc 3.3.8, Node >=22.18",
     "strict=true, noUncheckedIndexedAccess=true, exactOptionalPropertyTypes=true",
@@ -30,17 +31,8 @@
     "nessun Pinia, WebSocket, ORM o migrazione backend TypeScript"
   ],
   "assets":[
-    {"type":"starter","path":"starter/frontend/package.json","target_path":"frontend/package.json","visibility":"student","description":"Toolchain TS/vue-tsc"},
-    {"type":"starter","path":"starter/frontend/tsconfig.json","target_path":"frontend/tsconfig.json","visibility":"student","description":"Strict config"},
-    {"type":"starter","path":"starter/frontend/index.html","target_path":"frontend/index.html","visibility":"student","description":"Entry main.ts"},
-    {"type":"starter","path":"starter/frontend/src/main.ts","target_path":"frontend/src/main.ts","visibility":"student","description":"Typed Vue bootstrap"},
-    {"type":"starter","path":"starter/frontend/src/domain.ts","target_path":"frontend/src/domain.ts","visibility":"student","description":"Tipi di dominio da completare"},
-    {"type":"starter","path":"starter/frontend/src/api.ts","target_path":"frontend/src/api.ts","visibility":"student","description":"Boundary HTTP unknown -> domain"},
-    {"type":"starter","path":"starter/frontend/src/navigation-policy.ts","target_path":"frontend/src/navigation-policy.ts","visibility":"student","description":"Policy tipizzata"},
-    {"type":"starter","path":"starter/frontend/src/session.ts","target_path":"frontend/src/session.ts","visibility":"student","description":"Sessione tipizzata"},
-    {"type":"starter","path":"starter/frontend/src/router.ts","target_path":"frontend/src/router.ts","visibility":"student","description":"Router e RouteMeta tipizzati"},
-    {"type":"starter","path":"starter/frontend/src/components/PostCard.vue","target_path":"frontend/src/components/PostCard.vue","visibility":"student","description":"Props/emits tipizzati"},
-    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Procedura overlay e DoD"},
+    {"type":"starter","path":"starter","target_path":".","visibility":"student","description":"Workspace full stack completo con baseline milestone 10 e TODO TypeScript"},
+    {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Avvio diretto e Definition of Done"},
     {"type":"teacher_only","path":"solution/frontend/package.json","visibility":"teacher","description":"Toolchain reference"},
     {"type":"teacher_only","path":"solution/frontend/tsconfig.json","visibility":"teacher","description":"Strict reference"},
     {"type":"teacher_only","path":"solution/frontend/index.html","visibility":"teacher","description":"Typed entry"},
@@ -58,7 +50,7 @@
     {"type":"teacher_only","path":"solution/frontend/src/views/FeedView.vue","visibility":"teacher","description":"Typed feed state"},
     {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Review boundary"}
   ],
-  "soluzione_attesa":{"tipo":"typescript-overlay","file":"frontend/src/domain.ts","note":"Milestone 10 invariata nel comportamento; boundary frontend resi staticamente verificabili."},
+  "soluzione_attesa":{"tipo":"complete-milestone","file":"frontend/src/domain.ts","note":"Starter full stack autonomo; milestone 10 invariata nel comportamento e boundary frontend resi staticamente verificabili."},
   "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
   "metriche":{"tempo_stimato_minuti":240,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
   "manual_checks":[

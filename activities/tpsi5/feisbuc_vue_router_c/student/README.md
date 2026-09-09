@@ -1,6 +1,21 @@
 # Feisbuc milestone 10 — Vue Router
 
-Parti dalla milestone 9 funzionante. Applica i file overlay di questa Activity.
+Lo starter è già completo: include il backend funzionante e tutto il frontend della milestone 9, insieme ai TODO della milestone 10. Non devi copiare o sovrapporre file da altre Activity.
+
+## Avvio
+
+Esegui una sola volta dalla root dello starter:
+
+```bash
+npm install
+```
+
+Poi avvia backend e frontend in due terminali:
+
+```bash
+npm run dev:backend
+npm run dev:frontend
+```
 
 ## Frontend
 
@@ -19,7 +34,14 @@ Sono gia forniti:
 
 ## Backend integration
 
-La build Vite usa gia base `/vue/` dalla milestone 9. Dopo `npm run build`, copia `dist/` in `backend/public/vue/`.
+La build Vite usa già base `/vue/`. Dalla root dello starter esegui:
+
+```bash
+npm run build
+npm start
+```
+
+Il comando di build copia automaticamente `frontend/dist/` in `backend/public/vue/`.
 
 Completa:
 

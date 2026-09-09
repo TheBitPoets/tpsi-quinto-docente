@@ -73,6 +73,8 @@ La pagina [`GUIDA_USO_MDN.md`](GUIDA_USO_MDN.md) insegna a distinguere Learn, Gu
 12 REST commands + Socket.IO realtime + reconnect/resync
 ```
 
+Dalla milestone 8 in avanti ogni Activity consegna uno **starter completo** generato sulla baseline funzionante richiesta. Lo studente lavora direttamente sul progetto ricevuto: non deve recuperare la propria milestone precedente, copiare solution o applicare overlay manualmente. Le milestone Vue 9–12 includono inoltre un workspace root che automatizza installazione, avvio coordinato e integrazione della build frontend nel backend.
+
 Milestone 12 mantiene due flussi distinti:
 
 ```text

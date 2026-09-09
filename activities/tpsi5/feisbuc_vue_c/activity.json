@@ -7,6 +7,7 @@
   "difficolta":"C",
   "argomenti":["vue-3","vite","spa","sfc","composition-api","ref","computed","props","emits","fetch","authentication","authorization"],
   "linguaggio":"javascript",
+  "source_name":"package.json",
   "contesto":{"percorso":"quinto-anno","uda":"uda-25"},
   "content_ids":["tpsi5-content-vue3-components-reactivity","tpsi5-content-auth-sessions-security"],
   "source_refs":[
@@ -14,7 +15,8 @@
     {"source_id":"tpsi5-source-originali","path":"content/tpsi5/08_AUTH_SESSIONI_SICUREZZA.md","anchor":"autenticazione-sessioni-e-autorizzazione-identita-affidabile-nel-backend","role":"previous-architecture"}
   ],
   "project_milestone":"feisbuc-09-vue-spa",
-  "consegna":"Parti dalla milestone 7 auth/session e aggiungi il frontend Vue fornito come progetto separato. Completa `App.vue` per gestire bootstrap auth, caricamento post, login/register/logout, create, like e delete usando `api.js`. Mantieni PostCard come child presentazionale con props/emits. La build deve produrre asset con base `/vue/`, poi serviti dallo stesso Express: API, cookie HttpOnly, authorization e SQLite non cambiano.",
+  "starter_policy":{"delivery":"complete","baseline":"feisbuc-07-auth-session","generated_by":"scripts/build_feisbuc_starters.py"},
+  "consegna":"Usa direttamente lo starter full stack fornito: `backend/` contiene la baseline Express, SQLite, autenticazione e sessioni gia funzionante; `frontend/` contiene il progetto Vue con i TODO della milestone 9. Completa `App.vue` per gestire bootstrap auth, caricamento post, login/register/logout, create, like e delete usando `api.js`. Mantieni PostCard come child presentazionale con props/emits. La build deve produrre asset con base `/vue/` e integrarli automaticamente nello stesso Express: API, cookie HttpOnly, authorization e SQLite non cambiano. Non sono richieste copie da altre Activity.",
   "vincoli":[
     "Vue 3.5.40, Vite 8.2.1, @vitejs/plugin-vue 6.0.8, Node >=22.18",
     "base build /vue/ e API relative /api/*",
@@ -28,16 +30,7 @@
     "backend milestone 7 non viene riscritto o duplicato"
   ],
   "assets":[
-    {"type":"starter","path":"starter/frontend/package.json","target_path":"frontend/package.json","visibility":"student","description":"Toolchain Vue/Vite pinned"},
-    {"type":"starter","path":"starter/frontend/index.html","target_path":"frontend/index.html","visibility":"student","description":"SPA entry"},
-    {"type":"starter","path":"starter/frontend/vite.config.js","target_path":"frontend/vite.config.js","visibility":"student","description":"Vite base/proxy"},
-    {"type":"starter","path":"starter/frontend/src/main.js","target_path":"frontend/src/main.js","visibility":"student","description":"Vue mount"},
-    {"type":"starter","path":"starter/frontend/src/App.vue","target_path":"frontend/src/App.vue","visibility":"student","description":"Integration state da completare"},
-    {"type":"example","path":"starter/frontend/src/api.js","target_path":"frontend/src/api.js","visibility":"student","description":"HTTP adapter gia noto"},
-    {"type":"example","path":"starter/frontend/src/components/AuthPanel.vue","target_path":"frontend/src/components/AuthPanel.vue","visibility":"student","description":"Auth form component"},
-    {"type":"example","path":"starter/frontend/src/components/PostComposer.vue","target_path":"frontend/src/components/PostComposer.vue","visibility":"student","description":"Composer component"},
-    {"type":"example","path":"starter/frontend/src/components/PostCard.vue","target_path":"frontend/src/components/PostCard.vue","visibility":"student","description":"PostCard baseline da Activity B"},
-    {"type":"example","path":"starter/frontend/src/style.css","target_path":"frontend/src/style.css","visibility":"student","description":"CSS SPA"},
+    {"type":"starter","path":"starter","target_path":".","visibility":"student","description":"Workspace full stack completo con backend funzionante e frontend Vue da completare"},
     {"type":"example","path":"student/README.md","target_path":"README.md","visibility":"student","description":"Workflow dev/build e definition of done"},
     {"type":"teacher_only","path":"solution/frontend/package.json","visibility":"teacher","description":"Package reference"},
     {"type":"teacher_only","path":"solution/frontend/index.html","visibility":"teacher","description":"Entry reference"},
@@ -51,7 +44,7 @@
     {"type":"teacher_only","path":"solution/frontend/src/style.css","visibility":"teacher","description":"CSS reference"},
     {"type":"teacher_only","path":"teacher/NOTES.md","visibility":"teacher","description":"Integration review"}
   ],
-  "soluzione_attesa":{"tipo":"vue-spa-overlay","file":"frontend/src/App.vue","note":"Presentation adapter Vue sopra API/auth/SQLite invariati."},
+  "soluzione_attesa":{"tipo":"complete-milestone","file":"frontend/src/App.vue","note":"Starter full stack autonomo; presentation adapter Vue sopra API/auth/SQLite invariati."},
   "correzione":{"compila":false,"test":false,"sandbox":false,"ai_feedback":false},
   "metriche":{"tempo_stimato_minuti":210,"traccia_tempo_dichiarato":true,"traccia_sessioni_thebitlab":true,"traccia_eventi_didattici":true,"traccia_errori_compilazione":true},
   "manual_checks":[

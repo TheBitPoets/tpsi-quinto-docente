@@ -1,8 +1,15 @@
-# Feisbuc milestone 8 — overlay SSR
+# Feisbuc milestone 8 — SSR
 
-Questa Activity **parte dalla milestone 7**. Non riscrivere auth, sessione o repository SQL.
+Lo starter è già un progetto completo: contiene la baseline funzionante della milestone 7 e i file con i TODO della milestone 8. Non devi copiare o sovrapporre file provenienti da altre Activity.
 
-Applica i file starter sopra il progetto milestone 7 e completa i TODO.
+Lavora direttamente nella cartella ricevuta. Non riscrivere auth, sessione o repository SQL: completa soltanto i TODO relativi al presentation adapter SSR.
+
+## Avvio
+
+```bash
+npm install
+npm start
+```
 
 Definition of Done:
 

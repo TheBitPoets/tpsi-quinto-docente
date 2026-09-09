@@ -42,7 +42,8 @@ def assert_activity(root: Path, difficulty: str, activity_id: str, automatic: bo
     assert sum(entry["punti"] for entry in activity["rubrica"]) == 10
     student_targets: set[str] = set()
     for asset in activity["assets"]:
-        assert (root / asset["path"]).is_file(), asset
+        assert (root / asset["path"]).exists(), asset
+        assert not (root / asset["path"]).is_symlink(), asset
         if asset["visibility"] == "student":
             target = asset.get("target_path")
             assert isinstance(target, str) and target

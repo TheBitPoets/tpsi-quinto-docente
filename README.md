@@ -191,6 +191,19 @@ Le capability di piattaforma #729 (browser/HTML grader) e #731 (TypeScript Activ
 
 Umbrella di progetto: `TheBitPoets/2cornot2c#728`. Standard authoring cross-course accettato: `TheBitPoets/2cornot2c#723`. Delivery standard cross-course in rollout: `TheBitPoets/2cornot2c#737`.
 
+## Rigenerare gli starter Feisbuc avanzati
+
+Le milestone 8–12 distribuiscono uno **starter completo e autonomo**. Ogni starter contiene la baseline funzionante richiesta dalla milestone precedente e soltanto i TODO del nuovo argomento: lo studente non deve copiare solution, sovrapporre cartelle o integrare manualmente la build Vue.
+
+I file specifici della nuova milestone vivono nelle cartelle interne di authoring `starter-overlay/`, che non vengono consegnate agli studenti; gli starter completi sotto `starter/` sono generati in modo deterministico. Dopo avere modificato una baseline o uno starter overlay, eseguire dalla root del repository:
+
+```bash
+python3 scripts/build_feisbuc_starters.py
+python3 scripts/build_feisbuc_starters.py --check
+```
+
+Il primo comando ricostruisce gli starter completi delle milestone 8–12. Il secondo non modifica file e verifica che le copie versionate siano aggiornate. Per le milestone Vue 9–12, dalla root dello starter bastano `npm install`, i comandi `npm run dev:backend` e `npm run dev:frontend` durante lo sviluppo, oppure `npm run build` e `npm start` per la versione integrata. La build copia automaticamente gli asset in `backend/public/vue/`.
+
 ## Generare manualmente le slide
 
 La build converte esclusivamente le presentazioni Marp presenti in `slides/tpsi5/`. I file in `content/tpsi5/` sono le lezioni/dispense canoniche e non vengono trasformati in HTML o PDF da questo processo.

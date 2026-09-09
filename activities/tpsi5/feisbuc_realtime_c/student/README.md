@@ -1,6 +1,30 @@
 # Feisbuc milestone 12 — realtime
 
-Parti dalla milestone 11 TypeScript. Applica gli asset overlay di questa Activity.
+Lo starter è già un progetto full stack completo: contiene la milestone 11 funzionante e i TODO realtime della milestone 12. Non devi recuperare, copiare o sovrapporre file da Activity precedenti.
+
+## Avvio
+
+Esegui una sola volta dalla root dello starter:
+
+```bash
+npm install
+```
+
+Poi usa due terminali:
+
+```bash
+npm run dev:backend
+npm run dev:frontend
+```
+
+Per verificare la build integrata:
+
+```bash
+npm run build
+npm start
+```
+
+La build del frontend viene copiata automaticamente nel backend.
 
 ## Obiettivo osservabile
 

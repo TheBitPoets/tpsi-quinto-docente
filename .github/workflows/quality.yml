@@ -42,6 +42,9 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Verify complete Feisbuc starters
+        run: python scripts/build_feisbuc_starters.py --check
+
       - name: Install Python, FastAPI and SQLAlchemy test dependencies
         run: >-
           python -m pip install
@@ -315,3 +318,4 @@ jobs:
           tests/test_tpsi_quinto_sqlalchemy.py
           tests/test_tpsi_quinto_testing_strategy.py
           tests/test_tpsi_quinto_runtime_deploy.py
+          tests/test_feisbuc_starters.py

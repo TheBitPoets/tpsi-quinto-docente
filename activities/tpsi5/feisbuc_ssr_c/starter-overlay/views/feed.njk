@@ -1,0 +1,9 @@
+{% extends "base.njk" %}
+{% block title %}Feed SSR{% endblock %}
+{% block content %}
+<h1>Feed SSR</h1>
+<p>Utente: {{ currentUser.displayName }}</p>
+<!-- TODO composer POST /ssr/posts -->
+<!-- TODO lista posts: author/text/likes -->
+<!-- TODO form delete solo se post.canDelete -->
+{% endblock %}
