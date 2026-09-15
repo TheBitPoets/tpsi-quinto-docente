@@ -97,7 +97,7 @@ Ogni titolo di lezione apre la dispensa corrispondente. Ogni Activity apre diret
 | UDA | Lezione | Activity associate | Ore | Docente responsabile | Date e ore svolte |
 |---|---|---|---:|---|---|
 | UDA-20 | [00 — Architettura didattica del corso Full Stack](content/tpsi5/00_COURSE_ARCHITECTURE.md) | — | 4 | prof. Antonio Caristia | 07/09/2026 — 2 ore<br>09/09/2026 — 1 ora<br>10/09/2026 — 1 ora<br>Totale: 4/4 ore, **UDA conclusa** |
-| UDA-21 | [01 — Web Platform e HTML moderno](content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md) | [A — Anatomia di un documento HTML moderno](activities/tpsi5/html_anatomy_a/student/README.md)<br>[B — Feisbuc: da div generici a HTML semantico](activities/tpsi5/feisbuc_semantic_b/student/README.md) | 10 | prof. Antonio Caristia | — |
+| UDA-21 | [01 — Web Platform e HTML moderno](content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md) | [A — Anatomia di un documento HTML moderno](activities/tpsi5/html_anatomy_a/student/README.md)<br>[B — Feisbuc: da div generici a HTML semantico](activities/tpsi5/feisbuc_semantic_b/student/README.md) | 10 | prof. Antonio Caristia | 14/09/2026 — 3 ore<br>Totale: 3/10 ore, in corso |
 | UDA-21 | [02 — CSS moderno, layout e responsive design](content/tpsi5/02_CSS_MODERNO_RESPONSIVE.md) | [C — Shell responsive Feisbuc](activities/tpsi5/feisbuc_responsive_c/student/README.md)<br>[D — Debug del layout responsive](activities/tpsi5/css_debug_d/student/README.md) | 6 | prof. Antonio Caristia | — |
 | UDA-21 | [03 — Bootstrap: dal CSS nativo a un framework](content/tpsi5/03_BOOTSTRAP_DA_CSS_A_FRAMEWORK.md) | [E — Interfaccia Bootstrap Feisbuc](activities/tpsi5/feisbuc_bootstrap_e/student/README.md) | 6 | ITP Antonino Pirri | — |
 | UDA-22 | [04 — JavaScript moderno, DOM e Browser API](content/tpsi5/04_JAVASCRIPT_DOM_BROWSER_APIS.md) | [A — Pipeline JavaScript del feed](activities/tpsi5/js_feed_pipeline_a/student/README.md)<br>[B — Refactoring dello stato di un post](activities/tpsi5/js_post_refactor_b/student/README.md)<br>[C — Feed dinamico Feisbuc](activities/tpsi5/feisbuc_dynamic_c/student/README.md)<br>[D — Debug JavaScript, DOM e storage](activities/tpsi5/js_debug_d/student/README.md) | 19 | prof. Antonio Caristia | — |
@@ -120,9 +120,9 @@ Ogni titolo di lezione apre la dispensa corrispondente. Ogni Activity apre diret
 
 | Docente | Lezioni e Activity | Compito assegnato | Riserva flessibile | Totale annuale | Ore svolte | Ore ancora da svolgere |
 |---|---:|---:|---:|---:|---:|---:|
-| prof. Antonio Caristia | 58 | 2 | 6 | **66** | 4 | 62 |
+| prof. Antonio Caristia | 58 | 2 | 6 | **66** | 7 | 59 |
 | ITP Antonino Pirri | 58 | 2 | 6 | **66** | 0 | 66 |
-| **Totale** | **116** | **4** | **12** | **132** | **4** | **128** |
+| **Totale** | **116** | **4** | **12** | **132** | **7** | **125** |
 
 La verifica del primo quadrimestre è affidata ad Antonio Caristia; quella del secondo quadrimestre ad Antonino Pirri. Ulteriori prove da due ore vengono assorbite dalla riserva e devono essere distribuite in coppia o compensate, così da conservare il 50% esatto del carico assegnato.
 
@@ -134,9 +134,9 @@ La verifica del primo quadrimestre è affidata ad Antonio Caristia; quella del s
 | 08/09/2026 | [00 — Continuazione](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 1 | 0 | Annullata per rottura della conduttura dell'acqua; consumata 1 ora della riserva annuale. |
 | 09/09/2026 | [00 — Continuazione](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 1 | 1 | Svolta; lezione 00 ancora in corso. |
 | 10/09/2026 | [00 — Conclusione](content/tpsi5/00_COURSE_ARCHITECTURE.md) | prof. Antonio Caristia | 1 | 1 | Svolta; UDA-20 conclusa in 4 ore. |
-| 14/09/2026 | [01 — Web Platform e HTML moderno](content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md) | prof. Antonio Caristia | 2 | — | Pianificata; Antonio Caristia assume la responsabilità dell'intera lezione 01. |
+| 14/09/2026 | [01 — Web Platform e HTML moderno](content/tpsi5/01_WEB_PLATFORM_HTML_MODERNO.md) | prof. Antonio Caristia | 2 | 3 | Svolta un'ora aggiuntiva rispetto alla previsione; lezione 01 in corso. |
 
-Situazione dopo il 10 settembre: **4 ore svolte**, **UDA-20 conclusa** e **11 ore di riserva flessibile residue**. Le 10 ore della lezione 01 passano ad Antonio Caristia; per compensare senza spezzare lezioni, le 7 ore della lezione 06 e le 3 ore della lezione 12 passano ad Antonino Pirri. Le ore del 14 settembre sono pianificate ma non ancora conteggiate nel consuntivo. Le sospensioni non vengono attribuite come ore svolte al docente; il controllo del 50% riguarda il carico annuale assegnato, mentre il consuntivo effettivo resta separato.
+Situazione dopo il 14 settembre: **7 ore svolte**, **UDA-20 conclusa**, **3/10 ore della lezione 01 completate** e **11 ore di riserva flessibile residue**. Le 10 ore della lezione 01 sono assegnate ad Antonio Caristia; per compensare senza spezzare lezioni, le 7 ore della lezione 06 e le 3 ore della lezione 12 passano ad Antonino Pirri. Le sospensioni non vengono attribuite come ore svolte al docente; il controllo del 50% riguarda il carico annuale assegnato, mentre il consuntivo effettivo resta separato.
 
 ## Stack core congelato
 
